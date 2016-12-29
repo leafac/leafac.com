@@ -1,0 +1,79 @@
+==================================================================
+https://keybase.io/leafac
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://leafac.com
+  * I am leafac (https://keybase.io/leafac) on keybase.
+  * I have a public key with fingerprint 2429 9DEA BC98 3F0F CF71  67E1 5925 D068 3DF3 D583
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "24299deabc983f0fcf7167e15925d0683df3d583",
+            "host": "keybase.io",
+            "key_id": "5925d0683df3d583",
+            "kid": "010176d14682287d2fc4389f19197984bccf367e32a8599b439f96f4412e3479c98e0a",
+            "uid": "93cbdd0567747029460306513e565419",
+            "username": "leafac"
+        },
+        "revoke": {
+            "sig_ids": [
+                "83f1c4491f6f3a8f2c34b031d147ff4d3c83584e5382694c7d4bfb582efad3f90f"
+            ]
+        },
+        "service": {
+            "hostname": "leafac.com",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1433000986,
+    "expire_in": 157680000,
+    "prev": "6b67ef30eef2fbb9371f97b16215aff8f8cb1ae96c32f062a910f2a22e9a9737",
+    "seqno": 5,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v2
+
+owFtkn9MlVUYx+9FcHCNwMoIpggvxOJH7n3f8/46N7MQcDUiAb0Qubq9P86BV7j3
+hXsv15DQFRFTMHB1x3RqWmA/EFFLhtki+SE0cTpSGAhbMaMwxG6OnDS3zmX1R1t/
+nZ3nfJ/P832e8zSHLzNZzEVPXi159u71WvOlWcVk0yczqynF0KooazVVipYOrDuL
+kavcpTs9lJViORZCDcmKCiWAaaxikRFExPCQ5TVakICGgcZLgEqjSgx3IINgFNmN
+1ukGiZGLXddI9H/0pUsPNEMzoqAxnCCxrCRqLFY5IEHMQAaKUOIUVcWAVASsLPEQ
+KhyAGAqY4xgWAU6ExBeiZYKrXMJBoCqaRvOCKHIizUJOoAEt8AxAvMBzDAwI3cjl
+lB2IqMuQjGWVqkmjXMhrlKJA/269mFh2U9ZtFOmYUTkOMljAQJYwqwJOoQFD3IoY
+cxpQJcBLHOKBxAqQU0WNU7DCSyzCsgYwpDH1GmGTel5dXYIHZvSf2utUw0E8lbsM
+j6EaZSRe4vGUu60BT56q8oBwB1Ls/yDsiu7UyP+QDC9yuXXDSVkZolQ9eoDJcADQ
+NA0lIY1Cb5brLmTXAwpeFCQSpwN1kJcgBYVM9FUMaIQwixUFApHBUFQYgWV4GWMJ
+S6rCyAgKKmAxLbAyZGjMyiyLoAxFIFKBriqcBmXliU+5mDDJ3Jyyp9KFqBrLnqDV
+wSazxbQ8JCiwYyZLWOS/i7d+JNJ0KMzHSfSJaGfr4oOob+eTzsZiZNvwszpw+4hN
+ASlX98RcfuSeP07MX972HmVt3zoaeXP+Y7s51XFfGqFqz33WvkL6qa4pu/7wmtHv
+PRWVw4UFg2jt2zHmuTeuXNs2V/CC9/KtAV/eFP7FnpLX+8SWE/cS/IVGd1dIBBjq
+7/zOsrbVuL7+8Pny5qfzF/an3E2m+obSF1b5zxzcMvBi+675hPCpmdnqZjlG+3Jk
+psI7lnUse6jjxujUTI7Q0t0e60t9N8rfdKdnVuxr6tyh9bw1Hhde2jbi6c1cvWoi
+dHPO9t3JDX0NRXX+WM++Cn18pa82r8AsjccHVz/6dYayr/13U+HUMfePtxv5wSCk
+1b/juqkcDY0OK3E8/9Jk7qfzizX+0LY6243lh7rL8q4UXsxJbRSp2Wk9wZQYcmrr
+6YspudMtgtZRFn+Srmk5sL+jLKmroaYhLj9mry33/Qy4+NUr/qeyPpke3sn1pt+/
+gD9qjuo9EL8Jb+qPe04f7jqyLML5h/dhldKGtAbbD792Hz3piPD2JEXsNoXmqQun
+JzLOzFi4zthLIQ6jsGXh8VNm358bsz8Y2/zyweKMopHPN5hS6r/YuMK3ZvIhr28l
+803muWcmPmxEYS7uTtNg4rXFzqzOB3OvV4amF1woOd56K/GxXcXzZ3dWWfr/6jx+
+/jdbbvBYdM325L8B
+=qCqI
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/leafac
+
+==================================================================
+

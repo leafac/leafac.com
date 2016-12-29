@@ -1,0 +1,9 @@
+#lang pollen
+
+◊define-meta[title]{Colophon}
+
+◊margin-note{See the ◊link/internal["/software/www.leafac.com/"]{source code for the website}.}
+
+◊margin-note{To the authors of these tools, thank you!}
+
+◊new-thought{The author} typesets the website in ◊link["https://docs.racket-lang.org/pollen/"]{Pollen}, a ◊link["https://racket-lang.org/"]{Racket} library by ◊link["http://typographyforlawyers.com/about.html"]{Matthew Butterick}. The ◊acronym{CSS} comes from a ◊link/internal["/software/css-expr/"]{◊code/inline{css-expr}} source, a language designed by the author. The serif font is ◊link["http://practicaltypography.com/charter.html"]{Charter}, by ◊link["https://en.wikipedia.org/wiki/Matthew_Carter"]{Matthew Carter} from Bitstream. Additional glyphs—for example, small capitals—come from ◊link["http://software.sil.org/charis/"]{Charis SIL}, by SIL International. The sans-serif font is ◊link["https://adobe-fonts.github.io/source-sans-pro/"]{Source Sans Pro} and the monospaced font is ◊link["https://adobe-fonts.github.io/source-code-pro/"]{Source Code Pro}, both by ◊link["https://www.adobe.com/products/type/font-designers/paul-hunt.html"]{Paul D. Hunt} from Adobe Systems. The conversor of those fonts to webfonts is ◊link["https://www.fontsquirrel.com/"]{Font Squirrel}. Icons and illustrations come from ◊link["http://fontawesome.io/"]{Font Awesome}, by Dave Gandy and ◊link["https://fortawesome.com/"]{Fort Awesome}; and ◊link["https://www.lingoapp.com/"]{Lingo}, by ◊link["https://thenounproject.com/"]{The Noun Project}. Colors come from the ◊link["http://ethanschoonover.com/solarized"]{Solarized} colorscheme, by ◊link["http://ethanschoonover.com/"]{Ethan Schoonover}. The page layout draws from the works of ◊link["http://typographyforlawyers.com/about.html"]{Matthew Butterick} and ◊link["https://www.edwardtufte.com/"]{Edward Rolf Tufte}.

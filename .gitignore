@@ -1,0 +1,11 @@
+/source/**/*.html
+/source/**/*.css
+/source/**/*.atom
+!/source/vendor/**
+/**/compiled/
+/**/pollen-cache/
+/target
+/documentation/*.html
+/documentation/*.css
+/documentation/*.js
+/compiled-documentation/
