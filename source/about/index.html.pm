@@ -158,6 +158,7 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['advanced]{Functional Programming}
  ◊skill['beginner]{Haskell}
  ◊skill['intermediate]{Lisp}
+ ◊skill['beginner]{Golang}
  ◊skill['intermediate]{Number Theory}
  ◊skill['intermediate]{◊acronym{GPG}}
  ◊skill['intermediate]{OpenSSL}
@@ -229,7 +230,7 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['intermediate]{◊acronym{YAML}}
  ◊skill['intermediate]{Puppet}
  ◊skill['intermediate]{Vagrant}
- ◊skill['intermediate]{Docker}
+ ◊skill['advanced]{Docker}
  ◊skill['intermediate]{Amazon Web Services}
 }
 
