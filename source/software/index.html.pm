@@ -13,3 +13,7 @@ Password manager for Org Mode.
 ◊section['www-leafac-com]{◊link/internal["/software/www.leafac.com"]{www.leafac.com}}
 
 Source for Leandro Facchinetti’s personal website.
+
+◊section['leafac-com]{◊link/internal["/software/leafac.com"]{leafac.com}}
+
+Configuration for Leandro Facchinetti’s personal server “leafac.com”.
