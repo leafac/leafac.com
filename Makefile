@@ -9,6 +9,7 @@ build/clean:
 
 deploy: build
 	rsync -av --delete target/ leafac.com:leafac.com/websites/www.leafac.com/
+	rsync -av target/software/index.html leafac.com:leafac.com/websites/software/index.html
 
 documentation: compiled-documentation/index.html
 
