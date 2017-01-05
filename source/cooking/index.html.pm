@@ -7,6 +7,7 @@
 ◊recipes{
  ◊recipe["no-knead-bread"]{No-Knead Bread}
  ◊recipe["no-knead-whole-wheat-bread"]{No-Knead Whole Wheat Bread}
+ ◊recipe["beer-bread"]{Beer Bread}
  ◊recipe["whole-wheat-pizza-crust"]{Whole Wheat Pizza Crust}
  ◊recipe["thin-pizza-crust"]{Thin Pizza Crust}
  ◊recipe["medium-pizza-crust"]{Medium Pizza Crust}
@@ -20,5 +21,6 @@
  ◊recipe["bolinho-de-chuva"]{◊foreign{Bolinho de Chuva}}
  ◊recipe["banoffee-pie"]{Banoffee Pie}
  ◊recipe["chocolate-mousse"]{Chocolate Mousse}
+ ◊recipe["chocolate-chia-seed-pudding"]{Chocolate Chia Seed Pudding}
  ◊recipe["rice"]{Rice}
 }
