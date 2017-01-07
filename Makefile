@@ -14,7 +14,7 @@ deploy: build
 documentation: compiled-documentation/index.html
 
 compiled-documentation/index.html: documentation/www.leafac.com.scrbl
-	raco scribble --dest compiled-documentation/ --dest-name index -- documentation/www.leafac.com.scrbl
+	cd documentation && raco scribble --dest ../compiled-documentation/ --dest-name index -- www.leafac.com.scrbl
 
 documentation/deploy: documentation
 	rsync -av --delete compiled-documentation/ leafac.com:leafac.com/websites/software/www.leafac.com/
