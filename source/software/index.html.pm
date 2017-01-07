@@ -12,7 +12,7 @@ Password manager for Org Mode.
 
 ◊section['programmable-foot-keyboard]{◊link/internal["/software/programmable-foot-keyboard"]{Programmable Foot Keyboard}}
 
-A programmable foot keyboard using Adafruit’s Trinket.
+A programmable foot keyboard using ◊link["https://learn.adafruit.com/introducing-trinket"]{Adafruit’s Trinket}.
 
 ◊section['www-leafac-com]{◊link/internal["/software/www.leafac.com"]{www.leafac.com}}
 
