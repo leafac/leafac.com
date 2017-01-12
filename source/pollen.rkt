@@ -3,15 +3,13 @@
          racket/function racket/list racket/file racket/dict racket/string
          css-expr/untyped libuuid gregor gregor/period sugar xml
          (except-in syntax/parse attribute) syntax/parse/define
-         pollen/core pollen/decode pollen/tag pollen/file pollen/setup)
+         pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
 
 (provide (all-defined-out)
          (all-from-out racket/function racket/list racket/file racket/dict racket/string
                        gregor gregor/period sugar xml
                        pollen/core pollen/file
                        css-expr/untyped))
-
-(module+ test (require rackunit))
 
 ;; PERSONAL DATA -------------------------------------------------------------------------------------
 
@@ -31,85 +29,13 @@
 
 ;; COMPONENT SUPPORT ---------------------------------------------------------------------------------
 
-(define-syntax-parser component-types
-  [(component-types (~or (~optional (~seq #:dynamic (dynamic:identifier ...)))
-                         (~optional (~seq #:static (static:identifier ...))))
-                    ...)
-   (with-syntax ([define-component (datum->syntax #'component-types 'define-component)]
-                 [((dynamic/keyword dynamic/expr dynamic/expr:expr) ...)
-                  (for/list ([the-dynamic
-                              (if (attribute dynamic) (syntax->datum #'(dynamic ...)) '())])
-                    `(,(string->keyword (symbol->string the-dynamic))
-                      ,(format-id #'component-types "~a/expr" the-dynamic)
-                      ,(format-id #'component-types "~a/expr:expr" the-dynamic)))]
-                 [((static/keyword static/expr static/expr:expr components/static) ...)
-                  (for/list ([the-static
-                              (if (attribute static) (syntax->datum #'(static ...)) '())])
-                    `(,(string->keyword (symbol->string the-static))
-                      ,(format-id #'component-types "~a/expr" the-static)
-                      ,(format-id #'component-types "~a/expr:expr" the-static)
-                      ,(format-id #'component-types "components/~a" the-static)))])
-     #'(begin
-         (define-syntax-parser define-component
-           [(define-component signature:expr
-              (~or (~optional (~seq dynamic/keyword dynamic/expr:expr (... ...+))) ...
-                   (~optional (~seq static/keyword static/expr:expr (... ...+))) ...)
-              (... ...))
-            (with-syntax ([the-component
-                           (if (identifier? #'signature) #'signature (car (syntax-e #'signature)))]
-                          [metas (datum->syntax #'signature 'metas)])
-              (define output-types/dynamic
-                (filter cdr `((dynamic . ,(attribute dynamic/expr)) ...)))
-              (define output-types/static
-                (filter cdr `((components/static . ,(attribute static/expr)) ...)))
-              (define component-macro
-                (if (not (empty? output-types/dynamic))
-                    #`((define-syntax-parser the-component
-                         [(the-component argument (... (... ...)))
-                          #'((make-keyword-procedure
-                              (λ (keywords keyword-arguments . rest)
-                                (keyword-apply the-component keywords keyword-arguments rest)))
-                             argument (... (... ...)))]
-                         [the-component
-                          (with-syntax ([metas* (datum->syntax #'the-component 'metas)])
-                            #'(let* ([metas metas*]
-                                     [here (select-from-metas 'here-path metas)]
-                                     [here/output-path (->output-path here)]
-                                     [here/extension (get-ext here/output-path)]
-                                     [here/output-type
-                                      (if (equal? here/extension (setup:poly-source-ext))
-                                          (current-poly-target)
-                                          (string->symbol here/extension))])
-                                (case here/output-type
-                                  #,@(for/list ([(output-type output-type/expr)
-                                                 (in-dict output-types/dynamic)])
-                                       #`[(#,output-type)
-                                          (define signature #,@output-type/expr)
-                                          the-component])
-                                  [else (default-tag-function 'the-component)])))]))
-                    #'()))
-              (define static-assignments
-                (if (not (empty? output-types/static))
-                    (for/list ([(output-type output-type/expr)
-                                (in-dict output-types/static)])
-                      #`(set! #,output-type
-                              (append #,output-type `((the-component . ,#,@output-type/expr)))))
-                    #'()))
-              #`(begin #,@component-macro #,@static-assignments))])
-         (define components/static empty)
-         ...))])
-
-(component-types #:dynamic (html atom) #:static (css))
+(component-types #:dynamic html atom #:static css)
 
 ;; MISCELLANEOUS SUPPORT -----------------------------------------------------------------------------
 
-;; in-steps : number number integer -> (listof number)
 (define (in-steps start end steps)
   (for/list ([step (in-range (add1 steps))])
     (exact->inexact (+ start (* step (/ (- end start) steps))))))
-
-(module+ test
-  (check-equal? (in-steps 5 10 5) '(5. 6. 7. 8. 9. 10.)))
 
 (define base-path (make-parameter ""))
 
@@ -272,13 +198,6 @@
 
 (define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
   (* base (expt ratio step)))
-
-(module+ test
-  (check-= (modular-scale 0) 1 0)
-  (check-= (modular-scale 1) 1.200 .001)
-  (check-= (modular-scale 5) 2.488 .001)
-  (check-= (modular-scale -1) .833 .001)
-  (check-= (modular-scale -5) .402 .001))
 
 ;; SIZES ---------------------------------------------------------------------------------------------
 
