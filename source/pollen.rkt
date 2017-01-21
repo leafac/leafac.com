@@ -29,7 +29,7 @@
 
 ;; COMPONENT SUPPORT ---------------------------------------------------------------------------------
 
-(component-types #:dynamic html atom #:static css)
+(components-output-types #:dynamic html atom #:static css)
 
 ;; MISCELLANEOUS SUPPORT -----------------------------------------------------------------------------
 

@@ -10,6 +10,10 @@ Convert email newsletters into Atom feeds.
 
 Password manager for Org Mode.
 
+◊section['pollen-component]{◊link["https://docs.racket-lang.org/pollen-component"]{Pollen Component}}
+
+Component-based development for ◊link["http://pollenpub.com/"]{Pollen}.
+
 ◊section['programmable-foot-keyboard]{◊link/internal["/software/programmable-foot-keyboard"]{Programmable Foot Keyboard}}
 
 A programmable foot keyboard using ◊link["https://learn.adafruit.com/introducing-trinket"]{Adafruit’s Trinket}.
