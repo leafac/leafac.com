@@ -1,7 +1,7 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
          racket/function racket/list racket/file racket/dict racket/string
-         css-expr/untyped libuuid gregor gregor/period sugar xml
+         css-expr libuuid gregor gregor/period sugar xml
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
 
@@ -9,7 +9,7 @@
          (all-from-out racket/function racket/list racket/file racket/dict racket/string
                        gregor gregor/period sugar xml
                        pollen/core pollen/file
-                       css-expr/untyped))
+                       css-expr))
 
 ;; PERSONAL DATA -------------------------------------------------------------------------------------
 
@@ -94,7 +94,8 @@
 
 (define (font/face family weight style #:path [path (internal-url "/vendor/assets/fonts")])
   (define basename (string-append path "/" family "/" family "--" weight "--" style))
-  (css-expr [@font-face #:font-family ,family
+  (css-expr [@font-face
+             #:font-family ,family
              #:src (apply url ,(string-append basename ".eot"))
              #:src ((apply url ,(string-append basename ".eot?#iefix"))
                     (apply format "embedded-opentype"))

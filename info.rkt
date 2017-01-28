@@ -1,8 +1,8 @@
 #lang info
+
 (define collection "www.leafac.com")
-(define deps '("base" "rackunit-lib" "pollen" "css-expr" "gregor" "libuuid"))
+(define deps '("base" "rackunit-lib" "pollen" "pollen-component" "css-expr" "gregor" "libuuid"))
 (define build-deps '("scribble-lib" "racket-doc"))
-(define scribblings '(("scribblings/css-expr.scrbl" ())))
-(define pkg-desc "Leandro Facchinetti’s personal website")
-(define version "0.0")
+(define scribblings '(("documentation/www.leafac.com.scrbl" ())))
+(define pkg-desc "Source for Leandro Facchinetti’s personal website")
 (define pkg-authors '(leafac))
