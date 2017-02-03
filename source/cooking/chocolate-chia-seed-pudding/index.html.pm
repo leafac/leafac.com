@@ -56,7 +56,7 @@
  ◊direction{In a blender, mix the resulting paste with the following ingredients: ◊ingredients/repeat['base]}
  ◊direction{Mix the dates in: ◊ingredients/repeat['dates]}
  ◊direction{Mix the rest of the ingredients in: ◊ingredients/repeat['rest]}
- ◊direction{Let it rest overnight in the fridge.}
+ ◊direction{Let it rest in the fridge.}
 }
 
 ◊section['serving]{Serving}
