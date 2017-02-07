@@ -18,6 +18,10 @@ S-expression-based CSS.
 
 Component-based development for ◊link["http://pollenpub.com/"]{Pollen}.
 
+◊section['extensible-functions]{◊link["https://docs.racket-lang.org/extensible-functions"]{Extensible Functions}}
+
+A solution to the expression problem in Typed Racket.
+
 ◊section['programmable-foot-keyboard]{◊link/internal["/software/programmable-foot-keyboard"]{Programmable Foot Keyboard}}
 
 A programmable foot keyboard using ◊link["https://learn.adafruit.com/introducing-trinket"]{Adafruit’s Trinket}.
