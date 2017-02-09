@@ -1,4 +1,4 @@
-.PHONY: deploy documentation documentation/deploy documentation/clean clean
+.PHONY: deploy documentation documentation/deploy
 
 deploy:
 	raco pollen reset && \
