@@ -1,25 +1,21 @@
-.PHONY: build buid/clean deploy documentation documentation/deploy documentation/clean clean
+.PHONY: deploy documentation documentation/deploy documentation/clean clean
 
-build:
-	raco pollen render --recursive source
-	raco pollen publish source target
+deploy:
+	raco pollen reset && \
+	raco pollen render --recursive $(CURDIR)/source && \
+	temporary_directory=$$(mktemp -d) && \
+	raco pollen publish $(CURDIR)/source $$temporary_directory && \
+	rsync -av --delete $$temporary_directory/ leafac.com:leafac.com/websites/www.leafac.com/ && \
+	rsync -av $$temporary_directory/software/index.html leafac.com:leafac.com/websites/software/index.html
 
-build/clean:
-	rm -rf target
+################################################################################
 
-deploy: build
-	rsync -av --delete target/ leafac.com:leafac.com/websites/www.leafac.com/
-	rsync -av target/software/index.html leafac.com:leafac.com/websites/software/index.html
+project = www.leafac.com
 
-documentation: compiled-documentation/index.html
+documentation: documentation/index.html
 
-compiled-documentation/index.html: documentation/www.leafac.com.scrbl
-	cd documentation && raco scribble --dest ../compiled-documentation/ --dest-name index -- www.leafac.com.scrbl
+documentation/index.html: documentation/$(project).scrbl
+	cd documentation && raco scribble --dest-name index -- $(project).scrbl
 
 documentation/deploy: documentation
-	rsync -av --delete compiled-documentation/ leafac.com:leafac.com/websites/software/www.leafac.com/
-
-documentation/clean:
-	rm -rf compiled-documentation
-
-clean: build/clean documentation/clean
+	rsync -av --delete documentation/ leafac.com:leafac.com/websites/software/$(project)/
