@@ -116,9 +116,6 @@
                (font/face family weight style #:path path)
                (font/face family weight style)))))
 
-(define-component font/faces/charter
-  #:css (font/faces "charter" '("400" "700") '("normal" "italic")))
-
 (define-component font/faces/charis-sil
   #:css (font/faces "charis-sil" '("400" "700") '("normal" "italic")))
 
@@ -131,9 +128,7 @@
 
 (define-component font/faces/font-awesome #:css (font/face "font-awesome" "400" "normal"))
 
-(define font/serif (css-expr #:font-family "charter"))
-
-(define font/serif/extra (css-expr #:font-family "charis-sil"))
+(define font/serif (css-expr #:font-family "charis-sil"))
 
 (define font/sans-serif (css-expr #:font-family "source-sans-pro"))
 
@@ -149,7 +144,8 @@
   (css-expr ,@(prefix (css-expr #:font-feature-settings ,@font/feature-settings "smcp"))
             #:text-transform lowercase
             #:letter-spacing 0.2em
-            ,@font/serif/extra))
+            [(aside &) #:letter-spacing 0.1em]
+            #:margin-right -3px))
 
 (define font/all-caps
   (css-expr #:text-transform uppercase
@@ -264,8 +260,6 @@
 
 (define size/responsive/two-columns/min-width/absolute
   (css-expr rem ,size/responsive/two-columns/min-width/absolute/unitless))
-
-(define size/smart-underline/top '100%)
 
 (define size/ruler/thin '1px)
 
@@ -389,10 +383,15 @@
                        #:colors `(,(dict-ref colorscheme 'secondary-content)
                                   ,(dict-ref colorscheme 'background))
                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
+                                        ,(dict-ref colorscheme 'background-highlight)))]
+                   [(aside &)
+                    ,@(font/smart-underline
+                       #:colors `(,(dict-ref colorscheme 'secondary-content)
+                                  ,(dict-ref colorscheme 'background))
+                       #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
                                         ,(dict-ref colorscheme 'background-highlight))
-                       #:top size/smart-underline/top)]
-                   [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
-                    [(aside &)
+                       #:top '100%)
+                    [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
                      #:color ,(dict-ref colorscheme 'emphasized-content)
                      [(: & hover)
                       #:background-color ,(dict-ref colorscheme 'background)
@@ -402,7 +401,7 @@
                                    ,(dict-ref colorscheme 'background-highlight))
                         #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
                                          ,(dict-ref colorscheme 'background))
-                        #:top size/smart-underline/top)]]]))
+                        #:top '100%)]]]))
 
 (define disabled-paths '("/prose" "/music"))
 
@@ -515,11 +514,7 @@
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
   #:css (css-expr [span.acronym
-                   ,@font/small-caps
-                   #:margin-right -3px
-                   [(aside &)
-                    ,@font/secondary
-                    #:letter-spacing 0.1em]]))
+                   ,@font/small-caps]))
 
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width")
