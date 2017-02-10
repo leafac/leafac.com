@@ -145,7 +145,7 @@
             #:text-transform lowercase
             #:letter-spacing 0.2em
             [(aside &) #:letter-spacing 0.1em]
-            #:margin-right -3px))
+            #:margin-right -0.1em))
 
 (define font/all-caps
   (css-expr #:text-transform uppercase
