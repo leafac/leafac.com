@@ -318,7 +318,7 @@
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
 
 (define-component body-text
-  #:css (css-expr [* *::before *::after #:box-sizing border-box #:transition .3s #:outline none]
+  #:css (css-expr [* *::before *::after #:box-sizing border-box #:outline none]
                   [html
                    #:font-size ,size/body-text/start
                    ,@(for/list ([min-width size/responsive/min-width/range]
@@ -375,6 +375,7 @@
   #:css (css-expr [a
                    #:text-decoration none
                    #:color ,(dict-ref colorscheme 'primary-content)
+                   #:transition (background-color 0.3s) (text-shadow 0.3s)
                    [(: & hover)
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:color ,(dict-ref colorscheme 'emphasized-content)]
@@ -561,7 +562,9 @@
 
 (define-component (show-on-hover . elements)
   #:html (apply (default-tag-function 'span #:class "show-on-hover") elements)
-  #:css (css-expr [.show-on-hover #:opacity 0
+  #:css (css-expr [.show-on-hover
+                   #:transition (opacity 0.3s)
+                   #:opacity 0
                    [(> *:hover &) #:opacity 1]]))
 
 (define-component (heading/mark . elements)
