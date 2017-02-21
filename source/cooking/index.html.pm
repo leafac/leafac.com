@@ -20,7 +20,7 @@
  ◊recipe["pretzel"]{Pretzel}
  ◊recipe["bolinho-de-chuva"]{◊foreign{Bolinho de Chuva}}
  ◊recipe["banoffee-pie"]{Banoffee Pie}
- ◊recipe["chocolate-mousse"]{Chocolate Mousse}
+ ◊recipe["strawberry-chocolate-mousse-pie"]{Strawberry Chocolate Mousse Pie}
  ◊recipe["chocolate-chia-seed-pudding"]{Chocolate Chia Seed Pudding}
  ◊recipe["rice"]{Rice}
 }
