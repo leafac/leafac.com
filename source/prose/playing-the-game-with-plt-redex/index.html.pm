@@ -5,11 +5,13 @@
 
 ◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to define languages, operational semantics, type systems and so on. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
+Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, it might be a gentler introduction, which avoids the Greek letters and the jargon.
+
 ◊margin-note{◊link/internal["/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the full executable code.}
 
 ◊paragraph-separation[]
 
-◊new-thought{First, we need data structures} to represent the pegs and the board. We can use a ◊emphasis{language} for this purpose. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
+◊new-thought{First, we need data structures} to represent the pegs and the board. Normally one would use lists, structs, objects and so on, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
@@ -19,11 +21,11 @@
   (board ::= ([position ...] ...)))
 }
 
-The code above defines two data structures. The first, ◊code/inline{position}, represents a position in the board. It can be in one of three states: ◊code/inline{█} means uninitialized, a position that only serves as padding and is not really part of the board; ◊code/inline{○} means the position is empty; and ◊code/inline{●} means there is a peg in that position.
+The code above defines two data structures. The first, ◊code/inline{position}, represents a position in the board. It can be one of following: ◊code/inline{█} means uninitialized, a position that only serves as padding and is not really part of the board; ◊code/inline{○} means the position is empty; and ◊code/inline{●} means there is a peg in that position.
 
-◊margin-note{In Racket, different kinds of brackets—◊code/inline{()}, ◊code/inline{[]} and ◊code/inline{{}}—mean the same. Which one to use is a matter of readability.}
+◊margin-note{In Racket, different kinds of brackets—◊code/inline{()}, ◊code/inline{[]} and ◊code/inline{{}}—mean the same. Which one to use is a matter of readability—given that opening and closing brackets match, of course.}
 
-The second data structure is the ◊code/inline{board}, represented as a matrix of positions, or, more specifically, a list of lists of ◊code/inline{position}s. In ◊acronym{PLT} Redex, the ellipsis (◊code/inline{...}) means “the previous element repeated any number of times”. So ◊code/inline{[position ...]} means a list of ◊code/inline{position}s, and ◊code/inline{([position ...] ...)} means a list of lists of ◊code/inline{position}s.
+The second data structure is the ◊code/inline{board}, represented as a matrix of ◊code/inline{position}s, or, more specifically, a list of lists of ◊code/inline{position}s. In ◊acronym{PLT} Redex, the ellipsis (◊code/inline{...}) means “the previous element repeated any number of times.” So ◊code/inline{[position ...]} means a list of ◊code/inline{position}s, and ◊code/inline{([position ...] ...)} means a list of lists of ◊code/inline{position}s.
 
 Examples of possible boards are:
 
