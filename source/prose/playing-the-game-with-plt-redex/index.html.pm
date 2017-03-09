@@ -41,14 +41,13 @@ But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s 
 
 ◊code/block/highlighted['racket]{
 (define-term initial-board
-  ([█ █ █ ● ● ● █ █ █]
-   [█ █ █ ● ● ● █ █ █]
-   [● ● ● ● ● ● ● ● ●]
-   [● ● ● ● ○ ● ● ● ●]
-   [● ● ● ● ● ● ● ● ●]
-   [█ █ █ ● ● ● █ █ █]
-   [█ █ █ ● ● ● █ █ █]
-   [█ █ █ ● ● ● █ █ █]))
+  ([█ █ ● ● ● █ █]
+   [█ █ ● ● ● █ █]
+   [● ● ● ● ● ● ●]
+   [● ● ● ○ ● ● ●]
+   [● ● ● ● ● ● ●]
+   [█ █ ● ● ● █ █]
+   [█ █ ● ● ● █ █]))
 }
 
 ◊paragraph-separation[]
@@ -134,9 +133,12 @@ The following is the function with all the rules in the game:
         ↑)))
 }
 
+◊; TODO: Explain “domain”, “any” and “..._1”.
+
 The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching. It is not choosing the first pattern that matches, but simultaneously following all the patterns that match in parallel. One way of thinking about this is that ◊code/inline{move} is a function that returns multiple values—or, equivalently, a list of values. Another way is to think of ◊code/inline{move} as performing a non-deterministic computation. This sort of super-powered function is what ◊acronym{PLT} Redex calls a ◊technical-term{reduction relation}.
 
-◊;- I don't think it would be able to easily model the Game of Life, because, in that game, steps happen in parallel. It does allow us to escape to Racket, though.
-◊;- GOAL DIRECTED SEARCH
+◊; TODO: Playing the game.
 
-◊; TODO: Add syntax highlighting.
+◊; TODO: Find the solution. (1) Define goal function; (2) Track used rules; (3) Run.
+
+◊; TODO: I don’t think it would be able to easily model celullar automata—for example, the Game of Life—because steps can’t happen in parallel. Two solutions: (1) encode “current-cell” in the language; (2) escape to Racket.
