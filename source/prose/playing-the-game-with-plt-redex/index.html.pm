@@ -13,7 +13,7 @@
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
-◊code/block{
+◊code/block/highlighted['racket]{
 (define-language peg-solitaire
   (position ::= █ ○ ●)
   (board ::= ([position ...] ...)))
@@ -27,7 +27,7 @@ The second data structure is the ◊code/inline{board}, represented as a matrix 
 
 Examples of possible boards are:
 
-◊code/block{
+◊code/block/highlighted['racket]{
 ([█])
 
 ([█ ●]
@@ -39,7 +39,7 @@ Examples of possible boards are:
 
 But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s boards start in a specific configuration:
 
-◊code/block{
+◊code/block/highlighted['racket]{
 (define-term initial-board
   ([█ █ █ ● ● ● █ █ █]
    [█ █ █ ● ● ● █ █ █]
@@ -55,7 +55,7 @@ But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s 
 
 ◊new-thought{Next, we need} to specify how pegs are allowed to move on the board. We can define a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns the board configurations it is possible to reach with one move. This function includes each rule in forms that reads as “if the board looks this way now, then this is what the board should look like after one move:”
 
-◊code/block{
+◊code/block/highlighted['racket]{
 (--> (any_1
       ...
       [any_2 ... ● ● ○ any_3 ...]
@@ -75,7 +75,7 @@ This rule (called ◊code/inline{→}) is saying that, if anywhere on the board 
 
 The following is the function with all the rules in the game:
 
-◊code/block{
+◊code/block/highlighted['racket]{
 (define move
   (reduction-relation
    peg-solitaire

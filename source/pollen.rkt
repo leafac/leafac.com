@@ -15,15 +15,15 @@
 
 (define personal-data
   (let ([date-of-birth (date 1990 10 20)])
-    `((name           . ,◊values{Leandro Facchinetti})
-      (author         . ,◊values{Leandro Facchinetti})
-      (gpg-key-id     . ,◊values{5925D0683DF3D583})
-      (github-handle  . ,◊values{leafac})
-      (personal-email . ,◊values{me@leafac.com})
-      (work-email     . ,◊values{leandro@jhu.edu})
-      (skype-handle   . ,◊values{leafac})
-      (phone-number   . ,◊values{+14107799526})
-      (description    . ,◊values{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. student at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, lettering, education, minimalism and veganism.})
+    `((name           . ,◊~a{Leandro Facchinetti})
+      (author         . ,◊~a{Leandro Facchinetti})
+      (gpg-key-id     . ,◊~a{5925D0683DF3D583})
+      (github-handle  . ,◊~a{leafac})
+      (personal-email . ,◊~a{me@leafac.com})
+      (work-email     . ,◊~a{leandro@jhu.edu})
+      (skype-handle   . ,◊~a{leafac})
+      (phone-number   . ,◊~a{+14107799526})
+      (description    . ,◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. student at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, lettering, education, minimalism and veganism.})
       (date-of-birth  . ,date-of-birth)
       (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
 
@@ -512,6 +512,14 @@
                    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
                    #:padding ,size/indentation
                    #:padding (apply calc (- ,size/indentation ,size/ruler/thin))]))
+
+(define-component (code/block/highlighted language . elements)
+  #:html (string->xexpr
+          (with-input-from-string (apply string-append elements)
+            (λ ()
+              (with-output-to-string
+                  (λ ()
+                    (system (~a "pygmentize -f html -l " language))))))))
 
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
