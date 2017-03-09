@@ -345,7 +345,8 @@
                    #:margin 0
                    [(+ p &) #:text-indent ,size/indentation]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-                    [(+ aside &) #:text-indent ,size/indentation]]
+                    [(+ aside &) #:text-indent ,size/indentation]
+                    [(+ .insertion aside &) #:text-indent 0]]
                    [(: & first-of-type) #:text-indent 0 !important]]))
 
 (define-component insertion
@@ -404,7 +405,7 @@
                                          ,(dict-ref colorscheme 'background))
                         #:top '100%)]]]))
 
-(define disabled-paths '("/prose" "/music"))
+(define disabled-paths '("/music"))
 
 (define-component (link/internal path . elements)
   #:html (if (member path disabled-paths)
