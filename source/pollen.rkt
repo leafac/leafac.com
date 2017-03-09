@@ -514,12 +514,13 @@
                    #:padding (apply calc (- ,size/indentation ,size/ruler/thin))]))
 
 (define-component (code/block/highlighted language . elements)
-  #:html (string->xexpr
-          (with-input-from-string (apply string-append elements)
-            (λ ()
-              (with-output-to-string
-                  (λ ()
-                    (system (~a "pygmentize -f html -l " language))))))))
+  #:html ((default-tag-function 'div #:class "insertion")
+          (string->xexpr
+           (with-input-from-string (apply string-append elements)
+             (λ ()
+               (with-output-to-string
+                   (λ ()
+                     (system (~a "pygmentize -f html -l " language)))))))))
 
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
