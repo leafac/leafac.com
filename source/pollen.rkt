@@ -491,7 +491,9 @@
   #:html (default-tag-function 'figure)
   #:css (css-expr [figure #:margin 0]))
 
-(define-component figure/caption #:html (default-tag-function 'figcaption))
+(define-component figure/caption
+  #:html (default-tag-function 'figcaption)
+  #:css (css-expr [figcaption ,@font/secondary #:text-align center]))
 
 (define-component (image path caption)
   #:html (figure ((default-tag-function 'div #:class "image-in-figure")
