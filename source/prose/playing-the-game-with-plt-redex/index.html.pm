@@ -3,15 +3,81 @@
 ◊define-meta[title]{Playing the Game with PLT Redex}
 ◊define-meta[date]{2017-03-10}
 
+◊margin-note{This article assumes prior knowledge on programming in general and some exposure to functional programming in particular—specially immutable data structures and pattern matching. Racket experience is helpful, but not mandatory.}
+
+◊margin-note{◊figure{◊icon[#:illustration #t]{}◊figure/caption{A peg. Alone.}}}
+
 ◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to define languages, operational semantics, type systems and so on. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
 Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, it might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we are going to cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
-◊paragraph-separation[]
+◊section['rules-of-the-game]{Rules of the Game}
+
+◊margin-note{This section explains the rules of Peg Solitaire. If you already know them, ◊reference['data-structures]{skip ahead}.}
+
+◊new-thought{Peg Solitaire} is a 1-player board game. The initial arrangement of the board looks like the following:
+
+◊margin-note{There are other possible initial arrangements. We are considering the most common American variation.}
+
+◊code/block{
+    ● ● ●
+    ● ● ●
+● ● ● ● ● ● ●
+● ● ● ○ ● ● ●
+● ● ● ● ● ● ●
+    ● ● ●
+    ● ● ●
+}
+
+○ represents holes and ● represents a hole containing a peg.
+
+Pegs are allowed to jump over their immediate neighbors on the North, East, South and West—no diagonals—as long as they land on an empty hole. The neighbor that was jumped over is removed from the board. For example, the following is an allowed move:
+
+◊code/block{
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● ● ● ○ ● ● ●  ⇒  ● ○ ○ ● ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+}
+
+In this move, a peg jumped over its immediate neighbor on the East.
+
+The following is an example of an ◊emphasis{invalid} move:
+
+◊code/block{
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● ○ ○ ● ● ● ●  ⇒  ● ● ○ ○ ○ ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+}
+
+The problem with this move is that the peg must land on the empty hole right next to the neighbor over which it jumped.
+
+The goal of the game is to leave a single peg on the board. The following is an example of a ◊emphasis{lost} game:
+
+◊code/block{
+    ○ ○ ○
+    ○ ○ ○
+○ ○ ○ ● ○ ○ ○
+○ ○ ○ ○ ○ ○ ○
+○ ○ ○ ○ ○ ● ○
+    ○ ○ ○
+    ○ ○ ○
+}
+
+There are still two pegs remaining on the board, but they are not neighbors, so there are no further moves to make.
+
+◊section['data-structures]{Data Structures}
 
 ◊margin-note{◊link/internal["/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the full executable code.}
 
-◊new-thought{First, we need data structures} to represent the pegs and the board. Normally one would use lists, structs, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
+◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use lists, structs, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
@@ -52,9 +118,9 @@ But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s 
    [█ █ ● ● ● █ █]))
 }
 
-◊paragraph-separation[]
+◊section['moves]{Moves}
 
-◊new-thought{Next, we need} to specify how pegs are allowed to move on the board. We can define a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable with one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
+◊new-thought{We need to specify} how pegs are allowed to move on the board. We can define a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable with one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
 
 ◊code/block/highlighted['racket]{
 (--> (any_1
@@ -173,9 +239,9 @@ The following shows how ◊code/inline{move} works:
    (█ █ ● ● ● █ █)))
 }
 
-◊paragraph-separation[]
+◊section['game-play]{Game Play}
 
-◊new-thought{Now we can use} the visualization tools that come with ◊acronym{PLT} Redex to play Peg Solitaire. The tools are designed to allow for interactive exploration of evaluation rules, they let the user expand certain paths and backtrack, while highlighting the differences. The following illustrates game play:
+◊new-thought{We can use} the visualization tools that come with ◊acronym{PLT} Redex to play Peg Solitaire. The tools are designed to allow for interactive exploration of evaluation rules, they let the user expand certain paths and backtrack, while highlighting the differences. The following illustrates game play:
 
 
 ◊code/block/highlighted['racket]{
@@ -184,14 +250,9 @@ The following shows how ◊code/inline{move} works:
 
 ◊image["game-play.gif"]{A sample game play.}
 
-◊; TODO: Write in sections.
-◊; TODO: Pre-requisites.
-◊; TODO: Illustration of the board.
-◊; TODO: Explain the rules.
-
 ◊; TODO: Find the solution. (0) Use “traces” to show search space; (1) Define goal function; (2) Track used rules; (3) Run.
 ◊; IF THE ABOVE IS IMPOSSIBLE REVIEW INTRODUCTION!
 
 ◊; TODO: I don’t think it would be able to easily model celullar automata—for example, the Game of Life—because steps can’t happen in parallel. Two solutions: (1) encode “current-cell” in the language; (2) escape to Racket.
 
-◊; TODO: Ask for review: people new to Redex “where do you do get lost?”, experienced users “is there any explanation missing?” And typos.
+◊; TODO: Ask for review: people new to Redex “where do you do get lost?”, experienced users “is there any explanation missing?” And typos. Ask Shyam.

@@ -346,7 +346,8 @@
                    [(+ p &) #:text-indent ,size/indentation]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
                     [(+ aside &) #:text-indent ,size/indentation]
-                    [(+ .insertion aside &) #:text-indent 0]]
+                    [(+ .insertion aside &) (+ h1 aside &) (+ h2 aside &)
+                     #:text-indent 0]]
                    [(: & first-of-type) #:text-indent 0 !important]]))
 
 (define-component insertion
@@ -489,7 +490,7 @@
 
 (define-component figure
   #:html (default-tag-function 'figure)
-  #:css (css-expr [figure #:margin 0]))
+  #:css (css-expr [figure #:margin 0 #:text-align center]))
 
 (define-component figure/caption
   #:html (default-tag-function 'figcaption)
@@ -709,8 +710,10 @@
                    ,@font/icons
                    #:color ,(dict-ref colorscheme 'secondary-content)
                    [(\. & illustration)
+                    #:display block
                     #:font-size (rem ,(modular-scale 10))
-                    #:line-height (rem ,(modular-scale 10))]]))
+                    #:line-height (rem ,(modular-scale 10))
+                    #:margin-bottom (rem ,(modular-scale -1))]]))
 
 (define-component publication #:html emphasis)
 
