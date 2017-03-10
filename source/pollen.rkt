@@ -599,8 +599,8 @@
   #:html (apply (default-tag-function 'h2) `(,(label key) ,@elements ,(reference/§ key))))
 
 (define-component paragraph-separation
-  #:html (default-tag-function 'div #:class "paragraph-separation")
-  #:css (css-expr [.paragraph-separation #:height (rem ,(modular-scale 0))]))
+  #:html (default-tag-function 'div #:class "paragraph-separation insertion")
+  #:css (css-expr [.paragraph-separation #:height 1px]))
 
 (define-component big-separation
   #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))

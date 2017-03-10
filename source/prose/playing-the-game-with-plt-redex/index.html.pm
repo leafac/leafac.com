@@ -5,11 +5,11 @@
 
 ◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to define languages, operational semantics, type systems and so on. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
-Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, it might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we are going to cover interesting topics including alternative models of computation—non-deterministic computation—and goal-directed search.
-
-◊margin-note{◊link/internal["/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the full executable code.}
+Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, it might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we are going to cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
 ◊paragraph-separation[]
+
+◊margin-note{◊link/internal["/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the full executable code.}
 
 ◊new-thought{First, we need data structures} to represent the pegs and the board. Normally one would use lists, structs, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
@@ -184,7 +184,14 @@ The following shows how ◊code/inline{move} works:
 
 ◊image["game-play.gif"]{A sample game play.}
 
-◊; TODO: Find the solution. (1) Define goal function; (2) Track used rules; (3) Run.
+◊; TODO: Write in sections.
+◊; TODO: Pre-requisites.
+◊; TODO: Illustration of the board.
+◊; TODO: Explain the rules.
+
+◊; TODO: Find the solution. (0) Use “traces” to show search space; (1) Define goal function; (2) Track used rules; (3) Run.
 ◊; IF THE ABOVE IS IMPOSSIBLE REVIEW INTRODUCTION!
 
 ◊; TODO: I don’t think it would be able to easily model celullar automata—for example, the Game of Life—because steps can’t happen in parallel. Two solutions: (1) encode “current-cell” in the language; (2) escape to Racket.
+
+◊; TODO: Ask for review: people new to Redex “where do you do get lost?”, experienced users “is there any explanation missing?” And typos.
