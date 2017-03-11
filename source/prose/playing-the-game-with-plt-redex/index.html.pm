@@ -5,7 +5,7 @@
 
 ◊margin-note{This article assumes prior knowledge on programming in general and some exposure to functional programming in particular—specially immutable data structures and pattern matching. Racket experience is helpful, but not mandatory.}
 
-◊margin-note{◊figure{◊icon[#:illustration #t]{}◊figure/caption{A peg. Alone.}}}
+◊margin-note{◊figure{◊icon[#:illustration #t]{}◊figure/caption{A peg. Solitary.}}}
 
 ◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to define languages, operational semantics, type systems and so on. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
@@ -320,7 +320,7 @@ Finally, we need a function that traverses the graph. We want not only to determ
   (step `("initial" ,board)))
 }
 
-The function ◊code/inline{search-for-solution} works by recursion, accumulating the path it has been through. Its most unusual feature is the use of ◊code/inline{ormap}, which guarantees we stop the search after finding the first solution. The following are examples of ◊code/inline{search-for-solution} in use with simple boards:
+The function ◊code/inline{search-for-solution} works by recursion, accumulating the path it has been through. Its most unusual feature is the use of ◊code/inline{ormap}, which guarantees we stop the search after finding the first solution. The following are examples of using ◊code/inline{search-for-solution} in sections of the board:
 
 ◊code/block/highlighted['racket]{
 > (search-for-solution (term ([● ● ○])))
@@ -353,7 +353,7 @@ To find an answer, we would need a ◊technical-term{goal-directed search}. This
 
 ◊new-thought{Peg Solitaire is similar} to a simple cellular automata. It is a grid-based game in which cells can a assume certain states and evolve over time, the same as cellular automata. So, could ◊acronym{PLT} Redex model other automata? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular cellular automata?
 
-◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we explained above. While reduction relations explore multiple possibilities of moves for Peg Solitaire, in the Game of Life each move consists of multiple updates.}
+◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities of moves for Peg Solitaire, in the Game of Life each move consists of multiple updates.}
 
 Unfortunately, it would not be a straightforward task. Unlike in Peg Solitaire, the evolution of the Game of Life does not happen one cell (or peg) at a time. Instead, on every tick of the clock, all the cells on the board are updated simultaneously, in parallel. ◊acronym{PLT} Redex does not support this.
 
