@@ -29,9 +29,9 @@ Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond th
     ● ● ●
 }
 
-○ represents holes and ● represents a hole containing a peg.
+In figures representing the board, ○ stands for holes and ● for holes containing pegs.
 
-Pegs are allowed to jump over their immediate neighbors on the North, East, South and West—no diagonals—as long as they land on an empty hole. The neighbor that was jumped over is removed from the board. For example, the following is an allowed move:
+Pegs are allowed to jump over their immediate neighbors on the North, East, South and West—diagonals not included—as long as they land on an empty hole. The neighbor that was jumped over is removed from the board. For example, the following is an allowed move:
 
 ◊code/block{
     ● ● ●             ● ● ●
@@ -77,7 +77,7 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊margin-note{◊link/internal["/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the full executable code.}
 
-◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use lists, structs, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
+◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
@@ -93,19 +93,40 @@ The code above defines two data structures. The first, ◊code/inline{position},
 
 The second data structure is the ◊code/inline{board}, represented as a matrix of ◊code/inline{position}s, or, more specifically, a list of lists of ◊code/inline{position}s. In ◊acronym{PLT} Redex, the ellipsis (◊code/inline{...}) means “the previous element repeated any number of times.” So ◊code/inline{[position ...]} means a list of ◊code/inline{position}s, and ◊code/inline{([position ...] ...)} means a list of lists of ◊code/inline{position}s.
 
+◊margin-note{
+ Even ill-formed boards like the following are possible:
+
+ ◊code/block/highlighted['racket]{
+([●])
+
+([● ○ ●]
+ [● ○ █ ●])
+ }
+
+ But we are not going to consider them.
+}
+
 Examples of possible boards are:
 
 ◊code/block/highlighted['racket]{
-([█])
+([█ █ ● ● ● █ █]
+ [█ █ ● ● ○ █ █]
+ [● ○ ● ○ ● ● ●]
+ [● ● ● ○ ○ ○ ●]
+ [● ○ ● ● ● ● ●]
+ [█ █ ● ○ ● █ █]
+ [█ █ ● ● ● █ █])
 
-([█ ●]
- [○ █])
-
-([█ █]
- [█ ● ●])
+([█ █ ● ○ ● █ █]
+ [█ █ ● ● ○ █ █]
+ [● ○ ● ○ ● ● ●]
+ [● ● ● ○ ○ ○ ●]
+ [● ○ ● ● ○ ● ●]
+ [█ █ ● ○ ● █ █]
+ [█ █ ○ ● ● █ █])
 }
 
-But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s boards start in a specific configuration:
+We can then define the configuration for the initial Peg Solitaire board:
 
 ◊code/block/highlighted['racket]{
 (define-term initial-board
@@ -120,7 +141,13 @@ But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s 
 
 ◊section['moves]{Moves}
 
-◊new-thought{We need to specify} how pegs are allowed to move on the board. We can define a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable with one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
+◊margin-note{
+ The code closely resembles the ◊reference['rules-of-the-game]{game specification}. The code closely resembles the ◊reference['rules-of-the-game]{game specification}.
+
+                                The code closely resembles the ◊reference['rules-of-the-game]{game specification}. The code closely resembles the ◊reference['rules-of-the-game]{game specification}. The code closely resembles the ◊reference['rules-of-the-game]{game specification}.
+}
+
+◊new-thought{We need to specify} how pegs can to move on the board. We do this by defining a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable with one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
 
 ◊code/block/highlighted['racket]{
 (--> (any_1
@@ -136,7 +163,7 @@ But we are not interested in boards of ◊emphasis{any} form. Peg Solitaire’s 
      →)
 }
 
-◊margin-note{The code closely resembles the ◊link["https://en.wikipedia.org/wiki/Peg_solitaire#Play"]{game specification}.}
+◊margin-note{The code closely resembles the ◊reference['rules-of-the-game]{game specification}.}
 
 The rule above starts with ◊code/inline{-->} to indicate that it is a transformation. Then it states that, if ◊code/inline{● ● ○} exists anywhere on the board, then the peg on the left can jump to the right—over the peg in the middle—resulting in ◊code/inline{○ ○ ●}. The occurrences of ◊code/inline{any_*} are just preserving the rest of the board unaffected. Finally, the rule is given the name ◊code/inline{→}.
 
@@ -203,7 +230,11 @@ The following is the function with all the rules in the game:
 
 The function above starts by stating that it works over the language ◊code/inline{peg-solitaire}, more specifically over the ◊code/inline{board}s in that language. Then follows the rules. The only construct not explained thus far are the named ellipsis (◊code/inline{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
 
-The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel. One way of thinking about this is that ◊code/inline{move} is a function that returns multiple values—or, equivalently, a set of values. Another way is to think of ◊code/inline{move} as performing a ◊technical-term{non-deterministic computation}. This sort of super-powered function is what ◊acronym{PLT} Redex calls a ◊technical-term{reduction relation}.
+The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel. One way of thinking about this is that ◊code/inline{move} is a function that returns multiple values—or, equivalently, a set of values.
+
+◊margin-note{In accurate mathematical terms, a reduction relation is not a function, but a general relation, because of this non-deterministic behavior. But thinking of them as functions that return multiple values in different universes is a good approximation.}
+
+Another way of thinking about ◊code/inline{move} is as a function that lives in multiple universes. When multiple patterns match the input, functions have to decide which path (or paths) to take. In most languages, the first pattern that matches takes precedence over the rest, but ◊code/inline{move} explores all of them by creating multiple universes and following one path in each. This model of computation is called ◊technical-term{non-deterministic computation} and ◊acronym{PLT} Redex calls this sort of super-powered functions capable of non-deterministic computations ◊technical-term{reduction relations}.
 
 The following shows how ◊code/inline{move} works:
 
@@ -241,8 +272,7 @@ The following shows how ◊code/inline{move} works:
 
 ◊section['game-play]{Game Play}
 
-◊new-thought{We can use} the visualization tools that come with ◊acronym{PLT} Redex to play Peg Solitaire. The tools are designed to allow for interactive exploration of evaluation rules, they let the user expand certain paths and backtrack, while highlighting the differences. The following illustrates game play:
-
+◊new-thought{We can use} the visualization tools that come with ◊acronym{PLT} Redex to play Peg Solitaire. The tools are designed for interactive exploration of evaluation rules; they let the user expand certain paths and backtrack, while highlighting the differences. The following demonstrates game play:
 
 ◊code/block/highlighted['racket]{
 > (stepper move (term initial-board))
@@ -250,9 +280,38 @@ The following shows how ◊code/inline{move} works:
 
 ◊image["game-play.gif"]{A sample game play.}
 
-◊; TODO: Find the solution. (0) Use “traces” to show search space; (1) Define goal function; (2) Track used rules; (3) Run.
-◊; IF THE ABOVE IS IMPOSSIBLE REVIEW INTRODUCTION!
+◊section['winning]{Winning}
 
-◊; TODO: I don’t think it would be able to easily model celullar automata—for example, the Game of Life—because steps can’t happen in parallel. Two solutions: (1) encode “current-cell” in the language; (2) escape to Racket.
+◊; TODO: (0) Use “traces” to show search space; (1) Define goal function; (2) Track used rules; (3) Run.
+
+◊section['limitations]{Limitations}
+
+◊margin-note{For more on cellular automata, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
+
+◊new-thought{Peg Solitaire is similar} to a simple cellular automata. It is a grid-based game in which cells can a assume certain states and evolve over time, the same as cellular automata. So, could ◊acronym{PLT} Redex model other automata? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular cellular automata?
+
+◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we explained above. While reduction relations explore multiple possibilities of moves for Peg Solitaire, in the Game of Life each move consists of multiple updates.}
+
+Unfortunately, it would not be a straightforward task. Unlike in Peg Solitaire, the evolution of the Game of Life does not happen one cell (or peg) at a time. Instead, on every tick of the clock, all the cells on the board are updated simultaneously, in parallel. ◊acronym{PLT} Redex does not support this.
+
+There are two ways to work around this limitation. The first is break apart the update of the board in multiple steps. The data structures (language) encode the notion of ◊emphasis{current cell} and updates occur only the current cell. A single step in the evolution of the Game of Life is complete when the current cell has swept the whole board. Though implementing this is not as direct as the implementation of Peg Solitaire, which reads similar to the specification of the game.
+
+The second way to implement the Game of Life in ◊acronym{PLT} Redex is to cheat. Languages and functions in ◊acronym{PLT} Redex are Racket program, so it is possible to escape out and extend reduction relations with arbitrary Racket code. This is less clean than the powerful pattern-matching in ◊acronym{PLT} Redex, as the following example illustrates:
+
+◊code/block/highlighted['racket]{
+(define step
+  (reduction-relation
+   game-of-life
+   #:domain board
+   (--> board ,(racket-code-goes-here))))
+}
+
+The comma in the snippet above means “escape back to Racket, run this arbitrary code, and insert the result here.” At this point, ◊acronym{PLT} Redex is not contributing much, but having this possibility for extension is useful in localized contexts.
+
+◊section['conclusion]{Conclusion}
+
+◊; TODO:
+
+◊; ---------------------------------------------------------------------------------------------------
 
 ◊; TODO: Ask for review: people new to Redex “where do you do get lost?”, experienced users “is there any explanation missing?” And typos. Ask Shyam.
