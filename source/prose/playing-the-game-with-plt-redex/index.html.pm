@@ -141,12 +141,6 @@ We can then define the configuration for the initial Peg Solitaire board:
 
 ◊section['moves]{Moves}
 
-◊margin-note{
- The code closely resembles the ◊reference['rules-of-the-game]{game specification}. The code closely resembles the ◊reference['rules-of-the-game]{game specification}.
-
-                                The code closely resembles the ◊reference['rules-of-the-game]{game specification}. The code closely resembles the ◊reference['rules-of-the-game]{game specification}. The code closely resembles the ◊reference['rules-of-the-game]{game specification}.
-}
-
 ◊new-thought{We need to specify} how pegs can to move on the board. We do this by defining a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable with one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
 
 ◊code/block/highlighted['racket]{
