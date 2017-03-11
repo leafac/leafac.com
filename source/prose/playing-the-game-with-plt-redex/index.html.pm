@@ -276,9 +276,78 @@ The following shows how ◊code/inline{move} works:
 
 ◊section['winning]{Winning}
 
-◊; TODO: (0) Use “traces” to show search space; (1) Define goal function; (2) Track used rules; (3) Run.
+◊new-thought{Now that we can} play Peg Solitaire, a natural question is: can we use this model to compute a solution to the game? We can use another visualization tool from ◊acronym{PLT} Redex to understand what the search for an answer would look like:
 
-◊section['limitations]{Limitations}
+◊code/block/highlighted['racket]{
+> (traces move (term initial-board))
+}
+
+◊image["search-space.gif"]{The search space.}
+
+Starting with the initial board—on the top left—we repeatedly follow every possible move. The result is a graph of boards which we can traverse looking for a board in the winning state, with a single peg left.
+
+First, we encode the definition of a winning board:
+
+◊code/block/highlighted['racket]{
+(define (winning? board)
+  (define pegs-left-on-board
+    (count (curry equal? '●) (flatten board)))
+  (= pegs-left-on-board 1))
+}
+
+◊margin-note{The function ◊code/inline{curry} is performing ◊technical-term{partial application}. The function ◊code/inline{equal?} takes two arguments, so ◊code/inline{curry} is storing the first argument—the symbol ◊code/inline{●}—and yielding a function that takes the second argument for ◊code/inline{equal?} and calls it. This function that ◊code/inline{curry} yields is the predicate used for counting.}
+
+This function works by flattening the board—turning the matrix or list of lists into a single long list—and counting the number of elements that are pegs. Then we check if this count is equal to one.
+
+Finally, we need a function that traverses the graph. We want not only to determine not only if there is a solution, but also to keep track of the path we took in the graph to reach it, so that we know the steps to win:
+
+◊margin-note{There is no need to understand every detail of how ◊code/inline{search-for-solution} works. It uses ◊link["https://docs.racket-lang.org/guide/qq.html"]{quasiquoting} to build lists, ◊link["https://docs.racket-lang.org/guide/match.html"]{pattern matching} to destruct them, and other Racket features beyond the scope of the article.}
+
+◊code/block/highlighted['racket]{
+(define (search-for-solution board)
+  (define (step board-with-move)
+    (match-define `(,_ ,board) board-with-move)
+    (define next-boards-with-moves
+      (apply-reduction-relation/tag-with-names move board))
+    (cond
+      [(empty? next-boards-with-moves)
+       (and (winning? board) `(,board-with-move))]
+      [else
+       (define rest-of-solution
+         (ormap step next-boards-with-moves))
+       (and rest-of-solution
+            `(,board-with-move ,@rest-of-solution))]))
+  (step `("initial" ,board)))
+}
+
+The function ◊code/inline{search-for-solution} works by recursion, accumulating the path it has been through. Its most unusual feature is the use of ◊code/inline{ormap}, which guarantees we stop the search after finding the first solution. The following are examples of ◊code/inline{search-for-solution} in use with simple boards:
+
+◊code/block/highlighted['racket]{
+> (search-for-solution (term ([● ● ○])))
+'(("initial" ((● ● ○))) ("→" ((○ ○ ●))))
+> (search-for-solution (term ([● ● ○ ●])))
+'(("initial" ((● ● ○ ●))) ("→" ((○ ○ ● ●)))
+                          ("←" ((○ ● ○ ○))))
+> (search-for-solution (term ([● ● ● ○])))
+#f
+}
+
+◊margin-note{Returning false when no solutions are available is a common Racket pattern, inherited from its Scheme origins.}
+
+The snippet above demonstrates how ◊code/inline{search-for-solution} finds a solution and returns the whole path to reconstruct it. If the board is unsolvable, then ◊code/inline{search-for-solution} returns ◊technical-term{false} (◊code/inline{#f}).
+
+Finally, we can call ◊code/inline{search-for-solution} on the full board and solve Peg Solitaire:
+
+◊code/block/highlighted['racket]{
+> (search-for-solution (term initial-board))
+∞
+}
+
+Unfortunately, the above did not terminate after running for a whole night, when we interrupted the computation. This goes to show one limitation of ◊acronym{PLT} Redex (and other tools that are declarative and high-level): they are not always the fastest. They are designed for expressiveness, to facilitate the design of programming languages, not to brute-force the search in a space with millions of boards.
+
+To find an answer, we would need a ◊technical-term{goal-directed search}. This means we would prune the search space using some heuristics. For example, we know the board is symmetric, so we could prune search paths that are mirror images of one path we already explored. But this would complicate the model, so we are not going to pursue it in this article.
+
+◊section['other-limitations]{Other Limitations}
 
 ◊margin-note{For more on cellular automata, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
 
@@ -304,8 +373,10 @@ The comma in the snippet above means “escape back to Racket, run this arbitrar
 
 ◊section['conclusion]{Conclusion}
 
-◊; TODO:
+We showed how a language can work as a data structure. We used a language and the evaluation mechanisms from ◊acronym{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊acronym{PLT} Redex to play the game.
 
-◊; ---------------------------------------------------------------------------------------------------
+Along the way, we introduced a model for computation that is unusual for most programming languages: non-deterministic computations. When faced with multiple choices, non-deterministic computations ◊informal{create different universes} to follow every possible path.
 
-◊; TODO: Ask for review: people new to Redex “where do you do get lost?”, experienced users “is there any explanation missing?” And typos. Ask Shyam.
+We also showed how a simple brute-force search can find solutions, but they do not scale to solve the full board of Peg Solitaire in a reasonable time. We introduced the idea of a ◊technical-term{goal-directed search}, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue it and left the problem open.
+
+Finally, we discussed the limitations of ◊acronym{PLT} Redex and similar systems. This should assist users decide in which cases these tools are appropriate.

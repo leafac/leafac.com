@@ -113,10 +113,10 @@
                  (█ █ ● ● ● █ █))))
 
   #;
-  (traces move (term initial-board))
+  (stepper move (term initial-board))
 
   #;
-  (stepper move (term initial-board)))
+  (traces move (term initial-board)))
 
 ;; ---------------------------------------------------------------------------------------------------
 
@@ -141,5 +141,12 @@
   (step `("initial" ,board)))
 
 (module+ test
+  (test-equal (search-for-solution (term ([● ● ○])))
+              '(("initial" ((● ● ○))) ("→" ((○ ○ ●)))))
+  (test-equal (search-for-solution (term ([● ● ○ ●])))
+              '(("initial" ((● ● ○ ●))) ("→" ((○ ○ ● ●))) ("←" ((○ ● ○ ○)))))
+  (test-equal (search-for-solution (term ([● ● ● ○])))
+              #f)
+
   #;
   (search-for-solution (term initial-board)))
