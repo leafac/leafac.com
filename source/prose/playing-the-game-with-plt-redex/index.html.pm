@@ -75,7 +75,7 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊section['data-structures]{Data Structures}
 
-◊margin-note{◊link/internal["/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
+◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
 
 ◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
