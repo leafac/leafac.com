@@ -7,9 +7,9 @@
 
 ◊margin-note{◊figure{◊icon[#:illustration #t]{}◊figure/caption{A peg. Solitary.}}}
 
-◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to define languages, operational semantics, type systems and more. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
+◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
-Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, it might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we are going to cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
+Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we are going to cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
 ◊section['rules-of-the-game]{Rules of the Game}
 
@@ -87,9 +87,13 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
   (board ::= ([position ...] ...)))
 }
 
-The code above defines two data structures. The first, ◊code/inline{position}, represents a position in the board. It can be one of following: ◊code/inline{█} is an uninitialized position that only serves as padding and is not really part of the board; ◊code/inline{○} is an empty position; and ◊code/inline{●} is a position containing a peg.
+◊margin-note{The ◊code/inline{position} data structure is analogous to an enumeration.}
+
+The code above defines two data structures. The first, ◊code/inline{position}, represents a position on the board. It can be one of following: ◊code/inline{█} is an uninitialized position that only serves as padding and is not really part of the board; ◊code/inline{○} is an empty position; and ◊code/inline{●} is a position containing a peg.
 
 ◊margin-note{In Racket, different kinds of brackets—◊code/inline{()}, ◊code/inline{[]} and ◊code/inline{{}}—mean the same. Which one to use is a matter of readability—given that the kinds of open and close brackets match, of course.}
+
+◊margin-note{The ellipsis (◊code/inline{...}) in ◊acronym{PLT} Redex are similar to the Kleene star (◊code/inline{*}) in regular expressions.}
 
 The second data structure is the ◊code/inline{board}, represented as a matrix of ◊code/inline{position}s, or, more specifically, a list of lists of ◊code/inline{position}s. In ◊acronym{PLT} Redex, the ellipsis (◊code/inline{...}) means “the previous element repeated any number of times.” So ◊code/inline{[position ...]} means a list of ◊code/inline{position}s, and ◊code/inline{([position ...] ...)} means a list of lists of ◊code/inline{position}s.
 
@@ -222,15 +226,9 @@ The following is the function with all the rules in the game:
         ↑)))
 }
 
-The function above starts by stating that it works over the language ◊code/inline{peg-solitaire}, more specifically over the ◊code/inline{board}s in that language. Then follows the rules. The only construct not explained thus far are the named ellipsis (◊code/inline{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
+The function above starts by stating that it works over the language ◊code/inline{peg-solitaire}, more specifically over the ◊code/inline{board}s in that language. Then follow the rules. The only construct not explained thus far are the named ellipsis (◊code/inline{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
 
-The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel. One way of thinking about this is that ◊code/inline{move} is a function that returns multiple values—or, equivalently, a set of values.
-
-◊margin-note{In accurate mathematical terms, a reduction relation is not a function, but a general relation, because of this non-deterministic behavior. But thinking of them as functions that execute in different universes is a good approximation.}
-
-Another way of thinking about ◊code/inline{move} is as a function that lives in multiple universes. When multiple patterns match the input, functions have to decide which path (or paths) to take. In most languages, the first pattern that matches takes precedence over the rest, but ◊code/inline{move} explores all of them by creating multiple universes and following one path in each. This model of computation is called ◊technical-term{non-deterministic computation} and ◊acronym{PLT} Redex gives the name ◊technical-term{reduction relations} to these super-powered functions capable of non-deterministic computations.
-
-The following shows how ◊code/inline{move} works:
+The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel. The following shows how this works:
 
 ◊code/block/highlighted['racket]{
 > (apply-reduction-relation move (term initial-board))
@@ -263,6 +261,10 @@ The following shows how ◊code/inline{move} works:
    (█ █ ● ● ● █ █)
    (█ █ ● ● ● █ █)))
 }
+
+◊margin-note{In accurate mathematical terms, a reduction relation is not a function, but a general relation, because of this non-deterministic behavior. But thinking of them as functions that execute in different universes is a good approximation.}
+
+One way of thinking about ◊code/inline{move} is that it is a function returning multiple values—or, equivalently, a set of values. Another way of thinking about ◊code/inline{move} is that it is a function living in multiple universes. When multiple patterns match the input, functions have to decide which path (or paths) to take. In most languages, the first pattern that matches takes precedence over the rest, but ◊code/inline{move} explores all of them by creating multiple universes and following one path in each. This model of computation is called ◊technical-term{non-deterministic computation} and ◊acronym{PLT} Redex gives the name ◊technical-term{reduction relations} to these super-powered functions capable of non-deterministic computations.
 
 ◊section['game-play]{Game Play}
 
