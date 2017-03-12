@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Playing the Game with PLT Redex}
-◊define-meta[date]{2017-03-10}
+◊define-meta[date]{2017-03-12}
 
 ◊margin-note{This article assumes prior knowledge on programming in general and some exposure to functional programming in particular—specially immutable data structures and pattern matching. Racket experience is helpful, but not mandatory.}
 
@@ -286,7 +286,7 @@ One way of thinking about ◊code/inline{move} is that it is a function returnin
 
 ◊image["search-space.gif"]{The search space.}
 
-Starting with the initial board—on the top left—we repeatedly follow every possible move. The result is a graph of boards which we can traverse looking for a board in the winning state, with a single peg left.
+Starting with the initial board—on the top left—we repeatedly follow every possible move. The result is a graph of boards which we can traverse looking for a board in the winning state, with a single peg left. The path in the graph from the initial board to the winning board is the sequence of moves to win the game.
 
 First, we encode the definition of a winning board:
 
@@ -345,19 +345,19 @@ Finally, we can call ◊code/inline{search-for-solution} on the full board and s
 ∞
 }
 
-Unfortunately, the above did not terminate after running for a whole night, when we interrupted the computation. This goes to show one limitation of ◊acronym{PLT} Redex (and other tools that are declarative and high-level): they are not always the fastest. They are designed for expressiveness, to facilitate the design of programming languages, not to brute-force the search in a space with millions of elements.
+Unfortunately, the above did not terminate after running for a whole night, when we interrupted the computation. This goes to show one limitation of ◊acronym{PLT} Redex (and other tools that are declarative and high-level): they are not always the fastest. They are designed for expressiveness, to aid on the design of programming languages, not to brute-force a search in a space containing millions of elements.
 
-To find an answer, we would need a ◊technical-term{goal-directed search}. This means we would prune the search space using heuristics. This means we would encode more of our knowledge on the behavior of the game in the code. For example, we know the board is symmetric, so we could prune search paths that are mirror images of a path we already explored. But this would complicate the model, so we are not going to pursue this venue in this article.
+To find an answer within a reasonable time, we would need a ◊technical-term{goal-directed search}. This means we would prune the search space using more of our knowledge on the game. For example, we know that the board is symmetric, so we could prune search paths which are mirror images of paths we already explored. But this would complicate the model, so we are not going to pursue this venue in this article. Instead, we are going to leave open the problem of finding a solution for Peg Solitaire using ◊acronym{PLT} Redex.
 
 ◊section['other-limitations]{Other Limitations}
 
 ◊margin-note{For more on cellular automata, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
 
-◊new-thought{Peg Solitaire is similar} to a simple cellular automata. It is a grid-based game in which cells can a assume certain states and evolve over time, the same as cellular automata. So, could ◊acronym{PLT} Redex model them as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular cellular automata?
+◊new-thought{Peg Solitaire is similar} to a simple cellular automata. It is a grid-based game in which cells can assume certain states and evolve over time, the same as cellular automata. So, could ◊acronym{PLT} Redex model them as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular cellular automata?
 
-◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities of moves for Peg Solitaire, in the Game of Life each move consists of multiple updates.}
+◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities for moves in Peg Solitaire, in the Game of Life each move consists of multiple updates to the board.}
 
-Unfortunately, it would not be a straightforward task. Unlike in Peg Solitaire, the evolution of the Game of Life does not happen one cell (or peg) at a time. Instead, on every tick of the clock, all the cells on the board are updated simultaneously, in parallel. ◊acronym{PLT} Redex does not support this.
+Unfortunately, it would not be a straightforward task. Unlike Peg Solitaire, the evolution of the Game of Life does not happen one cell (or peg) at a time. Instead, on every tick of the clock, all the cells on the board are updated simultaneously, in parallel. ◊acronym{PLT} Redex does not support this.
 
 There are two ways to work around this limitation. The first is to break apart the update of the board in multiple steps. The data structures (language) would encode the notion of ◊emphasis{current cell} and updates would occur only to the current cell. Then the neighbor of the current cell would be elected the new current cell. A single step in the evolution of the Game of Life would be complete when the current cell would have swept the whole board. Implementing this is feasible, though it is not as direct as the implementation of Peg Solitaire, which reads similar to the specification of the game.
 
@@ -371,7 +371,7 @@ The second way to implement the Game of Life in ◊acronym{PLT} Redex is to chea
    (--> board ,(racket-code-goes-here))))
 }
 
-The comma in the snippet above means “escape back to Racket, run this arbitrary code, and insert the result here.” At this point, there is little benefit in using ◊acronym{PLT} Redex for this model. But, for other models already taking advantage of many of the tool’s features, it is useful to have this possibility for extension.
+The comma in the snippet above means “escape back to Racket, run this arbitrary code, and insert the result here.” At this point, there is little benefit in using ◊acronym{PLT} Redex for this model. But, for other models that mostly fit in ◊acronym{PLT} Redex, it is useful to have the possibility for localized arbitrary extensions.
 
 ◊section['conclusion]{Conclusion}
 
@@ -379,6 +379,6 @@ We showed how a language can work as a data structure. We used a language and th
 
 Along the way, we introduced a model for computation that is unusual in most programming languages: non-deterministic computation. When faced with multiple paths, non-deterministic computations ◊informal{create different universes} and follow them all.
 
-We also showed how a brute-force search is a simple way to explore a space of potential solutions. It can find solutions for small slices of the Peg Solitaire board, but does not scale to solve the full board in a reasonable running time. We introduced the idea of a ◊technical-term{goal-directed search}, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue this venue and left the problem open.
+We also used the model to look for a solution to the game. We showed how a brute-force search is a simple way to explore a space of potential solutions. It is enough for small slices of the Peg Solitaire board, but does not scale to solve the full board in a reasonable running time. We introduced the idea of a ◊technical-term{goal-directed search}, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue this venue and left the problem open.
 
 Finally, we discussed ◊acronym{PLT} Redex’s limitations. It cannot be used to directly encode systems of rules like most kinds of cellular automata, in which simultaneous updates need to occur throughout a data structure. We presented ways to work around this limitation, including one that demonstrates how ◊acronym{PLT} Redex is extensible with arbitrary Racket code.
