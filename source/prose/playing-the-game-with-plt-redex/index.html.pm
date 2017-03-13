@@ -77,7 +77,7 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and others, but we are going to use a ◊emphasis{language} as our data structure. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
+◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and others, but we are going to use a ◊emphasis{language} as our data structure definition. Terms in the language are going to represent board configurations. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
@@ -110,7 +110,7 @@ The second data structure is the ◊code/inline{board}, represented as a matrix 
  But we are not going to consider them.
 }
 
-Examples of possible boards are:
+Examples of terms in the language (boards) are:
 
 ◊code/block/highlighted['racket]{
 ([█ █ ● ● ● █ █]
@@ -375,10 +375,14 @@ The comma in the snippet above means “escape back to Racket, run this arbitrar
 
 ◊section['conclusion]{Conclusion}
 
-We showed how a language can work as a data structure. We used a language and the evaluation mechanisms in ◊acronym{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊acronym{PLT} Redex to play the game.
+We showed how a language can work as data structure definitions. We used a language and the evaluation mechanisms in ◊acronym{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊acronym{PLT} Redex to play the game.
 
 Along the way, we introduced a model for computation that is unusual in most programming languages: non-deterministic computation. When faced with multiple paths, non-deterministic computations ◊informal{create different universes} and follow them all.
 
 We also used the model to look for a solution to the game. We showed how a brute-force search is a simple way to explore a space of potential solutions. It is enough for small slices of the Peg Solitaire board, but does not scale to solve the full board in a reasonable running time. We introduced the idea of a ◊technical-term{goal-directed search}, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue this venue and left the problem open.
 
 Finally, we discussed ◊acronym{PLT} Redex’s limitations. It cannot be used to directly encode systems of rules like most kinds of cellular automata, in which simultaneous updates need to occur throughout a data structure. We presented ways to work around this limitation, including one that demonstrates how ◊acronym{PLT} Redex is extensible with arbitrary Racket code.
+
+◊section['acknowledgments]{Acknowledgments}
+
+◊new-thought{Thank you} ◊link["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar} and ◊link["http://www.thinkmoore.net/"]{Scott Moore} for your feedback on this article.
