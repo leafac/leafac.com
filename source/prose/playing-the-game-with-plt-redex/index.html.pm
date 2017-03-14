@@ -375,7 +375,7 @@ The comma in the snippet above means “escape back to Racket, run this arbitrar
 
 ◊section['conclusion]{Conclusion}
 
-We showed how a language can work as data structure definitions. We used a language and the evaluation mechanisms in ◊acronym{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊acronym{PLT} Redex to play the game.
+◊new-thought{We showed how a language} can work as data structure definitions. We used a language and the evaluation mechanisms in ◊acronym{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊acronym{PLT} Redex to play the game.
 
 Along the way, we introduced a model for computation that is unusual in most programming languages: non-deterministic computation. When faced with multiple paths, non-deterministic computations ◊informal{create different universes} and follow them all.
 

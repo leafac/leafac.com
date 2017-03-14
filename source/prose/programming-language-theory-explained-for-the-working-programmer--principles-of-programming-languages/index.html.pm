@@ -9,7 +9,7 @@
 
 ◊section['starting-point]{Starting Point}
 
-Consider the following program:
+◊new-thought{Consider} the following program:
 
 ◊margin-note{The same program is given in three popular programming languages to help users of these languages get started. From now on, we are going to proceed in Racket, but there is nothing special about this choice. Any language in which functions are values would work. This includes Ruby, Python, JavaScript, Java since version 8, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not.}
 
