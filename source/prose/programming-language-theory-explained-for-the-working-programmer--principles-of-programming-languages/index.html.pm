@@ -145,4 +145,4 @@ On a related idea, we could encode numbers as list lengths. Again, the contents 
 ;; => '(☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺)
 }
 
-Some encodings are more convenient than others. For example, implementing addition with the first string encoding is hard. It amounts to recreating the addition algorithm that we learn in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just appending lists.
+Some encodings are more convenient than others. For example, implementing addition with the first string encoding is hard. It amounts to recreating the addition algorithm that we learned in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just appending lists.
