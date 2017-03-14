@@ -503,6 +503,9 @@
   #:css (css-expr [img #:max-width 100%]
                   [.image-in-figure #:text-align center]))
 
+(define-component (svg path)
+  #:html (string->xexpr (file->string path)))
+
 (define-component code/inline
   #:html (default-tag-function 'code)
   #:css (css-expr [code ,@font/typewriter]))

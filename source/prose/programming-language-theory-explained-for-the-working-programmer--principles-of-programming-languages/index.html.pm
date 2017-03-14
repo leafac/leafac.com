@@ -53,12 +53,96 @@ public class Main {
 }
 }
 
-This program defines a function that sums integers from zero up to a given number, then calls this function with ◊code/inline{5}, outputting ◊code/inline{15}. What features are essential in programming languages that allow this program to be written? To address this question, we first have to consider what ◊emphasis{is} an essential feature.
+This program defines a function that sums integers from zero up to a given number, then calls this function with ◊code/inline{5}, outputting ◊code/inline{15}. What are the essential features in programming languages that allow this program to be written? To address this question, we first have to consider what ◊emphasis{is} an essential feature.
 
-Suppose one has to write an application that plays music. If one could find a programming language that comes with features for notes, melodies, harmony and rhythm, that work would be a lot simpler. But most programming languages do not have these features, and still it is possible to write applications that play music in them. One does that by ◊emphasis{encoding} the desired features. For example, notes could become numbers—1 for C, 2 for D, and so on—and chords could become tuples of notes.
+Suppose one wants to write an application that tracks information about bicycle trips. If one could find a programming language that comes with native constructs for distances, weather conditions and so on, then that would be a perfect fit. But programming languages generally do not have these features, so one has to use numbers, functions, lists, records, objects and other simpler features to ◊emphasis{encode} the necessary functionality.
 
-◊margin-note{Encoding abstractions in simpler terms is job of most compilers, which start with a language with more abstract features and output machine code. What we are targeting in this discussion is the essence of programming languages, so, in some ways, it is even more bare-bones than machine code.}
+◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in language with more features and output machine code. What we are targeting in this discussion is the essence of programming languages, so, in a way, it is even more bare-bones than machine code.}
 
-◊margin-note{◊(string->xexpr (file->string "convenience-vs-simplicity.svg"))}
+◊margin-note{◊svg["convenience-vs-simplicity.svg"]}
 
-So the capacity to play music is not an essential feature of a programming language, that is why most languages does not have it. Not having a feature makes the language simpler, having it makes it more convenient. The interesting observation is that most features included in most programming languages are also non-essential, but exist solely for convenience and can be encoded in terms of other, simpler, features. We are going to explore this simplicity–convenience spectrum, moving one feature at a time in the direction of simplicity.
+Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
+
+It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use less features, but they also become harder to understand. Think of the difference between programs in Ruby and C that perform the same task. While C is a simpler language, programs in it tend to be harder to read.
+
+◊; TODO: Start with Booleans, instead.
+
+◊section['numbers]{Numbers}
+
+◊new-thought{For convenience}, here is the initial program again:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (if (zero? number)
+      0
+      (+ number (sum-up-to (sub1 number)))))
+
+(sum-up-to 5) ;; => 15
+}
+
+The first feature we are going to remove via encoding are the numbers. There many different ways to write the same program above without numbers. For example, one could use strings to represent numbers, redefining the operations on them accordingly:
+
+◊margin-note{The ◊code/inline{___} in the code represent omitted code for the sake of simplicity.}
+
+◊code/block/highlighted['racket]{
+(define (zero? number)
+  (equal? "0" number))
+
+(define (sub1 number)
+  ___)
+
+(define (+ operand-left operand-right)
+  ___)
+
+(define (sum-up-to number)
+  (if (zero? number)
+      "0"
+      (+ number (sum-up-to (sub1 number)))))
+
+(sum-up-to "5")
+}
+
+Alternatively, we could encode numbers with strings not using their string representation, but the string length. Then contents of the string would be irrelevant, only its length would be meaningful. For example, ◊code/inline{0} could become ◊code/inline{""}, ◊code/inline{1} could become ◊code/inline{"☺"}, ◊code/inline{5} could become ◊code/inline{"☺☺☺☺☺"}, and so on. The running example would look like the following with this encoding:
+
+◊code/block/highlighted['racket]{
+(define (zero? number)
+  (equal? "" number))
+
+(define (sub1 number)
+  ___)
+
+(define (+ operand-left operand-right)
+  (string-append operand-left operand-right))
+
+(define (sum-up-to number)
+  (if (zero? number)
+      ""
+      (+ number (sum-up-to (sub1 number)))))
+
+(sum-up-to "☺☺☺☺☺")
+}
+
+On a related idea, we could encode numbers as list lengths. Again, the contents of the lists would be irrelevant, only their length would matter:
+
+◊code/block/highlighted['racket]{
+(define (zero? number)
+  (equal? '() number))
+
+(define (sub1 number)
+  (if (zero? number)
+      '()
+      (rest number)))
+
+(define (+ operand-left operand-right)
+  (append operand-left operand-right))
+
+(define (sum-up-to number)
+  (if (zero? number)
+      '()
+      (+ number (sum-up-to (sub1 number)))))
+
+(sum-up-to '(☺ ☺ ☺ ☺ ☺))
+;; => '(☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺)
+}
+
+Some encodings are more convenient than others. For example, implementing addition with the first string encoding is hard. It amounts to recreating the addition algorithm that we learn in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just appending lists.
