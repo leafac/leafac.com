@@ -65,8 +65,6 @@ Bicycle-trip information is not an essential feature of programming languages, t
 
 It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use less features, but they also become harder to understand. Think of the difference between programs in Ruby and C that perform the same task. While C is a simpler language, programs in it tend to be harder to read.
 
-◊; TODO: Start with Booleans, instead.
-
 ◊section['numbers]{Numbers}
 
 ◊new-thought{For convenience}, here is the initial program again:
@@ -145,4 +143,8 @@ On a related idea, we could encode numbers as list lengths. Again, the contents 
 ;; => '(☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺)
 }
 
-Some encodings are more convenient than others. For example, implementing addition with the first string encoding is hard. It amounts to recreating the addition algorithm that we learned in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just appending lists.
+Some encodings are more convenient than others. For example, it is harder to implement addition in the first string encoding presented above. It amounts to recreating the addition algorithm that we learned in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just list append.
+
+◊margin-note{The name of this proposed encoding using functions is ◊technical-term{Church Encoding}.}
+
+We are not seeking easiness, so from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but is interesting: we are going to encode numbers using ◊emphasis{functions}.
