@@ -5,6 +5,8 @@
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required.}
 
+◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
+
 ◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might question: What is the essence of programming languages? In this article, we are going to explore this question, but, unlike most presentations on the topic, we are going to avoid mathematical notation and jargon. We are going to start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages tick. The whole discussion is driven by executable code, making it approachable to all programmers.
 
 ◊section['starting-point]{Starting Point}
@@ -145,6 +147,135 @@ On a related idea, we could encode numbers as list lengths. Again, the contents 
 
 Some encodings are more convenient than others. For example, it is harder to implement addition in the first string encoding presented above. It amounts to recreating the addition algorithm that we learned in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just list append.
 
-◊margin-note{The name of this proposed encoding using functions is ◊technical-term{Church Encoding}.}
+◊margin-note{The name of this encoding of numbers using functions is ◊technical-term{Church Encoding}.}
 
-We are not seeking easiness, so from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but is interesting: we are going to encode numbers using ◊emphasis{functions}.
+We are not seeking easiness, so from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but interesting: we are going to encode numbers using ◊emphasis{functions}. Each number is going to be a function of two arguments: the first is a function and the second is an arbitrary argument. It repeatedly applies the first argument to the second, the amount of applications represents the number:
+
+◊margin-note{Another interpretation is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
+
+◊code/block/highlighted['racket]{
+(define (zero function argument)
+  argument)
+
+(define (one function argument)
+  (function argument))
+
+(define (five function argument)
+  (function
+   (function
+    (function
+     (function
+      (function argument))))))
+}
+
+◊margin-note{The encoding only supports non-negative integers. This is fine for our purposes in ◊code/inline{sum-up-to}, which only handles non-negative integers.}
+
+For ◊code/inline{zero}, the given function is not applied, the argument is returned unaltered. For ◊code/inline{one}, the given function is applied once. For ◊code/inline{five}, the given function is applied five times. And so on.
+
+When we print these numbers to inspect them, this is what Racket outputs:
+
+◊code/block/highlighted['racket]{
+> five
+#<procedure:five>
+}
+
+So we are going to introduce extra machinery, which is a non-essential feature of programming languages, but is going to help us read the output:
+
+◊code/block/highlighted['racket]{
+(define (pretty-print/number number)
+  (number add1 0))
+}
+
+The function ◊code/inline{pretty-print/number} is not going to be part of our main program, it only exists as a helper. That is why it is allowed to contain regular numbers—namely, ◊code/inline{0}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
+
+◊code/block/highlighted['racket]{
+> (pretty-print/number zero)
+0
+> (pretty-print/number one)
+1
+> (pretty-print/number five)
+5
+}
+
+The way ◊code/inline{pretty-print/number} works reveals how this encoding of numbers using function works. Numbers are functions, so ◊code/inline{pretty-print/number} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
+
+The function ◊code/inline{pretty-print/number} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print/number five)} turns into the following:
+
+◊code/block/highlighted['racket]{
+(add1
+ (add1
+  (add1
+   (add1
+    (add1 0))))) ;; => 5
+}
+
+◊paragraph-separation[]
+
+◊new-thought{Now that we have} an encoding for numbers, we need to define the necessary operations on those encoded numbers. For our original program (◊code/inline{sum-up-to}) we need three operations: ◊code/inline{zero?}, ◊code/inline{sub1} and ◊code/inline{+}.
+
+◊margin-note{In Racket, ◊technical-term{true} is spelled ◊code/inline{#t} and ◊technical-term{false} is spelled ◊code/inline{#f}.}
+
+To implement ◊code/inline{zero?}, we can use an idea similar to ◊code/inline{pretty-print/number}: call the number—which is a function—with carefully chosen arguments. For the initial value, we choose ◊code/inline{#t}, and for the function we choose one that always returns ◊code/inline{#f}:
+
+◊code/block/highlighted['racket]{
+(define (zero? number)
+  (define (always-false ignored-argument)
+    #f)
+  (number always-false #t))
+}
+
+Remember that these are the encoded numbers:
+
+◊code/block/highlighted['racket]{
+(define (zero function argument)
+  argument)
+
+(define (one function argument)
+  (function argument))
+
+(define (five function argument)
+  (function
+   (function
+    (function
+     (function
+      (function argument))))))
+}
+
+So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initial value ◊code/inline{#t} is returned. If ◊code/inline{zero?} is called with ◊code/inline{one}, then it becomes ◊code/inline{(one always-false #t)}, which turns into ◊code/inline{(always-false #t)}, and outputs ◊code/inline{#f}. The same happens to any number that is not ◊code/inline{zero}:
+
+◊code/block/highlighted['racket]{
+> (zero? zero)
+#t
+> (zero? one)
+#f
+> (zero? five)
+#f
+}
+
+◊paragraph-separation[]
+
+◊new-thought{To implement addition} (◊code/inline{+}), we can use the following observation: if the number ◊code/inline{number-left} means “do something to the argument ◊code/inline{number-left} times,” and the number ◊code/inline{number-right} means “do something to the argument ◊code/inline{number-right} times,” then the number ◊code/inline{number-left + number-right} means “do something to the argument ◊code/inline{number-left + number-right} times.” In particular, we can ◊informal{do something} to the argument ◊code/inline{number-right} times and use the result as the initial value to ◊informal{do something} to the argument ◊code/inline{number-left} times:
+
+◊margin-note{
+ Addition is a commutative operation (◊code/inline{number-left + number-right = number-right + number-left}). So inverting ◊code/inline{number-left} and ◊code/inline{number-right} does not change the meaning of ◊code/inline{+}. It could equivalently be written as the following:
+
+ ◊code/block/highlighted['racket]{
+(number-left function
+  (number-right function
+                argument))
+ }
+}
+
+◊code/block/highlighted['racket]{
+(define (+ number-left number-right)
+  (define (result function argument)
+    (number-left function (number-right function argument)))
+  result)
+}
+
+The following snippet is an example of ◊code/inline{+} in use:
+
+◊code/block/highlighted['racket]{
+> (pretty-print/number (+ five five))
+10
+}
