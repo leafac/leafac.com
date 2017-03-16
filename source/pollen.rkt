@@ -503,8 +503,21 @@
   #:css (css-expr [img #:max-width 100%]
                   [.image-in-figure #:text-align center]))
 
+(define svg/font-replacement
+  '(("Charis SIL" . "charis-sil")
+    ("Source Sans Pro" . "source-sans-pro")
+    ("Source Code Pro" . "source-code-pro")
+    ("Font Awesome" . "font-awesome")))
+
 (define-component (svg path)
-  #:html (string->xexpr (file->string path)))
+  #:html
+  (define source (file->string path))
+  (define font-replaced
+    (for/fold ([font-replaced source])
+              ([(source target) (in-dict svg/font-replacement)])
+      (regexp-replace* (pregexp (~a "font-family:\\s*[\"']?" source "[\"']?;"))
+                       font-replaced (~a "font-family:" target ";"))))
+  (string->xexpr font-replaced))
 
 (define-component code/inline
   #:html (default-tag-function 'code)
