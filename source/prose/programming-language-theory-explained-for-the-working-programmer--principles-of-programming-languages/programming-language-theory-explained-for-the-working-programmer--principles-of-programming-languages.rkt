@@ -161,19 +161,19 @@
   )
 
 (module+ sub1
-  (define (sub1 number)
-    (define initial-pair `(,zero . ,zero))
+  (struct pair (left right))
 
-    (define (slide-pair pair)
-      (match-define `(,previous . ,current) pair)
-      `(,current . ,(+ current one)))
+  (define (sub1 number)
+    (define initial-pair (pair zero zero))
+
+    (define (slide-pair current-pair)
+      (define current-number (pair-right current-pair))
+      (pair current-number (+ current-number one)))
 
     (define final-pair
       (number slide-pair initial-pair))
 
-    (match-define `(,result . ,result+1) final-pair)
-
-    result)
+    (pair-right final-pair))
 
   (define (+ number-left number-right)
     (define (result function argument)

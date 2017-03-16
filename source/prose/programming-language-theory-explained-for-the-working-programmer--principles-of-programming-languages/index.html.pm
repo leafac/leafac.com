@@ -61,7 +61,7 @@ Suppose one wants to write an application that tracks information about bicycle 
 
 ◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in language with more features and output machine code. What we are targeting in this discussion is the essence of programming languages, so, in a way, it is even more bare-bones than machine code.}
 
-◊margin-note{◊svg["convenience-vs-simplicity.svg"]}
+◊margin-note{◊svg{convenience-vs-simplicity.svg}}
 
 Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
 
@@ -279,3 +279,13 @@ The following snippet is an example of ◊code/inline{+} in use:
 > (pretty-print/number (+ five five))
 10
 }
+
+◊paragraph-separation[]
+
+◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we are going to start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we are going to define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero}.
+
+◊margin-note{◊svg{sliding-window.svg}}
+
+With that out of the way, we are going to use an ◊technical-term{sliding} window over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
+
+◊margin-note{To r}
