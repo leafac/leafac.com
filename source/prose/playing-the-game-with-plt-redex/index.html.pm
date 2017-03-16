@@ -347,6 +347,8 @@ Finally, we can call ◊code/inline{search-for-solution} on the full board and s
 
 Unfortunately, the above did not terminate after running for a whole night, when we interrupted the computation. This goes to show one limitation of ◊acronym{PLT} Redex (and other tools that are declarative and high-level): they are not always the fastest. They are designed for expressiveness, to aid on the design of programming languages, not to brute-force a search in a space containing millions of elements.
 
+◊margin-note{Any tool, when bent enough, will break. It is important to know this limit so we understand what the tool can and cannot do.}
+
 To find an answer within a reasonable time, we would need a ◊technical-term{goal-directed search}. This means we would prune the search space using more of our knowledge on the game. For example, we know that the board is symmetric, so we could prune search paths which are mirror images of paths we already explored. But this would complicate the model, so we are not going to pursue this venue in this article. Instead, we are going to leave open the problem of finding a solution for Peg Solitaire using ◊acronym{PLT} Redex.
 
 ◊section['other-limitations]{Other Limitations}
@@ -385,4 +387,4 @@ Finally, we discussed ◊acronym{PLT} Redex’s limitations. It cannot be used t
 
 ◊section['acknowledgments]{Acknowledgments}
 
-◊new-thought{Thank you} ◊link["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar} and ◊link["http://www.thinkmoore.net/"]{Scott Moore} for your feedback on this article.
+◊new-thought{Thank you} ◊link["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar}, ◊link["http://www.thinkmoore.net/"]{Scott Moore}, ◊link["http://www.allanvital.com/"]{Allan Vital} and ◊link["http://rafaelalmeida.net/"]{Rafael da Silva Almeida} for your feedback on this article.
