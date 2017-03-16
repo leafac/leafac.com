@@ -289,3 +289,50 @@ The following snippet is an example of ◊code/inline{+} in use:
 With that out of the way, we are going to use an ◊technical-term{sliding} window over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
 
 ◊margin-note{To represent pairs, we use ◊code/inline{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code/inline{cons}, ◊code/inline{car} and ◊code/inline{cdr} are not intuitive.}
+
+◊code/block/highlighted['racket]{
+(define (sub1 number)
+  (define initial-pair (pair zero zero))
+
+  (define (slide-pair current-pair)
+    (define current-number (pair-right current-pair))
+    (pair current-number (+ current-number one)))
+
+  (define final-pair
+    (number slide-pair initial-pair))
+
+  (pair-right final-pair))
+}
+
+We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-print/number}:
+
+◊code/block/highlighted['racket]{
+> (pretty-print/number (sub1 five))
+5
+}
+
+◊paragraph-separation[]
+
+◊new-thought{At this point}, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we are going to address the only other primitive data type used in our program: booleans.
+
+◊section['booleans]{Booleans}
+
+◊new-thought{There is only one} place in which we use a boolean in our program, the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. It calls ◊code/inline{zero?}, the only function generating booleans. For convenience, here are their current definitions again:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (if (zero? number)
+      '()
+      (+ number (sum-up-to (sub1 number)))))
+
+(define (zero? number)
+  (define (always-false ignored-argument)
+    #f)
+  (number always-false #t))
+}
+
+Are booleans an essential feature of programming languages, or can we ◊informal{encode them away}? Programmers familiar with C know that the answer to this question is negative, because in C there are no booleans—they are encoded in terms of numbers. Zero represents ◊technical-term{false} and any other number represents ◊technical-term{true}.
+
+As was the case before with numbers, other encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊techinical-term{true}. Some encodings would be more convenient than others.
+
+A particularly interesting choice is to follow C’s lead and use numbers to encode booleans. But, since the ◊reference['numbers]{previous section} already ◊informal{encoded numbers away} in terms of functions, we are going to keep the consistency and use the same feature to encode booleans.
