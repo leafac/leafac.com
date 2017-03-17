@@ -420,11 +420,15 @@ For the third step, remember that ◊code/inline{zero?} now returns a boolean en
   (branch-to-take))
 }
 
-Our work with booleans is complete. There are no longer native Racket booleans in our program, they have been encoded into functions. Moreover, there are no primitive values—numbers, booleans, strings, and so on—in our program. And our program continues to have the same meaning:
+◊paragraph-separation[]
+
+◊new-thought{Our work with booleans} is complete. There are no longer native Racket booleans in our program, they have been encoded into functions. Moreover, there are no primitive values—numbers, booleans, strings, and so on—in our program. And our program continues to have the same meaning:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
 15
 }
+
+So we showed that primitive values are not essential features to programming languages. Could it be that compound data structures are? On the next section we are going to explore this question.
 
 ◊section['pairs]{Pairs}
