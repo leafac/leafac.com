@@ -13,7 +13,7 @@
 
 ◊new-thought{Consider} the following program:
 
-◊margin-note{The same program is given in three popular programming languages to help users of these languages get started. From now on, we are going to proceed in Racket, but there is nothing special about this choice. Any language in which functions are values would work. This includes Ruby, Python, JavaScript, Java since version 8, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not.}
+◊margin-note{The same program is given in three popular programming languages to help users of these languages get started. From now on, we are going to proceed in Racket, but there is nothing special about this choice. Any dynamically typed language in which functions are values would work. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs we are going to write. There are static type systems with the necessary expressiveness, but they are rare.}
 
 ◊margin-note{To get started with Racket, refer to the ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction}.}
 
@@ -390,7 +390,7 @@ There is a problem with the code above, though. When we get to ask ◊code/inlin
 
 The second step aims to solve this issue. We ◊informal{wrap} the conditional branches in functions, and only call the function indicated by ◊code/inline{(zero? number)}:
 
-◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until the point it is necessary.}
+◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until it is necessary—at which point we can just call the function.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
