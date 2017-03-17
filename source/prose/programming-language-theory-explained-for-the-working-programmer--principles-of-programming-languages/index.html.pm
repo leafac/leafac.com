@@ -15,6 +15,8 @@
 
 ◊margin-note{The same program is given in three popular programming languages to help users of these languages get started. From now on, we are going to proceed in Racket, but there is nothing special about this choice. Any language in which functions are values would work. This includes Ruby, Python, JavaScript, Java since version 8, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not.}
 
+◊margin-note{To get started with Racket, refer to the ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction}.}
+
 ◊code/block/highlighted['racket]{
 ;; Racket
 (define (sum-up-to number)
@@ -182,24 +184,24 @@ When we print these numbers to inspect them, this is what Racket outputs:
 So we are going to introduce extra machinery, which is a non-essential feature of programming languages, but is going to help us read the output:
 
 ◊code/block/highlighted['racket]{
-(define (pretty-print/number number)
+(define (pretty-print number)
   (number add1 0))
 }
 
-The function ◊code/inline{pretty-print/number} is not going to be part of our main program, it only exists as a helper. That is why it is allowed to contain regular numbers—namely, ◊code/inline{0}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
+The function ◊code/inline{pretty-print} is not going to be part of our main program, it only exists as a helper. That is why it is allowed to contain regular numbers—namely, ◊code/inline{0}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
 
 ◊code/block/highlighted['racket]{
-> (pretty-print/number zero)
+> (pretty-print zero)
 0
-> (pretty-print/number one)
+> (pretty-print one)
 1
-> (pretty-print/number five)
+> (pretty-print five)
 5
 }
 
-The way ◊code/inline{pretty-print/number} works reveals how this encoding of numbers using function works. Numbers are functions, so ◊code/inline{pretty-print/number} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
+The way ◊code/inline{pretty-print} works reveals how this encoding of numbers using function works. Numbers are functions, so ◊code/inline{pretty-print} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
 
-The function ◊code/inline{pretty-print/number} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print/number five)} turns into the following:
+The function ◊code/inline{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print five)} turns into the following:
 
 ◊code/block/highlighted['racket]{
 (add1
@@ -211,11 +213,20 @@ The function ◊code/inline{pretty-print/number} makes a careful choice of argum
 
 ◊paragraph-separation[]
 
-◊new-thought{Now that we have} an encoding for numbers, we need to define the necessary operations on those encoded numbers. For our original program (◊code/inline{sum-up-to}) we need three operations: ◊code/inline{zero?}, ◊code/inline{sub1} and ◊code/inline{+}.
+◊new-thought{Now that we have} an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code/inline{sum-up-to}, we just change the return from ◊code/inline{0} (the native integer) to ◊code/inline{zero} (our encoding as defined above):
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (if (zero? number)
+      zero
+      (+ number (sum-up-to (sub1 number)))))
+}
+
+The next step is to modify the functions that work on the numbers so that they are aware of the encoding we introduced. There are three of them: ◊code/inline{zero?}, ◊code/inline{sub1} and ◊code/inline{+}.
 
 ◊margin-note{In Racket, ◊technical-term{true} is spelled ◊code/inline{#t} and ◊technical-term{false} is spelled ◊code/inline{#f}.}
 
-To implement ◊code/inline{zero?}, we can use an idea similar to ◊code/inline{pretty-print/number}: call the number—which is a function—with carefully chosen arguments. For the initial value, we choose ◊code/inline{#t}, and for the function we choose one that always returns ◊code/inline{#f}:
+To implement ◊code/inline{zero?}, we can use an idea similar to ◊code/inline{pretty-print}: call the number—which is a function—with carefully chosen arguments. For the initial value, we choose ◊code/inline{#t}, and for the function we choose one that always returns ◊code/inline{#f}:
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -276,7 +287,7 @@ So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initi
 The following snippet is an example of ◊code/inline{+} in use:
 
 ◊code/block/highlighted['racket]{
-> (pretty-print/number (+ five five))
+> (pretty-print (+ five five))
 10
 }
 
@@ -301,14 +312,14 @@ With that out of the way, we are going to use an ◊technical-term{sliding} wind
   (define final-pair
     (number slide-pair initial-pair))
 
-  (pair-right final-pair))
+  (pair-left final-pair))
 }
 
-We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-print/number}:
+We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-print}:
 
 ◊code/block/highlighted['racket]{
-> (pretty-print/number (sub1 five))
-5
+> (pretty-print (sub1 five))
+4
 }
 
 ◊paragraph-separation[]
@@ -317,12 +328,12 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 
 ◊section['booleans]{Booleans}
 
-◊new-thought{There is only one} place in which we use a boolean in our program, the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. It calls ◊code/inline{zero?}, the only function generating booleans. For convenience, here are their current definitions again:
+◊new-thought{There is only one} place in which we use a boolean in our program: the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. It calls ◊code/inline{zero?}, which is the only function generating booleans. For convenience, here are their current definitions again:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
   (if (zero? number)
-      '()
+      zero
       (+ number (sum-up-to (sub1 number)))))
 
 (define (zero? number)
@@ -331,8 +342,87 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
   (number always-false #t))
 }
 
-Are booleans an essential feature of programming languages, or can we ◊informal{encode them away}? Programmers familiar with C know that the answer to this question is negative, because in C there are no booleans—they are encoded in terms of numbers. Zero represents ◊technical-term{false} and any other number represents ◊technical-term{true}.
+Are booleans an essential feature of programming languages, or can we ◊informal{encode them away}? Programmers familiar with C know that the answer to this question is negative, because in C there are no booleans. They are encoded in terms of numbers: zero represents ◊technical-term{false} and any other number represents ◊technical-term{true}.
 
-As was the case before with numbers, other encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊techinical-term{true}. Some encodings would be more convenient than others.
+As was the case before with numbers, different encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊technical-term{true}. Some encodings are more convenient than others.
 
-A particularly interesting choice is to follow C’s lead and use numbers to encode booleans. But, since the ◊reference['numbers]{previous section} already ◊informal{encoded numbers away} in terms of functions, we are going to keep the consistency and use the same feature to encode booleans.
+A particularly interesting choice is to follow C’s lead and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we already ◊informal{encoded numbers away} in terms of functions, we are going to be consistent and use functions to encode booleans:
+
+◊code/block/highlighted['racket]{
+(define (true first second)
+  first)
+
+(define (false first second)
+  second)
+}
+
+In our encoding, booleans are functions that receive two arguments. The value ◊code/inline{true} returns the first argument, and ◊code/inline{false} returns the second argument.
+
+We can now adapt ◊code/inline{zero?} to use these values:
+
+◊code/block/highlighted['racket]{
+(define (zero? number)
+  (define (always-false ignored-argument)
+    false)
+  (number always-false true))
+}
+
+Because we changed the representation of booleans, we need to modify the place where they are used accordingly. We are going to do this in three steps. In the first, we extract the ◊technical-term{then} and the ◊technical-term{else} branches:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define then-branch
+    zero)
+
+  (define else-branch
+    (+ number (sum-up-to (sub1 number))))
+
+  (if (zero? number) then-branch else-branch))
+}
+
+There is a problem with the code above, though. When we get to ask ◊code/inline{(zero? number)} in the conditional, the recursive call to ◊code/inline{sum-up-to} in the ◊code/inline{else-branch} already happened. Previously, that recursive call was guarded by the conditional—it only executed if ◊code/inline{(zero? number)} was false. But, the code above leads to an infinite sequence of recursive calls. This program does not terminate.
+
+The second step aims to solve this issue. We ◊informal{wrap} the conditional branches in functions, and only call the function indicated by ◊code/inline{(zero? number)}:
+
+◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until the point it is necessary.}
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (then-branch)
+    zero)
+
+  (define (else-branch)
+    (+ number (sum-up-to (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then-branch else-branch))
+
+  (branch-to-take))
+}
+
+The most important part of the snippet above is that ◊code/inline{(define (then-branch) ...)} and ◊code/inline{(define (else-branch) ...)} are defining two ◊emphasis{functions} called ◊code/inline{then-branch} and ◊code/inline{else-branch}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then-branch) ...)} and not  ◊code/inline{(define (then-branch x y z) ...)}.
+
+For the third step, remember that ◊code/inline{zero?} now returns a boolean encoded in terms of a function. This function receives two arguments and returns the first if ◊technical-term{true} and the second if ◊technical-term{false}. Thus, we can call this function with the conditional branches:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (then-branch)
+    zero)
+
+  (define (else-branch)
+    (+ number (sum-up-to (sub1 number))))
+
+  (define branch-to-take
+    ((zero? number) then-branch else-branch))
+
+  (branch-to-take))
+}
+
+Our work with booleans is complete. There are no longer native Racket booleans in our program, they have been encoded into functions. Moreover, there are no primitive values—numbers, booleans, strings, and so on—in our program. And our program continues to have the same meaning:
+
+◊code/block/highlighted['racket]{
+> (pretty-print (sum-up-to five))
+15
+}
+
+◊section['pairs]{Pairs}

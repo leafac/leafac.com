@@ -89,8 +89,8 @@
         (function argument))))))
   )
 
-(module+ pretty-print
-  (define (pretty-print/number number)
+(module+ numbers/pretty-print
+  (define (pretty-print number)
     (number add1 0))
 
   (define (zero function argument)
@@ -106,12 +106,22 @@
        (function
         (function argument))))))
 
-  (pretty-print/number zero)
-  (pretty-print/number one)
-  (pretty-print/number five)
+  (pretty-print zero)
+  (pretty-print one)
+  (pretty-print five)
   )
 
-(module+ initial-zero?
+(module+ numbers/sum-up-to
+  (define (sum-up-to number)
+    (if (zero? number)
+        zero
+        (+ number (sum-up-to (sub1 number)))))
+
+  (define (zero function argument)
+    argument)
+  )
+
+(module+ numbers/zero?
   (define (zero? number)
     (define (always-false ignored-argument)
       #f)
@@ -135,7 +145,7 @@
   (zero? five)
   )
 
-(module+ +
+(module+ numbers/+
   (define (+ number-left number-right)
     (define (result function argument)
       (number-left function (number-right function argument)))
@@ -154,13 +164,13 @@
        (function
         (function argument))))))
 
-  (define (pretty-print/number number)
+  (define (pretty-print number)
     (number add1 0))
 
-  (pretty-print/number (+ five five))
+  (pretty-print (+ five five))
   )
 
-(module+ sub1
+(module+ numbers/sub1
   (struct pair (left right))
 
   (define (sub1 number)
@@ -173,7 +183,7 @@
     (define final-pair
       (number slide-pair initial-pair))
 
-    (pair-right final-pair))
+    (pair-left final-pair))
 
   (define (+ number-left number-right)
     (define (result function argument)
@@ -193,8 +203,123 @@
        (function
         (function argument))))))
 
-  (define (pretty-print/number number)
+  (define (pretty-print number)
     (number add1 0))
 
-  (pretty-print/number (sub1 five))
+  (pretty-print (sub1 five))
+  )
+
+(module+ booleans
+  (define (true first second)
+    first)
+
+  (define (false first second)
+    second)
+  )
+
+(module+ booleans/zero?
+  (define (zero? number)
+    (define (always-false ignored-argument)
+      false)
+    (number always-false true))
+
+  (define (true first second)
+    first)
+
+  (define (false first second)
+    second)
+  )
+
+(module+ booleans/extract-conditional-branches
+  (define (sum-up-to number)
+    (define then-branch
+      zero)
+
+    (define else-branch
+      (+ number (sum-up-to (sub1 number))))
+
+    (if (zero? number) then-branch else-branch))
+
+  (define (zero function argument)
+    argument)
+  )
+
+(module+ booleans/wrap-conditional-branches
+  (define (sum-up-to number)
+    (define (then-branch)
+      zero)
+
+    (define (else-branch)
+      (+ number (sum-up-to (sub1 number))))
+
+    (define branch-to-take
+      (if (zero? number) then-branch else-branch))
+
+    (branch-to-take))
+
+  (define (zero function argument)
+    argument)
+  )
+
+(module+ booleans/remove-if
+  (define (sum-up-to number)
+    (define (then-branch)
+      zero)
+
+    (define (else-branch)
+      (+ number (sum-up-to (sub1 number))))
+
+    (define branch-to-take
+      ((zero? number) then-branch else-branch))
+
+    (branch-to-take))
+
+  (define (zero? number)
+    (define (always-false ignored-argument)
+      false)
+    (number always-false true))
+
+  (define (true first second)
+    first)
+
+  (define (false first second)
+    second)
+
+  
+  (struct pair (left right))
+
+  (define (sub1 number)
+    (define initial-pair (pair zero zero))
+
+    (define (slide-pair current-pair)
+      (define current-number (pair-right current-pair))
+      (pair current-number (+ current-number one)))
+
+    (define final-pair
+      (number slide-pair initial-pair))
+
+    (pair-left final-pair))
+
+  (define (+ number-left number-right)
+    (define (result function argument)
+      (number-left function (number-right function argument)))
+    result)
+
+  (define (zero function argument)
+    argument)
+
+  (define (one function argument)
+    (function argument))
+
+  (define (five function argument)
+    (function
+     (function
+      (function
+       (function
+        (function argument))))))
+
+  (define (pretty-print number)
+    (number add1 0))
+
+  (pretty-print (sum-up-to five))
   )
