@@ -298,7 +298,7 @@ The following snippet is an example of ◊code/inline{+} in use:
 ◊margin-note{
  ◊svg{sub1.svg}
 
-  ◊no-indent[] Note that in the figure above there are five blue arrows, representing the steps we take to calculate ◊code/inline{(sub1 five)}.
+  ◊no-indent[] Note that in the figure above there are ◊emphasis{five} blue arrows, representing the steps we take to calculate ◊code/inline{sub1} of ◊code/inline{five}.
 }
 
 With that out of the way, we are going to use an ◊technical-term{sliding} window over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
@@ -419,7 +419,7 @@ The most important part of the snippet above is that ◊code/inline{(define (the
 
 ◊paragraph-separation[]
 
-◊new-thought{Our work with booleans} is complete. There are no longer native Racket booleans in our program, they have been encoded into functions. Moreover, there are no primitive values (numbers, booleans, strings, and so on) at all in our program. And it continues to have the same meaning:
+◊new-thought{Our work with booleans} is complete. There are no longer any native Racket booleans in our program, they have been encoded into functions. Moreover, our program contains no primitive values (numbers, booleans, strings, and so on) at all, and it continues to have the same meaning:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
