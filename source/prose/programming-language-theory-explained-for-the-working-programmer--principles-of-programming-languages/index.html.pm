@@ -295,7 +295,11 @@ The following snippet is an example of ◊code/inline{+} in use:
 
 ◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we are going to start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we are going to define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero}.
 
-◊margin-note{◊svg{sliding-window.svg}}
+◊margin-note{
+ ◊svg{sub1.svg}
+
+  Note that in the figure above there are five blue arrows, representing the steps we need to take to calculate ◊code/inline{(sub1 5)}.
+}
 
 With that out of the way, we are going to use an ◊technical-term{sliding} window over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
 
