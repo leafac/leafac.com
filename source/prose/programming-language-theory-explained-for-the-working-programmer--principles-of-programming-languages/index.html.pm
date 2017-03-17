@@ -346,6 +346,8 @@ Are booleans an essential feature of programming languages, or can we ◊informa
 
 As was the case before with numbers, different encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊technical-term{true}. Some encodings are more convenient than others.
 
+◊margin-note{This encoding of booleans using functions is also called ◊technical-term{Church Encoding}.}
+
 A particularly interesting choice is to follow C’s lead and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we already ◊informal{encoded numbers away} in terms of functions, we are going to be consistent and use functions to encode booleans:
 
 ◊code/block/highlighted['racket]{
