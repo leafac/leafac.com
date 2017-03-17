@@ -619,6 +619,9 @@
   #:html (default-tag-function 'div #:class "paragraph-separation insertion")
   #:css (css-expr [.paragraph-separation #:height 1px]))
 
+(define-component new-line
+  #:html (default-tag-function 'br))
+
 (define-component no-indent
   #:html (default-tag-function 'div #:class "no-indent"))
 
@@ -807,7 +810,7 @@
 (define-component certification/date #:html (default-tag-function '@))
 
 (define-component (certification/score . elements)
-  #:html (apply (default-tag-function '@) `(,((default-tag-function 'br)) ,@elements)))
+  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 (define-component event #:html (default-tag-function 'div #:class "big-separation"))
 
@@ -822,7 +825,7 @@
   #:html (apply (default-tag-function '@) `(" to " ,@elements)))
 
 (define-component (event/highlight . elements)
-  #:html (apply (default-tag-function '@) `(,((default-tag-function 'br)) ,@elements)))
+  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 (define-component course #:html (default-tag-function 'div #:class "big-separation"))
 
@@ -834,7 +837,7 @@
 (define-component course/date #:html (default-tag-function '@))
 
 (define-component (course/highlight . elements)
-  #:html (apply (default-tag-function '@) `(,((default-tag-function 'br)) ,@elements)))
+  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 (define-component service/reviewer #:html (default-tag-function '@))
 
@@ -852,11 +855,11 @@
   #:html (apply (default-tag-function '@) `(,@elements ".")))
 
 (define-component (publication/paper/venue . elements)
-  #:html (apply (default-tag-function '@) `(,((default-tag-function 'br))
+  #:html (apply (default-tag-function '@) `(,(new-line)
                                             ,(apply emphasis elements) ". ")))
 
 (define-component (publication/paper/date . elements)
   #:html (apply (default-tag-function '@) `(,@elements ".")))
 
 (define-component (publication/paper/abstract . elements)
-  #:html (apply (default-tag-function '@) `(,((default-tag-function 'br)) ,@elements)))
+  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))

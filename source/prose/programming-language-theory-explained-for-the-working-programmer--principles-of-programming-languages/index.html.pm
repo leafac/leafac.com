@@ -3,7 +3,7 @@
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
 ◊define-meta[date]{2017-03-13}
 
-◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required.}
+◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
 
@@ -14,8 +14,6 @@
 ◊new-thought{Consider} the following program:
 
 ◊margin-note{The same program is given in three popular programming languages to help users of these languages get started. From now on, we are going to proceed in Racket, but there is nothing special about this choice. Any dynamically typed language in which functions are values would work. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs we are going to write. There are static type systems with the necessary expressiveness, but they are rare.}
-
-◊margin-note{To get started with Racket, refer to the ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction}.}
 
 ◊code/block/highlighted['racket]{
 ;; Racket
