@@ -346,7 +346,7 @@
                    [(+ p &) #:text-indent ,size/indentation]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
                     [(+ aside &) #:text-indent ,size/indentation]
-                    [(+ .insertion aside &) (+ h1 aside &) (+ h2 aside &)
+                    [(+ .insertion aside &) (+ h1 aside &) (+ h2 aside &) (+ .no-indent &)
                      #:text-indent 0]]
                    [(: & first-of-type) #:text-indent 0 !important]]))
 
@@ -618,6 +618,9 @@
 (define-component paragraph-separation
   #:html (default-tag-function 'div #:class "paragraph-separation insertion")
   #:css (css-expr [.paragraph-separation #:height 1px]))
+
+(define-component no-indent
+  #:html (default-tag-function 'div #:class "no-indent"))
 
 (define-component big-separation
   #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))
