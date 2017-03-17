@@ -298,7 +298,7 @@ The following snippet is an example of ◊code/inline{+} in use:
 ◊margin-note{
  ◊svg{sub1.svg}
 
-  ◊no-indent[] Note that in the figure above there are five blue arrows, representing the steps we need to take to calculate ◊code/inline{(sub1 five)}.
+  ◊no-indent[] Note that in the figure above there are five blue arrows, representing the steps we take to calculate ◊code/inline{(sub1 five)}.
 }
 
 With that out of the way, we are going to use an ◊technical-term{sliding} window over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
