@@ -230,49 +230,34 @@
     second)
   )
 
-(module+ booleans/extract-conditional-branches
+(module+ booleans/if-as-function
+  (define (if condition then else)
+    (condition then else))
+
   (define (sum-up-to number)
-    (define then-branch
-      zero)
-
-    (define else-branch
-      (+ number (sum-up-to (sub1 number))))
-
-    (if (zero? number) then-branch else-branch))
+    (if (zero? number)
+        zero
+        (+ number (sum-up-to (sub1 number)))))
 
   (define (zero function argument)
     argument)
   )
 
-(module+ booleans/wrap-conditional-branches
+(module+ booleans/delay-computation
   (define (sum-up-to number)
-    (define (then-branch)
+    (define (then)
       zero)
 
-    (define (else-branch)
+    (define (else)
       (+ number (sum-up-to (sub1 number))))
 
     (define branch-to-take
-      (if (zero? number) then-branch else-branch))
+      (if (zero? number) then else))
 
     (branch-to-take))
 
-  (define (zero function argument)
-    argument)
-  )
-
-(module+ booleans/remove-if
-  (define (sum-up-to number)
-    (define (then-branch)
-      zero)
-
-    (define (else-branch)
-      (+ number (sum-up-to (sub1 number))))
-
-    (define branch-to-take
-      ((zero? number) then-branch else-branch))
-
-    (branch-to-take))
+  (define (if condition then else)
+    (condition then else))
 
   (define (zero? number)
     (define (always-false ignored-argument)
@@ -285,7 +270,6 @@
   (define (false first second)
     second)
 
-  
   (struct pair (left right))
 
   (define (sub1 number)

@@ -332,7 +332,7 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 
 ◊section['booleans]{Booleans}
 
-◊new-thought{There is only one} place in which we use a boolean in our program: the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. It calls ◊code/inline{zero?}, which is the only function generating booleans. For convenience, here are their current definitions again:
+◊new-thought{There is only one} place in which we use a boolean in our program: the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. Its condition depends on ◊code/inline{zero?}, which is the only function generating booleans. For convenience, here are their current definitions again:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -354,6 +354,8 @@ As was the case before with numbers, different encodings are possible. For examp
 
 A particularly interesting choice is to follow C’s lead and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we already ◊informal{encoded numbers away} in terms of functions, we are going to be consistent and use functions to encode booleans:
 
+◊margin-note{There is nothing special about the names ◊code/inline{true} and ◊code/inline{false}. They are regular functions, like ◊code/inline{sub1}, ◊code/inline{pretty-print} and so on.}
+
 ◊code/block/highlighted['racket]{
 (define (true first second)
   first)
@@ -373,66 +375,57 @@ We can now adapt ◊code/inline{zero?} to use these values:
   (number always-false true))
 }
 
-Because we changed the representation of booleans, we need to modify the place where they are used accordingly. We are going to do this in three steps. In the first, we extract the ◊technical-term{then} and the ◊technical-term{else} branches:
+Because we changed the representation of booleans, we need to modify the conditional (◊code/inline{if}) accordingly. It receives as arguments a condition, which is boolean encoded as a function, and this function is capable of choosing which branch (◊code/inline{then} or ◊code/inline{else}) to follow:
+
+◊margin-note{Again, there is nothing special about the names ◊code/inline{if},  ◊code/inline{then} and ◊code/inline{else}. The name ◊code/inline{if} became just another function. And ◊code/inline{then} and ◊code/inline{else} are regular variables, like ◊code/inline{number-left}, ◊code/inline{number-right} and so on.}
+
+◊margin-note{Conditionals are so natural to encode because our choice of encoding for booleans was deliberate to make this happen.}
 
 ◊code/block/highlighted['racket]{
-(define (sum-up-to number)
-  (define then-branch
-    zero)
-
-  (define else-branch
-    (+ number (sum-up-to (sub1 number))))
-
-  (if (zero? number) then-branch else-branch))
+(define (if condition then else)
+  (condition then else))
 }
 
-There is a problem with the code above, though. When we get to ask ◊code/inline{(zero? number)} in the conditional, the recursive call to ◊code/inline{sum-up-to} in the ◊code/inline{else-branch} already happened. Previously, that recursive call was guarded by the conditional—it only executed if ◊code/inline{(zero? number)} was false. But, the code above leads to an infinite sequence of recursive calls. This program does not terminate.
-
-The second step aims to solve this issue. We ◊informal{wrap} the conditional branches in functions, and only call the function indicated by ◊code/inline{(zero? number)}:
-
-◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until it is necessary—at which point we can just call the function.}
+We introduced a problem in ◊code/inline{sum-up-to}, though. Here is its current definition one more time:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
-  (define (then-branch)
+  (if (zero? number)
+      zero
+      (+ number (sum-up-to (sub1 number)))))
+}
+
+Before we encoded ◊code/inline{if}, this code was using Racket’s ◊code/inline{if}. And Racket’s ◊code/inline{if} only executes a branch if necessary. In particular, the part ◊code/inline{(+ number (sum-up-to (sub1 number)))} only ran if ◊code/inline{(zero? number)} was ◊technical-term{false}. But now, because ◊code/inline{if} is a function call, by the time we check the condition to make a decision, this part already ran. And it contains a recursive call to ◊code/inline{sum-up-to}, which leads to an infinite sequence of recursive calls. This program does not terminate.
+
+To solve this issue, we ◊informal{wrap} the conditional branches in functions, so that they do not execute right away. We then use ◊code/inline{if} to choose the right function to call:
+
+◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until it is necessary—at which point we call the function.}
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (then)
     zero)
 
-  (define (else-branch)
+  (define (else)
     (+ number (sum-up-to (sub1 number))))
 
   (define branch-to-take
-    (if (zero? number) then-branch else-branch))
+    (if (zero? number) then else))
 
   (branch-to-take))
 }
 
-The most important part of the snippet above is that ◊code/inline{(define (then-branch) ...)} and ◊code/inline{(define (else-branch) ...)} are defining two ◊emphasis{functions} called ◊code/inline{then-branch} and ◊code/inline{else-branch}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then-branch) ...)} and not  ◊code/inline{(define (then-branch x y z) ...)}.
-
-For the third step, remember that ◊code/inline{zero?} now returns a boolean encoded in terms of a function. This function receives two arguments and returns the first if ◊technical-term{true} and the second if ◊technical-term{false}. Thus, we can call this function with the conditional branches:
-
-◊code/block/highlighted['racket]{
-(define (sum-up-to number)
-  (define (then-branch)
-    zero)
-
-  (define (else-branch)
-    (+ number (sum-up-to (sub1 number))))
-
-  (define branch-to-take
-    ((zero? number) then-branch else-branch))
-
-  (branch-to-take))
-}
+The most important part of the snippet above is that ◊code/inline{(define (then) ...)} and ◊code/inline{(define (else) ...)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ...)} and not ◊code/inline{(define (then x y z) ...)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
 
 ◊paragraph-separation[]
 
-◊new-thought{Our work with booleans} is complete. There are no longer native Racket booleans in our program, they have been encoded into functions. Moreover, there are no primitive values—numbers, booleans, strings, and so on—in our program. And our program continues to have the same meaning:
+◊new-thought{Our work with booleans} is complete. There are no longer native Racket booleans in our program, they have been encoded into functions. Moreover, there are no primitive values (numbers, booleans, strings, and so on) at all in our program. And it continues to have the same meaning:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
 15
 }
 
-So we showed that primitive values are not essential features to programming languages. Could it be that compound data structures are? On the next section we are going to explore this question.
+So we can conclude that primitive values are not essential features to programming languages. Could it be that compound data structures are? On the next section we are going to explore this question.
 
 ◊section['pairs]{Pairs}
