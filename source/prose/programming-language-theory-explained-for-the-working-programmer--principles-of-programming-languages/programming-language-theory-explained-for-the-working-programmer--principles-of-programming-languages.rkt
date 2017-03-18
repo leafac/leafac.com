@@ -307,3 +307,50 @@
 
   (pretty-print (sum-up-to five))
   )
+
+(module+ pairs/store
+  (define (store value)
+    (define (retriever)
+      value)
+
+    retriever)
+
+  (define stored-5 (store 5))
+  (define stored-3 (store 3))
+
+  (stored-5) ;; => 5
+  (stored-3) ;; => 3
+  )
+
+(module+ pairs
+  (define (pair left right)
+    (define (retriever selector)
+      (selector left right))
+    retriever)
+
+  (define (selector-left left right)
+    left)
+
+  (define (selector-right left right)
+    right)
+
+  (define number-pair (pair 2 3))
+
+  (number-pair selector-left) ;; => 2
+  (number-pair selector-right) ;; => 3
+
+  (define (pair-left pair)
+    (define (selector-left left right)
+      left)
+
+    (pair selector-left))
+
+  (define (pair-right pair)
+    (define (selector-right left right)
+      right)
+
+    (pair selector-right))
+
+  (pair-left number-pair) ;; => 2
+  (pair-right number-pair) ;; => 3
+  )

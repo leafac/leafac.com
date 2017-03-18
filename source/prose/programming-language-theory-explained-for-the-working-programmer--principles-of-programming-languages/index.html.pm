@@ -427,3 +427,93 @@ The most important part of the snippet above is that ◊code/inline{(define (the
 So we can conclude that primitive values are not essential features to programming languages. Could it be that compound data structures are? On the next section we are going to explore this question.
 
 ◊section['pairs]{Pairs}
+
+◊new-thought{The only instance} of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. There are three functions to interact with pairs: the function ◊code/inline{(pair left right)} returns a pair with elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)} receives a pair and returns the element on the left; the function ◊code/inline{(pair-right pair)} receives a pair and returns the element on the right.
+
+◊margin-note{The compound of a function and the outer variable references whose value it ◊informal{remembers} is called a ◊technical-term{closure}.}
+
+Encodings for pairs are not as natural as, for example, the one for numbers using strings. Can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following snippet illustrates this:
+
+◊code/block/highlighted['racket]{
+(define (store value)
+  (define (retriever)
+    value)
+
+  retriever)
+
+(define stored-5 (store 5))
+(define stored-3 (store 3))
+
+(stored-5) ;; => 5
+(stored-3) ;; => 3
+}
+
+In the code above, ◊code/inline{store} is a function which receives a ◊code/inline{value} and stores it for later. The way to retrieve the value is to apply the return of the call to ◊code/inline{store}. It works defining and returning an inner function, ◊code/inline{retriever}, which has access to and ◊informal{remembers} the outer ◊code/inline{value}.
+
+To implement a pair, we can use the idea from ◊code/inline{store}, but with two ◊code/inline{value}s as arguments to ◊informal{remember}. The problem then becomes: when retrieving, which of the two values to return? This is not a decision we can make at the point of defining ◊code/inline{retriever}, because information about which of the two values to return is only known when retrieving.
+
+The solution is to modify ◊code/inline{retriever} such that it receives an argument, a ◊code/inline{selector} function. Then ◊code/inline{retriever} calls ◊code/inline{selector} with both values in the pair and let it decide which one to return. With that, the ◊code/inline{pair} function is complete:
+
+◊code/block/highlighted['racket]{
+(define (pair left right)
+  (define (retriever selector)
+    (selector left right))
+  retriever)
+}
+
+We can then define the selectors, which receive ◊code/inline{left} and ◊code/inline{right} and return the correct element in the pair:
+
+◊margin-note{Apart from identifiers, ◊code/inline{selector-left} is the same function as ◊code/inline{true} and ◊code/inline{selector-right} is the same function as ◊code/inline{false}.}
+
+◊code/block/highlighted['racket]{
+(define (selector-left left right)
+  left)
+
+(define (selector-right left right)
+  right)
+}
+
+Pairs now work, as the snippet below exemplifies:
+
+◊code/block/highlighted['racket]{
+(define number-pair (pair 2 3))
+
+> (number-pair selector-left)
+2
+> (number-pair selector-right)
+3
+}
+
+We can wrap this pattern of usage for pairs in the convenient accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right}, which ◊code/inline{sub1} uses:
+
+◊code/block/highlighted['racket]{
+(define (pair-left pair)
+  (define (selector-left left right)
+    left)
+
+  (pair selector-left))
+
+(define (pair-right pair)
+  (define (selector-right left right)
+    right)
+
+  (pair selector-right))
+}
+
+The following is an example of these accessor functions in use:
+
+◊code/block/highlighted['racket]{
+> (pair-left number-pair)
+2
+> (pair-right number-pair)
+3
+}
+
+More importantly, our program is working with this encoding for pairs in terms of functions:
+
+◊code/block/highlighted['racket]{
+> (pretty-print (sum-up-to five))
+15
+}
+
+◊; TODO: Use pairs to define other data structures.
