@@ -463,7 +463,7 @@ The solution is to modify ◊code/inline{retriever} such that it receives an arg
 
 We can then define the selectors, which receive ◊code/inline{left} and ◊code/inline{right} and return the correct element in the pair:
 
-◊margin-note{Apart from identifiers, ◊code/inline{selector-left} is the same function as ◊code/inline{true} and ◊code/inline{selector-right} is the same function as ◊code/inline{false}.}
+◊margin-note{Apart from identifiers, ◊code/inline{selector-left} is the same function as ◊code/inline{true} and ◊code/inline{selector-right} is the same function as ◊code/inline{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code/inline{true} ◊emphasis{or} ◊code/inline{false}) and conjunction (a pair holds a ◊code/inline{left} ◊emphasis{and} a ◊code/inline{right} elements). They are two sides of the same coin. This is a fundamental result of ◊link["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
 
 ◊code/block/highlighted['racket]{
 (define (selector-left left right)
@@ -485,6 +485,8 @@ Pairs now work, as the snippet below exemplifies:
 }
 
 We can wrap this pattern of usage for pairs in the convenient accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right}, which ◊code/inline{sub1} uses:
+
+◊margin-note{The technique to turn selectors (◊code/inline{selector-left} and ◊code/inline{selector-right}) into accessors (◊code/inline{pair-left} and ◊code/inline{pair-right}) is the same to turn booleans (◊code/inline{true} and ◊code/inline{false}) into conditionals (◊code/inline{if}).}
 
 ◊code/block/highlighted['racket]{
 (define (pair-left pair)
@@ -516,4 +518,12 @@ More importantly, our program is working with this encoding for pairs in terms o
 15
 }
 
-◊; TODO: Use pairs to define other data structures.
+◊paragraph-separation[]
+
+◊new-thought{Before we move on} to other programming-language features that we might question as ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures that ◊technical-term{essential} features in programming languages?
+
+One more time, the answer is that data structures in general are ◊informal{encodeable} in terms of simpler features. And, once again, there are different encodings available. In particular, it is possible to encode all data structures in terms of pairs; and, ultimately, in terms functions, by the result of this section. The figure below illustrates examples of encodings:
+
+◊margin-note{Encodings only depend on previously defined data structures, so that the whole construction is well-founded.}
+
+◊svg{data-structures.svg}
