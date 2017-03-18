@@ -668,307 +668,303 @@
          id="flowPara7042"></flowPara></flowRoot>    <g
        transform="translate(-115.33094,7.1771655)"
        id="g8661">
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         x="441.92462"
+         y="451.58658"
+         id="text6914"><tspan
+           id="tspan6916"
+           x="441.92462"
+           y="451.58658">Objects</tspan></text>
       <g
-         transform="translate(9.7501373,0)"
-         id="g8736">
-        <text
-           id="text6914"
-           y="451.58658"
-           x="432.1745"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           xml:space="preserve"><tspan
-             y="451.58658"
-             x="432.1745"
-             id="tspan6916">Objects</tspan></text>
+         transform="translate(33.750137,0)"
+         id="g8589">
+        <path
+           id="path6920"
+           d="m 418.21382,576.14313 28.70172,0"
+           style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7163)" />
         <g
-           id="g8589"
-           transform="translate(24,0)">
-          <path
-             style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7163)"
-             d="m 418.21382,576.14313 28.70172,0"
-             id="path6920" />
+           transform="translate(-31.177557,0)"
+           id="g8011">
           <g
-             id="g8011"
-             transform="translate(-31.177557,0)">
-            <g
-               id="g7935"
-               transform="translate(0,-30.255144)">
-              <text
-                 id="text7792"
-                 y="773.53113"
-                 x="220.65004"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 xml:space="preserve"><tspan
-                   y="773.53113"
-                   x="220.65004"
-                   id="tspan7794"><tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'"
-   id="tspan7811">λ</tspan> is a function</tspan></text>
-              <text
-                 xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 x="220.65004"
-                 y="746.29327"
-                 id="text7807"><tspan
-                   id="tspan7809"
-                   x="220.65004"
-                   y="746.29327"><tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'"
-   id="tspan7813">●</tspan> is a reference</tspan></text>
-            </g>
-            <g
-               id="g7977">
-              <g
-                 id="g7943">
-                <rect
-                   style="opacity:1;fill:none;fill-opacity:0.92156863;stroke:#d33682;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-                   id="rect7030"
-                   width="289.99194"
-                   height="177.70694"
-                   x="147.2585"
-                   y="508.95633" />
-                <path
-                   style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                   d="m 436.7215,551.69539 -289.11275,0"
-                   id="path7032" />
-                <path
-                   id="path7034"
-                   d="m 436.7215,599.52842 -289.11275,0"
-                   style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-                <path
-                   style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                   d="m 436.7215,643.21312 -289.11275,0"
-                   id="path7805" />
-              </g>
-              <g
-                 id="g7949">
-                <g
-                   id="g7901">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     x="165.64236"
-                     y="581.79828"
-                     id="text7006"><tspan
-                       id="tspan7008"
-                       x="165.64236"
-                       y="581.79828">name</tspan></text>
-                  <text
-                     id="text7010"
-                     y="581.79828"
-                     x="314.50467"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="581.79828"
-                       x="314.50467"
-                       id="tspan7012">&quot;Wheatley&quot;</tspan></text>
-                  <path
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     d="m 292.25487,570.78583 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     id="path7014" />
-                </g>
-                <g
-                   id="g7921">
-                  <text
-                     id="text7018"
-                     y="627.11279"
-                     x="165.64236"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="627.11279"
-                       x="165.64236"
-                       id="tspan7020">birthdate</tspan></text>
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     x="314.50467"
-                     y="627.11279"
-                     id="text7022"><tspan
-                       id="tspan7024"
-                       x="314.50467"
-                       y="627.11279">2011-04-19</tspan></text>
-                  <path
-                     id="path7026"
-                     d="m 292.25487,616.10033 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-                </g>
-                <g
-                   id="g7928">
-                  <text
-                     id="text7777"
-                     y="669.8764"
-                     x="314.50467"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="669.8764"
-                       x="314.50467"
-                       id="tspan7779">λ</tspan></text>
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     x="165.64236"
-                     y="669.8764"
-                     id="text7497"><tspan
-                       id="tspan7499"
-                       x="165.64236"
-                       y="669.8764">age</tspan></text>
-                  <path
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     d="m 292.25487,659.26699 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     id="path7796" />
-                </g>
-                <g
-                   id="g7892">
-                  <text
-                     id="text6994"
-                     y="536.95557"
-                     x="165.64236"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="536.95557"
-                       x="165.64236"
-                       id="tspan6996">self</tspan></text>
-                  <path
-                     id="path7002"
-                     d="m 292.25487,525.94308 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-                  <g
-                     id="g7887">
-                    <text
-                       id="text6998"
-                       y="536.95557"
-                       x="314.50467"
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                       xml:space="preserve"><tspan
-                         y="536.95557"
-                         x="314.50467"
-                         id="tspan7000">●</tspan></text>
-                    <path
-                       id="path7815"
-                       d="m 319.30556,531.64847 c 0,0 39.29914,-35.7265 33.047,-48.67735 -6.25213,-12.95086 -37.51282,-5.80556 -39.74572,0 -2.23291,5.80555 -2.67949,20.98931 -2.67949,20.98931"
-                       style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7823)" />
-                  </g>
-                </g>
-              </g>
-            </g>
-          </g>
-          <g
-             id="g8554"
-             transform="translate(-69.375892,-28.708663)">
-            <g
-               id="g8529">
-              <g
-                 id="g8243">
-                <rect
-                   y="552.16101"
-                   x="540.3316"
-                   height="134.50232"
-                   width="287.83746"
-                   id="rect8079"
-                   style="opacity:1;fill:none;fill-opacity:0.92156863;stroke:#2aa198;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-                <path
-                   style="fill:none;fill-rule:evenodd;stroke:#2aa198;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                   d="m 827.6401,599.52842 -287.38916,0"
-                   id="path8083" />
-                <path
-                   id="path8085"
-                   d="m 827.6401,643.21312 -287.38916,0"
-                   style="fill:none;fill-rule:evenodd;stroke:#2aa198;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
-              </g>
-              <g
-                 id="g8509">
-                <g
-                   transform="translate(390.9186,0)"
-                   id="g8089">
-                  <text
-                     id="text8091"
-                     y="581.79828"
-                     x="166.01712"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="581.79828"
-                       x="166.01712"
-                       id="tspan8093">name</tspan></text>
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     x="314.50467"
-                     y="581.79828"
-                     id="text8095"><tspan
-                       id="tspan8097"
-                       x="314.50467"
-                       y="581.79828">&quot;Wheatley&quot;</tspan></text>
-                  <path
-                     id="path8099"
-                     d="m 292.25487,570.78583 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-                </g>
-                <g
-                   transform="translate(390.9186,0)"
-                   id="g8101">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     x="166.01712"
-                     y="627.11279"
-                     id="text8103"><tspan
-                       id="tspan8105"
-                       x="166.01712"
-                       y="627.11279">birthdate</tspan></text>
-                  <text
-                     id="text8107"
-                     y="627.11279"
-                     x="314.50467"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="627.11279"
-                       x="314.50467"
-                       id="tspan8109">2011-04-19</tspan></text>
-                  <path
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     d="m 292.25487,616.10033 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     id="path8111" />
-                </g>
-                <g
-                   transform="translate(390.9186,0)"
-                   id="g8113">
-                  <text
-                     xml:space="preserve"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     x="314.50467"
-                     y="669.8764"
-                     id="text8115"><tspan
-                       id="tspan8117"
-                       x="314.50467"
-                       y="669.8764">m</tspan></text>
-                  <text
-                     id="text8119"
-                     y="669.8764"
-                     x="166.01712"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                     xml:space="preserve"><tspan
-                       y="669.8764"
-                       x="166.01712"
-                       id="tspan8121">age</tspan></text>
-                  <path
-                     id="path8123"
-                     d="m 292.25487,659.26699 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
-                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-                </g>
-              </g>
-            </g>
+             transform="translate(0,-30.255144)"
+             id="g7935">
             <text
-               id="text8252"
-               y="715.09906"
-               x="607.4306"
+               xml:space="preserve"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               x="220.65004"
+               y="773.53113"
+               id="text7792"><tspan
+                 id="tspan7794"
+                 x="220.65004"
+                 y="773.53113"><tspan
+   id="tspan7811"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'">λ</tspan> is a function</tspan></text>
+            <text
+               id="text7807"
+               y="746.29327"
+               x="220.65004"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                xml:space="preserve"><tspan
-                 y="715.09906"
-                 x="607.4306"
-                 id="tspan8254"><tspan
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'"
-   id="tspan8256">m</tspan> is a method</tspan></text>
+                 y="746.29327"
+                 x="220.65004"
+                 id="tspan7809"><tspan
+   id="tspan7813"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'">●</tspan> is a reference</tspan></text>
           </g>
+          <g
+             id="g7977">
+            <g
+               id="g7943">
+              <rect
+                 y="508.95633"
+                 x="147.2585"
+                 height="177.70694"
+                 width="289.99194"
+                 id="rect7030"
+                 style="opacity:1;fill:none;fill-opacity:0.92156863;stroke:#d33682;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+              <path
+                 id="path7032"
+                 d="m 436.7215,551.69539 -289.11275,0"
+                 style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+              <path
+                 style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                 d="m 436.7215,599.52842 -289.11275,0"
+                 id="path7034" />
+              <path
+                 id="path7805"
+                 d="m 436.7215,643.21312 -289.11275,0"
+                 style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+            </g>
+            <g
+               id="g7949">
+              <g
+                 id="g7901">
+                <text
+                   id="text7006"
+                   y="581.79828"
+                   x="165.64236"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   xml:space="preserve"><tspan
+                     y="581.79828"
+                     x="165.64236"
+                     id="tspan7008">name</tspan></text>
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="314.50467"
+                   y="581.79828"
+                   id="text7010"><tspan
+                     id="tspan7012"
+                     x="314.50467"
+                     y="581.79828">&quot;Wheatley&quot;</tspan></text>
+                <path
+                   id="path7014"
+                   d="m 292.25487,570.78583 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+              </g>
+              <g
+                 id="g7921">
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="165.64236"
+                   y="627.11279"
+                   id="text7018"><tspan
+                     id="tspan7020"
+                     x="165.64236"
+                     y="627.11279">birthdate</tspan></text>
+                <text
+                   id="text7022"
+                   y="627.11279"
+                   x="314.50467"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   xml:space="preserve"><tspan
+                     y="627.11279"
+                     x="314.50467"
+                     id="tspan7024">2011-04-19</tspan></text>
+                <path
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   d="m 292.25487,616.10033 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   id="path7026" />
+              </g>
+              <g
+                 id="g7928">
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="314.50467"
+                   y="669.8764"
+                   id="text7777"><tspan
+                     id="tspan7779"
+                     x="314.50467"
+                     y="669.8764">λ</tspan></text>
+                <text
+                   id="text7497"
+                   y="669.8764"
+                   x="165.64236"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   xml:space="preserve"><tspan
+                     y="669.8764"
+                     x="165.64236"
+                     id="tspan7499">age</tspan></text>
+                <path
+                   id="path7796"
+                   d="m 292.25487,659.26699 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+              </g>
+              <g
+                 id="g7892">
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="165.64236"
+                   y="536.95557"
+                   id="text6994"><tspan
+                     id="tspan6996"
+                     x="165.64236"
+                     y="536.95557">self</tspan></text>
+                <path
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   d="m 292.25487,525.94308 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   id="path7002" />
+                <g
+                   id="g7887">
+                  <text
+                     xml:space="preserve"
+                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                     x="314.50467"
+                     y="536.95557"
+                     id="text6998"><tspan
+                       id="tspan7000"
+                       x="314.50467"
+                       y="536.95557">●</tspan></text>
+                  <path
+                     style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker7823)"
+                     d="m 319.30556,531.64847 c 0,0 39.29914,-35.7265 33.047,-48.67735 -6.25213,-12.95086 -37.51282,-5.80556 -39.74572,0 -2.23291,5.80555 -2.67949,20.98931 -2.67949,20.98931"
+                     id="path7815" />
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+        <g
+           transform="translate(-69.375892,-28.708663)"
+           id="g8554">
+          <g
+             id="g8529">
+            <g
+               id="g8243">
+              <rect
+                 style="opacity:1;fill:none;fill-opacity:0.92156863;stroke:#2aa198;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+                 id="rect8079"
+                 width="287.83746"
+                 height="134.50232"
+                 x="540.3316"
+                 y="552.16101" />
+              <path
+                 id="path8083"
+                 d="m 827.6401,599.52842 -287.38916,0"
+                 style="fill:none;fill-rule:evenodd;stroke:#2aa198;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+              <path
+                 style="fill:none;fill-rule:evenodd;stroke:#2aa198;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+                 d="m 827.6401,643.21312 -287.38916,0"
+                 id="path8085" />
+            </g>
+            <g
+               id="g8509">
+              <g
+                 id="g8089"
+                 transform="translate(390.9186,0)">
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="166.01712"
+                   y="581.79828"
+                   id="text8091"><tspan
+                     id="tspan8093"
+                     x="166.01712"
+                     y="581.79828">name</tspan></text>
+                <text
+                   id="text8095"
+                   y="581.79828"
+                   x="314.50467"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   xml:space="preserve"><tspan
+                     y="581.79828"
+                     x="314.50467"
+                     id="tspan8097">&quot;Wheatley&quot;</tspan></text>
+                <path
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   d="m 292.25487,570.78583 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   id="path8099" />
+              </g>
+              <g
+                 id="g8101"
+                 transform="translate(390.9186,0)">
+                <text
+                   id="text8103"
+                   y="627.11279"
+                   x="166.01712"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   xml:space="preserve"><tspan
+                     y="627.11279"
+                     x="166.01712"
+                     id="tspan8105">birthdate</tspan></text>
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="314.50467"
+                   y="627.11279"
+                   id="text8107"><tspan
+                     id="tspan8109"
+                     x="314.50467"
+                     y="627.11279">2011-04-19</tspan></text>
+                <path
+                   id="path8111"
+                   d="m 292.25487,616.10033 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+              </g>
+              <g
+                 id="g8113"
+                 transform="translate(390.9186,0)">
+                <text
+                   id="text8115"
+                   y="669.8764"
+                   x="314.50467"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   xml:space="preserve"><tspan
+                     y="669.8764"
+                     x="314.50467"
+                     id="tspan8117">m</tspan></text>
+                <text
+                   xml:space="preserve"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   x="166.01712"
+                   y="669.8764"
+                   id="text8119"><tspan
+                     id="tspan8121"
+                     x="166.01712"
+                     y="669.8764">age</tspan></text>
+                <path
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   d="m 292.25487,659.26699 -0.75586,0.82813 3.61914,3.36718 -13.8418,0 0,-3.39453 -1.22461,0 0,8.01172 1.22461,0 0,-3.39453 13.8418,0 -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 0,-0.0723 -4.91406,-4.76953 z"
+                   id="path8123" />
+              </g>
+            </g>
+          </g>
+          <text
+             xml:space="preserve"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             x="607.4306"
+             y="715.09906"
+             id="text8252"><tspan
+               id="tspan8254"
+               x="607.4306"
+               y="715.09906"><tspan
+   id="tspan8256"
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'">m</tspan> is a method</tspan></text>
         </g>
       </g>
     </g>
