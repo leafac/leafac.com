@@ -524,8 +524,12 @@ More importantly, our program is working with this encoding for pairs in terms o
 
 One more time, the answer is that data structures in general are ◊informal{encodeable} in terms of simpler features. And, once again, there are different encodings available. In particular, it is possible to encode all data structures in terms of pairs; and, ultimately, in terms functions, by the result of this section. The figure below illustrates examples of encodings:
 
+◊paragraph-separation[]
+
 ◊margin-note{Encodings only depend on previously defined data structures, so the whole construction is well-founded.}
 
 ◊figure{
  ◊svg{data-structures.svg}
 }
+
+◊; TODO: Tuples, trees.
