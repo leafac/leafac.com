@@ -526,4 +526,6 @@ One more time, the answer is that data structures in general are ◊informal{enc
 
 ◊margin-note{Encodings only depend on previously defined data structures, so that the whole construction is well-founded.}
 
-◊svg{data-structures.svg}
+◊figure{
+ ◊svg{data-structures.svg}
+}

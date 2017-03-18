@@ -489,7 +489,7 @@
                     #:margin-right (rem ,(- (modular-scale 18)))]]))
 
 (define-component figure
-  #:html (default-tag-function 'figure)
+  #:html (default-tag-function 'figure #:class "insertion")
   #:css (css-expr [figure #:margin 0 #:text-align center]))
 
 (define-component figure/caption
