@@ -517,7 +517,8 @@
               ([(source target) (in-dict svg/font-replacement)])
       (regexp-replace* (pregexp (~a "font-family:\\s*[\"']?" source "[\"']?;"))
                        font-replaced (~a "font-family:" target ";"))))
-  (string->xexpr font-replaced))
+  (string->xexpr font-replaced)
+  #:css (css-expr [svg #:max-width 100% #:height auto]))
 
 (define-component code/inline
   #:html (default-tag-function 'code)
