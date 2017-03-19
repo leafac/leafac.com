@@ -532,4 +532,18 @@ One more time, the answer is that data structures in general are ◊informal{enc
  ◊svg{data-structures.svg}
 }
 
-◊; TODO: Tuples, trees.
+In the figure above, lists (also known as arrays) are composed of pairs of pairs and a distinguished empty pair. This distinguished empty pair could be represented by, for example, ◊technical-term{false}—anything outside the range of possible list elements (integer in the example) would work.
+
+A list containing pairs of elements could be interpreted as a record (also known as dictionary, hash, associative array). The left element of the pair is the key and the right element is the value.
+
+Finally, with records it is possible to encode objects. Some fields are values (for example, ◊code/inline{name} and ◊code/inline{birthdate}), and some are functions (for example, ◊code/inline{age}), which can be interpreted as methods. One special record field (◊code/inline{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code/inline{age}) can refer to other object attributes (for example, ◊code/inline{birthdate}).
+
+Objects can get more complicated, with features such as inheritance and polymorphism; also many other data structures exist: tuples, trees and more. And, with varying degrees of difficulty, they are all encodeable in terms of pairs, the simplest way to couple data together. So, ultimately, this section shows that all data structures can be defined in terms of functions.
+
+◊paragraph-separation[]
+
+◊new-thought{The next feature} we have to address is functions themselves, because they are the only kind of value left in ◊code/inline{sum-up-to}. What parts of functions are essential features of programming languages? What parts can be ◊informal{encoded away}? In the next section, we are going to address the most powerful aspect of functions: ◊emphasis{recursion}.
+
+◊section['recursion]{Recursion}
+
+◊new-thought{There is only one} recursive function in our program.
