@@ -620,3 +620,132 @@ Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can s
 
   (branch-to-take))
 }
+
+Once ◊code/inline{sum-up-to} has been implemented, though, we can use it to implement ◊code/inline{sum-up-to/rest}. This relies on the ability to ◊emphasis{change} the definition ◊code/inline{sum-up-to/rest} after the fact, using mutation (◊code/inline{set!}):
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to/rest number)
+  "TEMPORARY IMPLEMENTATION")
+
+(define (sum-up-to number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+
+  (branch-to-take))
+
+(set! sum-up-to/rest sum-up-to)
+}
+
+With this change, the program is no longer recursive, and it still outputs the same value:
+
+◊code/block/highlighted['racket]{
+> (pretty-print (sum-up-to five))
+15
+}
+
+We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it is a pervasive change to the program. The idea is to modify ◊emphasis{every} function definition and ◊emphasis{every} function application. Functions would receive a ◊reference['pairs]{pair} of their arguments along with the current global state of the program, and return a pair of their return value along with a possibly modified global state of the program. While feasible, this solution is not elegant. It requires changing even the functions that do not need to change the global state of the program, so that they thread the state along.
+
+So we are going to take a step back and reconsider our encoding for recursion, so that it does not depend on mutation. This is ◊code/inline{sum-up-to} before ◊technical-term{tying the knot}:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+}
+
+It still depends on ◊code/inline{sum-up-to/rest}, which we do not know how to implement. But, this time, instead of coming up with a placeholder implementation for it, we are going to change ◊code/inline{sum-up-to} so that it receives ◊code/inline{sum-up-to/rest} as an argument:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to sum-up-to/rest number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+}
+
+Now it is the job of ◊code/inline{sum-up-to}’s callers to provide a suitable ◊code/inline{sum-up-to/rest}:
+
+◊code/block/highlighted['racket]{
+(pretty-print (sum-up-to ___ five))
+}
+
+What can we use to fill in the ◊code/inline{___} above? A good candidate is ◊code/inline{sum-up-to} itself:
+
+◊code/block/highlighted['racket]{
+(pretty-print (sum-up-to sum-up-to five))
+}
+
+This choice is similar to the line ◊code/inline{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code/inline{sum-up-to} as ◊code/inline{sum-up-to/rest} when calling ◊code/inline{sum-up-to} itself. So, in ◊code/inline{sum-up-to}’s body, when ◊code/inline{sum-up-to/rest} is called, this is actually a call to ◊code/inline{sum-up-to}. And ◊code/inline{sum-up-to} requires a ◊code/inline{sum-up-to/rest} as its first argument:
+
+◊image["incomplete-self-passing.png"]{The code above, failing to execute properly because of the missing argument.}
+
+Again, we can use the same idea as before to solve this issue. We can pass ◊code/inline{sum-up-to/rest} itself as the argument:
+
+◊margin-note{The name of this technique is ◊emphasis{self-passing}. Unsurprisingly.}
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to sum-up-to/rest number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number
+       (sum-up-to/rest sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+
+  (branch-to-take))
+}
+
+With this change, we successfully encoded recursion in terms of non-recursive functions:
+
+◊code/block/highlighted['racket]{
+> (pretty-print (sum-up-to sum-up-to 5))
+15
+}
+
+Unfortunately, we changed the interface to ◊code/inline{sum-up-to}. Now callers need to be aware of the recursion encoding, and call it with ◊code/inline{(sum-up-to sum-up-to number)}, which is inconvenient. We can make this better by introducing an auxiliary function ◊code/inline{sum-up-to/partial}:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (sum-up-to/partial sum-up-to/rest number)
+    (define (then)
+      zero)
+
+    (define (else)
+      (+ number
+         (sum-up-to/rest sum-up-to/rest (sub1 number))))
+
+    (define branch-to-take
+      (if (zero? number) then else))
+
+    (branch-to-take))
+
+  (sum-up-to/partial sum-up-to/partial number))
+}
+
+◊margin-note{The ◊code/inline{sum-up-to} façade is not specific to the job of adding numbers, because ◊code/inline{sum-up-to/partial} is taking care of this. So ◊code/inline{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstracted façade has the name ◊technical-term{Y-combinator}.}
+
+The bulk of the work is in ◊code/inline{sum-up-to/partial}, and ◊code/inline{sum-up-to} is a façade. This brings us back to the original:
+
+◊code/block/highlighted['racket]{
+> (pretty-print (sum-up-to 5))
+15
+}

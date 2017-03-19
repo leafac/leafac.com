@@ -376,3 +376,25 @@
   (define (zero function argument)
     argument)
   )
+
+(module+ recursion/self-passing
+  (define (sum-up-to/rest number)
+    "TEMPORARY IMPLEMENTATION")
+
+  (define (sum-up-to number)
+    (define (then)
+      zero)
+
+    (define (else)
+      (+ number (sum-up-to/rest (sub1 number))))
+
+    (define branch-to-take
+      (if (zero? number) then else))
+
+    (branch-to-take))
+
+  (set! sum-up-to/rest sum-up-to)
+
+  (define (zero function argument)
+    argument)
+  )
