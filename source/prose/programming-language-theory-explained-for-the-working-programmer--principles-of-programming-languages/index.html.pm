@@ -546,4 +546,77 @@ Objects can get more complicated, with features such as inheritance and polymorp
 
 ◊section['recursion]{Recursion}
 
-◊new-thought{There is only one} recursive function in our program.
+◊new-thought{There is only one} recursive function in our program. It is ◊code/inline{sum-up-to} itself. The following is its current definition, for convenience:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+
+  (branch-to-take))
+}
+
+The particular point of recursion is the call to ◊code/inline{sum-up-to} in the ◊code/inline{else} branch. This works because, in Racket, when defining the function using ◊code/inline{(define (sum-up-to number) ...)} the binding for ◊code/inline{sum-up-to} is available in the body. Can we ◊informal{encode this feature away}?
+
+Surprisingly, the answer to this question is positive. And there are multiple possible encodings. The simplest is known as ◊technical-term{tying the knot}. Start with an implementation of ◊code/inline{sum-up-to} that is not recursive, when it needs to call itself, it instead calls an auxiliary function (named, for example, ◊code/inline{sum-up-to/rest}):
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+
+  (branch-to-take))
+}
+
+The name ◊code/inline{sum-up-to/rest} for this auxiliary function is appropriate because, as implemented, ◊code/inline{sum-up-to} is only performing one step of the computation; it is delegating the ◊emphasis{rest} to ◊code/inline{sum-up-to/rest}. The question then becomes: how do we implement ◊code/inline{sum-up-to/rest}?
+
+A first idea could be to copy and paste the implementation for ◊code/inline{sum-up-to}:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to/rest number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+
+  (branch-to-take))
+}
+
+But this idea is bad, because now ◊code/inline{sum-up-to/rest} is using recursion, the exact feature we are trying to ◊informal{encode away}. Alternatively, we could rewrite ◊code/inline{sum-up-to/rest} so that it delegates to another auxiliary function ◊code/inline{sum-up-to/rest2}. But this idea is also bad, because we would be just delaying the problem: how would we write ◊code/inline{sum-up-to/rest2}?
+
+Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can start with a placeholder:
+
+◊margin-note{The implementation of ◊code/inline{sum-up-to/rest} must appear before the one for ◊code/inline{sum-up-to}, and it must not refer to ◊code/inline{sum-up-to}. Otherwise it would again be (indirectly) relying on Racket’s support for recursion.}
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to/rest number)
+  "TEMPORARY IMPLEMENTATION")
+
+(define (sum-up-to number)
+  (define (then)
+    zero)
+
+  (define (else)
+    (+ number (sum-up-to/rest (sub1 number))))
+
+  (define branch-to-take
+    (if (zero? number) then else))
+
+  (branch-to-take))
+}
