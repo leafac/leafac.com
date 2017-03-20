@@ -355,6 +355,38 @@
   (pair-right number-pair) ;; => 3
   )
 
+;; Examples in the “recursion” section do not use the encoding for numbers, for simplicity.
+
+(module+ recursion/introduce-sum-up-to/rest
+  (define (sum-up-to/rest number)
+    (define (then)
+      zero)
+
+    (define (else)
+      (+ number (sum-up-to/rest (sub1 number))))
+
+    (define branch-to-take
+      (if (zero? number) then else))
+
+    (branch-to-take))
+
+  (define (sum-up-to number)
+    (define (then)
+      zero)
+
+    (define (else)
+      (+ number (sum-up-to/rest (sub1 number))))
+
+    (define branch-to-take
+      (if (zero? number) then else))
+
+    (branch-to-take))
+
+  (set! sum-up-to/rest sum-up-to)
+
+  (define zero 0)
+  )
+
 (module+ recursion/tying-the-knot
   (define (sum-up-to/rest number)
     "TEMPORARY IMPLEMENTATION")
@@ -373,28 +405,67 @@
 
   (set! sum-up-to/rest sum-up-to)
 
-  (define (zero function argument)
-    argument)
+  (define zero 0)
+
+  (sum-up-to sum-up-to 5)
   )
 
-(module+ recursion/self-passing
-  (define (sum-up-to/rest number)
-    "TEMPORARY IMPLEMENTATION")
-
-  (define (sum-up-to number)
+(module+ recursion/self-passing/failing
+  (define (sum-up-to sum-up-to/rest number)
     (define (then)
       zero)
 
     (define (else)
-      (+ number (sum-up-to/rest (sub1 number))))
+      (+ number
+         (sum-up-to/rest (sub1 number))))
 
     (define branch-to-take
       (if (zero? number) then else))
 
     (branch-to-take))
 
-  (set! sum-up-to/rest sum-up-to)
+  (define zero 0)
 
-  (define (zero function argument)
-    argument)
+  (sum-up-to sum-up-to 5)
+  )
+
+(module+ recursion/self-passing
+  (define (sum-up-to sum-up-to/rest number)
+    (define (then)
+      zero)
+
+    (define (else)
+      (+ number
+         (sum-up-to/rest sum-up-to/rest (sub1 number))))
+
+    (define branch-to-take
+      (if (zero? number) then else))
+
+    (branch-to-take))
+
+  (define zero 0)
+
+  (sum-up-to sum-up-to 5)
+  )
+
+(module+ recursion/façade
+  (define (sum-up-to number)
+    (define (sum-up-to/partial sum-up-to/rest number)
+      (define (then)
+        zero)
+
+      (define (else)
+        (+ number
+           (sum-up-to/rest sum-up-to/rest (sub1 number))))
+
+      (define branch-to-take
+        (if (zero? number) then else))
+
+      (branch-to-take))
+
+    (sum-up-to/partial sum-up-to/partial number))
+
+  (define zero 0)
+
+  (sum-up-to 5)
   )

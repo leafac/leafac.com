@@ -693,11 +693,13 @@ What can we use to fill in the ◊code/inline{___} above? A good candidate is �
 
 This choice is similar to the line ◊code/inline{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code/inline{sum-up-to} as ◊code/inline{sum-up-to/rest} when calling ◊code/inline{sum-up-to} itself. So, in ◊code/inline{sum-up-to}’s body, when ◊code/inline{sum-up-to/rest} is called, this is actually a call to ◊code/inline{sum-up-to}. And ◊code/inline{sum-up-to} requires a ◊code/inline{sum-up-to/rest} as its first argument:
 
-◊image["incomplete-self-passing.png"]{The code above, failing to execute properly because of the missing argument.}
+◊image["incomplete-self-passing.png"]{The code above, failing to execute because of the missing argument.}
 
 Again, we can use the same idea as before to solve this issue. We can pass ◊code/inline{sum-up-to/rest} itself as the argument:
 
 ◊margin-note{The name of this technique is ◊emphasis{self-passing}. Unsurprisingly.}
+
+◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating that unbounded sequence of functions is not possible; instead, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is taking one step and carrying along another copy of the function capable of the taking the next steps, if necessary.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to sum-up-to/rest number)
