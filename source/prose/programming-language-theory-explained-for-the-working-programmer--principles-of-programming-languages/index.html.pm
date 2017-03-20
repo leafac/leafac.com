@@ -751,3 +751,19 @@ The bulk of the work is in ◊code/inline{sum-up-to/partial}, and ◊code/inline
 > (pretty-print (sum-up-to 5))
 15
 }
+
+◊pagraph-separation[]
+
+◊new-thought{The result of this section} is the most important in this article. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to the argument, so the function works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking less than ten lines. What allows us to compact the definition this way is recursion.
+
+The observation that recursion can be encoded in terms of non-recursive functions leads to the conclusion that they alone are capable of performing arbitrary computations. Anything a computer can do is expressible in terms of non-recursive functions.
+
+There are few features left in our program. It is composed solely of (non-recursive) function definitions and applications. Can we make it even simpler? On the next section, we address functions with multiple arguments.
+
+◊section['functions-with-multiple-arguments]{Functions with Multiple Arguments}
+
+◊new-thought{Almost all functions} in our program receive multiple arguments. In some of them, for example, ◊code/inline{(pair left right)}, it seems like the ability to receive multiple arguments is essential to their functionality. After all, the purpose of ◊code/inline{pair} is exactly to couple the arguments ◊code/inline{left} and ◊code/inline{right} together. But is this an essential feature of programming languages, or can functions with multiple arguments be ◊informal{encoded away}, so that only functions with a single argument remain?
+
+The answer to this question is trivially positive if we allowed the encoding to include data structures. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its definition, ◊code/inline{+} would extract the operands from the pair and proceed as before.
+
+We ◊reference['pairs]{already established} an encoding for pairs and extended it for lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation, we need a new idea for encodings.
