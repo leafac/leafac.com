@@ -865,7 +865,8 @@ Cascades of this form extend to functions with arbitrarily large number of param
 
 (define ((+ number-left) number-right)
   (define ((result function) argument)
-    ((number-left function) ((number-right function) argument)))
+    ((number-left function)
+     ((number-right function) argument)))
   result)
 
 (define (sub1 number)
