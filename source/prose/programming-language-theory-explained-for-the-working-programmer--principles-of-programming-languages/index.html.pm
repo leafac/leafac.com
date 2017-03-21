@@ -913,3 +913,8 @@ Cascades of this form extend to functions with arbitrarily large number of param
 (pretty-print (sum-up-to five)) ;; => 15
 }
 
+◊paragraph-separation[]
+
+◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
+
+◊section['named-definitions]{Named Definitions}
