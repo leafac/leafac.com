@@ -413,7 +413,7 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
   (branch-to-take))
 }
 
-The most important part of the snippet above is that ◊code/inline{(define (then) ...)} and ◊code/inline{(define (else) ...)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ...)} and not ◊code/inline{(define (then x y z) ...)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
+The most important part of the snippet above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
 
 ◊paragraph-separation[]
 
@@ -562,7 +562,7 @@ Objects can get more complicated, with features such as inheritance and polymorp
   (branch-to-take))
 }
 
-The particular point of recursion is the call to ◊code/inline{sum-up-to} in the ◊code/inline{else} branch. This works because, in Racket, when defining the function using ◊code/inline{(define (sum-up-to number) ...)} the binding for ◊code/inline{sum-up-to} is available in the body. Can we ◊informal{encode this feature away}?
+The particular point of recursion is the call to ◊code/inline{sum-up-to} in the ◊code/inline{else} branch. This works because, in Racket, when defining the function using ◊code/inline{(define (sum-up-to number) ___)} the binding for ◊code/inline{sum-up-to} is available in the body. Can we ◊informal{encode this feature away}?
 
 Surprisingly, the answer to this question is positive. And there are multiple possible encodings. The simplest is known as ◊technical-term{tying the knot}. Start with an implementation of ◊code/inline{sum-up-to} that is not recursive, when it needs to call itself, it instead calls an auxiliary function (named, for example, ◊code/inline{sum-up-to/rest}):
 
@@ -766,4 +766,149 @@ There are few features left in our program. It is composed solely of (non-recurs
 
 The answer to this question is trivially positive if we allowed the encoding to include data structures. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its definition, ◊code/inline{+} would extract the operands from the pair and proceed as before.
 
-We ◊reference['pairs]{already established} an encoding for pairs and extended it for lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which encodings depend on one another, we need a new idea.
+We ◊reference['pairs]{already established} an encoding for pairs and extended it for lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
+
+This new idea comes from two observations: first, functions can return functions as their return value; second, inner functions (functions defined within other functions) have access to the outer functions arguments. We already used both of these properties when defining ◊code/inline{pair}, for example. The following is its implementation one more time:
+
+◊code/block/highlighted['racket]{
+(define (pair left right)
+  (define (retriever selector)
+    (selector left right))
+  retriever)
+}
+
+In the snippet above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} returns the function ◊code/inline{retriever} as its return value.
+
+◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when not all the arguments have been provided, the function is said to be ◊technical-term{partially applied}.}
+
+We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
+
+◊code/block/highlighted['racket]{
+(define (pair left)
+  (define (pair/intermediary right)
+    (define (retriever selector)
+      (selector left right))
+    retriever)
+  pair/intermediary)
+}
+
+The implementation above works the same as before, but the way to call it has changed. Every invocation of ◊code/inline{pair} has to go through the cascade. Instead of writing ◊code/inline{(define number-pair (pair 2 3))}, the following is necessary:
+
+◊code/block/highlighted['racket]{
+(define number-pair/intermediary (pair 2))
+(define number-pair (number-pair/intermediary 3))
+}
+
+More compactly, we can skip giving a name to the intermediary function and call it immediately:
+
+◊code/block/highlighted['racket]{
+(define number-pair ((pair 2) 3))
+}
+
+Cascades of this form extend to functions with arbitrarily large number of parameters. But what about functions with zero parameters? Our program includes few of them, for example ◊code/inline{else} in ◊code/inline{sum-up-to}, which serves to ◊informal{delay} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, to which the function body does not refer. Also, we change the places that call such functions to include a ◊informal{dummy} argument. The following is an extract of ◊code/inline{sum-up-to} including this treatment:
+
+◊margin-note{It is important that the omitted part ◊code/inline{___} does not refer to ◊code/inline{dummy}, otherwise we would have changed the meaning of the program.}
+
+◊code/block/highlighted['racket]{
+(define (else dummy)
+  ___)
+
+(define (dummy ignore-me)
+  ignore-me)
+
+(else dummy)
+}
+
+◊paragraph-separation[]
+
+◊new-thought{The change described} in this section is pervasive. It affects most defined functions and their invocations:
+
+◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code/inline{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code/inline{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program boiled down to adding many parenthesis and a few ◊informal{dummy} arguments.}
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  (define ((sum-up-to/partial sum-up-to/rest) number)
+    (define (then dummy)
+      zero)
+
+    (define (else dummy)
+      ((+ number)
+       ((sum-up-to/rest sum-up-to/rest) (sub1 number))))
+
+    (define branch-to-take
+      (((if (zero? number)) then) else))
+
+    (define (dummy ignore-me)
+      ignore-me)
+
+    (branch-to-take dummy))
+
+  ((sum-up-to/partial sum-up-to/partial) number))
+
+(define ((zero function) argument)
+  argument)
+
+(define ((one function) argument)
+  (function argument))
+
+(define ((five function) argument)
+  (function
+   (function
+    (function
+     (function
+      (function argument))))))
+
+(define (zero? number)
+  (define (always-false ignored-argument)
+    false)
+  ((number always-false) true))
+
+(define ((+ number-left) number-right)
+  (define ((result function) argument)
+    ((number-left function) ((number-right function) argument)))
+  result)
+
+(define (sub1 number)
+  (define initial-pair ((pair zero) zero))
+
+  (define (slide-pair current-pair)
+    (define current-number (pair-right current-pair))
+    ((pair current-number) ((+ current-number) one)))
+
+  (define final-pair
+    ((number slide-pair) initial-pair))
+
+  (pair-left final-pair))
+
+(define ((true first) second)
+  first)
+
+(define ((false first) second)
+  second)
+
+(define (((if condition) then) else)
+  ((condition then) else))
+
+(define ((pair left) right)
+  (define (retriever selector)
+    ((selector left) right))
+  retriever)
+
+(define (pair-left pair)
+  (define ((selector-left left) right)
+    left)
+
+  (pair selector-left))
+
+(define (pair-right pair)
+  (define ((selector-right left) right)
+    right)
+
+  (pair selector-right))
+
+(define (pretty-print number)
+  ((number add1) 0))
+
+(pretty-print (sum-up-to five)) ;; => 15
+}
+

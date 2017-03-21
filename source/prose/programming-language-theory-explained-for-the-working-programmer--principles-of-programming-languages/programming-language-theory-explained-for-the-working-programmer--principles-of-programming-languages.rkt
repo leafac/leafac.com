@@ -469,3 +469,193 @@
 
   (sum-up-to 5)
   )
+
+(module+ functions-with-multiple-arguments/multiple-arguments
+  (define (pair left)
+    (define (pair/intermediary right)
+      (define (retriever selector)
+        (selector left right))
+      retriever)
+    pair/intermediary)
+  )
+
+(module+ functions-with-multiple-arguments/zero-arguments
+  (define (else dummy)
+    ___)
+
+  (define (dummy ignore-me)
+    ignore-me)
+
+  (else dummy)
+  )
+
+(module+ functions-with-multiple-arguments/checkpoint
+  (define (sum-up-to number)
+    (define (sum-up-to/partial sum-up-to/rest number)
+      (define (then)
+        zero)
+
+      (define (else)
+        (+ number
+           (sum-up-to/rest sum-up-to/rest (sub1 number))))
+
+      (define branch-to-take
+        (if (zero? number) then else))
+
+      (branch-to-take))
+
+    (sum-up-to/partial sum-up-to/partial number))
+
+  (define (zero function argument)
+    argument)
+
+  (define (one function argument)
+    (function argument))
+
+  (define (five function argument)
+    (function
+     (function
+      (function
+       (function
+        (function argument))))))
+
+  (define (zero? number)
+    (define (always-false ignored-argument)
+      false)
+    (number always-false true))
+
+  (define (+ number-left number-right)
+    (define (result function argument)
+      (number-left function (number-right function argument)))
+    result)
+
+  (define (sub1 number)
+    (define initial-pair (pair zero zero))
+
+    (define (slide-pair current-pair)
+      (define current-number (pair-right current-pair))
+      (pair current-number (+ current-number one)))
+
+    (define final-pair
+      (number slide-pair initial-pair))
+
+    (pair-left final-pair))
+
+  (define (true first second)
+    first)
+
+  (define (false first second)
+    second)
+
+  (define (if condition then else)
+    (condition then else))
+
+  (define (pair left right)
+    (define (retriever selector)
+      (selector left right))
+    retriever)
+
+  (define (pair-left pair)
+    (define (selector-left left right)
+      left)
+
+    (pair selector-left))
+
+  (define (pair-right pair)
+    (define (selector-right left right)
+      right)
+
+    (pair selector-right))
+
+  (define (pretty-print number)
+    (number add1 0))
+
+  (pretty-print (sum-up-to five))
+  )
+
+(module+ functions-with-multiple-arguments/complete
+  (define (sum-up-to number)
+    (define ((sum-up-to/partial sum-up-to/rest) number)
+      (define (then dummy)
+        zero)
+
+      (define (else dummy)
+        ((+ number)
+         ((sum-up-to/rest sum-up-to/rest) (sub1 number))))
+
+      (define branch-to-take
+        (((if (zero? number)) then) else))
+
+      (define (dummy ignore-me)
+        ignore-me)
+
+      (branch-to-take dummy))
+
+    ((sum-up-to/partial sum-up-to/partial) number))
+
+  (define ((zero function) argument)
+    argument)
+
+  (define ((one function) argument)
+    (function argument))
+
+  (define ((five function) argument)
+    (function
+     (function
+      (function
+       (function
+        (function argument))))))
+
+  (define (zero? number)
+    (define (always-false ignored-argument)
+      false)
+    ((number always-false) true))
+
+  (define ((+ number-left) number-right)
+    (define ((result function) argument)
+      ((number-left function) ((number-right function) argument)))
+    result)
+
+  (define (sub1 number)
+    (define initial-pair ((pair zero) zero))
+
+    (define (slide-pair current-pair)
+      (define current-number (pair-right current-pair))
+      ((pair current-number) ((+ current-number) one)))
+
+    (define final-pair
+      ((number slide-pair) initial-pair))
+
+    (pair-left final-pair))
+
+  (define ((true first) second)
+    first)
+
+  (define ((false first) second)
+    second)
+
+  (define (((if condition) then) else)
+    ((condition then) else))
+
+  (define ((pair left) right)
+    (define (retriever selector)
+      ((selector left) right))
+    retriever)
+
+  (define (pair-left pair)
+    (define ((selector-left left) right)
+      left)
+
+    (pair selector-left))
+
+  (define (pair-right pair)
+    (define ((selector-right left) right)
+      right)
+
+    (pair selector-right))
+
+  (define (pretty-print number)
+    ((number add1) 0))
+
+  (pretty-print (sum-up-to five)) ;; => 15
+  )
