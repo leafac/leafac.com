@@ -918,3 +918,355 @@ Cascades of this form extend to functions with arbitrarily large number of param
 ◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
 
 ◊section['named-definitions]{Named Definitions}
+
+◊new-thought{We defined functions and intermediary values} using the ◊code/inline{(define ___ ___)} form all over our program. This is convenient because it allows us to give names to the concepts and parts of the computation. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other:
+
+◊code/block/highlighted['racket]{
+(define (sum-up-to number)
+  ___ (sub1 number) ___)
+
+(define (sub1 number)
+  ___)
+}
+
+◊margin-note{In C, for example, the equivalent of this snippet would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
+
+It is often better to present the high-level picture (◊code/inline{sum-up-to}) first, and the details (◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it is only going to be defined later. Is this an essential feature of programming languages?
+
+◊margin-note{We have managed to discuss theory with only a single Greek letter (◊code/inline{λ}), and it is only introduced in the last encoding. Success.}
+
+◊margin-note{Racket’s ◊technical-term{anonymous functions} can receive multiple arguments and include multiple internal definitions and expressions. So the full form is more complex than ◊code/inline{(λ (argument) body)}, but these extra features are not necessary for our purposes.}
+
+The answer one more time is negative. Named definitions are not an essential feature and we can ◊informal{encode them away}, in terms of simpler features. What can be simpler than a function with a name? A function with no name (◊technical-term{anonymous function}). In Racket, ◊technical-term{anonymous functions} are spelled ◊code/inline{(λ (argument) body)}, in which ◊code/inline{argument} is an identifier naming the argument the function receives, and ◊code/inline{body} is the expression of what the function performs. For example, the following two definitions are equivalent:
+
+◊code/block/highlighted['racket]{
+(define (sub1 number)
+  ___)
+
+(define sub1
+  (λ (number)
+    ___))
+}
+
+To ◊informal{encode away} named definitions, we are first going to reorder them so that they can only refer to previously defined names:
+
+◊margin-note{This step is only possible because we ◊informal{encoded ◊reference['recursion]{recursion} away}.}
+
+◊code/block/highlighted['racket]{
+(define ((true first) second)
+  first)
+
+(define ((false first) second)
+  second)
+
+(define (((if condition) then) else)
+  ((condition then) else))
+
+(define ((pair left) right)
+  (define (retriever selector)
+    ((selector left) right))
+  retriever)
+
+(define (pair-left pair)
+  (define ((selector-left left) right)
+    left)
+
+  (pair selector-left))
+
+(define (pair-right pair)
+  (define ((selector-right left) right)
+    right)
+
+  (pair selector-right))
+
+(define ((zero function) argument)
+  argument)
+
+(define ((one function) argument)
+  (function argument))
+
+(define ((five function) argument)
+  (function
+   (function
+    (function
+     (function
+      (function argument))))))
+
+(define (zero? number)
+  (define (always-false ignored-argument)
+    false)
+  ((number always-false) true))
+
+(define ((+ number-left) number-right)
+  (define ((result function) argument)
+    ((number-left function)
+     ((number-right function) argument)))
+  result)
+
+(define (sub1 number)
+  (define initial-pair ((pair zero) zero))
+
+  (define (slide-pair current-pair)
+    (define current-number (pair-right current-pair))
+    ((pair current-number) ((+ current-number) one)))
+
+  (define final-pair
+    ((number slide-pair) initial-pair))
+
+  (pair-left final-pair))
+
+(define (sum-up-to number)
+  (define ((sum-up-to/partial sum-up-to/rest) number)
+    (define (then dummy)
+      zero)
+
+    (define (else dummy)
+      ((+ number)
+       ((sum-up-to/rest sum-up-to/rest) (sub1 number))))
+
+    (define branch-to-take
+      (((if (zero? number)) then) else))
+
+    (define (dummy ignore-me)
+      ignore-me)
+
+    (branch-to-take dummy))
+
+  ((sum-up-to/partial sum-up-to/partial) number))
+
+(define (pretty-print number)
+  ((number add1) 0))
+
+(pretty-print (sum-up-to five)) ;; => 15
+}
+
+Now, we can ◊emphasis{inline} the definitions where they are used. For example, ◊code/inline{zero?}’s current definition is:
+
+◊code/block/highlighted['racket]{
+(define (always-false ignored-argument)
+  false)
+((number always-false) true)
+}
+
+We can rewrite the above such that all references to the ◊code/inline{always-false} function are replaced with ◊code/inline{always-false}’s implementation, using anonymous functions:
+
+◊margin-note{
+ While performing this rewrite, it is important that we avoid accidentally changing the meanings of the identifiers. For example, the following rewrite would be invalid:
+
+ ◊code/block/highlighted['racket]{
+;; From
+
+(define (always-false
+         ignored-argument)
+  false)
+(λ (false)
+  ((number always-false) true))
+
+;; To
+
+(λ (false)
+  ((number
+    (λ (ignored-argument) false))
+   true))
+ }
+
+ The reason is the difference between the meanings of ◊code/inline{false} in ◊code/inline{always-false}’s definition and in ◊code/inline{(λ (false) ___)}. The solution is to rename the identifier ◊code/inline{false} in ◊code/inline{(λ (false) ___)} to (for example) ◊code/inline{(λ (false2) ___)}—along with all its uses. Fortunately, this issue does not occur in our program.
+}
+
+◊code/block/highlighted['racket]{
+((number (λ (ignored-argument) false)) true)
+}
+
+We are finally ready to see our final version program, in which all definitions are inlined:
+
+◊margin-note{We did not inline ◊code/inline{pretty-print} because it is external to our program. It only exists for us to inspect the result of the computation, which is a number encoded in terms of functions.}
+
+◊code/block/highlighted['racket]{
+(define (pretty-print number)
+  ((number add1) 0))
+
+(pretty-print
+ ((λ (number)
+    (((λ (sum-up-to/rest)
+        (λ (number)
+          (((((λ (condition)
+                (λ (then)
+                  (λ (else)
+                    ((condition then)
+                     else))))
+              ((λ (number)
+                 ((number
+                   (λ (ignored-argument)
+                     (λ (first)
+                       (λ (second)
+                         second))))
+                  (λ (first)
+                    (λ (second) first))))
+               number))
+             (λ (dummy)
+               (λ (function)
+                 (λ (argument) argument))))
+            (λ (dummy)
+              (((λ (number-left)
+                  (λ (number-right)
+                    (λ (function)
+                      (λ (argument)
+                        ((number-left
+                          function)
+                         ((number-right
+                           function)
+                          argument))))))
+                number)
+               ((sum-up-to/rest
+                 sum-up-to/rest)
+                ((λ (number)
+                   ((λ (pair)
+                      (pair
+                       (λ (left)
+                         (λ (right) left))))
+                    ((number
+                      (λ (current-pair)
+                        (((λ (left)
+                            (λ (right)
+                              (λ (selector)
+                                ((selector
+                                  left)
+                                 right))))
+                          ((λ (pair)
+                             (pair
+                              (λ (left)
+                                (λ (right)
+                                  right))))
+                           current-pair))
+                         (((λ (number-left)
+                             (λ (number-right)
+                               (λ (function)
+                                 (λ (argument)
+                                   ((number-left
+                                     function)
+                                    ((number-right
+                                      function)
+                                     argument))))))
+                           ((λ (pair)
+                              (pair
+                               (λ (left)
+                                 (λ (right)
+                                   right))))
+                            current-pair))
+                          (λ (function)
+                            (λ (argument)
+                              (function
+                               argument)))))))
+                     (((λ (left)
+                         (λ (right)
+                           (λ (selector)
+                             ((selector
+                               left)
+                              right))))
+                       (λ (function)
+                         (λ (argument)
+                           argument)))
+                      (λ (function)
+                        (λ (argument)
+                          argument))))))
+                 number)))))
+           (λ (ignore-me) ignore-me))))
+      (λ (sum-up-to/rest)
+        (λ (number)
+          (((((λ (condition)
+                (λ (then)
+                  (λ (else)
+                    ((condition then)
+                     else))))
+              ((λ (number)
+                 ((number
+                   (λ (ignored-argument)
+                     (λ (first)
+                       (λ (second)
+                         second))))
+                  (λ (first)
+                    (λ (second) first))))
+               number))
+             (λ (dummy)
+               (λ (function)
+                 (λ (argument) argument))))
+            (λ (dummy)
+              (((λ (number-left)
+                  (λ (number-right)
+                    (λ (function)
+                      (λ (argument)
+                        ((number-left
+                          function)
+                         ((number-right
+                           function)
+                          argument))))))
+                number)
+               ((sum-up-to/rest
+                 sum-up-to/rest)
+                ((λ (number)
+                   ((λ (pair)
+                      (pair
+                       (λ (left)
+                         (λ (right) left))))
+                    ((number
+                      (λ (current-pair)
+                        (((λ (left)
+                            (λ (right)
+                              (λ (selector)
+                                ((selector
+                                  left)
+                                 right))))
+                          ((λ (pair)
+                             (pair
+                              (λ (left)
+                                (λ (right)
+                                  right))))
+                           current-pair))
+                         (((λ (number-left)
+                             (λ (number-right)
+                               (λ (function)
+                                 (λ (argument)
+                                   ((number-left
+                                     function)
+                                    ((number-right
+                                      function)
+                                     argument))))))
+                           ((λ (pair)
+                              (pair
+                               (λ (left)
+                                 (λ (right)
+                                   right))))
+                            current-pair))
+                          (λ (function)
+                            (λ (argument)
+                              (function
+                               argument)))))))
+                     (((λ (left)
+                         (λ (right)
+                           (λ (selector)
+                             ((selector
+                               left)
+                              right))))
+                       (λ (function)
+                         (λ (argument)
+                           argument)))
+                      (λ (function)
+                        (λ (argument)
+                          argument))))))
+                 number)))))
+           (λ (ignore-me) ignore-me)))))
+     number))
+  (λ (function)
+    (λ (argument)
+      (function
+       (function
+        (function
+         (function
+          (function argument)))))))))
+}
+
+The output of this program is still the same as when we started:
+
+◊code/block/highlighted['racket]{
+15
+}
