@@ -1077,7 +1077,7 @@ We can rewrite the above such that all references to the ◊code/inline{always-f
 ((number (λ (ignored-argument) false)) true)
 }
 
-We are finally ready to see our final version program, in which all definitions are inlined:
+We are finally ready to see the final version of our program, in which all definitions are inlined:
 
 ◊margin-note{We did not inline ◊code/inline{pretty-print} because it is external to our program. It only exists for us to inspect the result of the computation, which is a number encoded in terms of functions.}
 
@@ -1270,3 +1270,26 @@ The output of this program is still the same as when we started:
 ◊code/block/highlighted['racket]{
 15
 }
+
+◊paragraph-separation[]
+
+◊margin-note{The set of features that are left in the program goes by the name of Lambda calculus, which explains the use of the λ in the anonymous-function notation in Racket.}
+
+◊new-thought{This version of the program} is remarkably difficult to read. Only a few parts are familiar and most concepts that previously were abstracted and named are now intertwined. No programmer would write code this way. But, despite being ◊emphasis{difficult} to understand, the final version of our program is ◊emphasis{simple}. It uses almost no features from the underlying programming language (Racket). Namely, it uses only three features: (1) definitions of anonymous functions of a single argument and a single return value; (2) applications of those functions; and (3) references to variables.
+
+It would not be possible to ◊informal{encode away} any of these three features and still preserve the meaning of our program. Does this mean we reached the essence of programming languages? That is the subject of the next section.
+
+◊section['the-essence]{The Essence}
+
+◊new-thought{In this article}, we started with a short program that was easy to understand, but which used many features of the underlying programming language: numbers, booleans, conditionals, recursion, and more. To look for the essence of programming languages, we ◊informal{encoded features away}. We rewrote the program many times, preserving its meaning but encoding features in terms of other, simpler, features.
+
+We iterated on these rewrites until we reached a minimal, irreducible set of features. The result was an unrecognizable program, albeit a very ◊emphasis{simple} one. Do the features used in this program represent the essence of programming languages?
+
+Not quite. Had we taken a different turn on the road, we would have reached a different set of essential features. This is not surprising, given that we had to choose our base programming language (Racket) to meet certain criteria.
+
+◊; TODO: For example, we could have arrived at a Turing Machine, which ...
+
+◊; TODO: It is possible to encode anonymous functions in terms of other features...
+
+
+◊; TODO: Encode this features in terms of other features.
