@@ -1355,7 +1355,7 @@ Again, coming from a different direction, we acknowledge the importance of ◊em
 
 ◊new-thought{The main inspiration} for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version was in ◊link["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version was in ◊link["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊link["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊link["http://computationbook.com/"]{Understanding Computation}. Together, they not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
 
-Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in OOPSLA 1998. His presentation skills are remarkable.
+Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in ◊acronym{OOPSLA} 1998. His presentation skills are remarkable.
 
 But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
 
