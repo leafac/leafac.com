@@ -1287,7 +1287,7 @@ We iterated until we reached a minimal, irreducible set of features: definition 
 
 Not quite. One evidence is that we had to choose our base programming language (Racket) based on certain criteria. For example, it had to a language in which functions were values. If our resulting program represented the essence of programming languages, then C—a language in which functions are not values—would not qualify as a programming language. And it does.
 
-◊margin-note{Explaining the inner workings of Turing Machines, ◊acronym{SKI} combinator calculus and tag systems go beyond the scope of this article. The relevant aspect is that each of these constitutes minimal, irreducible sets of features for programming languages.}
+◊margin-note{Explaining the inner workings of Turing Machines, ◊acronym{SKI} combinator calculus and tag systems is beyond the scope of this article. The relevant aspect is that each of these constitutes minimal, irreducible sets of features for programming languages.}
 
 Moreover, had we taken a different turn on the road, we would have reached a different set of essential features. For example, we could have arrived at a machine with an infinite tape of cells, a head that reads and write to the tape and a set of rules to follow for reading, writing and moving the tape. This machine is known as Turing Machine. Or we could have arrived at something more esoteric, like the ◊acronym{SKI} combinator calculus or a tag system.
 
