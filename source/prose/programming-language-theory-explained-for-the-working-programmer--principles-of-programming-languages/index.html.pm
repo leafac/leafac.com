@@ -299,7 +299,7 @@ The following snippet is an example of ◊code/inline{+} in use:
   ◊no-indent[] Note that in the figure above there are ◊emphasis{five} blue arrows, representing the steps we take to calculate ◊code/inline{sub1} of ◊code/inline{five}.
 }
 
-With that out of the way, we are going to use an ◊technical-term{sliding} window over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
+With that out of the way, we are going to use an ◊technical-term{sliding window} over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
 
 ◊margin-note{To represent pairs, we use ◊code/inline{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code/inline{cons}, ◊code/inline{car} and ◊code/inline{cdr} are not intuitive.}
 
@@ -1317,14 +1317,39 @@ But, in one way or another, all the minimal sets of features at which we could h
 
 ◊section['conclusion]{Conclusion}
 
-◊new-thought{Our journey to the essence} of programming languages is complete. We started with a regular program and transformed it several times to make it simpler, until we could finally observe that ◊emphasis{communication} is the essence of programming languages. This is an important result on itself, but it is far from being the only interesting takeaway from this article.
+◊new-thought{Our journey to the essence} of programming languages is complete. We started with a regular program and transformed it several times to make it simpler, until we could finally observe that ◊emphasis{communication} is the essence of programming languages. This is an important result on itself, but it is far from being the only interesting takeaway from this article. The encodings are based on techniques that are generally applicable in real-world programs. The following paragraphs summarize them.
 
-◊; TODO: Minimal core to work in PL theory.
+The first and most important lesson regarding encodings is that whenever a language does not have a feature, we can encode it using the existing features. How convenient and practical it is to do so varies, but theoretically it is always an option. Ultimately, any task in programming can be framed as encoding constructs that do not exist in the base language—or in any language. These constructs may be the ones that we ◊informal{encoded away} in this article, or they may be constructs related to tracking bicycle trips, for example.
 
-◊; TODO: In introduction, motivate with:
-◊;   - Curiosity.
-◊;   - Programming tricks.
-◊;   - Minimal core to work in PL theory.
+When encoding numbers, we chose to use functions. With this choice, we encoded numbers not by what ◊emphasis{they are}, but by what ◊emphasis{they do}. Simply put, what numbers do is to count, so our encoding for them was to repeatedly apply a function, which effectively is performing a count. This shows that data (what numbers ◊emphasis{are}) and computation (what they do ◊emphasis{do}, in our encoding) are two sides of the same coin. Our final conclusion about the nature of functions manifested from the start.
+
+The most complicated operation to implement in our encoded numbers was ◊code/inline{sub1}. We did it using a ◊technical-term{sliding window} over the number line. This technique is applicable to all sorts of search in series in which each element depends on the previous ones. For example, calculating the Fibonacci numbers, in which each element is the sum of the previous two.
+
+For the encoding of booleans, we again used an encoding in terms of what ◊emphasis{they do}, instead of what ◊emphasis{they are}. The purpose of booleans in to choose between two options—◊technical-term{true} and ◊technical-term{false}.
+
+◊margin-note{This capability to ◊informal{remember} that functions have is related to ◊technical-term{lexical scoping}. Languages with ◊technical-term{dynamic scoping} (for example, Emacs Lisp) behave differently and the result would not be the same in them.}
+
+The encoding of pairs uses an important capability of functions: they ◊informal{remember} the values they had in scope when defined. A fundamental part of this encoding were the inner functions that ◊informal{remembered} the arguments of the outer functions even after the outer functions had returned.
+
+Another interesting technique we introduced in the encoding for pairs is that, when a function does not enough information to act, it can delegate to a helper function, which it receives as argument. In the particular case of pairs, the ◊code/inline{retriever} did not know which element of the pair (◊code/inline{left} or ◊code/inline{right}) to retrieve. So it received a ◊code/inline{selector} function as argument, transferring the responsibility of deciding which element to retrieve to the calling site. The calling site knows which element of the pair it needs, and that is why this technique works.
+
+The final lesson from the encoding of pairs is that any data structure is, in its essence, just a construct to couple data together. There is a huge number of different data structures to solve particular issues, for example optimizing access time, but their fundamental purpose is still simple. Moreover, it is possible to construct sophisticated data structures from simpler ones—for example, construct lists out of pairs. To solve a complex problem, in many cases it is better to build more sophisticated data structures in which the problem can be phrased naturally than to try to solve the problem directly. This was precisely the approach we took when introducing pairs in ◊code/inline{sub1}.
+
+The encoding for recursion was another instance of the technique “if a function does not have enough information to act, it should receive another function that does as argument.” In this case, the functions that need more information and that have the information happen to be the same. Even the ◊technical-term{tying the knot} technique is an example of this. It relies on mutation of the program state (◊code/inline{set!}), and mutation can be interpreted as an extra argument to every function, carrying the global program state. When using the ◊technical-term{tying the knot} technique, the global program state includes the ◊informal{function that has the information necessary to act}.
+
+◊margin-note{Functional programming languages are increasingly popular, and some of their features appear in traditionally non-functional languages—for example, Java 8 includes closures. This contributes to blur the line between paradigms, rendering obsolete definitions such as ◊technical-term{object-oriented} and ◊technical-term{functional}.}
+
+When encoding functions with multiple arguments, we took to an extreme the ◊informal{memory} features of inner function definitions, which we had already explored in the encoding for pairs. We created cascades of functions that received a single argument and returned intermediary functions. In every day programming, the ability to create inner functions is one of the most useful, and is a significant reason for the recent popularity of functional programming languages.
+
+◊margin-note{◊emphasis{Communication} is so important that it was the primary motivation for writing this article: to ◊emphasis{communicate} the important ideas of computer science to practitioners.}
+
+The final practical lesson for working programmers in this article comes from the encoding of named definitions. After the transformation, the program becomes unintelligible. This shows the importance of naming in programming. Not only we must identify abstractions, but we also must give them good names. Working programmers are not only writing programs that work—computers interpret our unintelligible final version of the program without problems—but, more importantly, ◊emphasis{communicating} ideas to other people, so that they can understand and improve them in the future.
+
+Again, coming from a different direction, we acknowledge the importance of ◊emphasis{communication}. We have now come full circle:
+
+◊paragraph-separation[]
+
+◊emphasis{The essence of programming languages is communication.}
 
 ◊; ◊section['references]{References}
 
@@ -1333,3 +1358,10 @@ But, in one way or another, all the minimal sets of features at which we could h
 ◊; Programming with Nothing
 ◊; PL Book
 ◊; A New Kind of Science
+
+◊; TODO: Minimal core to work in PL theory.
+
+◊; TODO: In introduction, motivate with:
+◊;   - Curiosity.
+◊;   - Programming tricks.
+◊;   - Minimal core to work in PL theory.
