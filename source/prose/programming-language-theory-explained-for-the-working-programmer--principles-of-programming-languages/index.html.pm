@@ -7,12 +7,9 @@
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
 
-◊; TODO: Motivate with:
-◊;   - Curiosity.
-◊;   - Programming tricks.
-◊;   - Minimal core to work in PL theory.
-
 ◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might question: What is the essence of programming languages? In this article, we are going to explore this question, but, unlike most presentations on the topic, we are going to avoid mathematical notation and jargon. We are going to start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages tick. The whole discussion is driven by executable code, making it approachable to all programmers.
+
+Besides satisfying the curiosity, this article introduces programming techniques that are generally applicable in every day programming. And, for people venturing into programming-language design and analysis, it is helpful to identify the essential features and start working from this core. It is often clearer and easier to consider a small language first, and then add features as extensions. In this article we are going to identify what is the minimal core possible in existence.
 
 ◊section['starting-point]{Starting Point}
 
