@@ -7,6 +7,11 @@
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
 
+◊; TODO: Motivate with:
+◊;   - Curiosity.
+◊;   - Programming tricks.
+◊;   - Minimal core to work in PL theory.
+
 ◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might question: What is the essence of programming languages? In this article, we are going to explore this question, but, unlike most presentations on the topic, we are going to avoid mathematical notation and jargon. We are going to start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages tick. The whole discussion is driven by executable code, making it approachable to all programmers.
 
 ◊section['starting-point]{Starting Point}
@@ -1299,8 +1304,6 @@ So we are still one step away from the essence. The essence must be what all the
 
 This brings us to the most important result of this article: What is the essence of programming languages? What is the essence of computing? What is the common aspect of the different systems capable of computing? ◊emphasis{Communication}.
 
-◊margin-note{For more on communication and its relation to computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
-
 The essence of programming languages is that they allow arbitrary ◊emphasis{communication} of data across the program. In our final program, communication is the only feature that remained. We ◊informal{encoded away} the numbers, booleans and more, and the only thing left were functions. Functions served two purposes in our program. First, functions served as ◊emphasis{data}. This is why we had to choose a base language in which functions were values—functions were the only kind of data left in the program. The second purpose functions served in our program was as a mechanism to ◊emphasis{communicate} data from calling site to function body, in the form of passing arguments and receiving the return value back.
 
 ◊margin-note{The observation that all these different minimal sets of features are equivalent in computational power is an important result of computer science theory. It is called Church–Turing thesis.}
@@ -1351,17 +1354,12 @@ Again, coming from a different direction, we acknowledge the importance of ◊em
 
 ◊emphasis{The essence of programming languages is communication.}
 
-◊; ◊section['references]{References}
+◊section['references]{References}
 
-◊; Adventures in Y
-◊; Understanding Computation
-◊; Programming with Nothing
-◊; PL Book
-◊; A New Kind of Science
+◊new-thought{The main inspiration} for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version was in ◊link["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version was in ◊link["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊link["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊link["http://computationbook.com/"]{Understanding Computation}. Together, they not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
 
-◊; TODO: Minimal core to work in PL theory.
+Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in OOPSLA 1998. His presentation skills are remarkable.
 
-◊; TODO: In introduction, motivate with:
-◊;   - Curiosity.
-◊;   - Programming tricks.
-◊;   - Minimal core to work in PL theory.
+But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
+
+Finally, people interested in the academic side of programming-language theory can read the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{Principles of Programming Languages}, by Dr. Scott F. Smith, my advisor. It includes an introduction to the notation and jargon used in research and is essential to be able to read conference articles.
