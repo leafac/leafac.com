@@ -355,7 +355,7 @@ To find an answer within a reasonable time, we would need a ◊technical-term{go
 
 ◊margin-note{For more on cellular automata, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
 
-◊new-thought{Peg Solitaire is similar} to a simple cellular automata. It is a grid-based game in which cells can assume certain states and evolve over time, the same as cellular automata. So, could ◊acronym{PLT} Redex model them as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular cellular automata?
+◊new-thought{Peg Solitaire is similar} to simple cellular automata. Like cellular automata, Peg Solitaire is based on a grid of cells that can assume certain states and evolve over time. So, could ◊acronym{PLT} Redex model cellular automata as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular kinds of cellular automata?
 
 ◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities for moves in Peg Solitaire, in the Game of Life each move consists of multiple updates to the board.}
 
