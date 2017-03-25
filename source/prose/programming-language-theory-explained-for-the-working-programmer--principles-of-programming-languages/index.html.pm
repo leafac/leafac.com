@@ -124,6 +124,8 @@ Alternatively, we could encode numbers with strings not using their string repre
 (sum-up-to "☺☺☺☺☺")
 }
 
+◊margin-note{This encoding for numbers using the lengths of lists is called ◊technical-term{Peano numbers}.}
+
 On a related idea, we could encode numbers as list lengths. Again, the contents of the lists would be irrelevant, only their length would matter:
 
 ◊code/block/highlighted['racket]{
