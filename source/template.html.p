@@ -11,6 +11,12 @@
       (meta #:name "viewport" #:content "width=device-width, initial-scale=1")
       (meta #:name "author" #:content (dict-ref personal-data 'author))
       (meta #:name "description" #:content (dict-ref personal-data 'description))
+      (head/link #:href ◊internal-url["/vendor/assets/stylesheets/fonts.css"]
+                 #:rel "stylesheet" #:type "text/css")
+      (head/link #:href ◊internal-url["/vendor/assets/stylesheets/normalize.css"]
+                 #:rel "stylesheet" #:type "text/css")
+      (head/link #:href ◊internal-url["/vendor/assets/stylesheets/syntax-highlight.css"]
+                 #:rel "stylesheet" #:type "text/css")
       (head/link #:href ◊internal-url["/assets/stylesheets/styles.css"] #:rel "stylesheet"
                  #:type "text/css")
       (head/link #:rel "icon" #:type "image/jpeg" #:href ◊internal-url["/assets/images/favicon.jpg"])

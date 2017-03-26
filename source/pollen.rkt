@@ -92,38 +92,6 @@
 
 ;; FONTS ---------------------------------------------------------------------------------------------
 
-(define (font/face path family [weight 400] [style 'normal]
-                   #:base-path [base-path (~a (current-project-root) "vendor/assets/fonts")])
-  (define full-path (~a base-path "/" path ".woff"))
-  (define font (base64-encode (file->bytes full-path) #""))
-  (css-expr [@font-face
-             #:font-family ,family
-             #:src ((apply url ,(~a "data:application/font-woff;charset=utf-8;base64," font))
-                    (apply format "woff"))
-             #:font-weight ,weight
-             #:font-style ,style]))
-
-(define-component font/faces/charis-sil
-  #:css
-  (css-expr
-   ,@(font/face "CharisSIL-R" "Charis SIL" 400 'normal)
-   ,@(font/face "CharisSIL-I" "Charis SIL" 400 'italic)
-   ,@(font/face "CharisSIL-B" "Charis SIL" 700 'normal)
-   ,@(font/face "CharisSIL-BI" "Charis SIL" 700 'italic)))
-
-(define-component font/faces/source-sans-pro
-  #:css
-  (css-expr
-   ,@(font/face "SourceSansPro-Regular.otf" "Source Sans Pro" 400)
-   ,@(font/face "SourceSansPro-Semibold.otf" "Source Sans Pro" 600)
-   ,@(font/face "SourceSansPro-Light.otf" "Source Sans Pro" 300)))
-
-(define-component font/faces/source-code-pro
-  #:css (font/face "SourceCodePro-Regular.otf" "Source Code Pro"))
-
-(define-component font/faces/font-awesome
-  #:css (font/face "fontawesome-webfont" "FontAwesome"))
-
 (define font/serif (css-expr #:font-family "Charis SIL"))
 
 (define font/sans-serif (css-expr #:font-family "Source Sans Pro"))
