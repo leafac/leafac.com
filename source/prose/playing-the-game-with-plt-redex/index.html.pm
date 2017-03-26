@@ -5,7 +5,7 @@
 
 ◊margin-note{This article assumes prior knowledge on programming in general and some exposure to functional programming in particular—specially immutable data structures and pattern matching. Racket experience is helpful, but not mandatory.}
 
-◊margin-note{◊figure{◊icon[#:illustration #t]{}◊figure/caption{A peg. Solitary.}}}
+◊margin-note{◊figure{◊svg{peg.svg}◊figure/caption{A peg. Solitary.}}}
 
 ◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 

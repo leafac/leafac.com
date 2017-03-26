@@ -675,20 +675,6 @@
 
 (define-component head/title #:html (default-tag-function 'title))
 
-(define-component (icon #:illustration [illustration #f] the-icon)
-  #:html ((default-tag-function 'span #:aria-hidden "true")
-          #:class (~a "icon" (if illustration " illustration" ""))
-          the-icon)
-  #:css (css-expr [.icon
-                   ,@font/rendering
-                   ,@font/icons
-                   #:color ,(dict-ref colorscheme 'secondary-content)
-                   [(\. & illustration)
-                    #:display block
-                    #:font-size (rem ,(modular-scale 10))
-                    #:line-height (rem ,(modular-scale 10))
-                    #:margin-bottom (rem ,(modular-scale -1))]]))
-
 (define-component publication #:html emphasis)
 
 (define-component education #:html (default-tag-function 'div #:class "big-separation"))

@@ -17,8 +17,8 @@
                  #:rel "stylesheet" #:type "text/css")
       (head/link #:href ◊internal-url["/vendor/assets/stylesheets/syntax-highlight.css"]
                  #:rel "stylesheet" #:type "text/css")
-      (head/link #:href ◊internal-url["/assets/stylesheets/styles.css"] #:rel "stylesheet"
-                 #:type "text/css")
+      (head/link #:href ◊internal-url["/assets/stylesheets/styles.css"]
+                 #:rel "stylesheet" #:type "text/css")
       (head/link #:rel "icon" #:type "image/jpeg" #:href ◊internal-url["/assets/images/favicon.jpg"])
       (head/link #:type "application/atom+xml" #:rel "alternate"
                  #:title (dict-ref personal-data 'name) #:href ◊internal-url["/feed.atom"])
