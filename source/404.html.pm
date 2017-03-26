@@ -2,6 +2,6 @@
 
 ◊define-meta[title]{404 Not Found}
 
-◊margin-note{◊figure{◊svg{◊internal-url{/assets/images/broken-link.svg}}}}
+◊margin-note{◊figure{◊svg{◊source-path{/assets/images/broken-link.svg}}}}
 
 ◊new-thought{If you think} there should be a page here, please ◊link/internal["/contact"]{report it}.

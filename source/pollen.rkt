@@ -45,6 +45,8 @@
 
 (define (absolute-url path) (~a (base-absolute) path))
 
+(define (source-path path) (~a (current-project-root) "/" path))
+
 (define (prefix declaration #:prefixes [prefixes '(moz webkit ms o)])
   (syntax-parse declaration
     [(name:keyword rest:expr ...)
