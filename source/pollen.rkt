@@ -1,7 +1,7 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
          racket/function racket/list racket/file racket/dict racket/string
-         css-expr libuuid gregor gregor/period sugar xml
+         css-expr libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
 
@@ -39,11 +39,11 @@
 
 (define base-path (make-parameter ""))
 
-(define (internal-url path) (string-append (base-path) path))
+(define (internal-url path) (~a (base-path) path))
 
 (define base-absolute (make-parameter "https://www.leafac.com"))
 
-(define (absolute-url path) (string-append (base-absolute) path))
+(define (absolute-url path) (~a (base-absolute) path))
 
 (define (prefix declaration #:prefixes [prefixes '(moz webkit ms o)])
   (syntax-parse declaration
@@ -58,7 +58,7 @@
                     (css-expr ,prefixed-name ,@rests/datum)))
                ,name/datum ,@rests/datum)]))
 
-(define (feed/uuid) (string-downcase (string-append "urn:uuid:" (uuid-generate))))
+(define (feed/uuid) (string-downcase (~a "urn:uuid:" (uuid-generate))))
 
 ;; https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 (define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
@@ -92,49 +92,45 @@
 
 ;; FONTS ---------------------------------------------------------------------------------------------
 
-(define (font/face family weight style #:path [path (internal-url "/vendor/assets/fonts")])
-  (define basename (string-append path "/" family "/" family "--" weight "--" style))
+(define (font/face path family [weight 400] [style 'normal]
+                   #:base-path [base-path (~a (current-project-root) "vendor/assets/fonts")])
+  (define full-path (~a base-path "/" path ".woff"))
+  (define font (base64-encode (file->bytes full-path) #""))
   (css-expr [@font-face
              #:font-family ,family
-             #:src (apply url ,(string-append basename ".eot"))
-             #:src ((apply url ,(string-append basename ".eot?#iefix"))
-                    (apply format "embedded-opentype"))
-             ((apply url ,(string-append basename ".woff2")) (apply format "woff2"))
-             ((apply url ,(string-append basename ".woff")) (apply format "woff"))
-             ((apply url ,(string-append basename ".ttf")) (apply format "truetype"))
-             ((apply url ,(string-append basename ".otf")) (apply format "opentype"))
-             ((apply url ,(string-append basename ".svg#" family))
-              (apply format "svg"))
-             #:font-weight ,(string->symbol weight)
-             #:font-style ,(string->symbol style)]))
-
-(define (font/faces family weights styles #:path [path #f])
-  (apply append
-         (for*/list ([weight weights]
-                     [style styles])
-           (if path
-               (font/face family weight style #:path path)
-               (font/face family weight style)))))
+             #:src ((apply url ,(~a "data:application/font-woff;charset=utf-8;base64," font))
+                    (apply format "woff"))
+             #:font-weight ,weight
+             #:font-style ,style]))
 
 (define-component font/faces/charis-sil
-  #:css (font/faces "charis-sil" '("400" "700") '("normal" "italic")))
+  #:css
+  (css-expr
+   ,@(font/face "CharisSIL-R" "Charis SIL" 400 'normal)
+   ,@(font/face "CharisSIL-I" "Charis SIL" 400 'italic)
+   ,@(font/face "CharisSIL-B" "Charis SIL" 700 'normal)
+   ,@(font/face "CharisSIL-BI" "Charis SIL" 700 'italic)))
 
 (define-component font/faces/source-sans-pro
-  #:css (font/faces "source-sans-pro" '("200" "300" "400" "600" "700" "900") '("normal" "italic")))
+  #:css
+  (css-expr
+   ,@(font/face "SourceSansPro-Regular.otf" "Source Sans Pro" 400)
+   ,@(font/face "SourceSansPro-Semibold.otf" "Source Sans Pro" 600)
+   ,@(font/face "SourceSansPro-Light.otf" "Source Sans Pro" 300)))
 
 (define-component font/faces/source-code-pro
-  #:css (font/faces "source-code-pro" '("200" "300" "400" "500" "600" "700" "900")
-                    '("normal" "italic")))
+  #:css (font/face "SourceCodePro-Regular.otf" "Source Code Pro"))
 
-(define-component font/faces/font-awesome #:css (font/face "font-awesome" "400" "normal"))
+(define-component font/faces/font-awesome
+  #:css (font/face "fontawesome-webfont" "FontAwesome"))
 
-(define font/serif (css-expr #:font-family "charis-sil"))
+(define font/serif (css-expr #:font-family "Charis SIL"))
 
-(define font/sans-serif (css-expr #:font-family "source-sans-pro"))
+(define font/sans-serif (css-expr #:font-family "Source Sans Pro"))
 
-(define font/typewriter (css-expr #:font-family "source-code-pro"))
+(define font/monospace (css-expr #:font-family "Source Code Pro"))
 
-(define font/icons (css-expr #:font-family "font-awesome"))
+(define font/icons (css-expr #:font-family "FontAwesome"))
 
 (define font/italics (css-expr #:font-style italic))
 
@@ -366,7 +362,7 @@
                              #:bottom (rem ,(modular-scale -2)))]
                   [h1
                    ,@font/small-caps
-                   #:font-weight 600]
+                   #:font-weight 700]
                   [h2
                    ,@font/italics
                    #:font-weight 400]))
@@ -417,15 +413,15 @@
                    [(.menu &) #:display none]]))
 
 (define-component (email address . elements)
-  #:html (apply link (string-append "mailto:" address)
+  #:html (apply link (~a "mailto:" address)
                 (if (null? elements) `(,address) elements)))
 
 (define-component (gpg-key-id key-id)
-  #:html (link (string-append "http://pgp.mit.edu/pks/lookup?op=vindex&search=0x" key-id)
-               (string-append "0x" key-id)))
+  #:html (link (~a "http://pgp.mit.edu/pks/lookup?op=vindex&search=0x" key-id)
+               (~a "0x" key-id)))
 
 (define-component (github-user handle)
-  #:html (link (string-append "https://github.com/" handle) (string-append "@" handle)))
+  #:html (link (~a "https://github.com/" handle) (~a "@" handle)))
 
 (define-component (skype-user handle)
   #:html ((default-tag-function 'em) handle))
@@ -503,31 +499,18 @@
   #:css (css-expr [img #:max-width 100%]
                   [.image-in-figure #:text-align center]))
 
-(define svg/font-replacement
-  '(("Charis SIL" . "charis-sil")
-    ("Source Sans Pro" . "source-sans-pro")
-    ("Source Code Pro" . "source-code-pro")
-    ("Font Awesome" . "font-awesome")))
-
 (define-component (svg path)
-  #:html
-  (define source (file->string path))
-  (define font-replaced
-    (for/fold ([font-replaced source])
-              ([(source target) (in-dict svg/font-replacement)])
-      (regexp-replace* (pregexp (~a "font-family:\\s*[\"']?" source "[\"']?;"))
-                       font-replaced (~a "font-family:" target ";"))))
-  (string->xexpr font-replaced)
+  #:html (string->xexpr (file->string path))
   #:css (css-expr [svg #:max-width 100% #:height auto]))
 
 (define-component code/inline
   #:html (default-tag-function 'code)
-  #:css (css-expr [code ,@font/typewriter]))
+  #:css (css-expr [code ,@font/monospace]))
 
 (define-component (code/block . elements)
   #:html ((default-tag-function 'pre #:class "insertion") (apply code/inline elements))
   #:css (css-expr [pre
-                   ,@font/typewriter
+                   ,@font/monospace
                    #:overflow auto
                    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
                    #:padding ,size/indentation
@@ -536,7 +519,7 @@
 (define-component (code/block/highlighted language . elements)
   #:html ((default-tag-function 'div #:class "insertion")
           (string->xexpr
-           (with-input-from-string (apply string-append elements)
+           (with-input-from-string (string-join elements "")
              (λ ()
                (with-output-to-string
                    (λ ()
@@ -568,7 +551,7 @@
 
 (define-component (recipe path . elements)
   #:html (list/unordered/item #:class "recipe"
-                              (apply link/internal (string-append "/cooking/" path) elements))
+                              (apply link/internal (~a "/cooking/" path) elements))
   #:css (css-expr [.recipe
                    #:list-style none
                    #:margin-bottom (rem ,(modular-scale -4))
@@ -709,7 +692,7 @@
            (span ((class "fraction--denominator")) ,(~a denominator)))
   #:css (css-expr [.fraction--numerator .fraction--denominator
                    #:font-size 0.8em
-                   #:font-weight 600]
+                   #:font-weight 700]
                   [.fraction--numerator #:vertical-align super]
                   [.fraction--denominator #:vertical-align sub]
                   [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
@@ -726,7 +709,7 @@
 
 (define-component (icon #:illustration [illustration #f] the-icon)
   #:html ((default-tag-function 'span #:aria-hidden "true")
-          #:class (string-append "icon" (if illustration " illustration" ""))
+          #:class (~a "icon" (if illustration " illustration" ""))
           the-icon)
   #:css (css-expr [.icon
                    ,@font/rendering
