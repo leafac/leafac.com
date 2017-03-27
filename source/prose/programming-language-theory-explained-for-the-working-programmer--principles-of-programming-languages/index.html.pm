@@ -1,21 +1,21 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
-◊define-meta[date]{2017-03-24}
+◊define-meta[date]{2017-03-27}
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might question: What is the essence of programming languages? In this article, we are going to explore this question, but, unlike most presentations on the topic, we are going to avoid mathematical notation and jargon. We are going to start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages tick. The whole discussion is driven by executable code, making it approachable to all programmers.
+◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might wonder: What is the essence of programming languages? In this article, we are going to explore this question, but, unlike most presentations on the topic, we are going to avoid mathematical notation and jargon. We are going to start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages work. The whole discussion is driven by executable code, making it approachable to all programmers.
 
-Besides satisfying the curiosity, this article introduces programming techniques that are generally applicable in every day programming. And, for people venturing into programming-language design and analysis, it is helpful to identify the essential features and start working from this core. It is often clearer and easier to consider a small language first, and then add features as extensions. In this article we are going to identify what is the minimal core possible in existence.
+Besides satisfying a curiosity, this article introduces programming techniques that are generally applicable in everyday programming. And, for people starting in programming-language design and analysis, this article introduces a minimal programming language core from which to build.
 
 ◊section['starting-point]{Starting Point}
 
-◊new-thought{Consider} the following program:
+◊new-thought{Consider the following} program:
 
-◊margin-note{The same program is given in three popular programming languages to help users of these languages get started. From now on, we are going to proceed in Racket, but there is nothing special about this choice. Any dynamically typed language in which functions are values would work. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs we are going to write. There are static type systems with the necessary expressiveness, but they are rare.}
+◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we are going to proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code/inline{+}) and control-flow primitives (for example, ◊code/inline{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs we are going to write. There are static type systems with the necessary expressiveness, but they are rare.}
 
 ◊code/block/highlighted['racket]{
 ;; Racket
@@ -57,15 +57,17 @@ public class Main {
 }
 }
 
+◊margin-note{◊code/inline{0 + 1 + 2 + 3 + 4 + 5 = 15}}
+
 This program defines a function that sums integers from zero up to a given number, then calls this function with ◊code/inline{5}, outputting ◊code/inline{15}. What are the essential features in programming languages that allow this program to be written? To address this question, we first have to consider what ◊emphasis{is} an essential feature.
 
 Suppose one wants to write an application that tracks information about bicycle trips. If one could find a programming language that comes with native constructs for distances, weather conditions and so on, then that would be a perfect fit. But programming languages generally do not have these features, so one has to use numbers, functions, lists, records, objects and other simpler features to ◊emphasis{encode} the necessary functionality.
 
-◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in language with more features and output machine code. What we are targeting in this discussion is the essence of programming languages, so, in a way, it is even more bare-bones than machine code.}
+◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in a language with more features than the machine code they output. So the techniques we are going to introduce are related to the transformations a compiler would apply to a source program. But we are looking for the essence of programming languages, therefore the language we are targeting is even simpler than machine code.}
 
 ◊margin-note{◊svg{convenience-vs-simplicity.svg}}
 
-Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
+Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking would be—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
 
 It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use less features, but they also become harder to understand. Think of the difference between programs in Ruby and C that perform the same task. While C is a simpler language, programs in it tend to be harder to read.
 
@@ -82,9 +84,9 @@ It is important to note that simplicity is not the same as easiness. As we advan
 (sum-up-to 5) ;; => 15
 }
 
-The first feature we are going to remove via encoding are the numbers. There many different ways to write the same program above without numbers. For example, one could use strings to represent numbers, redefining the operations on them accordingly:
+The first features we are going to remove via encoding are numbers and operations on them. There many different ways to rewrite the program above without numbers. For example, one could use strings to represent numbers, redefining the operations on them accordingly:
 
-◊margin-note{The ◊code/inline{___} in the code represent omitted code for the sake of simplicity.}
+◊margin-note{The ◊code/inline{___} in the code represent code omitted for simplicity.}
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -104,7 +106,7 @@ The first feature we are going to remove via encoding are the numbers. There man
 (sum-up-to "5")
 }
 
-Alternatively, we could encode numbers with strings not using their string representation, but the string length. Then contents of the string would be irrelevant, only its length would be meaningful. For example, ◊code/inline{0} could become ◊code/inline{""}, ◊code/inline{1} could become ◊code/inline{"☺"}, ◊code/inline{5} could become ◊code/inline{"☺☺☺☺☺"}, and so on. The running example would look like the following with this encoding:
+Alternatively, we could encode numbers with strings not using their string representation, but the string length. In this encoding, the contents of the strings representing numbers would be irrelevant, only their length would be meaningful. For example, ◊code/inline{0} would become ◊code/inline{""}, ◊code/inline{1} would become ◊code/inline{"☺"}, ◊code/inline{5} would become ◊code/inline{"☺☺☺☺☺"}, and so on. The running example would look like the following in this encoding:
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -126,7 +128,7 @@ Alternatively, we could encode numbers with strings not using their string repre
 
 ◊margin-note{This encoding for numbers using the lengths of lists is called ◊technical-term{Peano numbers}.}
 
-On a related idea, we could encode numbers as list lengths. Again, the contents of the lists would be irrelevant, only their length would matter:
+On a related idea, we could encode numbers as list lengths. Again, the contents of the lists would be irrelevant, only their length would be meaningful:
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -149,11 +151,13 @@ On a related idea, we could encode numbers as list lengths. Again, the contents 
 ;; => '(☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺ ☺)
 }
 
-Some encodings are more convenient than others. For example, it is harder to implement addition in the first string encoding presented above. It amounts to recreating the addition algorithm that we learned in elementary school, with addition tables, carries and so on. But in the list-length encoding, addition is just list append.
+Some encodings are more convenient than others. For example, it is more difficult to implement addition in the first encoding presented above than in the other two. The first encoding uses the string representation of numbers, so implementing addition in it amounts to recreating the addition algorithm taught in elementary school, including addition tables, carries and so on. But in the other two encodings, addition is just appending (either strings or lists), which is easy to implement.
 
 ◊margin-note{The name of this encoding of numbers using functions is ◊technical-term{Church Encoding}.}
 
-We are not seeking easiness, so from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but interesting: we are going to encode numbers using ◊emphasis{functions}. Each number is going to be a function of two arguments: the first is a function and the second is an arbitrary argument. It repeatedly applies the first argument to the second, the amount of applications represents the number:
+We are not seeking easiness, though. So, from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but interesting: we are going to encode numbers using ◊emphasis{functions}. Each number is going to be a function of two arguments: the first, a function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
+
+◊; TODO: Stopped editing pass here.
 
 ◊margin-note{Another interpretation is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
 
