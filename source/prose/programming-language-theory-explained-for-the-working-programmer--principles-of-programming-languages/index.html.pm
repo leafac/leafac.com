@@ -155,11 +155,11 @@ Some encodings are more convenient than others. For example, it is more difficul
 
 ◊margin-note{The name of this encoding of numbers using functions is ◊technical-term{Church Encoding}.}
 
-We are not seeking easiness, though. So, from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but interesting: we are going to encode numbers using ◊emphasis{functions}. Each number is going to be a function of two arguments: the first, a function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
+◊margin-note{Numbers are values. Our decision to encode them as functions is the reason why the base programming language for this article had to treat functions as values.}
 
-◊; TODO: Stopped editing pass here.
+We are not seeking easiness, though. So, from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but interesting: we are going to encode numbers using ◊emphasis{functions}. Each number is going to be a function of two arguments: the first, another arbitrary function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
 
-◊margin-note{Another interpretation is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
+◊margin-note{Another interpretation for this encoding is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
 
 ◊code/block/highlighted['racket]{
 (define (zero function argument)
@@ -176,7 +176,7 @@ We are not seeking easiness, though. So, from all the possible encodings, we are
       (function argument))))))
 }
 
-◊margin-note{The encoding only supports non-negative integers. This is fine for our purposes in ◊code/inline{sum-up-to}, which only handles non-negative integers.}
+◊margin-note{The encoding only supports non-negative integers. This is fine for our purposes in ◊code/inline{sum-up-to}, which only works over non-negative integers.}
 
 For ◊code/inline{zero}, the given function is not applied, the argument is returned unaltered. For ◊code/inline{one}, the given function is applied once. For ◊code/inline{five}, the given function is applied five times. And so on.
 
@@ -187,14 +187,14 @@ When we print these numbers to inspect them, this is what Racket outputs:
 #<procedure:five>
 }
 
-So we are going to introduce extra machinery, which is a non-essential feature of programming languages, but is going to help us read the output:
+As the listing above illustrates, functions are opaque, so we are going to introduce extra machinery. This is a non-essential feature of programming languages and is not part of our program, but is going to help us read its output:
 
 ◊code/block/highlighted['racket]{
 (define (pretty-print number)
   (number add1 0))
 }
 
-The function ◊code/inline{pretty-print} is not going to be part of our main program, it only exists as a helper. That is why it is allowed to contain regular numbers—namely, ◊code/inline{0}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
+The function ◊code/inline{pretty-print} is not going to be part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code/inline{0} and ◊code/inline{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print zero)
@@ -207,7 +207,7 @@ The function ◊code/inline{pretty-print} is not going to be part of our main pr
 
 The way ◊code/inline{pretty-print} works reveals how this encoding of numbers using function works. Numbers are functions, so ◊code/inline{pretty-print} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
 
-The function ◊code/inline{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print five)} turns into the following:
+The function ◊code/inline{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print five)} evaluates as the following:
 
 ◊code/block/highlighted['racket]{
 (add1
@@ -219,7 +219,7 @@ The function ◊code/inline{pretty-print} makes a careful choice of arguments wi
 
 ◊paragraph-separation[]
 
-◊new-thought{Now that we have} an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code/inline{sum-up-to}, we just change the return from ◊code/inline{0} (the native integer) to ◊code/inline{zero} (our encoding as defined above):
+◊new-thought{Now that we have} an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code/inline{sum-up-to}, we just change the return from ◊code/inline{0} (the native Racket number) to ◊code/inline{zero} (our encoding as defined above):
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -258,7 +258,7 @@ Remember that these are the encoded numbers:
       (function argument))))))
 }
 
-So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initial value ◊code/inline{#t} is returned. If ◊code/inline{zero?} is called with ◊code/inline{one}, then it becomes ◊code/inline{(one always-false #t)}, which turns into ◊code/inline{(always-false #t)}, and outputs ◊code/inline{#f}. The same happens to any number that is not ◊code/inline{zero}:
+So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initial value ◊code/inline{#t} is returned unaltered. If ◊code/inline{zero?} is called with ◊code/inline{one}, then it becomes ◊code/inline{(one always-false #t)}, which then becomes ◊code/inline{(always-false #t)}, and evaluates to ◊code/inline{#f}. The same happens to any number that is not ◊code/inline{zero}:
 
 ◊code/block/highlighted['racket]{
 > (zero? zero)
@@ -274,7 +274,7 @@ So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initi
 ◊new-thought{To implement addition} (◊code/inline{+}), we can use the following observation: if the number ◊code/inline{number-left} means “do something to the argument ◊code/inline{number-left} times,” and the number ◊code/inline{number-right} means “do something to the argument ◊code/inline{number-right} times,” then the number ◊code/inline{number-left + number-right} means “do something to the argument ◊code/inline{number-left + number-right} times.” In particular, we can ◊informal{do something} to the argument ◊code/inline{number-right} times and use the result as the initial value to ◊informal{do something} to the argument ◊code/inline{number-left} times:
 
 ◊margin-note{
- Addition is a commutative operation (◊code/inline{number-left + number-right = number-right + number-left}). So inverting ◊code/inline{number-left} and ◊code/inline{number-right} does not change the meaning of ◊code/inline{+}. It could equivalently be written as the following:
+ Addition is a commutative operation (◊code/inline{number-left + number-right = number-right + number-left}). So inverting ◊code/inline{number-left} and ◊code/inline{number-right} does not change the meaning of ◊code/inline{+}. The return value ◊code/inline{result} could equivalently be defined as the following:
 
  ◊code/block/highlighted['racket]{
 (number-left function
@@ -290,7 +290,7 @@ So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initi
   result)
 }
 
-The following snippet is an example of ◊code/inline{+} in use:
+The following listing is an example of ◊code/inline{+} in use:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (+ five five))
@@ -299,7 +299,7 @@ The following snippet is an example of ◊code/inline{+} in use:
 
 ◊paragraph-separation[]
 
-◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we are going to start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we are going to define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero}.
+◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we are going to start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we are going to define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero} instead of ◊code/inline{-1} as it should according to mathematics.
 
 ◊margin-note{
  ◊svg{sub1.svg}
@@ -307,7 +307,7 @@ The following snippet is an example of ◊code/inline{+} in use:
   ◊no-indent[] Note that in the figure above there are ◊emphasis{five} blue arrows, representing the steps we take to calculate ◊code/inline{sub1} of ◊code/inline{five}.
 }
 
-With that out of the way, we are going to use an ◊technical-term{sliding window} over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is right behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
+With this restriction in place, we can define ◊code/inline{sub1} for positive integers using a ◊technical-term{sliding window} over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is one behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
 
 ◊margin-note{To represent pairs, we use ◊code/inline{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code/inline{cons}, ◊code/inline{car} and ◊code/inline{cdr} are not intuitive.}
 
@@ -421,7 +421,7 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
   (branch-to-take))
 }
 
-The most important part of the snippet above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
+The most important part of the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
 
 ◊paragraph-separation[]
 
@@ -440,7 +440,7 @@ So we can conclude that primitive values are not essential features to programmi
 
 ◊margin-note{The compound of a function and the outer variable references whose value it ◊informal{remembers} is called a ◊technical-term{closure}.}
 
-Encodings for pairs are not as natural as, for example, the one for numbers using strings. Can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following snippet illustrates this:
+Encodings for pairs are not as natural as, for example, the one for numbers using strings. Can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following listing illustrates this:
 
 ◊code/block/highlighted['racket]{
 (define (store value)
@@ -481,7 +481,7 @@ We can then define the selectors, which receive ◊code/inline{left} and ◊code
   right)
 }
 
-Pairs now work, as the snippet below exemplifies:
+Pairs now work, as the listing below exemplifies:
 
 ◊code/block/highlighted['racket]{
 (define number-pair (pair 2 3))
@@ -785,7 +785,7 @@ This new idea comes from two observations: first, functions can return functions
   retriever)
 }
 
-In the snippet above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} returns the function ◊code/inline{retriever} as its return value.
+In the listing above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} returns the function ◊code/inline{retriever} as its return value.
 
 ◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when not all the arguments have been provided, the function is said to be ◊technical-term{partially applied}.}
 
@@ -937,7 +937,7 @@ Cascades of this form extend to functions with arbitrarily large number of param
   ___)
 }
 
-◊margin-note{In C, for example, the equivalent of this snippet would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
+◊margin-note{In C, for example, the equivalent of this listing would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
 
 It is often better to present the high-level picture (◊code/inline{sum-up-to}) first, and the details (◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it is only going to be defined later. Is this an essential feature of programming languages?
 
