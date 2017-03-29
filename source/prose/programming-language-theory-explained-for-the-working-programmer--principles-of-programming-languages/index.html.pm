@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
-◊define-meta[date]{2017-03-27}
+◊define-meta[date]{2017-03-29}
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -335,6 +335,8 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 ◊paragraph-separation[]
 
 ◊new-thought{At this point}, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we are going to address the only other primitive data type used in our program: booleans.
+
+◊; TODO: Stopped editing here.
 
 ◊section['booleans]{Booleans}
 
