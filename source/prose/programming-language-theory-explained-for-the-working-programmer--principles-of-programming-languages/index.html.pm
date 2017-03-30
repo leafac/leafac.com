@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
-◊define-meta[date]{2017-03-29}
+◊define-meta[date]{2017-03-30}
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -440,11 +440,13 @@ So we can conclude that primitive values are not essential features to programmi
 
 ◊section['pairs]{Pairs}
 
-◊new-thought{The only instance} of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. There are three functions to interact with pairs: the function ◊code/inline{(pair left right)} returns a pair with elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)} receives a pair and returns the element on the left; the function ◊code/inline{(pair-right pair)} receives a pair and returns the element on the right.
+◊new-thought{The only instance} of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. It uses three functions to interact with pairs: the function ◊code/inline{(pair left right)}, which creates a pair with the elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)}, which receives a pair and returns the element on the left; and the function ◊code/inline{(pair-right pair)}, which receives a pair and returns the element on the right.
 
 ◊margin-note{The compound of a function and the outer variable references whose value it ◊informal{remembers} is called a ◊technical-term{closure}.}
 
-Encodings for pairs are not as natural as, for example, the one for numbers using strings. Can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following listing illustrates this:
+Encodings for pairs are not as natural as, for example, the encoding for numbers in terms of strings. But can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following listing illustrates this:
+
+◊margin-note{Similar to ◊code/inline{then} and ◊code/inline{else} in ◊code/inline{sum-up-to} (see ◊reference['booleans]{previous section}), ◊code/inline{retriever} is a function that receives no arguments.}
 
 ◊code/block/highlighted['racket]{
 (define (store value)
@@ -460,11 +462,11 @@ Encodings for pairs are not as natural as, for example, the one for numbers usin
 (stored-3) ;; => 3
 }
 
-In the code above, ◊code/inline{store} is a function which receives a ◊code/inline{value} and stores it for later. The way to retrieve the value is to apply the return of the call to ◊code/inline{store}. It works defining and returning an inner function, ◊code/inline{retriever}, which has access to and ◊informal{remembers} the outer ◊code/inline{value}.
+In the code above, ◊code/inline{store} is a function which receives a ◊code/inline{value} and stores it for later. The way to retrieve the value is to apply the function returned by the call to ◊code/inline{store}. It works by defining and returning an inner function, ◊code/inline{retriever}, which has access to the outer ◊code/inline{value} and ◊informal{remembers} it, even after ◊code/inline{store} itself has returned.
 
 To implement a pair, we can use the idea from ◊code/inline{store}, but with two ◊code/inline{value}s as arguments to ◊informal{remember}. The problem then becomes: when retrieving, which of the two values to return? This is not a decision we can make at the point of defining ◊code/inline{retriever}, because information about which of the two values to return is only known when retrieving.
 
-The solution is to modify ◊code/inline{retriever} such that it receives an argument, a ◊code/inline{selector} function. Then ◊code/inline{retriever} calls ◊code/inline{selector} with both values in the pair and let it decide which one to return. With that, the ◊code/inline{pair} function is complete:
+The solution is to modify ◊code/inline{retriever} to receive an argument, a ◊code/inline{selector} function. Then ◊code/inline{retriever} calls ◊code/inline{selector} with both values in the pair and let it decide which one to return. With that, the ◊code/inline{pair} function is complete:
 
 ◊code/block/highlighted['racket]{
 (define (pair left right)
@@ -473,7 +475,7 @@ The solution is to modify ◊code/inline{retriever} such that it receives an arg
   retriever)
 }
 
-We can then define the selectors, which receive ◊code/inline{left} and ◊code/inline{right} and return the correct element in the pair:
+We can now create pairs, but to retrieve the values from it we still have to define the selectors. They receive ◊code/inline{left} and ◊code/inline{right} and return the correct element in the pair:
 
 ◊margin-note{Apart from identifiers, ◊code/inline{selector-left} is the same function as ◊code/inline{true} and ◊code/inline{selector-right} is the same function as ◊code/inline{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code/inline{true} ◊emphasis{or} ◊code/inline{false}) and conjunction (a pair holds a ◊code/inline{left} ◊emphasis{and} a ◊code/inline{right} elements). They are two sides of the same coin. This is a fundamental result of ◊link["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
 
@@ -485,7 +487,7 @@ We can then define the selectors, which receive ◊code/inline{left} and ◊code
   right)
 }
 
-Pairs now work, as the listing below exemplifies:
+With the selectors defined above, pairs are functional, as the listing below exemplifies:
 
 ◊code/block/highlighted['racket]{
 (define number-pair (pair 2 3))
@@ -496,7 +498,7 @@ Pairs now work, as the listing below exemplifies:
 3
 }
 
-We can wrap this pattern of usage for pairs in the convenient accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right}, which ◊code/inline{sub1} uses:
+We are now one step away from defining the accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right} used by ◊code/inline{sub1}. We only need to wrap the usage pattern from the listing above:
 
 ◊margin-note{The technique to turn selectors (◊code/inline{selector-left} and ◊code/inline{selector-right}) into accessors (◊code/inline{pair-left} and ◊code/inline{pair-right}) is the same to turn booleans (◊code/inline{true} and ◊code/inline{false}) into conditionals (◊code/inline{if}).}
 
@@ -532,7 +534,7 @@ More importantly, our program is working with this encoding for pairs in terms o
 
 ◊paragraph-separation[]
 
-◊new-thought{Before we move on} to other programming-language features that we might question as ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures that ◊technical-term{essential} features in programming languages?
+◊new-thought{Before we move on} to other programming-language features that we might question as ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures which are ◊technical-term{essential} features in programming languages?
 
 One more time, the answer is that data structures in general are ◊informal{encodeable} in terms of simpler features. And, once again, there are different encodings available. In particular, it is possible to encode all data structures in terms of pairs; and, ultimately, in terms functions, by the result of this section. The figure below illustrates examples of encodings:
 
@@ -544,9 +546,9 @@ One more time, the answer is that data structures in general are ◊informal{enc
  ◊svg{data-structures.svg}
 }
 
-In the figure above, lists (also known as arrays) are composed of pairs of pairs and a distinguished empty pair. This distinguished empty pair could be represented by, for example, ◊technical-term{false}—anything outside the range of possible list elements (integer in the example) would work.
+In the figure above, lists (also known as arrays and vectors) are composed of pairs of pairs and a distinguished empty pair. This distinguished empty pair could be represented by, for example, ◊technical-term{false}—anything outside the range of possible list elements (integers, in the example) would work.
 
-A list containing pairs of elements could be interpreted as a record (also known as dictionary, hash, associative array). The left element of the pair is the key and the right element is the value.
+A list containing pairs of elements could be interpreted as a record (also known as dictionary, hash and associative array). The left element of the pair is the key and the right element is the value.
 
 Finally, with records it is possible to encode objects. Some fields are values (for example, ◊code/inline{name} and ◊code/inline{birthdate}), and some are functions (for example, ◊code/inline{age}), which can be interpreted as methods. One special record field (◊code/inline{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code/inline{age}) can refer to other object attributes (for example, ◊code/inline{birthdate}).
 
@@ -554,7 +556,9 @@ Objects can get more complicated, with features such as inheritance and polymorp
 
 ◊paragraph-separation[]
 
-◊new-thought{The next feature} we have to address is functions themselves, because they are the only kind of value left in ◊code/inline{sum-up-to}. What parts of functions are essential features of programming languages? What parts can be ◊informal{encoded away}? In the next section, we are going to address the most powerful aspect of functions: ◊emphasis{recursion}.
+◊new-thought{The next features} we have to address are those in functions themselves, because they are the only kind of value left in ◊code/inline{sum-up-to}. What aspects of functions are essential features of programming languages? What aspects can be ◊informal{encoded away}? In the next section, we are going to address the most powerful feature of functions: ◊emphasis{recursion}.
+
+◊; TODO: Stopped here.
 
 ◊section['recursion]{Recursion}
 
