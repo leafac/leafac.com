@@ -336,11 +336,9 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 
 ◊new-thought{At this point}, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we are going to address the only other primitive data type used in our program: booleans.
 
-◊; TODO: Stopped editing here.
-
 ◊section['booleans]{Booleans}
 
-◊new-thought{There is only one} place in which we use a boolean in our program: the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. Its condition depends on ◊code/inline{zero?}, which is the only function generating booleans. For convenience, here are their current definitions again:
+◊new-thought{There is only one} place in which we use a boolean in our program: the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. Its condition depends on ◊code/inline{zero?}, which is the only function generating booleans. For convenience, the following lists their current definitions again:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -354,13 +352,15 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
   (number always-false #t))
 }
 
+◊margin-note{We are considering ◊acronym{ANSI} C 89 in this discussion.}
+
 Are booleans an essential feature of programming languages, or can we ◊informal{encode them away}? Programmers familiar with C know that the answer to this question is negative, because in C there are no booleans. They are encoded in terms of numbers: zero represents ◊technical-term{false} and any other number represents ◊technical-term{true}.
 
-As was the case before with numbers, different encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊technical-term{true}. Some encodings are more convenient than others.
+As was the case with numbers, different encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊technical-term{true}. And, as before, some encodings are more convenient than others.
 
 ◊margin-note{This encoding of booleans using functions is also called ◊technical-term{Church Encoding}.}
 
-A particularly interesting choice is to follow C’s lead and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we already ◊informal{encoded numbers away} in terms of functions, we are going to be consistent and use functions to encode booleans:
+A particularly interesting choice would to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are going to be consistent and use functions to encode booleans:
 
 ◊margin-note{There is nothing special about the names ◊code/inline{true} and ◊code/inline{false}. They are regular functions, like ◊code/inline{sub1}, ◊code/inline{pretty-print} and so on.}
 
@@ -383,9 +383,9 @@ We can now adapt ◊code/inline{zero?} to use these values:
   (number always-false true))
 }
 
-Because we changed the representation of booleans, we need to modify the conditional (◊code/inline{if}) accordingly. It receives as arguments a condition, which is boolean encoded as a function, and this function is capable of choosing which branch (◊code/inline{then} or ◊code/inline{else}) to follow:
+Because we changed the representation of booleans, we need to modify the conditional (◊code/inline{if}) accordingly. It receives as arguments a condition, a value (◊code/inline{then}) to return in case the condition is ◊technical-term{true} and another value (◊code/inline{else}) in case it is ◊technical-term{false}. The condition is a boolean which encoded as a function, and this function is already capable of choosing which value to return:
 
-◊margin-note{Again, there is nothing special about the names ◊code/inline{if},  ◊code/inline{then} and ◊code/inline{else}. The name ◊code/inline{if} became just another function. And ◊code/inline{then} and ◊code/inline{else} are regular variables, like ◊code/inline{number-left}, ◊code/inline{number-right} and so on.}
+◊margin-note{Again, there is nothing special about the names ◊code/inline{if},  ◊code/inline{then} and ◊code/inline{else}. To this point, the name ◊code/inline{if} was referring to Racket’s conditionals, but after this definition it became just another function. And ◊code/inline{then} and ◊code/inline{else} are regular variables, like ◊code/inline{number-left}, ◊code/inline{number-right} and so on.}
 
 ◊margin-note{Conditionals are so natural to encode because our choice of encoding for booleans was deliberate to make this happen.}
 
@@ -423,18 +423,20 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
   (branch-to-take))
 }
 
-The most important part of the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
+◊margin-note{To define ◊code/inline{then} and ◊code/inline{else} as non-function values, one would write ◊code/inline{(define then ___)}, without the parentheses around ◊code/inline{then}.}
+
+The key observation regarding the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
 
 ◊paragraph-separation[]
 
-◊new-thought{Our work with booleans} is complete. There are no longer any native Racket booleans in our program, they have been encoded into functions. Moreover, our program contains no primitive values (numbers, booleans, strings, and so on) at all, and it continues to have the same meaning:
+◊new-thought{Our work with booleans} is complete. There are no longer any native Racket booleans in our program, they have been encoded into functions. Moreover, our program contains no primitive values (numbers, booleans, strings, and so on), and it continues to have the same meaning:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
 15
 }
 
-So we can conclude that primitive values are not essential features to programming languages. Could it be that compound data structures are? On the next section we are going to explore this question.
+So we can conclude that primitive values are not essential features to programming languages, which is a surprising result. Are compound data structures essential? On the next section we are going to explore this question.
 
 ◊section['pairs]{Pairs}
 
