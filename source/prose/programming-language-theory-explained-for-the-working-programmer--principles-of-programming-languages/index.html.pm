@@ -614,9 +614,7 @@ A first idea would be to copy and paste the implementation for ◊code/inline{su
 
 But this idea is bad, because now ◊code/inline{sum-up-to/rest} is using recursion, the exact feature we are trying to ◊informal{encode away}. Alternatively, we could reuse our previous idea and rewrite ◊code/inline{sum-up-to/rest} to delegate to another auxiliary function ◊code/inline{sum-up-to/rest2}. But this idea is also bad, because we would be just delaying the problem: how would we write ◊code/inline{sum-up-to/rest2}?
 
-◊; TODO: Continue from here.
-
-Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can start with a placeholder:
+Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can leave it for later, defining just a placeholder:
 
 ◊margin-note{The implementation of ◊code/inline{sum-up-to/rest} must appear before the one for ◊code/inline{sum-up-to}, and it must not refer to ◊code/inline{sum-up-to}. Otherwise it would again be (indirectly) relying on Racket’s support for recursion.}
 
@@ -637,7 +635,7 @@ Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can s
   (branch-to-take))
 }
 
-Once ◊code/inline{sum-up-to} has been implemented, though, we can use it to implement ◊code/inline{sum-up-to/rest}. This relies on the ability to ◊emphasis{change} the definition ◊code/inline{sum-up-to/rest} after the fact, using mutation (◊code/inline{set!}):
+Before we can use ◊code/inline{sum-up-to}, we have to provide an implementation for ◊code/inline{sum-up-to/rest}. But, once ◊code/inline{sum-up-to} has been defined, we can use it to implement ◊code/inline{sum-up-to/rest}. The resulting program is still non-recursive, because all variables are defined before they are used. We can use mutation (◊code/inline{set!}) to ◊emphasis{change} the placeholder definition of ◊code/inline{sum-up-to/rest} into ◊code/inline{sum-up-to} itself:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to/rest number)
@@ -658,16 +656,18 @@ Once ◊code/inline{sum-up-to} has been implemented, though, we can use it to im
 (set! sum-up-to/rest sum-up-to)
 }
 
-With this change, the program is no longer recursive, and it still outputs the same value:
+After the ◊code/inline{set!} operation, the name ◊code/inline{sum-up-to/rest} refers to the function ◊code/inline{sum-up-to}, instead of the placeholder implementation. So ◊code/inline{sum-up-to} can call itself via ◊code/inline{sum-up-to/rest}, restoring its original functionality. With this change, the program is no longer recursive, and it still outputs the same value:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
 15
 }
 
-We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it is a pervasive change to the program. The idea is to modify ◊emphasis{every} function definition and ◊emphasis{every} function application. Functions would receive a ◊reference['pairs]{pair} of their arguments along with the current global state of the program, and return a pair of their return value along with a possibly modified global state of the program. While feasible, this solution is not elegant. It requires changing even the functions that do not need to change the global state of the program, so that they thread the state along.
+We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field.
 
-So we are going to take a step back and reconsider our encoding for recursion, so that it does not depend on mutation. This is ◊code/inline{sum-up-to} before ◊technical-term{tying the knot}:
+While feasible, this solution is not elegant. It affects even the functions that do not need to change the global state of the program, because they need to it thread appropriately.
+
+So we are going to backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code/inline{sum-up-to} before we ◊technical-term{tied the knot}:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -707,7 +707,7 @@ What can we use to fill in the ◊code/inline{___} above? A good candidate is �
 (pretty-print (sum-up-to sum-up-to five))
 }
 
-This choice is similar to the line ◊code/inline{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code/inline{sum-up-to} as ◊code/inline{sum-up-to/rest} when calling ◊code/inline{sum-up-to} itself. So, in ◊code/inline{sum-up-to}’s body, when ◊code/inline{sum-up-to/rest} is called, this is actually a call to ◊code/inline{sum-up-to}. And ◊code/inline{sum-up-to} requires a ◊code/inline{sum-up-to/rest} as its first argument:
+This choice is similar to the one in the line ◊code/inline{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code/inline{sum-up-to} as the ◊code/inline{sum-up-to/rest} argument when calling ◊code/inline{sum-up-to} itself. So, in ◊code/inline{sum-up-to}’s body, when ◊code/inline{sum-up-to/rest} is called, this is actually a call to ◊code/inline{sum-up-to}. And ◊code/inline{sum-up-to} requires a ◊code/inline{sum-up-to/rest} as its first argument:
 
 ◊image["incomplete-self-passing.png"]{The code above, failing to execute because of the missing argument.}
 
@@ -715,7 +715,7 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 
 ◊margin-note{The name of this technique is ◊emphasis{self-passing}. Unsurprisingly.}
 
-◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating that unbounded sequence of functions is not possible; instead, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is taking one step and carrying along another copy of the function capable of the taking the next steps, if necessary.}
+◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating this unbounded sequence of functions is not possible. Instead, in the self-passing encoding, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is creating the next ◊code/inline{sum-up-to/rest} in the chain. It is taking one step and carrying along another copy of itself as the function capable of the taking the next steps.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to sum-up-to/rest number)
@@ -739,7 +739,7 @@ With this change, we successfully encoded recursion in terms of non-recursive fu
 15
 }
 
-Unfortunately, we changed the interface to ◊code/inline{sum-up-to}. Now callers need to be aware of the recursion encoding, and call it with ◊code/inline{(sum-up-to sum-up-to number)}, which is inconvenient. We can make this better by introducing an auxiliary function ◊code/inline{sum-up-to/partial}:
+Unfortunately, we changed the interface to ◊code/inline{sum-up-to} in this process. Now callers need to be aware of the recursion encoding, and call the function with ◊code/inline{(sum-up-to sum-up-to number)}, which is inconvenient. We can make this better by introducing an auxiliary function ◊code/inline{sum-up-to/partial}:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -759,9 +759,9 @@ Unfortunately, we changed the interface to ◊code/inline{sum-up-to}. Now caller
   (sum-up-to/partial sum-up-to/partial number))
 }
 
-◊margin-note{The ◊code/inline{sum-up-to} façade is not specific to the job of adding numbers, because ◊code/inline{sum-up-to/partial} is taking care of this. So ◊code/inline{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstracted façade has the name ◊technical-term{Y-combinator}.}
+◊margin-note{The ◊code/inline{sum-up-to} façade is not specific to the job of adding numbers, all the actual computation is defined in ◊code/inline{sum-up-to/partial}. So ◊code/inline{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstracted façade is called ◊technical-term{Y-combinator}.}
 
-The bulk of the work is in ◊code/inline{sum-up-to/partial}, and ◊code/inline{sum-up-to} is a façade. This brings us back to the original:
+The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and ◊code/inline{sum-up-to} is only a façade to fix ◊code/inline{sum-up-to/partial}’s interface. This brings us back to the original:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to 5))
@@ -770,11 +770,15 @@ The bulk of the work is in ◊code/inline{sum-up-to/partial}, and ◊code/inline
 
 ◊paragraph-separation[]
 
-◊new-thought{The result of this section} is the most important in this article. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to the argument, so the function works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking less than ten lines. What allows us to compact the definition this way is recursion.
+◊new-thought{The result of this section} is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to the argument, so the function works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking less than ten lines. What allows us to compact the definition this way is recursion.
 
-The observation that recursion can be encoded in terms of non-recursive functions leads to the conclusion that they alone are capable of performing arbitrary computations. Anything a computer can do is expressible in terms of non-recursive functions.
+◊margin-note{In other words, non-recursive functions are ◊technical-term{Turing complete}.}
+
+The observation that recursion can be encoded in terms of non-recursive functions leads to the conclusion that non-recursive functions alone are capable of performing arbitrary computations. Anything a computer can do is expressible in terms of non-recursive functions.
 
 There are few features left in our program. It is composed solely of (non-recursive) function definitions and applications. Can we make it even simpler? On the next section, we address functions with multiple arguments.
+
+◊; TODO: Continue here.
 
 ◊section['functions-with-multiple-arguments]{Functions with Multiple Arguments}
 
