@@ -663,7 +663,27 @@ After the ◊code/inline{set!} operation, the name ◊code/inline{sum-up-to/rest
 15
 }
 
-We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field.
+We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field. The following extract illustrates this idea:
+
+◊code/block/highlighted['racket]{
+(define initial-state (empty-record))
+
+(define (sum-up-to/rest number program-state)
+  (pair "TEMPORARY IMPLEMENTATION" program-state))
+
+(define state-with-partial-sum-up-to/rest
+  (record-set initial-state
+              "sum-up-to/rest" sum-up-to/rest))
+
+(define (sum-up-to number program-state)
+  ___ (record-lookup program-state "sum-up-to/rest") ___)
+
+(define state-with-complete-sum-up-to/rest
+  (record-set state-with-partial-sum-up-to/rest
+              "sum-up-to/rest" sum-up-to))
+}
+
+In the listing above, the placeholder implementation of ◊code/inline{sum-up-to/rest} and ◊code/inline{sum-up-to} were modified to receive an extra argument representing the ◊code/inline{program-state}. Also, they return pairs of their output value and a possibly modified ◊code/inline{program-state}. Then, when using ◊code/inline{sum-up-to/rest} in ◊code/inline{sum-up-to}, it is necessary to lookup its definition in the given ◊code/inline{program-state}. Finally, we have to manage the global ◊code/inline{program-state}, first creating it as an ◊code/inline{empty-record}, then adding ◊code/inline{sum-up-to/rest} as it is implemented and overwriting its value when ◊code/inline{sum-up-to} is available.
 
 While feasible, this solution is not elegant. It affects even the functions that do not need to change the global state of the program, because they need to it thread appropriately.
 
@@ -934,6 +954,8 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 ◊paragraph-separation[]
 
 ◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means that we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
+
+◊; TODO: Stopped here.
 
 ◊section['named-definitions]{Named Definitions}
 
