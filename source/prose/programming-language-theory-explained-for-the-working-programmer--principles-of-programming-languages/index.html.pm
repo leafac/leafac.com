@@ -737,6 +737,8 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 
 ◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating this unbounded sequence of functions is not possible. Instead, in the self-passing encoding, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is creating the next ◊code/inline{sum-up-to/rest} in the chain. It is taking one step and carrying along another copy of itself as the function capable of the taking the next steps.}
 
+◊margin-note{Most static type systems are not capable of typing programs using self-passing. This is reason why OCaml, Haskell and similar languages could not be base languages for this article.}
+
 ◊code/block/highlighted['racket]{
 (define (sum-up-to sum-up-to/rest number)
   (define (then)
