@@ -778,17 +778,15 @@ The observation that recursion can be encoded in terms of non-recursive function
 
 There are few features left in our program. It is composed solely of (non-recursive) function definitions and applications. Can we make it even simpler? On the next section, we address functions with multiple arguments.
 
-◊; TODO: Continue here.
-
 ◊section['functions-with-multiple-arguments]{Functions with Multiple Arguments}
 
 ◊new-thought{Almost all functions} in our program receive multiple arguments. In some of them, for example, ◊code/inline{(pair left right)}, it seems like the ability to receive multiple arguments is essential to their functionality. After all, the purpose of ◊code/inline{pair} is exactly to couple the arguments ◊code/inline{left} and ◊code/inline{right} together. But is this an essential feature of programming languages, or can functions with multiple arguments be ◊informal{encoded away}, so that only functions with a single argument remain?
 
-The answer to this question is trivially positive if we allowed the encoding to include data structures. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its definition, ◊code/inline{+} would extract the operands from the pair and proceed as before.
+The answer to this question is positive if we allow the encoding to include data structures. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its body, ◊code/inline{+} would extract the operands from the pair and proceed as before.
 
-We ◊reference['pairs]{already established} an encoding for pairs and extended it for lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
+We ◊reference['pairs]{already established} an encoding for pairs and discussed how to use it to encode lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
 
-This new idea comes from two observations: first, functions can return functions as their return value; second, inner functions (functions defined within other functions) have access to the outer functions arguments. We already used both of these properties when defining ◊code/inline{pair}, for example. The following is its implementation one more time:
+This new idea stems from two observations we have already explored: first, that functions can return functions as their return value; second, that inner functions (functions defined within other functions) have access to outer functions’ arguments. We used both of these features when defining our encoding for ◊code/inline{pair}s, for example. The following is its implementation one more time:
 
 ◊code/block/highlighted['racket]{
 (define (pair left right)
@@ -797,9 +795,9 @@ This new idea comes from two observations: first, functions can return functions
   retriever)
 }
 
-In the listing above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} returns the function ◊code/inline{retriever} as its return value.
+In the listing above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} outputs the function ◊code/inline{retriever} as its return value.
 
-◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when not all the arguments have been provided, the function is said to be ◊technical-term{partially applied}.}
+◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when all the arguments have not been provided yet, the function is said to be ◊technical-term{partially applied}.}
 
 We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
 
@@ -825,7 +823,7 @@ More compactly, we can skip giving a name to the intermediary function and call 
 (define number-pair ((pair 2) 3))
 }
 
-Cascades of this form extend to functions with arbitrarily large number of parameters. But what about functions with zero parameters? Our program includes few of them, for example ◊code/inline{else} in ◊code/inline{sum-up-to}, which serves to ◊informal{delay} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, to which the function body does not refer. Also, we change the places that call such functions to include a ◊informal{dummy} argument. The following is an extract of ◊code/inline{sum-up-to} including this treatment:
+Cascades of this form extend to functions with arbitrarily many parameters. But what about functions with zero parameters? Our program includes few of them, for example ◊code/inline{else} in ◊code/inline{sum-up-to}, which serves to ◊informal{guard} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, which the function does not use. Also, we change the places that call such functions to pass a ◊informal{dummy} argument in. The following is an extract of ◊code/inline{sum-up-to} including this treatment:
 
 ◊margin-note{It is important that the omitted part ◊code/inline{___} does not refer to ◊code/inline{dummy}, otherwise we would have changed the meaning of the program.}
 
@@ -843,7 +841,7 @@ Cascades of this form extend to functions with arbitrarily large number of param
 
 ◊new-thought{The change described} in this section is pervasive. It affects most defined functions and their invocations:
 
-◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code/inline{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code/inline{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program boiled down to adding many parenthesis and a few ◊informal{dummy} arguments.}
+◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code/inline{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code/inline{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program consists of adding parenthesis and ◊informal{dummy} arguments.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -935,7 +933,7 @@ Cascades of this form extend to functions with arbitrarily large number of param
 
 ◊paragraph-separation[]
 
-◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
+◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means that we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
 
 ◊section['named-definitions]{Named Definitions}
 
