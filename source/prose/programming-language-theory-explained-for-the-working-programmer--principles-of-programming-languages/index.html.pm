@@ -7,7 +7,7 @@
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might wonder: What is the essence of programming languages? In this article, we are going to explore this question, but, unlike most presentations on the topic, we are going to avoid mathematical notation and jargon. We are going to start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages work. The whole discussion is driven by executable code, making it approachable to all programmers.
+◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might wonder: What is the essence of programming languages? In this article, we will explore this question, but, unlike most presentations on the topic, we will avoid mathematical notation and jargon. We will start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages work. The whole discussion is driven by executable code, making it approachable to all programmers.
 
 Besides satisfying a curiosity, this article introduces programming techniques that are generally applicable in everyday programming. And, for people starting in programming-language design and analysis, this article introduces a minimal programming language core from which to build.
 
@@ -15,7 +15,7 @@ Besides satisfying a curiosity, this article introduces programming techniques t
 
 ◊new-thought{Consider the following} program:
 
-◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we are going to proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code/inline{+}) and control-flow primitives (for example, ◊code/inline{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs we are going to write. There are static type systems with the necessary expressiveness, but they are rare.}
+◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we will proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code/inline{+}) and control-flow primitives (for example, ◊code/inline{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs we will write. There are static type systems with the necessary expressiveness, but they are rare.}
 
 ◊code/block/highlighted['racket]{
 ;; Racket
@@ -63,7 +63,7 @@ This program defines a function that sums integers from zero up to a given numbe
 
 Suppose one wants to write an application that tracks information about bicycle trips. If one could find a programming language that comes with native constructs for distances, weather conditions and so on, then that would be a perfect fit. But programming languages generally do not have these features, so one has to use numbers, functions, lists, records, objects and other simpler features to ◊emphasis{encode} the necessary functionality.
 
-◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in a language with more features than the machine code they output. So the techniques we are going to introduce are related to the transformations a compiler would apply to a source program. But we are looking for the essence of programming languages, therefore the language we are targeting is even simpler than machine code.}
+◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in a language with more features than the machine code they output. So the techniques we will introduce are related to the transformations a compiler would apply to a source program. But we are looking for the essence of programming languages, therefore the language we are targeting is even simpler than machine code.}
 
 ◊margin-note{◊svg{convenience-vs-simplicity.svg}}
 
@@ -84,7 +84,7 @@ It is important to note that simplicity is not the same as easiness. As we advan
 (sum-up-to 5) ;; => 15
 }
 
-The first features we are going to remove via encoding are numbers and operations on them. There many different ways to rewrite the program above without numbers. For example, one could use strings to represent numbers, redefining the operations on them accordingly:
+The first features we will remove via encoding are numbers and operations on them. There many different ways to rewrite the program above without numbers. For example, one could use strings to represent numbers, redefining the operations on them accordingly:
 
 ◊margin-note{The ◊code/inline{___} in the code represent code omitted for simplicity.}
 
@@ -157,7 +157,7 @@ Some encodings are more convenient than others. For example, it is more difficul
 
 ◊margin-note{Numbers are values. Our decision to encode them as functions is the reason why the base programming language for this article had to treat functions as values.}
 
-We are not seeking easiness, though. So, from all the possible encodings, we are going to choose one that is unnatural and inconvenient, but interesting: we are going to encode numbers using ◊emphasis{functions}. Each number is going to be a function of two arguments: the first, another arbitrary function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
+We are not seeking easiness, though. So, from all the possible encodings, we will choose one that is unnatural and inconvenient, but interesting: we will encode numbers using ◊emphasis{functions}. Each number will be a function of two arguments: the first, another arbitrary function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
 
 ◊margin-note{Another interpretation for this encoding is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
 
@@ -187,14 +187,14 @@ When we print these numbers to inspect them, this is what Racket outputs:
 #<procedure:five>
 }
 
-As the listing above illustrates, functions are opaque, so we are going to introduce extra machinery. This is a non-essential feature of programming languages and is not part of our program, but is going to help us read its output:
+As the listing above illustrates, functions are opaque, so we will introduce extra machinery. This is a non-essential feature of programming languages and is not part of our program, but it will help us read the program’s output:
 
 ◊code/block/highlighted['racket]{
 (define (pretty-print number)
   (number add1 0))
 }
 
-The function ◊code/inline{pretty-print} is not going to be part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code/inline{0} and ◊code/inline{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
+The function ◊code/inline{pretty-print} will not be part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code/inline{0} and ◊code/inline{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print zero)
@@ -299,7 +299,7 @@ The following listing is an example of ◊code/inline{+} in use:
 
 ◊paragraph-separation[]
 
-◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we are going to start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we are going to define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero} instead of ◊code/inline{-1} as it should according to mathematics.
+◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we will start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we will define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero} instead of ◊code/inline{-1} as it should according to mathematics.
 
 ◊margin-note{
  ◊svg{sub1.svg}
@@ -334,7 +334,7 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 
 ◊paragraph-separation[]
 
-◊new-thought{At this point}, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we are going to address the only other primitive data type used in our program: booleans.
+◊new-thought{At this point}, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we will address the only other primitive data type used in our program: booleans.
 
 ◊section['booleans]{Booleans}
 
@@ -360,7 +360,7 @@ As was the case with numbers, different encodings are possible. For example, we 
 
 ◊margin-note{This encoding of booleans using functions is also called ◊technical-term{Church Encoding}.}
 
-A particularly interesting choice would to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are going to be consistent and use functions to encode booleans:
+A particularly interesting choice would to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we will be consistent and use functions to encode booleans:
 
 ◊margin-note{There is nothing special about the names ◊code/inline{true} and ◊code/inline{false}. They are regular functions, like ◊code/inline{sub1}, ◊code/inline{pretty-print} and so on.}
 
@@ -436,7 +436,7 @@ The key observation regarding the listing above is that ◊code/inline{(define (
 15
 }
 
-So we can conclude that primitive values are not essential features to programming languages, which is a surprising result. Are compound data structures essential? On the next section we are going to explore this question.
+So we can conclude that primitive values are not essential features to programming languages, which is a surprising result. Are compound data structures essential? On the next section we will explore this question.
 
 ◊section['pairs]{Pairs}
 
@@ -556,7 +556,7 @@ Objects can get more complicated, with features such as inheritance and polymorp
 
 ◊paragraph-separation[]
 
-◊new-thought{The next features} we have to address are those in functions themselves, because they are the only kind of value left in ◊code/inline{sum-up-to}. What aspects of functions are essential features of programming languages? What aspects can be ◊informal{encoded away}? In the next section, we are going to address the most powerful feature of functions: ◊emphasis{recursion}.
+◊new-thought{The next features} we have to address are those in functions themselves, because they are the only kind of value left in ◊code/inline{sum-up-to}. What aspects of functions are essential features of programming languages? What aspects can be ◊informal{encoded away}? In the next section, we will address the most powerful feature of functions: ◊emphasis{recursion}.
 
 ◊section['recursion]{Recursion}
 
@@ -687,7 +687,7 @@ In the listing above, the placeholder implementation of ◊code/inline{sum-up-to
 
 While feasible, this solution is not elegant. It affects even the functions that do not need to change the global state of the program, because they need to it thread appropriately.
 
-So we are going to backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code/inline{sum-up-to} before we ◊technical-term{tied the knot}:
+So we will backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code/inline{sum-up-to} before we ◊technical-term{tied the knot}:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -701,7 +701,7 @@ So we are going to backtrack and reconsider our encoding for recursion, avoiding
     (if (zero? number) then else))
 }
 
-It still depends on ◊code/inline{sum-up-to/rest}, which we do not know how to implement. But, this time, instead of coming up with a placeholder implementation for it, we are going to change ◊code/inline{sum-up-to} so that it receives ◊code/inline{sum-up-to/rest} as an argument:
+It still depends on ◊code/inline{sum-up-to/rest}, which we do not know how to implement. But, this time, instead of coming up with a placeholder implementation for it, we will change ◊code/inline{sum-up-to} so that it receives ◊code/inline{sum-up-to/rest} as an argument:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to sum-up-to/rest number)
@@ -955,7 +955,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 ◊paragraph-separation[]
 
-◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means that we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
+◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means that we are near the essence of programming languages. The next section is about the last transformation we will apply to our program.
 
 ◊section['named-definitions]{Named Definitions}
 
@@ -971,7 +971,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 ◊margin-note{In C, for example, a direct translation of this listing would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
 
-When programming, it is often better to represent the high-level constructs (for example, ◊code/inline{sum-up-to}) first, and the details (for example, ◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it is only going to be defined later. Is this an essential feature of programming languages?
+When programming, it is often better to represent the high-level constructs (for example, ◊code/inline{sum-up-to}) first, and the details (for example, ◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it will only be defined later. Is this an essential feature of programming languages?
 
 ◊margin-note{We have managed to discuss theory with only a single Greek letter (◊code/inline{λ}), and it is only introduced in the last encoding. Success.}
 
@@ -988,7 +988,7 @@ The answer one more time is negative. Named definitions are not an essential fea
     ___))
 }
 
-To ◊informal{encode away} named definitions, we are first going to reorder them so that they can only refer to previously defined names:
+To ◊informal{encode away} named definitions, we will first reorder them so that they can only refer to previously defined names:
 
 ◊margin-note{This step is only possible because we ◊informal{encoded ◊reference['recursion]{recursion} away}.}
 
