@@ -362,7 +362,7 @@ As was the case with numbers, different encodings are possible. For example, we 
 
 ◊margin-note{This encoding of booleans using functions is also called ◊technical-term{Church Encoding}.}
 
-A particularly interesting choice would to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are consistent and use functions to encode booleans:
+A particularly interesting choice would be to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are consistent and use functions to encode booleans:
 
 ◊margin-note{There is nothing special about the names ◊code/inline{true} and ◊code/inline{false}. They are regular functions, like ◊code/inline{sub1}, ◊code/inline{pretty-print} and so on.}
 
@@ -385,7 +385,7 @@ We can now adapt ◊code/inline{zero?} to use these values:
   (number always-false true))
 }
 
-Because we changed the representation of booleans, we need to modify the conditional (◊code/inline{if}) accordingly. It receives as arguments a condition, a value (◊code/inline{then}) to return in case the condition is ◊technical-term{true} and another value (◊code/inline{else}) in case it is ◊technical-term{false}. The condition is a boolean which encoded as a function, and this function is already capable of choosing which value to return:
+Because we changed the representation of booleans, we need to modify the conditional (◊code/inline{if}) accordingly. It receives as arguments a condition, a value (◊code/inline{then}) to return in case the condition is ◊technical-term{true} and another value (◊code/inline{else}) in case it is ◊technical-term{false}. The condition is a boolean which we encoded as a function, and this function is already capable of choosing which value to return:
 
 ◊margin-note{Again, there is nothing special about the names ◊code/inline{if},  ◊code/inline{then} and ◊code/inline{else}. To this point, the name ◊code/inline{if} was referring to Racket’s conditionals, but after this definition it became just another function. And ◊code/inline{then} and ◊code/inline{else} are regular variables, like ◊code/inline{number-left}, ◊code/inline{number-right} and so on.}
 
@@ -404,6 +404,8 @@ We introduced a problem in ◊code/inline{sum-up-to}, though. Here is its curren
       zero
       (+ number (sum-up-to (sub1 number)))))
 }
+
+◊margin-note{This termination problem only occurs because of Racket’s evaluation order. Racket is a call-by-value language, which means function arguments are evaluated to values before the function starts to execute. There exists other languages with other evaluation orders, and in them this issue would not arise. For example, Haskell is a call-by-need language: arguments to a function are only evaluated when they are used. Arguments that are not used are never evaluated. So a program equivalent to ours written in Haskell would not run forever.}
 
 Before we encoded ◊code/inline{if}, this code was using Racket’s ◊code/inline{if}. And Racket’s ◊code/inline{if} only executes a branch if necessary. In particular, the part ◊code/inline{(+ number (sum-up-to (sub1 number)))} only ran if ◊code/inline{(zero? number)} was ◊technical-term{false}. But now, because ◊code/inline{if} is a function call, by the time we check the condition to make a decision, this part already ran. And it contains a recursive call to ◊code/inline{sum-up-to}, which leads to an infinite sequence of recursive calls. This program does not terminate.
 
@@ -427,7 +429,7 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
 
 ◊margin-note{To define ◊code/inline{then} and ◊code/inline{else} as non-function values, one would write ◊code/inline{(define then ___)}, without the parentheses around ◊code/inline{then}.}
 
-The key observation regarding the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
+The key observation regarding the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, the code ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
 
 ◊paragraph-separation[]
 
@@ -1368,6 +1370,8 @@ When encoding numbers, we chose to use functions. With this choice, we encoded n
 The most complicated operation to implement in our encoded numbers was ◊code/inline{sub1}. We did it using a ◊technical-term{sliding window} over the number line. This technique is applicable to all sorts of search in series in which each element depends on the previous ones. For example, calculating the Fibonacci numbers, in which each element is the sum of the previous two.
 
 For the encoding of booleans, we again used an encoding in terms of what ◊emphasis{they do}, instead of what ◊emphasis{they are}. The purpose of booleans in to choose between two options—◊technical-term{true} and ◊technical-term{false}.
+
+While encoding conditionals (◊code/inline{if}), we had a problem due to the order in which Racket evaluates programs. Function arguments are evaluated to values before the function starts to execute. In the case of our program, this led to infinite recursion and a non-terminating program. The solution was to ◊informal{wrap} the computations in functions to ◊informal{delay} them. This technique is useful in situations when a computation does not need to happen immediately. For example, calls to a logger might include an expensive computation that should only occur in ◊technical-term{debug} mode. In this case, the call might be ◊informal{delayed} by ◊informal{wrapping} it in a function, which the logger only calls if its log-level is ◊technical-term{debug}.
 
 ◊margin-note{This capability to ◊informal{remember} that functions have is related to ◊technical-term{lexical scoping}. Languages with ◊technical-term{dynamic scoping} (for example, Emacs Lisp) behave differently and the result would not be the same in them.}
 
