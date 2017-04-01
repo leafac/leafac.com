@@ -69,7 +69,7 @@ Suppose one wants to write an application that tracks information about bicycle 
 
 Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking would be—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
 
-It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use less features, but they also become harder to understand. Think of the difference between programs in Ruby and C that perform the same task. While C is a simpler language, programs in it tend to be harder to read.
+It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use less features, but they also become more difficult to understand. Think of the difference between programs in Ruby and C that perform the same task: while C is a simpler language, programs in it tend to be more difficult to read.
 
 ◊section['numbers]{Numbers}
 
@@ -205,7 +205,7 @@ The function ◊code/inline{pretty-print} is not be part of our main program, it
 5
 }
 
-The way ◊code/inline{pretty-print} works reveals how this encoding of numbers using function works. Numbers are functions, so ◊code/inline{pretty-print} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
+The way ◊code/inline{pretty-print} works reveals how this encoding of numbers using functions works. Numbers are functions, so ◊code/inline{pretty-print} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
 
 The function ◊code/inline{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print five)} evaluates as the following:
 
@@ -312,6 +312,8 @@ With this restriction in place, we can define ◊code/inline{sub1} for positive 
 ◊margin-note{To represent pairs, we use ◊code/inline{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code/inline{cons}, ◊code/inline{car} and ◊code/inline{cdr} are not intuitive.}
 
 ◊code/block/highlighted['racket]{
+(struct pair (left right))
+
 (define (sub1 number)
   (define initial-pair (pair zero zero))
 
