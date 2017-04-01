@@ -957,11 +957,9 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 ◊new-thought{The program above} is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means that we are near the essence of programming languages. The next section is about the last transformation we are going to apply to our program.
 
-◊; TODO: Stopped here.
-
 ◊section['named-definitions]{Named Definitions}
 
-◊new-thought{We defined functions and intermediary values} using the ◊code/inline{(define ___ ___)} form all over our program. This is convenient because it allows us to give names to the concepts and parts of the computation. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other:
+◊new-thought{We defined functions and intermediary values} using the ◊code/inline{(define ___ ___)} form all over our program. This form is convenient because it allows us to give names to the concepts and that parts of the computation. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other. Consider the following excerpt:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -971,15 +969,15 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
   ___)
 }
 
-◊margin-note{In C, for example, the equivalent of this listing would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
+◊margin-note{In C, for example, a direct translation of this listing would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
 
-It is often better to present the high-level picture (◊code/inline{sum-up-to}) first, and the details (◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it is only going to be defined later. Is this an essential feature of programming languages?
+When programming, it is often better to represent the high-level constructs (for example, ◊code/inline{sum-up-to}) first, and the details (for example, ◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it is only going to be defined later. Is this an essential feature of programming languages?
 
 ◊margin-note{We have managed to discuss theory with only a single Greek letter (◊code/inline{λ}), and it is only introduced in the last encoding. Success.}
 
 ◊margin-note{Racket’s ◊technical-term{anonymous functions} can receive multiple arguments and include multiple internal definitions and expressions. So the full form is more complex than ◊code/inline{(λ (argument) body)}, but these extra features are not necessary for our purposes.}
 
-The answer one more time is negative. Named definitions are not an essential feature and we can ◊informal{encode them away}, in terms of simpler features. What can be simpler than a function with a name? A function with no name (◊technical-term{anonymous function}). In Racket, ◊technical-term{anonymous functions} are spelled ◊code/inline{(λ (argument) body)}, in which ◊code/inline{argument} is an identifier naming the argument the function receives, and ◊code/inline{body} is the expression of what the function performs. For example, the following two definitions are equivalent:
+The answer one more time is negative. Named definitions are not an essential feature and we can ◊informal{encode them away}, in terms of simpler features. What can be simpler than a function with a name? A function with no name (◊technical-term{anonymous function}). In Racket, ◊technical-term{anonymous functions} are spelled ◊code/inline{(λ (argument) body)}, in which ◊code/inline{argument} is an identifier naming the argument that the function receives, and ◊code/inline{body} is the expression representing the computation of its return value. For example, the following two definitions are equivalent:
 
 ◊code/block/highlighted['racket]{
 (define (sub1 number)
@@ -1090,21 +1088,19 @@ Now, we can ◊emphasis{inline} the definitions where they are used. For example
 ((number always-false) true)
 }
 
-We can rewrite the above such that all references to the ◊code/inline{always-false} function are replaced with ◊code/inline{always-false}’s implementation, using anonymous functions:
+We can rewrite the above such that each reference to the ◊code/inline{always-false} function is replaced with ◊code/inline{always-false}’s implementation, using anonymous functions:
 
 ◊margin-note{
  While performing this rewrite, it is important that we avoid accidentally changing the meanings of the identifiers. For example, the following rewrite would be invalid:
 
  ◊code/block/highlighted['racket]{
-;; From
-
 (define (always-false
          ignored-argument)
   false)
 (λ (false)
   ((number always-false) true))
 
-;; To
+;; ⇓
 
 (λ (false)
   ((number
@@ -1112,14 +1108,14 @@ We can rewrite the above such that all references to the ◊code/inline{always-f
    true))
  }
 
- The reason is the difference between the meanings of ◊code/inline{false} in ◊code/inline{always-false}’s definition and in ◊code/inline{(λ (false) ___)}. The solution is to rename the identifier ◊code/inline{false} in ◊code/inline{(λ (false) ___)} to (for example) ◊code/inline{(λ (false2) ___)}—along with all its uses. Fortunately, this issue does not occur in our program.
+ The reason is the difference between the meanings of ◊code/inline{false} in ◊code/inline{always-false}’s definition and in ◊code/inline{(λ (false) ___)}. The solution is to rename the identifier ◊code/inline{false} in ◊code/inline{(λ (false) ___)} to, for example, ◊code/inline{(λ (false2) ___)}. And rename all uses of ◊code/inline{false} accordingly. Fortunately, this issue does not occur in our program.
 }
 
 ◊code/block/highlighted['racket]{
 ((number (λ (ignored-argument) false)) true)
 }
 
-We are finally ready to see the final version of our program, in which all definitions are inlined:
+We are ready to see the final version of our program, in which all definitions are inlined:
 
 ◊margin-note{We did not inline ◊code/inline{pretty-print} because it is external to our program. It only exists for us to inspect the result of the computation, which is a number encoded in terms of functions.}
 
@@ -1315,9 +1311,9 @@ The output of this program is still the same as when we started:
 
 ◊paragraph-separation[]
 
-◊margin-note{The set of features that are left in the program goes by the name of Lambda calculus, which explains the use of the λ in the anonymous-function notation in Racket.}
+◊margin-note{The set of features that are left in the program goes by the name of Lambda calculus, which explains the use of the lambda (λ) in the anonymous-function notation in Racket.}
 
-◊new-thought{This version of the program} is remarkably difficult to read. Only a few parts are familiar and most concepts that previously were abstracted and named are now intertwined. No programmer would write code this way. But, despite being ◊emphasis{difficult} to understand, the final version of our program is ◊emphasis{simple}. It uses almost no features from the underlying programming language (Racket). Namely, it uses only three features: (1) definitions of anonymous functions of a single argument and a single return value; (2) applications of those functions; and (3) references to variables.
+◊new-thought{This version of the program} is remarkably difficult to read. Only a few parts are familiar and most concepts that previously were abstracted and named are now obfuscated and intertwined. No programmer would write code this way. But, despite being ◊emphasis{difficult} to understand, the final version of our program is ◊emphasis{simple}. It uses almost no features from the underlying programming language (Racket). Namely, it uses only three features: (1) definitions of anonymous functions of a single argument and a single return value; (2) applications of those functions; and (3) references to variables.
 
 It would not be possible to ◊informal{encode away} any of these three features and still preserve the meaning of our program. Does this mean we reached the essence of programming languages? That is the subject of the next section.
 
@@ -1325,29 +1321,31 @@ It would not be possible to ◊informal{encode away} any of these three features
 
 ◊new-thought{In this article}, we started with a short program that was easy to understand, but which used many features of the underlying programming language: numbers, booleans, conditionals, recursion, and more. To look for the essence of programming languages, we ◊informal{encoded features away}. We rewrote the program many times, preserving its meaning but encoding features in terms of other, simpler, features.
 
-We iterated until we reached a minimal, irreducible set of features: definition and application of anonymous functions of single argument and return value; and variable references. The result was an unrecognizable program, albeit a very ◊emphasis{simple} one. Do these features represent the essence of programming languages?
+We iterated until we reached a minimal, irreducible set of features: definition and application of anonymous functions of a single argument and a single return value; and variable references. The result was an unrecognizable program, albeit a very ◊emphasis{simple} one. Do these features represent the essence of programming languages?
 
 Not quite. One evidence is that we had to choose our base programming language (Racket) based on certain criteria. For example, it had to a language in which functions were values. If our resulting program represented the essence of programming languages, then C—a language in which functions are not values—would not qualify as a programming language. And it does.
 
-◊margin-note{Explaining the inner workings of Turing Machines, ◊acronym{SKI} combinator calculus and tag systems is beyond the scope of this article. The relevant aspect is that each of these constitutes minimal, irreducible sets of features for programming languages.}
+◊margin-note{Explaining the inner workings of Turing Machines, ◊acronym{SKI} combinator calculus and tag systems is beyond the scope of this article. Their only aspect relevant to this article is that each of these system constitutes minimal, irreducible sets of features for programming languages.}
 
-Moreover, had we taken a different turn on the road, we would have reached a different set of essential features. For example, we could have arrived at a machine with an infinite tape of cells, a head that reads and write to the tape and a set of rules to follow for reading, writing and moving the tape. This machine is known as Turing Machine. Or we could have arrived at something more esoteric, like the ◊acronym{SKI} combinator calculus or a tag system.
+◊margin-note{A counterintuitive and interesting observation is that minimal, irreducible sets of features suitable for programming languages are remarkably common in systems with very simple rules. They occur frequently in nature, even in systems not commonly associated to computation. We reason about the Lambda calculus, Turing Machines and similar systems because they have features which make them convenient to analyze, not because their computational power is particularly special or rare.}
+
+Moreover, had we taken a different turn on the road, we would have reached a different set of essential features. For example, we could have arrived at a machine with an infinite tape of cells, a moving head that reads and writes to the tape and a set of rules to follow for reading, writing and moving through the tape. This machine is known as Turing Machine. Or we could have arrived at something more esoteric, like the ◊acronym{SKI} combinator calculus or a tag system.
 
 ◊margin-note{The process of encoding anonymous inner functions in terms of regular C functions is called ◊technical-term{closure conversion}. It is a technique commonly used in compilers for functional programming languages.}
 
-If we had decided for a different approach, we could have encoded the features from our final program in terms of other features. For example, we could have encoded anonymous inner functions in terms of regular C functions, which cannot be nested and must have names.
+As a consequence, if we had decided for a different approach, we could have encoded the features from our final program in terms of other features. For example, we could have encoded anonymous inner functions in terms of regular C functions, which cannot be nested and must have names.
 
 So we are still one step away from the essence. The essence must be what all these different minimal sets of features have in common. Thus, the essence of programming languages must be the essence of computation itself. Because the ability to perform arbitrary computations is the only similarity between the systems mentioned above.
 
 This brings us to the most important result of this article: What is the essence of programming languages? What is the essence of computing? What is the common aspect of the different systems capable of computing? ◊emphasis{Communication}.
 
-The essence of programming languages is that they allow arbitrary ◊emphasis{communication} of data across the program. In our final program, communication is the only feature that remained. We ◊informal{encoded away} the numbers, booleans and more, and the only thing left were functions. Functions served two purposes in our program. First, functions served as ◊emphasis{data}. This is why we had to choose a base language in which functions were values—functions were the only kind of data left in the program. The second purpose functions served in our program was as a mechanism to ◊emphasis{communicate} data from calling site to function body, in the form of passing arguments and receiving the return value back.
+The essence of programming languages is that they allow for arbitrary ◊emphasis{communication} of data across the program. In our final program, communication is the only important feature that remained, and it manifested itself in terms of function application. We ◊informal{encoded away} the numbers, booleans and more, and the only values left were functions. Functions served two purposes in our program. First, functions served as ◊emphasis{data}. This is why we had to choose a base language in which functions were values. The second purpose for functions was to work as a mechanism to ◊emphasis{communicate} data. Data flowed from calling site to function body in the form of arguments, and flowed back from function body to calling site in the form of the returned value.
 
 ◊margin-note{The observation that all these different minimal sets of features are equivalent in computational power is an important result of computer science theory. It is called Church–Turing thesis.}
 
 The minimal set of features at which we arrived after our rewrites is particularly elegant because of this dual nature of functions. It is simple to describe—if difficult to understand—because it is compact. And the compactness stems from the property that functions are simultaneously data and a means to ◊emphasis{communicate} data.
 
-◊margin-note{Another conclusion from our journey is that, apart from matters of convenience and taste, all general-purpose programming languages are equivalent in computational power. In other words, any existing program could be translated to any existing language. It might not be practical, but it is at least theoretically possible.}
+◊margin-note{Another conclusion from our journey is that, apart from matters of convenience and taste, all general-purpose programming languages are equivalent in computational power. In other words, any existing program could be translated to any existing language. It might not be practical to pursue this task for all programs, but it is at least theoretically possible.}
 
 But, in one way or another, all the minimal sets of features at which we could have arrived—for example, Turing Machines and the ◊acronym{SKI} combinator calculus—have the same essential capacity of enabling arbitrary ◊emphasis{communication} of data across the system.
 
