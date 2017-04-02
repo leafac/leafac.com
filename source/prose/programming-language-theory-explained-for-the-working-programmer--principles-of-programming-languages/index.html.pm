@@ -444,7 +444,7 @@ So we can conclude that primitive values are not essential features to programmi
 
 ◊section['pairs]{Pairs}
 
-◊new-thought{The only instance} of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. It uses three functions to interact with pairs: the function ◊code/inline{(pair left right)}, which creates a pair with the elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)}, which receives a pair and returns the element on the left; and the function ◊code/inline{(pair-right pair)}, which receives a pair and returns the element on the right.
+◊new-thought{The only instance} of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. There are three functions to interact with pairs: the function ◊code/inline{(pair left right)}, which creates a pair with the elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)}, which receives a pair and returns the element on the left; and the function ◊code/inline{(pair-right pair)}, which receives a pair and returns the element on the right.
 
 ◊margin-note{The compound of a function and the outer variable references whose value it ◊informal{remembers} is called a ◊technical-term{closure}.}
 
@@ -459,11 +459,11 @@ Encodings for pairs are not as natural as, for example, the encoding for numbers
 
   retriever)
 
-(define stored-5 (store 5))
-(define stored-3 (store 3))
+(define stored-5 (store five))
+(define stored-1 (store one))
 
-(stored-5) ;; => 5
-(stored-3) ;; => 3
+(pretty-print (stored-5)) ;; => 5
+(pretty-print (stored-1)) ;; => 1
 }
 
 In the code above, ◊code/inline{store} is a function which receives a ◊code/inline{value} and stores it for later. The way to retrieve the value is to apply the function returned by the call to ◊code/inline{store}. It works by defining and returning an inner function, ◊code/inline{retriever}, which has access to the outer ◊code/inline{value} and ◊informal{remembers} it, even after ◊code/inline{store} itself has returned.
@@ -494,12 +494,12 @@ We can now create pairs, but to retrieve the values from it we still have to def
 With the selectors defined above, pairs are functional, as the listing below exemplifies:
 
 ◊code/block/highlighted['racket]{
-(define number-pair (pair 2 3))
+(define number-pair (pair five one))
 
-> (number-pair selector-left)
-2
-> (number-pair selector-right)
-3
+> (pretty-print (number-pair selector-left))
+5
+> (pretty-print (number-pair selector-right))
+1
 }
 
 We are now one step away from defining the accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right} used by ◊code/inline{sub1}. We only need to wrap the usage pattern from the listing above:
@@ -523,10 +523,10 @@ We are now one step away from defining the accessor functions ◊code/inline{pai
 The following is an example of these accessor functions in use:
 
 ◊code/block/highlighted['racket]{
-> (pair-left number-pair)
-2
-> (pair-right number-pair)
-3
+> (pretty-print (pair-left number-pair))
+5
+> (pretty-print (pair-right number-pair))
+1
 }
 
 More importantly, our program is working with this encoding for pairs in terms of functions:
@@ -761,7 +761,7 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 With this change, we successfully encoded recursion in terms of non-recursive functions:
 
 ◊code/block/highlighted['racket]{
-> (pretty-print (sum-up-to sum-up-to 5))
+> (pretty-print (sum-up-to sum-up-to five))
 15
 }
 
@@ -790,7 +790,7 @@ Unfortunately, we changed the interface to ◊code/inline{sum-up-to} in this pro
 The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and ◊code/inline{sum-up-to} is only a façade to fix ◊code/inline{sum-up-to/partial}’s interface. This brings us back to the original:
 
 ◊code/block/highlighted['racket]{
-> (pretty-print (sum-up-to 5))
+> (pretty-print (sum-up-to five))
 15
 }
 

@@ -2,6 +2,8 @@
 
 (define ___ "omitted")
 
+;; ---------------------------------------------------------------------------------------------------
+
 ;; Starting Point
 
 (module+ original
@@ -209,6 +211,10 @@
   (pretty-print (sub1 five))
   )
 
+;; ---------------------------------------------------------------------------------------------------
+
+;; Booleans
+
 (module+ booleans
   (define (true first second)
     first)
@@ -308,6 +314,10 @@
   (pretty-print (sum-up-to five))
   )
 
+;; ---------------------------------------------------------------------------------------------------
+
+;; Pairs
+
 (module+ pairs/store
   (define (store value)
     (define (retriever)
@@ -315,11 +325,27 @@
 
     retriever)
 
-  (define stored-5 (store 5))
-  (define stored-3 (store 3))
+  (define (zero function argument)
+    argument)
 
-  (stored-5) ;; => 5
-  (stored-3) ;; => 3
+  (define (one function argument)
+    (function argument))
+
+  (define (five function argument)
+    (function
+     (function
+      (function
+       (function
+        (function argument))))))
+
+  (define (pretty-print number)
+    (number add1 0))
+
+  (define stored-5 (store five))
+  (define stored-1 (store one))
+
+  (pretty-print (stored-5)) ;; => 5
+  (pretty-print (stored-1)) ;; => 1
   )
 
 (module+ pairs
@@ -334,10 +360,26 @@
   (define (selector-right left right)
     right)
 
-  (define number-pair (pair 2 3))
+  (define (zero function argument)
+    argument)
 
-  (number-pair selector-left) ;; => 2
-  (number-pair selector-right) ;; => 3
+  (define (one function argument)
+    (function argument))
+
+  (define (five function argument)
+    (function
+     (function
+      (function
+       (function
+        (function argument))))))
+
+  (define (pretty-print number)
+    (number add1 0))
+
+  (define number-pair (pair five one))
+
+  (pretty-print (number-pair selector-left)) ;; => 5
+  (pretty-print (number-pair selector-right)) ;; => 1
 
   (define (pair-left pair)
     (define (selector-left left right)
@@ -351,11 +393,15 @@
 
     (pair selector-right))
 
-  (pair-left number-pair) ;; => 2
-  (pair-right number-pair) ;; => 3
+  (pretty-print (pair-left number-pair)) ;; => 5
+  (pretty-print (pair-right number-pair)) ;; => 1
   )
 
-;; Examples in the “recursion” section do not use the encoding for numbers, for simplicity.
+;; ---------------------------------------------------------------------------------------------------
+
+;; Recursion
+
+;; In this section, for simplicity, we do not use the encoding for numbers.
 
 (module+ recursion/introduce-sum-up-to/rest
   (define (sum-up-to/rest number)
@@ -469,6 +515,10 @@
 
   (sum-up-to 5)
   )
+
+;; ---------------------------------------------------------------------------------------------------
+
+;; Functions with Multiple Arguments
 
 (module+ functions-with-multiple-arguments/multiple-arguments
   (define (pair left)
@@ -660,6 +710,10 @@
 
   (pretty-print (sum-up-to five)) ;; => 15
   )
+
+;; ---------------------------------------------------------------------------------------------------
+
+;; Named Definitions
 
 (module+ named-definitions/reorder
   (define ((true first) second)
