@@ -538,7 +538,7 @@ More importantly, our program is working with this encoding for pairs in terms o
 
 ◊paragraph-separation[]
 
-◊new-thought{Before we move on} to other programming-language features that we might question as ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures which are ◊technical-term{essential} features in programming languages?
+◊new-thought{Before we move on} to other programming-language features that we might question as either ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures which are ◊technical-term{essential} features in programming languages?
 
 One more time, the answer is that data structures in general are ◊informal{encodeable} in terms of simpler features. And, once again, there are different encodings available. In particular, it is possible to encode all data structures in terms of pairs; and, ultimately, in terms functions, by the result of this section. The figure below illustrates examples of encodings:
 
@@ -554,13 +554,15 @@ In the figure above, lists (also known as arrays and vectors) are composed of pa
 
 A list containing pairs of elements could be interpreted as a record (also known as dictionary, hash and associative array). The left element of the pair is the key and the right element is the value.
 
-Finally, with records it is possible to encode objects. Some fields are values (for example, ◊code/inline{name} and ◊code/inline{birthdate}), and some are functions (for example, ◊code/inline{age}), which can be interpreted as methods. One special record field (◊code/inline{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code/inline{age}) can refer to other object attributes (for example, ◊code/inline{birthdate}).
+◊margin-note{How can we create a record including a reference to itself? We can start by adapting the techniques from the ◊reference['recursion]{next section} on recursion, but the details of this particular construction are beyond the scope of this article.}
 
-Objects can get more complicated, with features such as inheritance and polymorphism; also many other data structures exist: tuples, trees and more. And, with varying degrees of difficulty, they are all encodeable in terms of pairs, the simplest way to couple data together. So, ultimately, this section shows that all data structures can be defined in terms of functions.
+Finally, with records it is possible to encode objects. Some fields are non-function values (for example, ◊code/inline{name} and ◊code/inline{birthdate}), and some are functions (for example, ◊code/inline{age}), which can be interpreted as methods. One special record field (◊code/inline{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code/inline{age}) can refer to other object attributes (for example, ◊code/inline{birthdate}).
+
+Objects can get more complicated, with features such as inheritance and polymorphism. Also, there exists many other data structures: tuples, trees and more. But, with varying degrees of difficulty, they are all encodeable in terms of pairs, the simplest way to couple data together. So, ultimately, this section shows that all data structures can be defined in terms of functions.
 
 ◊paragraph-separation[]
 
-◊new-thought{The next features} we have to address are those in functions themselves, because they are the only kind of value left in ◊code/inline{sum-up-to}. What aspects of functions are essential features of programming languages? What aspects can be ◊informal{encoded away}? In the next section, we address the most powerful feature of functions: ◊emphasis{recursion}.
+◊new-thought{The next features} we have to address are those in functions themselves, because they are the only kind of value left in our program. What aspects of functions are essential features of programming languages? What aspects can be ◊informal{encoded away}? In the next section, we address the most powerful feature of functions: ◊emphasis{recursion}.
 
 ◊section['recursion]{Recursion}
 
