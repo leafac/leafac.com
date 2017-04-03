@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
-◊define-meta[date]{2017-04-02}
+◊define-meta[date]{2017-04-03}
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -810,7 +810,7 @@ There are few features left in our program. It is composed solely of (non-recurs
 
 ◊new-thought{Almost all functions} in our program receive multiple arguments. In some of them, for example, ◊code/inline{(pair left right)}, it seems like the ability to receive multiple arguments is essential to their functionality. After all, the purpose of ◊code/inline{pair} is exactly to couple the arguments ◊code/inline{left} and ◊code/inline{right} together. But is this an essential feature of programming languages, or can functions with multiple arguments be ◊informal{encoded away}, so that only functions with a single argument remain?
 
-The answer to this question is positive if we allow the encoding to include data structures. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its body, ◊code/inline{+} would extract the operands from the pair and proceed as before.
+If we allow the encoding to include data structures, then we can find an intuitive encoding. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its body, ◊code/inline{+} would extract the operands from the pair and proceed as before.
 
 We ◊reference['pairs]{already established} an encoding for pairs and discussed how to use it to encode lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
 
@@ -825,7 +825,7 @@ This new idea stems from two observations we have already explored: first, that 
 
 In the listing above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} outputs the function ◊code/inline{retriever} as its return value.
 
-◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when all the arguments have not been provided yet, the function is said to be ◊technical-term{partially applied}.}
+◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when some arguments are still missing, the function is said to be ◊technical-term{partially applied}.}
 
 We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
 
@@ -838,20 +838,20 @@ We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a 
   pair/intermediary)
 }
 
-The implementation above works the same as before, but the way to call it has changed. Every invocation of ◊code/inline{pair} has to go through the cascade. Instead of writing ◊code/inline{(define number-pair (pair 2 3))}, the following is necessary:
+The implementation above works the same as before, but the way to call it has changed. Every invocation of ◊code/inline{pair} has to go through the cascade. Instead of writing, for example, ◊code/inline{(define number-pair (pair five one))}, the following is necessary:
 
 ◊code/block/highlighted['racket]{
-(define number-pair/intermediary (pair 2))
-(define number-pair (number-pair/intermediary 3))
+(define number-pair/intermediary (pair five))
+(define number-pair (number-pair/intermediary one))
 }
 
 More compactly, we can skip giving a name to the intermediary function and call it immediately:
 
 ◊code/block/highlighted['racket]{
-(define number-pair ((pair 2) 3))
+(define number-pair ((pair five) one))
 }
 
-Cascades of this form extend to functions with arbitrarily many parameters. But what about functions with zero parameters? Our program includes few of them, for example ◊code/inline{else} in ◊code/inline{sum-up-to}, which serves to ◊informal{guard} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, which the function does not use. Also, we change the places that call such functions to pass a ◊informal{dummy} argument in. The following is an extract of ◊code/inline{sum-up-to} including this treatment:
+Cascades of this form extend to functions with arbitrarily many parameters. But what about functions with zero parameters? Our program includes a few of them, for example ◊code/inline{else} in ◊code/inline{sum-up-to}, which ◊informal{guards} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, which the function does not use. Also, we change the places that call such functions to pass a ◊informal{dummy} argument in. The following is an extract of ◊code/inline{sum-up-to} including this treatment:
 
 ◊margin-note{It is important that the omitted part ◊code/inline{___} does not refer to ◊code/inline{dummy}, otherwise we would have changed the meaning of the program.}
 
@@ -869,7 +869,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 ◊new-thought{The change described} in this section is pervasive. It affects most defined functions and their invocations:
 
-◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code/inline{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code/inline{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program consists of adding parenthesis and ◊informal{dummy} arguments.}
+◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code/inline{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code/inline{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program consists of adding parentheses and ◊informal{dummy} arguments.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -965,7 +965,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 ◊section['named-definitions]{Named Definitions}
 
-◊new-thought{We defined functions and intermediary values} using the ◊code/inline{(define ___ ___)} form all over our program. This form is convenient because it allows us to give names to the concepts and that parts of the computation. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other. Consider the following excerpt:
+◊new-thought{We defined functions and intermediary values} using the ◊code/inline{(define ___ ___)} form all over our program. This form is convenient because it allows us to give names to concepts and computations. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other. Consider the following excerpt:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -996,7 +996,7 @@ The answer one more time is negative. Named definitions are not an essential fea
 
 To ◊informal{encode away} named definitions, we first reorder them so that they can only refer to previously defined names:
 
-◊margin-note{This step is only possible because we ◊informal{encoded ◊reference['recursion]{recursion} away}.}
+◊margin-note{This step is only possible because we ◊informal{encoded recursion away} on a ◊reference['recursion]{previous section}.}
 
 ◊code/block/highlighted['racket]{
 (define ((true first) second)
@@ -1114,7 +1114,7 @@ We can rewrite the above such that each reference to the ◊code/inline{always-f
    true))
  }
 
- The reason is the difference between the meanings of ◊code/inline{false} in ◊code/inline{always-false}’s definition and in ◊code/inline{(λ (false) ___)}. The solution is to rename the identifier ◊code/inline{false} in ◊code/inline{(λ (false) ___)} to, for example, ◊code/inline{(λ (false2) ___)}. And rename all uses of ◊code/inline{false} accordingly. Fortunately, this issue does not occur in our program.
+ The reason is the difference between the meanings of ◊code/inline{false} in ◊code/inline{always-false}’s definition and in ◊code/inline{(λ (false) ___)}. The solution is to rename the identifier ◊code/inline{false} in ◊code/inline{(λ (false) ___)} to, for example, ◊code/inline{(λ (false2) ___)}. And rename all uses of ◊code/inline{false} in the anonymous function accordingly. Fortunately, this issue does not occur in our program.
 }
 
 ◊code/block/highlighted['racket]{
@@ -1331,9 +1331,9 @@ We iterated until we reached a minimal, irreducible set of features: definition 
 
 Not quite. One evidence is that we had to choose our base programming language (Racket) based on certain criteria. For example, it had to a language in which functions were values. If our resulting program represented the essence of programming languages, then C—a language in which functions are not values—would not qualify as a programming language. And it does.
 
-◊margin-note{Explaining the inner workings of Turing Machines, ◊acronym{SKI} combinator calculus and tag systems is beyond the scope of this article. Their only aspect relevant to this article is that each of these system constitutes minimal, irreducible sets of features for programming languages.}
+◊margin-note{Explaining the inner workings of Turing Machines, ◊acronym{SKI} combinator calculus and tag systems is beyond the scope of this article. The only aspect relevant to this discussion is that each of these system constitutes minimal, irreducible sets of features for programming languages.}
 
-◊margin-note{A counterintuitive and interesting observation is that minimal, irreducible sets of features suitable for programming languages are remarkably common in systems with very simple rules. They occur frequently in nature, even in systems not commonly associated to computation. We reason about the Lambda calculus, Turing Machines and similar systems because they have features which make them convenient to analyze, not because their computational power is particularly special or rare.}
+◊margin-note{A counterintuitive and interesting observation is that minimal, irreducible sets of features suitable for programming languages are remarkably common in systems with very simple rules. They occur frequently in nature, even in systems not commonly associated with computation. We reason about the Lambda calculus, Turing Machines and similar systems because they have features which make them convenient to analyze, not because their computational power is particularly special or rare.}
 
 Moreover, had we taken a different turn on the road, we would have reached a different set of essential features. For example, we could have arrived at a machine with an infinite tape of cells, a moving head that reads and writes to the tape and a set of rules to follow for reading, writing and moving through the tape. This machine is known as Turing Machine. Or we could have arrived at something more esoteric, like the ◊acronym{SKI} combinator calculus or a tag system.
 
@@ -1343,17 +1343,19 @@ As a consequence, if we had decided for a different approach, we could have enco
 
 So we are still one step away from the essence. The essence must be what all these different minimal sets of features have in common. Thus, the essence of programming languages must be the essence of computation itself. Because the ability to perform arbitrary computations is the only similarity between the systems mentioned above.
 
-This brings us to the most important result of this article: What is the essence of programming languages? What is the essence of computing? What is the common aspect of the different systems capable of computing? ◊emphasis{Communication}.
+This brings us to the most important result of this article: What is the essence of programming languages? What is the essence of computing? What is the common aspect of the different systems capable of performing computations? ◊emphasis{Communication}.
 
-The essence of programming languages is that they allow for arbitrary ◊emphasis{communication} of data across the program. In our final program, communication is the only important feature that remained, and it manifested itself in terms of function application. We ◊informal{encoded away} the numbers, booleans and more, and the only values left were functions. Functions served two purposes in our program. First, functions served as ◊emphasis{data}. This is why we had to choose a base language in which functions were values. The second purpose for functions was to work as a mechanism to ◊emphasis{communicate} data. Data flowed from calling site to function body in the form of arguments, and flowed back from function body to calling site in the form of the returned value.
+The essence of programming languages is that they allow for arbitrary ◊emphasis{communication} of data across the program. In our final program, communication is the only important feature that remained, and it manifested itself in terms of function application. We ◊informal{encoded away} the numbers, booleans and more, and the only values left were functions.
+
+Functions served two purposes in our program. First, functions served as ◊emphasis{data}. This is why we had to choose a base language in which functions were values. The second purpose for functions was to work as a mechanism to ◊emphasis{communicate} data. Data flowed from calling site to function body in the form of arguments, and flowed back from function body to calling site in the form of the returned value.
 
 ◊margin-note{The observation that all these different minimal sets of features are equivalent in computational power is an important result of computer science theory. It is called Church–Turing thesis.}
 
 The minimal set of features at which we arrived after our rewrites is particularly elegant because of this dual nature of functions. It is simple to describe—if difficult to understand—because it is compact. And the compactness stems from the property that functions are simultaneously data and a means to ◊emphasis{communicate} data.
 
-◊margin-note{Another conclusion from our journey is that, apart from matters of convenience and taste, all general-purpose programming languages are equivalent in computational power. In other words, any existing program could be translated to any existing language. It might not be practical to pursue this task for all programs, but it is at least theoretically possible.}
+◊margin-note{Another conclusion from our journey is that, apart from matters of convenience and taste, all general-purpose programming languages are equivalent in computational power. In other words, any existing program could be translated to any existing language. It might not be practical to pursue this task for some programs, but it is at least theoretically possible.}
 
-But, in one way or another, all the minimal sets of features at which we could have arrived—for example, Turing Machines and the ◊acronym{SKI} combinator calculus—have the same essential capacity of enabling arbitrary ◊emphasis{communication} of data across the system.
+But, in one way or another, with more or less elegance, all the minimal sets of features at which we could have arrived—for example, Turing Machines and the ◊acronym{SKI} combinator calculus—have the same essential capacity of enabling arbitrary ◊emphasis{communication} of data across the system.
 
 ◊paragraph-separation[]
 
@@ -1371,13 +1373,13 @@ When encoding numbers, we chose to use functions. With this choice, we encoded n
 
 The most complicated operation to implement in our encoded numbers was ◊code/inline{sub1}. We did it using a ◊technical-term{sliding window} over the number line. This technique is applicable to all sorts of search in series in which each element depends on the previous ones. For example, calculating the Fibonacci numbers, in which each element is the sum of the previous two.
 
-For the encoding of booleans, we again used an encoding in terms of what ◊emphasis{they do}, instead of what ◊emphasis{they are}. The purpose of booleans in to choose between two options—◊technical-term{true} and ◊technical-term{false}.
+For the encoding of booleans, we again used an encoding in terms of what ◊emphasis{they do}, instead of what ◊emphasis{they are}. The purpose of booleans in to choose between two options—◊technical-term{true} and ◊technical-term{false}—so our encoding for them were functions that received two arguments and chose one of them.
 
 While encoding conditionals (◊code/inline{if}), we had a problem due to the order in which Racket evaluates programs. Function arguments are evaluated to values before the function starts to execute. In the case of our program, this led to infinite recursion and a non-terminating program. The solution was to ◊informal{wrap} the computations in functions to ◊informal{delay} them. This technique is useful in situations when a computation does not need to happen immediately. For example, calls to a logger might include an expensive computation that should only occur in ◊technical-term{debug} mode. In this case, the call might be ◊informal{delayed} by ◊informal{wrapping} it in a function, which the logger only calls if its log-level is ◊technical-term{debug}.
 
 ◊margin-note{This capability to ◊informal{remember} that functions have is related to ◊technical-term{lexical scoping}. Languages with ◊technical-term{dynamic scoping} (for example, Emacs Lisp) behave differently and the result would not be the same in them.}
 
-The encoding of pairs used an important capability of functions: they ◊informal{remember} the values they had in scope when defined. A fundamental part of this encoding was the inner functions that ◊informal{remembered} the arguments of the outer functions even after the outer functions had returned.
+The encoding of pairs used an important capability of functions: they ◊informal{remember} the values they had in scope when defined. A fundamental part of this encoding were the inner functions that ◊informal{remembered} the arguments of the outer functions even after the outer functions had returned.
 
 Another interesting technique we introduced in the encoding for pairs is that, when a function does not have enough information to act, it can delegate to a helper function, which it receives as an argument. In the particular case of pairs, the ◊code/inline{retriever} did not know which element of the pair (◊code/inline{left} or ◊code/inline{right}) to retrieve. So it received a ◊code/inline{selector} function as an argument, transferring the responsibility of deciding which element to retrieve to the calling site. The calling site knows which element of the pair it needs, and that is why this technique works.
 
@@ -1387,11 +1389,11 @@ The encoding for recursion was another instance of the technique “if a functio
 
 ◊margin-note{Functional programming languages are increasingly popular, and some of their features appear in traditionally non-functional languages—for example, Java 8 includes closures. This contributes to blur the line between paradigms, rendering obsolete distinctions such as ◊technical-term{object-oriented} and ◊technical-term{functional}.}
 
-When encoding functions with multiple arguments, we took to an extreme the ◊informal{memory} features of inner function definitions, which we had already explored in the encoding for pairs. We created cascades of functions that received a single argument and returned an intermediary function. In every day programming, the ability to create inner functions is one of the most useful, and is a significant reason for the recent popularity of functional programming languages.
+When encoding functions with multiple arguments, we took to an extreme the ◊informal{memory} features of inner function definitions, which we had already explored in the encoding for pairs. We created cascades of functions that received a single argument and returned an intermediary function. In everyday programming, the ability to create inner functions is one of the most useful, and is a significant reason for the recent popularity of functional programming languages.
 
 ◊margin-note{◊emphasis{Communication} is so important that it was the primary motivation for writing this article: to ◊emphasis{communicate} the important ideas of computer science to practitioners.}
 
-The final practical lesson for working programmers in this article comes from the encoding of named definitions. After the transformation, the program becomes unintelligible. This highlights the importance of giving good names to concepts in programming. Working programmers are not only writing programs that run—computers interpret our unintelligible final version of the program without problems—but, more importantly, they are ◊emphasis{communicating} ideas to other people. Programmers ideally write code that others can understand and improve in the future.
+The final practical lesson for working programmers in this article comes from the encoding of named definitions. After the transformation, the program becomes unintelligible. This highlights the importance of giving good names to concepts in programming. Working programmers are not only writing programs that run correctly—computers interpret our unintelligible final version of the program without problems—but, more importantly, they are ◊emphasis{communicating} ideas to other people. Programmers ideally write code that others can understand and improve in the future.
 
 Again, coming from a different direction, we acknowledge the importance of ◊emphasis{communication}. We have now come full circle:
 
@@ -1401,10 +1403,10 @@ Again, coming from a different direction, we acknowledge the importance of ◊em
 
 ◊section['references]{References}
 
-◊new-thought{The main inspiration} for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version was in ◊link["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version was in ◊link["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊link["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊link["http://computationbook.com/"]{Understanding Computation} were major influences. Together, Weirich and Stuart not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
+◊new-thought{The main inspiration} for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version, in ◊link["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version, in ◊link["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊link["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊link["http://computationbook.com/"]{Understanding Computation} were major influences. Together, Weirich and Stuart not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
 
 Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in ◊acronym{OOPSLA} 1998. His presentation skills are remarkable.
 
 But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
 
-Finally, people interested in the academic side of programming-language theory can read the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{Principles of Programming Languages}, by Dr. Scott F. Smith, my advisor. It includes an introduction to the notation and jargon used in research and is essential to be able to read conference articles.
+Finally, people interested in the academic side of programming-language theory can read the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{Principles of Programming Languages}, by Dr. Scott F. Smith, my advisor. It includes an introduction to the notation and jargon used in research and is essential to reach the level of understanding necessary to read conference and journal articles.
