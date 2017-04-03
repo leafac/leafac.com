@@ -669,7 +669,7 @@ After the ◊code/inline{set!} operation, the name ◊code/inline{sum-up-to/rest
 15
 }
 
-We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field. The following extract illustrates this idea:
+We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be a pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field. The following extract illustrates this idea:
 
 ◊code/block/highlighted['racket]{
 (define initial-state (empty-record))
@@ -691,7 +691,7 @@ We have successfully encoded recursion, but the encoding relies on mutation of t
 
 In the listing above, the placeholder implementation of ◊code/inline{sum-up-to/rest} and ◊code/inline{sum-up-to} were modified to receive an extra argument representing the ◊code/inline{program-state}. Also, they return pairs of their output value and a possibly modified ◊code/inline{program-state}. Then, when using ◊code/inline{sum-up-to/rest} in ◊code/inline{sum-up-to}, it is necessary to lookup its definition in the given ◊code/inline{program-state}. Finally, we have to manage the global ◊code/inline{program-state}, first creating it as an ◊code/inline{empty-record}, then adding ◊code/inline{sum-up-to/rest} as it is implemented and overwriting its value when ◊code/inline{sum-up-to} is available.
 
-While feasible, this solution is not elegant. It affects even the functions that do not need to change the global state of the program, because they need to it thread appropriately.
+While feasible, this solution is not elegant. It affects even the functions that do not need to change the global state of the program, because they need to thread it appropriately.
 
 So we backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code/inline{sum-up-to} before we ◊technical-term{tied the knot}:
 
@@ -741,7 +741,7 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 
 ◊margin-note{The name of this technique is ◊emphasis{self-passing}. Unsurprisingly.}
 
-◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating this unbounded sequence of functions is not possible. Instead, in the self-passing encoding, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is creating the next ◊code/inline{sum-up-to/rest} in the chain. It is taking one step and carrying along another copy of itself as the function capable of the taking the next steps.}
+◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating this unbounded sequence of functions is not possible. Instead, in the self-passing encoding, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is creating the next ◊code/inline{sum-up-to/rest} in the chain. It is taking one step and carrying along another copy of itself as the function capable of taking the next steps.}
 
 ◊margin-note{Most static type systems are not capable of typing programs using self-passing. This is reason why OCaml, Haskell and similar languages could not be base languages for this article.}
 
@@ -787,7 +787,7 @@ Unfortunately, we changed the interface to ◊code/inline{sum-up-to} in this pro
   (sum-up-to/partial sum-up-to/partial number))
 }
 
-◊margin-note{The ◊code/inline{sum-up-to} façade is not specific to the job of adding numbers, all the actual computation is defined in ◊code/inline{sum-up-to/partial}. So ◊code/inline{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstracted façade is called ◊technical-term{Y-combinator}.}
+◊margin-note{The ◊code/inline{sum-up-to} façade is not specific to the job of adding numbers, all the actual computation is defined in ◊code/inline{sum-up-to/partial}. So ◊code/inline{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstract façade is called ◊technical-term{Y-combinator}.}
 
 The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and ◊code/inline{sum-up-to} is only a façade to fix ◊code/inline{sum-up-to/partial}’s interface. This brings us back to the original:
 
@@ -798,7 +798,7 @@ The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and �
 
 ◊paragraph-separation[]
 
-◊new-thought{The result of this section} is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to the argument, so the function works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking less than ten lines. What allows us to compact the definition this way is recursion.
+◊new-thought{The result of this section} is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to its argument, so it works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, then ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking less than ten lines. What allows us to compact the definition this way is recursion.
 
 ◊margin-note{In other words, non-recursive functions are ◊technical-term{Turing complete}.}
 
