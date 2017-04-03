@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
+ ◊link[#:href ◊absolute-url["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]]
+ ◊id{urn:uuid:23a4a636-0608-4eb5-8201-f7551d079e50}
+ ◊updated{2017-04-03T12:47:30-04:00}
+ ◊summary{I published an article about the essence of programming languages. The discussion is driven by working code and should be approachable to all programmers.}
+}
+
+◊entry{
  ◊title{Playing the Game with PLT Redex}
  ◊link[#:href ◊absolute-url["/prose/playing-the-game-with-plt-redex"]]
  ◊id{urn:uuid:32c8e6c7-b836-498e-a073-c7bec34c25cf}
