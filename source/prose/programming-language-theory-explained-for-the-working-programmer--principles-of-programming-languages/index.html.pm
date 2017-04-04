@@ -9,7 +9,7 @@
 
 ◊new-thought{Programming languages come} in many sizes and flavors. Working programmers have been exposed to a few of them and might wonder: What is the essence of programming languages? In this article, we explore this question, but, unlike most presentations on the topic, we avoid mathematical notation and jargon. We start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages work. The whole discussion is driven by executable code, making it approachable to all programmers.
 
-Besides satisfying a curiosity, this article introduces programming techniques that are generally applicable in everyday programming. And, for people starting in programming-language design and analysis, this article introduces a minimal programming language core from which to build.
+Besides satisfying curiosity, this article introduces programming techniques that are generally applicable in everyday programming. And, for people starting in programming-language design and analysis, this article introduces a minimal programming language core from which to build.
 
 ◊section['starting-point]{Starting Point}
 
@@ -69,7 +69,7 @@ Suppose one wants to write an application that tracks information about bicycle 
 
 Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking would be—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
 
-It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use less features, but they also become more difficult to understand. Think of the difference between programs in Ruby and C that perform the same task: while C is a simpler language, programs in it tend to be more difficult to read.
+It is important to note that simplicity is not the same as easiness. As we advance, programs get simpler, because they use fewer features, but they also become more difficult to understand. Think of the difference between programs in Ruby and C that perform the same task: while C is a simpler language, programs in it tend to be more difficult to read.
 
 ◊section['numbers]{Numbers}
 
@@ -798,7 +798,7 @@ The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and �
 
 ◊paragraph-separation[]
 
-◊new-thought{The result of this section} is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to its argument, so it works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, then ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking less than ten lines. What allows us to compact the definition this way is recursion.
+◊new-thought{The result of this section} is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to its argument, so it works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, then ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking fewer than ten lines. What allows us to compact the definition this way is recursion.
 
 ◊margin-note{In other words, non-recursive functions are ◊technical-term{Turing complete}.}
 
@@ -1410,3 +1410,7 @@ Another talk that was hugely influential to me is ◊link["https://www.youtube.c
 But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
 
 Finally, people interested in the academic side of programming-language theory can read the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{Principles of Programming Languages}, by Dr. Scott F. Smith, my advisor. It includes an introduction to the notation and jargon used in research and is essential to reach the level of understanding necessary to read conference and journal articles.
+
+◊section['acknowledgments]{Acknowledgments}
+
+Thank you David Storrs for the comments on this article.
