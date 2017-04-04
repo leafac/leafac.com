@@ -1413,4 +1413,4 @@ Finally, people interested in the academic side of programming-language theory c
 
 ◊section['acknowledgments]{Acknowledgments}
 
-Thank you David Storrs for the comments on this article.
+◊new-thought{Thank you} David Storrs for the comments on this article.
