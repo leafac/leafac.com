@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
-◊define-meta[date]{2017-04-03}
+◊define-meta[date]{2017-04-05}
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -160,6 +160,8 @@ Some encodings are more convenient than others. For example, it is more difficul
 We are not seeking easiness, though. So, from all the possible encodings, we choose one that is unnatural and inconvenient, but interesting: we encode numbers using ◊emphasis{functions}. Each number is a function of two arguments: the first, another arbitrary function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
 
 ◊margin-note{Another interpretation for this encoding is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: Our encoding for numbers is based on ◊emphasis{what they do} (to count), instead of ◊emphasis{what they are} (data). When designing a system, consider what the entities in it do, besides what they are. This might lead to a better overall design. For example, instead of modeling ◊emphasis{student} and ◊emphasis{staff} as data types, consider modeling ◊emphasis{enroll in classes} and ◊emphasis{budget planning} as actions. This fits better a case in which a person is part of the staff and wants to take classes at the same institution, for example.}
 
 ◊code/block/highlighted['racket]{
 (define (zero function argument)
@@ -374,6 +376,8 @@ A particularly interesting choice would be to follow C’s example and use numbe
   second)
 }
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Our encoding for booleans is another example of reasoning about ◊emphasis{what things do} (to select either ◊technical-term{true} or ◊technical-term{false}), instead of ◊emphasis{what they are} (data).}
+
 In our encoding, booleans are functions that receive two arguments. The value ◊code/inline{true} returns the first argument, and ◊code/inline{false} returns the second argument.
 
 We can now adapt ◊code/inline{zero?} to use these values:
@@ -413,6 +417,8 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
 
 ◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until it is necessary—at which point we call the function.}
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Avoid unnecessary expensive computations by ◊technical-term{delaying} them with ◊informal{wrapper functions}. For example, a debug logging entry might involve expensive computations that can be avoided if the appropriate log level is not reached.}
+
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
   (define (then)
@@ -447,6 +453,8 @@ So we can conclude that primitive values are not essential features to programmi
 ◊new-thought{The only instance} of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. There are three functions to interact with pairs: the function ◊code/inline{(pair left right)}, which creates a pair with the elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)}, which receives a pair and returns the element on the left; and the function ◊code/inline{(pair-right pair)}, which receives a pair and returns the element on the right.
 
 ◊margin-note{The compound of a function and the outer variable references whose value it ◊informal{remembers} is called a ◊technical-term{closure}.}
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: This ◊informal{memory} capability that inner functions have is necessary for some important features in popular programming languages. For example, Ruby blocks and JavaScript functions passed to (for example) ◊code/inline{.forEach()} can refer to variables local to their definition site, not their calling site inside (for example) ◊code/inline{.forEach()}’s implementation.}
 
 Encodings for pairs are not as natural as, for example, the encoding for numbers in terms of strings. But can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following listing illustrates this:
 
@@ -505,6 +513,8 @@ With the selectors defined above, pairs are functional, as the listing below exe
 We are now one step away from defining the accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right} used by ◊code/inline{sub1}. We only need to wrap the usage pattern from the listing above:
 
 ◊margin-note{The technique to turn selectors (◊code/inline{selector-left} and ◊code/inline{selector-right}) into accessors (◊code/inline{pair-left} and ◊code/inline{pair-right}) is the same to turn booleans (◊code/inline{true} and ◊code/inline{false}) into conditionals (◊code/inline{if}).}
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: When refactoring, do not change the interface to existing functionality.}
 
 ◊code/block/highlighted['racket]{
 (define (pair-left pair)
@@ -745,6 +755,8 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 
 ◊margin-note{Most static type systems are not capable of typing programs using self-passing. This is reason why OCaml, Haskell and similar languages could not be base languages for this article.}
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: When a function does not have enough information to implement part of its functionality, it can delegate to a helper function, which it receives as argument.}
+
 ◊code/block/highlighted['racket]{
 (define (sum-up-to sum-up-to/rest number)
   (define (then)
@@ -826,6 +838,20 @@ This new idea stems from two observations we have already explored: first, that 
 In the listing above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} outputs the function ◊code/inline{retriever} as its return value.
 
 ◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when some arguments are still missing, the function is said to be ◊technical-term{partially applied}.}
+
+◊margin-note{
+ ◊emphasis{Everyday programming takeaway}: Partial application generally results in concise code. For example, consider the following two equivalent function definitions:
+
+◊code/block/highlighted['racket]{
+(define (wheatley? x)
+  (equal? 'wheatley x))
+
+(define wheatley?
+  (curry equal? 'wheatley))
+ }
+
+ The ◊code/inline{curry} Racket function takes a function and some arguments for it, resulting in a partially applied function. This conciseness is welcome in small functions, for example those passed into ◊code/inline{map} or ◊code/inline{filter}. Bigger programs using this technique frequently tend to be difficult to read.
+}
 
 We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
 
@@ -1125,6 +1151,8 @@ We are ready to see the final version of our program, in which all definitions a
 
 ◊margin-note{We did not inline ◊code/inline{pretty-print} because it is external to our program. It only exists for us to inspect the result of the computation, which is a number encoded in terms of functions.}
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: One of the most important skills when designing systems is naming the concepts appropriately. The lack of good names is what makes this final version of our program unintelligible. In particular, only use anonymous functions for small functions whose meaning is evident.}
+
 ◊code/block/highlighted['racket]{
 (define (pretty-print number)
   ((number add1) 0))
@@ -1349,6 +1377,8 @@ The essence of programming languages is that they allow for arbitrary ◊emphasi
 
 Functions served two purposes in our program. First, functions served as ◊emphasis{data}. This is why we had to choose a base language in which functions were values. The second purpose for functions was to work as a mechanism to ◊emphasis{communicate} data. Data flowed from calling site to function body in the form of arguments, and flowed back from function body to calling site in the form of the returned value.
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Code can be data. Data can be code.}
+
 ◊margin-note{The observation that all these different minimal sets of features are equivalent in computational power is an important result of computer science theory. It is called Church–Turing thesis.}
 
 The minimal set of features at which we arrived after our rewrites is particularly elegant because of this dual nature of functions. It is simple to describe—if difficult to understand—because it is compact. And the compactness stems from the property that functions are simultaneously data and a means to ◊emphasis{communicate} data.
@@ -1392,6 +1422,8 @@ The encoding for recursion was another instance of the technique “if a functio
 When encoding functions with multiple arguments, we took to an extreme the ◊informal{memory} features of inner function definitions, which we had already explored in the encoding for pairs. We created cascades of functions that received a single argument and returned an intermediary function. In everyday programming, the ability to create inner functions is one of the most useful, and is a significant reason for the recent popularity of functional programming languages.
 
 ◊margin-note{◊emphasis{Communication} is so important that it was the primary motivation for writing this article: to ◊emphasis{communicate} the important ideas of computer science to practitioners.}
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: When writing programs, consider the two audiences that will read them: other programmers first, machines second.}
 
 The final practical lesson for working programmers in this article comes from the encoding of named definitions. After the transformation, the program becomes unintelligible. This highlights the importance of giving good names to concepts in programming. Working programmers are not only writing programs that run correctly—computers interpret our unintelligible final version of the program without problems—but, more importantly, they are ◊emphasis{communicating} ideas to other people. Programmers ideally write code that others can understand and improve in the future.
 
