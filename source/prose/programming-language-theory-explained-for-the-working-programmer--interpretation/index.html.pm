@@ -19,7 +19,7 @@ We choose ◊technical-term{simplicity} over ◊technical-term{convenience}. Our
 
 ◊margin-note{For more on our target language, refer to ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{◊publication{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}}.}
 
-There exist many languages that fit our requirements. From all of them, we choose one that is particularly elegant, because it is compact and simple. This target language represents a minimal core with only the essential features of programming languages: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. The following listing is an example of a program in this language:
+There exist many languages that fit our requirements. From all of them, we choose one that is particularly elegant, for its compactness. This target language represents a minimal core with only the essential features of programming languages: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. The following listing is an example of a program in this language:
 
 ◊code/block/highlighted['racket]{
 (λ (x) x)
@@ -27,7 +27,7 @@ There exist many languages that fit our requirements. From all of them, we choos
 
 ◊margin-note{The lambda (◊code/inline{λ}) is the only Greek letter and the most unusual notation in this article. It is worth introducing a short notation for anonymous functions because we write them frequently. This notation also justifies the formal name for our target language: ◊technical-term{Lambda calculus}.}
 
-The program above defines a function that has no name (anonymous function). Function definitions start with the Greek letter lambda (◊code/inline{λ}). This function receives an argument called ◊code/inline{x}, represented by the ◊code/inline{(x)} right after the lambda. Finally, after the argument comes the function body, specifying which computation the function performs. In this example, it just returns the argument unaltered: ◊code/inline{x}.
+The program above defines a function which has no name (anonymous function). Function definitions are delineated by parentheses, and start with the Greek letter lambda (◊code/inline{λ}). After the ◊code/inline{λ} there is the name of the argument received by the function, also in parentheses—◊code/inline{(x)} in the example. Finally, there is the function body, an expression specifying which computation the function performs. In the example, the computation is just to return the argument ◊code/inline{x}, unaltered.
 
 In our target language, functions are values. They are the only kind of values; there are no numbers, booleans, strings, data structures and other constructs usually found in programming languages. This highlights how ◊technical-term{simple} this language is. Despite its simplicity, our target language is ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{capable of performing arbitrary computations}. In the case of the listing above, the defined function is the whole program. This is similar how the following is a complete program in languages including Racket, Ruby, JavaScript and Python:
 
@@ -35,11 +35,22 @@ In our target language, functions are values. They are the only kind of values; 
 5
 }
 
-The listing above defines a full program. In Racket, its result is the number ◊code/inline{5}, because numbers are values in Racket. In our target language, functions are values, similar to how numbers are values in the other mentioned languages. So the result of our first program in our target language is the function ◊code/inline{(λ (x) x)}.
+The listing above defines a full program in the mentioned languages. Its result is the number ◊code/inline{5}, because numbers are values in these languages. In our target language functions are values, so the result of our first program in our target language is the function ◊code/inline{(λ (x) x)}.
 
-◊; TODO: Function application.
+Our first program is an example of function definition (◊code/inline{(λ ...)}) and variable reference (the ◊code/inline{x} in the function body). There is only one other feature in our target language, function application. It is represented by function and argument enclosed in parentheses. For example, if ◊code/inline{f} is a function and ◊code/inline{a} is an argument, then ◊code/inline{(f a)} is a function application. This is equivalent to the mathematical notation also used by many popular programming languages: ◊code/inline{f(a)}. The following listing is a full program illustrating function application in our target language:
+
+◊code/block/highlighted['racket]{
+((λ (x) x) (λ (y) y))
+}
+
+This program is an application of the function ◊code/inline{(λ (x) x)} to the argument ◊code/inline{(λ (y) y)}. The interpretation of this is the same as in mathematics and most programming languages: replace every occurrence of the argument name ◊code/inline{x} in ◊code/inline{(λ (x) x)}’s body with the argument ◊code/inline{(λ (y) y)}. Because ◊code/inline{(λ (x) x)}’s body is just ◊code/inline{x}, the result of this program is ◊code/inline{(λ (y) y)}.
+
+◊; TODO: There are many implicit design decisions. Strict vs. lazy, order in which to choose the next expression to evaluate, etc.
+◊; TODO: Function application. Support communication.
+◊; TODO: Substitution is the core of communication.
 ◊; TODO: Subset of Racket.
 ◊; TODO: Quote to represent programs.
+◊; TODO: Open programs.
 
 ◊; TODO: References.
 ◊; - SEwPR.
