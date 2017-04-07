@@ -27,6 +27,12 @@ There exist many languages that fit our requirements. From all of them, we choos
 
 ◊margin-note{The lambda (◊code/inline{λ}) is the only Greek letter and the most unusual notation in this article. It is worth introducing a short notation for anonymous functions because we write them frequently. This notation also justifies the formal name for our target language: ◊technical-term{Lambda calculus}.}
 
+◊margin-note{
+ Our choice of notation is based on Racket’s notation, so our target language is a subset of Racket. This means that programs in our target language are also programs in Racket, which is useful to check the correctness of our interpreters and for interactive exploration. But this latter application is limited by the way Racket prints functions—it just outputs ◊code/inline{#<procedure>}, instead of the function definition.
+
+ Another consequence of this decision is that our target language inherits many implicit design choices from Racket. For example, we evaluate the argument to a value before passing it into the function, we only evaluate function applications at the top level—and not those that occur within function bodies before the function is applied—and more. Different choices would lead to different interpreters, with different consequences to the programs. For example, some programs that run forever in our target language would terminate had we decided to only evaluate function arguments to values when they are needed, as opposed to before passing them into the function. We follow Racket’s design decisions because they are similar to those of most popular programming languages.
+}
+
 The program above defines a function which has no name (anonymous function). Function definitions are delineated by parentheses, and start with the Greek letter lambda (◊code/inline{λ}). After the ◊code/inline{λ} there is the name of the argument received by the function, also in parentheses—◊code/inline{(x)} in the example. Finally, there is the function body, an expression specifying which computation the function performs. In the example, the computation is just to return the argument ◊code/inline{x}, unaltered.
 
 In our target language, functions are values. They are the only kind of values; there are no numbers, booleans, strings, data structures and other constructs usually found in programming languages. This highlights how ◊technical-term{simple} this language is. Despite its simplicity, our target language is ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{capable of performing arbitrary computations}. In the case of the listing above, the defined function is the whole program. This is similar how the following is a complete program in languages including Racket, Ruby, JavaScript and Python:
@@ -43,14 +49,46 @@ Our first program is an example of function definition (◊code/inline{(λ ...)}
 ((λ (x) x) (λ (y) y))
 }
 
+◊margin-note{The replacement of argument names in the function body for the argument provided in the function application is the mechanism that allows for arbitrary ◊emphasis{communication} of data in the program.}
+
 This program is an application of the function ◊code/inline{(λ (x) x)} to the argument ◊code/inline{(λ (y) y)}. The interpretation of this is the same as in mathematics and most programming languages: replace every occurrence of the argument name ◊code/inline{x} in ◊code/inline{(λ (x) x)}’s body with the argument ◊code/inline{(λ (y) y)}. Because ◊code/inline{(λ (x) x)}’s body is just ◊code/inline{x}, the result of this program is ◊code/inline{(λ (y) y)}.
 
-◊; TODO: There are many implicit design decisions. Strict vs. lazy, order in which to choose the next expression to evaluate, etc.
-◊; TODO: Function application. Support communication.
-◊; TODO: Substitution is the core of communication.
-◊; TODO: Subset of Racket.
+◊paragraph-separation[]
+
+◊new-thought{We covered all features} of our target language, but there are two corner cases that we need to address: variable names that repeat and variable references that have not been defined. The first case, variable names that repeat, can occur in two ways. The simplest way is illustrated by the following listing:
+
+◊code/block/highlighted['racket]{
+((λ (x) x) (λ (x) x))
+}
+
+This is a variation on the program we used above to discuss function application. The only difference is the variable ◊code/inline{y} is consistently renamed to ◊code/inline{x}, so the name ◊code/inline{x} is used by both functions. These names occur in separate functions, so they do not interfere with each other. The same reasoning as before applies, and the result of this program is ◊code/inline{(λ (x) x)}. This is the same result as the previous example, except that the variable ◊code/inline{y} is consistently renamed to ◊code/inline{x} in the result as well.
+
+A more interesting corner case occurs when a variable name is reused in nested functions. Consider the following function:
+
+◊code/block/highlighted['racket]{
+(λ (x) (λ (x) x))
+}
+
+◊margin-note{
+
+ ◊svg{shadowing.svg}
+
+ ◊no-indent[] This phenomenon is known as ◊technical-term{shadowing}, because the argument of the inner function ◊technical-term{shadows} the argument of the outer function. In the inner function body there is no way to refer to the outer function argument.
+}
+
+Is the ◊code/inline{x} in the inner function body referring to the argument of the inner function or to the argument of the outer function? The answer is that variable references always refer to the nearest argument whose name (◊code/inline{x}, in the example) matches. So the ◊code/inline{x} in the inner function body is referring to the argument of the inner function.
+
+The final corner case is a variable reference to an undefined name. The following program is an example of this:
+
+◊code/block/highlighted['racket]{
+x
+}
+
+◊margin-note{Programs including variable references to undefined names are said to be ◊technical-term{open}. Since the meaning of ◊code/inline{x} in our example is not defined, the program is ◊technical-term{open} to different interpretations. If we said that ◊code/inline{x} is ◊code/inline{5}, then the program would result in ◊code/inline{5}. If we said that ◊code/inline{x} is ◊code/inline{"hello"}, then the program would result in ◊code/inline{"hello"}. Our interpreter only works over programs that do not contain these variable references to undefined names, which are said to be ◊technical-term{closed}.}
+
+The program consists of a variable reference to ◊code/inline{x}, but ◊code/inline{x} has not been defined, it is not an argument to any function. This program has no precise meaning on its own, so our interpreters fail to evaluate it. This decision is consistent with most programming languages. Racket, for example, errors when trying to run the program above: “◊code/inline{x}: unbound identifier in module.”
+
 ◊; TODO: Quote to represent programs.
-◊; TODO: Open programs.
 
 ◊; TODO: References.
 ◊; - SEwPR.
