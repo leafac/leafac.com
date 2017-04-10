@@ -113,6 +113,24 @@ Another advantage of using ◊technical-term{quasiquoting} to represent programs
 
 This listing has the same meaning as the previous program. First, it defines a variable named ◊code/inline{argument}, whose value is a data structure representing a program fragment in our target language: ◊code/inline{(λ (y) y)}. Then, it uses ◊technical-term{quasiquote} and ◊technical-term{unquote} to define the program ◊code/inline{((λ (x) x) (λ (y) y))} in our target language. The ◊technical-term{quasiquote} (◊code/inline{`}) starts a program in our target language embedded in Racket (a data structure), and the ◊technical-term{unquote} (◊code/inline{,}) escapes back to Racket. The result of the expression under the ◊technical-term{unquote} is interpolated in place. In the given example, the expression under the ◊technical-term{unquote} is just a reference to the variable defined right above: ◊code/inline{argument}. So its value (the program fragment ◊code/inline{(λ (y) y)} in our target language) is interpolated in place, resulting in the program ◊code/inline{((λ (x) x) (λ (y) y))} in our target language.
 
+◊section['first-interpreter]{First Interpreter}
+
+◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. There are only three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. We address them in order:
+
+◊code/block/highlighted['racket]{
+(define (interpret expression)
+  ; TODO: (1) Anonymous function definitions.
+  ; TODO: (2) Function application.
+  ; TODO: (3) Variable references.
+)
+}
+
+The first task of our ◊code/inline{interpret} function is to detect in which case the given ◊code/inline{expression} falls. To this end, we introduce a Racket feature called ◊technical-term{pattern matching}. The following figure is an example of ◊technical-term{pattern matching} and its parts:
+
+◊figure{◊svg{match.svg}}
+
+◊; Anonymous function definitions are already values in the language
+
 ◊; TODO: References.
 ◊; - SEwPR.
 ◊; - SICP.
