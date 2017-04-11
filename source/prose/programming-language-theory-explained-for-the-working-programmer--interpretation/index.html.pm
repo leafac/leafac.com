@@ -127,7 +127,55 @@ This listing has the same meaning as the previous program. First, it defines a v
 
 The first task of our ◊code/inline{interpret} function is to detect in which case the given ◊code/inline{expression} falls. To this end, we introduce a Racket feature called ◊technical-term{pattern matching}. The following figure is an example of ◊technical-term{pattern matching} and its parts:
 
+◊margin-note{The simple form of pattern matching in this example is similar to multiway branches in popular programming languages, for example, ◊code/inline{switch} and ◊code/inline{case} constructs.}
+
 ◊figure{◊svg{match.svg}}
+
+The pattern match works by matching the subject to each of the patterns, in order. The first pattern that matches determines which match clause has its body executed. In the example above, the subject and the patterns are numbers. The first match clause whose pattern matches the subject is ◊code/inline{[5 "five"]}, so the result of the pattern match is the clause body ◊code/inline{"five"}.
+
+The power of pattern matching is that patterns are not restricted to literal data (for example, ◊code/inline{4}, ◊code/inline{5} and ◊code/inline{6}), but can represent arbitrary data structures. Also, patterns can introduce variables that bind to parts of the structures. Consider the following example:
+
+◊margin-note{The form ◊code/inline{___} stands for omitted code.}
+
+◊margin-note{
+ Pattern matching with data structures and binding variables are a generalization of ◊technical-term{destructuring assignment}, a feature present in Ruby, Python, JavaScript and other languages that allow for the following program:
+
+ ◊code/block/highlighted['racket]{
+name, age = ["Wheatley", 6]
+ }
+
+ In this program, the data structure ◊code/inline{["Wheatley", 6]} is ◊technical-term{destructed}: the first element (◊code/inline{"Wheatley"}) is assigned to the first variable (◊code/inline{name}), and the second element (◊code/inline{6}) is assigned to the second variable (◊code/inline{age}).
+}
+
+◊code/block/highlighted['racket]{
+(match `("Wheatley" 6)
+  [`(,name ,age) ___])
+}
+
+The subject of the pattern match is the data structure ◊code/inline{`("Wheatley" 6)}. The pattern ◊code/inline{`(,name ,age)} matches this data structure, introducing the variables ◊code/inline{name} and ◊code/inline{age}, bound to the values ◊code/inline{"Wheatley"} and ◊code/inline{6}, respectively.
+
+The examples above demonstrate that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. In some cases, only this second feature is desired, because the subject can only have one form. While we could use the ◊code/inline{match} form for this purpose—as we did in the previous listing—Racket has a convenience called ◊code/inline{match-define}, which is less verbose. The program above can be rewritten to use ◊code/inline{match-define}:
+
+◊code/block/highlighted['racket]{
+(match-define `(,name ,age) `("Wheatley" 6))
+___
+}
+
+Coming back to ◊code/inline{interpret}, we can use pattern matching to detect in which case the given ◊code/inline{expression} falls:
+
+◊code/block/highlighted['racket]{
+(define (interpret expression)
+  (match expression
+    [`(λ (,argument) ,body)
+     ; TODO: (1) Anonymous function definitions.
+     ]
+    [`(,function ,argument)
+     ; TODO: (2) Function application.
+     ]
+    [variable
+     ; TODO: (3) Variable references.
+     ]))
+}
 
 ◊; Anonymous function definitions are already values in the language
 
