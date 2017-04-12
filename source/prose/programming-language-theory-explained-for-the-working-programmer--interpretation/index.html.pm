@@ -177,7 +177,9 @@ Coming back to ◊code/inline{interpret}, we can use pattern matching to detect 
      ]))
 }
 
-◊; Anonymous function definitions are already values in the language
+◊; TODO: Explain code above?
+
+◊; TODO: Anonymous function definitions are already values in the language
 
 ◊; TODO: References.
 ◊; - SEwPR.
