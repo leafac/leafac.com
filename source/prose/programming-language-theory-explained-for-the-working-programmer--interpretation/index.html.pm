@@ -115,6 +115,8 @@ This listing has the same meaning as the previous program. First, it defines a v
 
 ◊section['first-interpreter]{First Interpreter}
 
+◊; TODO: Are all components of pattern matches properly tagged as ◊technical-term{}?
+
 ◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. There are only three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. We address them in order:
 
 ◊code/block/highlighted['racket]{
@@ -177,9 +179,82 @@ Coming back to ◊code/inline{interpret}, we can use pattern matching to detect 
      ]))
 }
 
-◊; TODO: Explain code above?
+◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures, for example, ◊code/inline{`(λ (,argument) ,body)}.}
 
-◊; TODO: Anonymous function definitions are already values in the language
+In the listing above, the ◊technical-term{subject} of the pattern match is ◊code/inline{expression}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{expression} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
+
+◊paragraph-separation[]
+
+◊new-thought{We start by addressing} the first ◊technical-term{match clause}, regarding anonymous function definitions. The purpose of ◊code/inline{interpret} is to evaluate the given ◊code/inline{expression} to a value. If the given ◊code/inline{expression} is an anonymous function definition, then it is already a value in our language. All ◊code/inline{interpret} has to do in that case is to return ◊code/inline{expression} unaltered:
+
+◊code/block/highlighted['racket]{
+(define (interpret expression)
+  (match expression
+    [`(λ (,argument) ,body)
+     expression]
+    [`(,function ,argument)
+     ; TODO: (2) Function application.
+     ]
+    [variable
+     ; TODO: (3) Variable references.
+     ]))
+}
+
+◊margin-note{To run this partial implementation in Racket, remove the ◊technical-term{match clauses} that have not been implemented yet. Otherwise the missing ◊technical-term{clause bodies} cause errors.}
+
+This partial ◊code/inline{interpret} implementation is enough to interpret our first example: ◊code/inline{(λ (x) x)}. It returns ◊code/inline{(λ (x) x)} itself, unaltered.
+
+◊paragraph-separation[]
+
+◊new-thought{The next case} we address is function application. The following is an example of function application in our language:
+
+◊code/block/highlighted['racket]{
+((λ (x) x) (λ (y) y)) ;; => (λ (y) y)
+}
+
+The applied function is ◊code/inline{(λ (x) x)} and the argument is ◊code/inline{(λ (y) y)}. The meaning is the same as mathematics and most programming languages: in the function body (in this case, the body is ◊code/inline{x}) substitute every occurrence of the argument name (in this case, the argument name is ◊code/inline{x}) for the given argument (in this case, the given argument is ◊code/inline{(λ (y) y)}).
+
+The ◊technical-term{pattern} we use to match function application is ◊code/inline{`(,function ,argument)}. So, in our example, the variable name ◊code/inline{function} is bound to the value ◊code/inline{(λ (x) x)} and the variable name ◊code/inline{argument} is bound to the value ◊code/inline{(λ (y) y)}. Our first task is to ◊technical-term{destruct} ◊code/inline{function} to find its argument name and body:
+
+◊code/block/highlighted['racket]{
+(match-define `(λ (,argument-name) ,body)
+  function)
+}
+
+Then, we can call an auxiliary function to perform the substitution:
+
+◊code/block/highlighted['racket]{
+(define (interpret expression)
+  (match expression
+    [`(λ (,argument) ,body)
+     expression]
+    [`(,function ,argument)
+     (match-define `(λ (,argument-name) ,body)
+       function)
+     (substitute body argument-name argument)]
+    [variable
+     ; TODO: (3) Variable references.
+     ]))
+}
+
+The ◊code/inline{substitute} auxiliary function receives as argument a function ◊code/inline{body} and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement ◊code/inline{substitute}, we use the same strategy as in ◊code/inline{interpret}. We start by ◊technical-term{pattern matching} on the given ◊code/inline{body} to distinguish between the possible kinds:
+
+◊margin-note{The skeleton for the ◊code/inline{substitute} implementation is the same as the skeleton for the ◊code/inline{interpret} implementation. This is not a coincidence. Both functions work by traversing the data structures that represents the programs in our language. The difference between ◊code/inline{substitute} and ◊code/inline{interpret} is the computations they perform during this traversal. We could factor these common parts out of ◊code/inline{substitute} and ◊code/inline{interpret}, resulting in what is called the ◊technical-term{visitor pattern}. We do not perform this for clarity and simplicity.}
+
+◊code/block/highlighted['racket]{
+(define (substitute
+         body argument-name argument)
+  (match body
+    [`(λ (,other-argument-name) ,other-body)
+     ; TODO: (1) Anonymous function definitions.
+     ]
+    [`(,function ,other-argument)
+     ; TODO: (2) Function application.
+     ]
+    [variable
+     ; TODO: (3) Variable references.
+     ]))
+}
 
 ◊; TODO: References.
 ◊; - SEwPR.
