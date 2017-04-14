@@ -98,6 +98,8 @@ The program consists of a variable reference to ◊code/inline{x}, but ◊code/i
 
 To turn this program in our target language into a data structure in Racket, we introduce a quasiquote (◊code/inline{`}), as in the following Racket program:
 
+◊margin-note{Our target language is a subset of Racket, so ◊code/inline{((λ (x) x) (λ (y) y))} is a program both in our target language and in Racket. Quasiquote turns this Racket program into data. This data is the program in our target language, over which our interpreter will work. This process demonstrates that ◊emphasis{code can be data, and data can be code}. The two—data and code—are sides of the same coin.}
+
 ◊code/block/highlighted['racket]{
 `((λ (x) x) (λ (y) y))
 }
@@ -115,55 +117,68 @@ This listing has the same meaning as the previous program. First, it defines a v
 
 ◊section['first-interpreter]{First Interpreter}
 
-◊; TODO: Are all components of pattern matches properly tagged as ◊technical-term{}?
+◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. We build it incrementally, driven by the example programs from the ◊reference['language]{previous section}. The first program is an example of anonymous function definition:
 
-◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. There are only three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. We address them in order:
+◊code/block/highlighted['racket]{
+(λ (x) x)
+}
+
+Anonymous function definitions are already values in our language, so the interpreter can return the given expression unaltered:
 
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
-  ; TODO: (1) Anonymous function definitions.
-  ; TODO: (2) Function application.
-  ; TODO: (3) Variable references.
-)
+  expression)
 }
 
-The first task of our ◊code/inline{interpret} function is to detect in which case the given ◊code/inline{expression} falls. To this end, we introduce a Racket feature called ◊technical-term{pattern matching}. The following figure is an example of ◊technical-term{pattern matching} and its parts:
+This implementation is enough to interpret our first example program correctly:
 
-◊margin-note{The simple form of pattern matching in this example is similar to multiway branches in popular programming languages, for example, ◊code/inline{switch} and ◊code/inline{case} constructs.}
+◊margin-note{The quote (◊code/inline{'}) in the result means the same as the quasiquote (◊code/inline{`}), except that it does not support unquoting (◊code/inline{,}). For the purposes of this article, read the quote the same as the quasiquote: “the following is a program in our target language.”}
 
-◊figure{◊svg{match.svg}}
+◊code/block/highlighted['racket]{
+> (interpret `(λ (x) x))
+'(λ (x) x)
+}
 
-The pattern match works by matching the subject to each of the patterns, in order. The first pattern that matches determines which match clause has its body executed. In the example above, the subject and the patterns are numbers. The first match clause whose pattern matches the subject is ◊code/inline{[5 "five"]}, so the result of the pattern match is the clause body ◊code/inline{"five"}.
+The next program we address in our interpreter implementation is the function application:
 
-The power of pattern matching is that patterns are not restricted to literal data (for example, ◊code/inline{4}, ◊code/inline{5} and ◊code/inline{6}), but can represent arbitrary data structures. Also, patterns can introduce variables that bind to parts of the structures. Consider the following example:
+◊code/block/highlighted['racket]{
+((λ (x) x) (λ (y) y))
+}
 
-◊margin-note{The form ◊code/inline{___} stands for omitted code.}
+Before the interpreter starts working on the function application, it needs to detect that the given ◊code/inline{expression} is of this kind—as opposed to an anonymous function declaration, for example. To this end, we introduce ◊technical-term{pattern matching}. The simplest form of ◊technical-term{pattern matching} is the following:
 
 ◊margin-note{
- Pattern matching with data structures and binding variables are a generalization of ◊technical-term{destructuring assignment}, a feature present in Ruby, Python, JavaScript and other languages that allow for the following program:
+ ◊technical-term{Pattern matching} is a generalization of ◊technical-term{destructuring assignment}. The following listing is an example of ◊technical-term{destructuring assignment} in languages including Ruby, Python and JavaScript:
 
  ◊code/block/highlighted['racket]{
 name, age = ["Wheatley", 6]
  }
 
- In this program, the data structure ◊code/inline{["Wheatley", 6]} is ◊technical-term{destructed}: the first element (◊code/inline{"Wheatley"}) is assigned to the first variable (◊code/inline{name}), and the second element (◊code/inline{6}) is assigned to the second variable (◊code/inline{age}).
+ In this program, ◊code/inline{["Wheatley", 6]} is a list composed of the values ◊code/inline{"Wheatley"} and ◊code/inline{6}. The ◊technical-term{destructuring assignment} works by ◊technical-term{destructuring} the list and ◊technical-term{assigning} its elements to the variables ◊code/inline{name} and ◊code/inline{age}, respectively.
+
+ ◊technical-term{Pattern matching} extends ◊technical-term{destructuring assignment} to support arbitrary data structures, beyond lists, tuples and other data structures generally supported by ◊technical-term{destructuring assignment}.
 }
+
+◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures, for example, ◊code/inline{`(λ (,argument) ,body)}.}
 
 ◊code/block/highlighted['racket]{
-(match `("Wheatley" 6)
-  [`(,name ,age) ___])
+(match-define `(,function ,argument)
+              `((λ (x) x) (λ (y) y)))
 }
 
-The subject of the pattern match is the data structure ◊code/inline{`("Wheatley" 6)}. The pattern ◊code/inline{`(,name ,age)} matches this data structure, introducing the variables ◊code/inline{name} and ◊code/inline{age}, bound to the values ◊code/inline{"Wheatley"} and ◊code/inline{6}, respectively.
+This form matches the program in our target language ◊code/inline{`((λ (x) x) (λ (y) y))} with the pattern ◊code/inline{`(,function ,argument)}. As a result, the variable ◊code/inline{function} is bound to the program fragment ◊code/inline{(λ (x) x)} and the variable ◊code/inline{argument} is bound to the program fragment ◊code/inline{(λ (y) y)}.
 
-The examples above demonstrate that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. In some cases, only this second feature is desired, because the subject can only have one form. While we could use the ◊code/inline{match} form for this purpose—as we did in the previous listing—Racket has a convenience called ◊code/inline{match-define}, which is less verbose. The program above can be rewritten to use ◊code/inline{match-define}:
+In our case, the data structure which is ◊technical-term{subject} of the ◊technical-term{pattern match} (◊code/inline{expression}) might have different forms. Moreover, we want to perform different computations depending on the kind of ◊code/inline{expression}. So the ◊code/inline{match-define} form does not suffice, we have to reach for the ◊code/inline{match} form, which was designed for this purpose. The following is an example of ◊code/inline{pattern matching} with the ◊code/inline{match} form:
 
-◊code/block/highlighted['racket]{
-(match-define `(,name ,age) `("Wheatley" 6))
-___
-}
+◊margin-note{The ◊code/inline{match} form is similar to multiway branches (for example, ◊code/inline{switch} and ◊code/inline{case}) in popular programming languages.}
 
-Coming back to ◊code/inline{interpret}, we can use pattern matching to detect in which case the given ◊code/inline{expression} falls:
+◊figure{◊svg{match.svg}}
+
+The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} to each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data structures: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the result of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
+
+The example above demonstrate that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the given ◊code/inline{expression} falls. There are only possibilities, the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
+
+◊;{
 
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
@@ -178,8 +193,6 @@ Coming back to ◊code/inline{interpret}, we can use pattern matching to detect 
      ; TODO: (3) Variable references.
      ]))
 }
-
-◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures, for example, ◊code/inline{`(λ (,argument) ,body)}.}
 
 In the listing above, the ◊technical-term{subject} of the pattern match is ◊code/inline{expression}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{expression} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
 
@@ -255,7 +268,10 @@ The ◊code/inline{substitute} auxiliary function receives as argument a functio
      ; TODO: (3) Variable references.
      ]))
 }
+}
 
+◊; TODO: Are all components of pattern matches properly tagged as ◊technical-term{}?
+◊; TODO: Reorder explanation of pattern matching.
 ◊; TODO: Add listings with calls to “interpret”.
 
 ◊; TODO: References.
