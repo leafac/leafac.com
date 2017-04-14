@@ -256,6 +256,8 @@ The ◊code/inline{substitute} auxiliary function receives as argument a functio
      ]))
 }
 
+◊; TODO: Add listings with calls to “interpret”.
+
 ◊; TODO: References.
 ◊; - SEwPR.
 ◊; - SICP.
