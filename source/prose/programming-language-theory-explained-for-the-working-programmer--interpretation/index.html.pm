@@ -778,7 +778,7 @@ Our interpreter does not handle the case of variables used before their definiti
 15
 }
 
-Our interpreter is fully functional for any program in our target language.
+The output what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
 
 ◊; TODO: References.
 ◊; - SEwPR.
