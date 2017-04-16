@@ -594,6 +594,8 @@ Our interpreter does not handle the case of variables used before their definiti
 
 ◊margin-note{In this listing, we use Racket’s ◊code/inline{eval} function to transform the result of ◊code/inline{interpret}—a Racket data structure representing a program in our target language—into a Racket function. For example, ◊code/inline{(eval `(λ (x) x))} results in the Racket function ◊code/inline{(λ (x) x)}—note that there is no quasiquoting in this result, it is a native Racket function. We then use ◊code/inline{pretty-print} to inspect the outputs of our program. The ◊code/inline{pretty-print} is defined in ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{the article that introduces our target language}.}
 
+◊margin-note{To reproduce this result in DrRacket, enter the listing in the ◊technical-term{interactions} window (on the bottom or the right), instead of the ◊technical-term{definitions} window (on the top or the left). The reason is ◊code/inline{eval}, as written, only works in the ◊technical-term{interactions} window.}
+
 ◊code/block/highlighted['racket]{
 > (pretty-print
  (eval
@@ -778,7 +780,15 @@ Our interpreter does not handle the case of variables used before their definiti
 15
 }
 
-The output what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
+The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
+
+◊; TODO: Fix inconsistency of “argument” and “argument-name”. (Some λ have arguments named “argument”, while they should be consistenly named “argument-name”.
+
+◊; TODO: Motivate small-step: (1) reason about interpretation (step debugger); (2) don’t use Racket stack to model our interpreter’s stack.
+
+◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
+
+◊; TODO: Won’t deal with open programs.
 
 ◊; TODO: References.
 ◊; - SEwPR.
