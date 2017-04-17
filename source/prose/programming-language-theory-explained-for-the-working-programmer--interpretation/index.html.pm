@@ -161,7 +161,7 @@ name, age = ["Wheatley", 6]
  ◊technical-term{Pattern matching} extends ◊technical-term{destructuring assignment} to support arbitrary data structures, beyond lists, tuples and other data structures generally supported by ◊technical-term{destructuring assignment}.
 }
 
-◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures from program fragments, for example, ◊code/inline{`(λ (,argument) ,body)}.}
+◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures from program fragments, for example, ◊code/inline{`(λ (,argument-name) ,body)}.}
 
 ◊code/block/highlighted['racket]{
 (match-define `(,function ,argument)
@@ -185,7 +185,7 @@ The example above demonstrate that the ◊code/inline{match} form in Racket has 
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    #;[`(λ (,argument) ,body)
+    #;[`(λ (,argument-name) ,body)
        ; TODO: (1) Anonymous function definitions.
        ]
     #;[`(,function ,argument)
@@ -196,14 +196,14 @@ The example above demonstrate that the ◊code/inline{match} form in Racket has 
        ]))
 }
 
-In the listing above, the ◊technical-term{subject} of the pattern match is the ◊code/inline{expression}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{expression} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
+In the listing above, the ◊technical-term{subject} of the pattern match is the ◊code/inline{expression}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument-name) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{expression} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument-name} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
 
 We already have an implementation for anonymous function definitions, so we can fill in the first hole in the template above:
 
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    [`(λ (,argument) ,body)
+    [`(λ (,argument-name) ,body)
      expression]
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
@@ -242,7 +242,7 @@ Then, we can call an auxiliary function to perform the substitution:
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    [`(λ (,argument) ,body)
+    [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
      (match-define `(λ (,argument-name) ,body)
@@ -372,7 +372,7 @@ At the top level, this program is a function application, which matches the ◊c
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    [`(λ (,argument) ,body)
+    [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
      (match-define `(λ (,argument-name) ,body)
@@ -401,7 +401,7 @@ In this function application, the ◊code/inline{argument} is ◊code/inline{((�
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    [`(λ (,argument) ,body)
+    [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
      (match-define `(λ (,argument-name) ,body)
@@ -446,7 +446,7 @@ This output is the result of the substitution of the throwaway argument ◊code/
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    [`(λ (,argument) ,body)
+    [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
      (match-define `(λ (,argument-name) ,body)
@@ -552,7 +552,7 @@ Our interpreter does not handle the case of variables used before their definiti
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
   (match expression
-    [`(λ (,argument) ,body)
+    [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
      (match-define `(λ (,argument-name) ,body)

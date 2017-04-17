@@ -339,7 +339,7 @@
 (module+ big-step-interpreter
   (define (interpret expression)
     (match expression
-      [`(λ (,argument) ,body)
+      [`(λ (,argument-name) ,body)
        expression]
       [`(,function ,argument)
        (match-define `(λ (,argument-name) ,body)
