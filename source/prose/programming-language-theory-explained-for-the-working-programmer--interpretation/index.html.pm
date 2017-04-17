@@ -790,6 +790,8 @@ Our interpreter does not handle the case of variables used before their definiti
 
 The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
 
+◊; TODO: Point out that ‘open?’ has been implemented.
+
 ◊; TODO: Motivate small-step: (1) reason about interpretation (step debugger); (2) don’t use Racket stack to model our interpreter’s stack.
 
 ◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
