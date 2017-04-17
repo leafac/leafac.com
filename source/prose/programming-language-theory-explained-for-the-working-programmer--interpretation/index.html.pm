@@ -434,7 +434,7 @@ Our interpreter now works for the given example:
 ;; => (λ (y) y)
 }
 
-◊margin-note{The transformation of wrapping a program with an immediately-applied function which ignores its argument is called ◊technical-term{η-conversion}. More specifically, it is an ◊technical-term{η-abstraction}, as opposed to an ◊technical-term{η-reduction}, which is going in the opposite direction—removing the immediately applied function and the throwaway argument.}
+◊margin-note{The transformation of wrapping a program with a function which ignores its argument and is immediately applied to a throwaway argument always preserves the meaning of the original program. This process is called ◊technical-term{η-conversion}. More specifically, it is an ◊technical-term{η-abstraction}, as opposed to an ◊technical-term{η-reduction}, which is going in the opposite direction—removing the wrapping function and the throwaway argument.}
 
 This program is similar to our first example of function application ◊code/inline{((λ (x) x) (λ (y) y))}. The difference is that it has been wrapped into a function which ignores its argument (◊code/inline{i}). This function is immediately applied to the throwaway argument (◊code/inline{(λ (z) z)}).
 
@@ -508,7 +508,7 @@ This program fragment is a function application, in which the ◊code/inline{fun
 '(λ (x) (λ (y) y))
 }
 
-◊margin-note{While ◊code/inline{argument-name} and ◊code/inline{other-argument-name} have the same identifier (◊code/inline{x}, in the example), they are different bindings. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments how they want, without global knowledge of the program and all identifier names in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
+◊margin-note{While ◊code/inline{argument-name} and ◊code/inline{other-argument-name} have the same identifier (◊code/inline{x}, in the example), they are different bindings. Similar to how two different people might have the same name. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments how they want, without global knowledge of the program and all identifier names in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
 
 The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} refers to its argument, not the the outer declaration of ◊code/inline{x}, which we are currently substituting. So we need to change ◊code/inline{substitute}: when it finds a function definition whose ◊code/inline{other-argument-name} is the same as the given ◊code/inline{argument-name}, it should stop traversing the program fragment. It should not try to substitute occurrences of the ◊code/inline{argument-name} any further, because they refer to ◊code/inline{other-argument-name}:
 
