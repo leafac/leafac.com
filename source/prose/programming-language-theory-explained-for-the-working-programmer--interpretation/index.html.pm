@@ -790,6 +790,8 @@ The output is what we expected, ◊code/inline{15}. Our interpreter is fully fun
 
 ◊; TODO: Won’t deal with open programs.
 
+◊; TODO: Point out syntax-directed translation. (As a generally useful thing.)
+
 ◊; TODO: References.
 ◊; - SEwPR.
 ◊; - SICP.
