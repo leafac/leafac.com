@@ -375,8 +375,10 @@ At the top level, this program is a function application, which matches the ◊c
     [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
-     (match-define `(λ (,argument-name) ,body)
+     (define interpreted-function
        (interpret function))
+     (match-define `(λ (,argument-name) ,body)
+       interpreted-function)
      (substitute body argument-name argument)]
     #;[variable
        ; TODO: (3) Variable references.
@@ -404,10 +406,12 @@ In this function application, the ◊code/inline{argument} is ◊code/inline{((�
     [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
-     (match-define `(λ (,argument-name) ,body)
+     (define interpreted-function
        (interpret function))
      (define interpreted-argument
        (interpret argument))
+     (match-define `(λ (,argument-name) ,body)
+       interpreted-function)
      (substitute body argument-name interpreted-argument)]
     #;[variable
        ; TODO: (3) Variable references.
@@ -449,10 +453,12 @@ This output is the result of the substitution of the throwaway argument ◊code/
     [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
-     (match-define `(λ (,argument-name) ,body)
+     (define interpreted-function
        (interpret function))
      (define interpreted-argument
        (interpret argument))
+     (match-define `(λ (,argument-name) ,body)
+       interpreted-function)
      (define substituted-body
        (substitute
         body argument-name
@@ -555,10 +561,12 @@ Our interpreter does not handle the case of variables used before their definiti
     [`(λ (,argument-name) ,body)
      expression]
     [`(,function ,argument)
-     (match-define `(λ (,argument-name) ,body)
+     (define interpreted-function
        (interpret function))
      (define interpreted-argument
        (interpret argument))
+     (match-define `(λ (,argument-name) ,body)
+       interpreted-function)
      (define substituted-body
        (substitute
         body argument-name
@@ -781,8 +789,6 @@ Our interpreter does not handle the case of variables used before their definiti
 }
 
 The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
-
-◊; TODO: Fix inconsistency of “argument” and “argument-name”. (Some λ have arguments named “argument”, while they should be consistenly named “argument-name”.
 
 ◊; TODO: Motivate small-step: (1) reason about interpretation (step debugger); (2) don’t use Racket stack to model our interpreter’s stack.
 

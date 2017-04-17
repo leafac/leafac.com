@@ -342,10 +342,12 @@
       [`(λ (,argument-name) ,body)
        expression]
       [`(,function ,argument)
-       (match-define `(λ (,argument-name) ,body)
+       (define interpreted-function
          (interpret function))
        (define interpreted-argument
          (interpret argument))
+       (match-define `(λ (,argument-name) ,body)
+         interpreted-function)
        (define substituted-body
          (substitute
           body argument-name
