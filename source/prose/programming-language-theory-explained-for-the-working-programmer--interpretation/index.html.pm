@@ -100,6 +100,8 @@ To turn this program in our target language into a data structure in Racket, we 
 
 ◊margin-note{Our target language is a subset of Racket, so ◊code/inline{((λ (x) x) (λ (y) y))} is a program both in our target language and in Racket. Quasiquote turns this Racket program into data. This data is the program in our target language, over which our interpreter will work. This process demonstrates that ◊emphasis{code can be data, and data can be code}. The two—data and code—are sides of the same coin.}
 
+◊margin-note{The use of quasiquotation allows us to avoid the issues of ◊technical-term{parsing}, which are beyond the scope of this article. A ◊technical-term{parser} is a program which receives as input the text representation of a program and converts it into data structures. We skipped this process by representing programs in our target language as data structures in Racket directly. Our target language is ◊technical-term{embedded} in Racket.}
+
 ◊code/block/highlighted['racket]{
 `((λ (x) x) (λ (y) y))
 }
@@ -255,7 +257,11 @@ Then, we can call an auxiliary function to perform the substitution:
 
 The ◊code/inline{substitute} auxiliary function receives as argument a function ◊code/inline{body} and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement ◊code/inline{substitute}, we use the same strategy as in ◊code/inline{interpret}. We start by ◊technical-term{pattern matching} on the given ◊code/inline{body} to distinguish between the possible kinds:
 
-◊margin-note{The template for the ◊code/inline{substitute} implementation is the same as the template for the ◊code/inline{interpret} implementation. This is not a coincidence. Both functions work by traversing the data structures that represents the programs in our language. The difference between ◊code/inline{substitute} and ◊code/inline{interpret} is the computations they perform during this traversal. We could factor these common parts out of ◊code/inline{substitute} and ◊code/inline{interpret}, resulting in what is called the ◊technical-term{visitor pattern}. We do not do this for clarity and simplicity.}
+◊margin-note{
+ The template for the ◊code/inline{substitute} implementation is the same as the template for the ◊code/inline{interpret} implementation. This is not a coincidence, both functions work by traversing the data structures that represents the programs in our language. In technical terms, both ◊code/inline{substitute} and ◊code/inline{interpret} are performing ◊technical-term{syntax-directed translations}, via a ◊technical-term{depth-first traversals} of the ◊technical-term{abstract syntax tree} of the programs in ◊technical{postorder}.
+
+ The difference between ◊code/inline{substitute} and ◊code/inline{interpret} is the computations they perform during this traversal. We could factor these common parts out of ◊code/inline{substitute} and ◊code/inline{interpret}. We do not do this for clarity and simplicity.
+}
 
 ◊code/block/highlighted['racket]{
 (define (substitute
@@ -553,7 +559,7 @@ In this case, there is no value the interpreter can output, because the meaning 
 Our interpreter does not handle the case of variables used before their definitions, so it is safe for it to error. With this observation, we can complete our interpreter. The following listing is the full implementation:
 
 ◊margin-note{
- There is one edge case that our interpreter does not handle: undefined variables whose values are never necessary. For example, consider the program ◊code/inline{(λ (x) y)}. This program is a function definition, which is already a value, so the interpreter outputs ◊code/inline{(λ (x) y)} as the result. But the meaning of ◊code/inline{y} is not defined, so this result does not make sense on its own. For simplicity, we will not handle this case in the interpreter. We could perform this check prior to interpretation, in a pre-processing step that would check for the ◊technical-term{well-formedness} of the program. In our language, the only ◊technical-term{well-formedness} condition is whether the program is ◊technical-term{closed} or not. The implementation would consist of traversing the program—in a similar fashion to ◊code/inline{interpret} and ◊code/inline{substitute}—while keeping track of the variables that have already been defined and those that are used.}
+ There is one edge case that our interpreter does not handle: undefined variables whose values are never necessary. For example, consider the program ◊code/inline{(λ (x) y)}. This program is a function definition, which is already a value, so the interpreter outputs ◊code/inline{(λ (x) y)} as the result. But the meaning of ◊code/inline{y} is not defined, so this result does not make sense on its own. For simplicity, we will not handle this case in the interpreter. We could perform this check prior to interpretation, in a pre-processing step that would check for the ◊technical-term{well-formedness} of the program. In our language, the only ◊technical-term{well-formedness} condition is whether the program is ◊technical-term{closed} or not. The implementation would consist of traversing the program—in a similar fashion to ◊code/inline{interpret} and ◊code/inline{substitute}—while keeping track of the variables that have already been defined and those that are used. Explaining this implementation is beyond the scope of this article, but it is available with the ◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{rest of the code}.}
 
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
@@ -788,17 +794,25 @@ Our interpreter does not handle the case of variables used before their definiti
 15
 }
 
-The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
+The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language. But this interpreter is not revealing all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if it finds that the ◊code/inline{function} or the ◊code/inline{argument} are function application themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation.
 
-◊; TODO: Point out that ‘open?’ has been implemented.
+The next section addresses these aspects, making our interpreter more transparent and revealing more interesting facets of interpretation.
+
+◊section['debugger-like-interpreter]{Debugger-Like Interpreter}
+
+◊margin-note{
+ In technical terms, our first interpreter is a ◊technical-term{big-step interpreter}, because the whole interpretation happens in a single big traversal of the program. One call to ◊code/inline{interpret} suffices to interpret a whole program to a value—◊code/inline{interpret} might have to recursively call itself to do complete its task, but that is an internal implementation detail which is not relevant to the ◊technical-term{big-step} characterization.
+
+ The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—performs only a single operation, resolving a single function application. For convenience and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement a ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets expressions to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}.
+}
+
+◊new-thought{}
 
 ◊; TODO: Motivate small-step: (1) reason about interpretation (step debugger); (2) don’t use Racket stack to model our interpreter’s stack.
 
 ◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
 
 ◊; TODO: Won’t deal with open programs.
-
-◊; TODO: Point out syntax-directed translation. (As a generally useful thing.)
 
 ◊; TODO: References.
 ◊; - SEwPR.
