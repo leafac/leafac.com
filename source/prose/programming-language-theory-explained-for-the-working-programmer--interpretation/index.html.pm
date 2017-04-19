@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Interpretation}
-◊define-meta[date]{2017-04-03}
+◊define-meta[date]{2017-04-19}
 
 ◊margin-note{This article assumes knowledge in the ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -803,16 +803,24 @@ The next section addresses these aspects, making our interpreter more transparen
 ◊margin-note{
  In technical terms, our first interpreter is a ◊technical-term{big-step interpreter}, because the whole interpretation happens in a single big traversal of the program. One call to ◊code/inline{interpret} suffices to interpret a whole program to a value—◊code/inline{interpret} might have to recursively call itself to do complete its task, but that is an internal implementation detail which is not relevant to the ◊technical-term{big-step} characterization.
 
- The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—performs only a single operation, resolving a single function application. For convenience and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement a ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets expressions to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}.
+ The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—takes a single step towards a value, resolving a single function application. For convenience and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement a ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets expressions to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}.
 }
 
-◊new-thought{}
+◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) own stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of a ◊technical-term{continuation}, which we introduce later in this section.}
 
-◊; TODO: Motivate small-step: (1) reason about interpretation (step debugger); (2) don’t use Racket stack to model our interpreter’s stack.
+◊new-thought{Our first interpreter} defined in the ◊reference['first-interpreter]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, the ◊code/inline{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code/inline{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
+
+In this section, we rewrite our interpreter to take a different approach, more similar to that of ◊technical-term{step-debuggers}. ◊technical-term{Step-debuggers} are tools that aid program understanding and debugging, they allow the user to run a program step-by-step—either line-by-line or expression-by-expression. In our case, the level of granularity that is interesting is the function application, because function applications are the smallest pieces of computation that preserve meaning.
+
+If we inspected interpretation in the midst of ◊code/inline{substitute}, we would potentially find meaningless program fragments in which there are undefined variables. For example, while substituting the argument name ◊code/inline{x} for the value ◊code/inline{(λ (y) y)} in the program fragment ◊code/inline{(x x)}, we could find the program fragment ◊code/inline{((λ (y) y) x)}, in which only the first use of ◊code/inline{x} has been substituted. The program fragment ◊code/inline{((λ (y) y) x)} has no meaning on its own, because the variable ◊code/inline{x} is undefined.
+
+If we inspected interpretation after a few function applications, we would potentially miss some nuances of the process. So a single function application is the best level of granularity for a ◊technical-term{step} in our ◊technical-term{debugger-like interpreter}.
+
+◊paragraph-separation[]
+
+◊new-thought{To allow us to focus} on our study of interpretation, we start by reducing the scope of our ◊technical-term{debugger-like interpreter}. It does not need to handle the error case of programs including undefined variables. We assume that the programs the ◊technical-term{debugger-like interpreter} receives as arguments have already been checked by an external well-formedness checker. The implementation of this checker is not discussed in this article, but is available ◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{in the implementation}.
 
 ◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
-
-◊; TODO: Won’t deal with open programs.
 
 ◊; TODO: References.
 ◊; - SEwPR.
