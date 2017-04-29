@@ -117,7 +117,7 @@ This listing has the same meaning as the previous program. First, it defines a v
 
 ◊section['first-interpreter]{First Interpreter}
 
-◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. We build it incrementally, driven by the example programs from the ◊reference['language]{previous section}. The first program is an example of anonymous function definition:
+◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. We build it incrementally, driven by examples, starting with an anonymous function definition:
 
 ◊code/block/highlighted['racket]{
 (λ (x) x)
@@ -132,7 +132,7 @@ Anonymous function definitions are already values in our language, so the interp
 
 This implementation is enough to interpret our first example program correctly:
 
-◊margin-note{The quote (◊code/inline{'}) in the result means the same as the quasiquote (◊code/inline{`}), except that it does not support unquoting (◊code/inline{,}). For the purposes of this article, read the quote the same as the quasiquote: “the following is a program in our target language.”}
+◊margin-note{The quote (◊code/inline{'}) in the result means the same as the quasiquote (◊code/inline{`}), except that it does not support unquoting (◊code/inline{,}). For the purposes of this article, the two are mean the same: “the next form is a program in our target language.”}
 
 ◊code/block/highlighted['racket]{
 > (interpret `(λ (x) x))
@@ -170,17 +170,17 @@ name, age = ["Wheatley", 6]
 
 This form matches the program in our target language ◊code/inline{`((λ (x) x) (λ (y) y))} with the pattern ◊code/inline{`(,function ,argument)}. As a result, the variable ◊code/inline{function} is bound to the program fragment ◊code/inline{(λ (x) x)} and the variable ◊code/inline{argument} is bound to the program fragment ◊code/inline{(λ (y) y)}.
 
-In our case, the data structure which is ◊technical-term{subject} of the ◊technical-term{pattern match} (◊code/inline{expression}) might have different forms. Moreover, we want to perform different computations depending on the kind of ◊code/inline{expression}. So the ◊code/inline{match-define} form does not suffice, we have to reach for the ◊code/inline{match} form, which was designed for this purpose. The following is an example of ◊code/inline{pattern matching} with the ◊code/inline{match} form:
+In our interpreter, the data structure which is ◊technical-term{subject} of the ◊technical-term{pattern match} (◊code/inline{expression}) might have different forms. Moreover, we want to perform different computations depending on the kind of ◊code/inline{expression}. So the ◊code/inline{match-define} form does not suffice, we have to reach for the ◊code/inline{match} form, which was designed for this purpose. The following is an example of ◊code/inline{pattern matching} with the ◊code/inline{match} form:
 
-◊margin-note{The ◊code/inline{match} form is similar to multiway branches (for example, ◊code/inline{switch} and ◊code/inline{case}) in popular programming languages. And it works with arbitrary ◊technical-term{patterns} for arbitrary data structures.}
+◊margin-note{The ◊code/inline{match} form is similar to multiway branches (for example, ◊code/inline{switch} and ◊code/inline{case}) in other programming languages. And it works with arbitrary ◊technical-term{patterns} for arbitrary data structures.}
 
 ◊figure{◊svg{match.svg}}
 
-The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} to each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data structures: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the result of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
+The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} to each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the ◊technical-term{result} of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
 
-The example above demonstrate that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the given ◊code/inline{expression} falls. There are only possibilities, which are the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
+The example above demonstrates that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the given ◊code/inline{expression} falls. There are only three possibilities, which are the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
 
-◊margin-note{Text after the semicolon (◊code/inline{;}) are comments. And ◊code/inline{#;} comments out the whole form (◊code/inline{[___]}) that follows it. This is necessary because a ◊technical-term{match clause} without a ◊technical-term{body} is not valid Racket syntax. We remove the ◊code/inline{#;} comment markers as we implement the interpreter for different kinds of expressions.}
+◊margin-note{Texts after the semicolon (◊code/inline{;}) are comments. And ◊code/inline{#;} comments out the whole form ◊code/inline{[___]} that follows it. This is necessary because a ◊technical-term{match clause} without a ◊technical-term{body} is not valid Racket syntax. We remove the ◊code/inline{#;} comment markers as we implement the interpreter for different kinds of expressions.}
 
 ◊code/block/highlighted['racket]{
 (define (interpret expression)
@@ -222,7 +222,7 @@ The interpreter is working again for programs consisting of anonymous function d
 
 ◊paragraph-separation[]
 
-◊new-thought{We can now come back} to function application. The following is the example of function application in our language which we are addressing:
+◊new-thought{We now return} to function application. The following is the example of function application in our language which we are addressing:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y)) ;; => (λ (y) y)
@@ -256,9 +256,9 @@ Then, we can call an auxiliary function to perform the substitution:
 The ◊code/inline{substitute} auxiliary function receives as argument a function ◊code/inline{body} and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement ◊code/inline{substitute}, we use the same strategy as in ◊code/inline{interpret}. We start by ◊technical-term{pattern matching} on the given ◊code/inline{body} to distinguish between the possible kinds:
 
 ◊margin-note{
- The template for the ◊code/inline{substitute} implementation is the same as the template for the ◊code/inline{interpret} implementation. This is not a coincidence, both functions work by traversing the data structures that represents the programs in our language. In technical terms, both ◊code/inline{substitute} and ◊code/inline{interpret} are performing ◊technical-term{syntax-directed translations}, via a ◊technical-term{depth-first traversals} of the ◊technical-term{abstract syntax tree} of the programs in ◊technical{postorder}.
+ The template for the ◊code/inline{substitute} implementation is the same as the template for the ◊code/inline{interpret} implementation. This is not a coincidence, both functions work by traversing the data structures that represents the programs in our language. In technical terms, both ◊code/inline{substitute} and ◊code/inline{interpret} are performing ◊technical-term{syntax-directed translations}, via a ◊technical-term{depth-first traversals} of the ◊technical-term{abstract syntax tree} of the programs in ◊technical-term{postorder}.
 
- The difference between ◊code/inline{substitute} and ◊code/inline{interpret} is the computations they perform during this traversal. We could factor these common parts out of ◊code/inline{substitute} and ◊code/inline{interpret}. We do not do this for clarity and simplicity.
+ The difference between ◊code/inline{substitute} and ◊code/inline{interpret} is only the computations they perform during this traversal, so we could factor out their common parts. We do not do this for clarity and simplicity.
 }
 
 ◊code/block/highlighted['racket]{
@@ -365,7 +365,7 @@ The following listing includes examples of ◊code/inline{substitute} in use. Th
 
 ◊paragraph-separation[]
 
-◊new-thought{In our next program}, the ◊code/inline{function} to be applied is not immediately available. Instead, it is itself the result of a function application:
+◊new-thought{In our next program}, the ◊code/inline{function} to be applied is not immediately available. Instead, it is the result of a function application:
 
 ◊code/block/highlighted['racket]{
 (((λ (x) x) (λ (y) y)) (λ (z) z)) ;; => (λ (z) z)
@@ -440,7 +440,7 @@ Our interpreter now works for the given example:
 
 ◊margin-note{The transformation of wrapping a program with a function which ignores its argument and is immediately applied to a throwaway argument always preserves the meaning of the original program. This process is called ◊technical-term{η-conversion}. More specifically, it is an ◊technical-term{η-abstraction}, as opposed to an ◊technical-term{η-reduction}, which is going in the opposite direction—removing the wrapping function and the throwaway argument.}
 
-This program is similar to our first example of function application ◊code/inline{((λ (x) x) (λ (y) y))}. The difference is that it has been wrapped into a function which ignores its argument (◊code/inline{i}). This function is immediately applied to the throwaway argument (◊code/inline{(λ (z) z)}).
+This program is similar to our first example of function application ◊code/inline{((λ (x) x) (λ (y) y))}. The difference is that it has been wrapped into a function which ignores its argument ◊code/inline{i}. This function is immediately applied to the throwaway argument ◊code/inline{(λ (z) z)}.
 
 Our interpreter does not work in this program:
 
@@ -512,9 +512,9 @@ This program fragment is a function application, in which the ◊code/inline{fun
 '(λ (x) (λ (y) y))
 }
 
-◊margin-note{While ◊code/inline{argument-name} and ◊code/inline{other-argument-name} have the same identifier (◊code/inline{x}, in the example), they are different bindings—similar to how two different people might have the same name. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments how they want, without global knowledge of the program and all identifier names in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
+◊margin-note{While ◊code/inline{argument-name} and ◊code/inline{other-argument-name} have the same identifier (◊code/inline{x}, in the example), they are different bindings—similar to how two different people might have the same name. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments how they want, without global knowledge of the program and all identifiers in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
 
-The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} refers to its argument, not the the outer declaration of ◊code/inline{x}, which we are currently substituting. So we need to change ◊code/inline{substitute}: when it finds a function definition whose ◊code/inline{other-argument-name} is the same as the given ◊code/inline{argument-name}, it should stop traversing the program fragment. It should not try to substitute occurrences of the ◊code/inline{argument-name} any further, because they refer to ◊code/inline{other-argument-name}:
+The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} refers to its argument, not the outer declaration of ◊code/inline{x}, which we are currently substituting. So we need to change ◊code/inline{substitute}: when it finds a function definition whose ◊code/inline{other-argument-name} is the same as the given ◊code/inline{argument-name}, it should stop traversing the program fragment. It should not try to substitute occurrences of the ◊code/inline{argument-name} any further, because they refer to ◊code/inline{other-argument-name}:
 
 ◊code/block/highlighted['racket]{
 (define (substitute
@@ -552,9 +552,9 @@ Our program now works as we expected:
 x
 }
 
-In this case, there is no value the interpreter can output, because the meaning of ◊code/inline{x} is undefined. In general, the interpreter only receives an ◊code/inline{expression} which is a ◊code/inline{variable} if this ◊code/inline{variable} has its meaning undefined. Otherwise the substitution function would have already substituted it for a value in a previous step of the interpretation.
+In this case, there is no value the interpreter can output, because the meaning of ◊code/inline{x} is undefined. In general, the interpreter only receives an ◊code/inline{expression} which is a ◊code/inline{variable} if this ◊code/inline{variable} has its meaning undefined. Otherwise ◊code/inline{substitute} would have already substituted it for a value in a previous step of the interpretation.
 
-Our interpreter does not handle the case of variables used before their definitions, so it is safe for it to error. With this observation, we can complete our interpreter. The following listing is the full implementation:
+Our interpreter does not handle the case of variables used before their definitions, so it should error. With this observation, we can complete our interpreter. The following listing is the full implementation:
 
 ◊margin-note{
  There is one edge case that our interpreter does not handle: undefined variables whose values are never necessary. For example, consider the program ◊code/inline{(λ (x) y)}. This program is a function definition, which is already a value, so the interpreter outputs ◊code/inline{(λ (x) y)} as the result. But the meaning of ◊code/inline{y} is not defined, so this result does not make sense on its own. For simplicity, we will not handle this case in the interpreter. We could perform this check prior to interpretation, in a pre-processing step that would check for the ◊technical-term{well-formedness} of the program. In our language, the only ◊technical-term{well-formedness} condition is whether the program is ◊technical-term{closed} or not. The implementation would consist of traversing the program—in a similar fashion to ◊code/inline{interpret} and ◊code/inline{substitute}—while keeping track of the variables that have already been defined and those that are used. Explaining this implementation is beyond the scope of this article, but it is available with the ◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{rest of the code}.}
@@ -792,19 +792,19 @@ Our interpreter does not handle the case of variables used before their definiti
 15
 }
 
-The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language. But this interpreter is not revealing all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if it finds that the ◊code/inline{function} or the ◊code/inline{argument} are function application themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation.
+The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language. But this interpreter is not revealing all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation.
 
 The next section addresses these aspects, making our interpreter more transparent and revealing more interesting facets of interpretation.
 
 ◊section['debugger-like-interpreter]{Debugger-Like Interpreter}
 
 ◊margin-note{
- In technical terms, our first interpreter is a ◊technical-term{big-step interpreter}, because the whole interpretation happens in a single big traversal of the program. One call to ◊code/inline{interpret} suffices to interpret a whole program to a value—◊code/inline{interpret} might have to recursively call itself to do complete its task, but that is an internal implementation detail which is not relevant to the ◊technical-term{big-step} characterization.
+ In technical terms, our first interpreter is a ◊technical-term{big-step interpreter}, because the whole interpretation happens in a single big traversal of the program. One call to ◊code/inline{interpret} suffices to interpret a whole program to a value.
 
- The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—takes a single step towards a value, resolving a single function application. For convenience and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement a ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets expressions to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}.
+ The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—takes a single step towards a value, resolving a single function application. For convenience and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement an ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets expressions to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}.
 }
 
-◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) own stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of a ◊technical-term{continuation}, which we introduce later in this section.}
+◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of a ◊technical-term{continuation}, which we introduce later in this section.}
 
 ◊new-thought{Our first interpreter} defined in the ◊reference['first-interpreter]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, the ◊code/inline{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code/inline{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
 
