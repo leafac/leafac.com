@@ -873,6 +873,8 @@ In this program, the function of the top-level application is ◊code/inline{((�
 
 In the general case, function applications might be arbitrarily nested, and more than one inner application might be ready for resolution, when both their ◊code/inline{function} and ◊code/inline{argument} are already values. So we delegate this choice to an auxiliary function ◊code/inline{split-expression}, which we define later. The function ◊code/inline{split-expression} has this name because it ◊informal{splits} the given ◊code/inline{expression} in two parts: the function application which we resolve next, and the rest of the expression.
 
+◊; NEXT: Introduce ‘reduction-expression’ and ‘continuation’. Exemplify with the running example from above.
+
 
 ◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
 
