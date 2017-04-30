@@ -818,6 +818,62 @@ If we inspected interpretation after a few function applications, we would poten
 
 ◊new-thought{To allow us to focus} on our study of interpretation, we start by reducing the scope of our ◊technical-term{debugger-like interpreter}. It does not need to handle the error case of programs including undefined variables. We assume that the programs the ◊technical-term{debugger-like interpreter} receives as arguments have already been checked by an external well-formedness checker. The implementation of this checker is not discussed in this article, but is available ◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{in the implementation}.
 
+◊paragraph-separation[]
+
+◊new-thought{We start with} a function called ◊code/inline{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code/inline{expression} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code/inline{step} function is similar to ◊code/inline{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. The structure is the same as for other functions that traverse the program:
+
+◊code/block/highlighted['racket]{
+(define (step expression)
+  (match expression
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (1) Anonymous function definitions.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]
+    #;[variable
+       ; TODO: (3) Variable references.
+       ]))
+}
+
+As noted before, ◊code/inline{step} will not handle the case of undefined variables. For simplicity, we consider that the given ◊code/inline{expression} has already been checked and is guaranteed to be well-formed. This allows us to eliminate the third ◊technical-term{match clause} entirely:
+
+◊code/block/highlighted['racket]{
+(define (step expression)
+  (match expression
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (1) Anonymous function definitions.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]))
+}
+
+In the case of the first ◊technical-term{match clause}, an anonymous function definition is already a value, so ◊code/inline{step} only returns the given ◊code/inline{expression}, unaltered:
+
+◊code/block/highlighted['racket]{
+(define (step expression)
+  (match expression
+    [`(λ (,argument-name) ,body)
+     expression]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]))
+}
+
+This was the same approach taken by ◊code/inline{interpret} from our first interpreter. It means that an anonymous function application ◊technical-term{steps} to itself. In a ◊technical-term{step-debugger}, it would entail that clicking on the ◊technical-term{step} button would not change the ◊code/inline{expression}, because there would be no pending computation.
+
+For the case of function application, ◊code/inline{step} cannot reuse the approach from our first interpreter. Instead, it works in three parts: first, find which function application should happen next; then, substitute the argument name for the argument in the function body; finally, build the resulting expression. This process is necessary because the components of a function application might be function applications themselves. For example, consider the following program:
+
+◊code/block/highlighted['racket]{
+(((λ (x) x) (λ (y) y)) (λ (z) z))
+}
+
+In this program, the function of the top-level application is ◊code/inline{((λ (x) x) (λ (y) y))}. This is a function application itself, and it needs to be resolved before we can perform the top-level application. The same issue would arise if the argument was a function application. So, when given the ◊code/inline{expression} above, the ◊code/inline{step} function does not evaluate it directly to a value as our first interpreter did. Instead, it identifies that the next computation immediately available is ◊code/inline{((λ (x) x) (λ (y) y))}, performs it, and outputs ◊code/inline{((λ (y) y) (λ (z) z))}. A subsequent call to ◊code/inline{step} would reach the final value of the program: ◊code/inline{(λ (z) z)}.
+
+In the general case, function applications might be arbitrarily nested, and more than one inner application might be ready for resolution, when both their ◊code/inline{function} and ◊code/inline{argument} are already values. So we delegate this choice to an auxiliary function ◊code/inline{split-expression}, which we define later. The function ◊code/inline{split-expression} has this name because it ◊informal{splits} the given ◊code/inline{expression} in two parts: the function application which we resolve next, and the rest of the expression.
+
+
 ◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
 
 ◊; TODO: References.
