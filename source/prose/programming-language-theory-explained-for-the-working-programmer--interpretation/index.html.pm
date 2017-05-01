@@ -869,12 +869,73 @@ For the case of function application, ◊code/inline{step} cannot reuse the appr
 (((λ (x) x) (λ (y) y)) (λ (z) z))
 }
 
-In this program, the function of the top-level application is ◊code/inline{((λ (x) x) (λ (y) y))}. This is a function application itself, and it needs to be resolved before we can perform the top-level application. The same issue would arise if the argument was a function application. So, when given the ◊code/inline{expression} above, the ◊code/inline{step} function does not evaluate it directly to a value as our first interpreter did. Instead, it identifies that the next computation immediately available is ◊code/inline{((λ (x) x) (λ (y) y))}, performs it, and outputs ◊code/inline{((λ (y) y) (λ (z) z))}. A subsequent call to ◊code/inline{step} would reach the final value of the program: ◊code/inline{(λ (z) z)}.
+In this program, the function of the top-level application is ◊code/inline{((λ (x) x) (λ (y) y))}. This is a function application itself, and it needs to be resolved before we can perform the top-level application. The same issue would arise if the argument was a function application. So, when given the ◊code/inline{expression} above, the ◊code/inline{step} function does not evaluate it directly to a value as our first interpreter did. Instead, it identifies that the next computation immediately available is ◊code/inline{((λ (x) x) (λ (y) y))}, performs it, and outputs ◊code/inline{((λ (y) y) (λ (z) z))}. A subsequent call to ◊code/inline{step} would then reach the final value of the program: ◊code/inline{(λ (z) z)}.
 
-In the general case, function applications might be arbitrarily nested, and more than one inner application might be ready for resolution, when both their ◊code/inline{function} and ◊code/inline{argument} are already values. So we delegate this choice to an auxiliary function ◊code/inline{split-expression}, which we define later. The function ◊code/inline{split-expression} has this name because it ◊informal{splits} the given ◊code/inline{expression} in two parts: the function application which we resolve next, and the rest of the expression.
+In the general case, function applications might be arbitrarily nested, and more than one inner application might be ready for resolution, when both their ◊code/inline{function} and ◊code/inline{argument} are already values. So we delegate this choice of which application to resolve next to an auxiliary function ◊code/inline{split-expression}, which we define later. The function ◊code/inline{split-expression} has this name because it ◊informal{splits} the given ◊code/inline{expression} in two parts: the function application which we resolve next, and the rest of the expression.
 
-◊; NEXT: Introduce ‘reduction-expression’ and ‘continuation’. Exemplify with the running example from above.
+◊margin-note{The representation for ◊technical-term{holes} using ◊code/inline{(hole)} does not conflict with existing constructs in our target language, because function applications would include an argument in the parentheses and variable references would not have parentheses.}
 
+The function application which we resolve next is called ◊technical-term{reduction expression}, because ◊technical-term{reduction} is the technical term for what we have been informally calling ◊informal{resolving a function application}. We represent ◊technical-term{reduction expression} as any other program fragment, for example, ◊code/inline{`((λ (x) x) (λ (y) y))}. The rest of the program, in which we found the ◊technical-term{reduction expression}, is called ◊technical-term{continuation}, because it represents the computations that ◊code/inline{step} is going to perform ◊emphasis{after} the current one, on subsequent calls. We represent ◊technical-term{continuations} as a ◊informal{program with a hole}, and the ◊technical-term{hole} is identified by ◊code/inline{(hole)}, for example:
+
+◊code/block/highlighted['racket]{
+`((hole) (λ (z) z))
+}
+
+The ◊code/inline{split-expression} function has to return two values: the ◊technical-term{reduction expression} and the ◊technical-term{continuation}. In Racket, functions can return multiple values using the form ◊code/inline{values}, for example, ◊code/inline{(values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z)))}. To bind these results to variables, we use the ◊code/inline{define-values} form, for example:
+
+◊code/block/highlighted['racket]{
+(define-values (reduction-expression continuation)
+  (values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z))))
+}
+
+The ◊code/inline{reduction-expression} returned by ◊code/inline{split-expression} is guaranteed to be a function application in which both the ◊code/inline{function} and ◊code/inline{argument} are immediately available—they are values, not other function applications. Furthermore, if we fill the ◊technical-term{hole} in the ◊code/inline{continuation} with the ◊code/inline{reduction-expression}, then we have our original ◊code/inline{expression} back; in other words, this decomposition does not lose any information.
+
+Because the ◊code/inline{reduction-expression} is a function application ready for evaluation, we can use the same ◊code/inline{substitute} from the ◊reference['first-interpreter]{previous section} and substitute the ◊code/inline{argument-name} for the ◊code/inline{argument} in the ◊code/inline{body}. Then, we fill the ◊technical-term{hole} in the ◊code/inline{continuation} with the resulting program fragment. We use another auxiliary function ◊code/inline{fill-hole}, which we define later, for this last part. This is the complete listing for ◊code/inline{step}:
+
+◊code/block/highlighted['racket]{
+(define (step expression)
+  (match expression
+    [`(λ (,argument-name) ,body)
+     expression]
+    [`(,function ,argument)
+     (define-values (reduction-expression continuation)
+       (split-expression expression))
+     (match-define `((λ (,argument-name) ,body) ,argument)
+       reduction-expression)
+     (define reduced-expression
+       (substitute body argument-name argument))
+     (fill-hole reduced-expression continuation)]))
+}
+
+◊paragraph-separation[]
+
+◊new-thought{There are still} two missing pieces in our ◊technical-term{debugger-like interpreter}: the auxiliary functions ◊code/inline{split-expression} and ◊code/inline{fill-hole}. We start by addressing ◊code/inline{split-expression}.
+
+First, note that ◊code/inline{split-expression} is only called with ◊code/inline{expression}s which are function applications; otherwise, the ◊code/inline{expression}s would have been anonymous function definitions, which are values, and ◊code/inline{step} would have returned them unaltered, without calling ◊code/inline{split-expression}. The task of ◊code/inline{split-expression} is to chose which of the potentially arbitrarily nested function applications to compute next. The only constraint is that the function application must be ready for computation, which means both the ◊code/inline{function} and the ◊code/inline{argument} are already values, and not other nested function applications.
+
+But multiple function applications might be in this state in a given ◊code/inline{expression}, and ◊code/inline{split-expression} could chose any of them. Which application to evaluate next is a design decision and we follow Racket’s approach: go from left to right, and chose the innermost function application. Other orders would work equally well, but this corresponds more closely to programmers’ intuitions.
+
+The structure of the ◊code/inline{split-expression} function is similar to ◊code/inline{step}, in the sense that it receives an ◊code/inline{expression} as argument and them ◊technical-term{pattern matches} on it using the ◊code/inline{match} form. But the ◊technical-term{patterns} in ◊code/inline{split-expression} are different, because it consider different cases: (1) both the ◊code/inline{function} and the ◊code/inline{argument} are already values and the given ◊code/inline{expression} is ready for evaluation; (2) the ◊code/inline{function} is already a value, but the ◊code/inline{argument} is an application that needs to be resolved; (3) the ◊code/inline{function} is not a value yet, it needs to be resolved. To implement theses cases, we rely on the ◊code/inline{match} form following the first ◊technical-term{match clause} whose ◊technical-term{pattern} matches:
+
+◊code/block/highlighted['racket]{
+(define (split-expression expression)
+  (match expression
+    #;[`((λ (,argument-name/function) ,body/function)
+         (λ (,argument-name/argument) ,body/argument))
+       ; TODO: (1) Both function and argument are values.
+       ]
+    #;[`((λ (,argument-name/function) ,body/function)
+         ,argument)
+       ; TODO: (2) Function is a value, but argument is not.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (3) Function is not a value.
+       ]))
+}
+
+This order guarantees left-to-right evaluation, because we only consider the case of a ◊code/inline{function} which is not an immediate value (3) ◊emphasis{after} we have considered the case in which it ◊emphasis{is} an immediate value (2).
+
+◊; NEXT: Explain each branch of the ‘split-expression’ function.
 
 ◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
 
