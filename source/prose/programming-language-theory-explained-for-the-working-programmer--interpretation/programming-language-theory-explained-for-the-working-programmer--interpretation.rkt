@@ -438,15 +438,15 @@
      (values reduction-expression
              `(,continuation ,argument))]))
 
-(define (fill-hole reduced-expression continuation)
+(define (fill-hole program-fragment continuation)
   (match continuation
     [`(hole)
-     reduced-expression]
+     program-fragment]
     [`(λ (,argument-name) ,body)
      continuation]
     [`(,function ,argument)
-     `(,(fill-hole reduced-expression function)
-       ,(fill-hole reduced-expression argument))]
+     `(,(fill-hole program-fragment function)
+       ,(fill-hole program-fragment argument))]
     [variable
      continuation]))
 

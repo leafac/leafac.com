@@ -186,13 +186,13 @@ The example above demonstrates that the ◊code/inline{match} form in Racket has
 (define (interpret expression)
   (match expression
     #;[`(λ (,argument-name) ,body)
-       ; TODO: (1) Anonymous function definitions.
+       ; TODO: (1) Anonymous function definition.
        ]
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -209,7 +209,7 @@ We already have an implementation for anonymous function definitions, so we can 
        ; TODO: (2) Function application.
        ]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -249,7 +249,7 @@ Then, we can call an auxiliary function to perform the substitution:
        function)
      (substitute body argument-name argument)]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -266,13 +266,13 @@ The ◊code/inline{substitute} auxiliary function receives as argument a functio
          body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
-       ; TODO: (1) Anonymous function definitions.
+       ; TODO: (1) Anonymous function definition.
        ]
     #;[`(,function ,other-argument)
        ; TODO: (2) Function application.
        ]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -283,7 +283,7 @@ In our running example, the call to ◊code/inline{substitute} has the following
          body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
-       ; TODO: (1) Anonymous function definitions.
+       ; TODO: (1) Anonymous function definition.
        ]
     #;[`(,function ,other-argument)
        ; TODO: (2) Function application.
@@ -315,7 +315,7 @@ To fix this, we check if the ◊code/inline{variable} we found in the ◊code/in
          body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
-       ; TODO: (1) Anonymous function definitions.
+       ; TODO: (1) Anonymous function definition.
        ]
     #;[`(,function ,other-argument)
        ; TODO: (2) Function application.
@@ -385,7 +385,7 @@ At the top level, this program is a function application, which matches the ◊c
        interpreted-function)
      (substitute body argument-name argument)]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -418,7 +418,7 @@ In this function application, the ◊code/inline{argument} is ◊code/inline{((�
        interpreted-function)
      (substitute body argument-name interpreted-argument)]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -469,7 +469,7 @@ This output is the result of the substitution of the throwaway argument ◊code/
         interpreted-argument))
      (interpret substituted-body)]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -826,13 +826,13 @@ If we inspected interpretation after a few function applications, we would poten
 (define (step expression)
   (match expression
     #;[`(λ (,argument-name) ,body)
-       ; TODO: (1) Anonymous function definitions.
+       ; TODO: (1) Anonymous function definition.
        ]
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
     #;[variable
-       ; TODO: (3) Variable references.
+       ; TODO: (3) Variable reference.
        ]))
 }
 
@@ -842,7 +842,7 @@ As noted before, ◊code/inline{step} will not handle the case of undefined vari
 (define (step expression)
   (match expression
     #;[`(λ (,argument-name) ,body)
-       ; TODO: (1) Anonymous function definitions.
+       ; TODO: (1) Anonymous function definition.
        ]
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
@@ -935,11 +935,162 @@ The structure of the ◊code/inline{split-expression} function is similar to ◊
 
 This order guarantees left-to-right evaluation, because we only consider the case of a ◊code/inline{function} which is not an immediate value (3) ◊emphasis{after} we have considered the case in which it ◊emphasis{is} an immediate value (2).
 
-◊; NEXT: Explain each branch of the ‘split-expression’ function.
+In the first case, both ◊code/inline{function} and ◊code/inline{argument} are already values—functions—which means the ◊code/inline{expression} is ready for evaluation. So ◊code/inline{split-expression} returns the ◊code/inline{expression} as the ◊code/inline{reduction-expression} and the ◊code/inline{continuation} is just ◊code/inline{(hole)}, because there is no other context around the given ◊code/inline{expression}:
 
-◊; TODO: ‘fill-hole’ could recurse in the function-definition case. But it is not necessary, because a hole cannot occur in a function definition.
+◊code/block/highlighted['racket]{
+(define (split-expression expression)
+  (match expression
+    [`((λ (,argument-name/function) ,body/function)
+       (λ (,argument-name/argument) ,body/argument))
+     (values expression `(hole))]
+    #;[`((λ (,argument-name/function) ,body/function)
+         ,argument)
+       ; TODO: (2) Function is a value, but argument is not.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (3) Function is not a value.
+       ]))
+}
+
+In the second case, the ◊code/inline{function} is already a value, but the ◊code/inline{argument} is not, so the next immediately resolvable function application—the ◊code/inline{reduction-expression}—must be in the program fragment represented by ◊code/inline{argument}. The ◊code/inline{split-expression} function recursively calls itself with ◊code/inline{argument} and propagates the resulting ◊code/inline{reduction-expression} and ◊code/inline{continuation}, taking care of wrapping the ◊code/inline{continuation} with the function application in ◊code/inline{expression}:
+
+◊code/block/highlighted['racket]{
+(define (split-expression expression)
+  (match expression
+    [`((λ (,argument-name/function) ,body/function)
+       (λ (,argument-name/argument) ,body/argument))
+     (values expression `(hole))]
+    [`((λ (,argument-name/function) ,body/function)
+       ,argument)
+     (define-values (reduction-expression continuation)
+       (split-expression argument))
+     (values reduction-expression
+             `((λ (,argument-name/function) ,body/function)
+               ,continuation))]
+    #;[`(,function ,argument)
+       ; TODO: (3) Function is not a value.
+       ]))
+}
+
+The final case is similar to the second, except that the subject of the recursive call is ◊code/inline{function}. The strategy is the same: call ◊code/inline{split-expression} itself with the ◊code/inline{function} and forward the resulting ◊code/inline{reduction-expression} and ◊code/inline{continuation}, taking care of wrapping the ◊code/inline{continuation} with the function application in ◊code/inline{expression}:
+
+◊code/block/highlighted['racket]{
+(define (split-expression expression)
+  (match expression
+    [`((λ (,argument-name/function) ,body/function)
+       (λ (,argument-name/argument) ,body/argument))
+     (values expression `(hole))]
+    [`((λ (,argument-name/function) ,body/function)
+       ,argument)
+     (define-values (reduction-expression continuation)
+       (split-expression argument))
+     (values reduction-expression
+             `((λ (,argument-name/function) ,body/function)
+               ,continuation))]
+    [`(,function ,argument)
+     (define-values (reduction-expression continuation)
+       (split-expression function))
+     (values reduction-expression
+             `(,continuation ,argument))]))
+}
+
+◊paragraph-separation[]
+
+◊new-thought{The final auxiliary function} is ◊code/inline{fill-hole}, which, given an program fragment and a ◊code/inline{continuation} (a program fragment with a ◊technical-term{hole} in it), fills in the hole in the ◊code/inline{continuation} with the program fragment. For example, given the program fragment ◊code/inline{(λ (y) y)} the ◊code/inline{continuation} ◊code/inline{((hole) (λ (z) z))}, ◊code/inline{fill-hole} returns ◊code/inline{((λ (y) y) (λ (z) z))}. The structure for the function is:
+
+◊code/block/highlighted['racket]{
+(define (fill-hole program-fragment continuation)
+  (match continuation
+    #;[`(hole)
+       ; TODO: (1) Hole.
+       ]
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (2) Anonymous function definition.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (3) Function application.
+       ]
+    #;[variable
+       ; TODO: (4) Variable reference.
+       ]))
+}
+
+This structure is similar to all other functions that traverse the program structure, it is a pattern match on the argument ◊code/inline{continuation}. Besides the three usual cases (anonymous function definition, function application and variable reference), ◊code/inline{fill-hole} has to handle the ◊technical-term{holes} which occur in ◊code/inline{continuation}s. When that is the case, it just returns the given ◊code/inline{program-fragment}:
+
+◊code/block/highlighted['racket]{
+(define (fill-hole program-fragment continuation)
+  (match continuation
+    [`(hole)
+     program-fragment]
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (2) Anonymous function definition.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (3) Function application.
+       ]
+    #;[variable
+       ; TODO: (4) Variable reference.
+       ]))
+}
+
+◊margin-note{It would be correct to recursively call ◊code/inline{fill-hole} in the case that the ◊code/inline{continuation} is an anonymous function definition. But it is not necessary, so we avoid the extra work.}
+
+In the second case, the ◊code/inline{continuation} is an anonymous function definition. The ◊code/inline{split-expression} function only splits ◊code/inline{expression}s in function applications, never inside an anonymous function definition, so a ◊technical-term{hole} can never occur inside an anonymous function definition, and ◊code/inline{fill-hole} can just return the ◊code/inline{continuation}, unaltered:
+
+◊code/block/highlighted['racket]{
+(define (fill-hole program-fragment continuation)
+  (match continuation
+    [`(hole)
+     program-fragment]
+    [`(λ (,argument-name) ,body)
+     continuation]
+    #;[`(,function ,argument)
+       ; TODO: (3) Function application.
+       ]
+    #;[variable
+       ; TODO: (4) Variable reference.
+       ]))
+}
+
+In the case of a function application, ◊code/inline{fill-hole} has to keep traverse the program to find the ◊technical-term{hole} deeper in it. It does so by recursively calling itself on the ◊code/inline{function} and the ◊code/inline{argument}. It is necessary to traverse both the ◊code/inline{function} and the ◊code/inline{argument} because we do not know where the ◊technical-term{hole} is. There is only ever one ◊technical-term{hole} in any given ◊code/inline{continuation}, so one of these two recursive calls only triggers the cases other than the first, and the result is the same program fragment, unaltered. This preserves the rest of the ◊code/inline{continuation}, aside from the ◊technical-term{hole} in it:
+
+◊code/block/highlighted['racket]{
+(define (fill-hole program-fragment continuation)
+  (match continuation
+    [`(hole)
+     program-fragment]
+    [`(λ (,argument-name) ,body)
+     continuation]
+    [`(,function ,argument)
+     `(,(fill-hole program-fragment function)
+       ,(fill-hole program-fragment argument))]
+    #;[variable
+       ; TODO: (4) Variable reference.
+       ]))
+}
+
+Finally, if the ◊technical-term{pattern match} reaches the final case, it means the ◊technical-term{hole} is not there, so ◊code/inline{fill-hole} returns the ◊code/inline{continuation}, unaltered:
+
+◊code/block/highlighted['racket]{
+(define (fill-hole program-fragment continuation)
+  (match continuation
+    [`(hole)
+     program-fragment]
+    [`(λ (,argument-name) ,body)
+     continuation]
+    [`(,function ,argument)
+     `(,(fill-hole program-fragment function)
+       ,(fill-hole program-fragment argument))]
+    [variable
+     continuation]))
+}
+
+◊; NEXT: Discuss how ‘step’ is now complete.
+◊; NEXT: Introduce ‘interpret’ as a façade.
 
 ◊; TODO: References.
 ◊; - SEwPR.
 ◊; - SICP.
 ◊; - PL book.
+
+◊; TODO: Appendix: well-formedness condition.
