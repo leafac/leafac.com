@@ -1085,8 +1085,39 @@ Finally, if the ◊technical-term{pattern match} reaches the final case, it mean
      continuation]))
 }
 
-◊; NEXT: Discuss how ‘step’ is now complete.
-◊; NEXT: Introduce ‘interpret’ as a façade.
+◊paragraph-separation[]
+
+◊new-thought{We finished implementing} the auxiliary functions, so ◊code/inline{step} is complete:
+
+◊code/block/highlighted['racket]{
+> (step `(((λ (x) x) (λ (y) y)) (λ (z) z)))
+'((λ (y) y) (λ (z) z))
+> (step `((λ (y) y) (λ (z) z)))
+'(λ (z) z)
+> (step `(λ (z) z))
+'(λ (z) z)
+}
+
+Each call to ◊code/inline{step} performs only a single function application, the first one available when traversing the program depth-first, from left to right. When the given ◊code/inline{expression} is already a value, ◊code/inline{step} returns it unaltered. This ◊technical-term{debugger-like interpreter} allows us to inspect interpretation and understand step-by-step how any given ◊code/inline{expression} is evaluated to a value. It is a better choice than our first interpreter for reasoning about interpretation itself, because it is more transparent.
+
+To keep compatibility with our first interpreter, we implement an ◊code/inline{interpret} function, which works by repeatedly calling ◊code/inline{step} until it reaches a value:
+
+◊code/block/highlighted['racket]{
+(define (interpret expression)
+  (match expression
+    [`(λ (,argument-name) ,body)
+     expression]
+    [_
+     (interpret (step expression))]))
+}
+
+This version of ◊code/inline{interpret} works similarly to most other functions: it ◊technical-term{pattern matches} on the given ◊code/inline{expression}; if it is already a value, then return it unaltered; otherwise, call ◊code/inline{step} and recurse. The effect is that ◊code/inline{interpret} calls ◊code/inline{step} as many times as necessary to completely evaluate the ◊code/inline{expression} into a value.
+
+◊paragraph-separation[]
+
+◊new-thought{In this section} we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
+
+◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment.
 
 ◊; TODO: References.
 ◊; - SEwPR.
