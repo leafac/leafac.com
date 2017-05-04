@@ -1117,7 +1117,13 @@ This version of ◊code/inline{interpret} works similarly to most other function
 
 ◊new-thought{In this section} we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
 
-◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment.
+◊; NEXT: Explain the ‘_’ pattern, above.
+
+◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?”
+
+◊; TODO: Mention β-reduction.
+
+◊; TODO: Motivation for study of interpretation: understand how communication occurs in programming languages. It’s about names! The bindings allow long-distance communication.
 
 ◊; TODO: References.
 ◊; - SEwPR.
