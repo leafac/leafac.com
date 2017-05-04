@@ -372,15 +372,8 @@
                                          ,(dict-ref colorscheme 'background))
                         #:top '100%)]]]))
 
-(define disabled-paths '("/music"))
-
 (define-component (link/internal path . elements)
-  #:html (if (member path disabled-paths)
-             (apply (default-tag-function 'span #:class "disabled-path") elements)
-             (apply link (internal-url path) elements))
-
-  #:css (css-expr [.disabled-path
-                   [(.menu &) #:display none]]))
+  #:html (apply link (internal-url path) elements))
 
 (define-component (email address . elements)
   #:html (apply link (~a "mailto:" address)
@@ -803,3 +796,6 @@
 
 (define-component (publication/paper/abstract . elements)
   #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+
+(define-component (lyrics . elements)
+  #:html (full-width (apply code/block elements)))
