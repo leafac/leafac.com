@@ -400,6 +400,100 @@
 
 ;; SMALL-STEP INTERPRETER
 
+(module+ small-step-interpreter
+  (define (interpret expression)
+    (match expression
+      [`(λ (,argument-name) ,body)
+       expression]
+      [_
+       (interpret (step expression))]))
+
+  (define (step expression)
+    (match expression
+      [`(λ (,argument-name) ,body)
+       expression]
+      [`(,function ,argument)
+       (define-values (reduction-expression continuation)
+         (split-expression expression))
+       (match-define `((λ (,argument-name) ,body) ,argument)
+         reduction-expression)
+       (define reduced-expression
+         (substitute body argument-name argument))
+       (fill-hole reduced-expression continuation)]))
+
+  (define (split-expression expression)
+    (match expression
+      [`((λ (,argument-name/function) ,body/function)
+         (λ (,argument-name/argument) ,body/argument))
+       (values expression `(hole))]
+      [`((λ (,argument-name/function) ,body/function)
+         ,argument)
+       (define-values (reduction-expression continuation)
+         (split-expression argument))
+       (values reduction-expression
+               `((λ (,argument-name/function) ,body/function)
+                 ,continuation))]
+      [`(,function ,argument)
+       (define-values (reduction-expression continuation)
+         (split-expression function))
+       (values reduction-expression
+               `(,continuation ,argument))]))
+
+  (define (fill-hole program-fragment continuation)
+    (match continuation
+      [`(hole)
+       program-fragment]
+      [`(λ (,argument-name) ,body)
+       continuation]
+      [`(,function ,argument)
+       `(,(fill-hole program-fragment function)
+         ,(fill-hole program-fragment argument))]
+      [variable
+       continuation]))
+
+  ;; ‘substitute’ is the same as for the big-step interpreter.
+
+  (define (substitute
+           body argument-name argument)
+    (match body
+      [`(λ (,other-argument-name) ,other-body)
+       (if (equal? argument-name other-argument-name)
+           body
+           `(λ (,other-argument-name)
+              ,(substitute
+                other-body argument-name argument)))]
+      [`(,function ,other-argument)
+       `(,(substitute
+           function argument-name argument)
+         ,(substitute
+           other-argument argument-name argument))]
+      [variable
+       (if (equal? argument-name variable)
+           argument
+           variable)]))
+
+  (module+ test
+    (require rackunit (submod ".." ".." test-cases))
+
+    (check-equal? (interpret minimal-program)
+                  minimal-program/result)
+
+    (check-equal? (interpret minimal-application)
+                  minimal-application/result)
+
+    (check-equal? (interpret non-shadowing-variable-name-reuse)
+                  non-shadowing-variable-name-reuse/result)
+
+    (check-equal? (interpret shadowing)
+                  shadowing/result)
+
+    (check-equal? (interpret sum-up-to)
+                  sum-up-to/result)))
+
+;; ---------------------------------------------------------------------------------------------------
+
+;; ENVIRONMENT-BASED INTERPRETER
+
 (define (interpret expression)
   (match expression
     [`(λ (,argument-name) ,body)
