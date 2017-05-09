@@ -495,42 +495,55 @@
 ;; ENVIRONMENT-BASED INTERPRETER
 
 (define (interpret expression)
-  (match expression
-    [`(λ (,argument-name) ,body)
-     expression]
-    [_
-     (interpret (step expression))]))
+  (define (interpret* expression environment)
+    (match expression
+      [`(closure (λ (,argument-name) ,body) ,environment)
+       (values expression environment)]
+      [_
+       (define-values (new-expression new-environment)
+         (step expression environment))
+       (interpret* new-expression new-environment)]))
+  (interpret* expression empty))
 
-(define (step expression)
+(define (step expression environment)
   (match expression
-    [`(λ (,argument-name) ,body)
-     expression]
-    [`(,function ,argument)
+    [`(closure (λ (,argument-name) ,body) ,closure-environment)
+     (values expression environment)]
+    [_
      (define-values (reduction-expression continuation)
        (split-expression expression))
-     (match-define `((λ (,argument-name) ,body) ,argument)
-       reduction-expression)
-     (define reduced-expression
-       (substitute body argument-name argument))
-     (fill-hole reduced-expression continuation)]))
+     (define-values (reduced-expression new-environment)
+       (match reduction-expression
+         [`(λ (,argument-name) ,body)
+          (values `(closure (λ (,argument-name) ,body) ,environment)
+                  environment)]
+         [`((closure (λ (,argument-name) ,body) ,closure-environment) ,argument)
+          (values body (dict-set closure-environment argument-name argument))]
+         [variable
+          (values (dict-ref environment variable) environment)]))
+     (values (fill-hole reduced-expression continuation) new-environment)]))
 
 (define (split-expression expression)
   (match expression
-    [`((λ (,argument-name/function) ,body/function)
-       (λ (,argument-name/argument) ,body/argument))
+    [`(λ (,argument-name) ,body)
      (values expression `(hole))]
-    [`((λ (,argument-name/function) ,body/function)
+    [`((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
+       (closure (λ (,argument-name/argument) ,body/argument) ,closure-environment/argument))
+     (values expression `(hole))]
+    [`((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
        ,argument)
      (define-values (reduction-expression continuation)
        (split-expression argument))
      (values reduction-expression
-             `((λ (,argument-name/function) ,body/function)
+             `((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
                ,continuation))]
     [`(,function ,argument)
      (define-values (reduction-expression continuation)
        (split-expression function))
      (values reduction-expression
-             `(,continuation ,argument))]))
+             `(,continuation ,argument))]
+    [variable
+     (values variable `(hole))]))
 
 (define (fill-hole program-fragment continuation)
   (match continuation
@@ -543,27 +556,6 @@
        ,(fill-hole program-fragment argument))]
     [variable
      continuation]))
-
-;; ‘substitute’ is the same as for the big-step interpreter.
-
-(define (substitute
-         body argument-name argument)
-  (match body
-    [`(λ (,other-argument-name) ,other-body)
-     (if (equal? argument-name other-argument-name)
-         body
-         `(λ (,other-argument-name)
-            ,(substitute
-              other-body argument-name argument)))]
-    [`(,function ,other-argument)
-     `(,(substitute
-         function argument-name argument)
-       ,(substitute
-         other-argument argument-name argument))]
-    [variable
-     (if (equal? argument-name variable)
-         argument
-         variable)]))
 
 (module+ test
   (require rackunit (submod ".." test-cases))
