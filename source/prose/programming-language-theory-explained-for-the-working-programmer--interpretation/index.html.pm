@@ -1119,15 +1119,26 @@ This version of ◊code/inline{interpret} works similarly to most other function
 
 ◊; NEXT: Explain the ‘_’ pattern, above.
 
-◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?”
+◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?” Debugger-like with inspect variables—otherwise, “where’s my code?”
+
+◊; TODO: Add a ‘trace’ function, which repeatedly calls ‘step’ and collects the intermediate results.
+
+◊; TODO: APPENDIX: Well-formedness condition.
 
 ◊; TODO: Mention β-reduction.
 
 ◊; TODO: Motivation for study of interpretation: understand how communication occurs in programming languages. It’s about names! The bindings allow long-distance communication.
 
+◊; TODO: Mention that, which ‘interpret’ might not terminate, ‘step’ always does.
+
+◊; TODO: Mention that ‘reduction-expression’ is commonly abbreviated to ‘redex’.
+
+◊; TODO: Update explanation of ‘fill-hole’ to use ‘_’ pattern. TEST IT, FIRST!
+
 ◊; TODO: References.
 ◊; - SEwPR.
 ◊; - SICP.
 ◊; - PL book.
+◊; - Lambda papers.
 
 ◊; TODO: Appendix: well-formedness condition.
