@@ -1135,6 +1135,8 @@ This version of ◊code/inline{interpret} works similarly to most other function
 
 ◊; TODO: Update explanation of ‘fill-hole’ to use ‘_’ pattern. TEST IT, FIRST!
 
+◊; TODO: Mention that, for a realistic implementation, we wouldn’t want to split and fill expressions along the way.
+
 ◊; TODO: References.
 ◊; - SEwPR.
 ◊; - SICP.

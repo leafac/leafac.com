@@ -493,46 +493,45 @@
 ;; ENVIRONMENT-BASED INTERPRETER
 
 (define (interpret expression)
-  (define (interpret* expression environments)
+  (define (interpret* expression environment)
     (match expression
       [`(closure (λ (,argument-name) ,body) ,closure-environment)
        (closure->function expression)]
       [_
-       (define-values (new-expression new-environments)
-         (step expression environments))
-       (interpret* new-expression new-environments)]))
-  (interpret* expression `(,empty)))
+       (define-values (new-expression new-environment)
+         (step expression environment))
+       (interpret* new-expression new-environment)]))
+  (interpret* expression empty))
 
-(define (step expression environments)
-  (match-define `(,previous-environments ... ,current-environment)
-    environments)
+(define (step expression environment)
   (match expression
     [`(closure (λ (,argument-name) ,body)
                ,closure-environment)
-     (values expression environments)]
+     (values expression environment)]
     [_
      (define-values (reduction-expression continuation)
        (split-expression expression))
-     (define-values (reduced-expression new-environments)
+     (define-values (reduced-expression new-environment)
        (match reduction-expression
          [`(λ (,argument-name) ,body)
           (define closure
             `(closure (λ (,argument-name) ,body)
-                      ,current-environment))
-          (values closure previous-environments)]
+                      ,environment))
+          (values closure environment)]
          [`((closure (λ (,argument-name) ,body)
                      ,closure-environment)
             ,argument)
           (define new-environment
-            `(,@environments
-              ,(dict-set closure-environment argument-name argument)))
-          (values body new-environment)]
+            (dict-set closure-environment argument-name argument))
+          (values `(restore ,body ,environment) new-environment)]
+         [`(restore ,value ,previous-environment)
+          (values value previous-environment)]
          [variable
           (define value
-            (dict-ref current-environment variable))
-          (values value previous-environments)]))
+            (dict-ref environment variable))
+          (values value environment)]))
      (values (fill-hole reduced-expression continuation)
-             new-environments)]))
+             new-environment)]))
 
 (define (split-expression expression)
   (match expression
@@ -546,19 +545,27 @@
        ,argument)
      (define-values (reduction-expression continuation)
        (split-expression argument))
-     (values reduction-expression
-             `((closure (λ (,argument-name/function) ,body/function)
-                        ,closure-environment/function)
-               ,continuation))]
+     (values
+      reduction-expression
+      `((closure (λ (,argument-name/function) ,body/function)
+                 ,closure-environment/function)
+        ,continuation))]
     [`(,function ,argument)
      (define-values (reduction-expression continuation)
        (split-expression function))
      (values reduction-expression
              `(,continuation ,argument))]
+    [`(restore (closure (λ (,argument-name) ,body)
+                        ,closure-environment)
+               ,previous-environment)
+     (values expression `(hole))]
+    [`(restore ,body ,previous-environment)
+     (define-values (reduction-expression continuation)
+       (split-expression body))
+     (values reduction-expression
+             `(restore ,continuation ,previous-environment))]
     [variable
      (values expression `(hole))]))
-
-;; ‘fill-hole’ is the same as for the small-step interpreter.
 
 (define (fill-hole program-fragment continuation)
   (match continuation
@@ -567,6 +574,9 @@
     [`(,function ,argument)
      `(,(fill-hole program-fragment function)
        ,(fill-hole program-fragment argument))]
+    [`(restore ,body ,previous-environment)
+     `(restore ,(fill-hole program-fragment body)
+               ,previous-environment)]
     [_
      continuation]))
 
