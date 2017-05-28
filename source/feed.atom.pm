@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{O Fim da Tempestade}
+ ◊link[#:href ◊absolute-url["/music/o-fim-da-tempestade"]]
+ ◊id{urn:uuid:9a5f0c7a-0c7e-4e2b-a708-3788d13c5bbd}
+ ◊updated{2017-05-28T19:54:58-04:00}
+ ◊summary{I published a new song.}
+}
+
+◊entry{
  ◊title{Criatividade}
  ◊link[#:href ◊absolute-url["/music/criatividade"]]
  ◊id{urn:uuid:5b1ddfd2-8217-47e0-a392-8c4ca3e3cd29}
