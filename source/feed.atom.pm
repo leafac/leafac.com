@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{Agora há Algo a Temer}
+ ◊link[#:href ◊absolute-url["/music/agora-ha-algo-a-temer"]]
+ ◊id{urn:uuid:485e4b8f-f191-4f6b-afeb-0434287560b9}
+ ◊updated{2017-05-31T20:17:45-04:00}
+ ◊summary{I published a new song. In Portuguese.}
+}
+
+◊entry{
  ◊title{O Fim da Tempestade}
  ◊link[#:href ◊absolute-url["/music/o-fim-da-tempestade"]]
  ◊id{urn:uuid:9a5f0c7a-0c7e-4e2b-a708-3788d13c5bbd}
