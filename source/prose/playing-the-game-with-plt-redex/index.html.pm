@@ -7,9 +7,9 @@
 
 ◊margin-note{◊figure{◊svg{peg.svg}◊figure/caption{A peg. Solitary.}}}
 
-◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we are going to use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we are going to abuse these to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
+◊new-thought{◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, ◊acronym{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
-Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we are going to cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
+Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊acronym{PLT} Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we will cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
 ◊section['rules-of-the-game]{Rules of the Game}
 
@@ -77,28 +77,28 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and others, but we are going to use a ◊emphasis{language} as our data structure definition. Terms in the language are going to represent board configurations. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
+◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a ◊emphasis{language} as our data structure definition. Terms in the language will represent board configurations. ◊acronym{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊acronym{BNF}} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
 ◊code/block/highlighted['racket]{
 (define-language peg-solitaire
-  (position ::= █ ○ ●)
-  (board ::= ([position ...] ...)))
+  [position ::= █ ○ ●]
+  [board ::= ([position ...] ...)])
 }
 
 ◊margin-note{The ◊code/inline{position} data structure is analogous to an enumeration.}
 
 The code above defines two data structures. The first, ◊code/inline{position}, represents a position on the board. It can be one of following: ◊code/inline{█} is an uninitialized position that only serves as padding and is not really part of the board; ◊code/inline{○} is an empty position; and ◊code/inline{●} is a position containing a peg.
 
-◊margin-note{In Racket, different kinds of brackets—◊code/inline{()}, ◊code/inline{[]} and ◊code/inline{{}}—mean the same. Which one to use is a matter of readability—given that the kinds of open and close brackets match, of course.}
+◊margin-note{In Racket, different kinds of brackets—◊code/inline{()}, ◊code/inline{[]} and ◊code/inline{{}}—mean the same. The only constraint is that open and close brackets match; ◊code/inline{(]} is invalid. Which bracket to use is a matter of readability.}
 
 ◊margin-note{The ellipsis (◊code/inline{...}) in ◊acronym{PLT} Redex are similar to the Kleene star (◊code/inline{*}) in regular expressions.}
 
 The second data structure is the ◊code/inline{board}, represented as a matrix of ◊code/inline{position}s, or, more specifically, a list of lists of ◊code/inline{position}s. In ◊acronym{PLT} Redex, the ellipsis (◊code/inline{...}) means “the previous element repeated any number of times.” So ◊code/inline{[position ...]} means a list of ◊code/inline{position}s, and ◊code/inline{([position ...] ...)} means a list of lists of ◊code/inline{position}s.
 
 ◊margin-note{
- Even ill-formed boards like the following are possible:
+ Even ill-formed boards like the following are valid terms in this data structure definition:
 
  ◊code/block/highlighted['racket]{
 ([●])
@@ -107,7 +107,7 @@ The second data structure is the ◊code/inline{board}, represented as a matrix 
  [● ○ █ ●])
  }
 
- But we are not going to consider them.
+ But we will not to consider them.
 }
 
 Examples of terms in the language (boards) are:
@@ -130,7 +130,7 @@ Examples of terms in the language (boards) are:
  [█ █ ○ ● ● █ █])
 }
 
-We can then define the configuration for the initial Peg Solitaire board:
+We define the configuration for the initial Peg Solitaire board as a term in the language:
 
 ◊code/block/highlighted['racket]{
 (define-term initial-board
@@ -226,9 +226,9 @@ The following is the function with all the rules in the game:
         ↑)))
 }
 
-The function above starts by stating that it works over the language ◊code/inline{peg-solitaire}, more specifically over the ◊code/inline{board}s in that language. Then follow the rules. The only construct not explained thus far are the named ellipsis (◊code/inline{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
+The function above starts by stating that it works over the language ◊code/inline{peg-solitaire}, more specifically over the ◊code/inline{board}s in that language. Then follow the rules as discussed above. The only construct not explained thus far are the named ellipsis (◊code/inline{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
 
-The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel. The following shows how this works:
+The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel:
 
 ◊code/block/highlighted['racket]{
 > (apply-reduction-relation move (term initial-board))
@@ -349,7 +349,7 @@ Unfortunately, the above did not terminate after running for a whole night, when
 
 ◊margin-note{Any tool, when bent enough, will break. It is important to know this limit so we understand what the tool can and cannot do.}
 
-To find an answer within a reasonable time, we would need a ◊technical-term{goal-directed search}. This means we would prune the search space using more of our knowledge on the game. For example, we know that the board is symmetric, so we could prune search paths which are mirror images of paths we already explored. But this would complicate the model, so we are not going to pursue this venue in this article. Instead, we are going to leave open the problem of finding a solution for Peg Solitaire using ◊acronym{PLT} Redex.
+To find an answer within a reasonable time, we would need a ◊technical-term{goal-directed search}. This means we would prune the search space using more of our knowledge on the game. For example, we know that the board is symmetric, so we could prune search paths which are mirror images of paths we already explored. But this would complicate the model, so we will not pursue this venue in this article. Instead, we will leave open the problem of finding a solution for Peg Solitaire using ◊acronym{PLT} Redex.
 
 ◊section['other-limitations]{Other Limitations}
 
@@ -381,7 +381,7 @@ The comma in the snippet above means “escape back to Racket, run this arbitrar
 
 Along the way, we introduced a model for computation that is unusual in most programming languages: non-deterministic computation. When faced with multiple paths, non-deterministic computations ◊informal{create different universes} and follow them all.
 
-We also used the model to look for a solution to the game. We showed how a brute-force search is a simple way to explore a space of potential solutions. It is enough for small slices of the Peg Solitaire board, but does not scale to solve the full board in a reasonable running time. We introduced the idea of a ◊technical-term{goal-directed search}, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue this venue and left the problem open.
+We also used the model to look for a solution to the game. We showed how a brute-force search is a simple way to explore a space of potential solutions. It is enough for small slices of the Peg Solitaire board, but does not scale to solve the full board in a reasonable running time. We introduced the idea of ◊technical-term{goal-directed search}, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue this venue and left the problem open.
 
 Finally, we discussed ◊acronym{PLT} Redex’s limitations. It cannot be used to directly encode systems of rules like most kinds of cellular automata, in which simultaneous updates need to occur throughout a data structure. We presented ways to work around this limitation, including one that demonstrates how ◊acronym{PLT} Redex is extensible with arbitrary Racket code.
 

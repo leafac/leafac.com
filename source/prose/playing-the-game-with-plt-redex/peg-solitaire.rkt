@@ -2,8 +2,8 @@
 (require redex)
 
 (define-language peg-solitaire
-  (position ::= █ ○ ●)
-  (board ::= ([position ...] ...)))
+  [position ::= █ ○ ●]
+  [board ::= ([position ...] ...)])
 
 (module+ test
   (test-equal (redex-match? peg-solitaire board (term ([█])))
