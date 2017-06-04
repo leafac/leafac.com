@@ -624,10 +624,7 @@
                 non-shadowing-variable-name-reuse/result)
 
   (check-equal? (interpret shadowing)
-                shadowing/result)
-
-  (check-equal? (interpret sum-up-to)
-                sum-up-to/result))
+                shadowing/result))
 
 ;; ---------------------------------------------------------------------------------------------------
 
