@@ -1139,7 +1139,9 @@ This version of ◊code/inline{interpret} works similarly to most other function
 
 ◊; TODO: Factor environment into binding environment and value environment. Mention the value environment could be global.
 
-◊; TODO: Factor ‘state’ out of interpreter. Defer this to next article, about CPS.
+◊; TODO: Notes for CPS article:
+◊;       1. Motivate by avoiding re-doing the work of ‘split-expression’.
+◊;       2. A ‘continuation’ is the ‘context’ represented as a function.
 
 ◊; TODO: References.
 ◊; - SEwPR.
