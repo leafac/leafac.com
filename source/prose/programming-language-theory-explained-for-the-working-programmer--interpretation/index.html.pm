@@ -1137,9 +1137,9 @@ This version of ◊code/inline{interpret} works similarly to most other function
 
 ◊; TODO: Mention that, for a realistic implementation, we wouldn’t want to split and fill expressions along the way.
 
-◊; TODO: Factor environment into binding environment and value environment.
+◊; TODO: Factor environment into binding environment and value environment. Mention the value environment could be global.
 
-◊; TODO: Factor ‘state’ out of interpreter.
+◊; TODO: Factor ‘state’ out of interpreter. Defer this to next article, about CPS.
 
 ◊; TODO: References.
 ◊; - SEwPR.
