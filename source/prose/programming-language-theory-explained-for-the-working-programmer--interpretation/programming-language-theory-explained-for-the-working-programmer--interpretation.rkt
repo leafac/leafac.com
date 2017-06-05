@@ -517,40 +517,48 @@
 
 ;; ENVIRONMENT-BASED INTERPRETER
 
-;; TODO: Refactor ‘expression’ + ‘environment’ into ‘state’ data structure. Define ‘initial-state’. ‘lookup’ should receive state.
-
 (module+ environment-based-interpreter
   (define (interpret expression)
-    (define (interpret* expression environment)
-      (match expression
-        [`(closure (λ (,argument-name) ,body) ,closure-environment)
-         (close expression)]
+    (define (interpret* current-state)
+      (match (state-expression current-state)
+        [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
+         (state->value current-state)]
         [_
-         (define-values (new-expression new-environment) (step expression environment))
-         (interpret* new-expression new-environment)]))
-    (interpret* expression empty))
+         (interpret* (step current-state))]))
+    (interpret* (initial-state expression)))
 
-  (define (step expression environment)
+  (define (step current-state)
+    (match-define (state expression environment) current-state)
     (match expression
       [`(closure (λ (,argument-name) ,body) ,closure-environment)
-       (values expression environment)]
+       current-state]
       [_
        (define-values (reduction-expression context) (split-expression expression))
-       (define-values (reduced-expression new-environment)
+       (match-define (state reduced-expression new-environment)
          (match reduction-expression
            [`(λ (,argument-name) ,body)
-            (values `(closure (λ (,argument-name) ,body) ,environment) environment)]
+            (define reduced-expression `(closure (λ (,argument-name) ,body) ,environment))
+            (state reduced-expression environment)]
            [`((closure (λ (,argument-name) ,body) ,closure-environment) ,argument)
-            (values `(restore ,body ,environment)
-                    (dict-set closure-environment argument-name argument))]
+            (define reduced-expression `(restore ,body ,environment))
+            (define new-environment (dict-set closure-environment argument-name argument))
+            (state reduced-expression new-environment)]
            [`(restore ,value ,previous-environment)
-            (values value previous-environment)]
+            (state value previous-environment)]
            [variable
-            (values (lookup variable environment) environment)]))
-       (values (fill-hole reduced-expression context) new-environment)]))
+            (define reduced-expression (lookup variable current-state))
+            (state reduced-expression environment)]))
+       (define new-expression (fill-hole reduced-expression context))
+       (state new-expression new-environment)]))
 
-  (define (lookup variable environment)
+  (define (lookup variable current-state)
+    (match-define (state expression environment) current-state)
     (dict-ref environment variable))
+
+  (struct state (expression environment) #:transparent)
+
+  (define (initial-state expression)
+    (state expression empty))
 
   (define (split-expression expression)
     (match expression
@@ -585,14 +593,15 @@
       [_
        context]))
 
-  (define (close closure)
-    (match-define `(closure ,raw-function ,closure-environment) closure)
+  (define (state->value current-state)
+    (match-define (state `(closure ,raw-function ,closure-environment) environment) current-state)
     (for/fold ([function raw-function])
               ([binding (in-list closure-environment)])
       (match-define `(,variable . ,raw-value) binding)
       (cond
         [(set-member? (free-variables function) variable)
-         (define value (close raw-value))
+         (define raw-value (lookup variable (state variable closure-environment)))
+         (define value (state->value (state raw-value environment)))
          (substitute function variable value)]
         [else
          function])))
@@ -650,51 +659,56 @@
 
 (module+ factored-environment-interpreter
   (define (interpret expression)
-    (define (interpret* expression binding-environment value-environment time)
-      (match expression
+    (define (interpret* current-state)
+      (match (state-expression current-state)
         [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
-         (close expression value-environment)]
+         (state->value current-state)]
         [_
-         (define-values (new-expression new-binding-environment new-value-environment new-time)
-           (step expression binding-environment value-environment time))
-         (interpret* new-expression new-binding-environment new-value-environment new-time)]))
-    (interpret* expression empty empty initial-time))
+         (interpret* (step current-state))]))
+    (interpret* (initial-state expression)))
 
-  (define (step expression binding-environment value-environment time)
+  (define (step current-state)
+    (match-define (state expression binding-environment value-environment time) current-state)
     (match expression
-      [`(closure (λ (,argument-name) ,body)
-                 ,closure-binding-environment)
-       (values expression binding-environment value-environment time)]
+      [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
+       current-state]
       [_
-       (define-values (reduction-expression context)
-         (split-expression expression))
-       (define-values (reduced-expression new-binding-environment new-value-environment new-time)
+       (define-values (reduction-expression context) (split-expression expression))
+       (match-define
+         (state reduced-expression new-binding-environment new-value-environment new-time)
          (match reduction-expression
            [`(λ (,argument-name) ,body)
-            (define closure
-              `(closure (λ (,argument-name) ,body)
-                        ,binding-environment))
-            (values closure binding-environment value-environment time)]
-           [`((closure (λ (,argument-name) ,body)
-                       ,closure-binding-environment)
-              ,argument)
-            (define new-time (tick time))
+            (define reduced-expression `(closure (λ (,argument-name) ,body) ,binding-environment))
+            (state reduced-expression binding-environment value-environment time)]
+           [`((closure (λ (,argument-name) ,body) ,closure-binding-environment) ,argument)
+            (define reduced-expression `(restore ,body ,binding-environment))
+            (define new-time (tick current-state))
             (define new-binding-environment
               (dict-set closure-binding-environment argument-name new-time))
-            (define new-value-environment
-              (dict-set value-environment new-time argument))
-            (values `(restore ,body ,binding-environment)
-                    new-binding-environment new-value-environment new-time)]
+            (define new-value-environment (dict-set value-environment new-time argument))
+            (state reduced-expression new-binding-environment new-value-environment new-time)]
            [`(restore ,value ,previous-binding-environment)
-            (values value previous-binding-environment value-environment time)]
+            (state value previous-binding-environment value-environment time)]
            [variable
-            (define value (lookup variable binding-environment value-environment))
-            (values value binding-environment value-environment time)]))
-       (values (fill-hole reduced-expression context)
-               new-binding-environment new-value-environment new-time)]))
+            (define reduced-expression (lookup variable current-state))
+            (state reduced-expression binding-environment value-environment time)]))
+       (define new-expression (fill-hole reduced-expression context))
+       (state new-expression new-binding-environment new-value-environment new-time)]))
 
-  (define (lookup variable binding-environment value-environment)
+  (define (lookup variable current-state)
+    (match-define (state expression binding-environment value-environment time) current-state)
     (dict-ref value-environment (dict-ref binding-environment variable)))
+
+  (struct state (expression binding-environment value-environment time) #:transparent)
+
+  (define (initial-state expression)
+    (state expression empty empty initial-time))
+
+  (define initial-time 0)
+
+  (define (tick current-state)
+    (match-define (state expression binding-environment value-environment time) current-state)
+    (add1 time))
 
   ;; ‘substitute’ is the same as for the environment-based interpreter, except for variable names.
 
@@ -747,18 +761,19 @@
       [_
        context]))
 
-  (define (close closure value-environment)
+  (define (state->value current-state)
     (match-define
-      `(closure ,raw-function ,closure-binding-environment)
-      closure)
+      (state `(closure ,raw-function ,closure-binding-environment)
+             binding-environment value-environment time)
+      current-state)
     (for/fold ([function raw-function])
               ([binding (in-list closure-binding-environment)])
       (match-define `(,variable . ,time) binding)
       (cond
         [(set-member? (free-variables function) variable)
          (define raw-value
-           (lookup variable closure-binding-environment value-environment))
-         (define value (close raw-value value-environment))
+           (lookup variable (state variable closure-binding-environment value-environment time)))
+         (define value (state->value (state raw-value binding-environment value-environment time)))
          (substitute function variable value)]
         [else
          function])))
@@ -774,11 +789,6 @@
                   (free-variables argument))]
       [variable
        (set variable)]))
-
-  (define initial-time 0)
-
-  (define (tick time)
-    (add1 time))
 
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
@@ -819,4 +829,4 @@
     (check-equal? (interpret sum-up-to)
                   sum-up-to/result)))
 
-;; TODO: Test this whole thing! :)
+;; TODO: Re-read and test this whole thing! :)
