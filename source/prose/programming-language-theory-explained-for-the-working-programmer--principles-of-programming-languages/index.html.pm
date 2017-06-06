@@ -196,7 +196,7 @@ As the listing above illustrates, functions are opaque, so we introduce extra ma
   (number add1 0))
 }
 
-The function ◊code/inline{pretty-print} is not be part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code/inline{0} and ◊code/inline{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
+The function ◊code/inline{pretty-print} is not part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code/inline{0} and ◊code/inline{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print zero)
