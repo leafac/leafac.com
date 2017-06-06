@@ -1142,6 +1142,7 @@ This version of ◊code/inline{interpret} works similarly to most other function
 ◊; TODO: Notes for CPS article:
 ◊;       1. Motivate by avoiding re-doing the work of ‘split-expression’.
 ◊;       2. A ‘continuation’ is the ‘context’ represented as a function.
+◊;       3. “Alphatization”.
 
 ◊; TODO: References.
 ◊; - SEwPR.

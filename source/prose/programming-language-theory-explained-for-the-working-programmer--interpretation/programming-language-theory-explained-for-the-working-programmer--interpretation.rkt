@@ -368,7 +368,7 @@
                   (set)))
 
   (define (closed? program)
-    (equal? (free-variables program) (set)))
+    (set-empty? (free-variables program)))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -413,9 +413,7 @@
        `(,(substitute function argument-name argument)
          ,(substitute other-argument argument-name argument))]
       [variable
-       (if (equal? argument-name variable)
-           argument
-           variable)]))
+       (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -491,9 +489,7 @@
        `(,(substitute function argument-name argument)
          ,(substitute other-argument argument-name argument))]
       [variable
-       (if (equal? argument-name variable)
-           argument
-           variable)]))
+       (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -519,13 +515,14 @@
 
 (module+ environment-based-interpreter
   (define (interpret expression)
-    (define (interpret* current-state)
-      (match (state-expression current-state)
-        [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
-         (state->value current-state)]
-        [_
-         (interpret* (step current-state))]))
-    (interpret* (initial-state expression)))
+    (state->value (step* (initial-state expression))))
+
+  (define (step* current-state)
+    (match (state-expression current-state)
+      [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
+       current-state]
+      [_
+       (step* (step current-state))]))
 
   (define (step current-state)
     (match-define (state expression environment) current-state)
@@ -659,13 +656,14 @@
 
 (module+ factored-environment-interpreter
   (define (interpret expression)
-    (define (interpret* current-state)
-      (match (state-expression current-state)
-        [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
-         (state->value current-state)]
-        [_
-         (interpret* (step current-state))]))
-    (interpret* (initial-state expression)))
+    (state->value (step* (initial-state expression))))
+
+  (define (step* current-state)
+    (match (state-expression current-state)
+      [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
+       current-state]
+      [_
+       (step* (step current-state))]))
 
   (define (step current-state)
     (match-define (state expression binding-environment value-environment time) current-state)
@@ -828,5 +826,3 @@
 
     (check-equal? (interpret sum-up-to)
                   sum-up-to/result)))
-
-;; TODO: Re-read and test this whole thing! :)
