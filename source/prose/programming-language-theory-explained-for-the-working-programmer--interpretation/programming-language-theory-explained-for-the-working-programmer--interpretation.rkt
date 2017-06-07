@@ -367,23 +367,26 @@
     (check-equal? (free-variables sum-up-to)
                   (set)))
 
+  (define (well-formed? program)
+    (closed? program))
+
   (define (closed? program)
     (set-empty? (free-variables program)))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
 
-    (check-true (closed? minimal-program))
+    (check-true (well-formed? minimal-program))
 
-    (check-true (closed? minimal-application))
+    (check-true (well-formed? minimal-application))
 
-    (check-true (closed? non-shadowing-variable-name-reuse))
+    (check-true (well-formed? non-shadowing-variable-name-reuse))
 
-    (check-true (closed? shadowing))
+    (check-true (well-formed? shadowing))
 
-    (check-false (closed? open))
+    (check-false (well-formed? open))
 
-    (check-true (closed? sum-up-to))))
+    (check-true (well-formed? sum-up-to))))
 
 ;; ---------------------------------------------------------------------------------------------------
 
