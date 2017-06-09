@@ -104,6 +104,8 @@ To turn this program in our target language into a data structure in Racket, we 
 `((λ (x) x) (λ (y) y))
 }
 
+◊margin-note{Unquoting is similar to string interpolation in other languages, for example, Ruby. But on data structures, as opposed to strings.}
+
 Another advantage of using ◊technical-term{quasiquoting} to represent programs in our target language is that we can use Racket programs to build programs in our target language. For this, we use ◊technical-term{unquoting} (◊code/inline{,}), which interpolates Racket expressions in parts of the data structure. For example, consider the following rewrite of the program above:
 
 ◊code/block/highlighted['racket]{
