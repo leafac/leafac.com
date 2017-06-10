@@ -132,6 +132,34 @@ The second responsibility of the well-formedness checker is to check whether all
 
 This implementation is simplistic, because it receives a ◊code/inline{program} as input and just delegates to two auxiliary functions ◊code/inline{syntactically-valid?} and ◊code/inline{closed?} the responsibilities described above. For the rest of this section, we implement these two auxiliary functions.
 
+◊paragraph-separation[]
+
+◊new-thought{We start with} ◊code/inline{syntactically-valid?}:
+
+◊code/block/highlighted['racket]{
+(define (syntactically-valid? program-fragment)
+    ; TODO
+  )
+}
+
+This function receives as argument a ◊code/inline{program-fragment}, which is not necessarily a whole program. It makes sense to ask whether a smaller part of a bigger program is syntactically valid, for example, from the program ◊code/inline{(λ (a) (a a))}, we can ask whether ◊code/inline{(a a)} is syntactically valid—and it is.
+
+Let us first consider the simplest case, in which the ◊code/inline{program-fragment} is just a variable. For example, the ◊code/inline{program-fragment} ◊code/inline{x}. While this fragment on its own is not well-formed because it is open—◊code/inline{x} is used but not defined—it ◊emphasis{is} syntactically valid. To check for this, the function just has to check that the ◊code/inline{program-fragment} is a symbol which stands for a variable, as opposed to, for example, a number:
+
+◊code/block/highlighted['racket]{
+(define (syntactically-valid? program-fragment)
+  (symbol? program-fragment))
+}
+
+This simple implementation is just calling Racket’s ◊code/inline{symbol?} function, and it is already enough to check the syntactical validity of variables:
+
+◊code/block/highlighted['racket]{
+> (syntactically-valid? `x)
+#t
+> (syntactically-valid? 42)
+#f
+}
+
 ◊; ---------------------------------------------------------------------------------------------------
 
 ◊section['first-interpreter]{First Interpreter}
