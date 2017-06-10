@@ -337,6 +337,70 @@
 ;; WELL-FORMEDNESS CONDITION
 
 (module+ well-formedness-condition
+  (define (well-formed? program)
+    (and (syntactically-valid? program) (closed? program)))
+
+  (module+ test
+    (require rackunit (submod ".." ".." test-cases))
+
+    (check-true (well-formed? minimal-program))
+
+    (check-true (well-formed? minimal-application))
+
+    (check-true (well-formed? non-shadowing-variable-name-reuse))
+
+    (check-true (well-formed? shadowing))
+
+    (check-false (well-formed? open))
+
+    (check-true (well-formed? sum-up-to)))
+
+  (define (syntactically-valid? program-fragment)
+    (match program-fragment
+      [`(λ (,argument-name) ,body)
+       (and (symbol? argument-name) (syntactically-valid? body))]
+      [`(,function ,argument)
+       (and (syntactically-valid? function) (syntactically-valid? argument))]
+      [variable
+       (symbol? variable)]))
+
+  (module+ test
+    (require rackunit (submod ".." ".." test-cases))
+
+    (check-true (syntactically-valid? minimal-program))
+
+    (check-true (syntactically-valid? minimal-application))
+
+    (check-true (syntactically-valid? non-shadowing-variable-name-reuse))
+
+    (check-true (syntactically-valid? shadowing))
+
+    (check-true (syntactically-valid? open))
+
+    (check-true (syntactically-valid? sum-up-to))
+
+    (check-false (syntactically-valid? `(λ (a b) a)))
+
+    (check-false (syntactically-valid? `(λ (a) (a a a)))))
+
+  (define (closed? program)
+    (set-empty? (free-variables program)))
+
+  (module+ test
+    (require rackunit (submod ".." ".." test-cases))
+
+    (check-true (closed? minimal-program))
+
+    (check-true (closed? minimal-application))
+
+    (check-true (closed? non-shadowing-variable-name-reuse))
+
+    (check-true (closed? shadowing))
+
+    (check-false (closed? open))
+
+    (check-true (closed? sum-up-to)))
+
   (define (free-variables program-fragment)
     (match program-fragment
       [`(λ (,argument-name) ,body)
@@ -365,28 +429,7 @@
                   (set 'x))
 
     (check-equal? (free-variables sum-up-to)
-                  (set)))
-
-  (define (well-formed? program)
-    (closed? program))
-
-  (define (closed? program)
-    (set-empty? (free-variables program)))
-
-  (module+ test
-    (require rackunit (submod ".." ".." test-cases))
-
-    (check-true (well-formed? minimal-program))
-
-    (check-true (well-formed? minimal-application))
-
-    (check-true (well-formed? non-shadowing-variable-name-reuse))
-
-    (check-true (well-formed? shadowing))
-
-    (check-false (well-formed? open))
-
-    (check-true (well-formed? sum-up-to))))
+                  (set))))
 
 ;; ---------------------------------------------------------------------------------------------------
 

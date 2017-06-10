@@ -117,7 +117,22 @@ Another advantage of using ◊technical-term{quasiquoting} to represent programs
 
 This listing has the same meaning as the previous program. First, it defines a variable named ◊code/inline{argument}, whose value is a data structure representing a program fragment in our target language: ◊code/inline{(λ (y) y)}. Then, it uses ◊technical-term{quasiquote} and ◊technical-term{unquote} to define the program ◊code/inline{((λ (x) x) (λ (y) y))} in our target language. The ◊technical-term{quasiquote} (◊code/inline{`}) starts a program in our target language embedded in Racket (a data structure), and the ◊technical-term{unquote} (◊code/inline{,}) escapes back to Racket. The result of the expression under the ◊technical-term{unquote} is interpolated in place. In the given example, the expression under the ◊technical-term{unquote} is just a reference to the variable defined right above: ◊code/inline{argument}. So its value (the program fragment ◊code/inline{(λ (y) y)} in our target language) is interpolated in place, resulting in the program ◊code/inline{((λ (x) x) (λ (y) y))} in our target language.
 
-◊; TODO: Stopped here. Write section about well-formedness check.
+◊section['well-formedness-checker]{Well-Formedness Checker}
+
+◊new-thought{Before we start} the implementation of our first interpreter, we address the issue of checking whether a program is well-formed. In this section, we introduce a well-formedness checker, which runs before the interpreter, so it does not have to account for error cases. Also, the well-formedness checker is illustrative of the techniques we will use to process programs in our language in later sections.
+
+The well-formedness checker has two responsibilities: (1) checker whether the program is syntactically valid; and (2) checker whether all variables are defined before they are used. The first is to reject programs which are not in the form defined by our target language. For example, ◊code/inline{(λ (a b) a)} is invalid because it is an anonymous function with two arguments, ◊code/inline{a} and ◊code/inline{b}, whereas our target language only allows functions with one argument. Another example of syntactically invalid program is ◊code/inline{(f a b)}, which is a call to function ◊code/inline{f} with arguments ◊code/inline{a} and ◊code/inline{b}; this is disallowed because functions only receive one argument.
+
+The second responsibility of the well-formedness checker is to check whether all variables are defined before use. As mentioned on the ◊reference['language]{previous section}, the interpreters we will implement do not support these programs, which are said to be ◊technical-term{open}. With this knowledge, we are ready to implement the ◊code/inline{well-formed?} function, which is a well-formedness checker:
+
+◊code/block/highlighted['racket]{
+(define (well-formed? program)
+  (and (syntactically-valid? program) (closed? program)))
+}
+
+This implementation is simplistic, because it receives a ◊code/inline{program} as input and just delegates to two auxiliary functions ◊code/inline{syntactically-valid?} and ◊code/inline{closed?} the responsibilities described above. For the rest of this section, we implement these two auxiliary functions.
+
+◊; ---------------------------------------------------------------------------------------------------
 
 ◊section['first-interpreter]{First Interpreter}
 
