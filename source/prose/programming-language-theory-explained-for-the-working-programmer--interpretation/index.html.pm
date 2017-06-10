@@ -136,6 +136,8 @@ This implementation is simplistic, because it receives a ◊code/inline{program}
 
 ◊new-thought{We start with} ◊code/inline{syntactically-valid?}:
 
+◊margin-note{Texts after the semicolon (◊code/inline{;}) are comments.}
+
 ◊code/block/highlighted['racket]{
 (define (syntactically-valid? program-fragment)
     ; TODO
@@ -159,6 +161,142 @@ This simple implementation is just calling Racket’s ◊code/inline{symbol?} fu
 > (syntactically-valid? 42)
 #f
 }
+◊paragraph-separation[]
+
+◊new-thought{The next form of} ◊code/inline{program-fragment}} we address in ◊code/inline{syntactically-valid?} is the anonymous function definition, for example:
+
+◊code/block/highlighted['racket]{
+(λ (x) (x x))
+}
+
+Before ◊code/inline{syntactically-valid?} even considers the syntactical validity of the anonymous function definition, it needs to detect that the given ◊code/inline{program-fragment} is of this kind—as opposed to variable references, which considered above, for example. To this end, we introduce ◊technical-term{pattern matching}. The simplest form of ◊technical-term{pattern matching} is the following:
+
+◊margin-note{
+ ◊technical-term{Pattern matching} is a generalization of ◊technical-term{destructuring assignment}. The following listing is an example of ◊technical-term{destructuring assignment} in languages including Ruby, Python and JavaScript:
+
+ ◊code/block/highlighted['racket]{
+name, age = ["Wheatley", 6]
+ }
+
+ In this program, ◊code/inline{["Wheatley", 6]} is a list composed of the values ◊code/inline{"Wheatley"} and ◊code/inline{6}. The ◊technical-term{destructuring assignment} works by ◊technical-term{destructuring} the list and ◊technical-term{assigning} its elements to the variables ◊code/inline{name} and ◊code/inline{age}, respectively.
+
+ ◊technical-term{Pattern matching} extends ◊technical-term{destructuring assignment} to support arbitrary data structures, beyond lists, tuples and the few other data structures generally supported by ◊technical-term{destructuring assignment}.
+}
+
+◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures from program fragments, for example, ◊code/inline{`(λ (,argument-name) ,body)}.}
+
+◊code/block/highlighted['racket]{
+(match-define `(λ (,argument-name) ,body) `(λ (x) (x x)))
+}
+
+This form matches the program in our target language ◊code/inline{`(λ (x) (x x))} with the pattern ◊code/inline{`(λ (,argument-name) ,body)}. As a result, the variable ◊code/inline{argument-name} in Racket is bound to the variable name ◊code/inline{x} in our target language; and the Racket variable ◊code/inline{body} is bound to the program fragment ◊code/inline{(x x)}.
+
+In ◊code/inline{syntactically-valid?}, the data structure which is ◊technical-term{subject} of the ◊technical-term{pattern match} (◊code/inline{program-fragment}) might have different forms. Moreover, we want to perform different computations depending on the kind of ◊code/inline{program-fragment}. So the ◊code/inline{match-define} form does not suffice, we have to reach for the ◊code/inline{match} form. The following is an example of ◊code/inline{pattern matching} with the ◊code/inline{match} form:
+
+◊margin-note{The ◊code/inline{match} form is similar to multiway branches (for example, ◊code/inline{switch} and ◊code/inline{case}) in other programming languages. And it works with arbitrary ◊technical-term{patterns} for arbitrary data structures, the same as ◊code/inline{match-define}.}
+
+◊figure{◊svg{match.svg}}
+
+The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} to each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the ◊technical-term{result} of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
+
+The example above demonstrates that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the given ◊code/inline{program-fragment} given to ◊code/inline{syntactically-valid?} falls. There are only three possibilities, which are the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
+
+◊margin-note{Texts after the semicolon (◊code/inline{;}) are comments. And ◊code/inline{#;} comments out the whole form ◊code/inline{[___]} that follows it. This is necessary because a ◊technical-term{match clause} without a ◊technical-term{body} is not valid Racket syntax. We remove the ◊code/inline{#;} comment markers as we implement ◊code/inline{syntactically-valid?} for different kinds of ◊code/inline{program-fragment}s.}
+
+◊code/block/highlighted['racket]{
+(define (syntactically-valid? program-fragment)
+  (match program-fragment
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (1) Anonymous function definition.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]
+    #;[variable
+       ; TODO: (3) Variable reference.
+       ]))
+}
+
+In the listing above, the ◊technical-term{subject} of the pattern match is the ◊code/inline{program-fragment}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument-name) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{program-fragment} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument-name} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
+
+We already have an implementation for ◊code/inline{variable}s, so we can fill in the last hole in the template above:
+
+◊code/block/highlighted['racket]{
+(define (syntactically-valid? program-fragment)
+  (match program-fragment
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (1) Anonymous function definition.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]
+    [variable
+     (symbol? variable)]))
+}
+
+The ◊code/inline{syntactically-valid?} function is still working on the ◊code/inline{program-fragment}s consisting of ◊code/inline{variable}s, which we considered above:
+
+◊code/block/highlighted['racket]{
+> (syntactically-valid? `x)
+#t
+> (syntactically-valid? 42)
+#f
+}
+
+◊paragraph-separation[]
+
+◊new-thought{Now that} ◊code/inline{syntactically-valid?} can distinguish between the different forms of ◊code/inline{program-fragment}, we return to the issue of checking the syntactical validity of anonymous function definitions. Two conditions must hold: (1) the ◊code/inline{argument-name} must be a symbol (similar to variable references); and (2) the ◊code/inline{body} must be a ◊code/inline{syntactically-valid?} ◊code/inline{program-fragment}.
+
+For the first condition, we can use Racket’s ◊code/inline{symbol?} function, as we did before for variable references. For the second, we can call ◊code/inline{syntactically-valid?} recursively on the ◊code/inline{program-fragment} which is the anonymous function ◊code/inline{body}:
+
+◊code/block/highlighted['racket]{
+(define (syntactically-valid? program-fragment)
+  (match program-fragment
+    [`(λ (,argument-name) ,body)
+     (and (symbol? argument-name) (syntactically-valid? body))]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]
+    [variable
+     (symbol? variable)]))
+}
+
+To test our implementation, we use the syntactically valid anonymous function ◊code/inline{(λ (x) x)} and the syntactically ◊emphasis{invalid} anonymous function ◊code/inline{(λ (x y) x)}, which has more arguments than the one allowed:
+
+◊code/block/highlighted['racket]{
+> (syntactically-valid? `(λ (x) x))
+#t
+> (syntactically-valid? `(λ (x y) x))
+#f
+}
+
+◊paragraph-separation[]
+
+◊new-thought{To complete the implementation} of ◊code/inline{syntactically-valid?}, we consider the case of function applications. The conditions for syntactical validity in this case is just that both ◊code/inline{function} and ◊code/inline{argument} are syntactically valid themselves, and we can use ◊code/inline{syntactically-valid?} recursively to check that:
+
+◊code/block/highlighted['racket]{
+(define (syntactically-valid? program-fragment)
+  (match program-fragment
+    [`(λ (,argument-name) ,body)
+     (and (symbol? argument-name) (syntactically-valid? body))]
+    [`(,function ,argument)
+     (and (syntactically-valid? function) (syntactically-valid? argument))]
+    [variable
+     (symbol? variable)]))
+}
+
+To test this final case, we again consider one syntactically valid and one syntactically ◊emphasis{invalid} ◊code/inline{program-fragment}:
+
+◊code/block/highlighted['racket]{
+> (syntactically-valid? `(f a))
+#t
+> (syntactically-valid? `(f a b))
+#f
+}
+
+The function call ◊code/inline{(f a b)} is syntactically invalid because it has one argument more than allowed.
+
+The implementation of ◊code/inline{syntactically-valid?} is complete. Let us turn to ◊code/inline{closed?}, the other well-formedness condition.
 
 ◊; ---------------------------------------------------------------------------------------------------
 
@@ -186,86 +324,7 @@ This implementation is enough to interpret our first example program correctly:
 '(λ (x) x)
 }
 
-◊paragraph-separation[]
-
-◊new-thought{The next program we address} in our interpreter implementation is the function application:
-
-◊code/block/highlighted['racket]{
-((λ (x) x) (λ (y) y))
-}
-
-Before the interpreter starts working on the function application, it needs to detect that the given ◊code/inline{expression} is of this kind—as opposed to an anonymous function declaration, for example. To this end, we introduce ◊technical-term{pattern matching}. The simplest form of ◊technical-term{pattern matching} is the following:
-
-◊margin-note{
- ◊technical-term{Pattern matching} is a generalization of ◊technical-term{destructuring assignment}. The following listing is an example of ◊technical-term{destructuring assignment} in languages including Ruby, Python and JavaScript:
-
- ◊code/block/highlighted['racket]{
-name, age = ["Wheatley", 6]
- }
-
- In this program, ◊code/inline{["Wheatley", 6]} is a list composed of the values ◊code/inline{"Wheatley"} and ◊code/inline{6}. The ◊technical-term{destructuring assignment} works by ◊technical-term{destructuring} the list and ◊technical-term{assigning} its elements to the variables ◊code/inline{name} and ◊code/inline{age}, respectively.
-
- ◊technical-term{Pattern matching} extends ◊technical-term{destructuring assignment} to support arbitrary data structures, beyond lists, tuples and other data structures generally supported by ◊technical-term{destructuring assignment}.
-}
-
-◊margin-note{The quasiquotation notation for patterns that ◊technical-term{destruct} data structures is the same as the quasiquotation notation for ◊technical-term{constructing} data structures from program fragments, for example, ◊code/inline{`(λ (,argument-name) ,body)}.}
-
-◊code/block/highlighted['racket]{
-(match-define `(,function ,argument)
-              `((λ (x) x) (λ (y) y)))
-}
-
-This form matches the program in our target language ◊code/inline{`((λ (x) x) (λ (y) y))} with the pattern ◊code/inline{`(,function ,argument)}. As a result, the variable ◊code/inline{function} is bound to the program fragment ◊code/inline{(λ (x) x)} and the variable ◊code/inline{argument} is bound to the program fragment ◊code/inline{(λ (y) y)}.
-
-In our interpreter, the data structure which is ◊technical-term{subject} of the ◊technical-term{pattern match} (◊code/inline{expression}) might have different forms. Moreover, we want to perform different computations depending on the kind of ◊code/inline{expression}. So the ◊code/inline{match-define} form does not suffice, we have to reach for the ◊code/inline{match} form, which was designed for this purpose. The following is an example of ◊code/inline{pattern matching} with the ◊code/inline{match} form:
-
-◊margin-note{The ◊code/inline{match} form is similar to multiway branches (for example, ◊code/inline{switch} and ◊code/inline{case}) in other programming languages. And it works with arbitrary ◊technical-term{patterns} for arbitrary data structures.}
-
-◊figure{◊svg{match.svg}}
-
-The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} to each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the ◊technical-term{result} of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
-
-The example above demonstrates that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the given ◊code/inline{expression} falls. There are only three possibilities, which are the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
-
-◊margin-note{Texts after the semicolon (◊code/inline{;}) are comments. And ◊code/inline{#;} comments out the whole form ◊code/inline{[___]} that follows it. This is necessary because a ◊technical-term{match clause} without a ◊technical-term{body} is not valid Racket syntax. We remove the ◊code/inline{#;} comment markers as we implement the interpreter for different kinds of expressions.}
-
-◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
-    #;[`(λ (,argument-name) ,body)
-       ; TODO: (1) Anonymous function definition.
-       ]
-    #;[`(,function ,argument)
-       ; TODO: (2) Function application.
-       ]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
-}
-
-In the listing above, the ◊technical-term{subject} of the pattern match is the ◊code/inline{expression}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument-name) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{expression} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument-name} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
-
-We already have an implementation for anonymous function definitions, so we can fill in the first hole in the template above:
-
-◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
-    [`(λ (,argument-name) ,body)
-     expression]
-    #;[`(,function ,argument)
-       ; TODO: (2) Function application.
-       ]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
-}
-
-The interpreter is working again for programs consisting of anonymous function declarations. It outputs the same value as before for our first example:
-
-◊code/block/highlighted['racket]{
-> (interpret `(λ (x) x))
-'(λ (x) x)
-}
+◊; TODO: I cut a lot of stuff from here.
 
 ◊paragraph-separation[]
 
