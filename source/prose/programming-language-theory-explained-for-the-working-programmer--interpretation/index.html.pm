@@ -427,37 +427,57 @@ More importantly, note the similarities between the implementations of ◊code/i
 
 Our interpreters and auxiliary functions follow the ◊code/inline{traverse} pattern.
 
-◊; ---------------------------------------------------------------------------------------------------
-
 ◊section['first-interpreter]{First Interpreter}
 
-◊new-thought{Our first interpreter} is a function which receives as argument a program like those defined on the ◊reference['language]{previous section} and returns a value in our language. We build it incrementally, driven by examples, starting with an anonymous function definition:
+◊new-thought{Our first interpreter} is a function which receives as argument a ◊code/inline{program} and returns a value in our language. We start with the template for ◊technical-term{traversing} a ◊code/inline{program}, which we established in the ◊reference['first-interpreter]{previous section}:
 
 ◊code/block/highlighted['racket]{
-(λ (x) x)
+(define (interpret program)
+  (match program
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (1) Anonymous function definition.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]
+    #;[variable
+       ; TODO: (3) Variable reference.
+       ]))
 }
 
-Anonymous function definitions are already values in our language, so the interpreter can return the given expression unaltered:
+Let us first consider case (3), in which the ◊code/inline{program} is a ◊code/inline{variable}, for example, ◊code/inline{x}. In this case, the program is ◊technical-term{open}, and is not well-formed. Our interpreter does not need to handle programs which are not well-formed, they have already been discarded by the ◊code/inline{well-formed?} checker. So we can completely eliminate this case:
 
 ◊code/block/highlighted['racket]{
-(define (interpret expression)
-  expression)
+(define (interpret program)
+  (match program
+    #;[`(λ (,argument-name) ,body)
+       ; TODO: (1) Anonymous function definition.
+       ]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]))
+}
+
+Next, we address case (1), in which the program is the definition of an anonymous function, for example, ◊code/inline{(λ (x) x)}. Anonymous function definitions are already values in our language, so the interpreter can return the given ◊code/inline{program} unaltered:
+
+◊code/block/highlighted['racket]{
+(define (interpret program)
+  (match program
+    [`(λ (,argument-name) ,body)
+     program]
+    #;[`(,function ,argument)
+       ; TODO: (2) Function application.
+       ]))
 }
 
 This implementation is enough to interpret our first example program correctly:
-
-◊margin-note{The quote (◊code/inline{'}) in the result means the same as the quasiquote (◊code/inline{`}), except that it does not support unquoting (◊code/inline{,}). For the purposes of this article, the two are mean the same: “the next form is a program in our target language.”}
 
 ◊code/block/highlighted['racket]{
 > (interpret `(λ (x) x))
 '(λ (x) x)
 }
 
-◊; TODO: I cut a lot of stuff from here.
-
-◊paragraph-separation[]
-
-◊new-thought{We now return} to function application. The following is the example of function application in our language which we are addressing:
+The final case is function application. The following is the example of function application in our language:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y)) ;; => (λ (y) y)
@@ -468,37 +488,25 @@ The applied function is ◊code/inline{(λ (x) x)} and the argument is ◊code/i
 The ◊technical-term{pattern} we use in ◊code/inline{interpret} to match function application is ◊code/inline{`(,function ,argument)}. So, in our example, the variable name ◊code/inline{function} is bound to the value ◊code/inline{(λ (x) x)} and the variable name ◊code/inline{argument} is bound to the value ◊code/inline{(λ (y) y)}. Our first task is to ◊technical-term{destruct} ◊code/inline{function} to retrieve its argument name and body:
 
 ◊code/block/highlighted['racket]{
-(match-define `(λ (,argument-name) ,body)
-  function)
+(match-define `(λ (,argument-name) ,body) function)
 }
 
 Then, we can call an auxiliary function to perform the substitution:
 
 ◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
+(define (interpret program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     [`(,function ,argument)
-     (match-define `(λ (,argument-name) ,body)
-       function)
-     (substitute body argument-name argument)]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
+     (match-define `(λ (,argument-name) ,body) function)
+     (substitute body argument-name argument)]))
 }
 
-The ◊code/inline{substitute} auxiliary function receives as argument a function ◊code/inline{body} and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement ◊code/inline{substitute}, we use the same strategy as in ◊code/inline{interpret}. We start by ◊technical-term{pattern matching} on the given ◊code/inline{body} to distinguish between the possible kinds:
-
-◊margin-note{
- The template for the ◊code/inline{substitute} implementation is the same as the template for the ◊code/inline{interpret} implementation. This is not a coincidence, both functions work by traversing the data structures that represents the programs in our language. In technical terms, both ◊code/inline{substitute} and ◊code/inline{interpret} are performing ◊technical-term{syntax-directed translations}, via a ◊technical-term{depth-first traversals} of the ◊technical-term{abstract syntax tree} of the programs in ◊technical-term{postorder}.
-
- The difference between ◊code/inline{substitute} and ◊code/inline{interpret} is only the computations they perform during this traversal, so we could factor out their common parts. We do not do this for clarity and simplicity.
-}
+The ◊code/inline{substitute} auxiliary function receives as argument a function ◊code/inline{body} and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement it, we use the same ◊technical-term{traversal} pattern:
 
 ◊code/block/highlighted['racket]{
-(define (substitute
-         body argument-name argument)
+(define (substitute body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
        ; TODO: (1) Anonymous function definition.
@@ -514,8 +522,7 @@ The ◊code/inline{substitute} auxiliary function receives as argument a functio
 In our running example, the call to ◊code/inline{substitute} has the following form: ◊code/inline{(substitute `x `x `(λ (y) y))}. So ◊code/inline{body} is ◊code/inline{x}, ◊code/inline{argument-name} is ◊code/inline{x} and ◊code/inline{argument} is ◊code/inline{`(λ (y) y)}. This ◊code/inline{body} falls into the third kind in the ◊technical-term{pattern match} above: variable references. The expected result is the given ◊code/inline{argument}:
 
 ◊code/block/highlighted['racket]{
-(define (substitute
-         body argument-name argument)
+(define (substitute body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
        ; TODO: (1) Anonymous function definition.
@@ -536,7 +543,7 @@ This is enough to interpret our example:
 
 ◊paragraph-separation[]
 
-◊new-thought{The implementation} of ◊code/inline{substitute} above is overly simplistic. It replaces every ◊code/inline{variable} with ◊code/inline{argument}, not only those ◊code/inline{variable}s equal to the ◊code/inline{argument-name}. For example, if the ◊code/inline{body} had been ◊code/inline{z}, then ◊code/inline{substitute} would have substituted it for the ◊code/inline{argument}, which would have been incorrect, since ◊code/inline{argument-name} was ◊code/inline{x}. We can simulate this scenario by calling ◊code/inline{substitute} directly:
+◊new-thought{But there are more details} regarding function application that we need to consider. The first is that the implementation of ◊code/inline{substitute} for variable references above is overly simplistic. It replaces every ◊code/inline{variable} with ◊code/inline{argument}, not only those ◊code/inline{variable}s equal to the ◊code/inline{argument-name}. For example, if the ◊code/inline{body} had been ◊code/inline{z}, then ◊code/inline{substitute} would have substituted it for the ◊code/inline{argument}, which would have been incorrect, since the ◊code/inline{argument-name} was ◊code/inline{x}. We can simulate this scenario by calling ◊code/inline{substitute} directly:
 
 ◊code/block/highlighted['racket]{
 > (substitute `z `x `(λ (y) y))
@@ -546,8 +553,7 @@ This is enough to interpret our example:
 To fix this, we check if the ◊code/inline{variable} we found in the ◊code/inline{body} is equal to the ◊code/inline{argument-name}. If it is, then we substitute, otherwise, we leave it unaltered:
 
 ◊code/block/highlighted['racket]{
-(define (substitute
-         body argument-name argument)
+(define (substitute body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
        ; TODO: (1) Anonymous function definition.
@@ -556,12 +562,10 @@ To fix this, we check if the ◊code/inline{variable} we found in the ◊code/in
        ; TODO: (2) Function application.
        ]
     [variable
-     (if (equal? argument-name variable)
-         argument
-         variable)]))
+     (if (equal? argument-name variable) argument variable)]))
 }
 
-With this modification, ◊code/inline{substitute} works as we want:
+With this modification, ◊code/inline{substitute} works as intended:
 
 ◊code/block/highlighted['racket]{
 > (substitute `z `x `(λ (y) y))
@@ -571,22 +575,15 @@ With this modification, ◊code/inline{substitute} works as we want:
 For the rest of its implementation, ◊code/inline{substitute} just calls itself recursively on the parts of the given ◊code/inline{body}. The effect is that it traverses the data structure representing our program fragment. This guarantees that every occurrence of ◊code/inline{argument-name} in ◊code/inline{body} is substituted, even those that occur deeper in the data structure:
 
 ◊code/block/highlighted['racket]{
-(define (substitute
-         body argument-name argument)
+(define (substitute body argument-name argument)
   (match body
     [`(λ (,other-argument-name) ,other-body)
-     `(λ (,other-argument-name)
-        ,(substitute
-          other-body argument-name argument))]
+     `(λ (,other-argument-name) ,(substitute other-body argument-name argument))]
     [`(,function ,other-argument)
-     `(,(substitute
-         function argument-name argument)
-       ,(substitute
-         other-argument argument-name argument))]
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
     [variable
-     (if (equal? argument-name variable)
-         argument
-         variable)]))
+     (if (equal? argument-name variable) argument variable)]))
 }
 
 The following listing includes examples of ◊code/inline{substitute} in use. These examples require traversing the ◊code/inline{body} with the recursive calls to ◊code/inline{substitute} we implemented above, because the ◊code/inline{argument-name} (◊code/inline{x}) occurs deeper in the ◊code/inline{body}. In the first example, it occurs inside an anonymous function definitions; and, in the second example, it occurs inside a function application:
@@ -600,7 +597,7 @@ The following listing includes examples of ◊code/inline{substitute} in use. Th
 
 ◊paragraph-separation[]
 
-◊new-thought{In our next program}, the ◊code/inline{function} to be applied is not immediately available. Instead, it is the result of a function application:
+◊new-thought{In our next program}, the ◊code/inline{function} to be applied is not immediately available. Instead, it is itself the result of a function application:
 
 ◊code/block/highlighted['racket]{
 (((λ (x) x) (λ (y) y)) (λ (z) z)) ;; => (λ (z) z)
@@ -609,19 +606,14 @@ The following listing includes examples of ◊code/inline{substitute} in use. Th
 At the top level, this program is a function application, which matches the ◊code/inline{`(,function ,argument)} ◊technical-term{pattern}. The ◊code/inline{function} is ◊code/inline{((λ (x) x) (λ (y) y))} and the argument is ◊code/inline{(λ (z) z)}. The ◊code/inline{function} is not immediately available, it is the result of the function application ◊code/inline{((λ (x) x) (λ (y) y))}. We can use ◊code/inline{interpret} on ◊code/inline{function} to evaluate it into a value:
 
 ◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
+(define (interpret program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     [`(,function ,argument)
-     (define interpreted-function
-       (interpret function))
-     (match-define `(λ (,argument-name) ,body)
-       interpreted-function)
-     (substitute body argument-name argument)]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
+     (define interpreted-function (interpret function))
+     (match-define `(λ (,argument-name) ,body) interpreted-function)
+     (substitute body argument-name argument)]))
 }
 
 In the listing above, note the recursive call to ◊code/inline{interpret}. The result of this recursive call is a value, because ◊code/inline{interpret} returns values in our language. And values in our language are functions, which we can then ◊technical-term{destruct} with ◊code/inline{match-define}. With this change, ◊code/inline{interpret} works for our program:
@@ -640,21 +632,15 @@ An issue similar to the one addressed above occurs in the ◊code/inline{argumen
 In this function application, the ◊code/inline{argument} is ◊code/inline{((λ (y) y) (λ (z) z))}, which is not a value. So we have to call ◊code/inline{interpret} on the ◊code/inline{argument} before the substitution as well:
 
 ◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
+(define (interpret program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     [`(,function ,argument)
-     (define interpreted-function
-       (interpret function))
-     (define interpreted-argument
-       (interpret argument))
-     (match-define `(λ (,argument-name) ,body)
-       interpreted-function)
-     (substitute body argument-name interpreted-argument)]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
+     (define interpreted-function (interpret function))
+     (define interpreted-argument (interpret argument))
+     (match-define `(λ (,argument-name) ,body) interpreted-function)
+     (substitute body argument-name interpreted-argument)]))
 }
 
 Our interpreter now works for the given example:
@@ -669,13 +655,12 @@ Our interpreter now works for the given example:
 ◊new-thought{For our next program}, the result of a function application is another function application:
 
 ◊code/block/highlighted['racket]{
-((λ (i) ((λ (x) x) (λ (y) y))) (λ (z) z))
-;; => (λ (y) y)
+((λ (i) ((λ (x) x) (λ (y) y))) (λ (z) z)) ;; => (λ (y) y)
 }
 
 ◊margin-note{The transformation of wrapping a program with a function which ignores its argument and is immediately applied to a throwaway argument always preserves the meaning of the original program. This process is called ◊technical-term{η-conversion}. More specifically, it is an ◊technical-term{η-abstraction}, as opposed to an ◊technical-term{η-reduction}, which is going in the opposite direction—removing the wrapping function and the throwaway argument.}
 
-This program is similar to our first example of function application ◊code/inline{((λ (x) x) (λ (y) y))}. The difference is that it has been wrapped into a function which ignores its argument ◊code/inline{i}. This function is immediately applied to the throwaway argument ◊code/inline{(λ (z) z)}.
+This program is similar to our first example of function application ◊code/inline{((λ (x) x) (λ (y) y))}. The difference is that it has been wrapped in a function which ignores its argument ◊code/inline{i}. This function is immediately applied to the throwaway argument ◊code/inline{(λ (z) z)}.
 
 Our interpreter does not work in this program:
 
@@ -687,25 +672,16 @@ Our interpreter does not work in this program:
 This output is the result of the substitution of the throwaway argument ◊code/inline{(λ (z) z)} in the body of the function ◊code/inline{(λ (i) ((λ (x) x) (λ (y) y)))}. There were no occurrences of the argument name ◊code/inline{i} in the body, because it is an ignored argument. So the result of the substitution is just the body, ◊code/inline{((λ (x) x) (λ (y) y))}. But the interpreter should not stop at this point, it needs to proceed interpreting this program fragment, until it reaches a value. To accomplish this, we call ◊code/inline{interpret} recursively, with the result of the substitution:
 
 ◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
+(define (interpret program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     [`(,function ,argument)
-     (define interpreted-function
-       (interpret function))
-     (define interpreted-argument
-       (interpret argument))
-     (match-define `(λ (,argument-name) ,body)
-       interpreted-function)
-     (define substituted-body
-       (substitute
-        body argument-name
-        interpreted-argument))
-     (interpret substituted-body)]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
+     (define interpreted-function (interpret function))
+     (define interpreted-argument (interpret argument))
+     (match-define `(λ (,argument-name) ,body) interpreted-function)
+     (define substituted-body (substitute body argument-name interpreted-argument))
+     (interpret substituted-body)]))
 }
 
 Now ◊code/inline{interpret} works correctly for the running example:
@@ -714,6 +690,8 @@ Now ◊code/inline{interpret} works correctly for the running example:
 > (interpret `((λ (i) ((λ (x) x) (λ (y) y))) (λ (z) z)))
 '(λ (y) y)
 }
+
+◊paragraph-separation[]
 
 ◊new-thought{The next programs} we address are those concerning variable-name reuse. First, the case in which the reused name occurs in separate functions:
 
@@ -747,29 +725,24 @@ This program fragment is a function application, in which the ◊code/inline{fun
 '(λ (x) (λ (y) y))
 }
 
-◊margin-note{While ◊code/inline{argument-name} and ◊code/inline{other-argument-name} have the same identifier (◊code/inline{x}, in the example), they are different bindings—similar to how two different people might have the same name. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments how they want, without global knowledge of the program and all identifiers in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
+◊margin-note{While ◊code/inline{argument-name} and ◊code/inline{other-argument-name} have the same identifier (◊code/inline{x}, in the example), they are different bindings—similar to how two different people might have the same name. This observation that multiple bindings might have the same name is what makes ◊technical-term{lexical scoping} in general and ◊technical-term{shadowing} in particular work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments how they want, without global knowledge of the program and all identifiers in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
 
-The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} refers to its argument, not the outer declaration of ◊code/inline{x}, which we are currently substituting. So we need to change ◊code/inline{substitute}: when it finds a function definition whose ◊code/inline{other-argument-name} is the same as the given ◊code/inline{argument-name}, it should stop traversing the program fragment. It should not try to substitute occurrences of the ◊code/inline{argument-name} any further, because they refer to ◊code/inline{other-argument-name}:
+The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} refers to its argument, not the outer declaration of ◊code/inline{x}, which we are currently substituting. The problem is in ◊code/inline{substitute}: when it finds a function definition whose ◊code/inline{other-argument-name} is the same as the given ◊code/inline{argument-name}, it should stop traversing the program fragment; it should not try to substitute occurrences of the ◊code/inline{argument-name} any further, because they refer to ◊code/inline{other-argument-name}:
+
+◊margin-note{The Racket ◊code/inline{cond} form is similar to ◊code/inline{if}, except that each of the branches might have multiple expressions.}
 
 ◊code/block/highlighted['racket]{
-(define (substitute
-         body argument-name argument)
+(define (substitute body argument-name argument)
   (match body
     [`(λ (,other-argument-name) ,other-body)
      (if (equal? argument-name other-argument-name)
          body
-         `(λ (,other-argument-name)
-            ,(substitute
-              other-body argument-name argument)))]
+         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
     [`(,function ,other-argument)
-     `(,(substitute
-         function argument-name argument)
-       ,(substitute
-         other-argument argument-name argument))]
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
     [variable
-     (if (equal? argument-name variable)
-         argument
-         variable)]))
+     (if (equal? argument-name variable) argument variable)]))
 }
 
 Our program now works as we expected:
@@ -781,63 +754,34 @@ Our program now works as we expected:
 
 ◊paragraph-separation[]
 
-◊new-thought{There is one final} consideration for our interpreter: what should ◊code/inline{interpret} do when the given ◊code/inline{expression} is a ◊code/inline{variable}? For example, consider the following program:
+◊new-thought{This concludes the implementation} of our first interpreter. The following is the full listing:
 
 ◊code/block/highlighted['racket]{
-x
-}
-
-In this case, there is no value the interpreter can output, because the meaning of ◊code/inline{x} is undefined. In general, the interpreter only receives an ◊code/inline{expression} which is a ◊code/inline{variable} if this ◊code/inline{variable} has its meaning undefined. Otherwise ◊code/inline{substitute} would have already substituted it for a value in a previous step of the interpretation.
-
-Our interpreter does not handle the case of variables used before their definitions, so it should error. With this observation, we can complete our interpreter. The following listing is the full implementation:
-
-◊margin-note{
- There is one edge case that our interpreter does not handle: undefined variables whose values are never necessary. For example, consider the program ◊code/inline{(λ (x) y)}. This program is a function definition, which is already a value, so the interpreter outputs ◊code/inline{(λ (x) y)} as the result. But the meaning of ◊code/inline{y} is not defined, so this result does not make sense on its own. For simplicity, we will not handle this case in the interpreter. We could perform this check prior to interpretation, in a pre-processing step that would check for the ◊technical-term{well-formedness} of the program. In our language, the only ◊technical-term{well-formedness} condition is whether the program is ◊technical-term{closed} or not. The implementation would consist of traversing the program—in a similar fashion to ◊code/inline{interpret} and ◊code/inline{substitute}—while keeping track of the variables that have already been defined and those that are used. Explaining this implementation is beyond the scope of this article, but it is available with the ◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{rest of the code}.}
-
-◊code/block/highlighted['racket]{
-(define (interpret expression)
-  (match expression
+(define (interpret program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     [`(,function ,argument)
-     (define interpreted-function
-       (interpret function))
-     (define interpreted-argument
-       (interpret argument))
-     (match-define `(λ (,argument-name) ,body)
-       interpreted-function)
-     (define substituted-body
-       (substitute
-        body argument-name
-        interpreted-argument))
-     (interpret substituted-body)]
-    [variable
-     (raise-user-error
-      (~a "Variable not found: " variable))]))
+     (define interpreted-function (interpret function))
+     (define interpreted-argument (interpret argument))
+     (match-define `(λ (,argument-name) ,body) interpreted-function)
+     (define substituted-body (substitute body argument-name interpreted-argument))
+     (interpret substituted-body)]))
 
-(define (substitute
-         body argument-name argument)
+(define (substitute body argument-name argument)
   (match body
     [`(λ (,other-argument-name) ,other-body)
      (if (equal? argument-name other-argument-name)
          body
-         `(λ (,other-argument-name)
-            ,(substitute
-              other-body argument-name argument)))]
+         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
     [`(,function ,other-argument)
-     `(,(substitute
-         function argument-name argument)
-       ,(substitute
-         other-argument argument-name argument))]
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
     [variable
-     (if (equal? argument-name variable)
-         argument
-         variable)]))
+     (if (equal? argument-name variable) argument variable)]))
 }
 
-◊paragraph-separation[]
-
-◊new-thought{To check our interpret correct}, we can use the final version of the program ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}:
+To test our interpreter in a realistic setting, we can use the final version of the program ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}, which calculates the sum ◊code/inline{1 + 2 + 3 + 4 + 5}:
 
 ◊margin-note{In this listing, we use Racket’s ◊code/inline{eval} function to transform the result of ◊code/inline{interpret}—a Racket data structure representing a program in our target language—into a Racket function. For example, ◊code/inline{(eval `(λ (x) x))} results in the Racket function ◊code/inline{(λ (x) x)}—note that there is no quasiquoting in this result, it is a native Racket function. We then use ◊code/inline{pretty-print} to inspect the outputs of our program. The ◊code/inline{pretty-print} is defined in ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{the article that introduces our target language}.}
 
@@ -1027,7 +971,11 @@ Our interpreter does not handle the case of variables used before their definiti
 15
 }
 
-The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language. But this interpreter is not revealing all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation.
+The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
+
+◊paragraph-separation[]
+
+◊new-thought{But this interpreter is not revealing} all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation.
 
 The next section addresses these aspects, making our interpreter more transparent and revealing more interesting facets of interpretation.
 

@@ -436,10 +436,10 @@
 ;; BIG-STEP INTERPRETER
 
 (module+ big-step-interpreter
-  (define (interpret expression)
-    (match expression
+  (define (interpret program)
+    (match program
       [`(λ (,argument-name) ,body)
-       expression]
+       program]
       [`(,function ,argument)
        (define interpreted-function (interpret function))
        (define interpreted-argument (interpret argument))
@@ -448,18 +448,16 @@
        (interpret substituted-body)]))
 
   (define (substitute body argument-name argument)
-    (match body
-      [`(λ (,other-argument-name) ,other-body)
-       (cond
-         [(equal? argument-name other-argument-name)
-          body]
-         [else
-          `(λ (,other-argument-name) ,(substitute other-body argument-name argument))])]
-      [`(,function ,other-argument)
-       `(,(substitute function argument-name argument)
-         ,(substitute other-argument argument-name argument))]
-      [variable
-       (if (equal? argument-name variable) argument variable)]))
+  (match body
+    [`(λ (,other-argument-name) ,other-body)
+     (if (equal? argument-name other-argument-name)
+         body
+         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+    [`(,function ,other-argument)
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
+    [variable
+     (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -484,32 +482,32 @@
 ;; SMALL-STEP INTERPRETER
 
 (module+ small-step-interpreter
-  (define (interpret expression)
-    (match expression
+  (define (interpret program)
+    (match program
       [`(λ (,argument-name) ,body)
-       expression]
+       program]
       [_
-       (interpret (step expression))]))
+       (interpret (step program))]))
 
-  (define (step expression)
-    (match expression
+  (define (step program)
+    (match program
       [`(λ (,argument-name) ,body)
-       expression]
+       program]
       [`(,function ,argument)
-       (define-values (reduction-expression context) (split-expression expression))
+       (define-values (reduction-expression context) (split-program program))
        (match-define `((λ (,argument-name) ,body) ,argument) reduction-expression)
        (define reduced-expression (substitute body argument-name argument))
        (fill-hole reduced-expression context)]))
 
-  (define (split-expression expression)
-    (match expression
+  (define (split-program program)
+    (match program
       [`((λ (,argument-name/function) ,body/function) (λ (,argument-name/argument) ,body/argument))
-       (values expression `(hole))]
+       (values program `(hole))]
       [`((λ (,argument-name/function) ,body/function) ,argument)
-       (define-values (reduction-expression context) (split-expression argument))
+       (define-values (reduction-expression context) (split-program argument))
        (values reduction-expression `((λ (,argument-name/function) ,body/function) ,context))]
       [`(,function ,argument)
-       (define-values (reduction-expression context) (split-expression function))
+       (define-values (reduction-expression context) (split-program function))
        (values reduction-expression `(,context ,argument))]))
 
   (define (fill-hole program-fragment context)
@@ -524,18 +522,16 @@
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
   (define (substitute body argument-name argument)
-    (match body
-      [`(λ (,other-argument-name) ,other-body)
-       (cond
-         [(equal? argument-name other-argument-name)
-          body]
-         [else
-          `(λ (,other-argument-name) ,(substitute other-body argument-name argument))])]
-      [`(,function ,other-argument)
-       `(,(substitute function argument-name argument)
-         ,(substitute other-argument argument-name argument))]
-      [variable
-       (if (equal? argument-name variable) argument variable)]))
+  (match body
+    [`(λ (,other-argument-name) ,other-body)
+     (if (equal? argument-name other-argument-name)
+         body
+         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+    [`(,function ,other-argument)
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
+    [variable
+     (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -560,23 +556,23 @@
 ;; ENVIRONMENT-BASED INTERPRETER
 
 (module+ environment-based-interpreter
-  (define (interpret expression)
-    (state->value (step* (initial-state expression))))
+  (define (interpret program)
+    (state->value (step* (initial-state program))))
 
   (define (step* current-state)
-    (match (state-expression current-state)
+    (match (state-program current-state)
       [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
        current-state]
       [_
        (step* (step current-state))]))
 
   (define (step current-state)
-    (match-define (state expression environment) current-state)
-    (match expression
+    (match-define (state program environment) current-state)
+    (match program
       [`(closure (λ (,argument-name) ,body) ,closure-environment)
        current-state]
       [_
-       (define-values (reduction-expression context) (split-expression expression))
+       (define-values (reduction-expression context) (split-program program))
        (match-define (state reduced-expression new-environment)
          (match reduction-expression
            [`(λ (,argument-name) ,body)
@@ -591,39 +587,39 @@
            [variable
             (define reduced-expression (lookup variable current-state))
             (state reduced-expression environment)]))
-       (define new-expression (fill-hole reduced-expression context))
-       (state new-expression new-environment)]))
+       (define new-program (fill-hole reduced-expression context))
+       (state new-program new-environment)]))
 
   (define (lookup variable current-state)
-    (match-define (state expression environment) current-state)
+    (match-define (state program environment) current-state)
     (dict-ref environment variable))
 
-  (struct state (expression environment) #:transparent)
+  (struct state (program environment) #:transparent)
 
-  (define (initial-state expression)
-    (state expression empty))
+  (define (initial-state program)
+    (state program empty))
 
-  (define (split-expression expression)
-    (match expression
+  (define (split-program program)
+    (match program
       [`((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
          (closure (λ (,argument-name/argument) ,body/argument) ,closure-environment/argument))
-       (values expression `(hole))]
+       (values program `(hole))]
       [`((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
          ,argument)
-       (define-values (reduction-expression context) (split-expression argument))
+       (define-values (reduction-expression context) (split-program argument))
        (values reduction-expression
                `((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
                  ,context))]
       [`(,function ,argument)
-       (define-values (reduction-expression context) (split-expression function))
+       (define-values (reduction-expression context) (split-program function))
        (values reduction-expression `(,context ,argument))]
       [`(restore (closure (λ (,argument-name) ,body) ,closure-environment) ,previous-environment)
-       (values expression `(hole))]
+       (values program `(hole))]
       [`(restore ,body ,previous-environment)
-       (define-values (reduction-expression context) (split-expression body))
+       (define-values (reduction-expression context) (split-program body))
        (values reduction-expression `(restore ,context ,previous-environment))]
       [variable
-       (values expression `(hole))]))
+       (values program `(hole))]))
 
   (define (fill-hole program-fragment context)
     (match context
@@ -652,20 +648,16 @@
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
   (define (substitute body argument-name argument)
-    (match body
-      [`(λ (,other-argument-name) ,other-body)
-       (cond
-         [(equal? argument-name other-argument-name)
-          body]
-         [else
-          `(λ (,other-argument-name) ,(substitute other-body argument-name argument))])]
-      [`(,function ,other-argument)
-       `(,(substitute function argument-name argument)
-         ,(substitute other-argument argument-name argument))]
-      [variable
-       (if (equal? argument-name variable)
-           argument
-           variable)]))
+  (match body
+    [`(λ (,other-argument-name) ,other-body)
+     (if (equal? argument-name other-argument-name)
+         body
+         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+    [`(,function ,other-argument)
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
+    [variable
+     (if (equal? argument-name variable) argument variable)]))
 
   ;; ‘free-variables’ is the same as for the well-formedness condition.
 
@@ -701,23 +693,23 @@
 ;; FACTORED-ENVIRONMENT INTERPRETER
 
 (module+ factored-environment-interpreter
-  (define (interpret expression)
-    (state->value (step* (initial-state expression))))
+  (define (interpret program)
+    (state->value (step* (initial-state program))))
 
   (define (step* current-state)
-    (match (state-expression current-state)
+    (match (state-program current-state)
       [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
        current-state]
       [_
        (step* (step current-state))]))
 
   (define (step current-state)
-    (match-define (state expression binding-environment value-environment time) current-state)
-    (match expression
+    (match-define (state program binding-environment value-environment time) current-state)
+    (match program
       [`(closure (λ (,argument-name) ,body) ,closure-binding-environment)
        current-state]
       [_
-       (define-values (reduction-expression context) (split-expression expression))
+       (define-values (reduction-expression context) (split-program program))
        (match-define
          (state reduced-expression new-binding-environment new-value-environment new-time)
          (match reduction-expression
@@ -736,38 +728,38 @@
            [variable
             (define reduced-expression (lookup variable current-state))
             (state reduced-expression binding-environment value-environment time)]))
-       (define new-expression (fill-hole reduced-expression context))
-       (state new-expression new-binding-environment new-value-environment new-time)]))
+       (define new-program (fill-hole reduced-expression context))
+       (state new-program new-binding-environment new-value-environment new-time)]))
 
   (define (lookup variable current-state)
-    (match-define (state expression binding-environment value-environment time) current-state)
+    (match-define (state program binding-environment value-environment time) current-state)
     (dict-ref value-environment (dict-ref binding-environment variable)))
 
-  (struct state (expression binding-environment value-environment time) #:transparent)
+  (struct state (program binding-environment value-environment time) #:transparent)
 
-  (define (initial-state expression)
-    (state expression empty empty initial-time))
+  (define (initial-state program)
+    (state program empty empty initial-time))
 
   (define initial-time 0)
 
   (define (tick current-state)
-    (match-define (state expression binding-environment value-environment time) current-state)
+    (match-define (state program binding-environment value-environment time) current-state)
     (add1 time))
 
   ;; ‘substitute’ is the same as for the environment-based interpreter, except for variable names.
 
-  (define (split-expression expression)
-    (match expression
+  (define (split-program program)
+    (match program
       [`((closure (λ (,argument-name/function) ,body/function)
                   ,closure-binding-environment/function)
          (closure (λ (,argument-name/argument) ,body/argument)
                   ,closure-binding-environment/argument))
-       (values expression `(hole))]
+       (values program `(hole))]
       [`((closure (λ (,argument-name/function) ,body/function)
                   ,closure-binding-environment/function)
          ,argument)
        (define-values (reduction-expression context)
-         (split-expression argument))
+         (split-program argument))
        (values
         reduction-expression
         `((closure (λ (,argument-name/function) ,body/function)
@@ -775,20 +767,20 @@
           ,context))]
       [`(,function ,argument)
        (define-values (reduction-expression context)
-         (split-expression function))
+         (split-program function))
        (values reduction-expression
                `(,context ,argument))]
       [`(restore (closure (λ (,argument-name) ,body)
                           ,closure-binding-environment)
                  ,previous-binding-environment)
-       (values expression `(hole))]
+       (values program `(hole))]
       [`(restore ,body ,previous-binding-environment)
        (define-values (reduction-expression context)
-         (split-expression body))
+         (split-program body))
        (values reduction-expression
                `(restore ,context ,previous-binding-environment))]
       [variable
-       (values expression `(hole))]))
+       (values program `(hole))]))
 
   ;; ‘fill-hole’ is the same as for the environment-based interpreter, except for variable names.
 
@@ -836,24 +828,17 @@
 
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
-  (define (substitute
-           body argument-name argument)
-    (match body
-      [`(λ (,other-argument-name) ,other-body)
-       (if (equal? argument-name other-argument-name)
-           body
-           `(λ (,other-argument-name)
-              ,(substitute
-                other-body argument-name argument)))]
-      [`(,function ,other-argument)
-       `(,(substitute
-           function argument-name argument)
-         ,(substitute
-           other-argument argument-name argument))]
-      [variable
-       (if (equal? argument-name variable)
-           argument
-           variable)]))
+  (define (substitute body argument-name argument)
+  (match body
+    [`(λ (,other-argument-name) ,other-body)
+     (if (equal? argument-name other-argument-name)
+         body
+         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+    [`(,function ,other-argument)
+     `(,(substitute function argument-name argument)
+       ,(substitute other-argument argument-name argument))]
+    [variable
+     (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
