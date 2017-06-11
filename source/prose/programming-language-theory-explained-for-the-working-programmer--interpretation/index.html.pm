@@ -217,7 +217,7 @@ The example above demonstrates that the ◊code/inline{match} form in Racket has
        ]))
 }
 
-In the listing above, the ◊technical-term{subject} of the pattern match is the ◊code/inline{program-fragment}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{expression}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument-name) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{program-fragment} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument-name} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
+In the listing above, the ◊technical-term{subject} of the pattern match is the ◊code/inline{program-fragment}, and there are three ◊technical-term{match clauses}, corresponding to the three kinds of ◊code/inline{program-fragment}s. The first ◊technical-term{pattern} is ◊code/inline{`(λ (,argument-name) ,body)}, which matches anonymous function definitions. For example, if ◊code/inline{program-fragment} is ◊code/inline{(λ (x) (x x))}, then ◊code/inline{argument-name} represents ◊code/inline{x} and ◊code/inline{body} stands for ◊code/inline{(x x)}. The other two patterns work similarly.
 
 We already have an implementation for ◊code/inline{variable}s, so we can fill in the last hole in the template above:
 
@@ -729,8 +729,6 @@ This program fragment is a function application, in which the ◊code/inline{fun
 
 The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} refers to its argument, not the outer declaration of ◊code/inline{x}, which we are currently substituting. The problem is in ◊code/inline{substitute}: when it finds a function definition whose ◊code/inline{other-argument-name} is the same as the given ◊code/inline{argument-name}, it should stop traversing the program fragment; it should not try to substitute occurrences of the ◊code/inline{argument-name} any further, because they refer to ◊code/inline{other-argument-name}:
 
-◊margin-note{The Racket ◊code/inline{cond} form is similar to ◊code/inline{if}, except that each of the branches might have multiple expressions.}
-
 ◊code/block/highlighted['racket]{
 (define (substitute body argument-name argument)
   (match body
@@ -975,7 +973,7 @@ The output is what we expected, ◊code/inline{15}. Our interpreter is fully fun
 
 ◊paragraph-separation[]
 
-◊new-thought{But this interpreter is not revealing} all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation.
+◊new-thought{But this interpreter is not revealing} all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation. Furthermore, if given a ◊code/inline{program} which does not terminate, then ◊code/inline{interpret} itself does not terminate, and there is no way to inspect the computations that are happening during interpretation.
 
 The next section addresses these aspects, making our interpreter more transparent and revealing more interesting facets of interpretation.
 
@@ -984,124 +982,88 @@ The next section addresses these aspects, making our interpreter more transparen
 ◊margin-note{
  In technical terms, our first interpreter is a ◊technical-term{big-step interpreter}, because the whole interpretation happens in a single big traversal of the program. One call to ◊code/inline{interpret} suffices to interpret a whole program to a value.
 
- The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—takes a single step towards a value, resolving a single function application. For convenience and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement an ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets expressions to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}.
+ The ◊technical-term{debugger-like interpreter} of this section, in opposition, is called a ◊technical-term{small-step interpreter}. Each call to ◊code/inline{step}—which we implement later in this section—takes a single step towards a value, resolving a single function application. For convenience, and to keep a compatible interface with the ◊technical-term{big-step interpreter}, we implement an ◊code/inline{interpret} function in this section. Like the ◊code/inline{interpret} from the ◊technical-term{big-step interpreter}, it also interprets programs to values in a single call, but it does so by repeatedly calling ◊code/inline{step}. If given a non-terminating program, then ◊code/inline{interpret} itself does not terminate, but only because it tries to call ◊code/inline{step} infinitely many times—each of the calls to ◊code/inline{step} are guaranteed to terminate. It is the ◊code/inline{step} function that characterizes the ◊technical-term{debugger-like interpreter} as a ◊technical-term{small-step interpreter}, not ◊code/inline{interpret} itself.
 }
 
-◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of a ◊technical-term{continuation}, which we introduce later in this section.}
+◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of ◊technical-term{contexts}, which we introduce later in this section.}
 
 ◊new-thought{Our first interpreter} defined in the ◊reference['first-interpreter]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, the ◊code/inline{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code/inline{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
 
-In this section, we rewrite our interpreter to take a different approach, more similar to that of ◊technical-term{step-debuggers}. ◊technical-term{Step-debuggers} are tools that aid program understanding and debugging, they allow the user to run a program step-by-step—either line-by-line or expression-by-expression. In our case, the level of granularity that is interesting is the function application, because function applications are the smallest pieces of computation that preserve meaning.
+In this section, we rewrite our interpreter to take a different approach, more similar to that of ◊technical-term{step-debuggers}. ◊technical-term{Step-debuggers} are tools that aid program understanding and debugging, they allow the user to run a program step-by-step (line-by-line, expression-by-expression, and so forth). In our case, the level of granularity that is interesting is the function application, because function applications are the smallest pieces of computation that preserve meaning.
 
 If we inspected interpretation in the midst of ◊code/inline{substitute}, we would potentially find meaningless program fragments in which there are undefined variables. For example, while substituting the argument name ◊code/inline{x} for the value ◊code/inline{(λ (y) y)} in the program fragment ◊code/inline{(x x)}, we could find the program fragment ◊code/inline{((λ (y) y) x)}, in which only the first use of ◊code/inline{x} has been substituted. The program fragment ◊code/inline{((λ (y) y) x)} has no meaning on its own, because the variable ◊code/inline{x} is undefined.
 
-If we inspected interpretation after a few function applications, we would potentially miss some nuances of the process. So a single function application is the best level of granularity for a ◊technical-term{step} in our ◊technical-term{debugger-like interpreter}.
+Alternatively, if we inspected interpretation after a few function applications, we would potentially miss some nuances of the process. So a single function application is the best level of granularity for a ◊technical-term{step} in our ◊technical-term{debugger-like interpreter}.
 
 ◊paragraph-separation[]
 
-◊new-thought{To allow us to focus} on our study of interpretation, we start by reducing the scope of our ◊technical-term{debugger-like interpreter}. It does not need to handle the error case of programs including undefined variables. We assume that the programs the ◊technical-term{debugger-like interpreter} receives as arguments have already been checked by an external well-formedness checker. The implementation of this checker is not discussed in this article, but is available ◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{in the implementation}.
-
-◊paragraph-separation[]
-
-◊new-thought{We start with} a function called ◊code/inline{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code/inline{expression} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code/inline{step} function is similar to ◊code/inline{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. The structure is the same as for other functions that traverse the program:
+◊new-thought{We start with} a function called ◊code/inline{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code/inline{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code/inline{step} function is similar to ◊code/inline{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code/inline{step}’s definition:
 
 ◊code/block/highlighted['racket]{
-(define (step expression)
-  (match expression
-    #;[`(λ (,argument-name) ,body)
-       ; TODO: (1) Anonymous function definition.
-       ]
-    #;[`(,function ,argument)
-       ; TODO: (2) Function application.
-       ]
-    #;[variable
-       ; TODO: (3) Variable reference.
-       ]))
-}
-
-As noted before, ◊code/inline{step} will not handle the case of undefined variables. For simplicity, we consider that the given ◊code/inline{expression} has already been checked and is guaranteed to be well-formed. This allows us to eliminate the third ◊technical-term{match clause} entirely:
-
-◊code/block/highlighted['racket]{
-(define (step expression)
-  (match expression
-    #;[`(λ (,argument-name) ,body)
-       ; TODO: (1) Anonymous function definition.
-       ]
-    #;[`(,function ,argument)
-       ; TODO: (2) Function application.
-       ]))
-}
-
-In the case of the first ◊technical-term{match clause}, an anonymous function definition is already a value, so ◊code/inline{step} only returns the given ◊code/inline{expression}, unaltered:
-
-◊code/block/highlighted['racket]{
-(define (step expression)
-  (match expression
+(define (step program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]))
 }
 
-This was the same approach taken by ◊code/inline{interpret} from our first interpreter. It means that an anonymous function application ◊technical-term{steps} to itself. In a ◊technical-term{step-debugger}, it would entail that clicking on the ◊technical-term{step} button would not change the ◊code/inline{expression}, because there would be no pending computation.
-
-For the case of function application, ◊code/inline{step} cannot reuse the approach from our first interpreter. Instead, it works in three parts: first, find which function application should happen next; then, substitute the argument name for the argument in the function body; finally, build the resulting expression. This process is necessary because the components of a function application might be function applications themselves. For example, consider the following program:
+The case of function application works in three parts: first, find which function application should happen at the current step; then, perform it, substituting the ◊code/inline{argument-name} for the ◊code/inline{argument} in the ◊code/inline{function} ◊code/inline{body}; finally, build the resulting partially interpreted program. This process is necessary because the components of a function application might be function applications themselves. For example, consider again the following program from the previous section:
 
 ◊code/block/highlighted['racket]{
 (((λ (x) x) (λ (y) y)) (λ (z) z))
 }
 
-In this program, the function of the top-level application is ◊code/inline{((λ (x) x) (λ (y) y))}. This is a function application itself, and it needs to be resolved before we can perform the top-level application. The same issue would arise if the argument was a function application. So, when given the ◊code/inline{expression} above, the ◊code/inline{step} function does not evaluate it directly to a value as our first interpreter did. Instead, it identifies that the next computation immediately available is ◊code/inline{((λ (x) x) (λ (y) y))}, performs it, and outputs ◊code/inline{((λ (y) y) (λ (z) z))}. A subsequent call to ◊code/inline{step} would then reach the final value of the program: ◊code/inline{(λ (z) z)}.
+In this program, the function of the top-level application is ◊code/inline{((λ (x) x) (λ (y) y))}. This is a function application itself, and it needs to be resolved before we can perform the top-level application. The same issue would arise if the ◊code/inline{argument} was a function application. So, when given the ◊code/inline{program} above, the ◊code/inline{step} function does not evaluate it directly to a value as our first interpreter did. Instead, it identifies that the next computation immediately available is ◊code/inline{((λ (x) x) (λ (y) y))}, performs it, and outputs the partially interpreted program ◊code/inline{((λ (y) y) (λ (z) z))}. A subsequent call to ◊code/inline{step} with this intermediary result would then reach the final value of the program: ◊code/inline{(λ (z) z)}.
 
-In the general case, function applications might be arbitrarily nested, and more than one inner application might be ready for resolution, when both their ◊code/inline{function} and ◊code/inline{argument} are already values. So we delegate this choice of which application to resolve next to an auxiliary function ◊code/inline{split-expression}, which we define later. The function ◊code/inline{split-expression} has this name because it ◊informal{splits} the given ◊code/inline{expression} in two parts: the function application which we resolve next, and the rest of the expression.
+In the general case, function applications might be arbitrarily nested, and more than one inner application might be ready for resolution, when both their ◊code/inline{function} and ◊code/inline{argument} are already values. So we delegate this choice of which application to resolve next to an auxiliary function ◊code/inline{split-program}, which we define later. The function ◊code/inline{split-program} has this name because it ◊informal{splits} the given ◊code/inline{program} in two parts: the function application which we resolve next, and the rest of the program.
 
 ◊margin-note{The representation for ◊technical-term{holes} using ◊code/inline{(hole)} does not conflict with existing constructs in our target language, because function applications would include an argument in the parentheses and variable references would not have parentheses.}
 
-The function application which we resolve next is called ◊technical-term{reduction expression}, because ◊technical-term{reduction} is the technical term for what we have been informally calling ◊informal{resolving a function application}. We represent ◊technical-term{reduction expression} as any other program fragment, for example, ◊code/inline{`((λ (x) x) (λ (y) y))}. The rest of the program, in which we found the ◊technical-term{reduction expression}, is called ◊technical-term{continuation}, because it represents the computations that ◊code/inline{step} is going to perform ◊emphasis{after} the current one, on subsequent calls. We represent ◊technical-term{continuations} as a ◊informal{program with a hole}, and the ◊technical-term{hole} is identified by ◊code/inline{(hole)}, for example:
+The function application which we resolve next is called ◊technical-term{reduction expression}, because ◊technical-term{reduction} is the technical term for what we have been informally calling ◊informal{resolving a function application}. We represent ◊technical-term{reduction expression} as any other program fragment, for example, ◊code/inline{`((λ (x) x) (λ (y) y))}. The rest of the ◊code/inline{program}, from which we extracted the ◊technical-term{reduction expression}, is called ◊technical-term{context}, because it represents the context in which the ◊technical-term{reduction expression} occurs. We represent ◊technical-term{contexts} as ◊informal{programs with a hole}, and the ◊technical-term{hole} is identified by ◊code/inline{(hole)}, for example:
 
 ◊code/block/highlighted['racket]{
 `((hole) (λ (z) z))
 }
 
-The ◊code/inline{split-expression} function has to return two values: the ◊technical-term{reduction expression} and the ◊technical-term{continuation}. In Racket, functions can return multiple values using the form ◊code/inline{values}, for example, ◊code/inline{(values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z)))}. To bind these results to variables, we use the ◊code/inline{define-values} form, for example:
+The ◊code/inline{split-program} function has to return two values: the ◊technical-term{reduction expression} and the ◊technical-term{context}. In Racket, functions can return multiple values using the form ◊code/inline{values}, for example, ◊code/inline{(values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z)))}. To bind these results to variables, we use the ◊code/inline{define-values} form, for example:
 
 ◊code/block/highlighted['racket]{
-(define-values (reduction-expression continuation)
+(define-values (reduction-expression context)
   (values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z))))
 }
 
-The ◊code/inline{reduction-expression} returned by ◊code/inline{split-expression} is guaranteed to be a function application in which both the ◊code/inline{function} and ◊code/inline{argument} are immediately available—they are values, not other function applications. Furthermore, if we fill the ◊technical-term{hole} in the ◊code/inline{continuation} with the ◊code/inline{reduction-expression}, then we have our original ◊code/inline{expression} back; in other words, this decomposition does not lose any information.
+The ◊code/inline{reduction-expression} returned by ◊code/inline{split-program} is guaranteed to be a function application in which both the ◊code/inline{function} and ◊code/inline{argument} are immediately available—they are values, not other function applications. Furthermore, if we fill the ◊technical-term{hole} in the ◊code/inline{context} with the ◊code/inline{reduction-expression}, then we have our original ◊code/inline{program} back. In other words, this decomposition does not lose any information.
 
-Because the ◊code/inline{reduction-expression} is a function application ready for evaluation, we can use the same ◊code/inline{substitute} from the ◊reference['first-interpreter]{previous section} and substitute the ◊code/inline{argument-name} for the ◊code/inline{argument} in the ◊code/inline{body}. Then, we fill the ◊technical-term{hole} in the ◊code/inline{continuation} with the resulting program fragment. We use another auxiliary function ◊code/inline{fill-hole}, which we define later, for this last part. This is the complete listing for ◊code/inline{step}:
+Because the ◊code/inline{reduction-expression} is a function application ready for evaluation, we can use the same ◊code/inline{substitute} from the ◊reference['first-interpreter]{previous section} and substitute the ◊code/inline{argument-name} for the ◊code/inline{argument} in the ◊code/inline{body}. Then, we fill the ◊technical-term{hole} in the ◊code/inline{context} with the resulting program fragment. We use another auxiliary function ◊code/inline{fill-hole}, which we define later, for this last part. This is the complete listing for ◊code/inline{step}:
 
 ◊code/block/highlighted['racket]{
-(define (step expression)
-  (match expression
+(define (step program)
+  (match program
     [`(λ (,argument-name) ,body)
-     expression]
+     program]
     [`(,function ,argument)
-     (define-values (reduction-expression continuation)
-       (split-expression expression))
-     (match-define `((λ (,argument-name) ,body) ,argument)
-       reduction-expression)
-     (define reduced-expression
-       (substitute body argument-name argument))
-     (fill-hole reduced-expression continuation)]))
+     (define-values (reduction-expression context) (split-program program))
+     (match-define `((λ (,argument-name) ,body) ,argument) reduction-expression)
+     (define reduced-expression (substitute body argument-name argument))
+     (fill-hole reduced-expression context)]))
 }
 
 ◊paragraph-separation[]
 
-◊new-thought{There are still} two missing pieces in our ◊technical-term{debugger-like interpreter}: the auxiliary functions ◊code/inline{split-expression} and ◊code/inline{fill-hole}. We start by addressing ◊code/inline{split-expression}.
+◊new-thought{There are still} two missing pieces in our ◊technical-term{debugger-like interpreter}: the auxiliary functions ◊code/inline{split-program} and ◊code/inline{fill-hole}. We start by addressing ◊code/inline{split-program}.
 
-First, note that ◊code/inline{split-expression} is only called with ◊code/inline{expression}s which are function applications; otherwise, the ◊code/inline{expression}s would have been anonymous function definitions, which are values, and ◊code/inline{step} would have returned them unaltered, without calling ◊code/inline{split-expression}. The task of ◊code/inline{split-expression} is to chose which of the potentially arbitrarily nested function applications to compute next. The only constraint is that the function application must be ready for computation, which means both the ◊code/inline{function} and the ◊code/inline{argument} are already values, and not other nested function applications.
+◊; ---------------------------------------------------------------------------------------------------
 
-But multiple function applications might be in this state in a given ◊code/inline{expression}, and ◊code/inline{split-expression} could chose any of them. Which application to evaluate next is a design decision and we follow Racket’s approach: go from left to right, and chose the innermost function application. Other orders would work equally well, but this corresponds more closely to programmers’ intuitions.
+First, note that ◊code/inline{split-program} is only called with ◊code/inline{program}s which are function applications; otherwise, the ◊code/inline{expression}s would have been anonymous function definitions, which are values, and ◊code/inline{step} would have returned them unaltered, without calling ◊code/inline{split-program}. The task of ◊code/inline{split-program} is to chose which of the potentially arbitrarily nested function applications to compute next. The only constraint is that the function application must be ready for computation, which means both the ◊code/inline{function} and the ◊code/inline{argument} are already values, and not other nested function applications.
 
-The structure of the ◊code/inline{split-expression} function is similar to ◊code/inline{step}, in the sense that it receives an ◊code/inline{expression} as argument and them ◊technical-term{pattern matches} on it using the ◊code/inline{match} form. But the ◊technical-term{patterns} in ◊code/inline{split-expression} are different, because it consider different cases: (1) both the ◊code/inline{function} and the ◊code/inline{argument} are already values and the given ◊code/inline{expression} is ready for evaluation; (2) the ◊code/inline{function} is already a value, but the ◊code/inline{argument} is an application that needs to be resolved; (3) the ◊code/inline{function} is not a value yet, it needs to be resolved. To implement theses cases, we rely on the ◊code/inline{match} form following the first ◊technical-term{match clause} whose ◊technical-term{pattern} matches:
+But multiple function applications might be in this state in a given ◊code/inline{expression}, and ◊code/inline{split-program} could chose any of them. Which application to evaluate next is a design decision and we follow Racket’s approach: go from left to right, and chose the innermost function application. Other orders would work equally well, but this corresponds more closely to programmers’ intuitions.
+
+The structure of the ◊code/inline{split-program} function is similar to ◊code/inline{step}, in the sense that it receives an ◊code/inline{expression} as argument and them ◊technical-term{pattern matches} on it using the ◊code/inline{match} form. But the ◊technical-term{patterns} in ◊code/inline{split-program} are different, because it consider different cases: (1) both the ◊code/inline{function} and the ◊code/inline{argument} are already values and the given ◊code/inline{expression} is ready for evaluation; (2) the ◊code/inline{function} is already a value, but the ◊code/inline{argument} is an application that needs to be resolved; (3) the ◊code/inline{function} is not a value yet, it needs to be resolved. To implement theses cases, we rely on the ◊code/inline{match} form following the first ◊technical-term{match clause} whose ◊technical-term{pattern} matches:
 
 ◊code/block/highlighted['racket]{
-(define (split-expression expression)
+(define (split-program expression)
   (match expression
     #;[`((λ (,argument-name/function) ,body/function)
          (λ (,argument-name/argument) ,body/argument))
@@ -1118,10 +1080,10 @@ The structure of the ◊code/inline{split-expression} function is similar to ◊
 
 This order guarantees left-to-right evaluation, because we only consider the case of a ◊code/inline{function} which is not an immediate value (3) ◊emphasis{after} we have considered the case in which it ◊emphasis{is} an immediate value (2).
 
-In the first case, both ◊code/inline{function} and ◊code/inline{argument} are already values—functions—which means the ◊code/inline{expression} is ready for evaluation. So ◊code/inline{split-expression} returns the ◊code/inline{expression} as the ◊code/inline{reduction-expression} and the ◊code/inline{continuation} is just ◊code/inline{(hole)}, because there is no other context around the given ◊code/inline{expression}:
+In the first case, both ◊code/inline{function} and ◊code/inline{argument} are already values—functions—which means the ◊code/inline{expression} is ready for evaluation. So ◊code/inline{split-program} returns the ◊code/inline{expression} as the ◊code/inline{reduction-expression} and the ◊code/inline{context} is just ◊code/inline{(hole)}, because there is no other context around the given ◊code/inline{expression}:
 
 ◊code/block/highlighted['racket]{
-(define (split-expression expression)
+(define (split-program expression)
   (match expression
     [`((λ (,argument-name/function) ,body/function)
        (λ (,argument-name/argument) ,body/argument))
@@ -1135,55 +1097,55 @@ In the first case, both ◊code/inline{function} and ◊code/inline{argument} ar
        ]))
 }
 
-In the second case, the ◊code/inline{function} is already a value, but the ◊code/inline{argument} is not, so the next immediately resolvable function application—the ◊code/inline{reduction-expression}—must be in the program fragment represented by ◊code/inline{argument}. The ◊code/inline{split-expression} function recursively calls itself with ◊code/inline{argument} and propagates the resulting ◊code/inline{reduction-expression} and ◊code/inline{continuation}, taking care of wrapping the ◊code/inline{continuation} with the function application in ◊code/inline{expression}:
+In the second case, the ◊code/inline{function} is already a value, but the ◊code/inline{argument} is not, so the next immediately resolvable function application—the ◊code/inline{reduction-expression}—must be in the program fragment represented by ◊code/inline{argument}. The ◊code/inline{split-program} function recursively calls itself with ◊code/inline{argument} and propagates the resulting ◊code/inline{reduction-expression} and ◊code/inline{context}, taking care of wrapping the ◊code/inline{context} with the function application in ◊code/inline{expression}:
 
 ◊code/block/highlighted['racket]{
-(define (split-expression expression)
+(define (split-program expression)
   (match expression
     [`((λ (,argument-name/function) ,body/function)
        (λ (,argument-name/argument) ,body/argument))
      (values expression `(hole))]
     [`((λ (,argument-name/function) ,body/function)
        ,argument)
-     (define-values (reduction-expression continuation)
-       (split-expression argument))
+     (define-values (reduction-expression context)
+       (split-program argument))
      (values reduction-expression
              `((λ (,argument-name/function) ,body/function)
-               ,continuation))]
+               ,context))]
     #;[`(,function ,argument)
        ; TODO: (3) Function is not a value.
        ]))
 }
 
-The final case is similar to the second, except that the subject of the recursive call is ◊code/inline{function}. The strategy is the same: call ◊code/inline{split-expression} itself with the ◊code/inline{function} and forward the resulting ◊code/inline{reduction-expression} and ◊code/inline{continuation}, taking care of wrapping the ◊code/inline{continuation} with the function application in ◊code/inline{expression}:
+The final case is similar to the second, except that the subject of the recursive call is ◊code/inline{function}. The strategy is the same: call ◊code/inline{split-program} itself with the ◊code/inline{function} and forward the resulting ◊code/inline{reduction-expression} and ◊code/inline{context}, taking care of wrapping the ◊code/inline{context} with the function application in ◊code/inline{expression}:
 
 ◊code/block/highlighted['racket]{
-(define (split-expression expression)
+(define (split-program expression)
   (match expression
     [`((λ (,argument-name/function) ,body/function)
        (λ (,argument-name/argument) ,body/argument))
      (values expression `(hole))]
     [`((λ (,argument-name/function) ,body/function)
        ,argument)
-     (define-values (reduction-expression continuation)
-       (split-expression argument))
+     (define-values (reduction-expression context)
+       (split-program argument))
      (values reduction-expression
              `((λ (,argument-name/function) ,body/function)
-               ,continuation))]
+               ,context))]
     [`(,function ,argument)
-     (define-values (reduction-expression continuation)
-       (split-expression function))
+     (define-values (reduction-expression context)
+       (split-program function))
      (values reduction-expression
-             `(,continuation ,argument))]))
+             `(,context ,argument))]))
 }
 
 ◊paragraph-separation[]
 
-◊new-thought{The final auxiliary function} is ◊code/inline{fill-hole}, which, given an program fragment and a ◊code/inline{continuation} (a program fragment with a ◊technical-term{hole} in it), fills in the hole in the ◊code/inline{continuation} with the program fragment. For example, given the program fragment ◊code/inline{(λ (y) y)} the ◊code/inline{continuation} ◊code/inline{((hole) (λ (z) z))}, ◊code/inline{fill-hole} returns ◊code/inline{((λ (y) y) (λ (z) z))}. The structure for the function is:
+◊new-thought{The final auxiliary function} is ◊code/inline{fill-hole}, which, given an program fragment and a ◊code/inline{context} (a program fragment with a ◊technical-term{hole} in it), fills in the hole in the ◊code/inline{context} with the program fragment. For example, given the program fragment ◊code/inline{(λ (y) y)} the ◊code/inline{context} ◊code/inline{((hole) (λ (z) z))}, ◊code/inline{fill-hole} returns ◊code/inline{((λ (y) y) (λ (z) z))}. The structure for the function is:
 
 ◊code/block/highlighted['racket]{
-(define (fill-hole program-fragment continuation)
-  (match continuation
+(define (fill-hole program-fragment context)
+  (match context
     #;[`(hole)
        ; TODO: (1) Hole.
        ]
@@ -1198,11 +1160,11 @@ The final case is similar to the second, except that the subject of the recursiv
        ]))
 }
 
-This structure is similar to all other functions that traverse the program structure, it is a pattern match on the argument ◊code/inline{continuation}. Besides the three usual cases (anonymous function definition, function application and variable reference), ◊code/inline{fill-hole} has to handle the ◊technical-term{holes} which occur in ◊code/inline{continuation}s. When that is the case, it just returns the given ◊code/inline{program-fragment}:
+This structure is similar to all other functions that traverse the program structure, it is a pattern match on the argument ◊code/inline{context}. Besides the three usual cases (anonymous function definition, function application and variable reference), ◊code/inline{fill-hole} has to handle the ◊technical-term{holes} which occur in ◊code/inline{context}s. When that is the case, it just returns the given ◊code/inline{program-fragment}:
 
 ◊code/block/highlighted['racket]{
-(define (fill-hole program-fragment continuation)
-  (match continuation
+(define (fill-hole program-fragment context)
+  (match context
     [`(hole)
      program-fragment]
     #;[`(λ (,argument-name) ,body)
@@ -1216,17 +1178,17 @@ This structure is similar to all other functions that traverse the program struc
        ]))
 }
 
-◊margin-note{It would be correct to recursively call ◊code/inline{fill-hole} in the case that the ◊code/inline{continuation} is an anonymous function definition. But it is not necessary, so we avoid the extra work.}
+◊margin-note{It would be correct to recursively call ◊code/inline{fill-hole} in the case that the ◊code/inline{context} is an anonymous function definition. But it is not necessary, so we avoid the extra work.}
 
-In the second case, the ◊code/inline{continuation} is an anonymous function definition. The ◊code/inline{split-expression} function only splits ◊code/inline{expression}s in function applications, never inside an anonymous function definition, so a ◊technical-term{hole} can never occur inside an anonymous function definition, and ◊code/inline{fill-hole} can just return the ◊code/inline{continuation}, unaltered:
+In the second case, the ◊code/inline{context} is an anonymous function definition. The ◊code/inline{split-program} function only splits ◊code/inline{expression}s in function applications, never inside an anonymous function definition, so a ◊technical-term{hole} can never occur inside an anonymous function definition, and ◊code/inline{fill-hole} can just return the ◊code/inline{context}, unaltered:
 
 ◊code/block/highlighted['racket]{
-(define (fill-hole program-fragment continuation)
-  (match continuation
+(define (fill-hole program-fragment context)
+  (match context
     [`(hole)
      program-fragment]
     [`(λ (,argument-name) ,body)
-     continuation]
+     context]
     #;[`(,function ,argument)
        ; TODO: (3) Function application.
        ]
@@ -1235,15 +1197,15 @@ In the second case, the ◊code/inline{continuation} is an anonymous function de
        ]))
 }
 
-In the case of a function application, ◊code/inline{fill-hole} has to keep traverse the program to find the ◊technical-term{hole} deeper in it. It does so by recursively calling itself on the ◊code/inline{function} and the ◊code/inline{argument}. It is necessary to traverse both the ◊code/inline{function} and the ◊code/inline{argument} because we do not know where the ◊technical-term{hole} is. There is only ever one ◊technical-term{hole} in any given ◊code/inline{continuation}, so one of these two recursive calls only triggers the cases other than the first, and the result is the same program fragment, unaltered. This preserves the rest of the ◊code/inline{continuation}, aside from the ◊technical-term{hole} in it:
+In the case of a function application, ◊code/inline{fill-hole} has to keep traverse the program to find the ◊technical-term{hole} deeper in it. It does so by recursively calling itself on the ◊code/inline{function} and the ◊code/inline{argument}. It is necessary to traverse both the ◊code/inline{function} and the ◊code/inline{argument} because we do not know where the ◊technical-term{hole} is. There is only ever one ◊technical-term{hole} in any given ◊code/inline{context}, so one of these two recursive calls only triggers the cases other than the first, and the result is the same program fragment, unaltered. This preserves the rest of the ◊code/inline{context}, aside from the ◊technical-term{hole} in it:
 
 ◊code/block/highlighted['racket]{
-(define (fill-hole program-fragment continuation)
-  (match continuation
+(define (fill-hole program-fragment context)
+  (match context
     [`(hole)
      program-fragment]
     [`(λ (,argument-name) ,body)
-     continuation]
+     context]
     [`(,function ,argument)
      `(,(fill-hole program-fragment function)
        ,(fill-hole program-fragment argument))]
@@ -1252,20 +1214,20 @@ In the case of a function application, ◊code/inline{fill-hole} has to keep tra
        ]))
 }
 
-Finally, if the ◊technical-term{pattern match} reaches the final case, it means the ◊technical-term{hole} is not there, so ◊code/inline{fill-hole} returns the ◊code/inline{continuation}, unaltered:
+Finally, if the ◊technical-term{pattern match} reaches the final case, it means the ◊technical-term{hole} is not there, so ◊code/inline{fill-hole} returns the ◊code/inline{context}, unaltered:
 
 ◊code/block/highlighted['racket]{
-(define (fill-hole program-fragment continuation)
-  (match continuation
+(define (fill-hole program-fragment context)
+  (match context
     [`(hole)
      program-fragment]
     [`(λ (,argument-name) ,body)
-     continuation]
+     context]
     [`(,function ,argument)
      `(,(fill-hole program-fragment function)
        ,(fill-hole program-fragment argument))]
     [variable
-     continuation]))
+     context]))
 }
 
 ◊paragraph-separation[]
@@ -1300,6 +1262,8 @@ This version of ◊code/inline{interpret} works similarly to most other function
 
 ◊new-thought{In this section} we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
 
+◊; TODO: ◊margin-note{The Racket ◊code/inline{cond} form is similar to ◊code/inline{if}, except that each of the branches might have multiple expressions.}
+
 ◊; NEXT: Explain the ‘_’ pattern, above.
 
 ◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?” Debugger-like with inspect variables—otherwise, “where’s my code?”
@@ -1323,7 +1287,7 @@ This version of ◊code/inline{interpret} works similarly to most other function
 ◊; TODO: Factor environment into binding environment and value environment. Mention the value environment could be global.
 
 ◊; TODO: Notes for CPS article:
-◊;       1. Motivate by avoiding re-doing the work of ‘split-expression’.
+◊;       1. Motivate by avoiding re-doing the work of ‘split-program’.
 ◊;       2. A ‘continuation’ is the ‘context’ represented as a function.
 ◊;       3. “Alphatization”.
 

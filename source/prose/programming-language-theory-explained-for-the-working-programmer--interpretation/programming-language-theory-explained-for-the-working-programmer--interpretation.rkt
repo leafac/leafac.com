@@ -448,16 +448,16 @@
        (interpret substituted-body)]))
 
   (define (substitute body argument-name argument)
-  (match body
-    [`(λ (,other-argument-name) ,other-body)
-     (if (equal? argument-name other-argument-name)
-         body
-         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
-    [`(,function ,other-argument)
-     `(,(substitute function argument-name argument)
-       ,(substitute other-argument argument-name argument))]
-    [variable
-     (if (equal? argument-name variable) argument variable)]))
+    (match body
+      [`(λ (,other-argument-name) ,other-body)
+       (if (equal? argument-name other-argument-name)
+           body
+           `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+      [`(,function ,other-argument)
+       `(,(substitute function argument-name argument)
+         ,(substitute other-argument argument-name argument))]
+      [variable
+       (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -499,10 +499,10 @@
        (define reduced-expression (substitute body argument-name argument))
        (fill-hole reduced-expression context)]))
 
-  (define (split-program program)
-    (match program
+  (define (split-program program-fragment)
+    (match program-fragment
       [`((λ (,argument-name/function) ,body/function) (λ (,argument-name/argument) ,body/argument))
-       (values program `(hole))]
+       (values program-fragment `(hole))]
       [`((λ (,argument-name/function) ,body/function) ,argument)
        (define-values (reduction-expression context) (split-program argument))
        (values reduction-expression `((λ (,argument-name/function) ,body/function) ,context))]
@@ -522,16 +522,16 @@
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
   (define (substitute body argument-name argument)
-  (match body
-    [`(λ (,other-argument-name) ,other-body)
-     (if (equal? argument-name other-argument-name)
-         body
-         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
-    [`(,function ,other-argument)
-     `(,(substitute function argument-name argument)
-       ,(substitute other-argument argument-name argument))]
-    [variable
-     (if (equal? argument-name variable) argument variable)]))
+    (match body
+      [`(λ (,other-argument-name) ,other-body)
+       (if (equal? argument-name other-argument-name)
+           body
+           `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+      [`(,function ,other-argument)
+       `(,(substitute function argument-name argument)
+         ,(substitute other-argument argument-name argument))]
+      [variable
+       (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
@@ -599,11 +599,11 @@
   (define (initial-state program)
     (state program empty))
 
-  (define (split-program program)
-    (match program
+  (define (split-program program-fragment)
+    (match program-fragment
       [`((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
          (closure (λ (,argument-name/argument) ,body/argument) ,closure-environment/argument))
-       (values program `(hole))]
+       (values program-fragment `(hole))]
       [`((closure (λ (,argument-name/function) ,body/function) ,closure-environment/function)
          ,argument)
        (define-values (reduction-expression context) (split-program argument))
@@ -614,12 +614,12 @@
        (define-values (reduction-expression context) (split-program function))
        (values reduction-expression `(,context ,argument))]
       [`(restore (closure (λ (,argument-name) ,body) ,closure-environment) ,previous-environment)
-       (values program `(hole))]
+       (values program-fragment `(hole))]
       [`(restore ,body ,previous-environment)
        (define-values (reduction-expression context) (split-program body))
        (values reduction-expression `(restore ,context ,previous-environment))]
       [variable
-       (values program `(hole))]))
+       (values program-fragment `(hole))]))
 
   (define (fill-hole program-fragment context)
     (match context
@@ -648,16 +648,16 @@
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
   (define (substitute body argument-name argument)
-  (match body
-    [`(λ (,other-argument-name) ,other-body)
-     (if (equal? argument-name other-argument-name)
-         body
-         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
-    [`(,function ,other-argument)
-     `(,(substitute function argument-name argument)
-       ,(substitute other-argument argument-name argument))]
-    [variable
-     (if (equal? argument-name variable) argument variable)]))
+    (match body
+      [`(λ (,other-argument-name) ,other-body)
+       (if (equal? argument-name other-argument-name)
+           body
+           `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+      [`(,function ,other-argument)
+       `(,(substitute function argument-name argument)
+         ,(substitute other-argument argument-name argument))]
+      [variable
+       (if (equal? argument-name variable) argument variable)]))
 
   ;; ‘free-variables’ is the same as for the well-formedness condition.
 
@@ -746,15 +746,15 @@
     (match-define (state program binding-environment value-environment time) current-state)
     (add1 time))
 
-  ;; ‘substitute’ is the same as for the environment-based interpreter, except for variable names.
+  ;; ‘split-program’ is the same as for the environment-based interpreter, except for variable names.
 
-  (define (split-program program)
-    (match program
+  (define (split-program program-fragment)
+    (match program-fragment
       [`((closure (λ (,argument-name/function) ,body/function)
                   ,closure-binding-environment/function)
          (closure (λ (,argument-name/argument) ,body/argument)
                   ,closure-binding-environment/argument))
-       (values program `(hole))]
+       (values program-fragment `(hole))]
       [`((closure (λ (,argument-name/function) ,body/function)
                   ,closure-binding-environment/function)
          ,argument)
@@ -773,14 +773,14 @@
       [`(restore (closure (λ (,argument-name) ,body)
                           ,closure-binding-environment)
                  ,previous-binding-environment)
-       (values program `(hole))]
+       (values program-fragment `(hole))]
       [`(restore ,body ,previous-binding-environment)
        (define-values (reduction-expression context)
          (split-program body))
        (values reduction-expression
                `(restore ,context ,previous-binding-environment))]
       [variable
-       (values program `(hole))]))
+       (values program-fragment `(hole))]))
 
   ;; ‘fill-hole’ is the same as for the environment-based interpreter, except for variable names.
 
@@ -829,16 +829,16 @@
   ;; ‘substitute’ is the same as for the big-step interpreter.
 
   (define (substitute body argument-name argument)
-  (match body
-    [`(λ (,other-argument-name) ,other-body)
-     (if (equal? argument-name other-argument-name)
-         body
-         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
-    [`(,function ,other-argument)
-     `(,(substitute function argument-name argument)
-       ,(substitute other-argument argument-name argument))]
-    [variable
-     (if (equal? argument-name variable) argument variable)]))
+    (match body
+      [`(λ (,other-argument-name) ,other-body)
+       (if (equal? argument-name other-argument-name)
+           body
+           `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+      [`(,function ,other-argument)
+       `(,(substitute function argument-name argument)
+         ,(substitute other-argument argument-name argument))]
+      [variable
+       (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
     (require rackunit (submod ".." ".." test-cases))
