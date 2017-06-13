@@ -9,6 +9,8 @@
 
 ◊new-thought{Interpreters are programs} which run programs. They receive as input code specifying the desired computations, execute them, and output the results. How do interpreters work? In this article we address this question by writing four different interpreters. The goal is to explore the underlying principles of computing, not to produce a realistic interpreter for an industrial-grade language. But, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
 
+◊; TODO: Motivation for study of interpretation: understand how communication occurs in programming languages. It’s about names! The bindings allow long-distance communication.
+
 ◊section['language]{Language}
 
 ◊new-thought{To start writing} our first interpreter, we need to answer two questions: Which language do we use to write it? Which language does it interpret? For the former, we choose Racket. It has features that make interpreters easier to read, for example, ◊technical-term{pattern matching} and ◊technical-term{quasiquoting}—which we introduce in due time. This choice is solely based on convenience, this article could be rewritten in any other programming language.
@@ -1021,6 +1023,8 @@ In the general case, function applications might be arbitrarily nested, and more
 
 ◊margin-note{The representation for ◊technical-term{holes} using ◊code/inline{(hole)} does not conflict with existing constructs in our target language, because function applications would include an argument in the parentheses and variable references would not have parentheses.}
 
+◊margin-note{◊technical-term{Reduction expression} are commonly abbreviated to ◊technica-term{redex}.}
+
 The function application which we resolve next is called ◊technical-term{reduction expression}, because ◊technical-term{reduction} is the technical term for what we have been informally calling ◊informal{resolving a function application}. We represent ◊technical-term{reduction expression} as any other program fragment, for example, ◊code/inline{`((λ (x) x) (λ (y) y))}. The rest of the ◊code/inline{program}, from which we extracted the ◊technical-term{reduction expression}, is called ◊technical-term{context}, because it represents the context in which the ◊technical-term{reduction expression} occurs. We represent ◊technical-term{contexts} as ◊informal{programs with a hole}, and the ◊technical-term{hole} is identified by ◊code/inline{(hole)}, for example:
 
 ◊code/block/highlighted['racket]{
@@ -1261,29 +1265,17 @@ This version of ◊code/inline{interpret} follows the ◊code/inline{traverse} f
 
 ◊new-thought{In this section} we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
 
+Our ◊technical-term{debugger-like interpreter} allows us to reason about the interpretation of function application in terms of substitution. When the ◊code/inline{function} ◊code/inline{(λ (x) ___)} is applied, every occurrence of ◊code/inline{x} in the body ◊code/inline{___} is substituted by the ◊code/inline{argument}. After a number of ◊code/inline{step}s, the intermediary ◊code/inline{program} has been through several substitutions, and might become unrecognizable, with respect to the original ◊code/inline{program} under interpretation. While our ◊technical-term{debugger-like interpreter} makes very clear what are the exact ◊code/inline{program-fragment}s as interpretation progresses, it conceals the relationship between these ◊code/inline{program-fragment}s and those originally written by the programmer. The interpreter in the next section explores the other end of this trade-off.
+
+◊section['delayed-substitution-interpreter]{Delayed-Substitution Interpreter}
+
+◊; TODO: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?” Debugger-like with inspect variables—otherwise, “where’s my code?”
+
 ◊; TODO: ◊margin-note{The Racket ◊code/inline{cond} form is similar to ◊code/inline{if}, except that each of the branches might have multiple expressions.}
 
-◊; NEXT: Explain the ‘_’ pattern, above.
-
-◊; NEXT: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?” Debugger-like with inspect variables—otherwise, “where’s my code?”
-
-◊; TODO: Add a ‘trace’ function, which repeatedly calls ‘step’ and collects the intermediate results.
-
-◊; TODO: APPENDIX: Well-formedness condition.
-
-◊; TODO: Mention β-reduction.
-
-◊; TODO: Motivation for study of interpretation: understand how communication occurs in programming languages. It’s about names! The bindings allow long-distance communication.
-
-◊; TODO: Mention that, which ‘interpret’ might not terminate, ‘step’ always does.
-
-◊; TODO: Mention that ‘reduction-expression’ is commonly abbreviated to ‘redex’.
-
-◊; TODO: Update explanation of ‘fill-hole’ to use ‘_’ pattern. TEST IT, FIRST!
-
-◊; TODO: Mention that, for a realistic implementation, we wouldn’t want to split and fill expressions along the way.
-
-◊; TODO: Factor environment into binding environment and value environment. Mention the value environment could be global.
+◊; TODO: Section about realistic implementation:
+◊;       1. Don’t split and fill.
+◊;       2. The value environment could be global (widening).
 
 ◊; TODO: Notes for CPS article:
 ◊;       1. Motivate by avoiding re-doing the work of ‘split-program’.
