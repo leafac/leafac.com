@@ -7,7 +7,7 @@
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{Interpreters are programs} which run programs. They receive as input code specifying the desired computations, execute them, and output the results. How do interpreters work? In this article we address this question by writing four different interpreters. The goal is to explore the underlying principles of computing, not to produce a realistic interpreter for an industrial-grade language. But, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
+◊new-thought{Interpreters are programs} which run programs. They receive as input code specifying the desired computations, execute them, and output the results. How do interpreters work? In this article we address this question by writing four different interpreters. The goal is to explore the underlying principles of computing, to understand how programming languages support ◊emphasis{communication}, their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
 
 ◊; TODO: Motivation for study of interpretation: understand how communication occurs in programming languages. It’s about names! The bindings allow long-distance communication.
 
@@ -1267,7 +1267,7 @@ This version of ◊code/inline{interpret} follows the ◊code/inline{traverse} f
 
 Our ◊technical-term{debugger-like interpreter} allows us to reason about the interpretation of function application in terms of substitution. When the ◊code/inline{function} ◊code/inline{(λ (x) ___)} is applied, every occurrence of ◊code/inline{x} in the body ◊code/inline{___} is substituted by the ◊code/inline{argument}. After a number of ◊code/inline{step}s, the intermediary ◊code/inline{program} has been through several substitutions, and might become unrecognizable, with respect to the original ◊code/inline{program} under interpretation. While our ◊technical-term{debugger-like interpreter} makes very clear what are the exact ◊code/inline{program-fragment}s as interpretation progresses, it conceals the relationship between these ◊code/inline{program-fragment}s and those originally written by the programmer. The interpreter in the next section explores the other end of this trade-off.
 
-◊section['delayed-substitution-interpreter]{Delayed-Substitution Interpreter}
+◊section['variable-inspection-debugger-like-interpreter]{Variable-Inspection Debugger-Like Interpreter}
 
 ◊; TODO: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?” Debugger-like with inspect variables—otherwise, “where’s my code?”
 
