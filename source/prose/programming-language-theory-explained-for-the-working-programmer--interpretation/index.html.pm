@@ -1265,11 +1265,73 @@ This version of ◊code/inline{interpret} follows the ◊code/inline{traverse} f
 
 ◊new-thought{In this section} we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
 
-Our ◊technical-term{debugger-like interpreter} allows us to reason about the interpretation of function application in terms of substitution. When the ◊code/inline{function} ◊code/inline{(λ (x) ___)} is applied, every occurrence of ◊code/inline{x} in the body ◊code/inline{___} is substituted by the ◊code/inline{argument}. After a number of ◊code/inline{step}s, the intermediary ◊code/inline{program} has been through several substitutions, and might become unrecognizable, with respect to the original ◊code/inline{program} under interpretation. While our ◊technical-term{debugger-like interpreter} makes very clear what are the exact ◊code/inline{program-fragment}s as interpretation progresses, it conceals the relationship between these ◊code/inline{program-fragment}s and those originally written by the programmer. The interpreter in the next section explores the other end of this trade-off.
+Our ◊technical-term{debugger-like interpreter} allows us to reason about the interpretation of function application in terms of substitution. When the ◊code/inline{function} ◊code/inline{(λ (x) ___)} is applied, every occurrence of ◊code/inline{x} in the body ◊code/inline{___} is substituted by the ◊code/inline{argument}. After a number of ◊code/inline{step}s, the intermediary ◊code/inline{program} has been through several substitutions, and might become unrecognizable with respect to the original ◊code/inline{program} under interpretation. While our ◊technical-term{debugger-like interpreter} clarifies what are the exact ◊code/inline{program-fragment}s as interpretation progresses, it conceals the relationship between these ◊code/inline{program-fragment}s and those originally written by the programmer. The interpreter in the next section explores the other end of this trade-off.
 
-◊section['variable-inspection-debugger-like-interpreter]{Variable-Inspection Debugger-Like Interpreter}
+◊section['variable-inspecting-debugger-like-interpreter]{Variable-Inspecting Debugger-Like Interpreter}
 
-◊; TODO: Motivate environment-based interpreters: - more realistic - performance - compilers - environment. Reason about the meaning of names (bindings): Reference “What’s in a name?” Debugger-like with inspect variables—otherwise, “where’s my code?”
+◊new-thought{Interpreters and debuggers} generally do not work by substituting arguments in place and creating new program fragments. First, because this can disorient programmers, as the original program they wrote is no longer recognizable after some steps of interpretation. Also, it is inefficient to create program fragments, which tend to be big data structures.
+
+◊margin-note{Technically, the interpreters we wrote in previous sections are called ◊technical-term{substitution-based interpreters}, and the one write in section is a ◊technical-term{environment-based interpreter}.}
+
+◊margin-note{Compilers generally follow the ◊technical-term{environment-based} approach, because they cannot generate code at run-time.}
+
+The alternative approach is to ◊emphasis{delay} the substitution, storing the necessary information on the side. For example, suppose the function ◊code/inline{(λ (x) ___ x ___)} is being applied to the argument ◊code/inline{(λ (y) y)}. To this point in the article, interpretation proceeded by substituting every (free) occurrence of the argument name ◊code/inline{x} for the argument in the body, resulting in ◊code/inline{___ (λ (y) y) ___}. In our ◊technical-term{variable-inspecting debugger-like interpreter}, we keep the body ◊code/inline{___ x ___} unaltered, and keep a data structure on the side to record that any free ◊code/inline{x} means ◊code/inline{(λ (y) y)}. When we need to interpret that free ◊code/inline{x}, we consult this data structure.
+
+This solution is similar to most ◊technical-term{step-debuggers}, which do not work by substitution. They show the current execution point in terms of the original program the programmer wrote, and have a panel showing the current values of the variables. These mappings between free variables and values are called ◊technical-term{environments}.
+
+◊paragraph-separation[]
+
+◊new-thought{The implementation of our} ◊technical-term{variable-inspecting debugger-like interpreter} is similar in structure to our ◊technical-term{debugger-like interpreter}. The most important function is ◊code/inline{step}, which evaluates the next ◊technical-term{reduction expression}. There is one important difference between this interpreter and the previous, though. For interpreters up to this point in the article, all information necessary to evaluate the program was present in the intermediary programs generated during interpretation. The ◊code/inline{step} function received a ◊code/inline{program} as argument. Now, besides the intermediary program, it is also necessary to have information about the ◊technical-term{environment}. Together, they represent the current ◊technical-term{state} of computation. We start our implementation by defining a data structure for ◊technical-term{states}:
+
+◊margin-note{The ◊code/inline{#:transparent} flag is there just to make the data structure print nicely for debugging.}
+
+◊code/block/highlighted['racket]{
+(struct state (program environment) #:transparent)
+}
+
+◊margin-note{In other programming languages, ◊technical-term{dictionaries} are also called maps, hash maps, association lists, associative arrays and so forth.}
+
+The snippet above defines a data structure called ◊code/inline{state}, which has two fields named ◊code/inline{program} and ◊code/inline{environment}. The ◊code/inline{program}s are represented using quasiquoting, the same they have been to this point. The ◊code/inline{environment}s are dictionaries, which map variable names to values in our language.
+
+To start interpretation, it is necessary to inject the given ◊code/inline{program} into an ◊code/inline{initial-state}. No ◊code/inline{environment} information is available yet, so we use the empty ◊code/inline{environment}:
+
+◊code/block/highlighted['racket]{
+(define (initial-state program)
+  (state program empty))
+}
+
+For example, given the program ◊code/inline{(λ (x) x)}, the initial state is:
+
+◊code/block/highlighted['racket]{
+> (initial-state `(λ (x) x))
+(state '(λ (x) x) '())
+}
+
+◊paragraph-separation[]
+
+◊new-thought{The next big change} in our interpreter is that ◊emphasis{functions are no longer values in our language}! A function in an intermediary program might include references to variables which have not been substituted yet; the information for that substitution is in an ◊code/inline{environment}. For example, consider the program ◊code/inline{((λ (x) (λ (y) x)) (λ (z) z))}. In the interpreters we implemented in previous sections, this evaluates to ◊code/inline{(λ (y) (λ (z) z))}, because the ◊code/inline{x} in ◊code/inline{(λ (y) x)} is substituted for the argument ◊code/inline{(λ (z) z)}. But in our current interpreter this does not happen, the resulting program would be ◊code/inline{(λ (y) x)}, which cannot be a value because the variable ◊code/inline{x} is free and, consequently, the program is open.
+
+The solution is to pair functions with ◊code/inline{environment}s, which contain mappings for the variables free in the function body. In the running example, the function ◊code/inline{(λ (y) x)} is paired with an ◊code/inline{environment} containing a mapping for name ◊code/inline{x}. When the interpreter has to evaluate the variable reference ◊code/inline{x} in ◊code/inline{(λ (y) x)}, it looks up the name in the ◊code/inline{environment} associated with that function. This construct comprising a function and a corresponding ◊code/inline{environment} is called a ◊technical-term{closure}.
+
+◊emphasis{Functions are no longer values in our language, but closures are}!
+
+Why do we need closures to hold ◊code/inline{environment}s, instead of using the ◊code/inline{environment} already present in the interpretation ◊code/inline{state}, as defined above? Functions can be passed around as arguments to other functions or returned from calls to other functions; they transit freely through the program and may finally be called in a ◊technical-term{context} entirely different from the one in which it was created. The ◊code/inline{environment} in the interpretation ◊code/inline{state} has information about the context at the call site, and the ◊code/inline{environment} in the ◊technical-term{closure} has information about the context in which the function was defined.
+
+◊margin-note{An example of a language which has dynamic scoping is ◊emphasis{Emacs Lisp}.}
+
+◊margin-note{Lexical scoping is also called static scoping.}
+
+Which ◊code/inline{environment} to use (calling site or definition site) is a matter of language design, and there are languages in both fronts. If a language uses the ◊code/inline{environment} from the calling site (the one in the interpretation ◊code/inline{state}), then it has ◊technical-term{dynamic scoping}. If a language uses the ◊code/inline{environment} from the definition site (the one in the ◊technical-term{closure}), then it has ◊technical-term{lexical scoping}. Most programming languages—including Racket—feature ◊technical-term{lexical scoping}, because it allows programmers to reason about functions locally; they only have to think about the ◊code/inline{environment} in which the function is defined, as opposed to every ◊code/inline{environment} in which the function might possibly be called. As a result, functions are easier to compose and use in ways not anticipated by their designers.
+
+Our language has lexical scoping, and that is why we need closures: to carry around the ◊code/inline{environment} in which a function was defined along with the function itself, to be used at the calling sites. We represent closures as values in our language using the form ◊code/inline{`(closure (λ (,argument-name) ,body) ,closure-environment)}. Coming back to our example above, the following is a value in our language:
+
+◊code/block/highlighted['racket]{
+`(closure (λ (y) x) ((x . (closure (λ (z) z) ()))))
+}
+
+This is a closure over the function ◊code/inline{(λ (y) x)}, in which the ◊code/inline{environment} maps the name ◊code/inline{x} to its corresponding value. Note that values in the ◊code/inline{environment} are closures themselves, as closures are the only kind of value in our language.
+
+◊; ---------------------------------------------------------------------------------------------------
 
 ◊; TODO: ◊margin-note{The Racket ◊code/inline{cond} form is similar to ◊code/inline{if}, except that each of the branches might have multiple expressions.}
 
