@@ -3,25 +3,23 @@
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Simple Interpreter}
 ◊define-meta[date]{2017-06-20}
 
-◊margin-note{This article assumes knowledge in the ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
+◊margin-note{This article assumes knowledge of the ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
-◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--interpretation/programming-language-theory-explained-for-the-working-programmer--interpretation.rkt"]{Here} is the code for this entire article.}
+◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter/programming-language-theory-explained-for-the-working-programmer--simple-interpreter.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{Interpreters are programs} which run programs. They receive as input code specifying the desired computations, execute them, and output the results. How do interpreters work? In this article we address this question by writing four different interpreters. The goal is to explore the underlying principles of computing, to understand how programming languages support ◊emphasis{communication}, their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
-
-◊; TODO: Motivation for study of interpretation: understand how communication occurs in programming languages. It’s about names! The bindings allow long-distance communication.
+◊new-thought{Interpreters are programs} for running programs. They receive as input a program, evaluate it, and output the results. How does this process work? In this article we start to address this question by writing a simple interpreter. The goal is to explore the underlying principles of computing to understand how programming languages support ◊emphasis{communication}, which is their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. In subsequent articles we will explore the question further, developing variants of the simple interpreter from this article. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
 
 ◊section['language]{Language}
 
 ◊new-thought{To start writing} our first interpreter, we need to answer two questions: Which language do we use to write it? Which language does it interpret? For the former, we choose Racket. It has features that make interpreters easier to read, for example, ◊technical-term{pattern matching} and ◊technical-term{quasiquoting}—which we introduce in due time. This choice is solely based on convenience, this article could be rewritten in any other programming language.
 
-More interesting than the choice of base language is the choice of target language. Which language does our interpreter interpret? In this article, we are not interested in language design, our objective is not to understand how particular language features are interpreted. Instead, we are interested in studying interpretation itself, and understanding the fundamental principles behind computation. So the target language should be as ◊technical-term{simple} as possible.
+More interesting than the choice of base language is the choice of target language. Our interpreter evaluates programs written in which language? In this series of articles, we are not interested in language design, our objective is not to understand how particular language features are interpreted. Instead, we are interested in studying interpretation itself, and understanding the fundamental principles behind computation. So the target language should be as ◊technical-term{simple} as possible.
 
-We choose ◊technical-term{simplicity} over ◊technical-term{convenience}. Our target language preferably includes as few features as possible, so that our interpreters remain small and understandable, and changing them requires minimal effort. As a consequence, our target language is ◊technical-term{difficult} to use; programs written in it are verbose and unintelligible. It would be a bad choice for everyday programming tasks, but it is good target language for this article, because, despite its simplicity, it remains a programming language with enough features to support arbitrary computations.
+We choose ◊technical-term{simplicity} over ◊technical-term{convenience}. Our target language preferably includes as few features as possible, so that our interpreter remain small and understandable, and changing it requires minimal effort. The price we pay is that our target language is ◊technical-term{difficult} to use; programs written in it are verbose and unintelligible. It would be a bad choice for everyday programming tasks, but it is good target language for this article, because, despite its simplicity, it remains a programming language with enough features to support arbitrary computations.
 
 ◊margin-note{For more on our target language, refer to ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{◊publication{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}}.}
 
-There exist many languages that fit our requirements. From all of them, we choose one that is particularly elegant, for its compactness. This target language represents a minimal core with only the essential features of programming languages: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. The following listing is an example of a program in this language:
+There exist many languages that fit our requirements. From all of them, we choose one that is particularly elegant, for its compactness. This target language represents a minimal core with only the following features: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. The following listing is an example of a program in this language:
 
 ◊code/block/highlighted['racket]{
 (λ (x) x)
@@ -32,12 +30,12 @@ There exist many languages that fit our requirements. From all of them, we choos
 ◊margin-note{
  Our choice of notation is based on Racket’s notation, so our target language is a subset of Racket. This means that programs in our target language are also programs in Racket, which is useful to check the correctness of our interpreters and for interactive exploration. (Though this latter application is limited by the way Racket prints functions—it just outputs ◊code/inline{#<procedure>}, instead of the function definition.)
 
- Another consequence of this decision is that our target language inherits many implicit design choices from Racket. For example, we evaluate the argument to a value before passing it into the function, we only evaluate function applications reachable from the top level—and not those that occur within function bodies before the function is applied—and so forth. Different choices would lead to different interpreters, which would change the meaning of some programs. For example, some programs that run forever in our target language would terminate had we decided to only evaluate function arguments to values when they are needed, as opposed to before passing them into the function. We follow Racket’s design decisions because they are similar to those of most popular programming languages.
+ Another consequence of this decision is that our target language implicitly inherits many design choices from Racket. For example, we evaluate the argument to a value before passing it into the function. Different choices would lead to different interpreters, which would change the meaning of some programs. For example, some programs that run forever in our target language would terminate had we decided to only evaluate function arguments to values when they are needed, as opposed to before passing them into the function. We follow Racket’s design decisions because they are similar to those of most popular programming languages.
 }
 
-The program above defines a function which has no name (anonymous function). Function definitions are enclosed in parentheses, and start with the Greek letter lambda (◊code/inline{λ}). After the ◊code/inline{λ} there is the name of the argument received by the function, also in parentheses—◊code/inline{(x)} in the example. Finally, there is the function body, an expression specifying which computation the function performs. In the example, the computation is to just return the argument ◊code/inline{x}, unaltered.
+The program above defines a function which has no name (anonymous function). Function definitions are enclosed in parentheses, and start with the Greek letter lambda (◊code/inline{λ}). After the ◊code/inline{λ} there is the name of the argument received by the function, also in parentheses, ◊code/inline{(x)}. Finally, there is the function body, an expression specifying which computation the function performs. In the example, the computation is to just return the argument ◊code/inline{x}, unaltered.
 
-In our target language, functions are values. They are the only kind of values; there are no numbers, booleans, strings, data structures and other constructs usually found in programming languages. This highlights how ◊technical-term{simple} the language is. Despite its simplicity, our target language is ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{capable of performing arbitrary computations}. In the case of the listing above, the defined function is the whole program. This is similar to how the following is a complete program in languages including Racket, Ruby, JavaScript and Python:
+In our target language, functions are values. They are the only kind of value; there are no numbers, booleans, strings, data structures and other constructs usually found in programming languages. This highlights how ◊technical-term{simple} the language is. Despite its simplicity, our target language is ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{capable of performing arbitrary computations}. In the case of the listing above, the function definition is the whole program. This is similar to how the following is a complete program in languages including Racket, Ruby, JavaScript and Python:
 
 ◊code/block/highlighted['racket]{
 5
@@ -51,13 +49,13 @@ Our first program is an example of function definition—◊code/inline{(λ ...)
 ((λ (x) x) (λ (y) y))
 }
 
-◊margin-note{The replacement of argument names in the function body for the argument provided in the function application is the mechanism that allows for arbitrary ◊emphasis{communication} of data in the program. This process is known as ◊technical-term{β reduction}. The connection between names and their meanings is the fundamental power of the Lambda calculus and has deep implications. Refer to ◊link["https://blogs.janestreet.com/whats-in-a-name/"]{◊publication{What’s in a name?}}, by Olin Shivers for more.}
+◊margin-note{The substitution of argument names in the function body for the argument provided in the function application is the mechanism that allows for arbitrary ◊emphasis{communication} in the program. This process is known as ◊technical-term{β reduction}. The connection between names and their meanings is the fundamental power of the Lambda calculus and has deep implications. Refer to ◊link["https://blogs.janestreet.com/whats-in-a-name/"]{◊publication{What’s in a name?}}, by Olin Shivers for more.}
 
-This program is an application of the function ◊code/inline{(λ (x) x)} to the argument ◊code/inline{(λ (y) y)}. The interpretation of this is the same as in mathematics and most programming languages: replace every occurrence of the argument name ◊code/inline{x} in ◊code/inline{(λ (x) x)}’s body with the argument ◊code/inline{(λ (y) y)}. Because ◊code/inline{(λ (x) x)}’s body is just ◊code/inline{x}, the result of this program is ◊code/inline{(λ (y) y)}.
+This program is an application of the function ◊code/inline{(λ (x) x)} to the argument ◊code/inline{(λ (y) y)}. The interpretation of this is the same as in mathematics and most programming languages: to replace every occurrence of the argument name ◊code/inline{x} in ◊code/inline{(λ (x) x)}’s body with the argument ◊code/inline{(λ (y) y)}. Because ◊code/inline{(λ (x) x)}’s body is just ◊code/inline{x}, the result of this program is ◊code/inline{(λ (y) y)}.
 
 ◊paragraph-separation[]
 
-◊new-thought{We covered all features} of our target language, but there are two corner cases that we need to address: variable-name reuse and variable references that have not been defined. The first case, variable-name reuse, can occur in two ways. The simplest way is illustrated by the following listing:
+◊new-thought{We covered all features} of our target language, but there are two corner cases that we need to address: variable-name reuse and variable references that have not been defined. The first case, variable-name reuse, can occur in two ways, the simplest of which is illustrated by the following listing:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (x) x))
@@ -65,14 +63,13 @@ This program is an application of the function ◊code/inline{(λ (x) x)} to the
 
 This is a variation on the program we used above to discuss function application. The only difference is that the variable ◊code/inline{y} is consistently renamed to ◊code/inline{x}, so the name ◊code/inline{x} is used by both functions. These names occur in separate functions, so they do not interfere with each other. The same reasoning as before applies, and the result of this program is ◊code/inline{(λ (x) x)}. This is the same result as the previous example, except that the variable ◊code/inline{y} is consistently renamed to ◊code/inline{x} in the result as well.
 
-A more interesting corner case occurs when a variable name is reused in nested functions. Consider the following function:
+A more interesting corner case occurs when a variable name is reused not by functions which sit side-by-side, as in the example above, but by nested functions. Consider the following function:
 
 ◊code/block/highlighted['racket]{
 (λ (x) (λ (x) x))
 }
 
 ◊margin-note{
-
  ◊svg{shadowing.svg}
 
  ◊no-indent[] This phenomenon is known as ◊technical-term{shadowing}, because the argument of the inner function ◊technical-term{shadows} the argument of the outer function. In the inner function body there is no way to refer to the outer function argument.
@@ -86,13 +83,13 @@ The final corner case is a variable reference to an undefined name. The followin
 x
 }
 
-◊margin-note{Programs including variable references to undefined names are said to be ◊technical-term{open}. Since the meaning of ◊code/inline{x} in our example is not defined, the program is ◊technical-term{open} to different interpretations. If we said that ◊code/inline{x} is ◊code/inline{5}, then the program would result in ◊code/inline{5}. If we said that ◊code/inline{x} is ◊code/inline{"hello"}, then the program would result in ◊code/inline{"hello"}. Our interpreter only works over programs that do not contain these variable references to undefined names, which are said to be ◊technical-term{closed}.}
+◊margin-note{Programs including variable references to undefined names are said to be ◊technical-term{open}. Since the meaning of ◊code/inline{x} in our example is not defined, the program is ◊technical-term{open} to different interpretations. If we said that ◊code/inline{x} is ◊code/inline{5}, then the program would result in ◊code/inline{5}. If we said that ◊code/inline{x} is ◊code/inline{"hello"}, then the program would result in ◊code/inline{"hello"}. Our interpreter only works on programs that do not contain these variable references to undefined names, which are said to be ◊technical-term{closed}.}
 
-The program consists of a variable reference to ◊code/inline{x}, but ◊code/inline{x} has not been defined, it is not an argument to any function. This program has no precise meaning on its own, so our interpreters fail to evaluate it. This decision is consistent with most programming languages. Racket, for example, errors when trying to run the program above: “◊code/inline{x}: unbound identifier in module.”
+The program consists of a variable reference to ◊code/inline{x}, but ◊code/inline{x} has not been defined, it is not an argument to any function. This program has no precise meaning on its own, so our interpreter fails to evaluate it. This decision is consistent with most programming languages. Racket, for example, errors when trying to run the program above: “◊code/inline{x}: unbound identifier in module.”
 
-◊paragraph-separation[]
+◊section['representation]{Representation}
 
-◊new-thought{How do we represent} programs in our language? Generally, programs are plain text files, which interpreters read from the disk. Then they transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} and ◊technical-term{syntactic analysis}. This would be easy to do because our target language is a subset of Racket, and it comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from above:
+◊new-thought{How do we represent} in our base language (Racket) the programs in our target language? Generally, programs are plain text files, which interpreters read from the disk. Then they transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} and ◊technical-term{syntactic analysis}. This would be easy to do because our target language is a subset of Racket, and it comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from above:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y))
@@ -101,6 +98,8 @@ The program consists of a variable reference to ◊code/inline{x}, but ◊code/i
 To turn this program in our target language into a data structure in Racket, we introduce a quasiquote (◊code/inline{`}), as in the following Racket program:
 
 ◊margin-note{Our target language is a subset of Racket, so ◊code/inline{((λ (x) x) (λ (y) y))} is a program both in our target language and in Racket. Quasiquote turns this Racket program into data. This data is the program in our target language, over which our interpreter will work. This process demonstrates that ◊emphasis{code can be data, and data can be code}. Data and code are two sides of the same coin.}
+
+◊; TODO: Quasiquote is list + symbols. In other languages, lists + strings.
 
 ◊code/block/highlighted['racket]{
 `((λ (x) x) (λ (y) y))

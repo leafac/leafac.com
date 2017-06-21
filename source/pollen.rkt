@@ -312,7 +312,11 @@
                    [(+ p &) #:text-indent ,size/indentation]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
                     [(+ aside &) #:text-indent ,size/indentation]
-                    [(+ .insertion aside &) (+ h1 aside &) (+ h2 aside &) (+ .no-indent &)
+                    [(+ .insertion aside &)
+                     (+ .insertion aside aside &) (+ .insertion aside aside aside &)
+                     (+ h1 aside &) (+ h1 aside aside &) (+ h1 aside aside aside &)
+                     (+ h2 aside &) (+ h2 aside aside &) (+ h2 aside aside aside &)
+                     (+ .no-indent &)
                      #:text-indent 0]]
                    [(: & first-of-type) #:text-indent 0 !important]]))
 
