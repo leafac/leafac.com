@@ -85,38 +85,43 @@ x
 
 ◊margin-note{Programs including variable references to undefined names are said to be ◊technical-term{open}. Since the meaning of ◊code/inline{x} in our example is not defined, the program is ◊technical-term{open} to different interpretations. If we said that ◊code/inline{x} is ◊code/inline{5}, then the program would result in ◊code/inline{5}. If we said that ◊code/inline{x} is ◊code/inline{"hello"}, then the program would result in ◊code/inline{"hello"}. Our interpreter only works on programs that do not contain these variable references to undefined names, which are said to be ◊technical-term{closed}.}
 
-The program consists of a variable reference to ◊code/inline{x}, but ◊code/inline{x} has not been defined, it is not an argument to any function. This program has no precise meaning on its own, so our interpreter fails to evaluate it. This decision is consistent with most programming languages. Racket, for example, errors when trying to run the program above: “◊code/inline{x}: unbound identifier in module.”
+The program consists of a variable reference to ◊code/inline{x}, but ◊code/inline{x} has not been defined, it is not an argument to any function. This program has no precise meaning on its own, so our interpreter fails to evaluate it. This decision is consistent with that of most programming languages. Racket, for example, errors when trying to run the program above: “◊code/inline{x}: unbound identifier in module.”
 
 ◊section['representation]{Representation}
 
-◊new-thought{How do we represent} in our base language (Racket) the programs in our target language? Generally, programs are plain text files, which interpreters read from the disk. Then they transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} and ◊technical-term{syntactic analysis}. This would be easy to do because our target language is a subset of Racket, and it comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from above:
+◊new-thought{How do we represent} in our base language (Racket) the programs in our target language? Generally, programs are plain text files, which interpreters read from the disk. They transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} (◊technical-term{lexing}) and ◊technical-term{syntactic analysis} (◊technical-term{parsing}). This would be easy to do because our target language is a subset of Racket, which comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from the ◊reference['language]{previous section}:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y))
 }
 
-To turn this program in our target language into a data structure in Racket, we introduce a quasiquote (◊code/inline{`}), as in the following Racket program:
+To turn this program in our target language into a data structure in Racket, we introduce a quasiquote (◊code/inline{`}):
 
-◊margin-note{Our target language is a subset of Racket, so ◊code/inline{((λ (x) x) (λ (y) y))} is a program both in our target language and in Racket. Quasiquote turns this Racket program into data. This data is the program in our target language, over which our interpreter will work. This process demonstrates that ◊emphasis{code can be data, and data can be code}. Data and code are two sides of the same coin.}
+◊margin-note{Our target language is a subset of Racket, so ◊code/inline{((λ (x) x) (λ (y) y))} is a program both in our target language and in Racket. Quasiquote turns this Racket program into data for other Racket programs to process. The data is the program in our target language, which our interpreter will evaluate. This process demonstrates that ◊emphasis{code can be data, and data can be code}. Data and code are two sides of the same coin.}
 
-◊; TODO: Quasiquote is list + symbols. In other languages, lists + strings.
+◊margin-note{The data structures that quasiquoting create in our examples are (potentially nested) lists and symbols. The equivalent in other programming languages would be (potentially nested) lists and strings, for example, ◊code/inline{[["λ", ["x"], "x"], ["λ", ["y"], "y"]]}.}
 
 ◊code/block/highlighted['racket]{
 `((λ (x) x) (λ (y) y))
 }
 
+The snippet above is a Racket program which defines a program in our target language. Programs in our target language are data, from Racket’s perspective, so, by itself, the Racket program above just outputs ◊code/inline{`((λ (x) x) (λ (y) y))}. In a ◊reference['interpreter]{later section} we will implement an interpreter which receives this data structure as input.
+
 ◊margin-note{Unquoting is similar to string interpolation in other languages, for example, Ruby. But on data structures, as opposed to strings.}
 
-Another advantage of using ◊technical-term{quasiquoting} to represent programs in our target language is that we can use Racket programs to build programs in our target language. For this, we use ◊technical-term{unquoting} (◊code/inline{,}), which interpolates Racket expressions in parts of the data structure. For example, consider the following rewrite of the program above:
+Besides the convenient and terse notation, another advantage of using ◊technical-term{quasiquoting} to represent programs in our target language is that we can use Racket programs to build programs in our target language. For this, we use ◊technical-term{unquoting} (◊code/inline{,}), which interpolates Racket expressions in parts of the data structure. For example, consider the following rewrite of the program above:
 
 ◊code/block/highlighted['racket]{
 (define argument `(λ (y) y))
 `((λ (x) x) ,argument)
 }
 
-◊margin-note{Another consequence of using ◊technical-term{quasiquote} and ◊technical-term{unquote} in Racket to build programs in our target language is that it eliminates many syntax errors, as those would be syntax errors in Racket itself. This would not be the case had we decided to represent programs in our target language as plain text files on disk.}
 
 This listing has the same meaning as the previous program. First, it defines a variable named ◊code/inline{argument}, whose value is a data structure representing a program fragment in our target language: ◊code/inline{(λ (y) y)}. Then, it uses ◊technical-term{quasiquote} and ◊technical-term{unquote} to define the program ◊code/inline{((λ (x) x) (λ (y) y))} in our target language. The ◊technical-term{quasiquote} (◊code/inline{`}) starts a program in our target language embedded in Racket (a data structure), and the ◊technical-term{unquote} (◊code/inline{,}) escapes back to Racket. The result of the expression under the ◊technical-term{unquote} is interpolated in place. In the given example, the expression under the ◊technical-term{unquote} is just a reference to the variable defined right above: ◊code/inline{argument}. So its value (the program fragment ◊code/inline{(λ (y) y)} in our target language) is interpolated in place, resulting in the program ◊code/inline{((λ (x) x) (λ (y) y))} in our target language.
+
+As a consequence of using ◊technical-term{quasiquote} and ◊technical-term{unquote} to build programs in our target language, it is not possible to write a whole class of syntax errors in our target language. For example, the program ◊code/inline{`(λ (x) x} has unbalanced parentheses, but our interpreter does not have to handle this case, because it is a syntax error in Racket itself. This would not be the case had we decided to represent programs in our target language as plain text files on disk, our parser would have to detect this issue.
+
+Nevertheless, there are many problematic programs that one can still write. For example, the program ◊code/inline{`(λ (x y) x)} is not syntactically valid in our target language, because it defines a function which receives two arguments (◊code/inline{x} and ◊code/inline{y}), and our target language only supports functions with a single argument. In the following section we implement a program to validate the well-formedness of programs in our target language before the interpreter can evaluate them.
 
 ◊section['well-formedness-checker]{Well-Formedness Checker}
 
