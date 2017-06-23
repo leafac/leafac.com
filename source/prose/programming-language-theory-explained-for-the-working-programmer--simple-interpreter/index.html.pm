@@ -121,7 +121,7 @@ This listing has the same meaning as the previous program. First, it defines a v
 
 As a consequence of using ◊technical-term{quasiquote} and ◊technical-term{unquote} to build programs in our target language, it is not possible to write a whole class of syntax errors in our target language. For example, the program ◊code/inline{`(λ (x) x} has unbalanced parentheses, but our interpreter does not have to handle this case, because it is a syntax error in Racket itself. This would not be the case had we decided to represent programs in our target language as plain text files on disk, our parser would have to detect this issue.
 
-Nevertheless, there are many problematic programs that one can still write. For example, the program ◊code/inline{`(λ (x y) x)} is not syntactically valid in our target language, because it defines a function which receives two arguments (◊code/inline{x} and ◊code/inline{y}), and our target language only supports functions with a single argument. In the following section we implement a program to validate the well-formedness of programs in our target language before the interpreter can evaluate them.
+Nevertheless, there are many problematic programs that one can still write. For example, the program ◊code/inline{`(λ (x y) x)} is not syntactically valid in our target language, because it defines a function which receives two arguments (◊code/inline{x} and ◊code/inline{y}), and our target language only supports functions with a single argument. In the following section we implement a program to detect these classes of errors and validate the well-formedness of programs in our target language before the interpreter can evaluate them.
 
 ◊section['well-formedness-checker]{Well-Formedness Checker}
 
