@@ -1,12 +1,12 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
-         racket/function racket/list racket/file racket/dict racket/string
+         racket/function racket/list racket/file racket/dict racket/string file/sha1
          css-expr libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
 
 (provide (all-defined-out)
-         (all-from-out racket/function racket/list racket/file racket/dict racket/string
+         (all-from-out racket/function racket/list racket/file racket/dict racket/string file/sha1
                        gregor gregor/period sugar xml
                        pollen/core pollen/file
                        css-expr))
@@ -484,13 +484,27 @@
                    #:padding (apply calc (- ,size/indentation ,size/ruler/thin))]))
 
 (define-component (code/block/highlighted language . elements)
-  #:html ((default-tag-function 'div #:class "insertion")
-          (string->xexpr
-           (with-input-from-string (string-join elements "")
-             (λ ()
-               (with-output-to-string
-                   (λ ()
-                     (system (~a "pygmentize -f html -l " language)))))))))
+  #:html
+  (define code (string-join elements ""))
+  (define digest (sha1 (open-input-string code)))
+  (define path/basedir "compiled/code-block-highlighted/")
+  (define path/full (~a path/basedir digest ".html"))
+  (define code/highlighted
+    (cond
+      [(file-exists? path/full)
+       (file->string path/full)]
+      [else
+       (define code/highlighted
+         (with-input-from-string code
+           (λ ()
+             (with-output-to-string
+                 (λ ()
+                   (system (~a "pygmentize -f html -l " language)))))))
+       (make-directory* path/basedir)
+       (with-output-to-file path/full
+         (λ () (display code/highlighted)))
+       code/highlighted]))
+  ((default-tag-function 'div #:class "insertion") (string->xexpr code/highlighted)))
 
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
