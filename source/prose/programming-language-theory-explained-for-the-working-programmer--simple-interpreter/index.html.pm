@@ -125,18 +125,18 @@ Nevertheless, there are many problematic programs that one can still write. For 
 
 ◊section['well-formedness-checker]{Well-Formedness Checker}
 
-◊new-thought{Before we start} the implementation of our first interpreter, we address the issue of checking whether a program is well-formed. In this section, we introduce a well-formedness checker, which runs before the interpreter, so it does not have to account for error cases. Also, the well-formedness checker is illustrative of the techniques we will use to process programs in our language in later sections.
+◊new-thought{Before we start} the implementation of our first interpreter, we address the issue of checking whether a program is well-formed. In this section, we introduce a well-formedness checker, which runs before the interpreter, so it does not have to account for error cases. Also, the well-formedness checker is illustrative of the techniques we use to process programs in our language.
 
-The well-formedness checker has two responsibilities: (1) checker whether the program is syntactically valid; and (2) checker whether all variables are defined before they are used. The first is to reject programs which are not in the form defined by our target language. For example, ◊code/inline{(λ (a b) a)} is invalid because it is an anonymous function with two arguments, ◊code/inline{a} and ◊code/inline{b}, whereas our target language only allows functions with one argument. Another example of syntactically invalid program is ◊code/inline{(f a b)}, which is a call to function ◊code/inline{f} with arguments ◊code/inline{a} and ◊code/inline{b}; this is disallowed because functions only receive one argument.
+The well-formedness checker has two responsibilities: (1) checker whether the program is syntactically valid; and (2) checker whether all variables are defined before they are used. The first check rejects programs which are not in the forms defined by our target language. For example, ◊code/inline{(λ (a b) a)} is invalid because it is an anonymous function with two arguments (◊code/inline{a} and ◊code/inline{b}), whereas our target language only allows functions with one argument. Another example of syntactically invalid program is ◊code/inline{(f a b)}, which is a call to function ◊code/inline{f} with arguments ◊code/inline{a} and ◊code/inline{b}; this is disallowed because functions only receive one argument.
 
-The second responsibility of the well-formedness checker is to check whether all variables are defined before use. As mentioned on the ◊reference['language]{previous section}, the interpreters we will implement do not support these programs, which are said to be ◊technical-term{open}. With this knowledge, we are ready to implement the ◊code/inline{well-formed?} function, which is a well-formedness checker:
+The second responsibility of the well-formedness checker is to check whether all variables are defined before use. As mentioned on the ◊reference['language]{previous section}, the interpreter does not support these programs, which are said to be ◊technical-term{open}. With this knowledge, we are ready to implement the ◊code/inline{well-formed?} function:
 
 ◊code/block/highlighted['racket]{
 (define (well-formed? program)
   (and (syntactically-valid? program) (closed? program)))
 }
 
-This implementation is simplistic, because it receives a ◊code/inline{program} as input and just delegates to two auxiliary functions ◊code/inline{syntactically-valid?} and ◊code/inline{closed?} the responsibilities described above. For the rest of this section, we implement these two auxiliary functions.
+This implementation is simplistic, because it receives a ◊code/inline{program} as input and just delegates the responsibilities described above to two auxiliary functions ◊code/inline{syntactically-valid?} and ◊code/inline{closed?}. For the rest of this section, we implement these two auxiliary functions.
 
 ◊paragraph-separation[]
 
@@ -150,9 +150,9 @@ This implementation is simplistic, because it receives a ◊code/inline{program}
   )
 }
 
-This function receives as argument a ◊code/inline{program-fragment}, which is not necessarily a whole program. It makes sense to ask whether a smaller part of a bigger program is syntactically valid, for example, from the program ◊code/inline{(λ (a) (a a))}, we can ask whether ◊code/inline{(a a)} is syntactically valid—and it is.
+This function receives as argument a ◊code/inline{program-fragment}, which is not necessarily a whole program. It makes sense to ask whether a smaller part of a bigger program is syntactically valid, for example, from the program ◊code/inline{(λ (a) (a a))}, we can ask whether ◊code/inline{(a a)} is syntactically valid (it is).
 
-Let us first consider the simplest case, in which the ◊code/inline{program-fragment} is just a variable. For example, the ◊code/inline{program-fragment} ◊code/inline{x}. While this fragment on its own is not well-formed because it is open—◊code/inline{x} is used but not defined—it ◊emphasis{is} syntactically valid. To check for this, the function just has to check that the ◊code/inline{program-fragment} is a symbol which stands for a variable, as opposed to, for example, a number:
+Let us first consider the simplest case, in which the ◊code/inline{program-fragment} is just a variable, for example, the ◊code/inline{program-fragment} ◊code/inline{x}. This fragment on its own is syntactically valid, despite not being well-formed for being open (◊code/inline{x} is used but not defined). To check the syntactical validity, the function just has to check that the ◊code/inline{program-fragment} is a symbol which stands for a variable, as opposed to, for example, a number:
 
 ◊code/block/highlighted['racket]{
 (define (syntactically-valid? program-fragment)
@@ -167,6 +167,7 @@ This simple implementation is just calling Racket’s ◊code/inline{symbol?} fu
 > (syntactically-valid? 42)
 #f
 }
+
 ◊paragraph-separation[]
 
 ◊new-thought{The next form of} ◊code/inline{program-fragment}} we address in ◊code/inline{syntactically-valid?} is the anonymous function definition, for example:
@@ -175,7 +176,7 @@ This simple implementation is just calling Racket’s ◊code/inline{symbol?} fu
 (λ (x) (x x))
 }
 
-Before ◊code/inline{syntactically-valid?} even considers the syntactical validity of the anonymous function definition, it needs to detect that the given ◊code/inline{program-fragment} is of this kind—as opposed to variable references, which considered above, for example. To this end, we introduce ◊technical-term{pattern matching}. The simplest form of ◊technical-term{pattern matching} is the following:
+Though, before ◊code/inline{syntactically-valid?} even considers the syntactical validity of the anonymous function definition, it needs to detect that the given ◊code/inline{program-fragment} is of this kind—as opposed to, for example, a variable reference, which we considered above. To this end, we introduce ◊technical-term{pattern matching}. The simplest form of ◊technical-term{pattern matching} is the following:
 
 ◊margin-note{
  ◊technical-term{Pattern matching} is a generalization of ◊technical-term{destructuring assignment}. The following listing is an example of ◊technical-term{destructuring assignment} in languages including Ruby, Python and JavaScript:
@@ -195,7 +196,7 @@ name, age = ["Wheatley", 6]
 (match-define `(λ (,argument-name) ,body) `(λ (x) (x x)))
 }
 
-This form matches the program in our target language ◊code/inline{`(λ (x) (x x))} with the pattern ◊code/inline{`(λ (,argument-name) ,body)}. As a result, the variable ◊code/inline{argument-name} in Racket is bound to the variable name ◊code/inline{x} in our target language; and the Racket variable ◊code/inline{body} is bound to the program fragment ◊code/inline{(x x)}.
+This form matches the program in our target language ◊code/inline{`(λ (x) (x x))} with the pattern ◊code/inline{`(λ (,argument-name) ,body)}. As a result, the Racket variable ◊code/inline{argument-name} is bound to the variable name ◊code/inline{x} in our target language; and the Racket variable ◊code/inline{body} is bound to the program fragment ◊code/inline{(x x)}.
 
 In ◊code/inline{syntactically-valid?}, the data structure which is ◊technical-term{subject} of the ◊technical-term{pattern match} (◊code/inline{program-fragment}) might have different forms. Moreover, we want to perform different computations depending on the kind of ◊code/inline{program-fragment}. So the ◊code/inline{match-define} form does not suffice, we have to reach for the ◊code/inline{match} form. The following is an example of ◊code/inline{pattern matching} with the ◊code/inline{match} form:
 
@@ -205,9 +206,9 @@ In ◊code/inline{syntactically-valid?}, the data structure which is ◊technica
 
 The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} to each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the ◊technical-term{result} of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
 
-The example above demonstrates that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the given ◊code/inline{program-fragment} given to ◊code/inline{syntactically-valid?} falls. There are only three possibilities, which are the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
+The example above demonstrates that the ◊code/inline{match} form in Racket has two uses: (1) multiway branching; and (2) destructing data structures. Using it, we can detect in which case the ◊code/inline{program-fragment} given to ◊code/inline{syntactically-valid?} falls. There are only three possibilities, which are the three constructs in our language: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references.
 
-◊margin-note{Texts after the semicolon (◊code/inline{;}) are comments. The syntax ◊code/inline{#;} comments out the whole form ◊code/inline{[___]} that follows it. And ◊code/inline{___} stands for omitted code. This is necessary because a ◊technical-term{match clause} without a ◊technical-term{body} is not valid Racket syntax. We remove the ◊code/inline{#;} comment markers as we implement ◊code/inline{syntactically-valid?} for different kinds of ◊code/inline{program-fragment}s.}
+◊margin-note{The syntax ◊code/inline{#;} comments out the whole form ◊code/inline{[___]} that follows it, where ◊code/inline{___} stands for omitted code. This is necessary because a ◊technical-term{match clause} without a ◊technical-term{body} is not valid Racket syntax. We remove the ◊code/inline{#;} comment markers as we implement ◊code/inline{syntactically-valid?} for different kinds of ◊code/inline{program-fragment}s.}
 
 ◊code/block/highlighted['racket]{
 (define (syntactically-valid? program-fragment)
@@ -240,7 +241,7 @@ We already have an implementation for ◊code/inline{variable}s, so we can fill 
      (symbol? variable)]))
 }
 
-The ◊code/inline{syntactically-valid?} function is still working on the ◊code/inline{program-fragment}s consisting of ◊code/inline{variable}s, which we considered above:
+The ◊code/inline{syntactically-valid?} function is once again working on the ◊code/inline{program-fragment}s consisting of ◊code/inline{variable}s, which we considered above:
 
 ◊code/block/highlighted['racket]{
 > (syntactically-valid? `x)
@@ -278,7 +279,7 @@ To test our implementation, we use the syntactically valid anonymous function �
 
 ◊paragraph-separation[]
 
-◊new-thought{To complete the implementation} of ◊code/inline{syntactically-valid?}, we consider the case of function applications. The conditions for syntactical validity in this case is just that both ◊code/inline{function} and ◊code/inline{argument} are syntactically valid themselves, and we can use ◊code/inline{syntactically-valid?} recursively to check that:
+◊new-thought{To complete the implementation} of ◊code/inline{syntactically-valid?}, we consider the case of function applications. The condition for syntactical validity in this case is just that both ◊code/inline{function} and ◊code/inline{argument} are syntactically valid themselves, and we can use ◊code/inline{syntactically-valid?} recursively to check that:
 
 ◊code/block/highlighted['racket]{
 (define (syntactically-valid? program-fragment)
@@ -308,12 +309,14 @@ The implementation of ◊code/inline{syntactically-valid?} is complete. Let us t
 
 ◊new-thought{The implementation of the} ◊code/inline{closed?} function is simple because it delegates most of the work to an auxiliary function, a strategy similar to the one used in ◊code/inline{well-formed?}. Specifically, ◊code/inline{closed?} receives as argument a ◊code/inline{program} and calls ◊code/inline{free-variables} on it. This auxiliary function returns the set of free variables in the program, in other words, the set of variables which are used before they are defined. If this set is empty, then the program is closed:
 
+◊margin-note{Racket comes with ◊link["https://docs.racket-lang.org/reference/sets.html"]{functions for sets}, including ◊code/inline{set} to create them, ◊code/inline{set-empty?} to check their emptiness and so forth.}
+
 ◊code/block/highlighted['racket]{
 (define (closed? program)
   (set-empty? (free-variables program)))
 }
 
-Of course, now we have to implement ◊code/inline{free-variables}. It receives as argument a program fragment and returns the set of variables which are used before definition contained in it. We follow the technique we used to implement ◊code/inline{syntactically-valid?}, starting with the simplest program possible: ◊code/inline{x}. This program contains one free variable, ◊code/inline{x} itself. So ◊code/inline{free-variables} just has to return a set containing it:
+Of course, now we have to implement ◊code/inline{free-variables}. It receives as argument a program fragment and returns the set of variables used before definition in it. We follow the technique we used to implement ◊code/inline{syntactically-valid?}, starting with the simplest program possible: ◊code/inline{x}. This program contains only one free variable, ◊code/inline{x} itself. So ◊code/inline{free-variables} just has to return a set containing it:
 
 ◊code/block/highlighted['racket]{
 (define (free-variables program-fragment)
@@ -369,7 +372,7 @@ And, with this implementation, the ◊code/inline{variable} case is still workin
 
 Coming back to the case of function application, consider our example program ◊code/inline{(f a)}. The ◊code/inline{function} expression in this program is just a variable reference to ◊code/inline{f}, and the ◊code/inline{argument} is just a variable reference to ◊code/inline{a}. Both are free variables, so the set of free variables for the entire program is ◊code/inline{(set 'a 'f)}.
 
-In general, the ◊code/inline{free-variables} of a function application are those from the ◊code/inline{function} expression, ◊emphasis{plus} those from the ◊code/inline{argument} expression. We can call ◊code/inline{free-variables} recursively on the ◊code/inline{function} and ◊code/inline{argument} expressions and union the resulting sets:
+In general, the ◊code/inline{free-variables} of a function application are those from the ◊code/inline{function} expression, ◊emphasis{and} those from the ◊code/inline{argument} expression. We can call ◊code/inline{free-variables} recursively on the ◊code/inline{function} and ◊code/inline{argument} expressions and union the resulting sets:
 
 ◊code/block/highlighted['racket]{
 (define (free-variables program-fragment)
@@ -390,7 +393,7 @@ Let us test this implementation:
 (set 'a 'f)
 }
 
-Finally, we consider the case of anonymous function definitions. In the program ◊code/inline{(λ (x) y)}, the variable ◊code/inline{y} is free, but in the program ◊code/inline{(λ (x) x)} there are no free variables. The reason is the anonymous function definition ◊code/inline{(λ (x) ___)} is defining a variable named ◊code/inline{x}, so any occurrences of ◊code/inline{x} in the body ◊code/inline{___} is ◊technical-term{closed}.
+Finally, we consider the case of anonymous function definitions. In the program ◊code/inline{(λ (x) y)}, the variable ◊code/inline{y} is free, but in the program ◊code/inline{(λ (x) x)} there are no free variables. The reason is the anonymous function definition ◊code/inline{(λ (x) ___)} is defining a variable named ◊code/inline{x}, so any occurrence of ◊code/inline{x} in the body ◊code/inline{___} is ◊technical-term{closed}.
 
 In general, the set of free variables for an anonymous function definition is the set of free variables in its body ◊emphasis{minus} the variable it defines:
 
@@ -416,9 +419,9 @@ We can test this case with the examples mentioned above:
 
 ◊paragraph-separation[]
 
-◊new-thought{This completes the implementation} of ◊code/inline{free-variables} and, consequently, the implementations of ◊code/inline{closed?} and ◊code/inline{well-formed?} as well. Hereafter, all interpreters we define only work over programs which are valid with respect to the ◊code/inline{well-formed?} predicate.
+◊new-thought{This completes the implementation} of ◊code/inline{free-variables} and, consequently, the implementations of ◊code/inline{closed?} and ◊code/inline{well-formed?} as well. Hereafter, we only discuss interpretation of programs which are valid with respect to the ◊code/inline{well-formed?} predicate.
 
-More importantly, note the similarities between the implementations of ◊code/inline{syntactically-valid?} and ◊code/inline{free-variables}. Both these functions have to traverse the given ◊code/inline{program-fragment}, and they accomplish that using the same technique: first, ◊code/inline{match} on the given ◊code/inline{program-fragment} to detect which form it has; then, call the function recursively if it is necessary to traverse smaller ◊code/inline{program-fragment}s contained within the given ◊code/inline{program-fragment}. Abstractly, these functions which ◊technical-term{traverse} the given ◊code/inline{program-fragment} have the shape:
+More importantly, note the similarities between the implementations of ◊code/inline{syntactically-valid?} and ◊code/inline{free-variables}. Both of these functions have to traverse the given ◊code/inline{program-fragment}, and they accomplish it using the same technique: first, ◊code/inline{match} on the given ◊code/inline{program-fragment} to detect which form it has; then, call itself recursively if it is necessary to traverse smaller ◊code/inline{program-fragment}s contained within the given ◊code/inline{program-fragment}. Abstractly, these functions that ◊technical-term{traverse} the given ◊code/inline{program-fragment} have the shape:
 
 ◊code/block/highlighted['racket]{
 (define (traverse program-fragment)
@@ -431,11 +434,11 @@ More importantly, note the similarities between the implementations of ◊code/i
      ___]))
 }
 
-Our interpreters and auxiliary functions follow the ◊code/inline{traverse} pattern.
+Our interpreter and auxiliary functions will follow the ◊code/inline{traverse} pattern. We are ready to move to its implementation.
 
-◊section['first-interpreter]{First Interpreter}
+◊section['interpreter]{Interpreter}
 
-◊new-thought{Our first interpreter} is a function which receives as argument a ◊code/inline{program} and returns a value in our language. We start with the template for ◊technical-term{traversing} a ◊code/inline{program}, which we established in the ◊reference['first-interpreter]{previous section}:
+◊new-thought{Our interpreter} is a function which receives as argument a ◊code/inline{program} and returns a value in our language. We start with the template for ◊technical-term{traversing} a ◊code/inline{program}, which we established in the ◊reference['first-interpreter]{previous section}:
 
 ◊code/block/highlighted['racket]{
 (define (interpret program)

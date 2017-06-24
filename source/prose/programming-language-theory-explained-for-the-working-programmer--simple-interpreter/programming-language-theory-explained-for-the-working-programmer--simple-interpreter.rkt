@@ -334,7 +334,7 @@
 
 ;; ---------------------------------------------------------------------------------------------------
 
-;; WELL-FORMEDNESS CONDITION
+;; WELL-FORMEDNESS CHECKER
 
 (define (well-formed? program)
   (and (syntactically-valid? program) (closed? program)))
