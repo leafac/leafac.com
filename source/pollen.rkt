@@ -512,7 +512,7 @@
                    ,@font/small-caps]))
 
 (define-component full-width
-  #:html (default-tag-function 'div #:class "full-width")
+  #:html (default-tag-function 'div #:class "full-width insertion")
   #:css (css-expr [div.full-width
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
                     #:clear both
