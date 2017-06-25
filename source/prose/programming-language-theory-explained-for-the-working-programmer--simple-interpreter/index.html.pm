@@ -186,6 +186,8 @@ This simple implementation is just calling Racket’s ◊code/inline{symbol?} fu
 
 Though, before ◊code/inline{syntactically-valid?} even considers the syntactical validity of the anonymous function definition, it needs to detect that the given ◊code/inline{program-fragment} is of this kind—as opposed to, for example, a variable reference, which we considered above. To this end, we introduce ◊technical-term{pattern matching}. The simplest form of ◊technical-term{pattern matching} is the following:
 
+◊; TODO: Stopped here.
+
 ◊margin-note{
  ◊technical-term{Pattern matching} is a generalization of ◊technical-term{destructuring assignment}. The following listing is an example of ◊technical-term{destructuring assignment} in languages including Ruby, Python and JavaScript:
 
@@ -227,7 +229,7 @@ The example above demonstrates that the ◊code/inline{match} form in Racket has
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
-    #;[variable
+    #;[`,variable
        ; TODO: (3) Variable reference.
        ]))
 }
@@ -245,7 +247,7 @@ We already have an implementation for ◊code/inline{variable}s, so we can fill 
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
-    [variable
+    [`,variable
      (symbol? variable)]))
 }
 
@@ -272,7 +274,7 @@ For the first condition, we can use Racket’s ◊code/inline{symbol?} function,
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
-    [variable
+    [`,variable
      (symbol? variable)]))
 }
 
@@ -296,7 +298,7 @@ To test our implementation, we use the syntactically valid anonymous function �
      (and (symbol? argument-name) (syntactically-valid? body))]
     [`(,function ,argument)
      (and (syntactically-valid? function) (syntactically-valid? argument))]
-    [variable
+    [`,variable
      (symbol? variable)]))
 }
 
@@ -353,7 +355,7 @@ Next, we address the case of function application, for example ◊code/inline{(f
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
-    #;[variable
+    #;[`,variable
        ; TODO: (3) Variable reference.
        ]))
 }
@@ -369,7 +371,7 @@ Once again, we already have an implementation for the ◊code/inline{variable} c
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
-    [variable
+    [`,variable
      (set variable)]))
 }
 
@@ -392,7 +394,7 @@ In general, the ◊code/inline{free-variables} of a function application are tho
        ]
     [`(,function ,argument)
      (set-union (free-variables function) (free-variables argument))]
-    [variable
+    [`,variable
      (set variable)]))
 }
 
@@ -414,7 +416,7 @@ In general, the set of free variables for an anonymous function definition is th
      (set-remove (free-variables body) argument-name)]
     [`(,function ,argument)
      (set-union (free-variables function) (free-variables argument))]
-    [variable
+    [`,variable
      (set variable)]))
 }
 
@@ -442,7 +444,7 @@ More importantly, note the similarities between the implementations of ◊code/i
      ___ (traverse body) ___]
     [`(,function ,argument)
      ___ (traverse function) ___ (traverse argument) ___]
-    [variable
+    [`,variable
      ___]))
 }
 
@@ -461,7 +463,7 @@ Our interpreter and auxiliary functions will follow the ◊code/inline{traverse}
     #;[`(,function ,argument)
        ; TODO: (2) Function application.
        ]
-    #;[variable
+    #;[`,variable
        ; TODO: (3) Variable reference.
        ]))
 }
@@ -537,7 +539,7 @@ The ◊code/inline{substitute} auxiliary function receives as argument a functio
     #;[`(,function ,other-argument)
        ; TODO: (2) Function application.
        ]
-    #;[variable
+    #;[`,variable
        ; TODO: (3) Variable reference.
        ]))
 }
@@ -553,7 +555,7 @@ In our running example, the call to ◊code/inline{substitute} has the following
     #;[`(,function ,other-argument)
        ; TODO: (2) Function application.
        ]
-    [variable
+    [`,variable
      argument]))
 }
 
@@ -584,7 +586,7 @@ To fix this, we check if the ◊code/inline{variable} we found in the ◊code/in
     #;[`(,function ,other-argument)
        ; TODO: (2) Function application.
        ]
-    [variable
+    [`,variable
      (if (equal? argument-name variable) argument variable)]))
 }
 
@@ -605,7 +607,7 @@ For the rest of its implementation, ◊code/inline{substitute} just calls itself
     [`(,function ,other-argument)
      `(,(substitute function argument-name argument)
        ,(substitute other-argument argument-name argument))]
-    [variable
+    [`,variable
      (if (equal? argument-name variable) argument variable)]))
 }
 
@@ -762,7 +764,7 @@ The ◊code/inline{x} in the body of the function ◊code/inline{(λ (x) x)} ref
     [`(,function ,other-argument)
      `(,(substitute function argument-name argument)
        ,(substitute other-argument argument-name argument))]
-    [variable
+    [`,variable
      (if (equal? argument-name variable) argument variable)]))
 }
 

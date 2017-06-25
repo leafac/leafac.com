@@ -376,7 +376,7 @@
      (and (symbol? argument-name) (syntactically-valid? body))]
     [`(,function ,argument)
      (and (syntactically-valid? function) (syntactically-valid? argument))]
-    [variable
+    [`,variable
      (symbol? variable)]))
 
 (module+ test
@@ -430,7 +430,7 @@
      (set-remove (free-variables body) argument-name)]
     [`(,function ,argument)
      (set-union (free-variables function) (free-variables argument))]
-    [variable
+    [`,variable
      (set variable)]))
 
 (module+ test
@@ -485,7 +485,7 @@
     [`(,function ,other-argument)
      `(,(substitute function argument-name argument)
        ,(substitute other-argument argument-name argument))]
-    [variable
+    [`,variable
      (if (equal? argument-name variable) argument variable)]))
 
 (module+ test

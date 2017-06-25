@@ -387,7 +387,7 @@
       [`(,function ,other-argument)
        `(,(substitute function argument-name argument)
          ,(substitute other-argument argument-name argument))]
-      [variable
+      [`,variable
        (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
@@ -441,7 +441,7 @@
             (state reduced-expression new-environment)]
            [`(restore ,value ,previous-environment)
             (state value previous-environment)]
-           [variable
+           [`,variable
             (define reduced-expression (lookup variable current-state))
             (state reduced-expression environment)]))
        (define new-program (fill-hole reduced-expression context))
@@ -475,7 +475,7 @@
       [`(restore ,body ,previous-environment)
        (define-values (reduction-expression context) (split-program body))
        (values reduction-expression `(restore ,context ,previous-environment))]
-      [variable
+      [`,variable
        (values program-fragment `(hole))]))
 
   (define (fill-hole program-fragment context)
@@ -513,7 +513,7 @@
       [`(,function ,other-argument)
        `(,(substitute function argument-name argument)
          ,(substitute other-argument argument-name argument))]
-      [variable
+      [`,variable
        (if (equal? argument-name variable) argument variable)]))
 
   ;; ‘free-variables’ is the same as for the well-formedness condition.
@@ -524,7 +524,7 @@
        (set-remove (free-variables body) argument-name)]
       [`(,function ,argument)
        (set-union (free-variables function) (free-variables argument))]
-      [variable
+      [`,variable
        (set variable)]))
 
   (module+ test
@@ -582,7 +582,7 @@
             (state reduced-expression new-binding-environment new-value-environment new-time)]
            [`(restore ,value ,previous-binding-environment)
             (state value previous-binding-environment value-environment time)]
-           [variable
+           [`,variable
             (define reduced-expression (lookup variable current-state))
             (state reduced-expression binding-environment value-environment time)]))
        (define new-program (fill-hole reduced-expression context))
@@ -636,7 +636,7 @@
          (split-program body))
        (values reduction-expression
                `(restore ,context ,previous-binding-environment))]
-      [variable
+      [`,variable
        (values program-fragment `(hole))]))
 
   ;; ‘fill-hole’ is the same as for the environment-based interpreter, except for variable names.
@@ -680,7 +680,7 @@
       [`(,function ,argument)
        (set-union (free-variables function)
                   (free-variables argument))]
-      [variable
+      [`,variable
        (set variable)]))
 
   ;; ‘substitute’ is the same as for the big-step interpreter.
@@ -694,7 +694,7 @@
       [`(,function ,other-argument)
        `(,(substitute function argument-name argument)
          ,(substitute other-argument argument-name argument))]
-      [variable
+      [`,variable
        (if (equal? argument-name variable) argument variable)]))
 
   (module+ test
