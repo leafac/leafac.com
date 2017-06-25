@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Simple Interpreter}
-◊define-meta[date]{2017-06-20}
+◊define-meta[date]{2017-06-25}
 
 ◊margin-note{This article assumes knowledge of the ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -957,10 +957,14 @@ The output is what we expected, ◊code/inline{15}. Our interpreter is fully fun
 
 ◊new-thought{But this interpreter is not revealing} all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation. Furthermore, if given a ◊code/inline{program} which does not terminate, then ◊code/inline{interpret} itself does not terminate, and there is no way to inspect the computations that are happening during interpretation.
 
-The next section addresses these aspects, making our interpreter more transparent and revealing more interesting facets of interpretation.
+We will address these aspects of interpretation in subsequent articles, making our interpreter more transparent and revealing more interesting facets of computation.
 
-◊; TODO: References.
-◊; - SEwPR.
-◊; - SICP.
-◊; - PL book.
-◊; - Lambda papers.
+◊section['conclusion]{Conclusion}
+
+◊new-thought{We start with} a fundamental question: How do interpreters evaluate programs to values? The find an answer, we implemented a simple interpreter for a simple language. Despite the lack of features, this is machinery capable of general computation; adding support for numbers, data structures, more control-flow constructs and so forth would be a matter of convenience for humans, not enhancing the fundamental computational power. In the process of writing our interpreter, we used ◊technical-term{pattern matching} and devised a template for traversing hierarchical data structures. Finally, we observed the limitations of the interpreter we implemented; there are a few interesting aspects of evaluation that it conceals for relying on the host language (Racket). We will address these issues by modifying our interpreter in subsequent articles.
+
+◊section['references]{References}
+
+◊margin-note{For more on ◊acronym{PLT} Redex, read ◊link/internal["/prose/playing-the-game-with-plt-redex/"]{◊publication{Playing the Game with PLT Redex}}.}
+
+◊new-thought{The approach to} writing an interpret followed by this article is inspired by ◊link["https://mitpress.mit.edu/sicp/full-text/book/book.html"]{◊publication{Structure and Interpretation of Computer Programs}}, the classic textbook. We follow a more modern approach based on pattern matching, which comes from interacting with ◊link["https://redex.racket-lang.org/"]{◊acronym{PLT} Redex} and reading ◊link["https://mitpress.mit.edu/books/semantics-engineering-plt-redex"]{◊publication{Semantics Engineering with PLT Redex}}. A great source for learning about interpretation in depth is the ◊link["http://library.readscheme.org/page1.html"]{Lambda Papers}. People interested in reading more recent research papers need to understand the formal notation, for which the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{◊publication{Principles of Programming Languages}} is a gentle introduction (disclaimer, the author is my advisor).
