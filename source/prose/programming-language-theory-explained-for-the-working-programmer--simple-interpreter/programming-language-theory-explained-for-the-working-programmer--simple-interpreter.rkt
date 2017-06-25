@@ -7,15 +7,23 @@
 (module+ test
   (require rackunit))
 
+(define open `x)
+(define invalid-function-definition `(λ (a b) a))
+(define invalid-function-application `(λ (a) (a a a)))
 (define minimal-program `(λ (x) x))
 (define minimal-program/result `(λ (x) x))
 (define minimal-application `((λ (x) x) (λ (y) y)))
 (define minimal-application/result `(λ (y) y))
+(define function-is-application `(((λ (x) x) (λ (y) y)) (λ (z) z)))
+(define function-is-application/result `(λ (z) z))
+(define argument-is-application `((λ (x) x) ((λ (y) y) (λ (z) z))))
+(define argument-is-application/result `(λ (z) z))
+(define multiple-steps `((λ (i) ((λ (x) x) (λ (y) y))) (λ (z) z)))
+(define multiple-steps/result `(λ (y) y))
 (define non-shadowing-variable-name-reuse `((λ (x) x) (λ (x) x)))
 (define non-shadowing-variable-name-reuse/result `(λ (x) x))
 (define shadowing `(((λ (x) (λ (x) x)) (λ (y) y)) (λ (z) z)))
 (define shadowing/result `(λ (z) z))
-(define open `x)
 (define sum-up-to
   `((λ (number)
       (((λ (sum-up-to/rest)
@@ -340,15 +348,25 @@
   (and (syntactically-valid? program) (closed? program)))
 
 (module+ test
+  (check-false (well-formed? open))
+
+  (check-false (well-formed? invalid-function-definition))
+
+  (check-false (well-formed? invalid-function-application))
+
   (check-true (well-formed? minimal-program))
 
   (check-true (well-formed? minimal-application))
 
+  (check-true (well-formed? function-is-application))
+
+  (check-true (well-formed? argument-is-application))
+
+  (check-true (well-formed? multiple-steps))
+
   (check-true (well-formed? non-shadowing-variable-name-reuse))
 
   (check-true (well-formed? shadowing))
-
-  (check-false (well-formed? open))
 
   (check-true (well-formed? sum-up-to)))
 
@@ -362,35 +380,47 @@
      (symbol? variable)]))
 
 (module+ test
+  (check-true (syntactically-valid? open))
+
+  (check-false (syntactically-valid? invalid-function-definition))
+
+  (check-false (syntactically-valid? invalid-function-application))
+
   (check-true (syntactically-valid? minimal-program))
 
   (check-true (syntactically-valid? minimal-application))
+
+  (check-true (syntactically-valid? function-is-application))
+
+  (check-true (syntactically-valid? argument-is-application))
+
+  (check-true (syntactically-valid? multiple-steps))
 
   (check-true (syntactically-valid? non-shadowing-variable-name-reuse))
 
   (check-true (syntactically-valid? shadowing))
 
-  (check-true (syntactically-valid? open))
-
-  (check-true (syntactically-valid? sum-up-to))
-
-  (check-false (syntactically-valid? `(λ (a b) a)))
-
-  (check-false (syntactically-valid? `(λ (a) (a a a)))))
+  (check-true (syntactically-valid? sum-up-to)))
 
 (define (closed? program)
   (set-empty? (free-variables program)))
 
 (module+ test
+  (check-false (closed? open))
+
   (check-true (closed? minimal-program))
 
   (check-true (closed? minimal-application))
 
+  (check-true (closed? function-is-application))
+
+  (check-true (closed? argument-is-application))
+
+  (check-true (closed? multiple-steps))
+
   (check-true (closed? non-shadowing-variable-name-reuse))
 
   (check-true (closed? shadowing))
-
-  (check-false (closed? open))
 
   (check-true (closed? sum-up-to)))
 
@@ -404,10 +434,22 @@
      (set variable)]))
 
 (module+ test
+  (check-equal? (free-variables open)
+                (set 'x))
+
   (check-equal? (free-variables minimal-program)
                 (set))
 
   (check-equal? (free-variables minimal-application)
+                (set))
+
+  (check-equal? (free-variables function-is-application)
+                (set))
+
+  (check-equal? (free-variables argument-is-application)
+                (set))
+
+  (check-equal? (free-variables multiple-steps)
                 (set))
 
   (check-equal? (free-variables non-shadowing-variable-name-reuse)
@@ -415,9 +457,6 @@
 
   (check-equal? (free-variables shadowing)
                 (set))
-
-  (check-equal? (free-variables open)
-                (set 'x))
 
   (check-equal? (free-variables sum-up-to)
                 (set)))
@@ -455,6 +494,15 @@
 
   (check-equal? (interpret minimal-application)
                 minimal-application/result)
+
+  (check-equal? (interpret function-is-application)
+                function-is-application/result)
+
+  (check-equal? (interpret argument-is-application)
+                argument-is-application/result)
+
+  (check-equal? (interpret multiple-steps)
+                multiple-steps/result)
 
   (check-equal? (interpret non-shadowing-variable-name-reuse)
                 non-shadowing-variable-name-reuse/result)
