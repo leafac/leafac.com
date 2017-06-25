@@ -7,7 +7,7 @@
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter/programming-language-theory-explained-for-the-working-programmer--simple-interpreter.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{Interpreters are programs} for running programs. They receive as input a program, evaluate it, and output the results. How does this process work? In this article we start to address this question by writing a simple interpreter. The goal is to explore the underlying principles of computing to understand how programming languages support ◊emphasis{communication}, which is their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. In subsequent articles we will explore the question further, developing variants of the simple interpreter from this article. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
+◊new-thought{Interpreters are programs} for running programs. They receive as input a program, evaluate it, and output the results. How does this process work? In this article we start to address this question by writing a simple interpreter. The goal is to explore the underlying principles of computation to understand how programming languages support ◊emphasis{communication}, which is their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but, in the process, we introduce ideas and techniques that are generally applicable to everyday problem solving. In subsequent articles we will explore the question further, developing variants of the simple interpreter from this article. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
 
 ◊section['language]{Language}
 
@@ -109,6 +109,8 @@ The snippet above is a Racket program which defines a program in our target lang
 
 ◊margin-note{Unquoting is similar to string interpolation in other languages, for example, Ruby. But on data structures, as opposed to strings.}
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Bring the problem domain into the language. For example, instead of separate plain-text configuration files, use the host programming language. Tools of the Ruby ecosystem excel at this, the main way to interact and configure them is usually through Ruby code. The result are programs which compose better, in ways not anticipated by the designers.}
+
 Besides the convenient and terse notation, another advantage of using ◊technical-term{quasiquoting} to represent programs in our target language is that we can use Racket programs to build programs in our target language. For this, we use ◊technical-term{unquoting} (◊code/inline{,}), which interpolates Racket expressions in parts of the data structure. For example, consider the following rewrite of the program above:
 
 ◊code/block/highlighted['racket]{
@@ -125,11 +127,15 @@ Nevertheless, there are many problematic programs that one can still write. For 
 
 ◊section['well-formedness-checker]{Well-Formedness Checker}
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Separate the checking of exceptional cases from the computation. Program confidently, instead of defensively.}
+
 ◊new-thought{Before we start} the implementation of our first interpreter, we address the issue of checking whether a program is well-formed. In this section, we introduce a well-formedness checker, which runs before the interpreter, so it does not have to account for error cases. Also, the well-formedness checker is illustrative of the techniques we use to process programs in our language.
 
 The well-formedness checker has two responsibilities: (1) checker whether the program is syntactically valid; and (2) checker whether all variables are defined before they are used. The first check rejects programs which are not in the forms defined by our target language. For example, ◊code/inline{(λ (a b) a)} is invalid because it is an anonymous function with two arguments (◊code/inline{a} and ◊code/inline{b}), whereas our target language only allows functions with one argument. Another example of syntactically invalid program is ◊code/inline{(f a b)}, which is a call to function ◊code/inline{f} with arguments ◊code/inline{a} and ◊code/inline{b}; this is disallowed because functions only receive one argument.
 
 The second responsibility of the well-formedness checker is to check whether all variables are defined before use. As mentioned on the ◊reference['language]{previous section}, the interpreter does not support these programs, which are said to be ◊technical-term{open}. With this knowledge, we are ready to implement the ◊code/inline{well-formed?} function:
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: When an abstraction is evident, delegate to auxiliary functions instead of mixing responsibilities. In ◊code/inline{well-formed?}, it is better to delegate to ◊code/inline{syntactically-valid?} and ◊code/inline{closed?} than to implement their functionalities directly. In general, give names to concepts whenever those names make sense.}
 
 ◊code/block/highlighted['racket]{
 (define (well-formed? program)
@@ -151,6 +157,8 @@ This implementation is simplistic, because it receives a ◊code/inline{program}
 }
 
 This function receives as argument a ◊code/inline{program-fragment}, which is not necessarily a whole program. It makes sense to ask whether a smaller part of a bigger program is syntactically valid, for example, from the program ◊code/inline{(λ (a) (a a))}, we can ask whether ◊code/inline{(a a)} is syntactically valid (it is).
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: Start with the simplest, trivial cases.}
 
 Let us first consider the simplest case, in which the ◊code/inline{program-fragment} is just a variable, for example, the ◊code/inline{program-fragment} ◊code/inline{x}. This fragment on its own is syntactically valid, despite not being well-formed for being open (◊code/inline{x} is used but not defined). To check the syntactical validity, the function just has to check that the ◊code/inline{program-fragment} is a symbol which stands for a variable, as opposed to, for example, a number:
 
@@ -311,6 +319,8 @@ The implementation of ◊code/inline{syntactically-valid?} is complete. Let us t
 
 ◊margin-note{Racket comes with ◊link["https://docs.racket-lang.org/reference/sets.html"]{functions for sets}, including ◊code/inline{set} to create them, ◊code/inline{set-empty?} to check their emptiness and so forth.}
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Appreciate the difference between data structures and their purposes. A list would work as well as a set for representing ◊code/inline{free-variables}, but a set is conceptually more meaningful.}
+
 ◊code/block/highlighted['racket]{
 (define (closed? program)
   (set-empty? (free-variables program)))
@@ -423,6 +433,8 @@ We can test this case with the examples mentioned above:
 
 More importantly, note the similarities between the implementations of ◊code/inline{syntactically-valid?} and ◊code/inline{free-variables}. Both of these functions have to traverse the given ◊code/inline{program-fragment}, and they accomplish it using the same technique: first, ◊code/inline{match} on the given ◊code/inline{program-fragment} to detect which form it has; then, call itself recursively if it is necessary to traverse smaller ◊code/inline{program-fragment}s contained within the given ◊code/inline{program-fragment}. Abstractly, these functions that ◊technical-term{traverse} the given ◊code/inline{program-fragment} have the shape:
 
+◊margin-note{◊emphasis{Everyday programming takeaway}: Resist the temptation of over-abstracting code. While the ◊code/inline{traverse} template occurs repeatedly, it is better to copy and paste this template than to write an abstraction for it (a function, a macro and so forth). The result is more readable and flexible code. The cost of an abstraction would only be worth if we had ◊emphasis{a lot} of traversal functions.}
+
 ◊code/block/highlighted['racket]{
 (define (traverse program-fragment)
   (match program-fragment
@@ -455,6 +467,8 @@ Our interpreter and auxiliary functions will follow the ◊code/inline{traverse}
 }
 
 Let us first consider case (3), in which the ◊code/inline{program} is a ◊code/inline{variable}, for example, ◊code/inline{x}. In this case, the program is ◊technical-term{open}, and is not well-formed. Our interpreter does not need to handle programs which are not well-formed, they have already been discarded by the ◊code/inline{well-formed?} checker. So we can completely eliminate this case:
+
+◊margin-note{◊emphasis{Everyday programming takeaway}: Program confidently, instead of defensively. In a real-world scenario, ◊code/inline{interpret}’s inputs would be guarded by ◊code/inline{well-formed?} via, for example, a ◊link["https://docs.racket-lang.org/guide/contracts.html"]{contract}, so it does not have to handle error cases. This simplifies the implementation.}
 
 ◊code/block/highlighted['racket]{
 (define (interpret program)
