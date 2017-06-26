@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Simple Interpreter}
-◊define-meta[date]{2017-06-25}
+◊define-meta[date]{2017-06-26}
 
 ◊margin-note{This article assumes knowledge of the ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
@@ -319,7 +319,7 @@ The implementation of ◊code/inline{syntactically-valid?} is complete. Let us t
 
 ◊paragraph-separation[]
 
-◊new-thought{The implementation of the} ◊code/inline{closed?} function is simple because it delegates most of the work to an auxiliary function, a strategy similar to the one used in ◊code/inline{well-formed?}. Specifically, ◊code/inline{closed?} receives as argument a ◊code/inline{program} and calls ◊code/inline{free-variables} on it. This auxiliary function returns the set of free variables in the program, in other words, the set of variables which are used before definition. If this set is empty, then the program is closed:
+◊new-thought{The implementation of the} ◊code/inline{closed?} function is simple because it delegates most of the work to an auxiliary function, a strategy similar to the one used in ◊code/inline{well-formed?}. Specifically, ◊code/inline{closed?} receives a ◊code/inline{program} as argument and calls ◊code/inline{free-variables} on it. This auxiliary function returns the set of free variables in the program, in other words, the set of variables which are used before definition. If this set is empty, then the program is closed:
 
 ◊margin-note{Racket comes with ◊link["https://docs.racket-lang.org/reference/sets.html"]{functions for sets}, including ◊code/inline{set} to create them, ◊code/inline{set-empty?} to check their emptiness and so forth.}
 
@@ -330,7 +330,7 @@ The implementation of ◊code/inline{syntactically-valid?} is complete. Let us t
   (set-empty? (free-variables program)))
 }
 
-Of course, now we have to implement ◊code/inline{free-variables}. It receives as argument a program fragment and returns the set of variables used before definition in it. We follow the technique we used to implement ◊code/inline{syntactically-valid?}, starting with the simplest program possible: ◊code/inline{x}. This program contains only one free variable, ◊code/inline{x} itself. So ◊code/inline{free-variables} just has to return a set containing it:
+Of course, now we have to implement ◊code/inline{free-variables}. It receives a program fragment as argument and returns the set of variables used before definition it contains. We follow the technique we used to implement ◊code/inline{syntactically-valid?}, starting with the simplest program possible: ◊code/inline{x}. This program contains only one free variable, ◊code/inline{x} itself. So ◊code/inline{free-variables} just has to return a set containing it:
 
 ◊code/block/highlighted['racket]{
 (define (free-variables program-fragment)
@@ -346,7 +346,7 @@ We can test ◊code/inline{free-variables} with the simple program considered th
 (set 'x)
 }
 
-Next, we address the case of function application, for example ◊code/inline{(f a)}. We face the same issue as before, when implementing ◊code/inline{syntactically-valid?}: we need to distinguish between the different forms of ◊code/inline{program-fragment}s. The solution is the same, pattern matching with the ◊code/inline{match} form:
+Next, we address the case of function application, for example ◊code/inline{(f a)}. We face the same issue as before, when implementing ◊code/inline{syntactically-valid?}: we need to distinguish between the different forms of ◊code/inline{program-fragment}s. The solution is the same, ◊technical-term{pattern matching} with the ◊code/inline{match} form:
 
 ◊code/block/highlighted['racket]{
 (define (free-variables program-fragment)
@@ -413,7 +413,8 @@ Finally, we consider the case of anonymous function definitions. In the program 
 
 In general, the set of free variables for an anonymous function definition is the set of free variables in its body ◊emphasis{minus} the variable it defines:
 
-◊code/block/highlighted['racket]{
+◊full-width{
+ ◊code/block/highlighted['racket]{
 (define (free-variables program-fragment)
   (match program-fragment
     [`(λ (,argument-name) ,body)
@@ -422,6 +423,7 @@ In general, the set of free variables for an anonymous function definition is th
      (set-union (free-variables function) (free-variables argument))]
     [`,variable
      (set variable)]))
+ }
 }
 
 We can test this case with the examples mentioned above:
@@ -437,7 +439,7 @@ We can test this case with the examples mentioned above:
 
 ◊new-thought{This completes the implementation} of ◊code/inline{free-variables} and, consequently, the implementations of ◊code/inline{closed?} and ◊code/inline{well-formed?} as well. Hereafter, we only discuss interpretation of programs which are valid with respect to the ◊code/inline{well-formed?} predicate.
 
-More importantly, note the similarities between the implementations of ◊code/inline{syntactically-valid?} and ◊code/inline{free-variables}. Both of these functions have to traverse the given ◊code/inline{program-fragment}, and they accomplish it using the same technique: first, ◊code/inline{match} on the given ◊code/inline{program-fragment} to detect of which form it is; then, call itself recursively if it is necessary to traverse smaller ◊code/inline{program-fragment}s contained within the given ◊code/inline{program-fragment}. Abstractly, these functions that ◊technical-term{traverse} the given ◊code/inline{program-fragment} have the shape:
+More importantly, note the similarities between the implementations of ◊code/inline{syntactically-valid?} and ◊code/inline{free-variables}. Both of these functions have to traverse the given ◊code/inline{program-fragment}, and they accomplish it using the same technique: first, ◊code/inline{match} on the given ◊code/inline{program-fragment} to detect its form; then, call the function recursively if it is necessary to traverse smaller ◊code/inline{program-fragment}s contained within the given ◊code/inline{program-fragment}. Abstractly, these functions that ◊technical-term{traverse} the given ◊code/inline{program-fragment} have the shape:
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: Resist the temptation of over-abstracting code. While the ◊code/inline{traverse} template occurs repeatedly, it is better to copy and paste this template than to write an abstraction for it (a function, a macro and so forth). The result is more readable and flexible code. The cost of an abstraction would only be worth if we had ◊emphasis{a lot} of traversal functions.}
 
@@ -506,7 +508,9 @@ This implementation is enough to interpret our first valid example program corre
 '(λ (x) x)
 }
 
-The final case is function application. The following is an example of function application in our language:
+◊paragraph-separation[]
+
+◊new-thought{The final case} is function application. The following is an example of function application in our language:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y)) ;; => (λ (y) y)
@@ -532,7 +536,7 @@ Then, we can call an auxiliary function to perform the substitution:
      (substitute body argument-name argument)]))
 }
 
-The ◊code/inline{substitute} auxiliary function receives as argument a function ◊code/inline{body} and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement it, we use the same ◊technical-term{traversal} template:
+The ◊code/inline{substitute} auxiliary function receives a function ◊code/inline{body} as argument and returns a modified version of it in which each occurrence of the given ◊code/inline{argument-name} has been substituted with the given ◊code/inline{argument}. To implement it, we use the same ◊technical-term{traversal} template:
 
 ◊code/block/highlighted['racket]{
 (define (substitute body argument-name argument)
@@ -619,7 +623,7 @@ For the rest of its implementation, ◊code/inline{substitute} just calls itself
  }
 }
 
-The following listing includes examples of uses of ◊code/inline{substitute}. These examples require traversing the ◊code/inline{body} with the recursive calls to ◊code/inline{substitute} we implemented above, because the ◊code/inline{argument-name} ◊code/inline{x} occurs deeper in the ◊code/inline{body}. In the first example, it occurs inside an anonymous function definitions; and, in the second example, it occurs inside a function application:
+The following listing includes examples of uses of ◊code/inline{substitute}. These examples require traversing the ◊code/inline{body} with the recursive calls to ◊code/inline{substitute} we implemented above, because the ◊code/inline{argument-name} ◊code/inline{x} occurs deeper in the ◊code/inline{body}. In the first example, it occurs inside an anonymous function definition; and, in the second example, it occurs inside a function application:
 
 ◊code/block/highlighted['racket]{
 > (substitute `(λ (z) x) `x `(λ (y) y))
@@ -695,7 +699,7 @@ Our interpreter now works for the given example:
 ((λ (i) ((λ (x) x) (λ (y) y))) (λ (z) z)) ;; => (λ (y) y)
 }
 
-◊margin-note{The transformation of wrapping a program with a function which ignores its argument and is immediately applied to a throwaway argument always preserves the meaning of the original program. This process is called ◊technical-term{η-conversion}. More specifically, it is an ◊technical-term{η-abstraction}, as opposed to an ◊technical-term{η-reduction}, which is going in the opposite direction—removing the wrapping function and the throwaway argument.}
+◊margin-note{The transformation of wrapping a program with a function which ignores its argument and is immediately applied to a throwaway argument always preserves the meaning of the original program. This process is called ◊technical-term{η-conversion}. More specifically, it is an ◊technical-term{η-abstraction}, as opposed to an ◊technical-term{η-reduction}, which is going in the opposite direction; removing the wrapping function and the throwaway argument.}
 
 This program is similar to our first example of function application ◊code/inline{((λ (x) x) (λ (y) y))}. The difference is that it has been wrapped in a function which ignores its argument ◊code/inline{i}. This function is immediately applied to the throwaway argument ◊code/inline{(λ (z) z)}.
 
@@ -742,6 +746,8 @@ Now ◊code/inline{interpret} works correctly for the running example:
 }
 
 Our interpreter already handles this program correctly. But it does not work for the second case, in which the reused variable name occurs in a nested function. Consider the following program:
+
+◊margin-note{The arrows above the program represent variable bindings; the arrows below the program represent data flow.}
 
 ◊figure{◊svg{shadowing-interpretation.svg}}
 
