@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{Programming-Language Theory Explained for the Working Programmer: Simple Interpreter}
+ ◊link[#:href ◊absolute-url["/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter"]]
+ ◊id{urn:uuid:0c23c7e2-f714-4a1e-a390-3a719fd7287a}
+ ◊updated{2017-06-26T07:06:08-04:00}
+ ◊summary{I published an article about interpretation. The discussion is driven by working code and should be approachable to all programmers.}
+}
+
+◊entry{
  ◊title{Agora há Algo a Temer}
  ◊link[#:href ◊absolute-url["/music/agora-ha-algo-a-temer"]]
  ◊id{urn:uuid:485e4b8f-f191-4f6b-afeb-0434287560b9}
