@@ -9,5 +9,7 @@ compiled/
 /source/**/*.html
 /source/**/*.css
 /source/**/*.atom
-!/source/vendor/**
+!/source/vendor/**/*.html
+!/source/vendor/**/*.css
+!/source/vendor/**/*.atom
 pollen-cache/
