@@ -90,7 +90,15 @@
     (background-highlight . ,(dict-ref solarized 'base2))
     (secondary-content    . ,(dict-ref solarized 'base1))
     (primary-content      . ,(dict-ref solarized 'base00))
-    (emphasized-content   . ,(dict-ref solarized 'base01))))
+    (emphasized-content   . ,(dict-ref solarized 'base01))
+    (yellow               . ,(dict-ref solarized 'yellow))
+    (orange               . ,(dict-ref solarized 'orange))
+    (red                  . ,(dict-ref solarized 'red))
+    (magenta              . ,(dict-ref solarized 'magenta))
+    (violet               . ,(dict-ref solarized 'violet))
+    (blue                 . ,(dict-ref solarized 'blue))
+    (cyan                 . ,(dict-ref solarized 'cyan))
+    (green                . ,(dict-ref solarized 'green))))
 
 ;; FONTS ---------------------------------------------------------------------------------------------
 
@@ -746,13 +754,13 @@
                    #:border-left ((rem ,(modular-scale -5)) solid)]
                   [.beginner::before
                    #:height .3em
-                   #:border-left-color ,(dict-ref solarized 'red)]
+                   #:border-left-color ,(dict-ref colorscheme 'red)]
                   [.intermediate::before
                    #:height .6em
-                   #:border-left-color ,(dict-ref solarized 'yellow)]
+                   #:border-left-color ,(dict-ref colorscheme 'yellow)]
                   [.advanced::before
                    #:height .9em
-                   #:border-left-color ,(dict-ref solarized 'green)]))
+                   #:border-left-color ,(dict-ref colorscheme 'green)]))
 
 (define-component certification #:html (default-tag-function 'div #:class "big-separation"))
 
@@ -817,3 +825,11 @@
 
 (define-component (lyrics . elements)
   #:html (full-width (apply code/block elements)))
+
+(define-component git/verb
+  #:html (default-tag-function 'span #:class "git--verb")
+  #:css (css-expr [.git--verb #:color ,(dict-ref colorscheme 'blue)]))
+
+(define-component git/object
+  #:html (default-tag-function 'span #:class "git--object")
+  #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))

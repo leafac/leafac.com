@@ -49,4 +49,18 @@ For the rest of this article, we cover the most common use cases for Git, organi
 
 ◊; TODO: Fix the reference in the paragraph above.
 
+◊section['an-aside-about-git-commands]{An Aside About Git Commands}
+
+◊new-thought{Git provides} many distinct operations under the ◊code/inline{git} executable, which is called in a way that resembles natural language, for example:
+
+◊figure{◊svg{grammar.svg}}
+
+In general, Git commands follow the pattern:
+
+◊margin-note{By convention, command lines are prefixed with ◊code/inline{$} and comments with ◊code/inline{#}.}
+
+◊code/block{
+$ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
+}
+
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
