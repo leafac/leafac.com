@@ -16,7 +16,7 @@
 ◊margin-note{
  The author uses Git in almost everything he does on the computer: from keeping ◊link/internal["/cooking"]{vegan recipes} to the preparation of this article. The person below does not.
 
- ◊; TODO: «Image of filesystem with copied files and poop.»
+ ◊; TODO: «Filesystem with copied files and poop.»
 }
 
 Most companies use some version control system, among which Git is the most popular. Also, most free-software projects use version control systems and accept contributions through them. So knowing Git is a highly marketable skill. Moreover, version control can improve overall quality of digital life: version diary entries, recipes, lecture notes, and any other personal project. No work will be lost for technical issues, and there will be a rich history of the progress over time to compare, explore and experiment with different versions of the project.
@@ -31,14 +31,18 @@ Most companies use some version control system, among which Git is the most popu
 
 In this tutorial, we show how to perform operations both with the ◊acronym{CLI} and with the ◊acronym{GUI}. While there is only one ◊acronym{CLI}, there are many choices of ◊link["https://www.git-scm.com/downloads/guis"]{◊acronym{GUI}}. The purpose of this article is communicate basic principles, which are skills that transfer to different scenarios, so we use the ◊acronym{GUI} that comes with Git. It is not the most good-looking ◊acronym{GUI}, but it is fully functional, cross-platform and requires no extra setup.
 
+◊margin-note{
+ ◊; TODO: «(1) using Git alone on a local computer; (2) using Git with remote computers; and (3) using Git with collaborators»
+}
+
 For the rest of this article, we cover the most common use cases for Git, organized by three overarching goals: (1) using Git alone on a local computer; (2) using Git with remote computers; and (3) using Git with collaborators.
 
 ◊section['an-aside-about-github]{An Aside About GitHub}
 
 ◊margin-note{
- ◊; TODO: «Git ≠ GitHub ⇔ Email ≠ Gmail»
+ ◊svg{git-vs-github.svg}
 
- GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
+ ◊no-indent[] GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
 }
 
 ◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. They are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['TODO]{In a later section}, when we discuss using Git with remote computers, we will use GitHub for the example because it is the most popular choice, but the distinction should be clear.
