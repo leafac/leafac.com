@@ -16,7 +16,7 @@
 ◊margin-note{
  The author uses Git in almost everything he does on the computer: from keeping ◊link/internal["/cooking"]{vegan recipes} to the preparation of this article. The person below does not.
 
- ◊; TODO: «Filesystem with copied files and poop.»
+ ◊no-indent[] ◊svg{filesystem-without-version-control.svg}
 }
 
 Most companies use some version control system, among which Git is the most popular. Also, most free-software projects use version control systems and accept contributions through them. So knowing Git is a highly marketable skill. Moreover, version control can improve overall quality of digital life: version diary entries, recipes, lecture notes, and any other personal project. No work will be lost for technical issues, and there will be a rich history of the progress over time to compare, explore and experiment with different versions of the project.
