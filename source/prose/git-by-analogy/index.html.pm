@@ -167,6 +167,6 @@ The ◊acronym{GUI} indicates that the repository has been created by showing th
 
 ◊image["repository-created.png"]{Repository created successfully.}
 
-Git is longer complaining about the nonexistence of a repository, but it does mention two new concepts: ◊technical-term{branches} and ◊technical-term{commits}. We explore this terms in later sections, but before we need to consider some decisions regarding repository creation.
+Git is longer complaining about the nonexistence of a repository, but it does mention two new concepts: ◊technical-term{branches} and ◊technical-term{commits}. We explore this terms in later sections, but first we need to consider some decisions regarding repository creation.
 
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
