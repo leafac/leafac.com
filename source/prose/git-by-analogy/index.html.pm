@@ -169,4 +169,23 @@ The ◊acronym{GUI} indicates that the repository has been created by showing th
 
 Git is longer complaining about the nonexistence of a repository, but it does mention two new concepts: ◊technical-term{branches} and ◊technical-term{commits}. We explore this terms in later sections, but first we need to consider some decisions regarding repository creation.
 
+◊section['fine-points-about-repositories]{Fine Points About Repositories}
+
+◊new-thought{What constitutes} a project, and, consequently, a repository? There is no definitive answer to this question. Consider, for example, a product composed of a front-end and a back-end: are they separate projects living in two repositories, or two parts of a single project under two folders of the same repository? People in charge of this decision have to consider the following information:
+
+◊list/ordered{
+  ◊list/ordered/item{
+    It is monetarily cheap to create repositories. Most hosts, for example, GitHub, charge by the number of collaborators and the level of support, not by the number of repositories under an organization. (Other integrated tools, for example, continuous integration servers, might change per-repository, though.)
+  }
+  ◊list/ordered/item{
+    It is technically cheap to create repositories. Git has optimized data structures and avoids costly operations, for example, maintaining copies of files. If a single file stands on its own, there could be repository just for it.
+  }
+  ◊list/ordered/item{
+    It is complicated to manage access control within a repository. A person that has access to the repository has access to all the files in it and their whole history. It is easy to manage access control for whole repositories, though.
+  }
+  ◊list/ordered/item{
+    It is complicated to synchronize the changes across different repositories.
+  }
+}
+
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
