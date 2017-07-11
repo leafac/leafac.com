@@ -126,7 +126,7 @@ To address this problem in an office, people could try a new system: to make cha
 
 ◊margin-note{◊svg{commit.svg}}
 
-Maintaining this system is a lot of work, though, so it is desirable to have a tool for automating most of it. Git is that tool. It extends the office metaphor with a paper tray, labeled boxes and cabinets. The basic workflow is: (1) files in the project changed, either because some lines were added, or because some lines were removed, or whole files are added, for example; (2) those changes are organized in a paper tray; (3) the contents of the paper tray go into the box; (4) the box is labeled; and (5) the labeled box goes into the cabinet.
+Maintaining this system is a lot of work, though, so it is desirable to have a tool for automating most of it. Git is that tool. It extends the office metaphor with a paper tray, labeled boxes and cabinets. The basic workflow is: (1) files in the project changed, either because some lines were added, or because some lines were removed, or whole files are added, for example; (2) those changes are organized in a paper tray; (3) the contents of the paper tray go into the box; (4) the box is labeled; and (5) the labeled box goes into the cabinet. Over the next sections we address each of these steps in detail.
 
 ◊paragraph-separation[]
 
@@ -142,6 +142,12 @@ $ cd recipes/
 }
 
 ◊paragraph-separation[]
+
+◊margin-note{
+  ◊svg{repository.svg}
+
+  ◊no-indent[] An empty repository.
+}
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which Git calls the ◊technical-term{repository}:
 
@@ -187,5 +193,71 @@ Git is longer complaining about the nonexistence of a repository, but it does me
     It is complicated to synchronize the changes across different repositories.
   }
 }
+
+◊section['commit]{Commit}
+
+◊margin-note{
+  ◊svg{single-commit.svg}
+
+  ◊no-indent[] A single commit.
+}
+
+◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. These changes start in the working directory, with text editors and other tools modifying the files. Let us then create our first recipe:
+
+◊margin-note{Alternatively, instead of using the command-line, use a text editor or another tool to create a file in the working directory.}
+
+◊code/block{
+$ echo -e 'Delicious recipe\n\nIngredients ...' > vegan-cookies.txt
+}
+
+According to Git, this changed the status:
+
+◊full-width{
+  ◊code/block{
+$ git ◊git/verb{status}
+On branch master
+
+Initial commit
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	vegan-cookies.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+  }
+}
+
+On the ◊acronym{GUI}, click on the “Rescan” button to see the new file listed under “Unstaged Changes”:
+
+◊margin-note{
+  ◊svg{changes-in-working-directory.svg}
+
+  ◊no-indent[] The current state, in which there are changes (represented by ◊code/inline{+} and ◊code/inline{-}) in the working directory.
+}
+
+◊image["status-after-file-creation.png"]{Status after file creation.}
+
+Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exists in the working directory, but it is not known by Git. It is an “untracked file,” which is an “unstaged change.” To introduce the new file to Git, the change representing its creation has to go into a box (commit). But, before this can happen, the changes have to be organized. This step is important, because not necessarily all the changes should go in the same box; and some of them might not go into boxes at all—they might be, for example, the result of a failed experiment.
+
+The changes in the working directory are organized before going into labeled boxes using the ◊informal{paper tray}. Git calls it the ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
+
+◊code/block{
+$ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
+}
+
+◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊code/inline{git-add(1)} manual page.}
+
+This adds the whole file to the index, but it is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the “Unstaged Changes” pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the “Stage Hunk For Commit” or “Stage Line For Commit” action.
+
+◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this feature.}
+
+◊image["selective-staging.png"]{Selective staging.}
+
+◊; TODO: Explain we want to commit whole file, so how do we stage it?
+
+◊; TODO: Explain ‘git commit’.
+
+◊figure{◊svg{commit-legend.svg}}
 
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
