@@ -134,7 +134,7 @@ Maintaining this system is a lot of work, though, so it is desirable to have a t
 
 We select a directory to hold our project, which in our running example is a ◊link/internal["/cooking"]{vegan recipe cookbook}:
 
-◊margin-note{In the ◊acronym{GUI} click on “Create New Repository.”}
+◊margin-note{In the ◊acronym{GUI} click on ◊technical-term{Create New Repository}.}
 
 ◊code/block{
 $ mkdir recipes
@@ -228,7 +228,7 @@ nothing added to commit but untracked files present (use "git add" to track)
   }
 }
 
-On the ◊acronym{GUI}, click on the “Rescan” button to see the new file listed under “Unstaged Changes”:
+On the ◊acronym{GUI}, click on the ◊technical-term{Rescan} button to see the new file listed under ◊technical-term{Unstaged Changes}:
 
 ◊margin-note{
   ◊svg{changes-in-working-directory.svg}
@@ -248,16 +248,60 @@ $ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
 
 ◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊code/inline{git-add(1)} manual page.}
 
-This adds the whole file to the index, but it is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the “Unstaged Changes” pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the “Stage Hunk For Commit” or “Stage Line For Commit” action.
+This adds the whole file to the index, but it is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
 
 ◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this feature.}
 
 ◊image["selective-staging.png"]{Selective staging.}
 
-◊; TODO: Explain we want to commit whole file, so how do we stage it?
+In our running example, we want to commit the whole file, so ◊acronym{GUI} users should select ◊code/inline{vegan-cookies.txt} on the ◊technical-term{Unstaged Changes} pane and click on ◊technical-term{Stage Changed}. This has the same effect as the command line above.
 
-◊; TODO: Explain ‘git commit’.
+At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
+
+◊list/ordered{
+  ◊list/ordered/item{Information about the author including name and email.}
+  ◊list/ordered/item{The current date and time.}
+  ◊list/ordered/item{An unique identifier.}
+  ◊list/ordered/item{A reference to the identifier of the previous box in the chain (except for this first commit, which starts the chain).}
+  ◊list/ordered/item{A high-level description of the contents.}
+}
+
+◊margin-note{The ◊reference['local-setup]{setup} process of identifying to Git was necessary to make the automatic parts of labeling work.}
+
+All information except for the last are added to the label automatically by Git. The commit author has to provide a description of its contents; on the ◊acronym{GUI}, this goes on the bottom-right pane:
 
 ◊figure{◊svg{commit-legend.svg}}
+
+The equivalent on the ◊acronym{CLI} is the following:
+
+◊code/block{
+$ git ◊git/verb{commit }
+}
+
+◊margin-note{
+  Configure the text editor that Git uses with:
+
+  ◊code/block{
+$ git ◊git/verb{config} \
+  ◊git/object{--global core.editor "<EDITOR>"}
+  }
+
+  In many cases—particularly for ◊acronym{GUI} text editors—one has to provide a flag to the text editor process for it to work well with Git. For example, for Atom, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
+}
+
+After running this command, Git starts a text editor with a special file already open. One has to write the commit description on that file.
+
+To finally create the commit, on the ◊acronym{CLI} one has to close the special file that Git opened in the text editor for writing the commit message. Git will then print some statistics about the commit:
+
+◊code/block{
+".git/COMMIT_EDITMSG" 10L, 250C written 
+[master (root-commit) cff98a54] Add cookies recipe 
+ 1 file changed, 1 insertion(+)
+  create mode 100644 vegan-cookies.txt
+}
+
+On the ◊acronym{CLI}, one clicks on ◊technical-term{Commit}, and the status bar indicates success:
+
+◊image["after-first-commit.png"]{After first commit.}
 
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
