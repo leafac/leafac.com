@@ -246,9 +246,11 @@ The changes in the working directory are organized before going into labeled box
 $ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
 }
 
-◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊code/inline{git-add(1)} manual page.}
+◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["TODO"]{◊code/inline{git-add(1)}} manual page.}
 
-This adds the whole file to the index, but it is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
+◊; TODO: Add link to ‘git-add(1)’ manual page.
+
+It is important to note the abuse of terminology when we say that “Git tracks files.” Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, the boxes contain ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions, instead of containing files. It is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
 
 ◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this feature.}
 
@@ -279,7 +281,7 @@ $ git ◊git/verb{commit }
 }
 
 ◊margin-note{
-  Configure the text editor that Git uses with:
+  On most machines, the default text editor is ◊link["TODO"]{Vim}. Configure the text editor that Git uses with:
 
   ◊code/block{
 $ git ◊git/verb{config} \
@@ -288,6 +290,8 @@ $ git ◊git/verb{config} \
 
   In many cases—particularly for ◊acronym{GUI} text editors—one has to provide a flag to the text editor process for it to work well with Git. For example, for Atom, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
 }
+
+◊; TODO: Fix link above.
 
 After running this command, Git starts a text editor with a special file already open. One has to write the commit description on that file.
 
@@ -300,8 +304,24 @@ To finally create the commit, on the ◊acronym{CLI} one has to close the specia
   create mode 100644 vegan-cookies.txt
 }
 
-On the ◊acronym{CLI}, one clicks on ◊technical-term{Commit}, and the status bar indicates success:
+On the ◊acronym{GUI}, one clicks on ◊technical-term{Commit}, and the status bar indicates success:
+
+◊margin-note{The word “commit” can be a noun, meaning the box containing changes, or a verb, meaning the act of creating the box.}
 
 ◊image["after-first-commit.png"]{After first commit.}
+
+Now our cabinet (repository) contains the first labeled box (commit). The paper tray (staging area) is empty and Git gives as a new empty box to fill with the next changes to the project. Asking for the current status confirms that:
+
+◊code/block{
+$ git ◊git/verb{status}
+On branch master
+nothing to commit, working tree clean
+}
+
+◊paragraph-separation[]
+
+◊new-thought{This section} has been slow and detailed, but creating a commit is a low overhead operation—specially if there is Git support integrated on the text editor.
+
+◊; NEXT: Rinse and repeat, do a bunch more of commits.
 
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
