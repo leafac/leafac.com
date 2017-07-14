@@ -320,7 +320,14 @@ nothing to commit, working tree clean
 
 ◊paragraph-separation[]
 
-◊new-thought{This section} has been slow and detailed, but creating a commit is a low overhead operation—specially if there is Git support integrated on the text editor.
+◊new-thought{This section} has been slow and detailed, but creating a commit is a low overhead operation—specially if there is Git support integrated in the text editor. The following sequence of commands condenses the topics of this section: first, it modifies a file, simulating work on the project; then, it adds the modification to the index (the ◊code/inline{◊git/object{-a}} option); finally, it creates a commit with a given message (the ◊code/inline{◊git/object{-m}} option):
+
+◊margin-note{On the ◊acronym{GUI}, repeat the process above: modify the file using a text editor, add the modification to the index, write a message and click on ◊emphasis{Commit}.}
+
+◊code/block{
+$ echo -e "Directions\n...\n" >> vegan-cookies.txt
+$ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
+}
 
 ◊; NEXT: Rinse and repeat, do a bunch more of commits.
 
