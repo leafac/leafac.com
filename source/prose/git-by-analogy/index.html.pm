@@ -109,16 +109,20 @@ $ echo "*.text-editor-temporary-file" >> ~/.gitignore
 
 ◊new-thought{The most useful} Git command asks it to report the current status. Run the following ◊reference['local-setup]{after setting up}:
 
-◊code/block{
+◊full-width{
+  ◊code/block{
 $ git ◊git/verb{status} 
 fatal: Not a git repository (or any of the parent directories): .git
+  }
 }
 
-The result is a fatal error: Git cannot find the repository. The ◊reference['repository]{next section} explains what a repository is, and how to create one. The ◊acronym{GUI}, also detects that there is no repository:
+The result is a fatal error: Git cannot find the repository. The ◊acronym{GUI}, also detects that there is no repository:
 
 ◊image["gui-initial-screen.png"]{The initial screen.}
 
-◊section['repository]{Repository}
+The next sections explain what is a repository, and how to create one.
+
+◊section['office]{Office}
 
 ◊margin-note{◊svg{desktop.svg}}
 
@@ -134,7 +138,7 @@ Maintaining this system is a lot of work, though. To recover the state of the fi
 
 In the computer, Git has that job. It extends the office analogy of files and folders in the file system with metaphorical slips of paper to record changes, a paper tray, labeled boxes and a cabinet. Over the course of this article, we will learn about each of these components, their technical names in Git’s lexicon and the basic operations on them.
 
-◊paragraph-separation[]
+◊section['working-directory]{Working Directory}
 
 ◊new-thought{The first component} of this extended metaphor that we explore is the files and the folders, in which work happens. They correspond to the filesystem which already exists in the computer, and Git calls them the ◊technical-term{working directory}. Apart from this special terminology, there is nothing special about the ◊technical-term{working directory}; tools like text editors can work on these files oblivious of the version control system.
 
@@ -152,6 +156,8 @@ $ cd recipes/
 
   ◊no-indent[] An empty repository.
 }
+
+◊section['repository]{Repository}
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
 
@@ -199,6 +205,10 @@ Git is longer complaining about the nonexistence of a repository, but it does me
     It is complicated to synchronize the changes across different repositories.
   }
 }
+
+◊section['changes]{Changes}
+
+◊; TODO
 
 ◊section['commit]{Commit}
 
