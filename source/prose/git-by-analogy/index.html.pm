@@ -320,7 +320,7 @@ nothing to commit, working tree clean
 
 ◊paragraph-separation[]
 
-◊new-thought{This section} has been slow and detailed, but creating a commit is a low overhead operation—specially if there is Git support integrated in the text editor. The following sequence of commands condenses the topics of this section: first, it modifies a file, simulating work on the project; then, it adds the modification to the index (the ◊code/inline{◊git/object{-a}} option); finally, it creates a commit with a given message (the ◊code/inline{◊git/object{-m}} option):
+◊new-thought{This section} has been slow and detailed, but creating a commit is a low overhead operation—specially if there is Git support integrated in the text editor. The following sequence of commands condenses the topics of this section: first, it modifies a file, simulating work on the project; then, it adds the modification to the index (the ◊code/inline{◊git/object{-a}} option); finally, it creates a commit with a given message (the ◊code/inline{◊git/object{-m}} option). For convenience, ◊code/inline{git ◊git/verb{add}} and ◊code/inline{git ◊git/verb{commit}} have been performed in a single command, using the option ◊code/inline{◊git/object{-a}}, which adds all changes to the index:
 
 ◊margin-note{On the ◊acronym{GUI}, repeat the process above: modify the file using a text editor, add the modification to the index, write a message and click on ◊emphasis{Commit}.}
 
