@@ -140,26 +140,22 @@ In the computer, this robot is Git. It extends the office analogy of files and f
 
 ◊section['working-directory]{Working Directory}
 
-◊; NEXT
+◊margin-note{◊svg{working-directory.svg}}
 
 ◊new-thought{The first component} of this analogy that we explore is the files and the folders, in which work happens. They correspond to the filesystem which already exists in the computer, and Git calls them the ◊technical-term{working directory}. Apart from this special terminology, there is nothing special about the ◊technical-term{working directory}; tools like text editors can work on these files oblivious of the version control system.
 
 We start by creating a directory to contain our project, which in our running example is a ◊link/internal["/cooking"]{vegan recipe cookbook}:
+
+◊margin-note{On the ◊acronym{GUI}, use a file browser to create a directory.}
 
 ◊code/block{
 $ mkdir recipes
 $ cd recipes/
 }
 
-◊paragraph-separation[]
-
-◊margin-note{
-  ◊svg{repository.svg}
-
-  ◊no-indent[] An empty repository.
-}
-
 ◊section['repository]{Repository}
+
+◊margin-note{◊svg{repository.svg}}
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
 
@@ -170,7 +166,7 @@ $ git ◊git/verb{init} 
 Initialized empty Git repository in .../recipes/.git/
 }
 
-As the output says, Git created an empty repository in a folder called ◊code/inline{.git} within project’s folder. Because the name of this directory starts with a dot (◊code/inline{.}), it is ◊informal{hidden}. There is nothing special about hidden folders, but, by convention, file browsers generally do not show them unless explicitly requested. The ◊code/inline{.git} folder is Git’s ◊informal{cabinet} for this project; it contains files managed by Git and should not be edited by hand. Because of its existence, the status has changed:
+As the output says, Git created an empty repository in a folder called ◊code/inline{.git} within project’s directory. Because the name of this folder starts with a dot (◊code/inline{.}), it is ◊informal{hidden}. There is nothing special about hidden folders, but, by convention, file browsers generally do not show them unless explicitly requested. The ◊code/inline{.git} folder is Git’s ◊informal{cabinet} for this project; Git manages its contents, which should not be edited by hand. Due to the existence of this folder, the status has changed:
 
 ◊full-width{
   ◊code/block{
@@ -209,6 +205,10 @@ Git is longer complaining about the nonexistence of a repository, but it does me
 }
 
 ◊section['changes]{Changes}
+
+◊; TODO
+
+◊section['staging-area]{Staging Area}
 
 ◊; TODO
 
