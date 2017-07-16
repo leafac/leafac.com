@@ -130,7 +130,7 @@ The next sections explain what is a repository, and how to create one.
 
 To address this problem in an office, one could try a new system. After changing a file, one would take note of the change in a slip of paper, mentioning what was the previous content and what is the new content. One could use a paper tray to organize these slips of paper. After significant progress—which might mean anything from changing a single line to changing dozens of files—one could move these slips of paper into a box, label the box, and put the box in a cabinet for storage. The label on the box would contain the identification of the author of the changes, the current date and time, a high-level description of the box contents, an unique identifier for the current box and a reference to the identifier of the previous box.
 
-◊margin-note{◊svg{commit.svg}}
+◊margin-note{◊svg{office.svg}}
 
 With this system, the result would be a chain of boxes that record the history of the project in an organized and predictable manner. There is still only one working copy of the files, but it is possible to recreate the project’s history and recollect who changed what, when and why, by looking at the boxes.
 
