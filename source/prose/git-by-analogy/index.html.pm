@@ -124,13 +124,21 @@ The next sections explain what is a repository, and how to create one.
 
 ◊section['office]{Office}
 
-◊margin-note{◊svg{desktop.svg}}
+◊margin-note{
+  ◊svg{desktop.svg}
+
+  ◊no-indent[] The office metaphor on a desktop.
+}
 
 ◊new-thought{Modern operating system’s} ◊acronym{GUI}s make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track a project’s history over time. One could use, for example, a copying machine to record different versions as files change. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to inspect the differences, attribute the changes to different people in the project, collaborate and experiment. Unsurprisingly, these are the exact same issues that arise when using the computer.
 
 To address this problem in an office, one could try a new system. After changing a file, one would take note of the change in a slip of paper, mentioning what was the previous content and what is the new content. One could use a paper tray to organize these slips of paper. After significant progress—which might mean anything from changing a single line to changing dozens of files—one could move these slips of paper into a box, label the box, and put the box in a cabinet for storage. The label on the box would contain the identification of the author of the changes, the current date and time, a high-level description of the box contents, an unique identifier for the current box and a reference to the identifier of the previous box.
 
-◊margin-note{◊svg{office.svg}}
+◊margin-note{
+  ◊svg{office.svg}
+
+  ◊no-indent[] The extended office metaphor for version control, with Git as a robot in the middle managing the process.
+}
 
 With this system, the result would be a chain of boxes that record the history of the project in an organized and predictable manner. There is still only one working copy of the files, but it is possible to recreate the project’s history and recollect who changed what, when and why, by looking at the boxes.
 
@@ -140,7 +148,11 @@ In the computer, this robot is Git. It extends the office analogy of files and f
 
 ◊section['working-directory]{Working Directory}
 
-◊margin-note{◊svg{working-directory.svg}}
+◊margin-note{
+  ◊svg{working-directory.svg}
+
+  ◊no-indent[] The working directory.
+}
 
 ◊new-thought{The first component} of this analogy that we explore is the files and the folders, in which work happens. They correspond to the filesystem which already exists in the computer, and Git calls them the ◊technical-term{working directory}. Apart from this special terminology, there is nothing special about the ◊technical-term{working directory}; tools like text editors can work on these files oblivious of the version control system.
 
@@ -155,7 +167,11 @@ $ cd recipes/
 
 ◊section['repository]{Repository}
 
-◊margin-note{◊svg{repository.svg}}
+◊margin-note{
+  ◊svg{repository.svg}
+
+  ◊no-indent[] The empty repository.
+}
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
 
@@ -206,29 +222,21 @@ Git is longer complaining about the nonexistence of a repository, but it does me
 
 ◊section['changes]{Changes}
 
-◊; TODO
-
-◊section['staging-area]{Staging Area}
-
-◊; TODO
-
-◊section['commit]{Commit}
-
 ◊margin-note{
-  ◊svg{single-commit.svg}
+  ◊svg{changes.svg}
 
-  ◊no-indent[] A single commit.
+  ◊no-indent[] The changes.
 }
 
-◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. These changes start in the working directory, with text editors and other tools modifying the files. Let us then create our first recipe:
+◊new-thought{As the project} evolves, people modify the files in the working directory. On our extended office metaphor for version control, this requires taking notes of what changed in slips of paper. For example, if a line has changed, it is necessary to register the previous contents of that line as well as the new contents. This is a non-trivial amount of work, but fortunately we have Git as our robot managing the tedious parts. Its first task is to detect changes in the working directory.
 
-◊margin-note{Alternatively, instead of using the command-line, use a text editor or another tool to create a file in the working directory.}
+Currently, our working directory is empty. Let us start by creating a file which contains our first recipe. We can text editors or any other tool which works on files. If using the command line, run the following:
 
 ◊code/block{
-$ echo -e 'Delicious recipe\n\nIngredients ...' > vegan-cookies.txt
+$ echo -e 'Ingredients\n\n...\n\n' > vegan-cookies.txt
 }
 
-According to Git, this changed the status:
+This creates a file name ◊code/inline{vegan-cookies.txt}, which contains the (elided) list of ingredients for ◊link/internal["/cooking/chocolate-chip-cookie/"]{vegan cookies}. Git notices this change, as the following status reveals:
 
 ◊full-width{
   ◊code/block{
@@ -248,17 +256,21 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 On the ◊acronym{GUI}, click on the ◊technical-term{Rescan} button to see the new file listed under ◊technical-term{Unstaged Changes}:
 
-◊margin-note{
-  ◊svg{changes-in-working-directory.svg}
-
-  ◊no-indent[] The current state, in which there are changes (represented by ◊code/inline{+} and ◊code/inline{-}) in the working directory.
-}
-
 ◊image["status-after-file-creation.png"]{Status after file creation.}
 
-Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exists in the working directory, but it is not known by Git. It is an “untracked file,” which is an “unstaged change.” To introduce the new file to Git, the change representing its creation has to go into a box (commit). But, before this can happen, the changes have to be organized. This step is important, because not necessarily all the changes should go in the same box; and some of them might not go into boxes at all—they might be, for example, the result of a failed experiment.
+Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exists in the working directory, but it is not known by Git. It is an “untracked file,” which is an “unstaged change.” But these messages about files are just for user convenience; internally, Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, we do not represent changes with complete files, but with scraps of paper containing ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions.
 
-The changes in the working directory are organized before going into labeled boxes using the ◊informal{paper tray}. Git calls it the ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
+◊section['staging-area]{Staging Area}
+
+◊margin-note{
+  ◊svg{staging-area.svg}
+
+  ◊no-indent[] The staging area.
+}
+
+◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense together. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
+
+For simplicity, in our first example we will add to the paper tray the scrap of paper representing the creation of the whole ◊code/inline{vegan-cookies.txt} file. The technical names for the paper tray are ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
 
 ◊code/block{
 $ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
@@ -275,6 +287,16 @@ It is important to note the abuse of terminology when we say that “Git tracks 
 ◊image["selective-staging.png"]{Selective staging.}
 
 In our running example, we want to commit the whole file, so ◊acronym{GUI} users should select ◊code/inline{vegan-cookies.txt} on the ◊technical-term{Unstaged Changes} pane and click on ◊technical-term{Stage Changed}. This has the same effect as the command line above.
+
+◊section['commit]{Commit}
+
+◊margin-note{
+  ◊svg{single-commit.svg}
+
+  ◊no-indent[] A single commit.
+}
+
+◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. 
 
 At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
 
