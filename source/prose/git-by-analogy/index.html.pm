@@ -388,6 +388,4 @@ $ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
 
 The command above is a shortcut for convenience. The ◊code/inline{◊git/object{-a}} option adds all changes to the index and the ◊code/inline{◊git/object{-m}} option lets us specify the commit message without opening a text editor.
 
-◊; TODO: Commit message.
-
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
