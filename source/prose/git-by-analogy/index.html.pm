@@ -228,9 +228,9 @@ Git is longer complaining about the nonexistence of a repository, but it does me
   ◊no-indent[] The changes.
 }
 
-◊new-thought{As the project} evolves, people modify the files in the working directory. On our extended office metaphor for version control, this requires taking notes of what changed in slips of paper. For example, if a line has changed, it is necessary to register the previous contents of that line as well as the new contents. This is a non-trivial amount of work, but fortunately we have Git as our robot managing the tedious parts. Its first task is to detect changes in the working directory.
+◊new-thought{As the project} evolves, people modify the files in the working directory. On our extended office metaphor for version control, this requires taking notes of what changed in slips of paper. For example, to modify a line in a file, it is necessary to register the previous contents of that line as well as the new contents. This is a non-trivial amount of work, but fortunately we have Git as our robot managing the tedious parts. Its first task is to detect changes in the working directory.
 
-Currently, our working directory is empty. Let us start by creating a file which contains our first recipe. We can text editors or any other tool which works on files. If using the command line, run the following:
+Currently, our working directory is empty. Let us start by creating a file to contain our first recipe. We can use text editors or any other tool that works on files. If using the command line, run the following:
 
 ◊code/block{
 $ echo -e 'Ingredients\n\n...\n\n' > vegan-cookies.txt
@@ -272,7 +272,11 @@ Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exis
 
 ◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code/inline{git-add(1)}} manual page.}
 
-It is important to note the abuse of terminology when we say that “Git tracks files.” Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, the boxes contain ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions, instead of containing files. It is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
+It is possible to be selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
+
+◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this missing feature.}
+
+◊image["selective-staging.png"]{Selective staging.}
 
 For simplicity, in our first example we will add to the paper tray the scrap of paper representing the creation of the whole ◊code/inline{vegan-cookies.txt} file. The technical names for the paper tray are ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
 
@@ -280,21 +284,33 @@ For simplicity, in our first example we will add to the paper tray the scrap of 
 $ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
 }
 
-◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this feature.}
+◊acronym{GUI} users should select ◊code/inline{vegan-cookies.txt} on the ◊technical-term{Unstaged Changes} pane and click on ◊technical-term{Stage Changed}. This has the same effect as the command line above.
 
-◊image["selective-staging.png"]{Selective staging.}
+When asked about the current status, Git’s output has changed:
 
-In our running example, we want to commit the whole file, so ◊acronym{GUI} users should select ◊code/inline{vegan-cookies.txt} on the ◊technical-term{Unstaged Changes} pane and click on ◊technical-term{Stage Changed}. This has the same effect as the command line above.
+◊code/block{
+$ git ◊git/object{status }
+On branch master
+
+Initial commit
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+
+    new file:  vegan-cookies.txt
+}
+
+Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is on the paper tray and will be part of the next box (commit). The next section addresses this step.
 
 ◊section['commit]{Commit}
 
 ◊margin-note{
-  ◊svg{single-commit.svg}
+  ◊svg{commit.svg}
 
   ◊no-indent[] A single commit.
 }
 
-◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. 
+◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project.
 
 At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
 
