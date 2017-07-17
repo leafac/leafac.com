@@ -9,7 +9,7 @@
 
 ◊section['what-does-git-do]{What does Git do?}
 
-◊margin-note{Some tools have simple, embedded version control systems, for example, Google Docs allows traversing the history and comparing different versions of a file. Git is a more sophisticated version of this, with more features and support for a whole project, instead of a single document.}
+◊margin-note{Some tools have simple, embedded version control systems, for example, ◊link["https://docs.google.com"]{Google Docs} allows traversing the history and comparing different versions of a file. Git is a more sophisticated version of this, with more features and support for a whole project, instead of a single document.}
 
 ◊new-thought{Git solves} the problem of ◊technical-term{version control}. The name might sound unfamiliar, but the problem is not: keeping track of the changes in a project as it evolves, and collaborating on it with other people. The version control problem occurs whenever someone copies a file to modify it and compare the versions, sends a project as an email attachment, or loses work due to a corrupted or accidentally deleted file. Git is a ◊technical-term{version control system}, which solves the version control problem by tracking the project’s history.
 
@@ -310,9 +310,7 @@ Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is
   ◊no-indent[] A single commit.
 }
 
-◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project.
-
-At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
+◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
 
 ◊list/ordered{
   ◊list/ordered/item{Information about the author including name and email.}
@@ -326,7 +324,7 @@ At this point, the changes are organized on the ◊informal{paper tray} and read
 
 All information except for the last are added to the label automatically by Git. The commit author has to provide a description of its contents; on the ◊acronym{GUI}, this goes on the bottom-right pane:
 
-◊figure{◊svg{commit-legend.svg}}
+◊figure{◊svg{gui-commit.svg}}
 
 The equivalent on the ◊acronym{CLI} is the following:
 
@@ -335,17 +333,15 @@ $ git ◊git/verb{commit }
 }
 
 ◊margin-note{
-  On most machines, the default text editor is ◊link["TODO"]{Vim}. Configure the text editor that Git uses with:
+  On most machines, the default text editor is ◊link["http://www.vim.org/"]{Vim}. Configure the text editor that Git uses with:
 
   ◊code/block{
 $ git ◊git/verb{config} \
   ◊git/object{--global core.editor "<EDITOR>"}
   }
 
-  In many cases—particularly for ◊acronym{GUI} text editors—one has to provide a flag to the text editor process for it to work well with Git. For example, for Atom, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
+  In many cases—particularly for ◊acronym{GUI} text editors—one has to provide a flag to the text editor process for it to work well with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
 }
-
-◊; TODO: Fix link above.
 
 After running this command, Git starts a text editor with a special file already open. One has to write the commit description on that file.
 
@@ -364,7 +360,7 @@ On the ◊acronym{GUI}, one clicks on ◊technical-term{Commit}, and the status 
 
 ◊image["after-first-commit.png"]{After first commit.}
 
-Now our cabinet (repository) contains the first labeled box (commit). The paper tray (staging area) is empty and Git gives as a new empty box to fill with the next changes to the project. Asking for the current status confirms that:
+Now our cabinet (repository) contains the first labeled box (commit). The paper tray (staging area) is empty and Git gives us a new empty box to fill with the next changes to the project. Asking for the current status confirms that:
 
 ◊code/block{
 $ git ◊git/verb{status}
@@ -374,15 +370,24 @@ nothing to commit, working tree clean
 
 ◊paragraph-separation[]
 
-◊new-thought{This section} has been slow and detailed, but creating a commit is a low overhead operation—specially if there is Git support integrated in the text editor. The following sequence of commands condenses the topics of this section: first, it modifies a file, simulating work on the project; then, it adds the modification to the index (the ◊code/inline{◊git/object{-a}} option); finally, it creates a commit with a given message (the ◊code/inline{◊git/object{-m}} option). For convenience, ◊code/inline{git ◊git/verb{add}} and ◊code/inline{git ◊git/verb{commit}} have been performed in a single command, using the option ◊code/inline{◊git/object{-a}}, which adds all changes to the index:
-
-◊margin-note{On the ◊acronym{GUI}, repeat the process above: modify the file using a text editor, add the modification to the index, write a message and click on ◊emphasis{Commit}.}
+◊new-thought{These past few sections} have been slow and detailed, but going from a change in the working directory to a commit is a low overhead operation—specially if there is Git support integrated in the text editor. Let us review the whole process, on fast-forward. First, modify a file using a text editor or the following command line:
 
 ◊code/block{
-$ echo -e "Directions\n...\n" >> vegan-cookies.txt
+$ echo -e "Directions\n\n...\n\n" >> vegan-cookies.txt
+}
+
+Then, if using the ◊acronym{GUI}, click on ◊emphasis{Rescan}, select the file name under ◊technical-term{Unstaged Changes}, click on ◊emphasis{Stage Changed}, write a message on the lower-right pane and then click on ◊emphasis{Commit}. Alternatively, if using the command line, run the following:
+
+◊margin-note{Use the ◊code/inline{◊git/object{-a}} option only when confident of the changes on the working directory. Generally, it is better to inspect the changes and organize them on the staging area. This is the perfect opportunity to spot unaddressed ◊code/inline{TODO}s left over on the code.}
+
+◊code/block{
 $ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
 }
 
-◊; NEXT: Rinse and repeat, do a bunch more of commits.
+◊margin-note{The ◊code/inline{◊git/object{-a}} and the ◊code/inline{◊git/object{-m}} options have been condensed into ◊code/inline{◊git/object{-am}}.}
+
+The command above is a shortcut for convenience. The ◊code/inline{◊git/object{-a}} option adds all changes to the index and the ◊code/inline{◊git/object{-m}} option lets us specify the commit message without opening a text editor.
+
+◊; TODO: Commit message.
 
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
