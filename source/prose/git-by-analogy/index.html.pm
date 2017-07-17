@@ -268,19 +268,17 @@ Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exis
   ◊no-indent[] The staging area.
 }
 
-◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense together. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
+◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense together. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray at all—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
+
+◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code/inline{git-add(1)}} manual page.}
+
+It is important to note the abuse of terminology when we say that “Git tracks files.” Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, the boxes contain ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions, instead of containing files. It is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
 
 For simplicity, in our first example we will add to the paper tray the scrap of paper representing the creation of the whole ◊code/inline{vegan-cookies.txt} file. The technical names for the paper tray are ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
 
 ◊code/block{
 $ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
 }
-
-◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["TODO"]{◊code/inline{git-add(1)}} manual page.}
-
-◊; TODO: Add link to ‘git-add(1)’ manual page.
-
-It is important to note the abuse of terminology when we say that “Git tracks files.” Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, the boxes contain ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions, instead of containing files. It is possible to be more selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
 
 ◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this feature.}
 
