@@ -388,4 +388,22 @@ $ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
 
 The command above is a shortcut for convenience. The ◊code/inline{◊git/object{-a}} option adds all changes to the index and the ◊code/inline{◊git/object{-m}} option lets us specify the commit message without opening a text editor.
 
+◊section['fine-points-about-commits]{Fine Points About Commits}
+
+◊; NEXT: Remove details of “what constitutes a good commit” into its own section. Keep discussion general and incentivize people to just commit a lot.
+
+◊margin-note{For an example of a small personal project in which commits are ◊emphasis{not} carefully crafted, see the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for the website containing this article. For an example of the opposite, see the source for ◊link["https://github.com/git/git/commits/master"]{Git itself}.}
+
+◊new-thought{What constitutes} a meaningful contribution, and, consequently, a commit? The answer to this question depends on the who are the potential consumers of this information. On projects of lesser importance, people might only be interested in some aspects of version control, for example, not losing files due to corruption. On that case, little care goes into crafting meaningful commits and the corresponding commit messages.
+
+On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They contain modifications to the code, tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
+
+But great commits are not born that way. During development, one should use a personal space in the repository, ◊emphasis{commit early, and commit often}, using the commit messages as notes to self. When a feature stabilizes, all tests are passing, and the development is ready to be part of the project, then Git offers ways to ◊reference['crafting-the-perfect-commit]{rewrite the history} and craft a carefully constructed commit. This approach is more advanced, but it is better to follow it than to wait too long to commit, and risk losing work in the process.
+
+◊; TODO: ◊section['crafting-the-perfect-commit]{Crafting the Perfect Commit}
+
+◊; ◊margin-note{Pay attention to the line-length limits in carefully constructed commit messages. They are important for people using tools which do not soft-wrap the text, including the ◊acronym{CLI}.}
+
+◊; ‘rebase --interactive’
+
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
