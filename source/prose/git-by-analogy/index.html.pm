@@ -45,9 +45,7 @@ For the rest of this article, we cover the most common use cases for Git, organi
  ◊no-indent[] GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
 }
 
-◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['TODO]{In a later section}, when we discuss using Git with remote computers, we will use GitHub because it is the most popular choice, but the distinction should be clear.
-
-◊; TODO: Fix the reference in the paragraph above.
+◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['remote-repository]{In a later section}, when we discuss using Git with remote computers, we will use GitHub because it is the most popular choice, but the distinction should be clear.
 
 ◊section['an-aside-about-git-commands]{An Aside About Git Commands}
 
@@ -390,20 +388,26 @@ The command above is a shortcut for convenience. The ◊code/inline{◊git/objec
 
 ◊section['fine-points-about-commits]{Fine Points About Commits}
 
-◊; NEXT: Remove details of “what constitutes a good commit” into its own section. Keep discussion general and incentivize people to just commit a lot.
-
 ◊margin-note{For an example of a small personal project in which commits are ◊emphasis{not} carefully crafted, see the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for the website containing this article. For an example of the opposite, see the source for ◊link["https://github.com/git/git/commits/master"]{Git itself}.}
 
-◊new-thought{What constitutes} a meaningful contribution, and, consequently, a commit? The answer to this question depends on the who are the potential consumers of this information. On projects of lesser importance, people might only be interested in some aspects of version control, for example, not losing files due to corruption. On that case, little care goes into crafting meaningful commits and the corresponding commit messages.
+◊new-thought{What constitutes} a meaningful contribution, and, consequently, a commit? The answer to this question depends on the who are the potential consumers of this information. On projects of lesser importance, people might only be interested in some aspects of version control, for example, not losing files due to corruption or facilitating collaboration on a small team. In that case, little care goes into crafting meaningful commits and their corresponding commit messages.
 
-On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They contain modifications to the code, tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
+On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊link["http://keepachangelog.com"]{changelog entries}, and a detailed commit message. But, generally, these great commits are not born this way. They are manufactured after the fact, using the advanced techniques laid out in a ◊reference['crafting-the-perfect-commit]{later section}.
 
-But great commits are not born that way. During development, one should use a personal space in the repository, ◊emphasis{commit early, and commit often}, using the commit messages as notes to self. When a feature stabilizes, all tests are passing, and the development is ready to be part of the project, then Git offers ways to ◊reference['crafting-the-perfect-commit]{rewrite the history} and craft a carefully constructed commit. This approach is more advanced, but it is better to follow it than to wait too long to commit, and risk losing work in the process.
+Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. The messages can be notes to self, to inform the writing of the detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
 
 ◊; TODO: ◊section['crafting-the-perfect-commit]{Crafting the Perfect Commit}
+
+◊; They contain modifications to the code (don’t break tests—git bisect), tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
+
+◊; «Example of commit message»
+
+◊; During development, one should use a personal space in the repository, ◊emphasis{commit early, and commit often}, using the commit messages as notes to self. When a feature stabilizes, all tests are passing, and the development is ready to be part of the project, then Git offers ways to ◊reference['crafting-the-perfect-commit]{rewrite the history} and craft a carefully constructed commit. This approach is more advanced, but it is better to follow it than to wait too long to commit, and risk losing work in the process.
 
 ◊; ◊margin-note{Pay attention to the line-length limits in carefully constructed commit messages. They are important for people using tools which do not soft-wrap the text, including the ◊acronym{CLI}.}
 
 ◊; ‘rebase --interactive’
+
+◊; ◊section['remote-repository]{Remote Repository}
 
 ◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
