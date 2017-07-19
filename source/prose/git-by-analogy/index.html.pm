@@ -396,7 +396,13 @@ On bigger, more important projects, in which more people are involved, a lot of 
 
 Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. The messages can be notes to self, to inform the writing of the detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
 
-◊; TODO: ◊section['crafting-the-perfect-commit]{Crafting the Perfect Commit}
+◊; TODO: In introduction, say that this is different because explores *both* GUI and CLI.
+
+◊; TODO: Move discussion about selective staging to ‘Crafting the Perfect Commit’.
+
+◊; ◊section['crafting-the-perfect-commit]{Crafting the Perfect Commit}
+
+◊; Git is flexible and supports different workflows.
 
 ◊; They contain modifications to the code (don’t break tests—git bisect), tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
 
@@ -410,4 +416,12 @@ Beginners should ◊emphasis{commit early, and commit often}. Anything from a si
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
-◊; TODO: ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
+◊; ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
+
+◊; https://git-scm.com/
+◊; https://try.github.io · By Code School
+◊; http://gitreal.codeschool.com/
+◊; http://rogerdudler.github.io/git-guide/
+◊; https://help.github.com/
+◊; https://git-scm.com/book/
+◊; https://git-scm.com/docs
