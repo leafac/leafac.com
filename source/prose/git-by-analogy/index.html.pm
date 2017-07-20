@@ -5,7 +5,7 @@
 
 ◊margin-note{To follow the command-line snippets, this article assumes familiarity with basic command line skills: navigating the filesystem, creating directories and so forth. But following the command-line snippets is optional, one can use a ◊acronym{GUI} instead.}
 
-◊new-thought{What does} ◊link["https://git-scm.com/"]{Git} do? How to start with Git? Where to learn more about Git? This article addresses these three questions; the purpose is not turn the reader into an specialist, but to explore the basic underlying concepts and the most commonly used operations. The space of educational material about Git is enormous, this article distinguishes itself for being directed by analogies which make the ideas relatable, and for exploring some of the ◊emphasis{whys}, going beyond the ◊emphasis{hows}.
+◊new-thought{What does} ◊link["https://git-scm.com/"]{Git} do? How to start with Git? Where to learn more about Git? This article addresses these three questions, not with the purpose of turning the reader into an specialist, but that of exploring the basic underlying concepts and the most commonly used operations. The space of educational material about Git ◊reference['where-to-learn-more-about-git]{is enormous}, but it tends to be either a very short introduction without all the information necessary to effectively use the tool, or a book covering Git in more depth than a beginner would want. This article distinguishes itself for being the middle ground. Git is a flexible tool which accommodates very different workflows, so, to avoid as general as a book, this article comes with some opinions, covering the workflow most commonly used by teams in the industry and free-software development. Also, the exposition is directed by analogies, which makes the ideas relatable and more friendly to beginners. Still, we do not shy away from going into some of the ◊emphasis{whys}, beyond the ◊emphasis{hows}. Finally, for completeness and practicality, we cover both the Command-Line Interface (◊acronym{CLI}) and one Graphical User Interface (◊acronym{GUI}).
 
 ◊section['what-does-git-do]{What does Git do?}
 
@@ -395,8 +395,6 @@ The command above is a shortcut for convenience. The ◊code/inline{◊git/objec
 On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊link["http://keepachangelog.com"]{changelog entries}, and a detailed commit message. But, generally, these great commits are not born this way. They are manufactured after the fact, using the advanced techniques laid out in a ◊reference['crafting-the-perfect-commit]{later section}.
 
 Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. The messages can be notes to self, to inform the writing of the detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
-
-◊; TODO: In introduction, say that this is different because explores *both* GUI and CLI.
 
 ◊; TODO: Move discussion about selective staging to ‘Crafting the Perfect Commit’.
 
