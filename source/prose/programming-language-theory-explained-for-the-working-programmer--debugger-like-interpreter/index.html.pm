@@ -361,6 +361,8 @@ This is a closure over the function ◊code/inline{(λ (y) x)}, in which the ◊
 
 ◊; ---------------------------------------------------------------------------------------------------
 
+◊; TODO: Draw “trees with holes.”
+
 ◊; TODO: ◊margin-note{The Racket ◊code/inline{cond} form is similar to ◊code/inline{if}, except that each of the branches might have multiple expressions.}
 
 ◊; TODO: Section about realistic implementation:
