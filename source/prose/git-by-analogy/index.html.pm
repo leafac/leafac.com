@@ -337,6 +337,8 @@ $ git ◊git/verb{config} \
 
 After running this command, Git starts a text editor with a special file already open. To finally create the commit, one has to write the commit description on that file and close it. Git will then print some statistics about the commit:
 
+◊margin-note{The ◊code/inline{cff98a54} in the output is the unique identifier for the commit, it is different every time.}
+
 ◊code/block{
 ".git/COMMIT_EDITMSG" 10L, 250C written 
 [master (root-commit) cff98a54] Add cookies recipe 
@@ -387,6 +389,60 @@ The command above is a shortcut for convenience. The ◊code/inline{◊git/objec
 On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They make sure the changes to the code do not break the test suite, add tests for any new code, include documentation, and so forth. But, generally, these great commits are not born this way. They are manufactured after the fact, using the advanced techniques laid out on a ◊reference['crafting-the-perfect-commit]{later section}.
 
 Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. It is better to have too many commits than to wait until too many changes have accumulated in the working directory. The commit messages can be notes to self, to inform the writing of a detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
+
+◊section['read-history]{Read History}
+
+◊margin-note{Alternatively, open the ◊acronym{GUI} by running the program ◊code/inline{gitk} instead of ◊code/inline{git ◊git/verb{gui}} on the command line.}
+
+◊new-thought{In our running example} we already have two commits, how do we inspect those ◊emphasis{boxes in the cabinet}? The recommended approach is to use the ◊acronym{GUI}, by going to the menu option ◊emphasis{Repository} > ◊emphasis{Visualise All Branch History}:
+
+◊image["log.png"]{The contents of the cabinet: the project history.}
+
+◊margin-note{Git names the unique identifier for the commits after the hashing algorithm used to calculated it: ◊acronym{SHA1}.}
+
+The top panes show the chain of commits, most recent on top. It includes the title of the commit message, author and date. The lower panes show information about the selected commit. It includes the full commit message, the list of modified files, the changes in those files, and the ◊acronym{SHA1 ID}, which is how Git calls the unique identifier for the commit.
+
+On the command-line, use a combination of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}} to achieve the same effect:
+
+◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
+
+◊full-width{
+  ◊code/block{
+$ git ◊git/verb{log}
+commit ab84ed162d98c5d41f09826408a1412a5ed655f5 (HEAD -> master)
+Author: Leandro Facchinetti <me@leafac.com>
+Date:   Mon Jul 24 17:46:48 2017 -0400
+
+    Add directions
+
+commit 30a7d90741c4ef3544562144a9b4b692ba58e2e0
+Author: Leandro Facchinetti <me@leafac.com>
+Date:   Mon Jul 24 17:46:35 2017 -0400
+
+    Add cookies recipe
+
+$ git ◊git/verb{show} ◊git/object{ab84ed162d98c5d41f09826408a1412a5ed655f5}
+commit ab84ed162d98c5d41f09826408a1412a5ed655f5 (HEAD -> master)
+Author: Leandro Facchinetti <me@leafac.com>
+Date:   Mon Jul 24 17:46:48 2017 -0400
+
+    Add directions
+
+diff --git a/vegan-cookies.txt b/vegan-cookies.txt
+index 5ce4655..11660f0 100644
+--- a/vegan-cookies.txt
++++ b/vegan-cookies.txt
+@@ -3,3 +3,8 @@ Ingredients
+ ...
+
+
++Directions
++
++...
++
++
+  }
+}
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
