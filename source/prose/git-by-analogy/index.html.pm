@@ -266,15 +266,9 @@ Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exis
   ◊no-indent[] The staging area.
 }
 
-◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense together. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray at all—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
+◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense on its own. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray at all—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
 
-◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code/inline{git-add(1)}} manual page.}
-
-It is possible to be selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
-
-◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this missing feature.}
-
-◊image["selective-staging.png"]{Selective staging.}
+◊margin-note{It is possible to be more selective and stage ◊reference['changes]{changes} hunk by hunk or line by line. See ◊reference['crafting-the-perfect-commit]{◊emphasis{Crafting the Perfect Commit}} for more.}
 
 For simplicity, in our first example we will add to the paper tray the scrap of paper representing the creation of the whole ◊code/inline{vegan-cookies.txt} file. The technical names for the paper tray are ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
 
@@ -338,12 +332,10 @@ $ git ◊git/verb{config} \
   ◊git/object{--global core.editor "<EDITOR>"}
   }
 
-  In many cases—particularly for ◊acronym{GUI} text editors—one has to provide a flag to the text editor process for it to work well with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
+  In many cases—particularly for ◊acronym{GUI} text editors—one has to provide extra options to the text editor for it to work well with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
 }
 
-After running this command, Git starts a text editor with a special file already open. One has to write the commit description on that file.
-
-To finally create the commit, on the ◊acronym{CLI} one has to close the special file that Git opened in the text editor for writing the commit message. Git will then print some statistics about the commit:
+After running this command, Git starts a text editor with a special file already open. To finally create the commit, one has to write the commit description on that file and close it. Git will then print some statistics about the commit:
 
 ◊code/block{
 ".git/COMMIT_EDITMSG" 10L, 250C written 
@@ -374,9 +366,9 @@ nothing to commit, working tree clean
 $ echo -e "Directions\n\n...\n\n" >> vegan-cookies.txt
 }
 
-Then, if using the ◊acronym{GUI}, click on ◊emphasis{Rescan}, select the file name under ◊technical-term{Unstaged Changes}, click on ◊emphasis{Stage Changed}, write a message on the lower-right pane and then click on ◊emphasis{Commit}. Alternatively, if using the command line, run the following:
+Then, if using the ◊acronym{GUI}, click on ◊emphasis{Rescan}, select the file name under ◊technical-term{Unstaged Changes}, click on ◊emphasis{Stage Changed}, write a message on the lower-right pane and click on ◊emphasis{Commit}. Alternatively, if using the command line, run the following:
 
-◊margin-note{Use the ◊code/inline{◊git/object{-a}} option only when confident of the changes on the working directory. Generally, it is better to inspect the changes and organize them on the staging area. This is the perfect opportunity to spot unaddressed ◊code/inline{TODO}s left over on the code.}
+◊margin-note{Use the ◊code/inline{◊git/object{-a}} option only when confident of the changes on the working directory. Generally, it is better to inspect the changes and organize them on the staging area. This is the perfect opportunity to spot unaddressed ◊code/inline{TODO}s left over on the code, for example.}
 
 ◊code/block{
 $ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
@@ -384,23 +376,33 @@ $ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
 
 ◊margin-note{The ◊code/inline{◊git/object{-a}} and the ◊code/inline{◊git/object{-m}} options have been condensed into ◊code/inline{◊git/object{-am}}.}
 
-The command above is a shortcut for convenience. The ◊code/inline{◊git/object{-a}} option adds all changes to the index and the ◊code/inline{◊git/object{-m}} option lets us specify the commit message without opening a text editor.
+The command above is a shortcut for convenience. The ◊code/inline{◊git/object{-a}} option adds all changes to the index—subsuming the ◊code/inline{◊git/verb{add}} command—and the ◊code/inline{◊git/object{-m}} option lets us specify the commit message without opening a text editor.
 
 ◊section['fine-points-about-commits]{Fine Points About Commits}
 
 ◊margin-note{For an example of a small personal project in which commits are ◊emphasis{not} carefully crafted, see the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for the website containing this article. For an example of the opposite, see the source for ◊link["https://github.com/git/git/commits/master"]{Git itself}.}
 
-◊new-thought{What constitutes} a meaningful contribution, and, consequently, a commit? The answer to this question depends on who are the potential consumers of this information. On projects of lesser importance, people might only be interested in some aspects of version control, for example, not losing files due to corruption or facilitating collaboration on a small team. In that case, little care goes into crafting meaningful commits and their corresponding commit messages.
+◊new-thought{What constitutes} a meaningful contribution, and, consequently, a commit? The answer to this question depends on who are the potential consumers of this information. On projects of lesser importance, people might only be interested in some aspects of version control, for example, not losing files due to corruption or facilitating collaboration on a small team. In those cases, little care goes into crafting meaningful commits and their corresponding commit messages.
 
-On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊link["http://keepachangelog.com"]{changelog entries}, and a detailed commit message. But, generally, these great commits are not born this way. They are manufactured after the fact, using the advanced techniques laid out in a ◊reference['crafting-the-perfect-commit]{later section}.
+On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They make sure the changes to the code do not break the test suite, add tests for any new code, include documentation, and so forth. But, generally, these great commits are not born this way. They are manufactured after the fact, using the advanced techniques laid out on a ◊reference['crafting-the-perfect-commit]{later section}.
 
-Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. The messages can be notes to self, to inform the writing of the detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
+Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. It is better to have too many commits than to wait until too many changes have accumulated in the working directory. The commit messages can be notes to self, to inform the writing of a detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
 
 ◊; TODO: Move discussion about selective staging to ‘Crafting the Perfect Commit’.
 
 ◊; ◊section['crafting-the-perfect-commit]{Crafting the Perfect Commit}
 
 ◊; Git is flexible and supports different workflows.
+
+◊; make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊link["http://keepachangelog.com"]{changelog entries}, and a detailed commit message
+
+◊; ◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code/inline{git-add(1)}} manual page.}
+
+◊; It is possible to be selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
+
+◊; ◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this missing feature.}
+
+◊; ◊image["selective-staging.png"]{Selective staging.}
 
 ◊; They contain modifications to the code (don’t break tests—git bisect), tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
 
