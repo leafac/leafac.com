@@ -404,8 +404,6 @@ The top panes show the chain of commits, most recent on top. It includes the tit
 
 On the command-line, use a combination of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}} to achieve the same effect:
 
-◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
-
 ◊full-width{
   ◊code/block{
 $ git ◊git/verb{log}
@@ -443,6 +441,8 @@ index 5ce4655..11660f0 100644
 +
   }
 }
+
+◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
