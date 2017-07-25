@@ -396,9 +396,11 @@ Beginners should ◊emphasis{commit early, and commit often}. Anything from a si
 
 ◊new-thought{In our running example} we already have two commits, how do we inspect those ◊emphasis{boxes in the cabinet}? The recommended approach is to use the ◊acronym{GUI}, by going to the menu option ◊emphasis{Repository} > ◊emphasis{Visualise All Branch History}:
 
+◊margin-note{Git names the unique identifier for the commits after the hashing algorithm used to calculated it: ◊acronym{SHA1}.}
+
 ◊image["log.png"]{The contents of the cabinet: the project history.}
 
-◊margin-note{Git names the unique identifier for the commits after the hashing algorithm used to calculated it: ◊acronym{SHA1}.}
+◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
 
 The top panes show the chain of commits, most recent on top. It includes the title of the commit message, author and date. The lower panes show information about the selected commit. It includes the full commit message, the list of modified files, the changes in those files, and the ◊acronym{SHA1 ID}, which is how Git calls the unique identifier for the commit.
 
@@ -442,7 +444,31 @@ index 5ce4655..11660f0 100644
   }
 }
 
-◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
+◊paragraph-separation[]
+
+◊new-thought{Another use case} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file, which have not be subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
+
+On the ◊acronym{GUI}, go back to the window which we used to create a commit—as opposed to the one showing the project history—and use the menu option ◊emphasis{Repository} > ◊emphasis{Browse master’s Files}. This opens a file browser, and selecting a file on it opens another window containing the reconstruction of that file over time, with all the relevant commits. Clicking on section of the file opens information about the particular commit on the bottom pane, and clicking on the commit identifier in blue on the left changes the perspective to show how the file was at that time.
+
+◊image["blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe on the middle, and information about a particular commit on the bottom.}
+
+On the ◊acronym{CLI}, use the ◊code/inline{git ◊git/verb{blame}} command with the name of the file of interest as argument:
+
+◊full-width{
+  ◊code/block{
+$ git ◊git/verb{blame} ◊git/object{vegan-cookies.txt}
+^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  1) Ingredients
+^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  2)
+^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  3) ...
+^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  4)
+^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  5)
+ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  6) Directions
+ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  7)
+ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  8) ...
+ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  9)
+ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400 10)
+  }
+}
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
