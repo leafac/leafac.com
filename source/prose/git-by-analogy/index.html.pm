@@ -446,11 +446,11 @@ index 5ce4655..11660f0 100644
 
 ◊paragraph-separation[]
 
-◊new-thought{Another use case} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file, which have not be subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
+◊new-thought{Another use case} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file that have not been subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
 
 On the ◊acronym{GUI}, go back to the window which we used to create a commit—as opposed to the one showing the project history—and use the menu option ◊emphasis{Repository} > ◊emphasis{Browse master’s Files}. This opens a file browser, and selecting a file on it opens another window containing the reconstruction of that file over time, with all the relevant commits. Clicking on section of the file opens information about the particular commit on the bottom pane, and clicking on the commit identifier in blue on the left changes the perspective to show how the file was at that time.
 
-◊image["blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe on the middle, and information about a particular commit on the bottom.}
+◊image["blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe in the middle, and information about a particular commit on the bottom.}
 
 On the ◊acronym{CLI}, use the ◊code/inline{git ◊git/verb{blame}} command with the name of the file of interest as argument:
 
@@ -469,6 +469,28 @@ ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  9)
 ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400 10)
   }
 }
+
+◊section['navigate-in-history]{Navigate in History}
+
+◊new-thought{Besides reading the history}, as we covered in the ◊reference['read-history]{previous section}, it is be useful to ◊informal{travel in time}, and have the working directory reflect the project state at some time in the past. The boxes (commits) in the cabinet (repository) form a chain, because their labels include a reference to the previous (parent) box. So Git can open each of these boxes in reverse order and apply the changes in them to the working directory, an operation it calls ◊technical-term{checkout}.
+
+On the ◊acronym{GUI}, go to the window with the repository history, which we introduced in the ◊reference['read-history]{previous section}, and copy the identifier for the first commit, in which we added the cookies recipe:
+
+◊image["identifier-for-previous-commit.png"]{The first commit is selected on the top pane, and the identifier is on the right of the button labeled ‘SHA1 ID:’.}
+
+Now, back on the other window, go to ◊emphasis{Branch} > ◊emphasis{Checkout}, and paste the identifier on the dialog box:
+
+◊image["checkout.png"]{The checkout dialog.}
+
+Finally, click on ◊emphasis{Checkout}. A dialog warns about “branches” and “detached checkouts,” we will learn about them on a ◊reference['reference]{later section}, for the time being, it is safe to click ◊emphasis{◊acronym{OK}}:
+
+◊image["detached-checkout.png"]{A dialog warning about a “detached checkout,” which can be ignored for now.}
+
+◊image["after-checkout.png"]{TODO}
+
+If ◊code/inline{vegan-cookies.txt} is open in a text editor, reload it from the file system, and notice that the part added on the second commit regarding directions is no longer there. TODO: CHANGE PRESERVED IN REPOSITORY.
+
+◊; ◊section['reference]{Reference}
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
@@ -507,3 +529,7 @@ ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400 10)
 ◊; ◊margin-note{Pay attention to the line-length limits in carefully constructed commit messages. They are important for people using tools which do not soft-wrap the text, including the ◊acronym{CLI}.}
 
 ◊; ‘rebase --interactive’
+
+◊; TODO: Fix tag for menu options (for example, ‘Repository’ > ‘See all’). For now they are ◊emphasis, but they should be more semantic.
+
+◊; TODO: More semantic tag for file names.
