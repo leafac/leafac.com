@@ -527,9 +527,61 @@ Ingredients
 ...
 }
 
-But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached HEAD.” We address this on the ◊reference['reference]{next section}.
+But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached ◊code/inline{HEAD}.” We address this on the ◊reference['reference]{next section}.
 
-◊; ◊section['reference]{Reference}
+◊section['reference]{Reference}
+
+◊; TODO: Image with index card.
+
+◊new-thought{In our office} metaphor for how Git works, the cabinet contains a chain of boxes. Each box label contains a reference to the parent box, so we can reconstruct the history by following the chain. But how do we know where it starts?
+
+We can borrow the solution used by libraries: index cards. The index cards point to the box that starts the chain. When performing operations on the cabinet, we start by looking the index cards. For example, in a ◊reference['read-history]{previous section}, we asked Git to show the project history, listing each commit. It accomplished that by first consulting an index card. We did not specify which index card it should read, so, by default, it used a special index card which points to the commit currently represented by the working directory. Git calls these index cards ◊technical-term{references} and the special reference which points to the commit currently represented by the working directory is called the ◊code/inline{HEAD}.
+
+Many Git operations implicitly move the ◊code/inline{HEAD}, making it point to a different commit, for example, ◊reference['commit]{commit} and ◊reference['navigate-in-history]{checkout}. On the ◊acronym{GUI}, the ◊code/inline{HEAD} is represented by the yellow dot, as opposed to the blue dots. On the ◊acronym{CLI}, Git is more explicit and includes ◊code/inline{HEAD -> master} in the outputs of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}}. These outputs suggest that the special index card ◊code/inline{HEAD} is not the only kind of reference. In the ◊reference['branch]{next section}, we cover a second kind of reference, and finally solve the “detached ◊code/inline{HEAD}” mystery.
+
+◊section['branch]{Branch}
+
+◊new-thought{The working directory} currently represents our first commit, the cookies recipe in ◊code/inline{vegan-cookies.txt} only has “Ingredients” and no “Directions,” which we only introduced in the second commit. In other words, the ◊code/inline{HEAD} is the first commit. And Git needs an index card (reference) to find the start of the chain of boxes (commits) in the cabinet (repository). From the start, it can follow the chain backwards in time, because each box label contains a reference to its parent. But, when a box is created, it does not know who its children will be, so boxes cannot include references to them. As a result, the commit chain can only be navigated in one direction: backwards. Adding all this information together, we would expect the second commit to be inaccessible, as there is no path from ◊code/inline{HEAD} to it. Yet, the ◊code/inline{GUI} window showing the project history still includes the second commit. How can this be?
+
+An indexing system composed of a single index card would be ineffective. We need more references then just ◊code/inline{HEAD}. In particular, we would like to create arbitrary index cards, pointing to arbitrary boxes, and refer to them by a keyword. For example, an index card could point to the box representing the main version of the project, and refer to it by the keyword ◊emphasis{master}. As ◊code/inline{HEAD} moves around, ◊emphasis{master} is preserved, and we can always come back to the canonical version of the project by ◊reference['navigate-in-history]{navigating to ◊emphasis{master}.}
+
+◊margin-note{The name ◊code/inline{master} is just the default, and there is no special meaning ascribed to it, we could ask Git to use a branch named ◊code/inline{development}, for example.}
+
+Git calls these arbitrary index cards ◊emphasis{branches}, for a reason which will become evident in a ◊reference['tree]{later section}. Moreover, Git is an office robot eager to please and has implicitly maintained a branch pointing to the canonical version of the project for us. Since we created the repository and committed twice, Git has been update this index card up-to-date without us having to ask for it. Also, conveniently, it has identified this branch using the keyword ◊code/inline{master}. In fact, the ◊code/inline{◊git/verb{status}} commands have been telling us that all along, saying “On branch master.”
+
+We are finally in a position in which the “detached ◊code/inline{HEAD}” situation makes sense. When ◊code/inline{HEAD} points to a commit, it can do it directly, or indirectly by pointing to a branch which points to a commit. When we were ◊reference['read-history]{reading the history}, before we ◊reference['navigate-in-history]{navigated back to the first commit}, the ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}} commands on the ◊acronym{CLI} outputted ◊code/inline{HEAD -> master}, which means we were in this latter state: ◊code/inline{HEAD} was pointing to the branch ◊code/inline{master}, which in turn was pointing to a commit. Then, we checked the first commit out, which made ◊code/inline{HEAD} point directly to it, there was no branch intermediating the pointer. This situation is what Git calls “detached ◊code/inline{HEAD}.”
+
+◊margin-note{There is a potential solution to this problem of losing a commit for losing all references to it. Git comes with an advanced command called ◊code/inline{◊git/verb{reflog}}, which lists the commits at which ◊code/inline{HEAD} has recently pointed. If ◊code/inline{HEAD} has recently been pointing at the lost commit, then it is listed by ◊code/inline{◊git/verb{reflog}} and it is possible to copy its identifier and check it out. If enough time has passed, then Git might have run a periodic garbage collection routine, which permanently removes inaccessible commits from the repository. In that case the commit is unrecoverable.}
+
+Besides the gross name, there is nothing wrong with the “detached ◊code/inline{HEAD}” state. It can be useful for exploring the history, conducting quick experiments and so forth. We can even commit while in “detached ◊code/inline{HEAD}” state, and Git will update the ◊code/inline{HEAD} reference automatically. But, if we checkout any other commit or branch after that, then there will be no other references pointing to this newly created commit. And, as mentioned earlier, we can only follow the chain of commits backwards in time, so ◊emphasis{commits created while in detached “detached ◊code/inline{HEAD}” state can become inaccessible and be lost forever}.
+
+Git repositories are immutable and there are very few operations which might result in data loss. This is one of them, which is why Git was so loud when warning about the “detached ◊code/inline{HEAD}” state (and probably why it was so unfortunately named). ◊emphasis{Be careful to avoid data loss when in “detached ◊code/inline{HEAD}” state}. We can solve this situation avoid data loss by creating a new branch, and having it point at the same commit as ◊code/inline{HEAD}: the first commit.
+
+◊; Introduce ‘master’: “we can still see the other commit”
+
+◊; Detached HEAD: HEAD -> master -> commit vs. HEAD -> commit
+
+◊; ◊margin-note{When is it good to be in detached HEAD?}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+◊; ◊section['tree]{Tree}
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
