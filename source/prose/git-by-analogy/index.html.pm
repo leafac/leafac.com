@@ -337,7 +337,7 @@ $ git ◊git/verb{config} \
 
 After running this command, Git starts a text editor with a special file already open. To finally create the commit, one has to write the commit description on that file and close it. Git will then print some statistics about the commit:
 
-◊margin-note{The ◊code/inline{cff98a54} in the output is the unique identifier for the commit, it is different every time.}
+◊margin-note{The ◊code/inline{cff98a54} in the output is the unique identifier for the commit, it is different for each repository.}
 
 ◊code/block{
 ".git/COMMIT_EDITMSG" 10L, 250C written 
@@ -444,6 +444,8 @@ index 5ce4655..11660f0 100644
   }
 }
 
+The snippet above first shows the project history in reverse chronological order. The ◊code/inline{◊git/verb{log}} command lists the boxes labels, with the unique identifier and information about the author, the date at the moment of commit, and the message describing the box contents written by the author. Then, we select a single identifier and use ◊code/inline{◊git/verb{show}} to see the contents of a particular box.
+
 ◊paragraph-separation[]
 
 ◊new-thought{Another use case} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file that have not been subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
@@ -452,7 +454,7 @@ On the ◊acronym{GUI}, go back to the window which we used to create a commit�
 
 ◊image["blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe in the middle, and information about a particular commit on the bottom.}
 
-On the ◊acronym{CLI}, use the ◊code/inline{git ◊git/verb{blame}} command with the name of the file of interest as argument:
+On the ◊acronym{CLI}, use the ◊code/inline{◊git/verb{blame}} command with the name of the file of interest as argument:
 
 ◊full-width{
   ◊code/block{
@@ -472,23 +474,60 @@ ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400 10)
 
 ◊section['navigate-in-history]{Navigate in History}
 
-◊new-thought{Besides reading the history}, as we covered in the ◊reference['read-history]{previous section}, it is be useful to ◊informal{travel in time}, and have the working directory reflect the project state at some time in the past. The boxes (commits) in the cabinet (repository) form a chain, because their labels include a reference to the previous (parent) box. So Git can open each of these boxes in reverse order and apply the changes in them to the working directory, an operation it calls ◊technical-term{checkout}.
+◊new-thought{Besides reading the history}, as we covered in the ◊reference['read-history]{previous section}, one can ◊informal{travel in time}, and have the working directory reflect the project state at some time in the past. The boxes (commits) in the cabinet (repository) form a chain, because their labels include a reference to the previous (parent) box. So Git can open each of these boxes in reverse order and apply the changes in them backwards to the working directory, an operation it calls ◊technical-term{checkout}.
+
+◊margin-note{If the uncommitted changes in the working directory and the changes in checkout do not refer to the same lines of the same files, then checkout succeeds even in an ◊technical-term{dirty} working directory. But having a ◊technical-term{clean} working directory before checkout avoids confusion.}
+
+A necessary precondition for this operation is that the working directory is ◊technical-term{clean}. There should be no pending changes that have not been committed. This is important because checkout modifies the files in the working directory, and uncommitted changes could conflict with those modifications. Our project is already in this ◊technical-term{clean} state, so we can move on.
 
 On the ◊acronym{GUI}, go to the window with the repository history, which we introduced in the ◊reference['read-history]{previous section}, and copy the identifier for the first commit, in which we added the cookies recipe:
 
-◊image["identifier-for-previous-commit.png"]{The first commit is selected on the top pane, and the identifier is on the right of the button labeled ‘SHA1 ID:’.}
+◊image["identifier-for-previous-commit.png"]{The first commit is selected on the top pane, and the identifier is on the right of the button labeled ‘SHA1 ID:’. This identifier changes from repository to repository.}
 
 Now, back on the other window, go to ◊emphasis{Branch} > ◊emphasis{Checkout}, and paste the identifier on the dialog box:
 
 ◊image["checkout.png"]{The checkout dialog.}
 
-Finally, click on ◊emphasis{Checkout}. A dialog warns about “branches” and “detached checkouts,” we will learn about them on a ◊reference['reference]{later section}, for the time being, it is safe to click ◊emphasis{◊acronym{OK}}:
+Finally, click on ◊emphasis{Checkout}. A dialog warns about “branches” and “detached checkouts,” we will learn about them on the following sections. For the time being, it is safe to click ◊emphasis{◊acronym{OK}}:
 
 ◊image["detached-checkout.png"]{A dialog warning about a “detached checkout,” which can be ignored for now.}
 
-◊image["after-checkout.png"]{TODO}
+To check that checkout succeeded, go to the window showing the repository history and select the menu option ◊emphasis{File} > ◊emphasis{Update}. The graph showing the repository history changes, showing the first commit highlighted in yellow. This represents the point in time that the working directory currently reflects:
 
-If ◊code/inline{vegan-cookies.txt} is open in a text editor, reload it from the file system, and notice that the part added on the second commit regarding directions is no longer there. TODO: CHANGE PRESERVED IN REPOSITORY.
+◊image["after-checkout.png"]{After checkout, the current commit is the first in history—in yellow.}
+
+◊margin-note{Many text editors reload files changed in the disk automatically.}
+
+To see the effect of checkout in the working directory, reload ◊code/inline{vegan-cookies.txt} from the disk in the text editor. Notice that the part added on the second commit regarding directions is no longer there. This does not mean that those changes are lost, they are still preserved in the box in the cabinet, and can be recovered any time. It is just the current state of the working directory that reflects an earlier point in history.
+
+To perform a checkout on the ◊acronym{CLI}, first copy the commit identifier for the first commit from the ◊code/inline{◊git/verb{log}} command in the ◊reference['read-history]{previous section}. Then, use the ◊code/inline{◊git/verb{checkout}} command with the identifier as an argument:
+
+◊code/block{
+$ git checkout 30a7d90741c4ef3544562144a9b4b692ba58e2e0
+Note: checking out '30a7d90741c4ef3544562144a9b4b692ba58e2e0'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b <new-branch-name>
+
+HEAD is now at 30a7d90... Add cookies recipe
+}
+
+As before, inspecting ◊code/inline{vegan-cookies.txt} reveals the changes to the working directory:
+
+◊code/block{
+$ cat vegan-cookies.txt
+Ingredients
+
+...
+}
+
+But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached HEAD.” We address this on the ◊reference['reference]{next section}.
 
 ◊; ◊section['reference]{Reference}
 
