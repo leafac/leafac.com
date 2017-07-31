@@ -193,7 +193,7 @@ nothing to commit (create/copy files and use "git add" to track)
   }
 }
 
-The ◊acronym{GUI} indicates that the repository has been created by showing the screen which we explore in a ◊reference['commit]{later section}:
+The ◊acronym{GUI} indicates that the repository has been created by showing the screen which we explore in a ◊reference['commits]{later section}:
 
 ◊image["repository-created.png"]{Repository created successfully.}
 
@@ -294,7 +294,7 @@ Changes to be committed:
 
 Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is on the paper tray and will be part of the next box (commit). The next section addresses this step.
 
-◊section['commit]{Commit}
+◊section['commits]{Commits}
 
 ◊margin-note{
   ◊svg{commit.svg}
@@ -527,19 +527,21 @@ Ingredients
 ...
 }
 
-But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached ◊code/inline{HEAD}.” We address this on the ◊reference['reference]{next section}.
+But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached ◊code/inline{HEAD}.” We address this on the ◊reference['references]{next section}.
 
-◊section['reference]{Reference}
+◊section['references]{References}
 
-◊; TODO: Image with index card.
+◊margin-note{◊svg{references.svg}}
 
 ◊new-thought{In our office} metaphor for how Git works, the cabinet contains a chain of boxes. Each box label contains a reference to the parent box, so we can reconstruct the history by following the chain. But how do we know where it starts?
 
 We can borrow the solution used by libraries: index cards. The index cards point to the box that starts the chain. When performing operations on the cabinet, we start by looking the index cards. For example, in a ◊reference['read-history]{previous section}, we asked Git to show the project history, listing each commit. It accomplished that by first consulting an index card. We did not specify which index card it should read, so, by default, it used a special index card which points to the commit currently represented by the working directory. Git calls these index cards ◊technical-term{references} and the special reference which points to the commit currently represented by the working directory is called the ◊code/inline{HEAD}.
 
-Many Git operations implicitly move the ◊code/inline{HEAD}, making it point to a different commit, for example, ◊reference['commit]{commit} and ◊reference['navigate-in-history]{checkout}. On the ◊acronym{GUI}, the ◊code/inline{HEAD} is represented by the yellow dot, as opposed to the blue dots. On the ◊acronym{CLI}, Git is more explicit and includes ◊code/inline{HEAD -> master} in the outputs of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}}. These outputs suggest that the special index card ◊code/inline{HEAD} is not the only kind of reference. In the ◊reference['branch]{next section}, we cover a second kind of reference, and finally solve the “detached ◊code/inline{HEAD}” mystery.
+Many Git operations implicitly move the ◊code/inline{HEAD}, making it point to a different commit, for example, ◊reference['commits]{commit} and ◊reference['navigate-in-history]{checkout}. On the ◊acronym{GUI}, the ◊code/inline{HEAD} is represented by the yellow dot, as opposed to the blue dots. On the ◊acronym{CLI}, Git is more explicit and includes ◊code/inline{HEAD -> master} in the outputs of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}}. These outputs suggest that the special index card ◊code/inline{HEAD} is not the only kind of reference. In the ◊reference['branches]{next section}, we cover a second kind of reference, and finally solve the “detached ◊code/inline{HEAD}” mystery.
 
-◊section['branch]{Branch}
+◊section['branches]{Branches}
+
+◊margin-note{◊svg{branches.svg}}
 
 ◊new-thought{The working directory} currently represents our first commit, the cookies recipe in ◊code/inline{vegan-cookies.txt} only has “Ingredients” and no “Directions,” which we only introduced in the second commit. In other words, the ◊code/inline{HEAD} is the first commit. And Git needs an index card (reference) to find the start of the chain of boxes (commits) in the cabinet (repository). From the start, it can follow the chain backwards in time, because each box label contains a reference to its parent. But, when a box is created, it does not know who its children will be, so boxes cannot include references to them. As a result, the commit chain can only be navigated in one direction: backwards. Adding all this information together, we would expect the second commit to be inaccessible, as there is no path from ◊code/inline{HEAD} to it. Yet, the ◊code/inline{GUI} window showing the project history still includes the second commit. How can this be?
 
@@ -557,12 +559,9 @@ Besides the gross name, there is nothing wrong with the “detached ◊code/inli
 
 Git repositories are immutable and there are very few operations which might result in data loss. This is one of them, which is why Git was so loud when warning about the “detached ◊code/inline{HEAD}” state (and probably why it was so unfortunately named). ◊emphasis{Be careful to avoid data loss when in “detached ◊code/inline{HEAD}” state}. We can solve this situation avoid data loss by creating a new branch, and having it point at the same commit as ◊code/inline{HEAD}: the first commit.
 
-◊; Introduce ‘master’: “we can still see the other commit”
+◊; NEXT: How to create a commit. It does not automatically check it out!
 
-◊; Detached HEAD: HEAD -> master -> commit vs. HEAD -> commit
-
-◊; ◊margin-note{When is it good to be in detached HEAD?}
-
+◊; ◊margin-note{git checkout -b …}
 
 
 
@@ -582,6 +581,8 @@ Git repositories are immutable and there are very few operations which might res
 
 
 ◊; ◊section['tree]{Tree}
+
+◊; ◊section['remote-setup]{Remote Setup}
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
