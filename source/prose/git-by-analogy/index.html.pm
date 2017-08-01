@@ -231,7 +231,7 @@ Git is longer complaining about the nonexistence of a repository, but it does me
 Currently, our working directory is empty. Let us start by creating a file to contain our first recipe. We can use text editors or any other tool that works on files. If using the command line, run the following:
 
 ◊code/block{
-$ echo -e 'Ingredients\n\n...\n\n' > vegan-cookies.txt
+$ echo -e "Ingredients\n\n...\n\n" >> vegan-cookies.txt
 }
 
 This creates a file name ◊code/inline{vegan-cookies.txt}, which contains the (elided) list of ingredients for ◊link/internal["/cooking/chocolate-chip-cookie/"]{vegan cookies}. Git notices this change, as the following status reveals:
@@ -557,11 +557,114 @@ We are finally in a position in which the “detached ◊code/inline{HEAD}” si
 
 Besides the gross name, there is nothing wrong with the “detached ◊code/inline{HEAD}” state. It can be useful for exploring the history, conducting quick experiments and so forth. We can even commit while in “detached ◊code/inline{HEAD}” state, and Git will update the ◊code/inline{HEAD} reference automatically. But, if we checkout any other commit or branch after that, then there will be no other references pointing to this newly created commit. And, as mentioned earlier, we can only follow the chain of commits backwards in time, so ◊emphasis{commits created while in detached “detached ◊code/inline{HEAD}” state can become inaccessible and be lost forever}.
 
-Git repositories are immutable and there are very few operations which might result in data loss. This is one of them, which is why Git was so loud when warning about the “detached ◊code/inline{HEAD}” state (and probably why it was so unfortunately named). ◊emphasis{Be careful to avoid data loss when in “detached ◊code/inline{HEAD}” state}. We can solve this situation avoid data loss by creating a new branch, and having it point at the same commit as ◊code/inline{HEAD}: the first commit.
+Git repositories are immutable and there are very few operations which might result in data loss. This is one of them, which is why Git was so loud when warning about the “detached ◊code/inline{HEAD}” state (and probably why it was so unfortunately named). ◊emphasis{Be careful to avoid data loss when in “detached ◊code/inline{HEAD}” state}. We can evade this situation avoid data loss by creating a new branch, and have it point at the same commit as ◊code/inline{HEAD}: the first commit.
 
-◊; NEXT: How to create a commit. It does not automatically check it out!
+To create a branch using the ◊acronym{GUI}, select the window for creating commits and use the menu option ◊emphasis{Branch} > ◊emphasis{Create…} A dialog will ask for the name of the branch and extra optional information:
 
-◊; ◊margin-note{git checkout -b …}
+◊figure["branch-create.png"]{The dialog for branch creation.}
+
+Click on the ◊emphasis{Create} button to create a branch and check it out. Then go to the window showing the project history and use the menu option ◊emphasis{File} > ◊emphasis{Update}. The pane updates to show the newly created branch ◊code/inline{brownies}, which points to the first commit. The name ◊code/inline{brownies} is in bold letters, which means ◊code/inline{HEAD} is pointing to this branch, and the dot for this commit is yellow, informing that this still is the commit that the working directory represents. We are no longer in “detached ◊code/inline{HEAD}” state:
+
+◊margin-note{◊svg{brownies-branch.svg}}
+
+◊figure["history-after-branch-creation.png"]{The repository after creating a branch.}
+
+On the ◊acronym{CLI}, create a branch using the ◊code/inline{◊git/verb{branch}} command:
+
+◊code/block{
+$ git ◊git/verb{branch} ◊git/object{brownies}
+}
+
+The silence on the output means the branch was successfully created, but checking the ◊code/inline{◊git/verb{status}} reveals that we are still in “detached ◊code/inline{HEAD}” state:
+
+◊code/block{
+$ git ◊git/verb{status}
+HEAD detached at 30a7d90
+nothing to commit, working tree clean
+}
+
+This happens because ◊code/inline{◊git/verb{branch}} command only creates the branch, it does not automatically check it out. An explicit ◊code/inline{◊git/verb{checkout}} command is necessary:
+
+◊code/block{
+$ git ◊git/verb{checkout} ◊git/object{brownies}
+Switched to branch 'brownies'
+}
+
+Alternatively, the last two commands can be abbreviated with the ◊code/inline{◊git/object{-b}} option to the ◊code/inline{◊git/verb{checkout}} command:
+
+◊code/block{
+$ git ◊git/verb{checkout} ◊git/object{-b brownies}
+Switched to a new branch 'brownies'
+}
+
+◊paragraph-separation[]
+
+◊new-thought{Now it is possible} to navigate in history referring to the names of the branches, instead of the unique identifiers for the commits, which is more convenient. Moreover, the project can evolve in multiple directions at the same time, this is the subject of the ◊reference['tree]{next section}.
+
+◊section['tree]{Tree}
+
+◊margin-note{Readers that prefer the ◊acronym{GUI} should use a text editor and the steps from a ◊reference['commits]{previous section} to create commits and follow along.}
+
+◊new-thought{The current state} of the repository is: there are two commits, one with a full recipe for vegan cookies, another with just the ingredients part; also, there are two branches, called ◊code/inline{master} and ◊code/inline{brownies}, pointing at the second and first commit, respectively; the working directory reflects the time at the first commit, because the ◊code/inline{brownies} branch is checked out.
+
+Let us start working on the ◊code/inline{brownies} recipe:
+
+◊full-width{
+  ◊code/block{
+$ echo -e "Ingredients\n\n...\n\n" >> vegan-brownies.txt
+$ git ◊git/verb{add} ◊git/object{vegan-brownies.txt}
+$ git ◊git/verb{commit} ◊git/object{-m "Start working on vegan brownies"}
+[brownies 9ea8492] Start working on vegan brownies
+ 1 file changed, 5 insertions(+)
+ create mode 100644 vegan-brownies.txt
+  }
+}
+
+Refreshing the window showing the repository history shows the following picture:
+
+◊margin-note{◊svg{brownies-commit.svg}}
+
+◊image["tree.png"]{A tree starting to form in the project history.}
+
+The history of the project has diverged. The original timeline is still there, represented by the ◊code/inline{master} branch. It contains the full recipe for vegan cookies. Alternatively, on the ◊code/inline{brownies} branch, there is the recipe for vegan brownies, but the directions part of the cookies recipe is not there, because it was only added on the second commit of the main timeline. We can checkout the branches to navigate between these parallel universes and see the differences:
+
+◊margin-note{Branches in Git are just references to commits, not copies of the project, which makes them fast and cheap. This was an important feature that set Git apart from other version control systems and led to its popularity.}
+
+◊code/block{
+$ ls
+vegan-brownies.txt	vegan-cookies.txt
+$ cat vegan-cookies.txt
+Ingredients
+
+...
+
+
+$ git ◊git/verb{checkout} ◊git/object{master}
+Switched to branch 'master'
+$ ls
+vegan-cookies.txt
+$ cat vegan-cookies.txt
+Ingredients
+
+...
+
+
+Directions
+
+...
+
+
+}
+
+◊margin-note{◊svg{tree.svg}}
+
+If we keep at this, creating branches and committing on them, then the project history starts to look like a tree, hence the name.
+
+◊; ◊section['merge]{Merge}
+
+◊; No longer looks like a tree.
+
+◊; ◊margin-note{The technical term for this data structure is ◊technical-term{Direct Acyclic Graph (◊acronym{DAG})}.}
 
 
 
@@ -578,9 +681,11 @@ Git repositories are immutable and there are very few operations which might res
 
 
 
+◊; ◊section['tags]{Tags}
 
+◊; ◊section['fine-points-about-branches]{Fine points about branches}
 
-◊; ◊section['tree]{Tree}
+◊; Git is flexible and accommodates different workflows. It is possible to create arbitrary structures of branches. But avoid complexity and long-runnign branches.
 
 ◊; ◊section['remote-setup]{Remote Setup}
 
