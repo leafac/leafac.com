@@ -626,9 +626,11 @@ Refreshing the window showing the repository history shows the following picture
 
 ◊image["tree.png"]{A tree starting to form in the project history.}
 
-The history of the project has diverged. The original timeline is still there, represented by the ◊code/inline{master} branch. It contains the full recipe for vegan cookies. Alternatively, on the ◊code/inline{brownies} branch, there is the recipe for vegan brownies, but the directions part of the cookies recipe is not there, because it was only added on the second commit of the main timeline. We can checkout the branches to navigate between these parallel universes and see the differences:
+The history of the project has diverged. The original timeline is still there, represented by the ◊code/inline{master} branch. It contains the full recipe for vegan cookies. Alternatively, on the ◊code/inline{brownies} branch, there is the recipe for vegan brownies, but the directions part of the cookies recipe is not there, because it was only added on the second commit of the main timeline. We can checkout the branches to navigate between these ◊informal{parallel universes} and see the differences:
 
 ◊margin-note{Branches in Git are just references to commits, not copies of the project, which makes them fast and cheap. This was an important feature that set Git apart from other version control systems and led to its popularity.}
+
+◊margin-note{◊svg{tree.svg}}
 
 ◊code/block{
 $ ls
@@ -656,15 +658,93 @@ Directions
 
 }
 
-◊margin-note{◊svg{tree.svg}}
+If we keep at this, creating branches and committing on them, then the project history starts to look like a tree, hence the name. But creating more and more of these ◊informal{parallel universes} is not enough. Eventually we conclude the development of the brownies recipe, and we want to bring it back to the main line of history for our cookbook project. That is the subject of the ◊reference['merge]{next section}.
 
-If we keep at this, creating branches and committing on them, then the project history starts to look like a tree, hence the name.
+◊section['merge]{Merge}
 
-◊; ◊section['merge]{Merge}
+◊new-thought{We are working} on a recipe for vegan brownies on a separate branch, called ◊code/inline{brownies}. During this process, the main line of development for our cookbook is still ◊code/inline{master}. The two branches can advance with more commits independent of one another—changes in ◊code/inline{brownies} are not seen in ◊code/inline{master} and vice-versa. This is important to prevent interference, it could be hard to write a recipe if the rest of the cookbook keeps changing. For this small project, this might seem like an abundance of caution, but for bigger projects it is an essential feature.
 
-◊; No longer looks like a tree.
+◊margin-note{
+  ◊svg{merge.svg}
 
-◊; ◊margin-note{The technical term for this data structure is ◊technical-term{Direct Acyclic Graph (◊acronym{DAG})}.}
+  ◊no-indent[] The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊acronym{DAG})}.
+}
+
+When the development of the brownies recipe is complete, it is time to bring it to the main line of development, on the ◊code/inline{master} branch. In our running example, the result bringing together the brownies recipe on the ◊code/inline{brownies} branch and the directions for the cookies recipe on the second commit of the ◊code/inline{master} branch. Git calls this operation a ◊technical-term{merge}.
+
+Start by checking ◊code/inline{master} out. On the ◊acronym{GUI}, use the ◊emphasis{Branch} > ◊emphasis{Checkout…} menu option:
+
+◊image["checkout-master.png"]{The checkout dialog.}
+
+Then, use the ◊emphasis{Merge} > ◊emphasis{Local Merge…} menu option, and select to merge the ◊code/inline{brownies} branch:
+
+◊image["merge.png"]{The merge dialog.}
+
+After clicking on the ◊emphasis{Merge} button, the following screen shows that the merge succeeded:
+
+◊image["merge-succeeded.png"]{The merge succeeded.}
+
+To see the effect of the merge, go to the window showing the repository history and select the menu option ◊emphasis{File} > ◊emphasis{Update}:
+
+◊image["history-after-merge.png"]{The project history after the merge.}
+
+The ◊code/inline{brownies} branch remains pointing at the same commit as before, and ◊code/inline{master} has advanced to point at a new commit which has two parents. One of the parents is our second commit, adding directions to the cookies recipe; and the other parent is the commit adding the brownies recipe. Use a text editor to assert that both recipes are in the working directory at the same time.
+
+At this point, it is safe to remove the ◊code/inline{brownies} branch. Use the ◊emphasis{Branch} > ◊emphasis{Delete…} menu option on the main window:
+
+◊image["delete-branch.png"]{The branch deletion dialog.}
+
+Check the branch deletion on the project history by refreshing:
+
+◊image["after-branch-deletion.png"]{History after branch deletion.}
+
+On the ◊acronym{CLI}, start by checking ◊code/inline{master} out using the ◊code/inline{◊git/verb{checkout}} command:
+
+◊code/block{
+$ git ◊git/verb{checkout} ◊git/object{master}
+Switched to branch 'master'
+}
+
+Then, merge the ◊code/inline{brownies} branch using the using the ◊code/inline{◊git/verb{merge}} command:
+
+◊code/block{
+$ git ◊git/verb{merge} ◊git/object{brownies}
+Merge made by the 'recursive' strategy.
+ vegan-brownies.txt | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 vegan-brownies.txt
+}
+
+A text editor will open when running the command above, to allow for customizing the commit message for the merge commit. After finishing the process, observe the situation of the working directory, which contains the changes from both the cookies and the brownies recipes:
+
+◊code/block{
+$ ls
+vegan-brownies.txt	vegan-cookies.txt
+$ cat vegan-cookies.txt
+Ingredients
+
+...
+
+
+Directions
+
+...
+
+
+}
+
+Finally, delete the ◊code/inline{brownies} branch:
+
+◊code/block{
+$ git ◊git/verb{branch} ◊git/object{-d brownies}
+Deleted branch brownies (was 9ea8492).
+}
+
+
+
+
+
+
 
 
 
@@ -727,6 +807,6 @@ If we keep at this, creating branches and committing on them, then the project h
 
 ◊; ‘rebase --interactive’
 
-◊; TODO: Fix tag for menu options (for example, ‘Repository’ > ‘See all’). For now they are ◊emphasis, but they should be more semantic.
+◊; TODO: Fix tag for menu options (for example, ‘Repository’ > ‘See all’). For now they are ◊emphasis, but they should be more semantic. Also, some might be missing the ellipsis.
 
 ◊; TODO: More semantic tag for file names.
