@@ -514,6 +514,13 @@
        code/highlighted]))
   ((default-tag-function 'div #:class "insertion") (string->xexpr code/highlighted)))
 
+(define-component keyboard
+  #:html (default-tag-function 'kbd)
+  #:css (css-expr [kbd ,@font/monospace]))
+
+(define-component path
+  #:html code/inline)
+
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
   #:css (css-expr [span.acronym
@@ -587,6 +594,9 @@
 
 (define-component (subsection key . elements)
   #:html (apply (default-tag-function 'h2) `(,(label key) ,@elements ,(reference/§ key))))
+
+(define-component (appendix key . elements)
+  #:html (apply section key `("Appendix: " ,@elements)))
 
 (define-component paragraph-separation
   #:html (default-tag-function 'div #:class "paragraph-separation insertion")
@@ -833,3 +843,8 @@
 (define-component git/object
   #:html (default-tag-function 'span #:class "git--object")
   #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))
+
+(define-component (placeholder . elements)
+  #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
+  #:css (css-expr [.placeholder #:color ,(dict-ref colorscheme 'blue)]))
+
