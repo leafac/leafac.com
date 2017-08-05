@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{Email Migration: The Ultimate Solution to a Ridiculous Problem}
+ ◊link[#:href ◊absolute-url["/prose/email-migration"]]
+ ◊id{urn:uuid:d69eeb15-e521-4205-92f2-d2e40027a76e}
+ ◊updated{2017-08-05T08:46:37-04:00}
+ ◊summary{I published an article about email migration.}
+}
+
+◊entry{
  ◊title{Programming-Language Theory Explained for the Working Programmer: Simple Interpreter}
  ◊link[#:href ◊absolute-url["/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter"]]
  ◊id{urn:uuid:0c23c7e2-f714-4a1e-a390-3a719fd7287a}
