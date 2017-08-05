@@ -17,7 +17,6 @@
   (let ([date-of-birth (date 1990 10 20)])
     `((name           . ,◊~a{Leandro Facchinetti})
       (author         . ,◊~a{Leandro Facchinetti})
-      (gpg-key-id     . ,◊~a{5925D0683DF3D583})
       (github-handle  . ,◊~a{leafac})
       (personal-email . ,◊~a{me@leafac.com})
       (work-email     . ,◊~a{leandro@jhu.edu})
@@ -390,10 +389,6 @@
 (define-component (email address . elements)
   #:html (apply link (~a "mailto:" address)
                 (if (null? elements) `(,address) elements)))
-
-(define-component (gpg-key-id key-id)
-  #:html (link (~a "http://pgp.mit.edu/pks/lookup?op=vindex&search=0x" key-id)
-               (~a "0x" key-id)))
 
 (define-component (github-user handle)
   #:html (link (~a "https://github.com/" handle) (~a "@" handle)))

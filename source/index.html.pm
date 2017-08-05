@@ -6,6 +6,4 @@
 
 My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link/internal["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
-◊margin-note{Communicate with me securely and privately using ◊link["https://gnupg.org/"]{◊acronym{GPG}}. My key identifier is ◊gpg-key-id[◊(dict-ref personal-data 'gpg-key-id)].}
-
 Keep up with my productions with the ◊link/internal["/feed.atom"]{Atom feed}. Get ◊link/internal["/contact"]{in touch} by writing to ◊email[◊(dict-ref personal-data 'personal-email)].
