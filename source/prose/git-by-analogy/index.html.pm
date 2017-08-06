@@ -740,6 +740,29 @@ $ git ◊git/verb{branch} ◊git/object{-d brownies}
 Deleted branch brownies (was 9ea8492).
 }
 
+◊paragraph-separation[]
+
+◊new-thought{Iterate on the process} above and, eventually, a version of the cookbook will be ready for release. It does not mean that work on it will halt, but that a certain point in history is special, and we want to mark it. That is the topic of the ◊reference['tags]{next section}.
+
+◊section['tags]{Tags}
+
+◊new-thought{Tags are the last} kind of ◊refernece['references]{reference} covered in this article. They are similar to ◊reference['branches]{branches} in that they point to arbitrary commits and are identified by a name. The difference is that they ◊emphasis{do not move}. Tags are immutable, they always point to the same commit at which they pointed when created. Their main utility is to mark special points in history, for example, released versions or the last version before a big structural change on the project.
+
+To create a tag on the ◊acronym{GUI}, go to the window showing the project history, right-click on the commit of interest and use the ◊emphasis{Create tag} option:
+
+◊image["tag.png"]{Tag creation.}
+
+After clicking on the ◊emphasis{Tag} button, the project history shows the tag:
+
+◊image["history-after-tag.png"]{Project history with a tag.}
+
+On the ◊acronym{CLI}, the process is similar to creating a branch. First, checkout the commit of interest, then run the following command:
+
+◊code/block{
+$ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
+}
+
+◊; NEXT: Motivate workflow: flexibility.
 
 
 
@@ -761,9 +784,19 @@ Deleted branch brownies (was 9ea8492).
 
 
 
-◊; ◊section['tags]{Tags}
 
-◊; ◊section['fine-points-about-branches]{Fine points about branches}
+
+
+
+
+
+
+
+
+
+
+
+◊; ◊section['workflow]{Workflow}
 
 ◊; Git is flexible and accommodates different workflows. It is possible to create arbitrary structures of branches. But avoid complexity and long-runnign branches.
 
@@ -783,7 +816,7 @@ Deleted branch brownies (was 9ea8492).
 
 ◊; ------------------ APPENDIX -----------------------------------
 
-◊; ◊section['crafting-the-perfect-commit]{Crafting the Perfect Commit}
+◊; ◊appendix['crafting-the-perfect-commit]{Crafting the Perfect Commit}
 
 ◊; Git is flexible and supports different workflows.
 
@@ -810,3 +843,5 @@ Deleted branch brownies (was 9ea8492).
 ◊; TODO: Fix tag for menu options (for example, ‘Repository’ > ‘See all’). For now they are ◊emphasis, but they should be more semantic. Also, some might be missing the ellipsis.
 
 ◊; TODO: More semantic tag for file names.
+
+◊; TODO: Redo all the images of the GUI up to ‘Tag’, using the proper capturing tool with the space bar??
