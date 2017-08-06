@@ -762,7 +762,17 @@ On the ◊acronym{CLI}, the process is similar to creating a branch. First, chec
 $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 }
 
-◊; NEXT: Motivate workflow: flexibility.
+◊paragraph-separation[]
+
+◊new-thought{Changes, commits, references}, branches, merges and tags. These are the core concepts for working effectively with Git on a single machine. They are flexible features, which accommodate diverse workflows, from big distributed teams developing big projects to a single person versioning a single file. On the ◊references['workflow]{following section} we cover a simple workflow that brings together all the concepts presented thus far.
+
+◊section['workflow]{Workflow}
+
+◊new-thought{There does not exist} a single workflow with Git that comprehends all the different features and use cases. Git is a flexible tool which accommodates a wide variety of needs. It is possible to create complex schemes to organize branches and these might solve problems common in big companies and projects. But most Git users avoid this complexity, and follow the streamlined workflow which we present in this section. It is in the sweet spot between simplicity, flexibility, and a rich and useful project history.
+
+◊; NEXT: GitHub flow.
+
+◊; Avoid long-runnign branches.
 
 
 
@@ -795,10 +805,6 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 
 
-
-◊; ◊section['workflow]{Workflow}
-
-◊; Git is flexible and accommodates different workflows. It is possible to create arbitrary structures of branches. But avoid complexity and long-runnign branches.
 
 ◊; ◊section['remote-setup]{Remote Setup}
 
