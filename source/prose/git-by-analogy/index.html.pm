@@ -686,6 +686,12 @@ After clicking on the ◊emphasis{Merge} button, the following screen shows that
 
 To see the effect of the merge, go to the window showing the repository history and select the menu option ◊emphasis{File} > ◊emphasis{Update}:
 
+◊margin-note{
+  There is a special case of merge when the branch being merged is a direct successor of the current branch. It is not necessary to create a new merge commit with the tips of the two branches as parents, because advancing the pointer is enough to merge the two lines of history. Git calls this a ◊technical-term{fast-forward}. The following example shows a merge of the ◊code/inline{cupcakes} branch into ◊code/inline{master}. The ◊code/inline{master} branch advanced to match ◊code/inline{cupcakes}, but no new merge commits are created:
+
+  ◊no-indent[] ◊svg{fast-forward.svg}
+}
+
 ◊image["history-after-merge.png"]{The project history after the merge.}
 
 The ◊code/inline{brownies} branch remains pointing at the same commit as before, and ◊code/inline{master} has advanced to point at a new commit which has two parents. One of the parents is our second commit, adding directions to the cookies recipe; and the other parent is the commit adding the brownies recipe. Use a text editor to assert that both recipes are in the working directory at the same time.
@@ -762,17 +768,6 @@ On the ◊acronym{CLI}, the process is similar to creating a branch. First, chec
 $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 }
 
-◊paragraph-separation[]
-
-◊new-thought{Changes, commits, references}, branches, merges and tags. These are the core concepts for working effectively with Git on a single machine. They are flexible features, which accommodate diverse workflows, from big distributed teams developing big projects to a single person versioning a single file. On the ◊references['workflow]{following section} we cover a simple workflow that brings together all the concepts presented thus far.
-
-◊section['workflow]{Workflow}
-
-◊new-thought{There does not exist} a single workflow with Git that comprehends all the different features and use cases. Git is a flexible tool which accommodates a wide variety of needs. It is possible to create complex schemes to organize branches and these might solve problems common in big companies and projects. But most Git users avoid this complexity, and follow the streamlined workflow which we present in this section. It is in the sweet spot between simplicity, flexibility, and a rich and useful project history.
-
-◊; NEXT: GitHub flow.
-
-◊; Avoid long-runnign branches.
 
 
 
@@ -809,6 +804,18 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 ◊; ◊section['remote-setup]{Remote Setup}
 
 ◊; ◊section['remote-repository]{Remote Repository}
+
+◊; ◊paragraph-separation[]
+
+◊; ◊new-thought{Changes, commits, references}, branches, merges and tags. These are the core concepts for working effectively with Git on a single machine. They are flexible features, which accommodate diverse workflows, from big distributed teams developing big projects to a single person versioning a single file. On the ◊references['workflow]{following section} we cover a simple workflow that brings together all the concepts presented thus far.
+
+◊; ◊section['workflow]{Workflow}
+
+◊; ◊new-thought{There does not exist} a single workflow with Git that comprehends all the different features and use cases. Git is a flexible tool which accommodates a wide variety of needs. It is possible to create complex schemes to organize branches and these might solve problems common in big companies and projects. But most Git users avoid this complexity, and follow the streamlined workflow which we present in this section. It is in the sweet spot between simplicity, flexibility, and a rich and useful project history.
+
+◊; GitHub flow: https://guides.github.com/introduction/flow/
+
+◊; Avoid long-runnign branches.
 
 ◊; ◊section['where-to-learn-more-about-git]{Where to Learn More About Git?}
 
