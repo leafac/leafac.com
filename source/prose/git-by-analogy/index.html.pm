@@ -752,6 +752,8 @@ Deleted branch brownies (was 9ea8492).
 
 ◊section['tags]{Tags}
 
+◊margin-note{◊svg{tag.svg}}
+
 ◊new-thought{Tags are the last} kind of ◊refernece['references]{reference} covered in this article. They are similar to ◊reference['branches]{branches} in that they point to arbitrary commits and are identified by a name. The difference is that they ◊emphasis{do not move}. Tags are immutable, they always point to the same commit at which they pointed when created. Their main utility is to mark special points in history, for example, released versions or the last version before a big structural change on the project.
 
 To create a tag on the ◊acronym{GUI}, go to the window showing the project history, right-click on the commit of interest and use the ◊emphasis{Create tag} option:
@@ -768,44 +770,65 @@ On the ◊acronym{CLI}, the process is similar to creating a branch. First, chec
 $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 }
 
+◊paragraph-separation[]
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-◊; ◊section['remote-setup]{Remote Setup}
+◊new-thought{This concludes} the overview of the basic features for using Git locally. Next, we discuss how to distribute the repository to remote computers.
 
 ◊; ◊section['remote-repository]{Remote Repository}
 
+◊; Analogy (fax machine)
+◊; GitHub (example, popular) / gitlab bitbucket / any other machine would work
+◊; speed-dial ‘git remote add …’ (phrasal verb)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+◊; ◊section['aside-a-primer-to-public-key-cryptography]{Aside: A Primer to Public-Key Cryptography}
+
+◊; ◊section['connect-to-remote]{Connect to Remote}
+
+◊; ◊section['communicate-with-remote]{Communicate with Remote}
+
+◊; push, fetch+merge, pull
+
 ◊; ◊paragraph-separation[]
+
+◊; BUILD UP TO “COLLABORATING”
 
 ◊; ◊new-thought{Changes, commits, references}, branches, merges and tags. These are the core concepts for working effectively with Git on a single machine. They are flexible features, which accommodate diverse workflows, from big distributed teams developing big projects to a single person versioning a single file. On the ◊references['workflow]{following section} we cover a simple workflow that brings together all the concepts presented thus far.
 
