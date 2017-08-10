@@ -45,7 +45,7 @@ For the rest of this article, we cover the most common use cases for Git, organi
  ◊no-indent[] GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
 }
 
-◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['remote-repository]{In a later section}, when we discuss using Git with remote computers, we will use GitHub because it is the most popular choice, but the distinction should be clear.
+◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['remote-repositories]{In a later section}, when we discuss using Git with remote computers, we will use GitHub because it is the most popular choice, but the distinction should be clear.
 
 ◊section['an-aside-about-git-commands]{An Aside About Git Commands}
 
@@ -774,7 +774,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊new-thought{This concludes} the overview of the basic features for using Git locally. Next, we discuss how to distribute the repository to remote computers.
 
-◊; ◊section['remote-repository]{Remote Repository}
+◊; ◊section['remote-repositories]{Remote Repositories}
 
 ◊; Analogy (fax machine)
 ◊; GitHub (example, popular) / gitlab bitbucket / any other machine would work
