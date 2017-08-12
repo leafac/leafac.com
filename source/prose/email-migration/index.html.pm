@@ -17,7 +17,7 @@ In fact, people on the Internet have suggested this method before. And they reco
 
 ◊new-thought{In this article}, we introduce an alternative that brings together the two non-solutions discussed above. ◊emphasis{It is the ultimate solution to the ridiculous problem of email migration}. It is a compromise between running conversion tools locally and using a remote email server to intermediate the migration: ◊emphasis{setup a temporary local email server}.
 
-◊full-width{◊svg{migration.svg}}
+◊figure{◊svg{migration.svg}}
 
 ◊section['setup]{Setup}
 
