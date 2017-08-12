@@ -4,4 +4,4 @@
 
 ◊margin-note{◊figure{◊svg{◊source-path{/assets/images/broken-link.svg}}}}
 
-◊new-thought{If you think} there should be a page here, please ◊link/internal["/contact"]{report it}.
+◊new-thought{If you think} there should be a page here, please ◊email[◊(dict-ref personal-data 'personal-email)]{report it}.
