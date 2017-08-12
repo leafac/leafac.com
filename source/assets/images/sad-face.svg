@@ -5,11 +5,35 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="93.516678"
    height="99.253365"
    viewBox="0 0 93.516678 99.253365"
    id="svg2"
-   version="1.1">
+   version="1.1"
+   sodipodi:docname="sad-face.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="719"
+     id="namedview7"
+     showgrid="false"
+     inkscape:zoom="2.3777531"
+     inkscape:cx="47.178904"
+     inkscape:cy="49.626682"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg2" />
   <defs
      id="defs4" />
   <metadata
@@ -24,13 +48,9 @@
       </cc:Work>
     </rdf:RDF>
   </metadata>
-  <g
-     transform="matrix(5.8188159,0,0,6.1757649,-283.73609,-106.82643)"
-     id="text5348"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.75px;line-height:1000%;font-family:'Fira Sans';-inkscape-font-specification:'Fira Sans, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1">
-    <path
-       id="path5353"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.75px;line-height:1000%;font-family:FontAwesome;-inkscape-font-specification:'FontAwesome, Normal';text-align:start;writing-mode:lr-tb;text-anchor:start;fill:#657b83"
-       d="m 60.815397,27.342327 c 0,-0.366211 -0.303432,-0.669643 -0.669643,-0.669643 l -6.696428,0 c -0.366211,0 -0.669643,0.303432 -0.669643,0.669643 0,0.366211 0.303432,0.669643 0.669643,0.669643 l 6.696428,0 c 0.366211,0 0.669643,-0.303432 0.669643,-0.669643 z m -5.357143,-4.6875 c 0,-0.742885 -0.596401,-1.339286 -1.339286,-1.339286 -0.742885,0 -1.339285,0.596401 -1.339285,1.339286 0,0.742885 0.5964,1.339286 1.339285,1.339286 0.742885,0 1.339286,-0.596401 1.339286,-1.339286 z m 5.357143,0 c 0,-0.742885 -0.596401,-1.339286 -1.339286,-1.339286 -0.742885,0 -1.339285,0.596401 -1.339285,1.339286 0,0.742885 0.5964,1.339286 1.339285,1.339286 0.742885,0 1.339286,-0.596401 1.339286,-1.339286 z m 2.678571,2.678572 c 0,3.693498 -3.002929,6.696428 -6.696428,6.696428 -3.693499,0 -6.696429,-3.00293 -6.696429,-6.696428 0,-3.693499 3.00293,-6.696429 6.696429,-6.696429 3.693499,0 6.696428,3.00293 6.696428,6.696429 z m 1.339286,0 c 0,-4.436384 -3.59933,-8.035715 -8.035714,-8.035715 -4.436384,0 -8.035714,3.599331 -8.035714,8.035715 0,4.436383 3.59933,8.035714 8.035714,8.035714 4.436384,0 8.035714,-3.599331 8.035714,-8.035714 z" />
-  </g>
+  <path
+     inkscape:connector-curvature="0"
+     d="m 70.137509,62.033353 c 0,-2.261633 -1.765615,-4.135557 -3.896529,-4.135557 H 27.275698 c -2.130914,0 -3.896529,1.873924 -3.896529,4.135557 0,2.261633 1.765615,4.135558 3.896529,4.135558 H 66.24098 c 2.130914,0 3.896529,-1.873925 3.896529,-4.135558 z M 38.96528,33.084455 c 0,-4.587883 -3.470347,-8.271115 -7.793059,-8.271115 -4.322711,0 -7.793052,3.683232 -7.793052,8.271115 0,4.587884 3.470341,8.271116 7.793052,8.271116 4.322712,0 7.793059,-3.683232 7.793059,-8.271116 z m 31.172229,0 c 0,-4.587883 -3.470348,-8.271115 -7.793059,-8.271115 -4.322711,0 -7.793052,3.683232 -7.793052,8.271115 0,4.587884 3.470341,8.271116 7.793052,8.271116 4.322711,0 7.793059,-3.683232 7.793059,-8.271116 z m 15.586112,16.542231 c 0,22.810176 -17.473491,41.355565 -38.965282,41.355565 -21.491791,0 -38.9652877,-18.545389 -38.9652877,-41.355565 0,-22.810181 17.4734967,-41.3555708 38.9652877,-41.3555708 21.491791,0 38.965282,18.5453898 38.965282,41.3555708 z m 7.793058,0 C 93.516679,22.228622 72.572841,-3.0150841e-7 46.758339,-3.0150841e-7 20.943837,-3.0150841e-7 -1.5581666e-6,22.228622 -1.5581666e-6,49.626686 -1.5581666e-6,77.024745 20.943837,99.253367 46.758339,99.253367 c 25.814502,0 46.75834,-22.228622 46.75834,-49.626681 z"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.75px;line-height:1000%;font-family:FontAwesome;-inkscape-font-specification:'FontAwesome, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:5.99463415px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     id="path5353" />
 </svg>
