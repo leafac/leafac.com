@@ -65,7 +65,7 @@ Suppose one wants to write an application that tracks information about bicycle 
 
 ◊margin-note{Encoding abstractions in simpler terms is the job of most compilers. They receive as input a program in a language with more features than the machine code they output. So the techniques we introduce are related to the transformations a compiler would apply to a source program. But we are looking for the essence of programming languages, therefore the language we are targeting is even simpler than machine code.}
 
-◊margin-note{◊svg{convenience-vs-simplicity.svg}}
+◊margin-note{◊svg{images/convenience-vs-simplicity.svg}}
 
 Bicycle-trip information is not an essential feature of programming languages, that is why they do not have it. But that is not a problem, because the key observation is that ◊emphasis{any feature a language does not have, we can encode in terms of simpler features}. Most features included in most programming languages are non-essential—like bicycle-trip tracking would be—they exist solely for convenience. Not having a feature makes the language simpler, having it makes it more convenient. Our goal in this article is to explore this simplicity–convenience spectrum, removing one feature at a time, in the direction of simplicity. When we can no longer ◊informal{encode features away} without breaking the program, what remain are the ◊emphasis{essential features}—we will then have reached the essence of programming languages.
 
@@ -304,7 +304,7 @@ The following listing is an example of ◊code/inline{+} in use:
 ◊new-thought{For the last operation} on numbers, ◊code/inline{sub1}, we start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero} instead of ◊code/inline{-1} as it should according to mathematics.
 
 ◊margin-note{
- ◊svg{sub1.svg}
+ ◊svg{images/sub1.svg}
 
   ◊no-indent[] Note that in the figure above there are ◊emphasis{five} blue arrows, representing the steps we take to calculate ◊code/inline{sub1} of ◊code/inline{five}.
 }
@@ -557,7 +557,7 @@ One more time, the answer is that data structures in general are ◊informal{enc
 ◊margin-note{Encodings only depend on previously defined data structures, so the whole construction is well-founded.}
 
 ◊figure{
- ◊svg{data-structures.svg}
+ ◊svg{images/data-structures.svg}
 }
 
 In the figure above, lists (also known as arrays and vectors) are composed of pairs of pairs and a distinguished empty pair. This distinguished empty pair could be represented by, for example, ◊technical-term{false}—anything outside the range of possible list elements (integers, in the example) would work.
@@ -745,7 +745,7 @@ What can we use to fill in the ◊code/inline{___} above? A good candidate is �
 
 This choice is similar to the one in the line ◊code/inline{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code/inline{sum-up-to} as the ◊code/inline{sum-up-to/rest} argument when calling ◊code/inline{sum-up-to} itself. So, in ◊code/inline{sum-up-to}’s body, when ◊code/inline{sum-up-to/rest} is called, this is actually a call to ◊code/inline{sum-up-to}. And ◊code/inline{sum-up-to} requires a ◊code/inline{sum-up-to/rest} as its first argument:
 
-◊image["incomplete-self-passing.png"]{The code above, failing to execute because of the missing argument.}
+◊image["images/incomplete-self-passing.png"]{The code above, failing to execute because of the missing argument.}
 
 Again, we can use the same idea as before to solve this issue. We can pass ◊code/inline{sum-up-to/rest} itself as the argument:
 
