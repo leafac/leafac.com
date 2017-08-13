@@ -18,7 +18,7 @@
   - Not all browsers render the same, test!
 - Won’t teach you the basics: see the good tutorials that come with Inkscape and some primer to SVG. This article addresses the gaps.
 
-◊section['basics-to-learn']{Basics to Learn}
+◊section['basics-to-learn]{Basics to Learn}
 
 - Select and move.
   - Select in group.
@@ -32,6 +32,10 @@
 - Snapping (turn off).
 - Group & Layers.
   - Navigation.
+- Objects attributes: ID & CLASS.
+- Markers.
+- Clones.
+- XML (defs).
 
 ◊section['setup]{Setup}
 
@@ -57,7 +61,7 @@
 
 ◊section['fix-misaligned-markers-in-middle-of-a-path]{Fix Misaligned Markers in the Middle of a Path}
 
-◊section['arrows-poiting-the-wrong-way']{Arrows Pointing the Wrong Way}
+◊section['arrows-poiting-the-wrong-way]{Arrows Pointing the Wrong Way}
 
 - Solution: final nodes cannot be straight nodes. They have to be curvy (Bézier).
 
@@ -77,7 +81,7 @@
 
 - Solution: round up document size.
 
-◊section['save-optimized-version']{Save Optimized Version}
+◊section['save-optimized-version]{Save Optimized Version}
 
 - Save space.
 - Remove quirks.
