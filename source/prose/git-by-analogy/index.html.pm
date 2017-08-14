@@ -16,7 +16,7 @@
 ◊margin-note{
  The author uses Git in almost everything he does on the computer: from keeping ◊link/internal["/cooking"]{vegan recipes} to the preparation of this article. The person below does not.
 
- ◊no-indent[] ◊svg{filesystem-without-version-control.svg}
+ ◊no-indent[] ◊svg{images/filesystem-without-version-control.svg}
 }
 
 Most companies use some version control system, Git being the most popular choice. Also, most free-software projects use version control systems and accept contributions through them. So knowing Git is a highly marketable skill. Moreover, version control can improve overall quality of digital life: version diary entries, recipes, lecture notes, and any other personal projects. Git users do not lose work for technical issues, and have a rich history of the progress over time to compare, explore and experiment with different versions of a project.
@@ -34,13 +34,13 @@ In this tutorial, we show how to perform operations both with the ◊acronym{CLI
 For the rest of this article, we cover the most common use cases for Git, organized by three overarching goals: (1) using Git alone on a local computer; (2) using Git with remote computers; and (3) using Git with collaborators.
 
 ◊full-width{
- ◊figure{◊svg{goals.svg}}
+ ◊figure{◊svg{images/goals.svg}}
 }
 
 ◊section['an-aside-about-github]{An Aside About GitHub}
 
 ◊margin-note{
- ◊svg{git-vs-github.svg}
+ ◊svg{images/git-vs-github.svg}
 
  ◊no-indent[] GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
 }
@@ -51,7 +51,7 @@ For the rest of this article, we cover the most common use cases for Git, organi
 
 ◊new-thought{Git provides} many distinct operations under the ◊code/inline{git} executable, which is called in a way that resembles natural language, for example:
 
-◊figure{◊svg{grammar.svg}}
+◊figure{◊svg{images/grammar.svg}}
 
 In general, Git commands follow the pattern:
 
@@ -118,14 +118,14 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 The result is a fatal error: Git cannot find the repository. The ◊acronym{GUI}, also detects that there is no repository:
 
-◊image["gui-initial-screen.png"]{The initial screen.}
+◊image["images/gui-initial-screen.png"]{The initial screen.}
 
 The next sections explain what is a repository, and how to create one.
 
 ◊section['office]{Office}
 
 ◊margin-note{
-  ◊svg{desktop.svg}
+  ◊svg{images/desktop.svg}
 
   ◊no-indent[] The office metaphor on a desktop.
 }
@@ -135,7 +135,7 @@ The next sections explain what is a repository, and how to create one.
 To address this problem in an office, one could try a new system. After changing a file, one would take note of the change in a slip of paper, mentioning what was the previous content and what is the new content. One could use a paper tray to organize these slips of paper. After significant progress—which might mean anything from changing a single line to changing dozens of files—one could move these slips of paper into a box, label the box, and put the box in a cabinet for storage. The label on the box would contain the identification of the author of the changes, the current date and time, a high-level description of the box contents, an unique identifier for the current box and a reference to the identifier of the previous box.
 
 ◊margin-note{
-  ◊svg{office.svg}
+  ◊svg{images/office.svg}
 
   ◊no-indent[] The extended office metaphor for version control, with Git as a robot in the middle managing the process.
 }
@@ -149,7 +149,7 @@ In the computer, this robot is Git. It extends the office analogy of files and f
 ◊section['working-directory]{Working Directory}
 
 ◊margin-note{
-  ◊svg{working-directory.svg}
+  ◊svg{images/working-directory.svg}
 
   ◊no-indent[] The working directory.
 }
@@ -168,7 +168,7 @@ $ cd recipes/
 ◊section['repository]{Repository}
 
 ◊margin-note{
-  ◊svg{repository.svg}
+  ◊svg{images/repository.svg}
 
   ◊no-indent[] The empty repository.
 }
@@ -197,7 +197,7 @@ nothing to commit (create/copy files and use "git add" to track)
 
 The ◊acronym{GUI} indicates that the repository has been created by showing the screen which we explore in a ◊reference['commits]{later section}:
 
-◊image["repository-created.png"]{Repository created successfully.}
+◊image["images/repository-created.png"]{Repository created successfully.}
 
 Git is longer complaining about the nonexistence of a repository, but it does mention two new concepts: ◊technical-term{branches} and ◊technical-term{commits}. We explore these terms in later sections, but first we need to consider some trade-offs regarding repository creation.
 
@@ -223,7 +223,7 @@ Git is longer complaining about the nonexistence of a repository, but it does me
 ◊section['changes]{Changes}
 
 ◊margin-note{
-  ◊svg{changes.svg}
+  ◊svg{images/changes.svg}
 
   ◊no-indent[] The changes.
 }
@@ -256,14 +256,14 @@ nothing added to commit but untracked files present (use "git add" to track)
 
 On the ◊acronym{GUI}, click on the ◊technical-term{Rescan} button to see the new file listed under ◊technical-term{Unstaged Changes}:
 
-◊image["status-after-file-creation.png"]{Status after file creation.}
+◊image["images/status-after-file-creation.png"]{Status after file creation.}
 
 Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exists in the working directory, but it is not known by Git. It is an “untracked file,” which is an “unstaged change.” But these messages about files are just for user convenience; internally, Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, we do not represent changes with complete files, but with scraps of paper containing ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions.
 
 ◊section['staging-area]{Staging Area}
 
 ◊margin-note{
-  ◊svg{staging-area.svg}
+  ◊svg{images/staging-area.svg}
 
   ◊no-indent[] The staging area.
 }
@@ -299,7 +299,7 @@ Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is
 ◊section['commits]{Commits}
 
 ◊margin-note{
-  ◊svg{commit.svg}
+  ◊svg{images/commit.svg}
 
   ◊no-indent[] A single commit.
 }
@@ -318,7 +318,7 @@ Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is
 
 All information except for the last are added to the label automatically by Git. The commit author has to provide a description of its contents; on the ◊acronym{GUI}, this goes on the bottom-right pane:
 
-◊figure{◊svg{gui-commit.svg}}
+◊figure{◊svg{images/gui-commit.svg}}
 
 The equivalent on the ◊acronym{CLI} is the following:
 
@@ -352,7 +352,7 @@ On the ◊acronym{GUI}, one clicks on ◊technical-term{Commit}, and the status 
 
 ◊margin-note{The word “commit” can be a noun, meaning the box containing changes, or a verb, meaning the act of creating the box.}
 
-◊image["after-first-commit.png"]{After first commit.}
+◊image["images/after-first-commit.png"]{After first commit.}
 
 Now our cabinet (repository) contains the first labeled box (commit). The paper tray (staging area) is empty and Git gives us a new empty box to fill with the next changes to the project. Asking for the current status confirms that:
 
@@ -400,7 +400,7 @@ Beginners should ◊emphasis{commit early, and commit often}. Anything from a si
 
 ◊margin-note{Git names the unique identifier for the commits after the hashing algorithm used to calculated it: ◊acronym{SHA1}.}
 
-◊image["log.png"]{The contents of the cabinet: the project history.}
+◊image["images/log.png"]{The contents of the cabinet: the project history.}
 
 ◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
 
@@ -454,7 +454,7 @@ The snippet above first shows the project history in reverse chronological order
 
 On the ◊acronym{GUI}, go back to the window which we used to create a commit—as opposed to the one showing the project history—and use the menu option ◊emphasis{Repository} > ◊emphasis{Browse master’s Files}. This opens a file browser, and selecting a file on it opens another window containing the reconstruction of that file over time, with all the relevant commits. Clicking on section of the file opens information about the particular commit on the bottom pane, and clicking on the commit identifier in blue on the left changes the perspective to show how the file was at that time.
 
-◊image["blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe in the middle, and information about a particular commit on the bottom.}
+◊image["images/blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe in the middle, and information about a particular commit on the bottom.}
 
 On the ◊acronym{CLI}, use the ◊code/inline{◊git/verb{blame}} command with the name of the file of interest as argument:
 
@@ -484,19 +484,19 @@ A necessary precondition for this operation is that the working directory is ◊
 
 On the ◊acronym{GUI}, go to the window with the repository history, which we introduced in the ◊reference['read-history]{previous section}, and copy the identifier for the first commit, in which we added the cookies recipe:
 
-◊image["identifier-for-previous-commit.png"]{The first commit is selected on the top pane, and the identifier is on the right of the button labeled ‘SHA1 ID:’. This identifier changes from repository to repository.}
+◊image["images/identifier-for-previous-commit.png"]{The first commit is selected on the top pane, and the identifier is on the right of the button labeled ‘SHA1 ID:’. This identifier changes from repository to repository.}
 
 Now, back on the other window, go to ◊emphasis{Branch} > ◊emphasis{Checkout}, and paste the identifier on the dialog box:
 
-◊image["checkout.png"]{The checkout dialog.}
+◊image["images/checkout.png"]{The checkout dialog.}
 
 Finally, click on ◊emphasis{Checkout}. A dialog warns about “branches” and “detached checkouts,” we will learn about them on the following sections. For the time being, it is safe to click ◊emphasis{◊acronym{OK}}:
 
-◊image["detached-checkout.png"]{A dialog warning about a “detached checkout,” which can be ignored for now.}
+◊image["images/detached-checkout.png"]{A dialog warning about a “detached checkout,” which can be ignored for now.}
 
 To check that checkout succeeded, go to the window showing the repository history and select the menu option ◊emphasis{File} > ◊emphasis{Update}. The graph showing the repository history changes, showing the first commit highlighted in yellow. This represents the point in time that the working directory currently reflects:
 
-◊image["after-checkout.png"]{After checkout, the current commit is the first in history—in yellow.}
+◊image["images/after-checkout.png"]{After checkout, the current commit is the first in history—in yellow.}
 
 ◊margin-note{Many text editors reload files changed in the disk automatically.}
 
@@ -533,7 +533,7 @@ But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊
 
 ◊section['references]{References}
 
-◊margin-note{◊svg{references.svg}}
+◊margin-note{◊svg{images/references.svg}}
 
 ◊new-thought{In our office} metaphor for how Git works, the cabinet contains a chain of boxes. Each box label contains a reference to the parent box, so we can reconstruct the history by following the chain. But how do we know where it starts?
 
@@ -543,7 +543,7 @@ Many Git operations implicitly move the ◊code/inline{HEAD}, making it point to
 
 ◊section['branches]{Branches}
 
-◊margin-note{◊svg{branches.svg}}
+◊margin-note{◊svg{images/branches.svg}}
 
 ◊new-thought{The working directory} currently represents our first commit, the cookies recipe in ◊code/inline{vegan-cookies.txt} only has “Ingredients” and no “Directions,” which we only introduced in the second commit. In other words, the ◊code/inline{HEAD} is the first commit. And Git needs an index card (reference) to find the start of the chain of boxes (commits) in the cabinet (repository). From the start, it can follow the chain backwards in time, because each box label contains a reference to its parent. But, when a box is created, it does not know who its children will be, so boxes cannot include references to them. As a result, the commit chain can only be navigated in one direction: backwards. Adding all this information together, we would expect the second commit to be inaccessible, as there is no path from ◊code/inline{HEAD} to it. Yet, the ◊code/inline{GUI} window showing the project history still includes the second commit. How can this be?
 
@@ -563,13 +563,13 @@ Git repositories are immutable and there are very few operations which might res
 
 To create a branch using the ◊acronym{GUI}, select the window for creating commits and use the menu option ◊emphasis{Branch} > ◊emphasis{Create…} A dialog will ask for the name of the branch and extra optional information:
 
-◊figure["branch-create.png"]{The dialog for branch creation.}
+◊figure["images/branch-create.png"]{The dialog for branch creation.}
 
 Click on the ◊emphasis{Create} button to create a branch and check it out. Then go to the window showing the project history and use the menu option ◊emphasis{File} > ◊emphasis{Update}. The pane updates to show the newly created branch ◊code/inline{brownies}, which points to the first commit. The name ◊code/inline{brownies} is in bold letters, which means ◊code/inline{HEAD} is pointing to this branch, and the dot for this commit is yellow, informing that this still is the commit that the working directory represents. We are no longer in “detached ◊code/inline{HEAD}” state:
 
-◊margin-note{◊svg{brownies-branch.svg}}
+◊margin-note{◊svg{images/brownies-branch.svg}}
 
-◊figure["history-after-branch-creation.png"]{The repository after creating a branch.}
+◊figure["images/history-after-branch-creation.png"]{The repository after creating a branch.}
 
 On the ◊acronym{CLI}, create a branch using the ◊code/inline{◊git/verb{branch}} command:
 
@@ -624,15 +624,15 @@ $ git ◊git/verb{commit} ◊git/object{-m "Start working on vegan brownies"}
 
 Refreshing the window showing the repository history shows the following picture:
 
-◊margin-note{◊svg{brownies-commit.svg}}
+◊margin-note{◊svg{images/brownies-commit.svg}}
 
-◊image["tree.png"]{A tree starting to form in the project history.}
+◊image["images/tree.png"]{A tree starting to form in the project history.}
 
 The history of the project has diverged. The original timeline is still there, represented by the ◊code/inline{master} branch. It contains the full recipe for vegan cookies. Alternatively, on the ◊code/inline{brownies} branch, there is the recipe for vegan brownies, but the directions part of the cookies recipe is not there, because it was only added on the second commit of the main timeline. We can checkout the branches to navigate between these ◊informal{parallel universes} and see the differences:
 
 ◊margin-note{Branches in Git are just references to commits, not copies of the project, which makes them fast and cheap. This was an important feature that set Git apart from other version control systems and led to its popularity.}
 
-◊margin-note{◊svg{tree.svg}}
+◊margin-note{◊svg{images/tree.svg}}
 
 ◊code/block{
 $ ls
@@ -667,7 +667,7 @@ If we keep at this, creating branches and committing on them, then the project h
 ◊new-thought{We are working} on a recipe for vegan brownies on a separate branch, called ◊code/inline{brownies}. During this process, the main line of development for our cookbook is still ◊code/inline{master}. The two branches can advance with more commits independent of one another—changes in ◊code/inline{brownies} are not seen in ◊code/inline{master} and vice-versa. This is important to prevent interference, it could be hard to write a recipe if the rest of the cookbook keeps changing. For this small project, this might seem like an abundance of caution, but for bigger projects it is an essential feature.
 
 ◊margin-note{
-  ◊svg{merge.svg}
+  ◊svg{images/merge.svg}
 
   ◊no-indent[] The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊acronym{DAG})}.
 }
@@ -676,35 +676,35 @@ When the development of the brownies recipe is complete, it is time to bring it 
 
 Start by checking ◊code/inline{master} out. On the ◊acronym{GUI}, use the ◊emphasis{Branch} > ◊emphasis{Checkout…} menu option:
 
-◊image["checkout-master.png"]{The checkout dialog.}
+◊image["images/checkout-master.png"]{The checkout dialog.}
 
 Then, use the ◊emphasis{Merge} > ◊emphasis{Local Merge…} menu option, and select to merge the ◊code/inline{brownies} branch:
 
-◊image["merge.png"]{The merge dialog.}
+◊image["images/merge.png"]{The merge dialog.}
 
 After clicking on the ◊emphasis{Merge} button, the following screen shows that the merge succeeded:
 
-◊image["merge-succeeded.png"]{The merge succeeded.}
+◊image["images/merge-succeeded.png"]{The merge succeeded.}
 
 To see the effect of the merge, go to the window showing the repository history and select the menu option ◊emphasis{File} > ◊emphasis{Update}:
 
 ◊margin-note{
   There is a special case of merge when the branch being merged is a direct successor of the current branch. It is not necessary to create a new merge commit with the tips of the two branches as parents, because advancing the pointer is enough to merge the two lines of history. Git calls this a ◊technical-term{fast-forward}. The following example shows a merge of the ◊code/inline{cupcakes} branch into ◊code/inline{master}. The ◊code/inline{master} branch advanced to match ◊code/inline{cupcakes}, but no new merge commits are created:
 
-  ◊no-indent[] ◊svg{fast-forward.svg}
+  ◊no-indent[] ◊svg{images/fast-forward.svg}
 }
 
-◊image["history-after-merge.png"]{The project history after the merge.}
+◊image["images/history-after-merge.png"]{The project history after the merge.}
 
 The ◊code/inline{brownies} branch remains pointing at the same commit as before, and ◊code/inline{master} has advanced to point at a new commit which has two parents. One of the parents is our second commit, adding directions to the cookies recipe; and the other parent is the commit adding the brownies recipe. Use a text editor to assert that both recipes are in the working directory at the same time.
 
 At this point, it is safe to remove the ◊code/inline{brownies} branch. Use the ◊emphasis{Branch} > ◊emphasis{Delete…} menu option on the main window:
 
-◊image["delete-branch.png"]{The branch deletion dialog.}
+◊image["images/delete-branch.png"]{The branch deletion dialog.}
 
 Check the branch deletion on the project history by refreshing:
 
-◊image["after-branch-deletion.png"]{History after branch deletion.}
+◊image["images/after-branch-deletion.png"]{History after branch deletion.}
 
 On the ◊acronym{CLI}, start by checking ◊code/inline{master} out using the ◊code/inline{◊git/verb{checkout}} command:
 
@@ -754,17 +754,17 @@ Deleted branch brownies (was 9ea8492).
 
 ◊section['tags]{Tags}
 
-◊margin-note{◊svg{tag.svg}}
+◊margin-note{◊svg{images/tag.svg}}
 
 ◊new-thought{Tags are the last} kind of ◊refernece['references]{reference} covered in this article. They are similar to ◊reference['branches]{branches} in that they point to arbitrary commits and are identified by a name. The difference is that they ◊emphasis{do not move}. Tags are immutable, they always point to the same commit at which they pointed when created. Their main utility is to mark special points in history, for example, released versions or the last version before a big structural change on the project.
 
 To create a tag on the ◊acronym{GUI}, go to the window showing the project history, right-click on the commit of interest and use the ◊emphasis{Create tag} option:
 
-◊image["tag.png"]{Tag creation.}
+◊image["images/tag.png"]{Tag creation.}
 
 After clicking on the ◊emphasis{Tag} button, the project history shows the tag:
 
-◊image["history-after-tag.png"]{Project history with a tag.}
+◊image["images/history-after-tag.png"]{Project history with a tag.}
 
 On the ◊acronym{CLI}, the process is similar to creating a branch. First, checkout the commit of interest, then run the following command:
 
@@ -866,7 +866,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; ◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this missing feature.}
 
-◊; ◊image["selective-staging.png"]{Selective staging.}
+◊; ◊image["images/selective-staging.png"]{Selective staging.}
 
 ◊; They contain modifications to the code (don’t break tests—git bisect), tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
 
