@@ -42,9 +42,9 @@ For the rest of this article, we cover the most common use cases for Git, organi
 ◊section['an-aside-about-github]{An Aside About GitHub}
 
 ◊margin-note{
- ◊svg{images/git-vs-github.svg}
+ ◊figure{◊svg{images/git-vs-github.svg}}
 
- ◊no-indent[] GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
+ GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
 }
 
 ◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['remote-repositories]{In a later section}, when we discuss using Git with remote computers, we will use GitHub because it is the most popular choice, but the distinction should be clear.
@@ -127,9 +127,9 @@ The next sections explain what is a repository, and how to create one.
 ◊section['office]{Office}
 
 ◊margin-note{
-  ◊svg{images/desktop.svg}
+  ◊figure{◊svg{images/desktop.svg}}
 
-  ◊no-indent[] The office metaphor on a desktop.
+  The office metaphor on a desktop.
 }
 
 ◊new-thought{Modern operating system’s} ◊acronym{GUI}s make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track a project’s history over time. One could use, for example, a copying machine to record different versions as files change. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to inspect the differences, attribute the changes to different people in the project, collaborate and experiment. Unsurprisingly, these are the exact same issues that arise when using the computer.
@@ -137,9 +137,9 @@ The next sections explain what is a repository, and how to create one.
 To address this problem in an office, one could try a new system. After changing a file, one would take note of the change in a slip of paper, mentioning what was the previous content and what is the new content. One could use a paper tray to organize these slips of paper. After significant progress—which might mean anything from changing a single line to changing dozens of files—one could move these slips of paper into a box, label the box, and put the box in a cabinet for storage. The label on the box would contain the identification of the author of the changes, the current date and time, a high-level description of the box contents, an unique identifier for the current box and a reference to the identifier of the previous box.
 
 ◊margin-note{
-  ◊svg{images/office.svg}
+  ◊figure{◊svg{images/office.svg}}
 
-  ◊no-indent[] The extended office metaphor for version control, with Git as a robot in the middle managing the process.
+  The extended office metaphor for version control, with Git as a robot in the middle managing the process.
 }
 
 With this system, the result would be a chain of boxes that record the history of the project in an organized and predictable manner. There is still only one working copy of the files, but it is possible to recreate the project’s history and recollect who changed what, when and why, by looking at the boxes.
@@ -151,9 +151,9 @@ In the computer, this robot is Git. It extends the office analogy of files and f
 ◊section['working-directory]{Working Directory}
 
 ◊margin-note{
-  ◊svg{images/working-directory.svg}
+  ◊figure{◊svg{images/working-directory.svg}}
 
-  ◊no-indent[] The working directory.
+  The working directory.
 }
 
 ◊new-thought{The first component} of this analogy that we explore is the files and the folders, in which work happens. They correspond to the filesystem which already exists in the computer, and Git calls them the ◊technical-term{working directory}. Apart from this special terminology, there is nothing special about the ◊technical-term{working directory}; tools like text editors can work on these files oblivious of the version control system.
@@ -170,9 +170,9 @@ $ cd recipes/
 ◊section['repository]{Repository}
 
 ◊margin-note{
-  ◊svg{images/repository.svg}
+  ◊figure{◊svg{images/repository.svg}}
 
-  ◊no-indent[] The empty repository.
+  The empty repository.
 }
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
@@ -225,9 +225,9 @@ Git is longer complaining about the nonexistence of a repository, but it does me
 ◊section['changes]{Changes}
 
 ◊margin-note{
-  ◊svg{images/changes.svg}
+  ◊figure{◊svg{images/changes.svg}}
 
-  ◊no-indent[] The changes.
+  The changes.
 }
 
 ◊new-thought{As the project} evolves, people modify the files in the working directory. On our extended office metaphor for version control, this requires taking notes of what changed in slips of paper. For example, to modify a line in a file, it is necessary to register the previous contents of that line as well as the new contents. This is a non-trivial amount of work, but fortunately we have Git as our robot managing the tedious parts. Its first task is to detect changes in the working directory.
@@ -265,9 +265,9 @@ Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exis
 ◊section['staging-area]{Staging Area}
 
 ◊margin-note{
-  ◊svg{images/staging-area.svg}
+  ◊figure{◊svg{images/staging-area.svg}}
 
-  ◊no-indent[] The staging area.
+  The staging area.
 }
 
 ◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense on its own. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray at all—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
@@ -301,9 +301,9 @@ Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is
 ◊section['commits]{Commits}
 
 ◊margin-note{
-  ◊svg{images/commit.svg}
+  ◊figure{◊svg{images/commit.svg}}
 
-  ◊no-indent[] A single commit.
+  A single commit.
 }
 
 ◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
@@ -669,9 +669,9 @@ If we keep at this, creating branches and committing on them, then the project h
 ◊new-thought{We are working} on a recipe for vegan brownies on a separate branch, called ◊code/inline{brownies}. During this process, the main line of development for our cookbook is still ◊code/inline{master}. The two branches can advance with more commits independent of one another—changes in ◊code/inline{brownies} are not seen in ◊code/inline{master} and vice-versa. This is important to prevent interference, it could be hard to write a recipe if the rest of the cookbook keeps changing. For this small project, this might seem like an abundance of caution, but for bigger projects it is an essential feature.
 
 ◊margin-note{
-  ◊svg{images/merge.svg}
+  ◊figure{◊svg{images/merge.svg}}
 
-  ◊no-indent[] The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊acronym{DAG})}.
+  The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊acronym{DAG})}.
 }
 
 When the development of the brownies recipe is complete, it is time to bring it to the main line of development, on the ◊code/inline{master} branch. In our running example, the result bringing together the brownies recipe on the ◊code/inline{brownies} branch and the directions for the cookies recipe on the second commit of the ◊code/inline{master} branch. Git calls this operation a ◊technical-term{merge}.
@@ -693,7 +693,7 @@ To see the effect of the merge, go to the window showing the repository history 
 ◊margin-note{
   There is a special case of merge when the branch being merged is a direct successor of the current branch. It is not necessary to create a new merge commit with the tips of the two branches as parents, because advancing the pointer is enough to merge the two lines of history. Git calls this a ◊technical-term{fast-forward}. The following example shows a merge of the ◊code/inline{cupcakes} branch into ◊code/inline{master}. The ◊code/inline{master} branch advanced to match ◊code/inline{cupcakes}, but no new merge commits are created:
 
-  ◊no-indent[] ◊svg{images/fast-forward.svg}
+  ◊figure{◊svg{images/fast-forward.svg}}
 }
 
 ◊image["images/history-after-merge.png"]{The project history after the merge.}

@@ -330,7 +330,6 @@
                      (+ .insertion aside aside &) (+ .insertion aside aside aside &)
                      (+ h1 aside &) (+ h1 aside aside &) (+ h1 aside aside aside &)
                      (+ h2 aside &) (+ h2 aside aside &) (+ h2 aside aside aside &)
-                     (+ .no-indent &)
                      #:text-indent 0]]
                    [(: & first-of-type) #:text-indent 0 !important]]))
 
@@ -602,9 +601,6 @@
 
 (define-component new-line
   #:html (default-tag-function 'br))
-
-(define-component no-indent
-  #:html (default-tag-function 'div #:class "no-indent"))
 
 (define-component big-separation
   #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))
