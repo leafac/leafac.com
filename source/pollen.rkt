@@ -264,6 +264,13 @@
    [(: & last-child)
     #:margin-right 0]))
 
+(define ruler-left-spacing
+  (css-expr #:padding (rem ,(modular-scale -4))
+            (#:left ,size/indentation
+             #:left (apply calc (- ,size/indentation ,size/ruler/thick)))
+            #:margin (#:top (rem ,(modular-scale 0))
+                      #:bottom (rem ,(modular-scale 0)))))
+
 ;; COMPONENTS ----------------------------------------------------------------------------------------
 
 (define-component (root . elements)
@@ -442,11 +449,7 @@
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:border-left
                     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
-                    #:padding (rem ,(modular-scale -4))
-                    (#:left ,size/indentation
-                     #:left (apply calc (- ,size/indentation ,size/ruler/thick)))
-                    #:margin (#:top (rem ,(modular-scale 0))
-                              #:bottom (rem ,(modular-scale 0)))]
+                    ,@ruler-left-spacing]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
                     #:float right
                     #:clear right
@@ -838,6 +841,18 @@
 (define-component git/object
   #:html (default-tag-function 'span #:class "git--object")
   #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))
+
+(define-component git/gui
+  #:html (default-tag-function 'div #:class "git--gui")
+  #:css (css-expr [.git--gui
+                   #:border-left (,size/ruler/thick solid ,(dict-ref colorscheme 'violet))
+                   ,@ruler-left-spacing]))
+
+(define-component git/cli
+  #:html (default-tag-function 'div #:class "git--cli")
+  #:css (css-expr [.git--cli
+                   #:border-left (,size/ruler/thick solid ,(dict-ref colorscheme 'yellow))
+                   ,@ruler-left-spacing]))
 
 (define-component (placeholder . elements)
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
