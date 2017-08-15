@@ -842,17 +842,30 @@
   #:html (default-tag-function 'span #:class "git--object")
   #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))
 
+(define git/gui/color (dict-ref colorscheme 'violet))
+(define git/cli/color (dict-ref colorscheme 'yellow))
+
 (define-component git/gui
   #:html (default-tag-function 'div #:class "git--gui")
   #:css (css-expr [.git--gui
-                   #:border-left (,size/ruler/thick solid ,(dict-ref colorscheme 'violet))
+                   #:border-left (,size/ruler/thick solid ,git/gui/color)
                    ,@ruler-left-spacing]))
 
 (define-component git/cli
   #:html (default-tag-function 'div #:class "git--cli")
   #:css (css-expr [.git--cli
-                   #:border-left (,size/ruler/thick solid ,(dict-ref colorscheme 'yellow))
+                   #:border-left (,size/ruler/thick solid ,git/cli/color)
                    ,@ruler-left-spacing]))
+
+(define-component git/gui/inline
+  #:html (default-tag-function 'span #:class "git--gui--inline")
+  #:css (css-expr [.git--gui--inline
+                   #:color ,git/gui/color]))
+
+(define-component git/cli/inline
+  #:html (default-tag-function 'span #:class "git--cli--inline")
+  #:css (css-expr [.git--cli--inline
+                   #:color ,git/cli/color]))
 
 (define-component (placeholder . elements)
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))

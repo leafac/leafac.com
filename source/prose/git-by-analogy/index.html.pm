@@ -1,11 +1,11 @@
 #lang pollen
 
 ◊define-meta[title]{Git by Analogy}
-◊define-meta[date]{2017-07-06}
+◊define-meta[date]{2017-08-15}
 
-◊margin-note{To follow the command-line snippets, this article assumes familiarity with basic command line skills: navigating the filesystem, creating directories and so forth. But following the command-line snippets is optional, one can use a ◊acronym{GUI} instead.}
+◊margin-note{Sections about the ◊git/gui/inline{◊acronym{GUI} are outlined in violet}, and sections about the ◊git/cli/inline{◊acronym{CLI} are outlined in yellow}. The latter are optional and assume familiarity with the command line: navigating the filesystem, creating files and directories, and so forth.}
 
-◊new-thought{What does} ◊link["https://git-scm.com/"]{Git} do? How to start with Git? Where to learn more about Git? This article addresses these three questions, not with the purpose of turning the reader into an specialist, but that of exploring the basic underlying concepts and the most commonly used operations. The space of educational material about Git ◊reference['where-to-learn-more-about-git]{is enormous}, but it tends to be either a very short introduction without all the information necessary to effectively use the tool, or a book covering Git in more depth than a beginner would want. This article distinguishes itself for being the middle ground. Git is a flexible tool which accommodates very different workflows, so, to avoid as general as a book, this article comes with some opinions, covering the workflow most commonly used by teams in the industry and free-software development. Also, the exposition is directed by analogies, which makes the ideas relatable and more friendly to beginners. Still, we do not shy away from going into some of the ◊emphasis{whys}, beyond the ◊emphasis{hows}. Finally, for completeness and practicality, we cover both the Command-Line Interface (◊acronym{CLI}) and one Graphical User Interface (◊acronym{GUI}).
+◊new-thought{What does} ◊link["https://git-scm.com/"]{Git} do? How to start with Git? Where to learn more about Git? There are ◊reference['where-to-learn-more-about-git]{innumerous articles, videos, courses, books and so forth} addressing these questions, but they tend to either be short introductions or in-depth explorations. A beginner does not learn enough to be effective in the former, and is overwhelmed by information in the latter. This article is the middle ground: it answers the questions that opened this paragraph, but does not try to be comprehensive. We only cover the most common operations and workflows, but we cover them in detail, going beyond a ◊emphasis{how-to} tutorial. The presentation is directed by analogies which make the core concepts more relatable and friendly, and the practical sections cover both a Graphical User Interface (◊acronym{GUI}) front-end and the Command-Line Interface (◊acronym{CLI}).
 
 ◊section['what-does-git-do]{What does Git do?}
 
