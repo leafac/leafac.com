@@ -9,17 +9,19 @@
 
 ◊section['what-does-git-do]{What does Git do?}
 
-◊margin-note{Some tools have simple, embedded version control systems, for example, ◊link["https://docs.google.com"]{Google Docs} allows traversing the history and comparing different versions of a file. Git is a more sophisticated version of this, with more features and support for a whole project, instead of a single document.}
-
-◊new-thought{Git solves} the problem of ◊technical-term{version control}. The name might sound unfamiliar, but the problem is not: keeping track of the changes in a project as it evolves, and collaborating on it with other people. The version control problem occurs whenever someone copies a file to modify it and compare the versions, sends a project as an email attachment, or loses work due to a corrupted or accidentally deleted file. Git is a ◊technical-term{version control system}, which solves the version control problem by tracking the project’s history.
-
 ◊margin-note{
  The author uses Git in almost everything he does on the computer: from keeping ◊link/internal["/cooking"]{vegan recipes} to the preparation of this article. The person below does not.
 
  ◊no-indent[] ◊svg{images/filesystem-without-version-control.svg}
 }
 
-Most companies use some version control system, Git being the most popular choice. Also, most free-software projects use version control systems and accept contributions through them. So knowing Git is a highly marketable skill. Moreover, version control can improve overall quality of digital life: version diary entries, recipes, lecture notes, and any other personal projects. Git users do not lose work for technical issues, and have a rich history of the progress over time to compare, explore and experiment with different versions of a project.
+◊new-thought{Git solves} the problem of ◊technical-term{version control}. The name might sound unfamiliar, but the problem is not: tracking the evolution of a project, and collaborating with other people. Most people already use rudimentary version control systems, maintaining multiple slightly modified versions of the same files, and sending files to collaborators as email attachments. But this method has limitations, for example, it can be difficult to identify the differences between two versions and to associate the changes to their authors. In general, this is error-prone and involves a great deal of tedious work.
+
+◊margin-note{Some tools include simple version control systems for the files they create that are not as rudimentary as the manual method described above and not as complete as Git. For example, ◊link["https://docs.google.com"]{Google Docs} allows traversing the history and comparing different versions of a file. Git is a more sophisticated version of this, with more features and support for whole projects, instead of single documents.}
+
+Git is a ◊technical-term{version control system}, which streamlines these processes. It tracks the history of a project, associating each line to its author, creation date, and so forth. Users can investigate and navigate on this history, retrieve changes arbitrarily in time, compare different versions and more. Finally, they can distribute all this information to collaborators and manage their contributions. Git is agnostic about the tools used to work on the project (for example, text editors) and is suitable for most kinds of projects and teams.
+
+Because of this widespread applicability Git is increasingly popular, ◊link["https://rhodecode.com/insights/version-control-systems-2016"]{ranking first among version control systems by a large margin}. ◊emphasis{Git is a highly marketable skill}. Companies and free-software teams alike use Git in projects of all sizes, primarily for software development, but also for everything from making ◊link["https://www.wired.com/2012/08/bundestag/"]{laws} to ◊link["/cooking"]{cookbooks}.
 
 ◊section['how-to-start-with-git]{How to start with Git?}
 
