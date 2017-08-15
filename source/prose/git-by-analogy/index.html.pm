@@ -12,7 +12,7 @@
 ◊margin-note{
  The author uses Git in almost everything he does on the computer: from keeping ◊link/internal["/cooking"]{vegan recipes} to the preparation of this article. The person below does not:
 
- ◊no-indent[] ◊svg{images/filesystem-without-version-control.svg}
+ ◊figure{◊svg{images/filesystem-without-version-control.svg}}
 }
 
 ◊new-thought{Git solves} the problem of ◊technical-term{version control}. The name might sound unfamiliar, but the problem is not: tracking the evolution of a project, and collaborating with other people. Most people already use rudimentary version control systems, maintaining multiple slightly modified versions of the same files, and sending files to collaborators as email attachments. But this method has limitations, for example, it can be difficult to identify the differences between two versions and to associate the changes to their authors. In general, this is error-prone and involves a great deal of tedious work.
