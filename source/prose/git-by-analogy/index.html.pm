@@ -776,49 +776,49 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊new-thought{This concludes} the overview of the basic features for using Git locally. Next, we discuss how to distribute the repository to remote computers.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ◊; ◊section['remote-repositories]{Remote Repositories}
 
 ◊; Analogy (fax machine)
 ◊; GitHub (example, popular) / gitlab bitbucket / any other machine would work
 ◊; speed-dial ‘git remote add …’ (phrasal verb)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ◊; ◊section['aside-a-primer-to-public-key-cryptography]{Aside: A Primer to Public-Key Cryptography}
 
