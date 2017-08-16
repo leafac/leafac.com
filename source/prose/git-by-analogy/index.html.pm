@@ -25,7 +25,7 @@ Because of this widespread applicability Git is increasingly popular, ◊link["h
 
 ◊section['how-to-start-with-git]{How to start with Git?}
 
-◊new-thought{First}, ◊link["https://www.git-scm.com/"]{install it}. Git comes with a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{CLI} is more complete, it supports all Git operations and is more widely available, even in remote machines with only terminal access, for example. But it is less ergonomic and more difficult to learn. This article describes ◊git/cli/inline{how to use the ◊acronym{CLI} in sections outlined in yellow}, but they are optional and targeted at readers already familiar with the command line.
+◊new-thought{First}, ◊link["https://www.git-scm.com/"]{install Git}. It comes with a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{CLI} is more complete, it supports all Git operations and is more widely available, even in remote machines with only terminal access, for example. But it is less ergonomic and more difficult to learn. This article describes ◊git/cli/inline{how to use the ◊acronym{CLI} in sections outlined in yellow}, but they are optional and targeted at readers already familiar with the command line.
 
 ◊margin-note{The author uses the Git client in ◊link["https://atom.io/"]{Atom} and the ◊acronym{GUI} that comes with Git, rarely using the ◊acronym{CLI}.}
 
@@ -42,10 +42,36 @@ For most of the rest of this article, we cover the common use cases for Git, org
 ◊margin-note{
  ◊figure{◊svg{images/git-vs-github.svg}}
 
- GitHub is to Git as Gmail is to email. They are popular commercial tools which make the underlying technology easier to use and provide convenient extensions, but are not essential. One can use Git without GitHub the same way one can send emails from providers other than Gmail.
+ GitHub is to Git as ◊link["https://gmail.com"]{Gmail} is to email. GitHub and Gmail are popular commercial tools which make the corresponding underlying technologies more ergonomic and provide convenient extensions. But they are not the same as the underlying technologies: one can use Git without GitHub the same way one can send emails from providers other than Gmail.
 }
 
-◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool, which is free software; and GitHub is a company and a commercial product built around Git which provides hosting and extended functionality. ◊reference['remote-repositories]{In a later section}, when we discuss using Git with remote computers, we will use GitHub because it is the most popular choice, but the distinction should be clear.
+◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool; and GitHub is both a company and a product built around Git which provides hosting and extended functionality. When we discuss using Git with remote computers ◊reference['remote-repositories]{on a later section}, we use GitHub for the example because it is the prevalent hosting provider, and the distinction between Git and GitHub is important.
+
+◊git/gui{
+  ◊section['gui-structure]{◊acronym{GUI} Structure}
+
+  ◊new-thought{The ◊acronym{GUI} we use} in this article comes bundled in the Git installation. Unfortunately, the installation process generally does not create launchers for the ◊acronym{GUI}, so even readers interested only in the ◊acronym{GUI} sections must launch it from the ◊acronym{CLI}. ◊emphasis{This is the only obligatory interaction with the command line}.
+
+  The ◊acronym{GUI} comes in two parts. The main one is launched with the following command:
+
+  ◊code/block{
+$ git ◊git/verb{gui}
+  }
+
+  The result from running the command above should be the following welcome screen:
+
+  ◊image["images/welcome-screen.png"]{Welcome screen.}
+
+  This is the main application to which we refer in most of the article. The second part of the ◊acronym{GUI} is specifically for visualizing the project history. It can be launched from the main window or directly with the following command:
+
+  ◊code/block{
+$ gitk
+  }
+
+  At the moment this terminates with an error, because there is no project, so there is no history to show yet:
+
+  ◊image["images/cannot-find-git-repository.png"]{Error trying to visualize inexistent project history.}
+}
 
 ◊section['an-aside-about-git-commands]{An Aside About Git Commands}
 
@@ -59,16 +85,6 @@ In general, Git commands follow the pattern:
 
 ◊code/block{
 $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
-}
-
-◊section['an-aside-about-the-gui]{An Aside About the ◊acronym{GUI}}
-
-◊new-thought{Generally}, Git does not install desktop shortcuts for the ◊acronym{GUI}. Start it by running the following command line:
-
-◊margin-note{For the reader who is only interested in the ◊acronym{GUI} portion of this article and wants to avoid the command-line, this is the only necessary command.}
-
-◊code/inline{
-$ git ◊git/verb{gui}
 }
 
 ◊section['local-setup]{Local Setup}
