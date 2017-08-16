@@ -54,6 +54,8 @@ For most of the rest of this article, we cover the common use cases for Git, org
 
   The ◊acronym{GUI} comes in two parts. The main one is launched with the following command:
 
+  ◊margin-note{The ◊code/inline{$} represents the prompt and should not be typed.}
+
   ◊code/block{
 $ git ◊git/verb{gui}
   }
@@ -73,18 +75,20 @@ $ gitk
   ◊image["images/cannot-find-git-repository.png"]{Error trying to visualize inexistent project history.}
 }
 
-◊section['an-aside-about-git-commands]{An Aside About Git Commands}
+◊git/cli{
+  ◊section['cli-structure]{◊acronym{CLI} Structure}
 
-◊new-thought{Git provides} many distinct operations under the ◊code/inline{git} executable, which is called in a way that resembles natural language, for example:
+  ◊new-thought{There is only one} Git executable: ◊code/inline{git}. It expects arguments that resemble natural language, for example:
 
-◊figure{◊svg{images/grammar.svg}}
+  ◊figure{◊svg{images/grammar.svg}}
 
-In general, Git commands follow the pattern:
+  In general, Git commands follow the pattern:
 
-◊margin-note{By convention, command lines are prefixed with ◊code/inline{$} and comments with ◊code/inline{#}.}
+  ◊margin-note{By convention, command lines are prefixed with ◊code/inline{$} and comments with ◊code/inline{#}. Git ◊git/verb{verbs} and ◊git/object{objects-and-options} are color-coded.}
 
-◊code/block{
+  ◊code/block{
 $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
+  }
 }
 
 ◊section['local-setup]{Local Setup}
