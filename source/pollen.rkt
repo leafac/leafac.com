@@ -262,8 +262,10 @@
     #:margin-right 0]))
 
 (define ruler-left-spacing
-  (css-expr #:padding (rem ,(modular-scale -4))
-            (#:left ,size/indentation
+  (css-expr #:padding
+            (#:top (rem ,(modular-scale -4))
+             #:bottom (rem ,(modular-scale -4))
+             #:left ,size/indentation
              #:left (apply calc (- ,size/indentation ,size/ruler/thick)))
             #:margin (#:top (rem ,(modular-scale 0))
                       #:bottom (rem ,(modular-scale 0)))
@@ -449,7 +451,8 @@
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:border-left
                     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
-                    ,@ruler-left-spacing]
+                    ,@ruler-left-spacing
+                    #:padding-right (rem ,(modular-scale -4))]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
                     #:float right
                     #:clear right

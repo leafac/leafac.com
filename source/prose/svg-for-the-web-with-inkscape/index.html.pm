@@ -97,6 +97,10 @@
 - Trick to make it scale.
 - Embed in HTML, to reuse fonts.
 
+◊section['avoid-reused-ids]{Avoid Reused IDs}
+
+- Multiple SVG on the same page might result in ID clash. Particularly for markers. Solution: clone the arrow, so it gets a new marker with a new ID, then “clean the document.”
+
 ◊section['the-last-resorts]{The Last Resorts}
 
 - If all fails:
@@ -107,3 +111,5 @@
 
 - http://slides.com/sdrasner/svg-can-do-that#/
 - https://css-tricks.com/mega-list-svg-information/
+- https://svgontheweb.com
+- http://tavmjong.free.fr/INKSCAPE/MANUAL/html/Web-Inkscape.html

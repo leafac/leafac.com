@@ -20,18 +20,18 @@
   <defs
      id="defs2">
     <marker
-       inkscape:stockid="TriangleOutL"
-       orient="auto"
-       refY="0.0"
-       refX="0.0"
-       id="TriangleOutL"
+       inkscape:isstock="true"
        style="overflow:visible"
-       inkscape:isstock="true">
+       id="marker844"
+       refX="0.0"
+       refY="0.0"
+       orient="auto"
+       inkscape:stockid="TriangleOutL">
       <path
-         id="path994"
-         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         transform="scale(0.8)"
          style="fill-rule:evenodd;stroke:#dc322f;stroke-width:1pt;stroke-opacity:1;fill:#dc322f;fill-opacity:1"
-         transform="scale(0.8)" />
+         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
+         id="path842" />
     </marker>
   </defs>
   <sodipodi:namedview
@@ -42,8 +42,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="143"
-     inkscape:cy="549.14288"
+     inkscape:cx="331.5"
+     inkscape:cy="469.14288"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="false"
@@ -82,8 +82,8 @@
      x="-4.020996e-07"
      y="297.14288" />
   <path
-     inkscape:connector-curvature="0"
-     id="path850"
+     style="fill:none;stroke:#dc322f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker844)"
      d="M 417,106.14288 H 378"
-     style="fill:none;stroke:#dc322f;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutL)" />
+     id="path834"
+     inkscape:connector-curvature="0" />
 </svg>
