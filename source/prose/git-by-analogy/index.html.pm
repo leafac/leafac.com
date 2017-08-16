@@ -93,17 +93,23 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊section['local-setup]{Local Setup}
 
-◊new-thought{As we will see} later, one of Git’s features is to attribute work to different collaborators in a project. So it is necessary to identify to Git, even if one does not plan to use Git for collaboration. After having installed Git but before running any commands, run the following commands:
+◊margin-note{If one does not plan to use ◊reference['workflow]{Git for collaboration}, then always relating all changes to the same author arguably is not an useful feature. But it is not possible to turn it off, so it is mandatory to follow the instructions in this section.}
+
+◊new-thought{One Git feature} is to relate changes to their corresponding authors. For this to work, it necessary to identify to Git, providing a name and an email address. It is important to ◊emphasis{choose a permanent email address}. Institutional emails, for example, are bad choices because they might be reassigned to another person after the affiliation ends. If both people identified by that email address work on the same project, then their contributions might be confused.
+
+◊git/gui{
+  One of the quirks of the ◊acronym{GUI} bundled with Git is that configurations are only accessible when there is a repository, which is a concept we have not explored thus far. For the moment, create a ◊informal{dummy} directory in the file system, and ◊menu-option{Create New Repository} there:
+
+  ◊figure{◊svg{images/creating-dummy-repository.svg}}
+
+  Then, go to ◊menu-option{Preferences} and fill ◊menu-option/path["Global (All Repositories)" "User Name"] and ◊menu-option{Email Address}:
+
+  ◊full-width{◊figure{◊svg{images/setup.svg}}}
+}
 
 ◊margin-note{Replace the ◊code/inline{◊git/object{<placeholders>}} with the actual information.}
 
 ◊margin-note{On the ◊acronym{GUI}, go to ◊emphasis{Preferences} and fill in ◊emphasis{Gloal User Name} and ◊emphasis{Email Address}.}
-
-◊margin-note{
-  It is important to ◊emphasis{choose an email address that one owns forever}. Institutional emails are bad choices because, after the affiliation ends, the email address could be reassigned and all the previous work under that name would be attributed to the new person.
-
-  This issue is more important for contributions for public projects, but it is cumbersome to have multiple profiles and distinguish between personal work and institutional work. So, unless an institution insists on the use of their email address, avoid it.
-}
 
 ◊code/block{
 $ git ◊git/verb{config} ◊git/object{--global user.name "<name>"}
@@ -195,7 +201,7 @@ $ cd recipes/
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
 
-◊margin-note{In the ◊acronym{GUI} click on ◊technical-term{Create New Repository}.}
+◊margin-note{In the ◊acronym{GUI} click on ◊menu-option{Create New Repository}.}
 
 ◊code/block{
 $ git ◊git/verb{init} 

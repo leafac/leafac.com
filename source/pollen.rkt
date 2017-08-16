@@ -159,9 +159,6 @@
 
 (define font/secondary font/sans-serif)
 
-(define font/rendering (css-expr #:-moz-osx-font-smoothing grayscale
-                                 #:-webkit-font-smoothing antialiased))
-
 ;; MODULAR SCALE -------------------------------------------------------------------------------------
 
 ;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
@@ -269,7 +266,11 @@
             (#:left ,size/indentation
              #:left (apply calc (- ,size/indentation ,size/ruler/thick)))
             #:margin (#:top (rem ,(modular-scale 0))
-                      #:bottom (rem ,(modular-scale 0)))))
+                      #:bottom (rem ,(modular-scale 0)))
+            [div.full-width
+             [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+                     #:width ,size/responsive/two-columns/width
+                     #:width (apply calc (- ,size/responsive/two-columns/width ,size/indentation))]]))
 
 ;; COMPONENTS ----------------------------------------------------------------------------------------
 
@@ -867,3 +868,10 @@
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
   #:css (css-expr [.placeholder #:color ,(dict-ref colorscheme 'blue)]))
 
+(define-component menu-option
+  #:html (default-tag-function 'span #:class "menu-option")
+  #:css (css-expr [.menu-option
+                   ,@font/secondary]))
+
+(define-component (menu-option/path . elements)
+  #:html (apply menu-option (add-between elements " > ")))
