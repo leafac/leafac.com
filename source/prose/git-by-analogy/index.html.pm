@@ -25,17 +25,13 @@ Because of this widespread applicability Git is increasingly popular, ◊link["h
 
 ◊section['how-to-start-with-git]{How to start with Git?}
 
-◊; NEXT: First, install it.
+◊new-thought{First}, ◊link["https://www.git-scm.com/"]{install it}. Git comes with a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{CLI} is more complete, it supports all Git operations and is more widely available, even in remote machines with only terminal access, for example. But it is less ergonomic and more difficult to learn. This article describes ◊git/cli/inline{how to use the ◊acronym{CLI} in sections outlined in yellow}, but they are optional and targeted at readers already familiar with the command line.
 
-◊margin-note{This article does not cover technical issues that are system-dependent and change often, for example, how to install Git and ◊acronym{GUI} front-ends. Refer to the ◊link["https://www.git-scm.com/"]{tool’s website} for more on these topics.}
+◊margin-note{The author uses the Git client in ◊link["https://atom.io/"]{Atom} and the ◊acronym{GUI} that comes with Git, rarely using the ◊acronym{CLI}.}
 
-◊new-thought{There are two} main ways to learn and use Git: through the Command-Line Interface (◊acronym{CLI}) and through the Graphical User Interface (◊acronym{GUI}). The ◊acronym{GUI} serves as a front-end for the tool; it is more friendly and, for some operations, it is more convenient. In everyday Git usage, a ◊acronym{GUI} is usually a better choice. But the ◊acronym{GUI} may not support all operations available in Git, or may have issues with big repositories. In some cases, a graphical environment is not available at all, for example, when accessing a remote server machine. Also, the ◊acronym{GUI} makes it harder to automate some tasks and generally does not interact well with scripts. So there are reasons to learn both the ◊acronym{CLI} and the ◊acronym{GUI}, as they offer different advantages and disadvantages.
+The ◊acronym{GUI}, on the other hand, is more ergonomic and easier to learn, but it does not support a few of the most advanced operations. Also, it might not be available in remote machines, for example, servers which do not have a graphical environment. This article ◊git/gui/inline{describes how to use the ◊acronym{GUI} in sections outlined in violet}. The ◊acronym{GUI} that comes with Git is functional, but it arguably is not aesthetically pleasing and does not offer the best user experience. We choose it for this article because it is the common denominator, available for all platforms and requiring no extra setup. But there is an assortment of ◊link["https://git-scm.com/downloads/guis"]{other ◊acronym{GUI}s}—also called ◊technical-term{clients}—investigate them after reading this article. In particular, try the Git clients available in development environments (text editors, ◊acronym{IDE}s and so forth), they might be the most familiar and better integrated with the rest of the workflow. More than showing which buttons to click, this article covers the underlying concepts, which should transport naturally to other Git clients.
 
-◊margin-note{There are stand-alone Git ◊acronym{GUI}s and there are Git ◊acronym{GUI}s inside text editors. The latter are preferred, particularly for the most frequent operations.}
-
-In this tutorial, we show how to perform operations both with the ◊acronym{CLI} and with the ◊acronym{GUI}. While there is only one ◊acronym{CLI}, there are many choices of ◊link["https://www.git-scm.com/downloads/guis"]{◊acronym{GUI}s}. The purpose of this article is communicate basic principles, which are skills that transfer to different ◊acronym{GUI}s, so we use the ◊acronym{GUI} that comes with Git. It is not the most good-looking option, but it is fully functional, cross-platform and requires no extra setup.
-
-For the rest of this article, we cover the most common use cases for Git, organized by three overarching goals: (1) using Git alone on a local computer; (2) using Git with remote computers; and (3) using Git with collaborators.
+For most of the rest of this article, we cover the common use cases for Git, organized by three overarching goals: (1) ◊reference['local-setup]{using Git alone on a local computer}; (2) ◊reference['remote-repositories]{using Git with remote computers}; and (3) ◊reference['workflow]{using Git for collaboration}:
 
 ◊full-width{
  ◊figure{◊svg{images/goals.svg}}
@@ -834,7 +830,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; ◊paragraph-separation[]
 
-◊; BUILD UP TO “COLLABORATING”
+◊; BUILD UP TO “GIT FOR COLLABORATION”
 
 ◊; ◊new-thought{Changes, commits, references}, branches, merges and tags. These are the core concepts for working effectively with Git on a single machine. They are flexible features, which accommodate diverse workflows, from big distributed teams developing big projects to a single person versioning a single file. On the ◊references['workflow]{following section} we cover a simple workflow that brings together all the concepts presented thus far.
 
