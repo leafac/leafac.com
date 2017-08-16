@@ -93,12 +93,12 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊section['local-setup]{Local Setup}
 
-◊margin-note{If one does not plan to use ◊reference['workflow]{Git for collaboration}, then always relating all changes to the same author arguably is not an useful feature. But it is not possible to turn it off, so it is mandatory to follow the instructions in this section.}
+◊margin-note{If one does not plan to use ◊reference['workflow]{Git for collaboration}, then always associating changes to the same author is an arguably useless feature. But it is not possible to turn it off, so the instructions in this section are mandatory.}
 
-◊new-thought{One Git feature} is to relate changes to their corresponding authors. For this to work, it necessary to identify to Git, providing a name and an email address. It is important to ◊emphasis{choose a permanent email address}. Institutional emails, for example, are bad choices because they might be reassigned to another person after the affiliation ends. If both people identified by that email address work on the same project, then their contributions might be confused.
+◊new-thought{Git associates ◊reference['changes]{changes}} in the project to their authors. For this to work, it is necessary to identify to Git, providing a name and an email address. ◊emphasis{Choose a permanent email address}. Institutional emails, for example, are bad choices because they might be reassigned to another person after the affiliation ends. Git would have trouble distinguishing contributions to the same project made by multiple people that shared an email address over time.
 
 ◊git/gui{
-  One of the quirks of the ◊acronym{GUI} bundled with Git is that configurations are only accessible when there is a repository, which is a concept we have not explored thus far. For the moment, create a ◊informal{dummy} directory in the file system, and ◊menu-option{Create New Repository} there:
+  One of the quirks of the ◊acronym{GUI} bundled with Git is that configurations are only accessible when there is a repository (which is a concept we cover in a ◊reference['repository]{later section}). For the moment, create a ◊informal{dummy} directory in the file system, and ◊menu-option{Create New Repository} there:
 
   ◊figure{◊svg{images/creating-dummy-repository.svg}}
 
