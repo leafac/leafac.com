@@ -90,6 +90,7 @@
 - Save “Optimized SVG”
   - Round measurements.
   - “Work around renderer bugs”
+- https://github.com/svg/svgo
 
 ◊section['include-svg-in-page]{Include SVG in Page}
 
@@ -101,3 +102,8 @@
 - If all fails:
   - Convert everything to path.
   - Export to PNG.
+
+◊section['references]{References}
+
+- http://slides.com/sdrasner/svg-can-do-that#/
+- https://css-tricks.com/mega-list-svg-information/
