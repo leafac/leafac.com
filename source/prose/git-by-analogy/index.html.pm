@@ -134,22 +134,24 @@ We configure Git to ignore these files by creating a file at ◊path{~/.config/g
 # ...
 }
 
-◊section['first-git-command]{First Git Command}
+Git is ready to use.
 
-◊new-thought{The most useful} Git command asks it to report the current status. Run the following ◊reference['local-setup]{after setting up}:
+◊git/cli{
+  ◊section['the-most-important-command]{The Most Important Command}
 
-◊full-width{
-  ◊code/block{
+  ◊new-thought{The most important} command in Git asks for the current status:
+
+  ◊full-width{
+    ◊code/block{
 $ git ◊git/verb{status} 
 fatal: Not a git repository (or any of the parent directories): .git
+    }
   }
+
+  We use this command frequently to check our progress. Currently, the result is a fatal error: Git cannot find a repository.
+
+  The following sections explain what is a repository, and how to create one.
 }
-
-The result is a fatal error: Git cannot find the repository. The ◊acronym{GUI}, also detects that there is no repository:
-
-◊image["images/gui-initial-screen.png"]{The initial screen.}
-
-The next sections explain what is a repository, and how to create one.
 
 ◊section['office]{Office}
 
