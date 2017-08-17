@@ -223,9 +223,9 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
 
 ◊paragraph-separation[]
 
-◊new-thought{What constitutes} a project, and, consequently, a repository? For example, consider a product composed of a front-end and a back-end. Are they separate projects, under two repositories? Or are they parts of the same project, under folders in the same repository? There is no definitive answer to these questions, because there are advantages and disadvantages to both approaches:
+◊margin-note{It is possible to move from one approach to the other. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of whole communities and took a long time to complete.}
 
-◊margin-note{It is possible to move from one approach to the other. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into a collection of smaller repositories. But the transition was not easy, particularly for big projects: these were big undertakings which required the coordination of the whole community and took a long time to complete.}
+◊new-thought{What constitutes} a project, and, consequently, a repository? For example, consider a product composed of a front-end and a back-end. Are they separate projects, under two repositories? Or are they parts of the same project, under folders in the same repository? There is no definitive answer to these questions, because there are advantages and disadvantages to both approaches:
 
 ◊list/unordered{
   ◊list/unordered/item{
@@ -235,10 +235,10 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
     It is technically inexpensive to create repositories. Git has optimized data structures and avoids costly operations, for example, it avoids maintaining copies of files. If a single file makes sense on its own, there could be repository just for it.
   }
   ◊list/unordered/item{
-    It is complicated to manage access control within a repository. A person that has access to the repository has access to all the files in it and their whole history. But it is easy to manage access control accross different repositories.
+    It is complicated to manage access control within a repository. A person that has access to the repository has access to all the files in it and their whole history. But it is easier to manage access control across different repositories.
   }
   ◊list/unordered/item{
-    It is complicated to synchronize the changes across different repositories. But synchronizing the changes in different parts of a single repository is easy.
+    It is complicated to synchronize the changes across different repositories. But it is easier to synchronize the changes in different parts of a single repository.
   }
 }
 
