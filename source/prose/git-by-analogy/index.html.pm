@@ -99,6 +99,8 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊new-thought{Git associates ◊reference['changes]{changes}} in the project to their authors. For this to work, it is necessary to identify to Git, providing a name and an email address. ◊emphasis{Choose a permanent email address}. Institutional emails, for example, are bad choices because they might be reassigned to another person after the affiliation ends. Git would have trouble distinguishing contributions to the same project made by multiple people that shared an email address over time.
 
+◊margin-note{Readers following both the ◊git/gui/inline{◊acronym{GUI}} and the ◊git/cli/inline{◊acronym{CLI}} sections must choose only one of these instructions, to configure the system only once.}
+
 ◊git/gui{
   One of the quirks of the ◊acronym{GUI} bundled with Git is that configurations are only accessible when there is a repository (which is a concept we cover in a ◊reference['repository]{later section}). For the moment, create a ◊informal{dummy} directory in the file system, and ◊menu-option{Create New Repository} there:
 
@@ -173,30 +175,15 @@ Git extends the office analogy of files and folders in a desktop from the operat
 
 ◊section['working-directory]{Working Directory}
 
-◊margin-note{
-  ◊figure{◊svg{images/working-directory.svg}}
+◊margin-note{◊figure{◊svg{images/working-directory.svg}}}
 
-  The working directory.
-}
+◊new-thought{The first component} of the office analogy that we explore is the files and the folders, which come with the operating system. Git changes nothing about them, so that it does not interfere with other tools, for example, text editors. The only aspect particular to Git is terminology: Git calls the main project folder the ◊technical-term{working directory}.
 
-◊new-thought{The first component} of this analogy that we explore is the files and the folders, in which work happens. They correspond to the filesystem which already exists in the computer, and Git calls them the ◊technical-term{working directory}. Apart from this special terminology, there is nothing special about the ◊technical-term{working directory}; tools like text editors can work on these files oblivious of the version control system.
-
-We start by creating a directory to contain our project, which in our running example is a ◊link/internal["/cooking"]{vegan recipe cookbook}:
-
-◊margin-note{On the ◊acronym{GUI}, use a file browser to create a directory.}
-
-◊code/block{
-$ mkdir recipes
-$ cd recipes/
-}
+For the rest of this article we use a simple project for the examples: the writing of a ◊link/internal["/cooking"]{vegan cookbook}. Create a working directory for the project. Readers following both the ◊git/gui/inline{◊acronym{GUI}} and the ◊git/cli/inline{◊acronym{CLI}} sections must create two independent working directories, and follow the instructions from the different sections in the respective working directories.
 
 ◊section['repository]{Repository}
 
-◊margin-note{
-  ◊figure{◊svg{images/repository.svg}}
-
-  The empty repository.
-}
+◊margin-note{◊figure{◊svg{images/repository.svg}}}
 
 ◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
 
