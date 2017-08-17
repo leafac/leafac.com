@@ -246,11 +246,7 @@ In general, the repository structure should reflect the organizational structure
 
 ◊section['changes]{Changes}
 
-◊margin-note{
-  ◊figure{◊svg{images/changes.svg}}
-
-  The changes.
-}
+◊margin-note{◊figure{◊svg{images/changes.svg}}}
 
 ◊new-thought{As the project} evolves, people modify the files in the working directory. On our extended office metaphor for version control, this requires taking notes of what changed in slips of paper. For example, to modify a line in a file, it is necessary to register the previous contents of that line as well as the new contents. This is a non-trivial amount of work, but fortunately we have Git as our robot managing the tedious parts. Its first task is to detect changes in the working directory.
 
