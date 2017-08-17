@@ -248,19 +248,33 @@ In general, the repository structure should reflect the organizational structure
 
 ◊margin-note{◊figure{◊svg{images/changes.svg}}}
 
-◊new-thought{As the project} evolves, people modify the files in the working directory. On our extended office metaphor for version control, this requires taking notes of what changed in slips of paper. For example, to modify a line in a file, it is necessary to register the previous contents of that line as well as the new contents. This is a non-trivial amount of work, but fortunately we have Git as our robot managing the tedious parts. Its first task is to detect changes in the working directory.
+◊new-thought{Git extends} the office metaphor of files and folders, but Git itself does not directly reason about them, it works over slips of paper which represent changes to the project. There is a difference between between nouns (for example, a file) and verbs (for example, creating a file), and Git reasons about the latter. Examples of changes that Git tracks are: creating files, removing files, moving (or renaming) files, adding lines to files, removing lines from files and modifying lines from files. The slips of paper containing changes include not only the new situation (for example, the line after modification), but also the old situation (for example, the line before modification). In the illustrations of the metaphor, changes are slips of paper with ◊code/inline{+} and ◊code/inline{-} marks, as opposed to full files.
 
-Currently, our working directory is empty. Let us start by creating a file to contain our first recipe. We can use text editors or any other tool that works on files. If using the command line, run the following:
+The lifecycle of changes start in the working directory, when we make changes to the project. Create a file named ◊path{vegan-cookies.txt} with the following contents:
+
+◊margin-note{The ◊link/internal["/cooking/chocolate-chip-cookie/"]{complete vegan cookies recipe}.}
 
 ◊code/block{
-$ echo -e "Ingredients\n\n...\n\n" >> vegan-cookies.txt
+# vegan-cookies.txt
+Ingredients
+
+...
 }
 
-This creates a file name ◊code/inline{vegan-cookies.txt}, which contains the (elided) list of ingredients for ◊link/internal["/cooking/chocolate-chip-cookie/"]{vegan cookies}. Git notices this change, as the following status reveals:
+We can now check that Git detected the change in the working directory.
 
-◊full-width{
-  ◊code/block{
-$ git ◊git/verb{status}
+◊git/gui{
+  Click on ◊menu-option{Rescan} to see the new file listed on the ◊menu-option{Unstaged Changes} pane:
+
+  ◊image["images/rescan.png"]{The change in the working directory.}
+}
+
+◊git/cli{
+  Run ◊code/inline{◊git/verb{status}}:
+
+  ◊full-width{
+    ◊code/block{
+$ git status
 On branch master
 
 Initial commit
@@ -271,14 +285,11 @@ Untracked files:
 	vegan-cookies.txt
 
 nothing added to commit but untracked files present (use "git add" to track)
+    }
   }
 }
 
-On the ◊acronym{GUI}, click on the ◊technical-term{Rescan} button to see the new file listed under ◊technical-term{Unstaged Changes}:
-
-◊image["images/status-after-file-creation.png"]{Status after file creation.}
-
-Both the ◊acronym{CLI} and the ◊acronym{GUI} are saying that a new file exists in the working directory, but it is not known by Git. It is an “untracked file,” which is an “unstaged change.” But these messages about files are just for user convenience; internally, Git does not reason directly about files or directories, but about ◊emphasis{changes}. This is why, in the analogy, we do not represent changes with complete files, but with scraps of paper containing ◊code/inline{+} and ◊code/inline{-} to represent additions and deletions.
+Thus far, Git only detected the change in the working directory, but it has not registered it in the project history yet. The change is not in a box in the cabinet, but only in the working directory.
 
 ◊section['staging-area]{Staging Area}
 
