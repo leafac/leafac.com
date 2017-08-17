@@ -223,7 +223,7 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
 
 ◊paragraph-separation[]
 
-◊margin-note{It is possible to move from one approach to the other. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of whole communities and took a long time to complete.}
+◊margin-note{◊figure{◊svg{images/folders-vs-repositories.svg}}}
 
 ◊new-thought{What constitutes} a project, and, consequently, a repository? For example, consider a product composed of a front-end and a back-end. Are they separate projects, under two repositories? Or are they parts of the same project, under folders in the same repository? There is no definitive answer to these questions, because there are advantages and disadvantages to both approaches:
 
@@ -242,9 +242,7 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
   }
 }
 
-◊figure{◊svg{images/folders-vs-repositories.svg}}
-
-In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories.
+In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories. It is even possible to move from one approach to the other, as the organizational structure evolves. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of whole communities and took a long time to complete.
 
 ◊section['changes]{Changes}
 
