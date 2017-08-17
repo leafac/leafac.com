@@ -555,6 +555,8 @@ Ingredients
 
 But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached ◊code/inline{HEAD}.” We address this on the ◊reference['references]{next section}.
 
+◊; TODO: MARK WHEN FINISHED CORE FEATURES…
+
 ◊section['references]{References}
 
 ◊margin-note{◊svg{images/references.svg}}
