@@ -242,7 +242,7 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
   }
 }
 
-In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories. It is even possible to move from one approach to the other, as the organizational structure evolves. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of whole communities and took a long time to complete.
+In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories. It is even possible to move from one approach to the other, as the organizational structure evolves. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of entire communities and took a long time to complete.
 
 ◊section['changes]{Changes}
 
