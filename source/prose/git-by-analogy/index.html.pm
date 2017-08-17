@@ -155,27 +155,21 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 ◊section['office]{Office}
 
-◊margin-note{
-  ◊figure{◊svg{images/desktop.svg}}
+◊margin-note{◊figure{◊svg{images/office.svg}}}
 
-  The office metaphor on a desktop.
-}
+◊new-thought{Modern operating system ◊acronym{GUI}s} make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track the progress over time. One could use, for example, a copying machine and keep copies of the different revisions. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to tell which is the current, to inspect the differences, to associate the changes to authors, and so forth. These processes take a long time, are prone to error, and require tedious manual work. Unsurprisingly, these are the exact same issues that arise in the computer when creating copies of different project revisions.
 
-◊new-thought{Modern operating system’s} ◊acronym{GUI}s make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track a project’s history over time. One could use, for example, a copying machine to record different versions as files change. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to inspect the differences, attribute the changes to different people in the project, collaborate and experiment. Unsurprisingly, these are the exact same issues that arise when using the computer.
+To address this problem in an office, we could try a new system. To avoid confusion, we start by keeping only one copy of the project. After making a change, we take note of it in a slip of paper, mentioning what was the old content and what is the new content. If we are careful about managing these slips of paper, then we can recreate any point in time by following them in the appropriate direction: to go backward in time we replace the new content with the old content, and to go forward in time we replace the old content with the new content.
 
-To address this problem in an office, one could try a new system. After changing a file, one would take note of the change in a slip of paper, mentioning what was the previous content and what is the new content. One could use a paper tray to organize these slips of paper. After significant progress—which might mean anything from changing a single line to changing dozens of files—one could move these slips of paper into a box, label the box, and put the box in a cabinet for storage. The label on the box would contain the identification of the author of the changes, the current date and time, a high-level description of the box contents, an unique identifier for the current box and a reference to the identifier of the previous box.
+But how can we manage these slips of paper carefully? We start by writing them in our desktop, and moving them to a paper tray to organize them. Eventually, we make significant progress in the project. The size of what constitutes “significant progress” varies: it might be a single change to a single line, or it might involve dozens of files. Regardless, the slips of paper in the paper tray tell a cohesive story, for example, “fix the bug in thrust calculation,” or “add a button to escape battle.”
 
-◊margin-note{
-  ◊figure{◊svg{images/office.svg}}
+At this point, we move the contents of the paper tray into a box. We close the box and label it with some information: author, current date and time, a description of the story the box tells, and an unique identifier. We finally move the box into a cabinet for storage. Then we iterate: change the unique copy of the project; note the changes in slips of paper; organize them in a paper tray; when they tell a cohesive story, move them to a box; label the box; and move it to the cabinet.
 
-  The extended office metaphor for version control, with Git as a robot in the middle managing the process.
-}
+As we stack boxes in the cabinet, they form a chain, from the newest on the top to the oldest on the bottom. This chain represents a timeline for the project. We can look at the boxes and recollect who changed what, when and why. We can even navigate in time by systematically opening the boxes in order and applying the changes they contain to the unique copy of the project.
 
-With this system, the result would be a chain of boxes that record the history of the project in an organized and predictable manner. There is still only one working copy of the files, but it is possible to recreate the project’s history and recollect who changed what, when and why, by looking at the boxes.
+But maintaining this system is a great deal of tedious work! We want a robot to manage these processes: storing boxes in the cabinet, finding them, systematically applying the changes to the project to navigate in time, and so forth. In an office, this robot would be expensive. In the computer, it is free: we call it Git.
 
-Maintaining this system is a lot of work, though. To recover the state of the files at a particular moment, it is necessary to look in the cabinet for the relevant series of boxes, open each of them in order and apply the recorded changes to the files. To find who is responsible for a particular change, one has to open several boxes to find the relevant slip of paper. It would be desirable to have a robot to manage these processes.
-
-In the computer, this robot is Git. It extends the office analogy of files and folders in the filesystem with metaphorical slips of paper to record changes, a paper tray, labeled boxes and a cabinet. Over the course of this article, we will learn about each of these components, their technical names in Git’s lexicon and the basic operations on them.
+Git extends the office analogy of files and folders in a desktop from the operating system ◊acronym{GUI}. This extended office includes metaphorical slips of paper, paper tray, labeled boxes, cabinet, and more. The following sections cover each of these components, their technical names in Git lexicon and how to give orders to the robot. We start with the part that is already familiar: the files and folders.
 
 ◊section['working-directory]{Working Directory}
 
