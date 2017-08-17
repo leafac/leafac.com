@@ -185,50 +185,60 @@ For the rest of this article we use a simple project for the examples: the writi
 
 ◊margin-note{◊figure{◊svg{images/repository.svg}}}
 
-◊new-thought{Now that we have} a working directory, we need to inform Git that we are interested in tracking the history of this project. In particular, we command Git to create the ◊informal{cabinet}, which it calls the ◊technical-term{repository}:
+◊new-thought{The first order} we give to our Git robot is to create the cabinet which will contain the project history. Git calls it the ◊technical-term{repository}.
 
-◊margin-note{In the ◊acronym{GUI} click on ◊menu-option{Create New Repository}.}
+◊git/gui{
+  We had already created a repository ◊reference['local-setup]{during setup} to work around a quirk in the ◊acronym{GUI}. Repeat the process to ◊menu-option{Create New Repository} in the working directory:
 
-◊code/block{
-$ git ◊git/verb{init} 
-Initialized empty Git repository in .../recipes/.git/
+  ◊figure{◊svg{images/create-repository.svg}}
 }
 
-As the output says, Git created an empty repository in a folder called ◊code/inline{.git} within project’s directory. Because the name of this folder starts with a dot (◊code/inline{.}), it is ◊informal{hidden}. There is nothing special about hidden folders, but, by convention, file browsers generally do not show them unless explicitly requested. The ◊code/inline{.git} folder is Git’s ◊informal{cabinet} for this project; Git manages its contents, which should not be edited by hand. Due to the existence of this folder, the status has changed:
+◊git/cli{
+  Run the following command:
 
-◊full-width{
-  ◊code/block{
+  ◊full-width{
+    ◊code/block{
+$ git ◊git/verb{init}
+Initialized empty Git repository in /Users/leafac/Downloads/git/recipes-cli/.git/
+    }
+  }
+
+  The status has changed, Git no longer complaints about the lack of a repository:
+
+  ◊full-width{
+    ◊code/block{
 $ git ◊git/verb{status} 
 On branch master
 
   Initial commit  
 
 nothing to commit (create/copy files and use "git add" to track)
+    }
   }
+
+  We still do not have enough information to understand this output. ◊technical-term{Branches}, ◊technical-term{commits} and ◊technical-term{tracking} files are subjects of the following sections.
 }
 
-The ◊acronym{GUI} indicates that the repository has been created by showing the screen which we explore in a ◊reference['commits]{later section}:
+Git created the cabinet in a folder called ◊path{.git/} under the project directory. This path starts with a dot (◊path{.}), which means it is ◊technical-term{hidden}: most file browsers will not show it by default. But, otherwise, there is nothing special about hidden files and folders, it is just a naming convention. The contents of the ◊path{.git/} directory are just files and folders which Git uses to represent the cabinet. Regardless, ◊emphasis{do not directly edit the contents of} ◊path{.git/}, instead, ask the robot to perform the operations.
 
-◊image["images/repository-created.png"]{Repository created successfully.}
+◊paragraph-separation[]
 
-Git is longer complaining about the nonexistence of a repository, but it does mention two new concepts: ◊technical-term{branches} and ◊technical-term{commits}. We explore these terms in later sections, but first we need to consider some trade-offs regarding repository creation.
+◊new-thought{What constitutes} a project, and, consequently, a repository? For example, consider a product composed of a front-end and a back-end. Are they separate projects, under two repositories? Or are they parts of the same project, under folders in the same repository? There is no definitive answer to these questions, because there are advantages and disadvantages to both approaches:
 
-◊section['fine-points-about-repositories]{Fine Points About Repositories}
+◊margin-note{It is possible to move from one approach to the other. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into a collection of smaller repositories. But the transition was not easy, particularly for big projects: these were big undertakings which required the coordination of the whole community and took a long time to complete.}
 
-◊new-thought{What constitutes} a project, and, consequently, a repository? There is no definitive answer to this question. Consider, for example, a product composed of a front-end and a back-end; are they separate projects living in two repositories, or two parts of a single project under two folders of the same repository? People in charge of this decision have to consider the following information:
-
-◊list/ordered{
-  ◊list/ordered/item{
-    It is monetarily cheap to create repositories. Most hosts, for example, GitHub, charge by the number of collaborators and the level of support, not by the number of repositories under an organization. (Other integrated tools, for example, continuous integration servers, might charge per-repository, though.)
+◊list/unordered{
+  ◊list/unordered/item{
+    Generally, it is monetarily inexpensive to create repositories. Most hosts, for example, GitHub, charge by the number of collaborators and the level of support, not by the number of repositories. But other tools, for example, continuous integration servers, might charge per repository.
   }
-  ◊list/ordered/item{
-    It is technically cheap to create repositories. Git has optimized data structures and avoids costly operations, for example, it avoids maintaining copies of files. If a single file stands on its own, there could be repository just for it.
+  ◊list/unordered/item{
+    It is technically inexpensive to create repositories. Git has optimized data structures and avoids costly operations, for example, it avoids maintaining copies of files. If a single file makes sense on its own, there could be repository just for it.
   }
-  ◊list/ordered/item{
-    It is complicated to manage access control within a repository. A person that has access to the repository has access to all the files in it and their whole history. It is easy to manage access control for whole repositories, though.
+  ◊list/unordered/item{
+    It is complicated to manage access control within a repository. A person that has access to the repository has access to all the files in it and their whole history. But it is easy to manage access control accross different repositories.
   }
-  ◊list/ordered/item{
-    It is complicated to synchronize the changes across different repositories.
+  ◊list/unordered/item{
+    It is complicated to synchronize the changes across different repositories. But synchronizing the changes in different parts of a single repository is easy.
   }
 }
 
@@ -318,12 +328,12 @@ Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is
 
 ◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
 
-◊list/ordered{
-  ◊list/ordered/item{Information about the author including name and email.}
-  ◊list/ordered/item{The current date and time.}
-  ◊list/ordered/item{An unique identifier.}
-  ◊list/ordered/item{A reference to the identifier of the previous box in the chain (except for this first commit, which starts the chain).}
-  ◊list/ordered/item{A high-level description of the contents.}
+◊list/unordered{
+  ◊list/unordered/item{Information about the author including name and email.}
+  ◊list/unordered/item{The current date and time.}
+  ◊list/unordered/item{An unique identifier.}
+  ◊list/unordered/item{A reference to the identifier of the previous box in the chain (except for this first commit, which starts the chain).}
+  ◊list/unordered/item{A high-level description of the contents.}
 }
 
 ◊margin-note{The ◊reference['local-setup]{setup} process of identifying to Git was necessary to make the automatic parts of labeling work.}
