@@ -76,6 +76,7 @@
 
 - More semantic: changes carry through.
 - Save space (specially with image).
+- Be careful with IDs, if multiple SVG in same page.
 
 ◊section['truncated-text]{Truncated Text}
 

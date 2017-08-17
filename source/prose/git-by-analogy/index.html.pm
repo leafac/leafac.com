@@ -242,6 +242,8 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
   }
 }
 
+◊figure{◊svg{images/folders-vs-repositories.svg}}
+
 In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories.
 
 ◊section['changes]{Changes}
