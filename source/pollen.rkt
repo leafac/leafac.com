@@ -184,6 +184,8 @@
 
 (define size/body-text/end (css-expr rem ,size/body-text/end/ratio))
 
+(define size/text/small (css-expr rem ,(modular-scale -2)))
+
 (define size/indentation (css-expr rem ,(modular-scale 2)))
 
 (define size/responsive/steps 5)
@@ -435,7 +437,7 @@
                              #:bottom (rem ,(modular-scale -2)))
                    [time
                     ,@font/secondary
-                    #:font-size (rem ,(modular-scale -1))
+                    #:font-size ,size/text/small
                     #:position relative
                     #:top (rem ,(- (modular-scale -3)))
                     #:color ,(dict-ref colorscheme 'secondary-content)]]))
@@ -852,17 +854,34 @@
 (define git/gui/color (dict-ref colorscheme 'violet))
 (define git/cli/color (dict-ref colorscheme 'yellow))
 
+(define (section/flag content color)
+  (css-expr
+   #:border-left (,size/ruler/thick solid ,color)
+   ,@ruler-left-spacing
+   #:position relative
+   [(:: & before)
+    #:content ,content
+    ,@font/secondary
+    ,@font/small-caps
+    #:font-size ,size/text/small
+    #:line-height 1
+    #:background-color ,color
+    #:color ,(dict-ref colorscheme 'background)
+    #:display inline-block
+    #:padding (#:bottom 0.1em #:left 0.2em)
+    #:position absolute
+    #:left -3px ; FIXME: (- ,size/ruler/thick) after unary ‘-’ is implemented in ‘css-expr’
+    #:top 0
+    ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
+    ,@(prefix (css-expr #:transform-origin (top left)))]))
+
 (define-component git/gui
   #:html (default-tag-function 'div #:class "git--gui")
-  #:css (css-expr [.git--gui
-                   #:border-left (,size/ruler/thick solid ,git/gui/color)
-                   ,@ruler-left-spacing]))
+  #:css (css-expr [.git--gui ,@(section/flag "GUI" git/gui/color)]))
 
 (define-component git/cli
   #:html (default-tag-function 'div #:class "git--cli")
-  #:css (css-expr [.git--cli
-                   #:border-left (,size/ruler/thick solid ,git/cli/color)
-                   ,@ruler-left-spacing]))
+  #:css (css-expr [.git--cli ,@(section/flag "CLI" git/cli/color)]))
 
 (define-component git/gui/inline
   #:html (default-tag-function 'span #:class "git--gui--inline")
