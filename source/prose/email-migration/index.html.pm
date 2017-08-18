@@ -37,15 +37,13 @@ $ mkdir ◊placeholder{migration-directory}
 
 ◊section['configure]{Configure}
 
-◊new-thought{Configure Dovecot} with a ◊path{dovecot.conf} file, by  replacing the ◊code/inline{◊placeholder{placeholders}} in the following template:
+◊margin-note{The location of the ◊path{dovecot.conf} file depends on the installation. The given path works for the installation using Homebrew, another common location is ◊path{/etc/dovecot/dovecot.conf}.}
 
 ◊margin-note{See the ◊reference['dovecot-configuration-explained]{appendix} for more details on this configuration file.}
 
-◊margin-note{The location of the ◊path{dovecot.conf} file depends on the installation. The given path works for the installation using Homebrew, another common location is ◊path{/etc/dovecot/dovecot.conf}.}
+◊new-thought{Configure Dovecot} with a ◊path{dovecot.conf} file, by  replacing the ◊code/inline{◊placeholder{placeholders}} in the following template:
 
-◊code/block{
-# /usr/local/etc/dovecot/dovecot.conf
-
+◊file-listing["/usr/local/etc/dovecot/dovecot.conf"]{
 protocols = imap
 
 default_login_user = ◊placeholder{user}

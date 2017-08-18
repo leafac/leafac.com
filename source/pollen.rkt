@@ -515,6 +515,13 @@
        code/highlighted]))
   ((default-tag-function 'div #:class "insertion") (string->xexpr code/highlighted)))
 
+(define-component (file-listing a-path #:language [language #f] . elements)
+  #:html ((default-tag-function 'div #:class "file-listing insertion")
+          (path a-path)
+          (if language
+              (apply code/block/highlighted language elements)
+              (apply code/block elements))))
+
 (define-component keyboard
   #:html (default-tag-function 'kbd)
   #:css (css-expr [kbd ,@font/monospace]))
