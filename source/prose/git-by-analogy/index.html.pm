@@ -190,7 +190,11 @@ For the rest of this article we use a simple project for the examples: the writi
 
   ◊figure{◊svg{images/create-repository.svg}}
 
-  The screen above means the repository was successfully created. Besides this main ◊acronym{GUI} window, there is another front-end window to show the project history. Open it with the ◊menu-option/path["Repository" "Visualise All Branch History"] menu option, or directly from the command line with ◊code/inline{gitk}. Currently there is no history to show, the cabinet is still empty, so this window shows an error:
+  The screen above means the repository was successfully created. Each pane in this window corresponds to one part of our office metaphor, which we cover in the following sections:
+
+  ◊figure{◊svg{images/gui-parts.svg}}
+
+  Besides this main ◊acronym{GUI} window, there is another front-end window to show the project history. Open it with the ◊menu-option/path["Repository" "Visualise All Branch History"] menu option, or directly from the command line with ◊code/inline{gitk}. Currently there is no history to show, the cabinet is still empty, so this window shows an error:
 
   ◊image["images/no-history-yet.png"]{History visualization window with error due to empty repository.}
 }
@@ -252,22 +256,36 @@ In general, the repository structure should reflect the organizational structure
 
 ◊new-thought{Git extends} the office metaphor of files and folders, but Git itself does not directly reason about them, it works over slips of paper which represent changes to the project. There is a difference between between nouns (for example, a file) and verbs (for example, creating a file), and Git reasons about the latter. Examples of changes that Git tracks are: creating files, removing files, moving (or renaming) files, adding lines to files, removing lines from files and modifying lines from files. The slips of paper containing changes include not only the new situation (for example, the line after modification), but also the old situation (for example, the line before modification). In the illustrations of the metaphor, changes are slips of paper with ◊code/inline{+} and ◊code/inline{-} marks, as opposed to full files.
 
-The lifecycle of changes start in the working directory, when we make changes to the project. Create a file:
+The lifecycle of changes start in the working directory, when we make changes to the project. Create two files:
 
-◊margin-note{The ◊link/internal["/cooking/chocolate-chip-cookie/"]{complete vegan cookies recipe}.}
+◊margin-note{See the ◊link/internal["/cooking/"]{Cooking} section for the actual recipes from this article.}
 
-◊file-listing["vegan-cookies.txt"]{
+◊file-listing["cookies.txt"]{
 Ingredients
+
+...
+
+Directions
 
 ...
 }
 
-We can now check that Git detected the change in the working directory.
+◊file-listing["muffins.txt"]{
+Ingredients
+
+...
+
+Directions
+
+...
+}
+
+We can now check that Git detected the changes in the working directory.
 
 ◊git/gui{
-  Click on ◊menu-option{Rescan} to see the new file listed on the ◊menu-option{Unstaged Changes} pane:
+  Click on ◊menu-option{Rescan} to see the new files listed on the ◊menu-option{Unstaged Changes} pane:
 
-  ◊image["images/rescan.png"]{The change in the working directory.}
+  ◊image["images/rescan.png"]{The changes in the working directory.}
 }
 
 ◊git/cli{
@@ -275,7 +293,7 @@ We can now check that Git detected the change in the working directory.
 
   ◊full-width{
     ◊code/block{
-$ git status
+$ git ◊git/verb{status}
 On branch master
 
 Initial commit
@@ -283,39 +301,41 @@ Initial commit
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
 
-	vegan-cookies.txt
+	cookies.txt
+	muffins.txt
 
 nothing added to commit but untracked files present (use "git add" to track)
     }
   }
 }
 
-Thus far, Git only detected the change in the working directory, but it has not registered it in the project history yet. The change is not in a box in the cabinet, but only in the working directory.
+Thus far, Git only detected the changes in the working directory, but it has not registered them in the project history. The changes are not in a box in the cabinet, but only in the working directory.
 
 ◊section['staging-area]{Staging Area}
 
-◊margin-note{
-  ◊figure{◊svg{images/staging-area.svg}}
+◊margin-note{◊figure{◊svg{images/staging-area.svg}}}
 
-  The staging area.
+◊new-thought{We want to register} the creation of ◊path{cookies.txt} and ◊path{muffins.txt} into the project history. Currently, these changes are only slips of paper on the working directory. Before they go to a box and into the cabinet, they have to be organized in the paper tray. This intermediary step might seem trivial, because the changes ware small. But even in this simple case Git gives us flexibility, for example, we can choose to only register one of the recipes in the history, while we are still working on the other. We can be even more precise and choose line-by-line which parts of the recipes we want to record at the moment. This is possible because Git reasons about ◊reference['changes]{changes}, instead of files.
+
+For simplicity, we follow the most common case and add all slips of paper from the working directory to the paper tray. Git has two names for the paper tray: ◊technical-term{staging area} and ◊technical-term{index}. The act of adding slips of paper from the working directory to the paper tray is called ◊technical-term{staging the changes} or ◊technical-term{adding the changes to the index}.
+
+◊git/gui{
+  Select a file on the ◊technical-term{Unstaged Changes} pane to see the corresponding changes on the upper-right pane. At the moment, the whole file is new, so its entire contents are displayed, later, this pane will show only the modified lines. Then, use the ◊menu-option/path["Commit" "Stage To Commit"] menu option to add the file creation to the index. It should move to the ◊menu-option{Staged Changes (Will Commit)} pane. Repeat the process for the other file. Alternatively, click on the ◊menu-option{Stage Changed} button to stage all the changes in one step:
+
+  ◊figure{◊svg{images/staging.svg}}
 }
 
-◊new-thought{To introduce the new file} to Git, the first step is to add to the paper tray the slip of paper representing the file creation. Later, these scraps of paper will be the contents of a box, which will be part of the project’s history. This intermediary step is important, because it is on the paper tray that we organize the changes into a set that makes sense on its own. We do not always want to add all the changes in the working directory to the paper tray. Some of them might never go the paper tray at all—they might be, for example, the result of a failed experiment, which we do not want as part of the project’s history.
+◊git/cli{
+  Run the following command:
 
-◊margin-note{It is possible to be more selective and stage ◊reference['changes]{changes} hunk by hunk or line by line. See ◊reference['crafting-the-perfect-commit]{◊emphasis{Crafting the Perfect Commit}} for more.}
+  ◊code/block{
+$ git ◊git/verb{add} ◊git/object{cookies.txt } ◊git/object{muffins.txt }
+  }
 
-For simplicity, in our first example we will add to the paper tray the scrap of paper representing the creation of the whole ◊code/inline{vegan-cookies.txt} file. The technical names for the paper tray are ◊technical-term{staging area} or ◊technical-term{index}. We add changes to the index using the following command:
+  The ◊code/inline{◊git/verb{status}} has changed from “untracked files” to “changes to be committed:”
 
-◊code/block{
-$ git ◊git/verb{add} ◊git/object{vegan-cookies.txt }
-}
-
-◊acronym{GUI} users should select ◊code/inline{vegan-cookies.txt} on the ◊technical-term{Unstaged Changes} pane and click on ◊technical-term{Stage Changed}. This has the same effect as the command line above.
-
-When asked about the current status, Git’s output has changed:
-
-◊code/block{
-$ git ◊git/object{status }
+  ◊code/block{
+$ git ◊git/verb{status}
 On branch master
 
 Initial commit
@@ -323,10 +343,12 @@ Initial commit
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
 
-    new file:  vegan-cookies.txt
+	new file:   cookies.txt
+	new file:   muffins.txt
+  }
 }
 
-Git now knows that the creation of the file ◊code/inline{vegan-cookies.txt} is on the paper tray and will be part of the next box (commit). The next section addresses this step.
+The changes are now organized on the paper tray, the next step is to move them to a box and into the cabinet.
 
 ◊section['commits]{Commits}
 
@@ -919,3 +941,5 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 ◊; TODO: More semantic tag for file names.
 
 ◊; TODO: Redo all the images of the GUI up to ‘Tag’, using the proper capturing tool with the space bar??
+
+◊; TODO: Double-check ◊git/verb & ◊git/object
