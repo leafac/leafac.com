@@ -626,37 +626,32 @@ $ git ◊git/verb{blame} ◊git/object{pancakes.txt}
 
 ◊section['navigate-in-history]{Navigate in History}
 
-◊new-thought{Besides reading the history}, as we covered in the ◊reference['read-history]{previous section}, one can ◊informal{travel in time}, and have the working directory reflect the project state at some time in the past. The boxes (commits) in the cabinet (repository) form a chain, because their labels include a reference to the previous (parent) box. So Git can open each of these boxes in reverse order and apply the changes in them backwards to the working directory, an operation it calls ◊technical-term{checkout}.
+◊new-thought{Once we find} a point of interest in history, we might want to navigate to it, having the working directory the same as it was then. For example, we might want to print a previous revision of our cookbook, before pancakes were introduced. One important precondition for navigating in history is to ◊emphasis{have no pending changes in the working directory}. If they exist, then commit them first.
 
-◊margin-note{If the uncommitted changes in the working directory and the changes in checkout do not refer to the same lines of the same files, then checkout succeeds even in an ◊technical-term{dirty} working directory. But having a ◊technical-term{clean} working directory before checkout avoids confusion.}
+Git calls this process of navigating in history ◊technical-term{checkout}.
 
-A necessary precondition for this operation is that the working directory is ◊technical-term{clean}. There should be no pending changes that have not been committed. This is important because checkout modifies the files in the working directory, and uncommitted changes could conflict with those modifications. Our project is already in this ◊technical-term{clean} state, so we can move on.
+◊git/gui{
+  On the main ◊acronym{GUI} window, go to the ◊menu-option["Branch" "Checkout…"] menu option:
 
-On the ◊acronym{GUI}, go to the window with the repository history, which we introduced in the ◊reference['read-history]{previous section}, and copy the identifier for the first commit, in which we added the cookies recipe:
+  ◊image{images/checkout.png}
 
-◊image["images/identifier-for-previous-commit.png"]{The first commit is selected on the top pane, and the identifier is on the right of the button labeled ‘SHA1 ID:’. This identifier changes from repository to repository.}
 
-Now, back on the other window, go to ◊emphasis{Branch} > ◊emphasis{Checkout}, and paste the identifier on the dialog box:
+  Fill in ◊menu-option{Revision Expression} input with the identifier for the first commit, which we collect by ◊reference['read-history]{reading the history}. Then click on the ◊menu-option{Checkout} button, Git shows a warning regarding a “detached checkout,” which is the subject of the following sections:
 
-◊image["images/checkout.png"]{The checkout dialog.}
+  ◊image{images/detached-checkout.png}
 
-Finally, click on ◊emphasis{Checkout}. A dialog warns about “branches” and “detached checkouts,” we will learn about them on the following sections. For the time being, it is safe to click ◊emphasis{◊acronym{OK}}:
+  Refresh the project history window using the ◊menu-option/path["File" "Update"] menu option and note that the yellow dot is at the first commit. The yellow dot marks the commit which the working directory currently represents:
 
-◊image["images/detached-checkout.png"]{A dialog warning about a “detached checkout,” which can be ignored for now.}
+  ◊image{images/history-after-checkout.png}
+}
 
-To check that checkout succeeded, go to the window showing the repository history and select the menu option ◊emphasis{File} > ◊emphasis{Update}. The graph showing the repository history changes, showing the first commit highlighted in yellow. This represents the point in time that the working directory currently reflects:
+◊git/cli{
+  Use the ◊code/inline{◊git/verb{checkout}} command with the identifier of the first commit, which we collect by ◊reference['read-history]{reading the history}:
 
-◊image["images/after-checkout.png"]{After checkout, the current commit is the first in history—in yellow.}
-
-◊margin-note{Many text editors reload files changed in the disk automatically.}
-
-To see the effect of checkout in the working directory, reload ◊code/inline{vegan-cookies.txt} from the disk in the text editor. Notice that the part added on the second commit regarding directions is no longer there. This does not mean that those changes are lost, they are still preserved in the box in the cabinet, and can be recovered any time. It is just the current state of the working directory that reflects an earlier point in history.
-
-To perform a checkout on the ◊acronym{CLI}, first copy the commit identifier for the first commit from the ◊code/inline{◊git/verb{log}} command in the ◊reference['read-history]{previous section}. Then, use the ◊code/inline{◊git/verb{checkout}} command with the identifier as an argument:
-
-◊code/block{
-$ git checkout 30a7d90741c4ef3544562144a9b4b692ba58e2e0
-Note: checking out '30a7d90741c4ef3544562144a9b4b692ba58e2e0'.
+  ◊full-width{
+    ◊code/block{
+$ git ◊git/verb{checkout} ◊git/object{464f886e53aa4475010e7569b9e9d8de14975969}
+Note: checking out '464f886e53aa4475010e7569b9e9d8de14975969'.
 
 You are in 'detached HEAD' state. You can look around, make experimental
 changes and commit them, and you can discard any commits you make in this
@@ -667,21 +662,20 @@ do so (now or later) by using -b with the checkout command again. Example:
 
   git checkout -b <new-branch-name>
 
-HEAD is now at 30a7d90... Add cookies recipe
+HEAD is now at 464f886... Add first recipes
+    }
+  }
+
+  The output warns about the unfortunately named “detached ◊code/inline{HEAD} state,” which is the subject of the following sections.
 }
 
-As before, inspecting ◊code/inline{vegan-cookies.txt} reveals the changes to the working directory:
+Inspect the contents of the working directory, the files ◊path{cookies.txt}	and ◊path{muffins.txt} should be there, but the file ◊path{pancakes.txt} should not. The working directory now reflects the point in time right after the first commit was created, when there was no pancakes recipe in the cookbook. But it is not lost, the repository still tracks the whole history, regardless of the situation of the working directory, and it contains the commit which introduced that recipe. We could navigate back to the second commit by checking it out.
 
-◊code/block{
-$ cat vegan-cookies.txt
-Ingredients
+◊paragraph-separation[]
 
-...
-}
+◊margin-note{There is a reason to prefer the simpler version control systems embedded in other tools, in some situations. Binary files, for example, images and files created by word processors, are opaque to Git. This limits features like blaming files, because Git cannot specify which lines changed in the files. It records that the whole file changed, even if the modification was adding a single comma. Specialized version control systems embedded in the editing tools do not have this restriction.}
 
-But, similar to the ◊acronym{GUI} dialog, the output of the ◊code/inline{◊git/verb{checkout}} command includes a warning. Instead of “detached checkout,” it uses the unfortunately gory term “detached ◊code/inline{HEAD}.” We address this on the ◊reference['references]{next section}.
-
-◊; TODO: MARK WHEN FINISHED CORE FEATURES…
+◊new-thought{The working directory}, the repository, changes, the staging area, commits, reading the history and navigating in it are the core concepts and operations in Git. This is the feature set generally supported by simple version control systems, for example, those embedded in word processors. But Git does much more than what we covered thus far. A hint is the warning Git issued when we checked out the first commit in our repository. The following sections address this issue.
 
 ◊section['references]{References}
 
