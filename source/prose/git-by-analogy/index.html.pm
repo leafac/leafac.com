@@ -496,8 +496,11 @@ $ git ◊git/verb{commit}
 
 ◊paragraph-separation[]
 
-◊margin-note{See the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history.
-See the source for ◊link["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference['crafting-the-perfect-commit]{carefully crafted commits} which are often the result of rewriting the history.}
+◊margin-note{
+  See the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history. Most commit messages in this repository are just dots (◊code/inline{.}), to satisfy the requirement that every commit must include a message.
+
+  See the source for ◊link["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference['crafting-the-perfect-commit]{carefully crafted commits} which are often the result of rewriting the history.
+}
 
 ◊new-thought{Creating a commit} is a straightforward process, and we should do it as often as possible. It is better to have an excess of commits than to wait for too long before committing. This avoids data loss and promotes early communication and review from collaborators. Some intermediary commits might not constitute meaningful contributions, and it is not important to write careful commit messages for them, simple reminders suffice. The writing of this article, for example, spans across hundreds of commits. Some of them include many changes, others just fix a single typo.
 
