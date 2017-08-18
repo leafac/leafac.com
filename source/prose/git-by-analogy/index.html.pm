@@ -510,7 +510,7 @@ The disadvantage of this approach is that it pollutes the project history with u
 
 ◊margin-note{◊figure{◊svg{images/chain.svg}}}
 
-◊new-thought{We created} two commits. The first includes the creations of the files ◊path{cookies.txt} and ◊path{muffins.txt}, and the second includes the creation of the file ◊path{pancakes.txt}. The second commit includes a reference to the first, but the first does not include a reference to the second. This happens because once we added the first box to the cabinet, it cannot change, and the second commit did not exist at that time. As we create more commits, each of them will include a reference to the immediate predecessor, forming an unidirectional chain. This chain of commits represents the project timeline, which we can read.
+◊new-thought{We created} two commits. The first includes the creation of the files ◊path{cookies.txt} and ◊path{muffins.txt}, and the second includes the creation of the file ◊path{pancakes.txt}. The second commit includes a reference to the first, but the first does not include a reference to the second. This happens because the second commit did not exist at the time we created the first, and once we added it to the repository, we cannot change it—commits are immutable. As we create more commits, each of them will include a reference to the immediate predecessor, forming an unidirectional chain. This chain of commits represents the project timeline, which we can read.
 
 ◊git/gui{
   Go to the window showing the project history:
@@ -519,7 +519,7 @@ The disadvantage of this approach is that it pollutes the project history with u
 
   ◊list/ordered{
     ◊list/ordered/item{The chain of commits.}
-    ◊list/ordered/item{The commit messages.}
+    ◊list/ordered/item{The first lines of the commit messages.}
     ◊list/ordered/item{The commit author and email.}
     ◊list/ordered/item{The date and time of the commit creation.}
     ◊list/ordered/item{
@@ -527,7 +527,7 @@ The disadvantage of this approach is that it pollutes the project history with u
 
       The unique identifier of the currently selected commit. Use the panes above to switch to different commits.
     }
-    ◊list/ordered/item{The whole commit label, including the commit message.}
+    ◊list/ordered/item{The whole commit label, including the entire commit message.}
     ◊list/ordered/item{A list of files changed by the currently selected commit.}
     ◊list/ordered/item{The changes in the commit.}
   }
