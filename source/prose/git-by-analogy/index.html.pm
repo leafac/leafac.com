@@ -197,6 +197,10 @@ For the rest of this article we use a simple project for the examples: the writi
   Besides this main ◊acronym{GUI} window, there is another front-end window to show the project history. Open it with the ◊menu-option/path["Repository" "Visualise All Branch History"] menu option, or directly from the command line with ◊code/inline{gitk}. Currently there is no history to show, the cabinet is still empty, so this window shows an error:
 
   ◊image["images/no-history-yet.png"]{History visualization window with error due to empty repository.}
+
+  The panes in this window also correspond to parts of our office metaphor:
+
+  ◊figure{◊svg{images/gitk-parts.svg}}
 }
 
 ◊git/cli{
@@ -352,91 +356,145 @@ The changes are now organized on the paper tray, the next step is to move them t
 
 ◊section['commits]{Commits}
 
-◊margin-note{
-  ◊figure{◊svg{images/commit.svg}}
+◊margin-note{◊figure{◊svg{images/commit.svg}}}
 
-  A single commit.
-}
+◊new-thought{The last step} to register the changes in the project history is to move them from the paper tray to a box and into the cabinet. But, later, when inspecting the boxes, we do not always want to open each one of them and look at the paper slips inside. This would be tedious and uninformative. Instead, we label the boxes with high-level descriptions of their contents. These labels contain the following information:
 
-◊new-thought{In our office analogy}, the ◊technical-term{commits} are the ◊informal{labeled boxes} which live in the cabinet (◊reference['repository]{repository}) and store the changes to the project. At this point, the changes are organized on the ◊informal{paper tray} and ready to go into the box. To finish the process, we have to create the label, which is composed of:
+◊margin-note{Git associates the boxes with their authors, which is why the ◊reference['local-setup]{setup} was necessary.}
 
 ◊list/unordered{
-  ◊list/unordered/item{Information about the author including name and email.}
-  ◊list/unordered/item{The current date and time.}
   ◊list/unordered/item{An unique identifier.}
-  ◊list/unordered/item{A reference to the identifier of the previous box in the chain (except for this first commit, which starts the chain).}
+  ◊list/unordered/item{The author name and email.}
+  ◊list/unordered/item{The current date and time.}
+  ◊list/unordered/item{A reference to the unique identifier of the previous box (or boxes) in the chain (except for this first box, which starts the chain).}
   ◊list/unordered/item{A high-level description of the contents.}
 }
 
-◊margin-note{The ◊reference['local-setup]{setup} process of identifying to Git was necessary to make the automatic parts of labeling work.}
+Git manages most of this information automatically. The only item requiring manual input is the last: the description of the box contents.
 
-All information except for the last are added to the label automatically by Git. The commit author has to provide a description of its contents; on the ◊acronym{GUI}, this goes on the bottom-right pane:
+Once a box is closed, labeled, and goes into the cabinet, it becomes part of the project history and cannot be modified. It is possible to revert changes, for example, we could remove ◊path{cookies.txt}, but this removal is a new change, which exists on its own slip of paper, and goes into a separate box.
 
-◊figure{◊svg{images/gui-commit.svg}}
+Git calls the boxes ◊technical-term{commits}, and the content descriptions in the labels are called ◊technical-term{commit messages}. The act of creating a ◊technical-term{commit} is called ◊technical-term{committing} the changes.
 
-The equivalent on the ◊acronym{CLI} is the following:
+◊git/gui{
+  Write a description of what is in the staging area on the ◊menu-option{Commit Message} pane, and click on the ◊menu-option{Commit} button:
 
-◊code/block{
-$ git ◊git/verb{commit }
+  ◊figure{◊svg{images/create-commit.svg}}
+
+  The status bar on the bottom confirms the commit creation, including a prefix of the unique identifier and the commit message. Go to the window showing the project history and to the ◊menu-option/path["File" "Update"] menu option to see the box in the cabinet:
+
+  ◊image["images/history-first-commit.png"]{History with one commit.}
 }
 
-◊margin-note{
-  On most machines, the default text editor is ◊link["http://www.vim.org/"]{Vim}. Configure the text editor that Git uses with:
+◊git/cli{
+  Run the following command:
 
   ◊code/block{
-$ git ◊git/verb{config} \
-  ◊git/object{--global core.editor "<EDITOR>"}
+$ git ◊git/verb{commit }
   }
 
-  In many cases—particularly for ◊acronym{GUI} text editors—one has to provide extra options to the text editor for it to work well with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
-}
+  ◊margin-note{
+    On most machines, the default text editor is ◊link["http://www.vim.org/"]{Vim}. Configure a different text editor with the following command:
 
-After running this command, Git starts a text editor with a special file already open. To finally create the commit, one has to write the commit description on that file and close it. Git will then print some statistics about the commit:
+    ◊code/block{
+$ git ◊git/verb{config} \
+  ◊git/object{--global core.editor "<EDITOR>"}
+    }
 
-◊margin-note{The ◊code/inline{cff98a54} in the output is the unique identifier for the commit, it is different for each repository.}
+    In many cases—particularly for ◊acronym{GUI} text editors—one has to provide extra options to the text editor for it to work with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
+  }
 
-◊code/block{
-".git/COMMIT_EDITMSG" 10L, 250C written 
-[master (root-commit) cff98a54] Add cookies recipe 
- 1 file changed, 1 insertion(+)
-  create mode 100644 vegan-cookies.txt
-}
+  Git starts a text editor with a special file already open. To create the commit, write the commit message, save, and close that file:
 
-On the ◊acronym{GUI}, one clicks on ◊technical-term{Commit}, and the status bar indicates success:
+  ◊code/block{
+[master (root-commit) 464f886] Add first recipes
+ 2 files changed, 14 insertions(+)
+ create mode 100644 cookies.txt
+ create mode 100644 muffins.txt
+  }
 
-◊margin-note{The word “commit” can be a noun, meaning the box containing changes, or a verb, meaning the act of creating the box.}
+  The ◊code/inline{◊git/verb{status}} has changed, indicating that there are no longer any changes in the working directory with respect to the cabinet:
 
-◊image["images/after-first-commit.png"]{After first commit.}
-
-Now our cabinet (repository) contains the first labeled box (commit). The paper tray (staging area) is empty and Git gives us a new empty box to fill with the next changes to the project. Asking for the current status confirms that:
-
-◊code/block{
+  ◊code/block{
 $ git ◊git/verb{status}
 On branch master
 nothing to commit, working tree clean
+  }
+}
+
+◊section['commits---revisited]{Commits—Revisited}
+
+◊new-thought{These past few sections} were detailed and, therefore, slow. But going from a change in the working directory to a commit in the repository is a low overhead operation. Moreover, committing is the most common process in Git, so let us practice it one more time, on fast-forward. Create a new file:
+
+◊file-listing["pancakes.txt"]{
+Ingredients
+
+...
+
+Directions
+
+...
+}
+
+◊git/gui{
+  ◊list/ordered{
+    ◊list/ordered/item{
+      Click on ◊menu-option{Rescan} to see the file creation in the working directory:
+
+      ◊image["images/create-commit-review-1.png"]
+    }
+    ◊list/ordered/item{
+      Click on ◊menu-option{Stage Changed} to add the file creation to the staging area:
+
+      ◊image["images/create-commit-review-2.png"]
+    }
+    ◊list/ordered/item{
+      Write a commit message:
+
+      ◊image["images/create-commit-review-3.png"]
+    }
+    ◊list/ordered/item{
+      Click on ◊menu-option{Commit} to create the commit:
+
+      ◊image["images/create-commit-review-4.png"]
+    }
+    ◊list/ordered/item{
+      On the window showing the project history, go to the menu option ◊menu-option/path["File" "Update"] to see the new commit in the repository:
+
+      ◊image["images/create-commit-review-5.png"]
+    }
+  }
+}
+
+◊git/cli{
+  ◊list/ordered{
+    ◊list/ordered/item{
+      Add the file creation to the staging area:
+
+      ◊code/block{
+$ git ◊git/verb{add} ◊git/object{pancakes.txt}
+      }
+    }
+    ◊list/ordered/item{
+      Start the commit creation:
+
+      ◊code/block{
+$ git ◊git/verb{commit}
+      }
+    }
+    ◊list/ordered/item{
+      Write a commit message on the text editor that opens, save and close the file:
+
+      ◊code/block{
+[master 7ad6089] Add Pancakes
+ 1 file changed, 7 insertions(+)
+ create mode 100644 pancakes.txt
+      }
+    }
+  }
 }
 
 ◊paragraph-separation[]
-
-◊new-thought{These past few sections} have been slow and detailed, but going from a change in the working directory to a commit is a low overhead operation—specially if there is Git support integrated in the text editor. Let us review the whole process, on fast-forward. First, modify a file using a text editor or the following command line:
-
-◊code/block{
-$ echo -e "Directions\n\n...\n\n" >> vegan-cookies.txt
-}
-
-Then, if using the ◊acronym{GUI}, click on ◊emphasis{Rescan}, select the file name under ◊technical-term{Unstaged Changes}, click on ◊emphasis{Stage Changed}, write a message on the lower-right pane and click on ◊emphasis{Commit}. Alternatively, if using the command line, run the following:
-
-◊margin-note{Use the ◊code/inline{◊git/object{-a}} option only when confident of the changes on the working directory. Generally, it is better to inspect the changes and organize them on the staging area. This is the perfect opportunity to spot unaddressed ◊code/inline{TODO}s left over on the code, for example.}
-
-◊code/block{
-$ git ◊git/verb{commit} ◊git/object{-am "Add directions"}
-}
-
-◊margin-note{The ◊code/inline{◊git/object{-a}} and the ◊code/inline{◊git/object{-m}} options have been condensed into ◊code/inline{◊git/object{-am}}.}
-
-The command above is a shortcut for convenience. The ◊code/inline{◊git/object{-a}} option adds all changes to the index—subsuming the ◊code/inline{◊git/verb{add}} command—and the ◊code/inline{◊git/object{-m}} option lets us specify the commit message without opening a text editor.
-
-◊section['fine-points-about-commits]{Fine Points About Commits}
 
 ◊margin-note{For an example of a small personal project in which commits are ◊emphasis{not} carefully crafted, see the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for the website containing this article. For an example of the opposite, see the source for ◊link["https://github.com/git/git/commits/master"]{Git itself}.}
 

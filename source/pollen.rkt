@@ -468,7 +468,7 @@
   #:html (default-tag-function 'figcaption)
   #:css (css-expr [figcaption ,@font/secondary #:text-align center]))
 
-(define-component (image path caption)
+(define-component (image path [caption ""])
   #:html (figure ((default-tag-function 'div #:class "image-in-figure")
                   ((default-tag-function 'img) #:src path #:alt caption))
                  (figure/caption caption))
