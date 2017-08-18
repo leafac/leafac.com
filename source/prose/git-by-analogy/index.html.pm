@@ -441,27 +441,27 @@ Directions
     ◊list/ordered/item{
       Click on ◊menu-option{Rescan} to see the file creation in the working directory:
 
-      ◊image["images/create-commit-review-1.png"]
+      ◊image{images/create-commit-review-1.png}
     }
     ◊list/ordered/item{
       Click on ◊menu-option{Stage Changed} to add the file creation to the staging area:
 
-      ◊image["images/create-commit-review-2.png"]
+      ◊image{images/create-commit-review-2.png}
     }
     ◊list/ordered/item{
       Write a commit message:
 
-      ◊image["images/create-commit-review-3.png"]
+      ◊image{images/create-commit-review-3.png}
     }
     ◊list/ordered/item{
       Click on ◊menu-option{Commit} to create the commit:
 
-      ◊image["images/create-commit-review-4.png"]
+      ◊image{images/create-commit-review-4.png}
     }
     ◊list/ordered/item{
       On the window showing the project history, go to the menu option ◊menu-option/path["File" "Update"] to see the new commit in the repository:
 
-      ◊image["images/create-commit-review-5.png"]
+      ◊image{images/create-commit-review-5.png}
     }
   }
 }
@@ -587,28 +587,41 @@ index 0000000..5bc1d5e
 
 ◊paragraph-separation[]
 
-◊new-thought{Another point of view} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file that have not been subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
+◊margin-note{◊figure{◊svg{images/blame.svg}}}
 
-On the ◊acronym{GUI}, go back to the window which we used to create a commit—as opposed to the one showing the project history—and use the menu option ◊emphasis{Repository} > ◊emphasis{Browse master’s Files}. This opens a file browser, and selecting a file on it opens another window containing the reconstruction of that file over time, with all the relevant commits. Clicking on section of the file opens information about the particular commit on the bottom pane, and clicking on the commit identifier in blue on the left changes the perspective to show how the file was at that time.
+◊new-thought{Another point of view} for reading the project history is to start from a particular file and reconstruct its composition. We change files as the project evolves, so the current state of a file might be the result of several different commits. When looking for a bug, for example, it is helpful to find the commit that introduced a suspicious line, to read the commit message and understand the reason for its existence. Git calls this ◊technical-term{blaming} the file.
 
-◊image["images/blame.png"]{The file browser on the top, the reconstruction of the vegan cookie recipe in the middle, and information about a particular commit on the bottom.}
+◊git/gui{
+  On the main window, go to ◊menu-option/path["Repository" "Browse master's Files"]:
 
-On the ◊acronym{CLI}, use the ◊code/inline{◊git/verb{blame}} command with the name of the file of interest as argument:
+  ◊image{images/blame-1.png}
 
-◊full-width{
-  ◊code/block{
-$ git ◊git/verb{blame} ◊git/object{vegan-cookies.txt}
-^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  1) Ingredients
-^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  2)
-^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  3) ...
-^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  4)
-^30a7d90 (Leandro Facchinetti 2017-07-24 17:46:35 -0400  5)
-ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  6) Directions
-ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  7)
-ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  8) ...
-ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400  9)
-ab84ed16 (Leandro Facchinetti 2017-07-24 17:46:48 -0400 10)
+  In this file browser, select a file:
+
+  ◊image{images/blame-2.png}
+
+  The window above shows the file contents and, on the left, the commit that introduced the lines. It includes the commit identifier and the author’s initials. In our example, the whole file was introduced by a single commit, but this is generally not the case. Finally, click on the line of interest to see more details about the commit which introduced it:
+
+  ◊image{images/blame-3.png}
+}
+
+◊git/cli{
+  Use the ◊code/inline{◊git/verb{blame}} command with the file name as an argument:
+
+  ◊full-width{
+    ◊code/block{
+$ git ◊git/verb{blame} ◊git/object{pancakes.txt}
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 1) Ingredients
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 2) 
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 3) ...
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 4) 
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 5) Directions
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 6) 
+7ad60897 (Leandro Facchinetti 2017-08-18 11:09:04 -0400 7) ...
+    }
   }
+
+  To see the commit details, use ◊code/inline{◊git/verb{show}}, as above.
 }
 
 ◊section['navigate-in-history]{Navigate in History}
