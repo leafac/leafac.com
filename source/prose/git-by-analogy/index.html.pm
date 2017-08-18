@@ -508,65 +508,86 @@ The disadvantage of this approach is that it pollutes the project history with u
 
 ◊section['read-history]{Read History}
 
-NOTE THE CHAIN!!
+◊margin-note{◊figure{◊svg{images/chain.svg}}}
 
-◊margin-note{Alternatively, open the ◊acronym{GUI} by running the program ◊code/inline{gitk} instead of ◊code/inline{git ◊git/verb{gui}} on the command line.}
+◊new-thought{We created} two commits. The first includes the creations of the files ◊path{cookies.txt} and ◊path{muffins.txt}, and the second includes the creation of the file ◊path{pancakes.txt}. The second commit includes a reference to the first, but the first does not include a reference to the second. This happens because once we added the first box to the cabinet, it cannot change, and the second commit did not exist at that time. As we create more commits, each of them will include a reference to the immediate predecessor, forming an unidirectional chain. This chain of commits represents the project timeline, which we can read.
 
-◊new-thought{In our running example} we already have two commits, how do we inspect those ◊emphasis{boxes in the cabinet}? The recommended approach is to use the ◊acronym{GUI}, by going to the menu option ◊emphasis{Repository} > ◊emphasis{Visualise All Branch History}:
+◊git/gui{
+  Go to the window showing the project history:
 
-◊margin-note{Git names the unique identifier for the commits after the hashing algorithm used to calculated it: ◊acronym{SHA1}.}
+  ◊figure{◊svg{images/history.svg}}
 
-◊image["images/log.png"]{The contents of the cabinet: the project history.}
+  ◊list/ordered{
+    ◊list/ordered/item{The chain of commits.}
+    ◊list/ordered/item{The commit messages.}
+    ◊list/ordered/item{The commit author and email.}
+    ◊list/ordered/item{The date and time of the commit creation.}
+    ◊list/ordered/item{
+      ◊margin-note{Git calls the unique commit identifier ◊acronym{SHA1 ID}, after the hashing algorithm used to generate it.}
 
-◊margin-note{Any prefix of the commit identifier that remains unique throughout the repository is a valid argument for ◊code/inline{◊git/verb{show}}, for example, ◊code/inline{◊git/object{ab84ed16}} would have the same result.}
-
-The top panes show the chain of commits, most recent on top. It includes the title of the commit message, author and date. The lower panes show information about the selected commit. It includes the full commit message, the list of modified files, the changes in those files, and the ◊acronym{SHA1 ID}, which is how Git calls the unique identifier for the commit.
-
-On the command-line, use a combination of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}} to achieve the same effect:
-
-◊full-width{
-  ◊code/block{
-$ git ◊git/verb{log}
-commit ab84ed162d98c5d41f09826408a1412a5ed655f5 (HEAD -> master)
-Author: Leandro Facchinetti <me@leafac.com>
-Date:   Mon Jul 24 17:46:48 2017 -0400
-
-    Add directions
-
-commit 30a7d90741c4ef3544562144a9b4b692ba58e2e0
-Author: Leandro Facchinetti <me@leafac.com>
-Date:   Mon Jul 24 17:46:35 2017 -0400
-
-    Add cookies recipe
-
-$ git ◊git/verb{show} ◊git/object{ab84ed162d98c5d41f09826408a1412a5ed655f5}
-commit ab84ed162d98c5d41f09826408a1412a5ed655f5 (HEAD -> master)
-Author: Leandro Facchinetti <me@leafac.com>
-Date:   Mon Jul 24 17:46:48 2017 -0400
-
-    Add directions
-
-diff --git a/vegan-cookies.txt b/vegan-cookies.txt
-index 5ce4655..11660f0 100644
---- a/vegan-cookies.txt
-+++ b/vegan-cookies.txt
-@@ -3,3 +3,8 @@ Ingredients
- ...
-
-
-+Directions
-+
-+...
-+
-+
+      The unique identifier of the currently selected commit. Use the panes above to switch to different commits.
+    }
+    ◊list/ordered/item{The whole commit label, including the commit message.}
+    ◊list/ordered/item{A list of files changed by the currently selected commit.}
+    ◊list/ordered/item{The changes in the commit.}
   }
 }
 
-The snippet above first shows the project history in reverse chronological order. The ◊code/inline{◊git/verb{log}} command lists the boxes labels, with the unique identifier and information about the author, the date at the moment of commit, and the message describing the box contents written by the author. Then, we select a single identifier and use ◊code/inline{◊git/verb{show}} to see the contents of a particular box.
+◊git/cli{
+  Run the following command to see the chain of commits:
+
+  ◊code/block{
+$ git ◊git/verb{log}
+commit 7ad6089705d3dd0abdbde219274ae2c6e4631bef (HEAD -> master)
+Author: Leandro Facchinetti <me@leafac.com>
+Date:   Fri Aug 18 11:09:04 2017 -0400
+
+    Add Pancakes
+
+commit 464f886e53aa4475010e7569b9e9d8de14975969
+Author: Leandro Facchinetti <me@leafac.com>
+Date:   Fri Aug 18 10:24:41 2017 -0400
+
+    Add first recipes
+  }
+
+  To see details about a particular commit, use ◊code/inline{◊git/verb{show}} with the commit identifier as argument:
+
+  ◊margin-note{
+    We can use the prefix of an unique identifier. For example, the following is equivalent to the other example:
+
+  ◊code/block{
+$ git ◊git/verb{show} ◊git/object{7ad60897}
+    }
+  }
+
+  ◊code/block{
+$ git ◊git/verb{show} ◊git/object{7ad6089705d3dd0abdbde219274ae2c6e4631bef}
+commit 7ad6089705d3dd0abdbde219274ae2c6e4631bef (HEAD -> master)
+Author: Leandro Facchinetti <me@leafac.com>
+Date:   Fri Aug 18 11:09:04 2017 -0400
+
+    Add Pancakes
+
+diff --git a/pancakes.txt b/pancakes.txt
+new file mode 100644
+index 0000000..5bc1d5e
+--- /dev/null
++++ b/pancakes.txt
+@@ -0,0 +1,7 @@
++Ingredients
++
++...
++
++Directions
++
++...
+  }
+}
 
 ◊paragraph-separation[]
 
-◊new-thought{Another use case} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file that have not been subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
+◊new-thought{Another point of view} for reading the project history is to reconstruct how a particular file was composed. This amounts to recovering all the most recent slips of paper relative to that file that have not been subsumed by subsequent changes. These slips of paper might be in several different boxes and, Git, the office robot, automates all the hard work of finding them. In Git terminology, this is called ◊emphasis{blaming} the file.
 
 On the ◊acronym{GUI}, go back to the window which we used to create a commit—as opposed to the one showing the project history—and use the menu option ◊emphasis{Repository} > ◊emphasis{Browse master’s Files}. This opens a file browser, and selecting a file on it opens another window containing the reconstruction of that file over time, with all the relevant commits. Clicking on section of the file opens information about the particular commit on the bottom pane, and clicking on the commit identifier in blue on the left changes the perspective to show how the file was at that time.
 
