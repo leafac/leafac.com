@@ -191,6 +191,10 @@ For the rest of this article we use a simple project for the examples: the writi
   We had already created a repository ◊reference['local-setup]{during setup} to work around a quirk in the ◊acronym{GUI}. Repeat the process to ◊menu-option{Create New Repository} in the working directory:
 
   ◊figure{◊svg{images/create-repository.svg}}
+
+  The screen above means the repository was successfully created. Besides this main ◊acronym{GUI} window, there is another front-end window to show the project history. Open it with the ◊menu-option/path["Repository" "Visualise All Branch History"] menu option, or directly from the command line with ◊code/inline{gitk}. Currently there is no history to show, the cabinet is still empty, so this window shows an error:
+
+  ◊image["images/no-history-yet.png"]{History visualization window with error due to empty repository.}
 }
 
 ◊git/cli{
