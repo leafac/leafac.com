@@ -506,6 +506,8 @@ Beginners should ◊emphasis{commit early, and commit often}. Anything from a si
 
 ◊section['read-history]{Read History}
 
+NOTE THE CHAIN!!
+
 ◊margin-note{Alternatively, open the ◊acronym{GUI} by running the program ◊code/inline{gitk} instead of ◊code/inline{git ◊git/verb{gui}} on the command line.}
 
 ◊new-thought{In our running example} we already have two commits, how do we inspect those ◊emphasis{boxes in the cabinet}? The recommended approach is to use the ◊acronym{GUI}, by going to the menu option ◊emphasis{Repository} > ◊emphasis{Visualise All Branch History}:
@@ -965,6 +967,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 ◊; https://help.github.com/
 ◊; https://git-scm.com/book/
 ◊; https://git-scm.com/docs
+◊; MANUALS
 
 ◊; ------------------ APPENDIX -----------------------------------
 
