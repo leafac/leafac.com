@@ -496,13 +496,12 @@ $ git ◊git/verb{commit}
 
 ◊paragraph-separation[]
 
-◊margin-note{For an example of a small personal project in which commits are ◊emphasis{not} carefully crafted, see the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for the website containing this article. For an example of the opposite, see the source for ◊link["https://github.com/git/git/commits/master"]{Git itself}.}
+◊margin-note{See the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history.
+See the source for ◊link["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference['crafting-the-perfect-commit]{carefully crafted commits} which are often the result of rewriting the history.}
 
-◊new-thought{What constitutes} a meaningful contribution, and, consequently, a commit? The answer to this question depends on who are the potential consumers of this information. On projects of lesser importance, people might only be interested in some aspects of version control, for example, not losing files due to corruption or facilitating collaboration on a small team. In those cases, little care goes into crafting meaningful commits and their corresponding commit messages.
+◊new-thought{Creating a commit} is a straightforward process, and we should do it as often as possible. It is better to have an excess of commits than to wait for too long before committing. This avoids data loss and promotes early communication and review from collaborators. Some intermediary commits might not constitute meaningful contributions, and it is not important to write careful commit messages for them, simple reminders suffice. The writing of this article, for example, spans across hundreds of commits. Some of them include many changes, others just fix a single typo.
 
-On bigger, more important projects, in which more people are involved, a lot of attention goes into the commits. They make sure the changes to the code do not break the test suite, add tests for any new code, include documentation, and so forth. But, generally, these great commits are not born this way. They are manufactured after the fact, using the advanced techniques laid out on a ◊reference['crafting-the-perfect-commit]{later section}.
-
-Beginners should ◊emphasis{commit early, and commit often}. Anything from a single line to a couple hours of work is enough. It is better to have too many commits than to wait until too many changes have accumulated in the working directory. The commit messages can be notes to self, to inform the writing of a detailed commit message in the future, if desirable. This is the best way to enjoy some of the benefits of version control with minimal effort.
+The disadvantage of this approach is that it pollutes the project history with unimportant commits. When comfortable with creating commits, read the appendix on ◊reference['crafting-the-perfect-commit]{◊emphasis{Crafting the Perfect Commit}} to learn how to fix this issue by rewriting the history.
 
 ◊section['read-history]{Read History}
 
