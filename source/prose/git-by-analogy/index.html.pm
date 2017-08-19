@@ -681,13 +681,35 @@ Inspect the contents of the working directory, the files ◊path{cookies.txt}	an
 
 ◊section['references]{References}
 
-◊margin-note{◊svg{images/references.svg}}
+◊margin-note{
+  ◊figure{◊svg{images/references.svg}}
 
-◊new-thought{In our office} metaphor for how Git works, the cabinet contains a chain of boxes. Each box label contains a reference to the parent box, so we can reconstruct the history by following the chain. But how do we know where it starts?
+  The object on top of the cabinet is a rolodex with index cards.
+}
 
-We can borrow the solution used by libraries: index cards. The index cards point to the box that starts the chain. When performing operations on the cabinet, we start by looking the index cards. For example, in a ◊reference['read-history]{previous section}, we asked Git to show the project history, listing each commit. It accomplished that by first consulting an index card. We did not specify which index card it should read, so, by default, it used a special index card which points to the commit currently represented by the working directory. Git calls these index cards ◊technical-term{references} and the special reference which points to the commit currently represented by the working directory is called the ◊code/inline{HEAD}.
+◊new-thought{We ◊reference['navigate-in-history]{navigate in history}}, and the files and folders on our desktop reflect a point in the project timeline represented by a particular box in the cabinet. To orient ourselves, we need to know which box is currently checked out. So we keep an index card, which points to the appropriate box. We update this index card any time we checkout a different point in history, or when we create new boxes, for example.
 
-Many Git operations implicitly move the ◊code/inline{HEAD}, making it point to a different commit, for example, ◊reference['commits]{commit} and ◊reference['navigate-in-history]{checkout}. On the ◊acronym{GUI}, the ◊code/inline{HEAD} is represented by the yellow dot, as opposed to the blue dots. On the ◊acronym{CLI}, Git is more explicit and includes ◊code/inline{HEAD -> master} in the outputs of ◊code/inline{◊git/verb{log}} and ◊code/inline{◊git/verb{show}}. These outputs suggest that the special index card ◊code/inline{HEAD} is not the only kind of reference. In the ◊reference['branches]{next section}, we cover a second kind of reference, and finally solve the “detached ◊code/inline{HEAD}” mystery.
+◊margin-note{◊figure{◊svg{images/head.svg}}}
+
+Git calls these index cards ◊technical-term{references}. There are different kinds of references, and the first we encounter is the special reference pointing to the currently checked out commit, which is called ◊code/inline{HEAD}. Git updates ◊code/inline{HEAD} automatically, for example, when committing and checking out.
+
+◊git/gui{
+  The ◊code/inline{HEAD} is represented by the yellow dot in the window showing the project history, as opposed to the blue dots:
+
+  ◊figure{◊svg{images/gui-head.svg}}
+}
+
+◊git/cli{
+  The position of ◊code/inline{HEAD} is the first line of output from ◊code/inline{◊git/verb{status}}:
+
+  ◊code/block{
+$ git ◊git/verb{status}
+HEAD detached at 464f886
+nothing to commit, working tree clean
+  }
+}
+
+Understanding ◊code/inline{HEAD} is half of the way to solving the “detached checkout” or “detached ◊code/inline{HEAD}” mystery. The other half is the subject of the next section.
 
 ◊section['branches]{Branches}
 
@@ -1036,3 +1058,5 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 ◊; TODO: Redo all the images of the GUI up to ‘Tag’, using the proper capturing tool with the space bar??
 
 ◊; TODO: Double-check ◊git/verb & ◊git/object
+
+◊; TODO: Double-check that every ◊svg is surrounded by ◊figure
