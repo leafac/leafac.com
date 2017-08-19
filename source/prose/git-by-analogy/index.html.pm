@@ -496,6 +496,8 @@ $ git ◊git/verb{commit}
 
 ◊paragraph-separation[]
 
+◊margin-note{◊figure{◊svg{images/commit-often.svg}}}
+
 ◊margin-note{
   See the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history. Most commit messages in this repository are just dots (◊code/inline{.}), to satisfy the requirement that every commit must include a message.
 
