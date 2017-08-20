@@ -476,6 +476,14 @@ $ git ◊git/verb{add} ◊git/object{pancakes.txt}
       }
     }
     ◊list/ordered/item{
+      ◊margin-note{
+        Alternatively, write the commit message as an argument:
+
+        ◊code/block{
+$ git ◊git/verb{commit} ◊git/object{-m "Add Pancakes"}
+        }
+      }
+
       Start the commit creation:
 
       ◊code/block{
@@ -713,63 +721,78 @@ Understanding ◊code/inline{HEAD} is half of the way to solving the “detached
 
 ◊section['branches]{Branches}
 
-◊margin-note{◊svg{images/branches.svg}}
+◊margin-note{
+  ◊figure{◊svg{images/branches.svg}}
 
-◊new-thought{When we ◊reference['navigate-in-history]{navigate in history}}, ◊code/inline{HEAD} points at different commits, how do we know which box in the cabinet represents the most recent point in our cookbook timeline? We need a second kind of index card, one that is not special and does not always point at the commit that the working directory represents. We need an index card that points at the end of the timeline, and only updates if we create new boxes.
+  The first step in the figure above occurred when ◊reference['navigate-in-history]{navigating in history}, which resulted in the “detached ◊code/inline{HEAD}” state in the middle. The second step is the subject of this section, evading the “detached ◊code/inline{HEAD}” state.
+}
+
+◊new-thought{While we ◊reference['navigate-in-history]{navigate in history}}, ◊code/inline{HEAD} points at different commits, so how do we know which box in the cabinet represents the most recent point in our cookbook timeline? We need a second kind of index card, one that is not special in that it does not always point at the commit that the working directory represents. We need an index card that points at the end of the timeline, and only updates if we create new boxes.
 
 Git includes this second kind of references, which it calls ◊technical-term{branches}, for reasons which will become evident ◊reference['tree]{later}. When we started committing to the repository, Git created a branch and it has been updating it automatically ever since, keeping the branch pointing at the most recent commit in the timeline. By convention, the name of this first branch created by Git is ◊code/inline{master}.
 
-◊margin-note{◊svg{images/detached-head.svg}}
+Branches complete the picture of the “detached checkout” or “detached ◊code/inline{HEAD}” mystery. The ◊code/inline{HEAD} reference can point to a commit directly or indirectly, via a branch. Initially, Git kept ◊code/inline{HEAD} pointing to the most recent commit in the timeline ◊emphasis{indirectly}, via the ◊code/inline{master} branch. Then, when ◊reference['navigate-in-history]{navigating in history}, we checked out a commit identifier, making ◊code/inline{HEAD} point to a commit directly. This state is called “detached checkout” or “detached ◊code/inline{HEAD}” by Git, because there is no branch associated with ◊code/inline{HEAD}.
 
-Branches complete the picture of the “detached checkout” or “detached ◊code/inline{HEAD}” mystery. The ◊code/inline{HEAD} reference can point to a commit directly or indirectly, via a branch. Initially, Git kept ◊code/inline{HEAD} pointing to the most recent commit in the timeline ◊emphasis{indirectly}, via the ◊code/inline{master} branch. Then, when ◊reference['navigate-in-history]{navigating in history}, we checked out a commit identifier, making ◊code/inline{HEAD} point to a commit directly. This later state is called “detached checkout” or “detached ◊code/inline{HEAD}” by Git, because there is no branch associated with ◊code/inline{HEAD}.
-
-◊margin-note{There is a potential solution to this problem of losing a commit due to losing all references to it. Git comes with an advanced command called ◊code/inline{◊git/verb{reflog}}, which lists the commits at which ◊code/inline{HEAD} has recently pointed. If ◊code/inline{HEAD} has recently been pointing at the lost commit, then it is listed by ◊code/inline{◊git/verb{reflog}} and it is possible to copy its identifier and check it out. If enough activity has happened in the repository, then the lost commit might have been purged from the ◊code/inline{◊git/verb{reflog}}. Moreover, Git might have run a garbage collection routine, which permanently removes inaccessible commits from the repository. In that case the commit is unrecoverable.}
+◊margin-note{There is a method for potentially recovering inaccessible commits. Git comes with an advanced command called ◊code/inline{◊git/verb{reflog}}, which lists the commits at which ◊code/inline{HEAD} has recently pointed. If ◊code/inline{HEAD} has recently been pointing at the lost commit, then it is listed by ◊code/inline{◊git/verb{reflog}} and it is possible to recover it. If enough activity has happened in the repository, then the lost commit might have been purged from the ◊code/inline{◊git/verb{reflog}}. Moreover, Git might have run a garbage collection routine, which permanently removes inaccessible commits from the repository. In that case the commit is unrecoverable.}
 
 Besides the disturbing name, there is nothing wrong with the “detached ◊code/inline{HEAD}” state. It can be useful for exploring the history, conducting quick experiments and so forth. We can even commit while in “detached ◊code/inline{HEAD}” state, and Git will update the ◊code/inline{HEAD} reference automatically. But, if we checkout another commit or branch after committing, then there will be no pointers to this new commit, and it becomes inaccessible.
 
-There are few operations in Git which might result in data loss, and making a commit inaccessible is one of them. That is why Git issued an warning when we entered “detached ◊code/inline{HEAD}” state. We can evade this situation and avoid potential data loss by creating a new branch, which points at the same commit as ◊code/inline{HEAD}: the first commit.
+There are few operations in Git which might result in data loss, and making a commit inaccessible is one of them. That is why Git issued an warning when we entered “detached ◊code/inline{HEAD}” state. But we can have more branches besides ◊code/inline{master}, pointing at arbitrary commits in the timeline. So let us can evade our currently potentially dangerous situation and avoid data loss by creating a new branch. Suppose that we want to create this branch because the changes we want to make to the cookbook are to start working on a brownies recipe.
 
-◊git/gui{}
+◊git/gui{
+  Go to the ◊menu-option/path["Branch" "Create…"] menu option:
 
-COMMIT WHILE “ATTACHED HEAD” ⇒ GIT UPDATES BRANCH
+  ◊image["images/branch-create.png"]
 
-To create a branch using the ◊acronym{GUI}, select the window for creating commits and use the menu option ◊emphasis{Branch} > ◊emphasis{Create…} A dialog will ask for the name of the branch and extra optional information:
+  Click on ◊menu-option{Create} and then use the ◊menu-option/path["File" "Update"] menu option on the window showing the project history:
 
-◊figure["images/branch-create.png"]{The dialog for branch creation.}
+  ◊image["images/history-after-branch-creation.png"]
 
-Click on the ◊emphasis{Create} button to create a branch and check it out. Then go to the window showing the project history and use the menu option ◊emphasis{File} > ◊emphasis{Update}. The pane updates to show the newly created branch ◊code/inline{brownies}, which points to the first commit. The name ◊code/inline{brownies} is in bold letters, which means ◊code/inline{HEAD} is pointing to this branch, and the dot for this commit is yellow, informing that this still is the commit that the working directory represents. We are no longer in “detached ◊code/inline{HEAD}” state:
+  On the image above, green rectangles represent the ◊code/inline{master} and ◊code/inline{brownies} branches. Moreover, ◊code/inline{brownies} is bold, to demonstrate that ◊code/inline{HEAD} points at it. And ◊code/inline{HEAD} still indirectly points at the same commit, as indicated by the yellow dot.
+}
 
-◊margin-note{◊svg{images/brownies-branch.svg}}
+◊git/cli{
+  Run the following command:
 
-◊figure["images/history-after-branch-creation.png"]{The repository after creating a branch.}
-
-On the ◊acronym{CLI}, create a branch using the ◊code/inline{◊git/verb{branch}} command:
-
-◊code/block{
+  ◊code/block{
 $ git ◊git/verb{branch} ◊git/object{brownies}
-}
+  }
 
-The silence on the output means the branch was successfully created, but checking the ◊code/inline{◊git/verb{status}} reveals that we are still in “detached ◊code/inline{HEAD}” state:
+  This creates the branch, but does not change ◊code/inline{HEAD}, as revealed by ◊code/inline{◊git/verb{status}}:
 
-◊code/block{
+  ◊code/block{
 $ git ◊git/verb{status}
-HEAD detached at 30a7d90
+HEAD detached at 464f886
 nothing to commit, working tree clean
-}
+  }
 
-This happens because ◊code/inline{◊git/verb{branch}} command only creates the branch, it does not automatically check it out. An explicit ◊code/inline{◊git/verb{checkout}} command is necessary:
+  ◊margin-note{
+    Alternatively, create a branch and check it out in one command:
 
-◊code/block{
-$ git ◊git/verb{checkout} ◊git/object{brownies}
-Switched to branch 'brownies'
-}
-
-Alternatively, the last two commands can be abbreviated with the ◊code/inline{◊git/object{-b}} option to the ◊code/inline{◊git/verb{checkout}} command:
-
-◊code/block{
+    ◊code/block{
 $ git ◊git/verb{checkout} ◊git/object{-b brownies}
 Switched to a new branch 'brownies'
+    }
+  }
+
+  We have to checkout the new branch as a separate step:
+
+  ◊code/block{
+$ git ◊git/verb{checkout} ◊git/object{brownies}
+  }
+
+  Now the ◊code/inline{◊git/verb{status}} has changed:
+
+  ◊code/block{
+$ git ◊git/verb{status}
+On branch brownies
+nothing to commit, working tree clean
+  }
 }
+
+WE ARE NO LONGER IN DETACHED HEAD STATE.
+
+COMMIT WHILE “ATTACHED HEAD” ⇒ GIT UPDATES BRANCH
 
 ◊paragraph-separation[]
 
@@ -796,7 +819,7 @@ $ git ◊git/verb{commit} ◊git/object{-m "Start working on vegan brownies"}
 
 Refreshing the window showing the repository history shows the following picture:
 
-◊margin-note{◊svg{images/brownies-commit.svg}}
+◊margin-note{◊figure{◊svg{images/brownies-commit.svg}}}
 
 ◊image["images/tree.png"]{A tree starting to form in the project history.}
 
@@ -804,7 +827,7 @@ The history of the project has diverged. The original timeline is still there, r
 
 ◊margin-note{Branches in Git are just references to commits, not copies of the project, which makes them fast and cheap. This was an important feature that set Git apart from other version control systems and led to its popularity.}
 
-◊margin-note{◊svg{images/tree.svg}}
+◊margin-note{◊figure{◊svg{images/tree.svg}}}
 
 ◊code/block{
 $ ls
@@ -839,7 +862,7 @@ If we keep at this, creating branches and committing on them, then the project h
 ◊new-thought{We are working} on a recipe for vegan brownies on a separate branch, called ◊code/inline{brownies}. During this process, the main line of development for our cookbook is still ◊code/inline{master}. The two branches can advance with more commits independent of one another—changes in ◊code/inline{brownies} are not seen in ◊code/inline{master} and vice-versa. This is important to prevent interference, it could be hard to write a recipe if the rest of the cookbook keeps changing. For this small project, this might seem like an abundance of caution, but for bigger projects it is an essential feature.
 
 ◊margin-note{
-  ◊figure{◊svg{images/merge.svg}}
+  ◊figure{◊figure{◊svg{images/merge.svg}}}
 
   The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊acronym{DAG})}.
 }
