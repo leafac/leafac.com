@@ -790,17 +790,9 @@ nothing to commit, working tree clean
   }
 }
 
-WE ARE NO LONGER IN DETACHED HEAD STATE.
-
-COMMIT WHILE “ATTACHED HEAD” ⇒ GIT UPDATES BRANCH
-
-◊paragraph-separation[]
-
-◊new-thought{Now it is possible} to navigate in history referring to the names of the branches, instead of the unique identifiers for the commits, which is more convenient. Moreover, the project can evolve in multiple directions at the same time, this is the subject of the ◊reference['tree]{next section}.
+We are no longer in “detached ◊code/inline{HEAD}” state. Also, we can navigate in history more conveniently using branch names (◊code/inline{master} and ◊code/inline{brownies}) instead of commit identifiers. Finally, the timelines for the different branches can evolve independently, which is the subject of the next section.
 
 ◊section['tree]{Tree}
-
-◊margin-note{Readers that prefer the ◊acronym{GUI} should use a text editor and the steps from a ◊reference['commits]{previous section} to create commits and follow along.}
 
 ◊new-thought{The current state} of the repository is: there are two commits, one with a full recipe for vegan cookies, another with just the ingredients part; also, there are two branches, called ◊code/inline{master} and ◊code/inline{brownies}, pointing at the second and first commit, respectively; the working directory reflects the time at the first commit, because the ◊code/inline{brownies} branch is checked out.
 
