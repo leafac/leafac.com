@@ -1,7 +1,7 @@
 #lang pollen
 
 ◊define-meta[title]{Git by Analogy}
-◊define-meta[date]{2017-08-15}
+◊define-meta[date]{2017-08-21}
 
 ◊margin-note{Sections about the ◊git/gui/inline{◊acronym{GUI} are outlined in violet}, and sections about the ◊git/cli/inline{◊acronym{CLI} are outlined in yellow}. The latter are optional and assume familiarity with the command line: navigating the filesystem, creating files and directories, and so forth.}
 
