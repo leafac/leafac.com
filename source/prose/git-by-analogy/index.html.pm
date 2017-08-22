@@ -23,19 +23,19 @@ The copying-machine approach was not working, so Alice developed a better system
 
 ◊margin-note{◊figure{◊svg{images/getting-started-gui-and-cli.svg}}}
 
-◊new-thought{First}, Alice ◊link["https://www.git-scm.com/"]{installed Git}. It included a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic than the ◊acronym{CLI}. ◊link["https://git-scm.com/downloads/guis"]{On the download website} she found an assortment of other ◊acronym{GUI}s, besides the one bundled with Git. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to stick with the ◊acronym{GUI} bundled with Git, at first. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after learning the basics, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support that comes with her text editor, as she read that the integration between the two leads to more efficient workflows.
+◊new-thought{First}, Alice ◊link["https://www.git-scm.com/"]{installed Git}. It included a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, while the ◊acronym{CLI} must be used from the terminal.
 
-But the ◊acronym{GUI}s generally do not support some of the most advanced operations. Also, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
+Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic than the ◊acronym{CLI}. ◊link["https://git-scm.com/downloads/guis"]{On the download website} she found an assortment of other ◊acronym{GUI}s, besides the one bundled with Git. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to stick with the ◊acronym{GUI} bundled with Git, at first. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after learning the basics, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support that comes with her text editor, as she read that the integration between the two leads to more efficient workflows.
 
-◊section['an-aside-about-github]{An Aside About GitHub}
+But the ◊acronym{GUI}s generally do not support some of the most advanced operations. Also, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
 
-◊margin-note{
- ◊figure{◊svg{images/git-vs-github.svg}}
+◊section['git-vs-github]{Git vs. GitHub}
 
- GitHub is to Git as ◊link["https://gmail.com"]{Gmail} is to email. GitHub and Gmail are popular commercial tools which make the corresponding underlying technologies more ergonomic and provide convenient extensions. But they are not the same as the underlying technologies: one can use Git without GitHub the same way one can send emails from providers other than Gmail.
-}
+◊margin-note{◊figure{◊svg{images/git-vs-github.svg}}}
 
-◊new-thought{It is a common} misconception among beginners that Git and ◊link["https://github.com"]{GitHub} are synonyms, or that Git is short for GitHub. But they are not the same: Git is the tool; and GitHub is both a company and a product built around Git which provides hosting and extended functionality. When we discuss using Git with remote computers ◊reference['remote-repositories]{on a later section}, we use GitHub for the example because it is the prevalent hosting provider, and the distinction between Git and GitHub is important.
+◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly found out that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
+
+Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{collaborations from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
 
 ◊git/gui{
   ◊section['gui-structure]{◊acronym{GUI} Structure}

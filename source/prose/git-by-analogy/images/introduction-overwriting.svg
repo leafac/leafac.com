@@ -26,6 +26,19 @@
          id="path18"
          inkscape:connector-curvature="0" />
     </clipPath>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter1130"
+       x="-0.11024126"
+       width="1.2204825"
+       y="-0.15372057"
+       height="1.3074411">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.2142178"
+         id="feGaussianBlur1132" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -35,8 +48,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="49.464286"
-     inkscape:cy="18.21429"
+     inkscape:cx="46.5"
+     inkscape:cy="42"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
      showgrid="false"
@@ -140,7 +153,7 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:28.63636398px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.23999999;fill:#dc322f;fill-opacity:1;stroke:none;stroke-width:1.590909"
+     style="font-style:normal;font-weight:normal;font-size:28.63636398px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.23999999;fill:#dc322f;fill-opacity:1;stroke:none;stroke-width:1.590909;filter:url(#filter1130)"
      x="21.875"
      y="112.38636"
      id="text1134"><tspan
