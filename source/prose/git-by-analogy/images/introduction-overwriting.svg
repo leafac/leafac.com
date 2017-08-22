@@ -35,7 +35,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="-18.035714"
+     inkscape:cx="49.464286"
      inkscape:cy="18.21429"
      inkscape:document-units="px"
      inkscape:current-layer="svg8"
@@ -142,13 +142,13 @@
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:28.63636398px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;opacity:0.23999999;fill:#dc322f;fill-opacity:1;stroke:none;stroke-width:1.590909"
      x="21.875"
-     y="117.38636"
+     y="112.38636"
      id="text1134"><tspan
        sodipodi:role="line"
        id="tspan1132"
        x="21.875"
-       y="117.38636"
-       style="stroke-width:1.590909">30</tspan></text>
+       y="112.38636"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro';stroke-width:1.590909">30</tspan></text>
   <text
      id="text1138"
      y="117.38636"
@@ -159,5 +159,16 @@
        x="19.418859"
        id="tspan1136"
        sodipodi:role="line"
-       style="fill:#859900;stroke-width:1.590909">25</tspan></text>
+       style="fill:#859900;stroke-width:1.590909;-inkscape-font-specification:'Source Sans Pro';font-family:'Source Sans Pro';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal">25</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:28.63636398px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1.590909"
+     x="69.418861"
+     y="117.38636"
+     id="text838"><tspan
+       style="fill:#657b83;stroke-width:1.590909;-inkscape-font-specification:'Source Sans Pro';font-family:'Source Sans Pro';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+       sodipodi:role="line"
+       id="tspan836"
+       x="69.418861"
+       y="117.38636">…</tspan></text>
 </svg>
