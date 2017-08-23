@@ -189,6 +189,8 @@ For the rest of this article we use a simple project for the examples: the writi
   The panes in this window also correspond to parts of our office metaphor:
 
   ◊figure{◊svg{images/gitk-parts.svg}}
+
+  ◊; TODO: Revisit how to open gitk from ‘gui-structure’.
 }
 
 ◊git/cli{
