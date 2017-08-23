@@ -23,9 +23,9 @@ The copying-machine approach was not working, so Alice developed a better system
 
 ◊margin-note{◊figure{◊svg{images/getting-started-gui-and-cli.svg}}}
 
-◊new-thought{First}, Alice ◊link["https://www.git-scm.com/"]{installed Git}. It included a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, while the ◊acronym{CLI} must be used from the terminal.
+◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it. Likewise, Alice started by ◊link["https://www.git-scm.com/"]{installing Git}. Then, when she gets home, she opens the package and checks the contents. Alice opened the Git package and found a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, and the ◊acronym{CLI} is based on text and must be used from the terminal.
 
-Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic than the ◊acronym{CLI}. ◊link["https://git-scm.com/downloads/guis"]{On the download website} she found an assortment of other ◊acronym{GUI}s, besides the one bundled with Git. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to stick with the ◊acronym{GUI} bundled with Git, at first. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after learning the basics, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support that comes with her text editor, as she read that the integration between the two leads to more efficient workflows.
+Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic than the ◊acronym{CLI}. ◊link["https://git-scm.com/downloads/guis"]{On the download website} she found an assortment of other ◊acronym{GUI}s, besides the one bundled with Git. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to stick with the ◊acronym{GUI} bundled with Git, at first. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after learning the basics, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to more efficient workflows.
 
 But the ◊acronym{GUI}s generally do not support some of the most advanced operations. Also, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
 
@@ -35,34 +35,32 @@ But the ◊acronym{GUI}s generally do not support some of the most advanced oper
 
 ◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly found out that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
 
-Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{collaborations from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
+Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{collaborations from her friends}, she will use GitHub as a host, because that currently is the most popular choice.
 
 ◊git/gui{
   ◊section['gui-structure]{◊acronym{GUI} Structure}
 
-  ◊new-thought{The ◊acronym{GUI} we use} in this article comes bundled in the Git installation. Unfortunately, the installation process generally does not create launchers for the ◊acronym{GUI}, so even readers interested only in the ◊acronym{GUI} sections must launch it from the ◊acronym{CLI}. ◊emphasis{This is the only obligatory interaction with the command line}.
+  ◊new-thought{Inspecting the ◊acronym{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like other applications. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊acronym{GUI} she had to use the command line. She opened the terminal and typed the following:
 
-  The ◊acronym{GUI} comes in two parts. The main one is launched with the following command:
-
-  ◊margin-note{The ◊code/inline{$} represents the prompt and should not be typed.}
+  ◊margin-note{The ◊code/inline{$} represents the prompt.}
 
   ◊code/block{
 $ git ◊git/verb{gui}
   }
 
-  The result from running the command above should be the following welcome screen:
+  The result was the following welcome screen:
 
-  ◊image["images/welcome-screen.png"]{Welcome screen.}
+  ◊image{images/gui-structure-main-screen.png}
 
-  This is the main application to which we refer in most of the article. The second part of the ◊acronym{GUI} is specifically for visualizing the project history. It can be launched from the main window or directly with the following command:
+  This is the main Git ◊acronym{GUI}, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
 
   ◊code/block{
 $ gitk
   }
 
-  At the moment this terminates with an error, because there is no project, so there is no history to show yet:
+  When she first tried to run the above command, it failed. There was no project so there was no history to show at the moment:
 
-  ◊image["images/cannot-find-git-repository.png"]{Error trying to visualize inexistent project history.}
+  ◊image{images/gui-structure-project-history.png}
 }
 
 ◊git/cli{
