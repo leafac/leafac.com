@@ -66,13 +66,11 @@ $ gitk
 ◊git/cli{
   ◊section['cli-structure]{◊acronym{CLI} Structure}
 
-  ◊new-thought{There is only one} Git executable: ◊code/inline{git}. It expects arguments that resemble natural language, for example:
+  ◊new-thought{Inspecting the ◊acronym{CLI}} part of the Git package, Alice learned that there is only one executable: ◊code/inline{git}. She noticed this executable receives arguments in a form that resembles natural language, for example:
 
-  ◊figure{◊svg{images/grammar.svg}}
+  ◊figure{◊svg{images/cli-structure-grammar.svg}}
 
-  In general, Git commands follow the pattern:
-
-  ◊margin-note{By convention, command lines are prefixed with ◊code/inline{$} and comments with ◊code/inline{#}. Git ◊git/verb{verbs} and ◊git/object{objects-and-options} are color-coded.}
+  She inferred that, in general, Git commands follow the pattern:
 
   ◊code/block{
 $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
