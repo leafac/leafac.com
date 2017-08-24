@@ -851,9 +851,6 @@
   #:html (default-tag-function 'span #:class "git--object")
   #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))
 
-(define git/gui/color (dict-ref colorscheme 'violet))
-(define git/cli/color (dict-ref colorscheme 'yellow))
-
 (define (section/flag content color)
   (css-expr
    #:border-left (,size/ruler/thick solid ,color)
@@ -877,21 +874,11 @@
 
 (define-component git/gui
   #:html (default-tag-function 'div #:class "git--gui")
-  #:css (css-expr [.git--gui ,@(section/flag "GUI" git/gui/color)]))
+  #:css (css-expr [.git--gui ,@(section/flag "GUI" (dict-ref colorscheme 'violet))]))
 
 (define-component git/cli
   #:html (default-tag-function 'div #:class "git--cli")
-  #:css (css-expr [.git--cli ,@(section/flag "CLI" git/cli/color)]))
-
-(define-component git/gui/inline
-  #:html (default-tag-function 'span #:class "git--gui--inline")
-  #:css (css-expr [.git--gui--inline
-                   #:color ,git/gui/color]))
-
-(define-component git/cli/inline
-  #:html (default-tag-function 'span #:class "git--cli--inline")
-  #:css (css-expr [.git--cli--inline
-                   #:color ,git/cli/color]))
+  #:css (css-expr [.git--cli ,@(section/flag "CLI" (dict-ref colorscheme 'yellow))]))
 
 (define-component (placeholder . elements)
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))

@@ -79,30 +79,28 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊section['local-setup]{Local Setup}
 
-◊margin-note{Git configurations live in plain-text file at ◊path{~/.gitconfig}.}
+◊margin-note{Git configuration lives in a plain-text file at ◊path{~/.gitconfig}.}
 
-◊margin-note{If one does not plan to use ◊reference['workflow]{Git for collaboration}, then always associating changes to the same author is an arguably useless feature. But it is not possible to turn it off, so the instructions in this section are mandatory.}
+◊new-thought{After opening} the package of a new kitchen appliance, Alice goes through the setup steps. Some parts might need assembling or adjustments, before they work in Alice’s kitchen. The same is true of the new software she just installed. The first configuration was necessary because Git associates ◊reference['changes]{changes} in the project to their authors. For this to work, Alice had to identify herself to Git with her name and email address.
 
-◊new-thought{Git associates ◊reference['changes]{changes}} in the project to their authors. For this to work, it is necessary to identify to Git, providing a name and an email address. ◊emphasis{Choose a permanent email address}. Institutional emails, for example, are bad choices because they might be reassigned to another person after the affiliation ends. Git would have trouble distinguishing contributions to the same project made by multiple people that shared an email address over time.
-
-◊margin-note{Readers following both the ◊git/gui/inline{◊acronym{GUI}} and the ◊git/cli/inline{◊acronym{CLI}} sections must choose only one of these instructions, to configure the system only once.}
+◊emphasis{Alice chose a permanent email address for this configuration}. She thought about using her institutional email addresses, for example, the ones provided by her employer or her university. But she realized these are bad choices because they might be reassigned to another person named Alice after her affiliation ends. Git would have trouble distinguishing contributions to the same projects made by multiple Alices that shared an email address over time.
 
 ◊git/gui{
-  One of the quirks of the ◊acronym{GUI} bundled with Git is that configurations are only accessible when there is a repository (which is a concept we cover in a ◊reference['repository]{later section}). For the moment, create a ◊informal{dummy} directory in the file system, and ◊menu-option{Create New Repository} there:
+  Alice knew the ◊acronym{GUI} bundled with Git has some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference['repository]{later}). For the moment, she just created a ◊informal{dummy} directory and ran ◊menu-option{Create New Repository} there:
 
-  ◊figure{◊svg{images/creating-dummy-repository.svg}}
+  ◊figure{◊svg{images/local-setup-create-dummy-repository.svg}}
 
-  Then, go to ◊menu-option{Preferences} and fill ◊menu-option/path["Global (All Repositories)" "User Name"] and ◊menu-option{Email Address}:
+  Then, Alice went to ◊menu-option{Preferences} and filled ◊menu-option/path["Global (All Repositories)" "User Name"] and ◊menu-option{Email Address}:
 
-  ◊full-width{◊figure{◊svg{images/setup.svg}}}
+  ◊full-width{◊figure{◊svg{images/local-setup.svg}}}
 }
 
 ◊git/cli{
-  Run the following commands:
+  Alice also tried repeating the above and configuring Git on the ◊acronym{CLI}, by running the following commands:
 
   ◊code/block{
-$ git ◊git/verb{config} ◊git/object{--global user.name "<name>"}
-$ git ◊git/verb{config} ◊git/object{--global user.email "<email>"}
+$ git ◊git/verb{config} ◊git/object{--global user.name "Alice"}
+$ git ◊git/verb{config} ◊git/object{--global user.email "alice@leafac.com"}
   }
 }
 
