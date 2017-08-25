@@ -486,7 +486,7 @@
   #:css (css-expr [code ,@font/monospace]))
 
 (define-component (code/block . elements)
-  #:html ((default-tag-function 'pre #:class "insertion") (apply code/inline elements))
+  #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
   #:css (css-expr [pre
                    ,@font/monospace
                    #:overflow auto
@@ -515,21 +515,35 @@
        (with-output-to-file path/full
          (λ () (display code/highlighted)))
        code/highlighted]))
-  ((default-tag-function 'div #:class "insertion") (string->xexpr code/highlighted)))
+  ((default-tag-function 'div #:class "code--block insertion") (string->xexpr code/highlighted)))
 
 (define-component (file-listing a-path #:language [language #f] . elements)
   #:html ((default-tag-function 'div #:class "file-listing insertion")
           (path a-path)
           (if language
               (apply code/block/highlighted language elements)
-              (apply code/block elements))))
+              (apply code/block elements)))
+  #:css (css-expr [.file-listing
+                   [.code--block
+                    #:margin-top 0]
+                   [.path
+                    #:border
+                    (#:top (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+                     #:right (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+                     #:left (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content)))
+                    #:padding
+                    (#:left (rem ,(modular-scale -1))
+                     #:right (rem ,(modular-scale -1)))
+                    #:color ,(dict-ref colorscheme 'secondary-content)]
+                   [(> & p)
+                    #:margin-bottom -1px]])) ; FIXME: (- ,size/ruler/thin) after unary ‘-’ is implemented in ‘css-expr’
 
 (define-component keyboard
   #:html (default-tag-function 'kbd)
   #:css (css-expr [kbd ,@font/monospace]))
 
 (define-component path
-  #:html code/inline)
+  #:html (default-tag-function 'code #:class "path"))
 
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
