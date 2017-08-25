@@ -5,11 +5,11 @@
 
 ◊margin-note{◊figure{◊svg{images/introduction-alice.svg}}}
 
-◊new-thought{Meet Alice}. Alice spends a lot of her free time in the kitchen, her specialty are vegan baked goods. The alchemy of flour and water turning into dough, its soft touch when shaping a loaf, the sweet smell of cookies in the oven, she loves it all. And her friends love it too, because they often receive tasty gifts. Alice began to learn by following recipes she found on the Internet, but, as she gained experience, she started adapting them. Her friends say that her versions are better than the originals, and often ask for them. But recipe development requires a ton of experiments, and Alice is constantly tweaking the proportion of flour and water, finding better ways to replace eggs in vegan pastries, and so forth. Some of her friends even contribute back with tips when they tried recipes on their own. To keep everybody updated with the latest and greatest, Alice is writing her own vegan cookbook!
+◊new-thought{Meet Alice}. Alice spends a lot of her free time in the kitchen, her specialty are vegan baked goods. The alchemy of flour and water turning into dough, its soft touch when shaping a loaf, the sweet smell of cookies in the oven, she loves it all. And her friends love it too, because they often receive tasty gifts. Alice began to learn how to bake by following recipes she found on the Internet, but, as she gained experience, she started adapting them. Her friends say that her versions are better than the originals, and often ask for them. But recipe development requires a ton of experiments, and Alice is constantly tweaking the proportion of flour and water, finding better ways to replace eggs in vegan pastries, and so forth. Some of her friends even contribute back with tips from having tried the recipes on their own. To keep everybody updated with the latest and greatest, Alice is writing her own vegan cookbook!
 
 ◊margin-note{◊figure{◊svg{images/introduction-overwriting.svg}}}
 
-When she started baking, Alice was old-fashioned and wrote her recipes on paper. She was not fond of the idea of getting flour all over her computer. And she kept it simple: if she wanted to tweak the amount of sugar, for example, she would erase the old quantity and write in the new one. But the kitchen is about experimenting, and sometimes she discovered the change did not work well, the cookies came out too sweet. She wanted to revert to the old amount but, unfortunately, because she had used an eraser, she depended on her memory. With so many recipes in her mind, that did not work, she had already forgotten the old version. Alice heard that many people using computers had the same issue when they modify files.
+When she started baking, Alice was old-fashioned and wrote her recipes on paper. She was not fond of the idea of getting flour all over her computer. And she kept it simple: if she wanted to tweak the amount of sugar, for example, she would erase the old quantity and write in the new one. But the kitchen is about experimenting, and sometimes she discovered the change did not work well, the cookies came out too sweet. She wanted to revert to the old amount but, unfortunately, because she had used an eraser, she depended on her memory. With so many recipes in her head, that did not work, she had already forgotten the old version. Alice heard that many people using computers had the same issue when they modify files.
 
 ◊margin-note{◊image{images/introduction-copies.png}}
 
@@ -23,24 +23,24 @@ The copying-machine approach was not working, so Alice developed a better system
 
 ◊margin-note{◊figure{◊svg{images/getting-started-gui-and-cli.svg}}}
 
-◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it. Then, when she gets home, she opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, and the ◊acronym{CLI} is based on text and must be used from the terminal.
+◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it. Then, when she gets home, she opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, and the ◊acronym{CLI} is text-based and must be used from the terminal.
 
 Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic than the ◊acronym{CLI}. ◊link["https://git-scm.com/downloads/guis"]{On the download website} she found an assortment of other ◊acronym{GUI}s, besides the one bundled with Git. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to stick with the ◊acronym{GUI} bundled with Git, at first. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after learning the basics, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to more efficient workflows.
 
-But the ◊acronym{GUI}s generally do not support some of the most advanced operations. Also, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
+But the ◊acronym{GUI}s generally do not support some of the more advanced operations. Also, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
 
 ◊section['git-vs-github]{Git vs. GitHub}
 
 ◊margin-note{◊figure{◊svg{images/git-vs-github.svg}}}
 
-◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly found out that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
+◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly discovered that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
 
 Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{collaborations from her friends}, she will use GitHub as a host, because that currently is the most popular choice.
 
 ◊git/gui{
   ◊section['gui-structure]{◊acronym{GUI} Structure}
 
-  ◊new-thought{Inspecting the ◊acronym{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like other applications. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊acronym{GUI} she had to use the command line. She opened the terminal and typed the following:
+  ◊new-thought{Inspecting the ◊acronym{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like those for almost all other applications in her computer. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊acronym{GUI} she had to use the command line. She opened the terminal and typed the following:
 
   ◊margin-note{The ◊code/inline{$} represents the prompt.}
 
@@ -52,7 +52,7 @@ $ git ◊git/verb{gui}
 
   ◊image{images/gui-structure-main-screen.png}
 
-  This is the main Git ◊acronym{GUI}, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
+  This is the main Git ◊acronym{GUI}, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her to launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
 
   ◊code/block{
 $ gitk
@@ -81,7 +81,7 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊margin-note{Git configuration lives in a plain-text file at ◊path{~/.gitconfig}.}
 
-◊new-thought{After opening} the package of a new kitchen appliance, Alice goes through the setup steps. Some parts might need assembling or adjustments, before they work in Alice’s kitchen. The same is true of the new software she just installed. The first configuration was necessary because Git associates ◊reference['changes]{changes} in the project to their authors. For this to work, Alice had to identify herself to Git with her name and email address.
+◊new-thought{After opening} the package of a new kitchen appliance, Alice goes through the setup steps. Some parts might need assembling or adjustments before they work in Alice’s kitchen. The same is true of the new software she just installed. The first configuration was necessary because Git associates ◊reference['changes]{changes} in the project with their authors. For this to work, Alice had to identify herself to Git with her name and email address.
 
 ◊emphasis{Alice chose a permanent email address for this configuration}. She thought about using her institutional email addresses, for example, the ones provided by her employer or her university. But she realized these are bad choices because they might be reassigned to another person named Alice after her affiliation ends. Git would have trouble distinguishing contributions to the same projects made by multiple Alices that shared an email address over time.
 
@@ -96,13 +96,15 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 }
 
 ◊git/cli{
-  Alice also tried repeating the above and configuring Git on the ◊acronym{CLI}, by running the following commands:
+  Alice repeated the above and configure Git again on the ◊acronym{CLI}, by running the following commands:
 
   ◊code/block{
 $ git ◊git/verb{config} ◊git/object{--global user.name "Alice"}
 $ git ◊git/verb{config} ◊git/object{--global user.email "alice@leafac.com"}
   }
 }
+
+◊;{
 
 ◊paragraph-separation[]
 
@@ -1063,3 +1065,5 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 ◊; TODO: Double-check ◊git/verb & ◊git/object
 
 ◊; TODO: Double-check that every ◊svg is surrounded by ◊figure
+
+}
