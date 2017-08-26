@@ -1,33 +1,37 @@
 #lang pollen
 
 ◊define-meta[title]{Git by Analogy}
-◊define-meta[date]{2017-08-21}
+◊define-meta[date]{2017-08-26}
 
-◊margin-note{◊figure{◊svg{images/introduction-alice.svg}}}
+◊margin-note{◊figure{◊svg{images/introduction--alice.svg}}}
 
-◊new-thought{Meet Alice}. Alice spends a lot of her free time in the kitchen, her specialty are vegan baked goods. The alchemy of flour and water turning into dough, its soft touch when shaping a loaf, the sweet smell of cookies in the oven, she loves it all. And her friends love it too, because they often receive tasty gifts. Alice began to learn how to bake by following recipes she found on the Internet, but, as she gained experience, she started adapting them. Her friends say that her versions are better than the originals, and often ask for them. But recipe development requires a ton of experiments, and Alice is constantly tweaking the proportion of flour and water, finding better ways to replace eggs in vegan pastries, and so forth. Some of her friends even contribute back with tips from having tried the recipes on their own. To keep everybody updated with the latest and greatest, Alice is writing her own vegan cookbook!
+◊new-thought{Meet Alice}. Alice spends a lot of her free time in the kitchen, and her specialty are vegan baked goods. The alchemy of flour and water turning into dough, its soft touch when shaping a loaf, the sweet smell of cookies in the oven, she loves it all. And her friends love it too, because they often receive tasty gifts. Alice began to learn how to bake by following recipes she found on the Internet, but, as she gained experience, she started adapting them and developing her own. Her friends say that her recipes are the best, and often ask for them. But recipes are always under development: Alice tweaks the proportion of flour and water, finds better ways to replace eggs in vegan pastries, and so forth. Even her friends contribute with tips they discover when trying recipes on their own. To keep everybody updated with the latest and greatest, Alice is writing her own ◊link/internal["/cooking"]{vegan cookbook}!
 
-◊margin-note{◊figure{◊svg{images/introduction-overwriting.svg}}}
+◊margin-note{◊figure{◊svg{images/introduction--overwriting.svg}}}
 
-When she started baking, Alice was old-fashioned and wrote her recipes on paper. She was not fond of the idea of getting flour all over her computer. And she kept it simple: if she wanted to tweak the amount of sugar, for example, she would erase the old quantity and write in the new one. But the kitchen is about experimenting, and sometimes she discovered the change did not work well, the cookies came out too sweet. She wanted to revert to the old amount but, unfortunately, because she had used an eraser, she depended on her memory. With so many recipes in her head, that did not work, she had already forgotten the old version. Alice heard that many people using computers had the same issue when they modify files.
+When she started baking, Alice was old-fashioned and wrote her recipes on paper. She was not fond of getting flour all over her computer. And she kept it simple: if she wanted to add more sugar, for example, she would erase the old quantity and write in the new one. But the kitchen is about experimenting, and sometimes she realized that the change did not work well. The cookies came out too sweet after the extra sugar, for example. She wanted to revert to the old amount but, unfortunately, because she had used an eraser, she depended on her memory. With so many recipes in her head, that did not work as she had already forgotten the old version. Alice heard that many people using computers had the same issue when they modify files.
 
-◊margin-note{◊image{images/introduction-copies.png}}
+◊margin-note{◊image{images/introduction--copies.png}}
 
-Soon Alice thought of a solution: she bought a copying machine and kept copies of her recipes before altering them. This way she had a history of her recipes over time, and could always recover previous revisions. But it did not take long before the sheer amount of slightly modified versions of the same recipe overwhelmed her. She would often find herself asking questions like “is this the version that was too sweet?” or “what did my friend Bob modify in this version that he sent me?” Alice heard that many people using computers had the same issues. They would keep many copies of slightly different versions of the same files, send them as email attachments to their friends, and then get lost trying to manage the process. They had problems figuring what changed between versions, who contributed what, and some changes even get lost in this tedious and error-prone manual work.
+Soon Alice thought of a solution: she bought a copying machine and kept copies of her recipes before altering them. This way she had a history of her recipes over time, and could always recover previous revisions. But it did not take long before the sheer amount of slightly modified versions of the same recipe overwhelmed her. She would often find herself asking questions like “is this the version that was too sweet?” or “what did my friend Bob modify in this version that he sent me?” Alice heard that many people using computers thought of the same solution, and had the same issues. They would keep many copies of slightly different versions of the same files, send them as email attachments to their friends, and then get lost trying to manage the process. They had problems figuring what changed between versions, who contributed what, and some changes even get lost in this tedious and error-prone manual work.
 
-◊margin-note{◊figure{◊svg{images/introduction-git.svg}}}
+◊margin-note{◊figure{◊svg{images/introduction--git.svg}}}
 
-The copying-machine approach was not working, so Alice developed a better system. It involves slips of paper, paper trays, boxes, cabinets and more. This system has been working for a while, and, now that Alice is writing her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that the process she developed is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of what she was doing on paper. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
+The copying-machine approach was not working, so Alice developed a better system. It involves slips of paper, paper trays, boxes, cabinets and more. This system has been working for a while, and, now that Alice is writing her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
 
 ◊section['getting-started]{Getting Started}
 
-◊margin-note{◊figure{◊svg{images/getting-started-gui-and-cli.svg}}}
+◊margin-note{
+  ◊figure{◊svg{images/getting-started--guis-and-cli.svg}}
 
-◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it. Then, when she gets home, she opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, and the ◊acronym{CLI} is text-based and must be used from the terminal.
+  Different ◊acronym{GUI}s and a ◊acronym{CLI} as front-ends for the same Git features.
+}
 
-Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic than the ◊acronym{CLI}. ◊link["https://git-scm.com/downloads/guis"]{On the download website} she found an assortment of other ◊acronym{GUI}s, besides the one bundled with Git. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to stick with the ◊acronym{GUI} bundled with Git, at first. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after learning the basics, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to more efficient workflows.
+◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it, comes back home, opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, and the ◊acronym{CLI} is text-based and must be used from the terminal.
 
-But the ◊acronym{GUI}s generally do not support some of the more advanced operations. Also, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
+Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic for everyday use than the ◊acronym{CLI}. The ◊acronym{GUI} bundled with Git is not the only one, on the ◊link["https://git-scm.com/downloads/guis"]{download website} she found an assortment of other options. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to keep it simple and stick with the ◊acronym{GUI} bundled with Git for the moment. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after she is comfortable with Git, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to efficient workflows.
+
+But she also read that the ◊acronym{GUI}s generally do not support some of the more advanced operations. Moreover, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
 
 ◊section['git-vs-github]{Git vs. GitHub}
 
@@ -35,12 +39,12 @@ But the ◊acronym{GUI}s generally do not support some of the more advanced oper
 
 ◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly discovered that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
 
-Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{collaborations from her friends}, she will use GitHub as a host, because that currently is the most popular choice.
+Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{contributions from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
 
 ◊git/gui{
   ◊section['gui-structure]{◊acronym{GUI} Structure}
 
-  ◊new-thought{Inspecting the ◊acronym{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like those for almost all other applications in her computer. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊acronym{GUI} she had to use the command line. She opened the terminal and typed the following:
+  ◊new-thought{Inspecting the ◊acronym{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like those for almost all other applications in her computer. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊acronym{GUI}, she had to use the command line. She opened the terminal and ran the following:
 
   ◊margin-note{The ◊code/inline{$} represents the prompt.}
 
@@ -50,7 +54,7 @@ $ git ◊git/verb{gui}
 
   The result was the following welcome screen:
 
-  ◊image{images/gui-structure-main-screen.png}
+  ◊image{images/gui-structure--main-screen.png}
 
   This is the main Git ◊acronym{GUI}, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her to launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
 
@@ -60,15 +64,15 @@ $ gitk
 
   When she first tried to run the above command, it failed. There was no project so there was no history to show at the moment:
 
-  ◊image{images/gui-structure-project-history.png}
+  ◊image{images/gui-structure--project-history.png}
 }
 
 ◊git/cli{
   ◊section['cli-structure]{◊acronym{CLI} Structure}
 
-  ◊new-thought{Inspecting the ◊acronym{CLI}} part of the Git package, Alice learned that there is only one executable: ◊code/inline{git}. She noticed this executable receives arguments in a form that resembles natural language, for example:
+  ◊new-thought{Inspecting the ◊acronym{CLI}} in the Git package, Alice learned that there is only one executable: ◊code/inline{git}. She noticed this executable receives arguments in a form that resembles natural language, for example:
 
-  ◊figure{◊svg{images/cli-structure-grammar.svg}}
+  ◊figure{◊svg{images/cli-structure--grammar.svg}}
 
   She inferred that, in general, Git commands follow the pattern:
 
@@ -81,22 +85,22 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊margin-note{Git configuration lives in a plain-text file at ◊path{~/.gitconfig}.}
 
-◊new-thought{After opening} the package of a new kitchen appliance, Alice goes through the setup steps. Some parts might need assembling or adjustments before they work in Alice’s kitchen. The same is true of the new software she just installed. The first configuration was necessary because Git associates ◊reference['changes]{changes} in the project with their authors. For this to work, Alice had to identify herself to Git with her name and email address.
+◊new-thought{After opening} a package of a new kitchen appliance, Alice goes through the setup steps, as some parts might need assembling or adjustments. The same is true of the new software she just installed. The first configuration is necessary because Git associates ◊reference['changes]{changes} in the project with their authors. For this to work, Alice had to identify herself to Git with her name and email address.
 
-◊emphasis{Alice chose a permanent email address for this configuration}. She thought about using her institutional email addresses, for example, the ones provided by her employer or her university. But she realized these are bad choices because they might be reassigned to another person named Alice after her affiliation ends. Git would have trouble distinguishing contributions to the same projects made by multiple Alices that shared an email address over time.
+◊emphasis{Alice chose a permanent email address for her Git configuration}. She considered using institutional email addresses, for example, the ones provided to her by her employer or her university. But she realized these are bad choices, because they might be reassigned to another person named Alice after her affiliation ends. Git would have trouble distinguishing contributions to the same projects made by multiple Alices that shared an email address over time.
 
 ◊git/gui{
-  Alice knew the ◊acronym{GUI} bundled with Git has some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference['repository]{later}). For the moment, she just created a ◊informal{dummy} directory and ran ◊menu-option{Create New Repository} there:
+  Alice knew that the ◊acronym{GUI} bundled with Git had some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference['repository]{later}). For the moment, she just created a ◊informal{dummy} directory and used the ◊menu-option{Create New Repository} menu option there:
 
-  ◊figure{◊svg{images/local-setup-create-dummy-repository.svg}}
+  ◊figure{◊svg{images/local-setup--create-dummy-repository.svg}}
 
-  Then, Alice went to ◊menu-option{Preferences} and filled ◊menu-option/path["Global (All Repositories)" "User Name"] and ◊menu-option{Email Address}:
+  Then, Alice went to ◊menu-option{Preferences} and filled the fields ◊menu-option/path["Global (All Repositories)" "User Name"] and ◊menu-option{Email Address}:
 
   ◊full-width{◊figure{◊svg{images/local-setup.svg}}}
 }
 
 ◊git/cli{
-  Alice repeated the above and configure Git again on the ◊acronym{CLI}, by running the following commands:
+  Out of curiosity, Alice repeated the above and configured Git again on the ◊acronym{CLI}, by running the following commands:
 
   ◊code/block{
 $ git ◊git/verb{config} ◊git/object{--global user.name "Alice"}
@@ -108,15 +112,14 @@ $ git ◊git/verb{config} ◊git/object{--global user.email "alice@leafac.com"}
 
 ◊; TODO: Double-check link to macOS.
 
-◊new-thought{Alice knows} that there are files in her computer which should never be part of her cookbook. They would never belong to any project history, because they are specific to her computer, being generated by her operating system, text editor, and so forth. For example, Alice uses ◊link["https://apple.com/macos"]{macOS}, which creates ◊path{.DS_Store} files in each directory visited with Finder to store custom folder attributes. Tracking these files with Git would pollute the cookbook history, and could cause problems in her friends’ machines.
+◊new-thought{Alice knows} that there are files in her computer which should never be part of her cookbook. In general, they would never belong to any project, because they are specific to her computer, being generated by her operating system, text editor, and so forth. For example, Alice uses ◊link["https://apple.com/macos"]{macOS}, which creates ◊path{.DS_Store} files to store custom folder attributes in each directory visited with Finder. Tracking the history of these files with Git would just introduce noise, and could cause problems in her friends’ machines.
 
-Alice configured Git to ignore these extraneous files by creating a file with one line for each path Git must ignore:
+So Alice configured Git to ignore these extraneous files. Even if they exist in the directories containing her cookbook, Git will not try to track their history. The configuration consists of creating the following file:
 
-◊margin-note{The language to specify ignored paths is sophisticated, see ◊link["https://git-scm.com/docs/gitignore"]{the manual for ◊code/inline{gitignore(5)}}.}
+◊margin-note{The exact location and contents of this file are system dependent. Look for templates online and see ◊link["https://git-scm.com/docs/gitignore"]{the manual for ◊code/inline{gitignore(5)}} for more on the sophisticated language to specify ignored paths.}
 
 ◊file-listing["~/.config/git/ignore"]{
 .DS_Store
-*.extension-of-temporary-file-created-by-alice’s-text-editor
 # ...
 }
 
