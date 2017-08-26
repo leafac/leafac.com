@@ -83,7 +83,7 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊section['local-setup]{Local Setup}
 
-◊margin-note{Git configuration lives in a plain-text file at ◊path{~/.gitconfig}.}
+◊margin-note{Git configurations generally live in a plain-text file at ◊path{~/.gitconfig}, but the exact location is system dependent.}
 
 ◊new-thought{After opening} a package of a new kitchen appliance, Alice goes through the setup steps, as some parts might need assembling or adjustments. The same is true of the new software she just installed. The first configuration is necessary because Git associates ◊reference['changes]{changes} in the project with their authors. For this to work, Alice had to identify herself to Git with her name and email address.
 
@@ -116,7 +116,7 @@ $ git ◊git/verb{config} ◊git/object{--global user.email "alice@leafac.com"}
 
 So Alice configured Git to ignore these extraneous files. Even if they exist in the directories containing her cookbook, Git will not try to track their history. The configuration consists of creating the following file:
 
-◊margin-note{The exact location and contents of this file are system dependent. Look for templates online and see ◊link["https://git-scm.com/docs/gitignore"]{the manual for ◊code/inline{gitignore(5)}} for more on the sophisticated language to specify ignored paths.}
+◊margin-note{The exact location and contents of this file are system dependent. Search for templates for particular operating systems and tools (for example, text editors), and see the manual page ◊link["https://git-scm.com/docs/gitignore"]{◊code/inline{gitignore(5)}} for more on the sophisticated language to specify ignored paths.}
 
 ◊file-listing["~/.config/git/ignore"]{
 .DS_Store
