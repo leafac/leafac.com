@@ -19,6 +19,28 @@ Soon Alice thought of a solution: she bought a copying machine and kept copies o
 
 The copying-machine approach was not working, so Alice developed a better system. It involves slips of paper, paper trays, boxes, cabinets and more. This system has been working for a while, and, now that Alice is writing her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
 
+◊section['alices-version-control-system-on-paper]{Alice’s Version Control System on Paper}
+
+◊new-thought{Alice developed} her version control system on paper. Recipes started as sheets of paper on her desk, and as she felt the need to track their evolution over time, she initially tried the copying machine approach. Unfortunately, keeping numerous slightly different versions of the same recipes was causing even more confusion, so Alice went to the stationary store and exchanged her copying machine for some other equipment to help organize a new process.
+
+Alice brought home slips of paper, a paper tray, boxes, labels, a cabinet, index cards and a fax machine. She eliminated all the extra copies of recipes she had created with the copying machine, and went back to the state in which each recipe was only a sheet of paper on her desk. From that moment on, when she wanted to add more sugar to the cookies recipe, for example, she did not create another copy of the whole recipe, but overwrote it in place. Additionally, she wrote both the old and the new amounts of sugar in a slip of paper. The, she could refer to this slip of paper when she wanted to see the old version again.
+
+As she anticipated, this process would quickly lead to large amounts of slips of paper on her desk, and she had a plan to cope with them. She used the paper tray to organize the slips of paper into a coherent set she want to keep. For example, slips of paper corresponding to tweaks in the amounts of sugar, flour and almond milk could form the set “sweeter cookies.” Alice then moved the slips of paper from the paper tray into a box. She then closed the box, labeled it with the description and some extra information, and stored the box in the cabinet.
+
+To guarantee that the system would be reliable, she committed to never change the contents of a box after closing it. If she was unsatisfied with the changes corresponding to slips of paper on her desk or the paper tray, then she would just revert them and discard the slips of paper. But if they were already in a closed box, then she would go through the process of creating a new box containing new slips of paper with the inverse of the original changes.
+
+As she progressed, the boxes in the cabinet formed a timeline of her recipes evolution. Alice was careful to uniquely identify each box, and, when she created a new box, she included in the label a reference to the identifier of the previous box in the chain. The resulting chain was unidirectional, though, as only child boxes pointed to their parents, and not the other way around. This is in line with Alice’s rule of never modifying a box in the cabinet: when creating a new box, she knew the ancestor in the chain so she included a reference to it, but she did not allow herself to modify the existing boxes to mention the new box.
+
+
+
+READ
+
+NAVIGATE
+
+INDEX CARDS
+
+
+
 ◊section['getting-started]{Getting Started}
 
 ◊margin-note{
@@ -140,40 +162,7 @@ fatal: Not a git repository (or any of the parent directories): .git
   Alice used this command frequently as she progressed on her learning. Currently, the result is a fatal error: Git cannot find a repository. The following sections explain what is a repository, and how Alice created one.
 }
 
-◊section['alices-version-control-system]{Alice’s Version Control System}
-
-◊new-thought{Alice developed} her version control system on paper. Recipes started as sheets of paper on her desk, and as she felt the need to track their evolution over time, she initially tried the copying machine approach. Unfortunately, keeping numerous slightly different versions of the same recipes was causing even more confusion, so Alice went to the stationary store and exchanged her copying machine for some other equipment to help organize a new process.
-
-Alice brought home slips of paper, a paper tray, boxes, labels, a cabinet, index cards and a fax machine. She eliminated all the extra copies of recipes she had created with the copying machine, and went back to the state in which each recipe was only a sheet of paper on her desk. From that moment on, when she wanted to add more sugar to the cookies recipe, for example, she did not create another copy of the whole recipe, but overwrote it in place. Additionally, she wrote both the old and the new amounts of sugar in a slip of paper. The, she could refer to this slip of paper when she wanted to see the old version again.
-
-As she anticipated, this process would quickly lead to large amounts of slips of paper on her desk, and she had a plan to cope with them. She used the paper tray to organize the slips of paper into a coherent set she want to keep. For example, slips of paper corresponding to tweaks in the amounts of sugar, flour and almond milk could form the set “sweeter cookies.” Alice then moved the slips of paper from the paper tray into a box. She then closed the box, labeled it with the description and some extra information, and stored the box in the cabinet.
-
-To guarantee that the system would be reliable, she committed to never change the contents of a box after closing it. If she was unsatisfied with the changes corresponding to slips of paper on her desk or the paper tray, then she would just revert them and discard the slips of paper. But if they were already in a closed box, then she would go through the process of creating a new box containing new slips of paper with the inverse of the original changes.
-
-As she progressed, the boxes in the cabinet formed a timeline of her recipes evolution. Alice was careful to uniquely identify each box, and, when she created a new box, she included in the label a reference to the identifier of the previous box in the chain. The resulting chain was unidirectional, though, as only child boxes pointed to their parents, and not the other way around. This is in line with Alice’s rule of never modifying a box in the cabinet: when creating a new box, she knew the ancestor in the chain so she included a reference to it, but she did not allow herself to modify the existing boxes to mention the new box.
-
-
-
-READ
-
-NAVIGATE
-
-INDEX CARDS
-
-
 ◊;{
-
-Paper on desk
-
-Photocopy machine
-
-Cabinet  /  How do I use it?
-
-Boxes
-
-Paper tray
-
-
 ◊section['office]{Office}
 
 ◊margin-note{◊figure{◊svg{images/office.svg}}}
