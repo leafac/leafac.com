@@ -19,25 +19,33 @@ Soon Alice thought of a solution: she bought a copying machine and kept copies o
 
 The copying-machine approach was not working, so Alice developed a better system. It involves slips of paper, paper trays, boxes, cabinets and more. This system has been working for a while, and, now that Alice is writing her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
 
-◊section['alices-version-control-system-on-paper]{Alice’s Version Control System on Paper}
+◊section['alices-version-control-system]{Alice’s Version Control System}
 
-◊new-thought{Alice developed} her version control system on paper. Recipes started as sheets of paper on her desk, and as she felt the need to track their evolution over time, she initially tried the copying machine approach. Unfortunately, keeping numerous slightly different versions of the same recipes was causing even more confusion, so Alice went to the stationary store and exchanged her copying machine for some other equipment to help organize a new process.
+◊new-thought{Alice developed} her version control system on paper. She went to the stationery store and exchanged her copying machine for slips of paper, a paper tray, boxes, labels, a cabinet, index cards and a fax machine. She eliminated all the extra copies of recipes she had created with the copying machine, and went back to the state in which each recipe was only a sheet of paper on her desk. From that moment on, when she wanted to add more sugar to the cookies recipe, for example, she did not create another copy of the whole recipe, but overwrote it in place. Additionally, she noted both the old and the new amounts of sugar on a slip of paper, to which she referred when she wanted to see the old version again.
 
-Alice brought home slips of paper, a paper tray, boxes, labels, a cabinet, index cards and a fax machine. She eliminated all the extra copies of recipes she had created with the copying machine, and went back to the state in which each recipe was only a sheet of paper on her desk. From that moment on, when she wanted to add more sugar to the cookies recipe, for example, she did not create another copy of the whole recipe, but overwrote it in place. Additionally, she wrote both the old and the new amounts of sugar in a slip of paper. The, she could refer to this slip of paper when she wanted to see the old version again.
+As she anticipated, this process quickly led to large quantities of slips of paper on her desk, so she used the paper tray to organize the slips of paper into a coherent set that she want to keep. For example, the slips of paper corresponding to tweaks in the amounts of sugar, flour and almond milk together formed the set “sweeter cookies.” Alice then moved the slips of paper from the paper tray into a box. Finally, she closed the box, labeled it with the description and some extra information, and stored the box in the cabinet.
 
-As she anticipated, this process would quickly lead to large amounts of slips of paper on her desk, and she had a plan to cope with them. She used the paper tray to organize the slips of paper into a coherent set she want to keep. For example, slips of paper corresponding to tweaks in the amounts of sugar, flour and almond milk could form the set “sweeter cookies.” Alice then moved the slips of paper from the paper tray into a box. She then closed the box, labeled it with the description and some extra information, and stored the box in the cabinet.
+To guarantee that the system would be reliable, she committed to never changing a box after closing it. If she discovered that the changes in a box were not good, then she would create a new box containing the inverse changes. She could only add new boxes to the cabinet, but never remove them from there.
 
-To guarantee that the system would be reliable, she committed to never change the contents of a box after closing it. If she was unsatisfied with the changes corresponding to slips of paper on her desk or the paper tray, then she would just revert them and discard the slips of paper. But if they were already in a closed box, then she would go through the process of creating a new box containing new slips of paper with the inverse of the original changes.
+As she progressed, the boxes in the cabinet formed a timeline of her recipes evolution. Alice uniquely identified each box, and, when creating them, she included in their label a reference to the identifier of the previous box in the sequence. The result was an unidirectional chain, as child boxes pointed to their parents, but not the other way around. This is in line with Alice’s rule of never modifying a box in the cabinet: when creating a new box, she knew the ancestor in the chain so she included a reference to it, but she did not allow herself to modify the existing boxes to mention the new box.
 
-As she progressed, the boxes in the cabinet formed a timeline of her recipes evolution. Alice was careful to uniquely identify each box, and, when she created a new box, she included in the label a reference to the identifier of the previous box in the chain. The resulting chain was unidirectional, though, as only child boxes pointed to their parents, and not the other way around. This is in line with Alice’s rule of never modifying a box in the cabinet: when creating a new box, she knew the ancestor in the chain so she included a reference to it, but she did not allow herself to modify the existing boxes to mention the new box.
+The cabinet contained the history of her recipes over time. Alice could investigate it by following the labels in each box to recreate the chain, and then open each box to inspect the changes. The high-level descriptions in the box labels helped orient her, so that she could find the boxes of her interest. Moreover, she could navigate in history, and bring the recipes in her desk to any point in the timeline. The slips of paper recording changes included both the old and the new values, so she could diligently follow the chain of boxes applying the changes in them in the appropriate direction.
+
+Even when she navigated to a point in the past, she did not lose any information about her recipes. The recipes on her desk represented a point in the past, but the cabinet still contained information about the whole history. It was only necessary to know which point in history the desk contents currently represented. To this end, Alice maintained an index card pointing at the appropriate box in the cabinet. Whenever Alice created a new box, or navigated in history, she updated the index card accordingly.
+
+This index card had an special meaning: it pointed at the box in the cabinet which represented the current state of her desk contents. But Alice also maintained other index cards. For example, she had an index card pointing at the most recent box in the timeline. Even when the desk contents traveled in time, this index card remained fixed. She only updated it when she added a new box to the cabinet. This allowed her to find the start of the timeline chain, regardless of her desk state.
+
+The index cards were independent of one another, so Alice created more of them. For example, she had two experiments in mind: adding more sugar to the cookies, and more flour to the brownies. These experiments are unrelated, and she did not want to couple the changes related to them. So she created two index cards. At first, they both pointed at the same box in the cabinet: the most recent box in the history.
+
+Then Alice started working on the experiments, creating boxes as she went. But, when she created a box with changes related to one of the experiments, only the corresponding index card was updated. The history of her recipes divided into two independent timelines. She could use her navigation techniques to see on her desk the recipes for either experiment, but only one at a time.
+
+She continued with the process, experimenting and creating more independent timelines. She even thought of experiments within experiments, varying the amount of added sugar to the cookies, for example. Soon her project history started to look like a tree, with several chains which shared a common ancestor, but then diverged.
 
 
+MERGE
 
-READ
+FAX
 
-NAVIGATE
-
-INDEX CARDS
 
 
 
