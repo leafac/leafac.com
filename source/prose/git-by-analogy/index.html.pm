@@ -125,12 +125,10 @@ So Alice configured Git to ignore these extraneous files. Even if they exist in 
 
 Alice was ready to use Git.
 
-◊;{
-
 ◊git/cli{
   ◊section['the-most-important-command]{The Most Important Command}
 
-  ◊new-thought{The most important} command in Git asks for the current status:
+  ◊new-thought{The first command} Alice learned on the ◊acronym{CLI} is also the most important one. It asks Git for the current status:
 
   ◊full-width{
     ◊code/block{
@@ -139,10 +137,10 @@ fatal: Not a git repository (or any of the parent directories): .git
     }
   }
 
-  We use this command frequently to check our progress. Currently, the result is a fatal error: Git cannot find a repository.
-
-  The following sections explain what is a repository, and how to create one.
+  Alice used this command frequently as she progressed on her learning. Currently, the result is a fatal error: Git cannot find a repository. The following sections explain what is a repository, and how Alice created one.
 }
+
+◊;{
 
 ◊section['office]{Office}
 
