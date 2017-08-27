@@ -17,7 +17,7 @@ Soon Alice thought of a solution: she went to the stationery story and bought a 
 
 ◊margin-note{◊figure{◊svg{images/introduction--git.svg}}}
 
-The copying-machine approach was not working, so Alice developed a better system. It involves slips of paper, a paper tray, boxes, labels, a cabinet, index cards and a fax machine. This system has been working for a while for Alice and her friends, and, now that Alice is serious about her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
+The copying-machine approach was not working, so Alice developed a better system. She went back to the stationery store and exchanged her copying machine for slips of paper, a paper tray, boxes, labels, a cabinet, index cards and a fax machine. This system has been working for a while for Alice and her friends, and, now that Alice is serious about her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
 
 ◊section['alices-version-control-system]{Alice’s Version Control System}
 
