@@ -17,7 +17,7 @@ The copying-machine approach was not working, so Alice developed a better system
 
 She anticipated this would quickly lead to large quantities of slips of paper on her desk, so she used the paper tray to organize them after she had done a small amount of work she wanted to keep. For example, the slips of paper corresponding to tweaks in the amounts of sugar, flour and almond milk together formed the set “sweeter cookies.” Alice then moved the slips of paper from the paper tray into a box. Finally, she closed this box, labeled it with the description and some extra information, and stored the box in the cabinet.
 
-To guarantee that the system would be reliable, she committed to never changing a box after closing it. If she discovered that she did not like the changes in a box that was already closed, then she would create a new box containing the inverse changes. She could only add new boxes to the cabinet, but never remove them from there.
+To guarantee that the system would be reliable, she committed to never changing a box after closing it. If she discovered that she did not like the changes in a box that was already closed, then she would create a new box containing the inverse changes. She could only add new boxes to the cabinet, but never remove them from there. And Alice created boxes frequently, as many as possible, because she knew her work was secure once in the cabinet.
 
 As she progressed, the boxes in the cabinet formed a timeline of her recipes evolution. Alice uniquely identified each box, and, when creating them, she included in their label a reference to the identifier of the previous box in the sequence. The result was an unidirectional chain, a new box pointed to its immediate predecessor, but not the other way around. This is in line with Alice’s rule of never modifying a box in the cabinet: when creating a new box, she knew the ancestor so she included a reference to it, but she did not allow herself to modify the old box to mention the new box.
 
@@ -31,15 +31,21 @@ These index cards were inexpensive, so Alice created even more of them. More imp
 
 Then Alice started working on the experiments, creating boxes as she went. But, when she created a box with changes related to one of the experiments, only its corresponding index card was updated. The history of her recipes divided into two independent timelines which shared a common past, but evolved differently. She could use her navigation techniques to see on her desk the recipes for either experiment, one at a time.
 
-She had more ideas, and created more independent timelines to test them. She even thought of experiments within experiments, varying the increase in sugar to the cookies, for example. Soon her project history started to look like a tree, with several chains which shared common ancestors, but then diverged.
+She had more ideas, and created more independent timelines to test them. She even thought of experiments within experiments, for example, varying the increase in sugar to the cookies. Soon her project history started to look like a tree, with several chains which shared common ancestors, but then diverged.
 
+Eventually, Alice concluded an experiment. She tried the recipe variation a few times, gathered opinions from her friends, and decided whether it was a success of a failure. If it was a failure, then it was easy for Alice to discard the whole timeline, regardless of how many boxes it included. She just had to discard the index card corresponding to this experiment. A box without an index card pointing to it—either directly or indirectly via a newer box in the chain—became inaccessible, and she would just ignore it. Once in a while Alice would go through the cabinet and permanently remove inaccessible boxes, but storage space was ample, so this rarely happened.
 
-MERGE
+If, on the other hand, Alice and her friends considered the experiment a success, then she wanted to bring the corresponding boxes into the main timeline. There are two ways in which this could happen, depending on the situation of the index cards. If the index card corresponding to the experiment was a direct descendent of the index card corresponding to the main timeline, then she just updated the latter to point at the same box as the former.
+
+Otherwise, the histories of the main timeline and the experiment have diverged, and Alice had to reconcile the changes. Back when Alice was using a copying machine, she sometimes had to reconcile changes from diverging versions of a recipe, and it was very challenging. She had trouble to find the differences, recollect which version was newer, and so forth. But her new version control system made things more straightforward: the boxes contained slips of paper corresponding only to what changed, and they formed a chain with a clear order.
+
+Nonetheless, reconciling diverging timelines was not as simple as updating an index card. In those occasions, Alice created a special box which had two immediate ancestors, coming from each of the two timelines. In most cases, this special box was empty. It existed only to represent the convergence of two timelines. Sometimes, however, the changes from one timeline contradicted the other. For example, one added sugar to the cookies recipe, and the other removed. When that happened, Alice had to decide whether to keep the change from one timeline, or the change from the other timeline, or the old amount, or a new amount. Her decision would be in a slip of paper on the new special box.
+
+Alice followed one of the processes described above and brought the boxes corresponding to the successful experiment into the main timeline. Then, the index card corresponding to it became redundant: the index card corresponding to the main timeline already pointed at the relevant boxes, which would not become inaccessible. Alice runs a clean kitchen, and does the same with her version control system. There is no point in keeping an index card for a finished experiment, so she discarded it.
 
 FAX
 
 TERMINOLOGY MAPPING
-
 
 ◊section['getting-started]{Getting Started}
 
