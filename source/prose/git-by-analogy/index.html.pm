@@ -61,6 +61,8 @@ Alice had a copying machine that was idle since she started using her new versio
 
 ◊new-thought{}
 
+PUBLIC & PRIVATE KEYS
+
 TERMINOLOGY MAPPING
 
 ◊section['getting-started]{Getting Started}
