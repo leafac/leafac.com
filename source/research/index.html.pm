@@ -5,6 +5,14 @@
 ◊section['publications]{Publications}
 
 ◊publication/paper{
+ ◊publication/paper/title['publication--paper--relative-store-fragment-for-singleton-abstraction]{◊link/internal["/research/relative-store-fragment-for-singleton-abstraction/relative-store-fragment-for-singleton-abstraction.pdf"]{Relative Store Fragment for Singleton Abstraction}}
+ ◊publication/paper/authors{Leandro Facchinetti, Zachary Palmer and Scott F. Smith}
+ ◊publication/paper/venue{◊link["http://staticanalysis.org/sas2017/sas2017.html"]{24th Static Analysis Symposium}}
+ ◊publication/paper/date{2017}
+ ◊publication/paper/abstract{A ◊technical-term{singleton abstraction} occurs in a program analysis when some results of the analysis are known to be exact: an abstract binding corresponds to a single concrete binding. In this paper, we develop a novel approach to constructing singleton abstractions via ◊technical-term{relative store fragments}. Each store fragment is a ◊emphasis{locally} exact store abstraction in that it contains only those abstract variable bindings necessary to address a particular question at a particular program point; it is ◊technical-term{relative} to that program point and the point of view may be shifted. We show how an analysis incorporating relative store fragments achieves flow-, context-, path- and must-alias sensitivity, and can be used as a basis for envi- ronment analysis, without any machinery put in place for those specific aims. We build upon recent advances in ◊technical-term{demand-driven} higher-order pro- gram analysis to achieve this construction as it is fundamentally tied to demand-driven lookup of variable values.}
+}
+
+◊publication/paper{
  ◊publication/paper/title['publication--paper--practical-demand-driven-program-analysis-with-recursion]{◊link/internal["/research/practical-demand-driven-program-analysis-with-recursion/practical-demand-driven-program-analysis-with-recursion.pdf"]{Practical Demand-Driven Program Analysis with Recursion}}
  ◊publication/paper/authors{Leandro Facchinetti}
  ◊publication/paper/venue{Research project report to fulfill a qualifying requirement of the Ph.D. program at The Johns Hopkins University}
