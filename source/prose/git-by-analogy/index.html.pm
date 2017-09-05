@@ -59,6 +59,8 @@ Alice had a copying machine that was idle since she started using her new versio
 
 ◊paragraph-separation[]
 
+◊;{
+
 ◊new-thought{}
 
 PUBLIC & PRIVATE KEYS
@@ -186,7 +188,6 @@ fatal: Not a git repository (or any of the parent directories): .git
   Alice used this command frequently as she progressed on her learning. Currently, the result is a fatal error: Git cannot find a repository. The following sections explain what is a repository, and how Alice created one.
 }
 
-◊;{
 ◊section['office]{Office}
 
 ◊margin-note{◊figure{◊svg{images/office.svg}}}
