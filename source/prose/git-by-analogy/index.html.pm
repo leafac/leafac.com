@@ -78,6 +78,24 @@ PUBLIC & PRIVATE KEYS
 
 TERMINOLOGY MAPPING
 
+REBASE
+
+COMPARE TO GOOGLE DOCS:
+  - ACROSS PROJECT
+  - NO VENDOR-LOCK-IN
+  - MORE FEATUREFUL
+
+  - STEEPER LEARNING CURVE
+
+
+GIT EXTENSIONS:
+  - Forks
+  - Issues
+  - Pull Requests
+  - Milestones
+  - Projects
+  - Edit online
+
 ◊section['getting-started]{Getting Started}
 
 ◊margin-note{
