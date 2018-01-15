@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{My First Robot}
+ ◊link[#:href ◊absolute-url["/music/my-first-robot"]]
+ ◊id{urn:uuid:f567c62e-852e-48b1-b9b0-c87f3cbfefc6}
+ ◊updated{2018-01-15T08:46:37-04:00}
+ ◊summary{I published a new song.}
+}
+
+◊entry{
  ◊title{Email Migration: The Ultimate Solution to a Ridiculous Problem}
  ◊link[#:href ◊absolute-url["/prose/email-migration"]]
  ◊id{urn:uuid:d69eeb15-e521-4205-92f2-d2e40027a76e}
