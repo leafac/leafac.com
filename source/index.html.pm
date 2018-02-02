@@ -6,4 +6,4 @@
 
 My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link/internal["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
-Keep up with my productions with the ◊link/internal["/feed.atom"]{Atom feed}. Get ◊link/internal["/contact"]{in touch} by writing to ◊email[◊(dict-ref personal-data 'personal-email)].
+Follow my productions on the ◊link/internal["/feed.atom"]{Atom feed}. ◊link/internal["/contact"]{Contact me} via email on ◊email[◊(dict-ref personal-data 'personal-email)].
