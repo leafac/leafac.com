@@ -30,10 +30,6 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; AUXILIARY
 
-;; Components
-
-(components-output-types #:dynamic html atom #:static css)
-
 ;; Paths
 
 (define base-path (make-parameter ""))
@@ -72,6 +68,100 @@
 
 ;; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 (define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
+
+;; ---------------------------------------------------------------------------------------------------
+;; SIZES
+
+;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
+(define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
+  (* base (expt ratio step)))
+
+(define size/body-text/start/unitless 15)
+
+(define size/body-text/default/unitless 16)
+
+(define size/body-text/end/unitless (modular-scale 1 #:base size/body-text/start/unitless))
+
+(define size/body-text/start/ratio
+  (exact->inexact (/ size/body-text/start/unitless size/body-text/default/unitless)))
+
+(define size/body-text/end/ratio
+  (exact->inexact (/ size/body-text/end/unitless size/body-text/default/unitless)))
+
+(define size/body-text/start (css-expr rem ,size/body-text/start/ratio))
+
+(define size/body-text/end (css-expr rem ,size/body-text/end/ratio))
+
+(define size/text/small (css-expr rem ,(modular-scale -2)))
+
+(define size/indentation (css-expr rem ,(modular-scale 2)))
+
+(define size/responsive/steps 5)
+
+(define size/responsive/min-width/start/unitless (modular-scale 17))
+
+(define size/responsive/min-width/start (css-expr rem ,size/responsive/min-width/start/unitless))
+
+(define size/responsive/min-width/end/unitless (modular-scale 20))
+
+(define size/responsive/min-width/end (css-expr rem ,size/responsive/min-width/end/unitless))
+
+(define size/responsive/min-width/range
+  (in-steps size/responsive/min-width/start/unitless
+            size/responsive/min-width/end/unitless
+            size/responsive/steps))
+
+(define size/body/padding/unitless (modular-scale -2))
+
+(define size/body/padding (css-expr rem ,size/body/padding/unitless))
+
+(define size/responsive/two-columns/min-width/step 23)
+
+(define size/responsive/two-columns/min-width/unitless
+  (modular-scale size/responsive/two-columns/min-width/step))
+
+(define size/responsive/two-columns/min-width
+  (css-expr rem ,size/responsive/two-columns/min-width/unitless))
+
+(define size/responsive/two-columns/width/unitless
+  (- size/responsive/two-columns/min-width/unitless (* 2 size/body/padding/unitless)))
+
+(define size/responsive/two-columns/width
+  (css-expr rem ,size/responsive/two-columns/width/unitless))
+
+;; ‘absolute’ is to use with media queries, as they are relative to the browser’s default ‘font-size’,
+;; and not to the ‘font-size’ of the root element ‘html’ [1]. The approach I’m taking is
+;; to use ‘rem’ for everything, including the root ‘font-size’, so that I don’t lose the information
+;; of the browser’s default ‘font-size’. This way, I’m able to compensate the fact that media queries
+;; are not relative to the ‘html’ ‘font-size’, but everything else is.
+;; [1]: https://www.sitepoint.com/understanding-and-using-rem-units-in-css/
+(define size/responsive/two-columns/min-width/absolute/unitless
+  (modular-scale size/responsive/two-columns/min-width/step #:base size/body-text/end/ratio))
+
+(define size/responsive/two-columns/min-width/absolute
+  (css-expr rem ,size/responsive/two-columns/min-width/absolute/unitless))
+
+(define size/ruler/thin/unitless 1)
+(define size/ruler/thin (css-expr px ,size/ruler/thin/unitless))
+(define size/ruler/thick/unitless 3)
+(define size/ruler/thick (css-expr px ,size/ruler/thick/unitless))
+
+(define size/two-columns/content (prefix (css-expr #:column-count 2)))
+
+(define size/table/data/padding (css-expr rem ,(modular-scale -2)))
+
+(define size/table/data/last/start (modular-scale 11))
+
+(define size/table/data/last/end (modular-scale 15))
+
+(define size/table/data/last
+  (css-expr #:width (rem ,size/table/data/last/start)
+            ,@(for/list ([min-width size/responsive/min-width/range]
+                         [width (in-steps size/table/data/last/start
+                                          size/table/data/last/end
+                                          size/responsive/steps)])
+                (css-expr @media (and screen (#:min-width (rem ,min-width)))
+                          #:width (rem ,width)))))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORSCHEME
@@ -171,102 +261,9 @@
 (define font/secondary font/sans-serif)
 
 ;; ---------------------------------------------------------------------------------------------------
-;; MODULAR SCALE
+;; COMPONENTS
 
-;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
-
-(define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
-  (* base (expt ratio step)))
-
-;; ---------------------------------------------------------------------------------------------------
-;; SIZES
-
-(define size/body-text/start/unitless 15)
-
-(define size/body-text/default/unitless 16)
-
-(define size/body-text/end/unitless (modular-scale 1 #:base size/body-text/start/unitless))
-
-(define size/body-text/start/ratio
-  (exact->inexact (/ size/body-text/start/unitless size/body-text/default/unitless)))
-
-(define size/body-text/end/ratio
-  (exact->inexact (/ size/body-text/end/unitless size/body-text/default/unitless)))
-
-(define size/body-text/start (css-expr rem ,size/body-text/start/ratio))
-
-(define size/body-text/end (css-expr rem ,size/body-text/end/ratio))
-
-(define size/text/small (css-expr rem ,(modular-scale -2)))
-
-(define size/indentation (css-expr rem ,(modular-scale 2)))
-
-(define size/responsive/steps 5)
-
-(define size/responsive/min-width/start/unitless (modular-scale 17))
-
-(define size/responsive/min-width/start (css-expr rem ,size/responsive/min-width/start/unitless))
-
-(define size/responsive/min-width/end/unitless (modular-scale 20))
-
-(define size/responsive/min-width/end (css-expr rem ,size/responsive/min-width/end/unitless))
-
-(define size/responsive/min-width/range
-  (in-steps size/responsive/min-width/start/unitless
-            size/responsive/min-width/end/unitless
-            size/responsive/steps))
-
-(define size/body/padding/unitless (modular-scale -2))
-
-(define size/body/padding (css-expr rem ,size/body/padding/unitless))
-
-(define size/responsive/two-columns/min-width/step 23)
-
-(define size/responsive/two-columns/min-width/unitless
-  (modular-scale size/responsive/two-columns/min-width/step))
-
-(define size/responsive/two-columns/min-width
-  (css-expr rem ,size/responsive/two-columns/min-width/unitless))
-
-(define size/responsive/two-columns/width/unitless
-  (- size/responsive/two-columns/min-width/unitless (* 2 size/body/padding/unitless)))
-
-(define size/responsive/two-columns/width
-  (css-expr rem ,size/responsive/two-columns/width/unitless))
-
-;; ‘absolute’ is to use with media queries, as they are relative to the browser’s default ‘font-size’,
-;; and not to the ‘font-size’ of the root element ‘html’ [1]. The approach I’m taking is
-;; to use ‘rem’ for everything, including the root ‘font-size’, so that I don’t lose the information
-;; of the browser’s default ‘font-size’. This way, I’m able to compensate the fact that media queries
-;; are not relative to the ‘html’ ‘font-size’, but everything else is.
-;; [1]: https://www.sitepoint.com/understanding-and-using-rem-units-in-css/
-(define size/responsive/two-columns/min-width/absolute/unitless
-  (modular-scale size/responsive/two-columns/min-width/step #:base size/body-text/end/ratio))
-
-(define size/responsive/two-columns/min-width/absolute
-  (css-expr rem ,size/responsive/two-columns/min-width/absolute/unitless))
-
-(define size/ruler/thin/unitless 1)
-(define size/ruler/thin (css-expr px ,size/ruler/thin/unitless))
-(define size/ruler/thick/unitless 3)
-(define size/ruler/thick (css-expr px ,size/ruler/thick/unitless))
-
-(define size/two-columns/content (prefix (css-expr #:column-count 2)))
-
-(define size/table/data/padding (css-expr rem ,(modular-scale -2)))
-
-(define size/table/data/last/start (modular-scale 11))
-
-(define size/table/data/last/end (modular-scale 15))
-
-(define size/table/data/last
-  (css-expr #:width (rem ,size/table/data/last/start)
-            ,@(for/list ([min-width size/responsive/min-width/range]
-                         [width (in-steps size/table/data/last/start
-                                          size/table/data/last/end
-                                          size/responsive/steps)])
-                (css-expr @media (and screen (#:min-width (rem ,min-width)))
-                          #:width (rem ,width)))))
+(components-output-types #:dynamic html atom #:static css)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
