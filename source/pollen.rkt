@@ -68,6 +68,62 @@
 (define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
 
 ;; ---------------------------------------------------------------------------------------------------
+;; FONTS
+
+(define font/serif (css-expr #:font-family "Charter")) ; 400, 400 italic, 700
+
+(define font/sans-serif (css-expr #:font-family "Fira Sans")) ; 300, 400, 600
+
+(define font/monospace (css-expr #:font-family "Fira Mono")) ; 400, 500
+
+(define font/display (css-expr #:font-family "Cooper Hewitt" #:font-weight 700)) ; 700
+
+(define font/main font/serif)
+
+(define font/secondary font/sans-serif)
+
+(define font/capitals
+  (css-expr #:text-transform uppercase
+            #:letter-spacing 0.1em
+            #:margin-right -0.1em))
+
+;; ---------------------------------------------------------------------------------------------------
+;; COLORS
+
+(define solarized
+  '((base03  . |#002b36|)
+    (base02  . |#073642|)
+    (base01  . |#586e75|)
+    (base00  . |#657b83|)
+    (base0   . |#839496|)
+    (base1   . |#93a1a1|)
+    (base2   . |#eee8d5|)
+    (base3   . |#fdf6e3|)
+    (yellow  . |#b58900|)
+    (orange  . |#cb4b16|)
+    (red     . |#dc322f|)
+    (magenta . |#d33682|)
+    (violet  . |#6c71c4|)
+    (blue    . |#268bd2|)
+    (cyan    . |#2aa198|)
+    (green   . |#859900|)))
+
+(define colorscheme
+  `((background           . ,(dict-ref solarized 'base3))
+    (background-highlight . ,(dict-ref solarized 'base2))
+    (secondary-content    . ,(dict-ref solarized 'base1))
+    (primary-content      . ,(dict-ref solarized 'base00))
+    (emphasized-content   . ,(dict-ref solarized 'base01))
+    (yellow               . ,(dict-ref solarized 'yellow))
+    (orange               . ,(dict-ref solarized 'orange))
+    (red                  . ,(dict-ref solarized 'red))
+    (magenta              . ,(dict-ref solarized 'magenta))
+    (violet               . ,(dict-ref solarized 'violet))
+    (blue                 . ,(dict-ref solarized 'blue))
+    (cyan                 . ,(dict-ref solarized 'cyan))
+    (green                . ,(dict-ref solarized 'green))))
+
+;; ---------------------------------------------------------------------------------------------------
 ;; SIZES
 
 ;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
@@ -160,62 +216,6 @@
                                           size/responsive/steps)])
                 (css-expr @media (and screen (#:min-width (rem ,min-width)))
                           #:width (rem ,width)))))
-
-;; ---------------------------------------------------------------------------------------------------
-;; COLORS
-
-(define solarized
-  '((base03  . |#002b36|)
-    (base02  . |#073642|)
-    (base01  . |#586e75|)
-    (base00  . |#657b83|)
-    (base0   . |#839496|)
-    (base1   . |#93a1a1|)
-    (base2   . |#eee8d5|)
-    (base3   . |#fdf6e3|)
-    (yellow  . |#b58900|)
-    (orange  . |#cb4b16|)
-    (red     . |#dc322f|)
-    (magenta . |#d33682|)
-    (violet  . |#6c71c4|)
-    (blue    . |#268bd2|)
-    (cyan    . |#2aa198|)
-    (green   . |#859900|)))
-
-(define colorscheme
-  `((background           . ,(dict-ref solarized 'base3))
-    (background-highlight . ,(dict-ref solarized 'base2))
-    (secondary-content    . ,(dict-ref solarized 'base1))
-    (primary-content      . ,(dict-ref solarized 'base00))
-    (emphasized-content   . ,(dict-ref solarized 'base01))
-    (yellow               . ,(dict-ref solarized 'yellow))
-    (orange               . ,(dict-ref solarized 'orange))
-    (red                  . ,(dict-ref solarized 'red))
-    (magenta              . ,(dict-ref solarized 'magenta))
-    (violet               . ,(dict-ref solarized 'violet))
-    (blue                 . ,(dict-ref solarized 'blue))
-    (cyan                 . ,(dict-ref solarized 'cyan))
-    (green                . ,(dict-ref solarized 'green))))
-
-;; ---------------------------------------------------------------------------------------------------
-;; FONTS
-
-(define font/serif (css-expr #:font-family "Charter")) ; 400, 400 italic, 700
-
-(define font/sans-serif (css-expr #:font-family "Fira Sans")) ; 300, 400, 600
-
-(define font/monospace (css-expr #:font-family "Fira Mono")) ; 400, 500
-
-(define font/display (css-expr #:font-family "Cooper Hewitt" #:font-weight 700)) ; 700
-
-(define font/main font/serif)
-
-(define font/secondary font/sans-serif)
-
-(define font/capitals
-  (css-expr #:text-transform uppercase
-            #:letter-spacing 0.1em
-            #:margin-right -0.1em))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COMPONENTS
