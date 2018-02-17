@@ -11,7 +11,8 @@
                        pollen/core pollen/file
                        css-expr))
 
-;; PERSONAL DATA -------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; PERSONAL DATA
 
 (define personal-data
   (let ([date-of-birth (date 1990 10 20)])
@@ -26,11 +27,13 @@
       (date-of-birth  . ,date-of-birth)
       (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
 
-;; COMPONENT SUPPORT ---------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; COMPONENT SUPPORT
 
 (components-output-types #:dynamic html atom #:static css)
 
-;; MISCELLANEOUS SUPPORT -----------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; MISCELLANEOUS SUPPORT
 
 (define (in-steps start end steps)
   (for/list ([step (in-range (add1 steps))])
@@ -64,7 +67,8 @@
 ;; https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 (define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
 
-;; COLORSCHEME ---------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; COLORSCHEME
 
 (define solarized
   '((base03  . |#002b36|)
@@ -99,7 +103,8 @@
     (cyan                 . ,(dict-ref solarized 'cyan))
     (green                . ,(dict-ref solarized 'green))))
 
-;; FONTS ---------------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; FONTS
 
 (define font/serif (css-expr #:font-family "Charis SIL"))
 
@@ -159,14 +164,16 @@
 
 (define font/secondary font/sans-serif)
 
-;; MODULAR SCALE -------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; MODULAR SCALE
 
 ;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
 
 (define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
   (* base (expt ratio step)))
 
-;; SIZES ---------------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; SIZES
 
 (define size/body-text/start/unitless 15)
 
@@ -254,7 +261,8 @@
                 (css-expr @media (and screen (#:min-width (rem ,min-width)))
                           #:width (rem ,width)))))
 
-;; MISCELLANEOUS MIXINS ------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; MISCELLANEOUS MIXINS
 
 (define (inline-block-enumeration gutter)
   (css-expr
@@ -276,7 +284,8 @@
               #:width ,size/responsive/two-columns/width
               #:width (apply calc (- ,size/responsive/two-columns/width ,size/indentation))]]))
 
-;; COMPONENTS ----------------------------------------------------------------------------------------
+;; ---------------------------------------------------------------------------------------------------
+;; COMPONENTS
 
 (define-component (root . elements)
   #:html
