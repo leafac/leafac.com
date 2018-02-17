@@ -1,2 +1,2 @@
 #lang pollen
-◊(css-expr->css (apply append (map cdr (components/css))))
+◊(css-expr->css (append* (map cdr (components/css))))

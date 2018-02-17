@@ -200,11 +200,13 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; FONTS
 
-(define font/serif (css-expr #:font-family "Charis SIL"))
+(define font/serif (css-expr #:font-family "Charter")) ; 400, 400 italic, 700
 
-(define font/sans-serif (css-expr #:font-family "Source Sans Pro"))
+(define font/sans-serif (css-expr #:font-family "Fira Sans")) ; 300, 400, 600
 
-(define font/monospace (css-expr #:font-family "Source Code Pro"))
+(define font/monospace (css-expr #:font-family "Fira Mono")) ; 400, 500
+
+(define font/display (css-expr #:font-family "Cooper Hewitt" #:font-weight 700)) ; 700
 
 (define font/main font/serif)
 
@@ -284,6 +286,7 @@
     #:content ,content
     ,@font/secondary
     ,@font/capitals
+    #:font-weight 300
     #:font-size ,size/text/small
     #:line-height 1
     #:background-color ,color
@@ -375,17 +378,14 @@
 
 (define-component headings
   #:css (css-expr [h1 h2
+                   ,@font/secondary
                    #:font-size (rem ,(modular-scale 0))
-                   [(header &)
-                    #:font-size (rem ,(modular-scale 2))
-                    [a ,@smart-underline/disable]]
                    #:margin (#:top (rem ,(modular-scale 2))
-                             #:bottom (rem ,(modular-scale -2)))]
+                             #:bottom (rem ,(modular-scale -2)))
+                   [a ,@smart-underline/disable]]
                   [h1
-                   ,@font/capitals
-                   #:font-weight 700]
+                   #:font-weight 600]
                   [h2
-                   #:font-style italic
                    #:font-weight 400]))
 
 (define-component (heading/mark . elements)
@@ -406,26 +406,30 @@
 (define-component (menu . elements)
   #:html (apply navigation #:class "menu" elements)
   #:css (css-expr [.menu
-                   ,@font/capitals
                    ,@font/secondary
                    #:font-weight 300
                    #:line-height ,(modular-scale 4)
                    [a ,@(inline-block-enumeration (modular-scale 0))]]))
 
 (define-component header
-  #:css (css-expr [body>header
-                   #:padding-bottom (rem ,(modular-scale -4))
-                   #:border-bottom
-                   (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                   #:margin-bottom (rem ,(modular-scale 4))]
-                  [article>header
-                   #:margin (#:top (rem ,(modular-scale 2))
-                             #:bottom (rem ,(modular-scale -2)))]))
+  #:css (css-expr [header
+                   [h1
+                    ,@font/display
+                    #:font-size (rem ,(modular-scale 2))]
+                   [(> body &)
+                    #:padding-bottom (rem ,(modular-scale -4))
+                    #:border-bottom
+                    (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+                    #:margin-bottom (rem ,(modular-scale 4))]
+                   [(> article &)
+                    #:margin (#:top (rem ,(modular-scale 2))
+                              #:bottom (rem ,(modular-scale -2)))]]))
 
 (define-component time
   #:html (default-tag-function 'time)
   #:css (css-expr [time
                    ,@font/secondary
+                   #:font-weight 300
                    #:font-size ,size/text/small
                    #:position relative
                    #:top (rem ,(- (modular-scale -3)))
@@ -498,7 +502,6 @@
 (define-component margin-note
   #:html (default-tag-function 'aside)
   #:css (css-expr [aside
-                   ,@font/secondary
                    [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
                     #:color ,(dict-ref colorscheme 'emphasized-content)
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
@@ -507,6 +510,7 @@
                     ,@ruler-left-spacing
                     #:padding-right (rem ,(modular-scale -4))]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+                    #:font-size (rem ,(modular-scale -1))
                     #:float right
                     #:clear right
                     #:width (rem ,(modular-scale 17)) !important
@@ -617,10 +621,7 @@
 (define-component list/ordered/item #:html (default-tag-function 'li))
 
 (define-component emphasis
-  #:html (default-tag-function 'em)
-  #:css (css-expr [(aside em)
-                   #:font-style normal
-                   #:font-weight 600]))
+  #:html (default-tag-function 'em))
 
 (define-component foreign #:html emphasis)
 
@@ -668,8 +669,7 @@
 (define-component table/data/header
   #:html (default-tag-function 'th)
   #:css (css-expr [th
-                   ,@font/capitals
-                   #:font-weight 400
+                   ,@font/secondary
                    #:text-align left
                    #:padding 0 (#:right ,size/table/data/padding)]))
 
