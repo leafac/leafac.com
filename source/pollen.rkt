@@ -449,6 +449,7 @@
                              #:bottom (rem ,(modular-scale -2)))]))
 
 (define-component time
+  #:html (default-tag-function 'time)
   #:css (css-expr [time
                    ,@font/secondary
                    #:font-size ,size/text/small
