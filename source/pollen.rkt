@@ -42,13 +42,11 @@
 
 (define (source-path path) (~a (current-project-root) "/" path))
 
-;; Miscellaneous
+;; CSS helpers
 
 (define (in-steps start end steps)
   (for/list ([step (in-range (add1 steps))])
     (exact->inexact (+ start (* step (/ (- end start) steps))))))
-
-;; CSS helpers
 
 (define (prefix declaration #:prefixes [prefixes '(moz webkit ms o)])
   (syntax-parse declaration
@@ -164,7 +162,7 @@
                           #:width (rem ,width)))))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; COLORSCHEME
+;; COLORS
 
 (define solarized
   '((base03  . |#002b36|)
@@ -208,35 +206,29 @@
 
 (define font/monospace (css-expr #:font-family "Source Code Pro"))
 
-(define font/icons (css-expr #:font-family "FontAwesome"))
+(define font/main font/serif)
 
-(define font/italics (css-expr #:font-style italic))
+(define font/secondary font/sans-serif)
 
-(define font/feature-settings '("kern" "rlig" "liga" "clig" "calt"))
-
-(define font/small-caps
-  (css-expr ,@(prefix (css-expr #:font-feature-settings ,@font/feature-settings "smcp"))
-            #:text-transform lowercase
-            #:letter-spacing 0.2em
-            [(aside &) #:letter-spacing 0.1em]
+(define font/capitals
+  (css-expr #:text-transform uppercase
+            #:letter-spacing 0.1em
             #:margin-right -0.1em))
 
-(define font/all-caps
-  (css-expr #:text-transform uppercase
-            #:letter-spacing 0.2em))
+;; ---------------------------------------------------------------------------------------------------
+;; COMPONENTS
 
-(define font/kerning
-  (css-expr ,@(prefix (css-expr #:font-kerning normal))
-            ,@(prefix (css-expr #:font-variant-ligatures (common-ligatures contextual)))
-            ,@(prefix (css-expr #:text-rendering optimizeLegibility))
-            ,@(prefix (css-expr #:font-feature-settings ,@font/feature-settings))))
+(components-output-types #:dynamic html atom #:static css)
 
-(define (font/smart-underline #:colors colors
-                              #:colors/hover [colors/hover #f]
-                              #:distances [distances (in-steps .03 .15 4)]
-                              #:thickness [thickness '1px]
-                              #:top [top '90%])
-  ;; Reference: https://eager.io/blog/smarter-link-underlines/
+;; ---------------------------------------------------------------------------------------------------
+;; MIXINS
+
+;; Reference: https://eager.io/blog/smarter-link-underlines/
+(define (smart-underline #:colors colors
+                         #:colors/hover [colors/hover #f]
+                         #:distances [distances (in-steps .03 .15 4)]
+                         #:thickness [thickness '1px]
+                         #:top [top '90%])
   (define/match (rules colors)
     [(`(,color/foreground ,color/background))
      (css-expr #:text-decoration none
@@ -253,20 +245,8 @@
   (css-expr ,@(rules colors)
             ,@(if colors/hover (css-expr [(: & hover) ,@(rules colors/hover)]) (css-expr))))
 
-(define font/smart-underline/disable
+(define smart-underline/disable
   (css-expr #:background-image none !important))
-
-(define font/main font/serif)
-
-(define font/secondary font/sans-serif)
-
-;; ---------------------------------------------------------------------------------------------------
-;; COMPONENTS
-
-(components-output-types #:dynamic html atom #:static css)
-
-;; ---------------------------------------------------------------------------------------------------
-;; MIXINS
 
 (define (inline-block-enumeration gutter)
   (css-expr
@@ -303,7 +283,7 @@
    [(:: & before)
     #:content ,content
     ,@font/secondary
-    ,@font/small-caps
+    ,@font/capitals
     #:font-size ,size/text/small
     #:line-height 1
     #:background-color ,color
@@ -357,9 +337,12 @@
                  (css-expr @media (and screen (#:min-width (rem ,min-width)))
                            #:font-size (rem ,font-size)))]
             [body
-             #:font-synthesis none
+             ,@(prefix (css-expr #:font-synthesis none))
+             ,@(prefix (css-expr #:font-kerning normal))
+             ,@(prefix (css-expr #:font-variant-ligatures (common-ligatures contextual)))
+             ,@(prefix (css-expr #:text-rendering optimizeLegibility))
+             ,@(prefix (css-expr #:font-feature-settings "kern" "rlig" "liga" "clig" "calt"))
              ,@font/main
-             ,@font/kerning
              #:line-height ,(modular-scale 2)
              #:margin ((rem ,(modular-scale 4)) auto)
              [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
@@ -395,21 +378,15 @@
                    #:font-size (rem ,(modular-scale 0))
                    [(header &)
                     #:font-size (rem ,(modular-scale 2))
-                    [a ,@font/smart-underline/disable]]
+                    [a ,@smart-underline/disable]]
                    #:margin (#:top (rem ,(modular-scale 2))
                              #:bottom (rem ,(modular-scale -2)))]
                   [h1
-                   ,@font/small-caps
+                   ,@font/capitals
                    #:font-weight 700]
                   [h2
-                   ,@font/italics
+                   #:font-style italic
                    #:font-weight 400]))
-
-(define-component (label key)
-  #:html ((default-tag-function 'span) #:id (~a key)))
-
-(define-component (reference key . elements)
-  #:html (apply link (~a "#" key) elements))
 
 (define-component (heading/mark . elements)
   #:html (show-on-hover
@@ -418,7 +395,7 @@
   #:css (css-expr [.heading--mark
                    #:margin-left (rem ,(modular-scale -3))
                    [a
-                    ,@font/smart-underline/disable
+                    ,@smart-underline/disable
                     #:color ,(dict-ref colorscheme 'secondary-content)]]))
 
 (define-component (reference/§ key)
@@ -429,7 +406,7 @@
 (define-component (menu . elements)
   #:html (apply navigation #:class "menu" elements)
   #:css (css-expr [.menu
-                   ,@font/small-caps
+                   ,@font/capitals
                    ,@font/secondary
                    #:font-weight 300
                    #:line-height ,(modular-scale 4)
@@ -457,6 +434,12 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
 
+(define-component (label key)
+  #:html ((default-tag-function 'span) #:id (~a key)))
+
+(define-component (reference key . elements)
+  #:html (apply link (~a "#" key) elements))
+
 (define-component (link path . elements)
   #:html (apply (default-tag-function 'a) #:href path
                 (if (null? elements) `(,path) elements))
@@ -468,13 +451,13 @@
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:color ,(dict-ref colorscheme 'emphasized-content)]
                    [(article &)
-                    ,@(font/smart-underline
+                    ,@(smart-underline
                        #:colors `(,(dict-ref colorscheme 'secondary-content)
                                   ,(dict-ref colorscheme 'background))
                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
                                         ,(dict-ref colorscheme 'background-highlight)))]
                    [(aside &)
-                    ,@(font/smart-underline
+                    ,@(smart-underline
                        #:colors `(,(dict-ref colorscheme 'secondary-content)
                                   ,(dict-ref colorscheme 'background))
                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
@@ -485,7 +468,7 @@
                      [(: & hover)
                       #:background-color ,(dict-ref colorscheme 'background)
                       #:color ,(dict-ref colorscheme 'primary-content)]
-                     ,@(font/smart-underline
+                     ,@(smart-underline
                         #:colors `(,(dict-ref colorscheme 'secondary-content)
                                    ,(dict-ref colorscheme 'background-highlight))
                         #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
@@ -510,7 +493,7 @@
 
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
-  #:css (css-expr [.new-thought ,@font/small-caps]))
+  #:css (css-expr [.new-thought ,@font/capitals]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -616,7 +599,7 @@
 (define-component acronym
   #:html (default-tag-function 'span #:class "acronym")
   #:css (css-expr [span.acronym
-                   ,@font/small-caps]))
+                   ,@font/capitals]))
 
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
@@ -685,7 +668,7 @@
 (define-component table/data/header
   #:html (default-tag-function 'th)
   #:css (css-expr [th
-                   ,@font/small-caps
+                   ,@font/capitals
                    #:font-weight 400
                    #:text-align left
                    #:padding 0 (#:right ,size/table/data/padding)]))
@@ -739,7 +722,7 @@
   #:css (css-expr [.recipe
                    #:list-style none
                    #:margin-bottom (rem ,(modular-scale -4))
-                   [a ,@font/smart-underline/disable]]))
+                   [a ,@smart-underline/disable]]))
 
 (define ingredients/collected (make-hash))
 
