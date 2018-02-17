@@ -94,7 +94,7 @@ Choose an arbitrary ◊code/inline{◊placeholder{password}} and use the ◊path
 
   The call to ◊code/inline{ulimit} is necessary because Dovecot wants to be able to open more than 256 files, the default limit.
 
-  The call to ◊code/inline{sudo} is necessary because Dovecot needs to bind to a network port below 1024—specifically, the port for ◊acronym{IMAP}, 143.
+  The call to ◊code/inline{sudo} is necessary because Dovecot needs to bind to a network port below 1024—specifically, the port for ◊initialism{IMAP}, 143.
 
   The ◊code/inline{-F} flag for Dovecot tells it to run on the foreground, instead of becoming a daemon. This makes it easy to see the logs as the server runs, and to kill it with ◊keyboard{Ctrl} + ◊keyboard{C}.
 }
@@ -107,7 +107,7 @@ Confirm that email server is running correctly by inspecting the startup log mes
 
 Connect your email clients, for example, Thunderbird and Apple Mail to this temporary email server:
 
-◊margin-note{Some email clients insist on having a server to send emails (◊acronym{SMTP}). Let this part of the configuration fail or reuse the outgoing email configuration from other accounts.}
+◊margin-note{Some email clients insist on having a server to send emails (◊initialism{SMTP}). Let this part of the configuration fail or reuse the outgoing email configuration from other accounts.}
 
 ◊margin-note{
   If it is necessary to change Dovecot’s configuration from the ◊reference['configure]{previous section}, restart the server or run the following command on a separate terminal:
@@ -123,7 +123,7 @@ $ sudo doveadm reload
   ◊table/body{
     ◊table/row{◊table/data{Email address} ◊table/data{◊code/inline{◊placeholder{user}@localhost}}}
     ◊table/row{◊table/data{Server} ◊table/data{◊code/inline{localhost}}}
-    ◊table/row{◊table/data{Protocol} ◊table/data{◊acronym{IMAP}}}
+    ◊table/row{◊table/data{Protocol} ◊table/data{◊initialism{IMAP}}}
     ◊table/row{◊table/data{Port} ◊table/data{143}}
     ◊table/row{◊table/data{User} ◊table/data{◊code/inline{◊placeholder{user}}}}
     ◊table/row{◊table/data{Password} ◊table/data{◊code/inline{◊placeholder{password}}}}
@@ -154,7 +154,7 @@ $ brew uninstall dovecot
 
 ◊margin-note{Refer to Dovecot’s manual for more details on each individual configuration option.}
 
-Dovecot supports many kinds of services, for example, the ◊acronym{IMAP} and ◊acronym{POP3} email server protocols, and authentication for other applications. In our temporary email server, we only want the ◊acronym{IMAP} service:
+Dovecot supports many kinds of services, for example, the ◊initialism{IMAP} and ◊initialism{POP3} email server protocols, and authentication for other applications. In our temporary email server, we only want the ◊initialism{IMAP} service:
 
 ◊code/block{
 protocols = imap

@@ -105,14 +105,14 @@ HOW DOES ALICE FINDS THE RELEVANT BOXES WHEN “EXPLORING THE HISTORY?” IN PAR
 ◊margin-note{
   ◊figure{◊svg{images/getting-started--guis-and-cli.svg}}
 
-  Different ◊acronym{GUI}s and a ◊acronym{CLI} as front-ends for the same Git features.
+  Different ◊initialism{GUI}s and a ◊initialism{CLI} as front-ends for the same Git features.
 }
 
-◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it, comes back home, opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (◊acronym{GUI}) and a Command-Line Interface (◊acronym{CLI}). The ◊acronym{GUI} is a regular application, with windows, menus and so forth, and the ◊acronym{CLI} is text-based and must be used from the terminal.
+◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it, comes back home, opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (◊initialism{GUI}) and a Command-Line Interface (◊initialism{CLI}). The ◊initialism{GUI} is a regular application, with windows, menus and so forth, and the ◊initialism{CLI} is text-based and must be used from the terminal.
 
-Alice heard that the ◊acronym{GUI} is easier to learn and more ergonomic for everyday use than the ◊acronym{CLI}. The ◊acronym{GUI} bundled with Git is not the only one, on the ◊link["https://git-scm.com/downloads/guis"]{download website} she found an assortment of other options. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to keep it simple and stick with the ◊acronym{GUI} bundled with Git for the moment. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after she is comfortable with Git, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to efficient workflows.
+Alice heard that the ◊initialism{GUI} is easier to learn and more ergonomic for everyday use than the ◊initialism{CLI}. The ◊initialism{GUI} bundled with Git is not the only one, on the ◊link["https://git-scm.com/downloads/guis"]{download website} she found an assortment of other options. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to keep it simple and stick with the ◊initialism{GUI} bundled with Git for the moment. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after she is comfortable with Git, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to efficient workflows.
 
-But she also read that the ◊acronym{GUI}s generally do not support some of the more advanced operations. Moreover, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊acronym{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
+But she also read that the ◊initialism{GUI}s generally do not support some of the more advanced operations. Moreover, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the ◊initialism{CLI} as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
 
 ◊section['git-vs-github]{Git vs. GitHub}
 
@@ -123,9 +123,9 @@ But she also read that the ◊acronym{GUI}s generally do not support some of the
 Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{contributions from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
 
 ◊git/gui{
-  ◊section['gui-structure]{◊acronym{GUI} Structure}
+  ◊section['gui-structure]{◊initialism{GUI} Structure}
 
-  ◊new-thought{Inspecting the ◊acronym{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like those for almost all other applications in her computer. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊acronym{GUI}, she had to use the command line. She opened the terminal and ran the following:
+  ◊new-thought{Inspecting the ◊initialism{GUI}}, Alice’s first discovery was that the installation process did not create launchers, like those for almost all other applications in her computer. There were no icons or buttons on her desktop, so just once in her whole exploration of the ◊initialism{GUI}, she had to use the command line. She opened the terminal and ran the following:
 
   ◊margin-note{The ◊code/inline{$} represents the prompt.}
 
@@ -137,7 +137,7 @@ $ git ◊git/verb{gui}
 
   ◊image{images/gui-structure--main-screen.png}
 
-  This is the main Git ◊acronym{GUI}, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her to launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
+  This is the main Git ◊initialism{GUI}, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her to launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
 
   ◊code/block{
 $ gitk
@@ -149,9 +149,9 @@ $ gitk
 }
 
 ◊git/cli{
-  ◊section['cli-structure]{◊acronym{CLI} Structure}
+  ◊section['cli-structure]{◊initialism{CLI} Structure}
 
-  ◊new-thought{Inspecting the ◊acronym{CLI}} in the Git package, Alice learned that there is only one executable: ◊code/inline{git}. She noticed this executable receives arguments in a form that resembles natural language, for example:
+  ◊new-thought{Inspecting the ◊initialism{CLI}} in the Git package, Alice learned that there is only one executable: ◊code/inline{git}. She noticed this executable receives arguments in a form that resembles natural language, for example:
 
   ◊figure{◊svg{images/cli-structure--grammar.svg}}
 
@@ -171,7 +171,7 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 ◊emphasis{Alice chose a permanent email address for her Git configuration}. She considered using institutional email addresses, for example, the ones provided to her by her employer or her university. But she realized these are bad choices, because they might be reassigned to another person named Alice after her affiliation ends. Git would have trouble distinguishing contributions to the same projects made by multiple Alices that shared an email address over time.
 
 ◊git/gui{
-  Alice knew that the ◊acronym{GUI} bundled with Git had some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference['repository]{later}). For the moment, she just created a ◊informal{dummy} directory and used the ◊menu-option{Create New Repository} menu option there:
+  Alice knew that the ◊initialism{GUI} bundled with Git had some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference['repository]{later}). For the moment, she just created a ◊informal{dummy} directory and used the ◊menu-option{Create New Repository} menu option there:
 
   ◊figure{◊svg{images/local-setup--create-dummy-repository.svg}}
 
@@ -181,7 +181,7 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 }
 
 ◊git/cli{
-  Out of curiosity, Alice repeated the above and configured Git again on the ◊acronym{CLI}, by running the following commands:
+  Out of curiosity, Alice repeated the above and configured Git again on the ◊initialism{CLI}, by running the following commands:
 
   ◊code/block{
 $ git ◊git/verb{config} ◊git/object{--global user.name "Alice"}
@@ -209,7 +209,7 @@ Alice was ready to use Git.
 ◊git/cli{
   ◊section['the-most-important-command]{The Most Important Command}
 
-  ◊new-thought{The first command} Alice learned on the ◊acronym{CLI} is also the most important one. It asks Git for the current status:
+  ◊new-thought{The first command} Alice learned on the ◊initialism{CLI} is also the most important one. It asks Git for the current status:
 
   ◊full-width{
     ◊code/block{
@@ -225,7 +225,7 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 ◊margin-note{◊figure{◊svg{images/office.svg}}}
 
-◊new-thought{Modern operating system ◊acronym{GUI}s} make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track the progress over time. One could use, for example, a copying machine and keep copies of the different revisions. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to tell which is the current, to inspect the differences, to associate the changes to authors, and so forth. These processes take a long time, are prone to error, and require tedious manual work. Unsurprisingly, these are the exact same issues that arise in the computer when creating copies of different project revisions.
+◊new-thought{Modern operating system ◊initialism{GUI}s} make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track the progress over time. One could use, for example, a copying machine and keep copies of the different revisions. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to tell which is the current, to inspect the differences, to associate the changes to authors, and so forth. These processes take a long time, are prone to error, and require tedious manual work. Unsurprisingly, these are the exact same issues that arise in the computer when creating copies of different project revisions.
 
 To address this problem in an office, we could try a new system. To avoid confusion, we start by keeping only one copy of the project. After making a change, we take note of it in a slip of paper, mentioning what was the old content and what is the new content. If we are careful about managing these slips of paper, then we can recreate any point in time by following them in the appropriate direction: to go backward in time we replace the new content with the old content, and to go forward in time we replace the old content with the new content.
 
@@ -237,7 +237,7 @@ As we stack boxes in the cabinet, they form a chain, from the newest on the top 
 
 But maintaining this system is a great deal of tedious work! We want a robot to manage these processes: storing boxes in the cabinet, finding them, systematically applying the changes to the project to navigate in time, and so forth. In an office, this robot would be expensive. In the computer, it is free: we call it Git.
 
-Git extends the office analogy of files and folders in a desktop from the operating system ◊acronym{GUI}. This extended office includes metaphorical slips of paper, paper tray, labeled boxes, cabinet, and more. The following sections cover each of these components, their technical names in Git lexicon and how to give orders to the robot. We start with the part that is already familiar: the files and folders.
+Git extends the office analogy of files and folders in a desktop from the operating system ◊initialism{GUI}. This extended office includes metaphorical slips of paper, paper tray, labeled boxes, cabinet, and more. The following sections cover each of these components, their technical names in Git lexicon and how to give orders to the robot. We start with the part that is already familiar: the files and folders.
 
 ◊section['working-directory]{Working Directory}
 
@@ -245,7 +245,7 @@ Git extends the office analogy of files and folders in a desktop from the operat
 
 ◊new-thought{The first component} of the office analogy that we explore is the files and the folders, which come with the operating system. Git changes nothing about them, so that it does not interfere with other tools, for example, text editors. The only aspect particular to Git is terminology: Git calls the main project folder the ◊technical-term{working directory}.
 
-For the rest of this article we use a simple project for the examples: the writing of a ◊link/internal["/cooking"]{vegan cookbook}. Create a working directory for the project. Readers following both the ◊git/gui/inline{◊acronym{GUI}} and the ◊git/cli/inline{◊acronym{CLI}} sections must create two independent working directories, and follow the instructions from the different sections in the respective working directories.
+For the rest of this article we use a simple project for the examples: the writing of a ◊link/internal["/cooking"]{vegan cookbook}. Create a working directory for the project. Readers following both the ◊git/gui/inline{◊initialism{GUI}} and the ◊git/cli/inline{◊initialism{CLI}} sections must create two independent working directories, and follow the instructions from the different sections in the respective working directories.
 
 ◊section['repository]{Repository}
 
@@ -254,7 +254,7 @@ For the rest of this article we use a simple project for the examples: the writi
 ◊new-thought{The first order} we give to our Git robot is to create the cabinet which will contain the project history. Git calls it the ◊technical-term{repository}.
 
 ◊git/gui{
-  We had already created a repository ◊reference['local-setup]{during setup} to work around a quirk in the ◊acronym{GUI}. Repeat the process to ◊menu-option{Create New Repository} in the working directory:
+  We had already created a repository ◊reference['local-setup]{during setup} to work around a quirk in the ◊initialism{GUI}. Repeat the process to ◊menu-option{Create New Repository} in the working directory:
 
   ◊figure{◊svg{images/create-repository.svg}}
 
@@ -262,7 +262,7 @@ For the rest of this article we use a simple project for the examples: the writi
 
   ◊figure{◊svg{images/gui-parts.svg}}
 
-  Besides this main ◊acronym{GUI} window, there is another front-end window to show the project history. Open it with the ◊menu-option/path["Repository" "Visualise All Branch History"] menu option, or directly from the command line with ◊code/inline{gitk}. Currently there is no history to show, the cabinet is still empty, so this window shows an error:
+  Besides this main ◊initialism{GUI} window, there is another front-end window to show the project history. Open it with the ◊menu-option/path["Repository" "Visualise All Branch History"] menu option, or directly from the command line with ◊code/inline{gitk}. Currently there is no history to show, the cabinet is still empty, so this window shows an error:
 
   ◊image["images/no-history-yet.png"]{History visualization window with error due to empty repository.}
 
@@ -471,7 +471,7 @@ $ git ◊git/verb{config} \
   ◊git/object{--global core.editor "<EDITOR>"}
     }
 
-    In many cases—particularly for ◊acronym{GUI} text editors—one has to provide extra options to the text editor for it to work with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
+    In many cases—particularly for ◊initialism{GUI} text editors—one has to provide extra options to the text editor for it to work with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code/inline{◊git/object{"atom --wait"}}.
   }
 
   Git starts a text editor with a special file already open. To create the commit, write the commit message, save, and close that file:
@@ -603,7 +603,7 @@ The disadvantage of this approach is that it pollutes the project history with u
     ◊list/ordered/item{The commit author and email.}
     ◊list/ordered/item{The date and time of the commit creation.}
     ◊list/ordered/item{
-      ◊margin-note{Git calls the unique commit identifier ◊acronym{SHA1 ID}, after the hashing algorithm used to generate it.}
+      ◊margin-note{Git calls the unique commit identifier ◊initialism{SHA1 ID}, after the hashing algorithm used to generate it.}
 
       The unique identifier of the currently selected commit. Use the panes above to switch to different commits.
     }
@@ -711,7 +711,7 @@ $ git ◊git/verb{blame} ◊git/object{pancakes.txt}
 Git calls this process of navigating in history ◊technical-term{checkout}.
 
 ◊git/gui{
-  On the main ◊acronym{GUI} window, go to the ◊menu-option["Branch" "Checkout…"] menu option:
+  On the main ◊initialism{GUI} window, go to the ◊menu-option["Branch" "Checkout…"] menu option:
 
   ◊image{images/checkout.png}
 
@@ -926,12 +926,12 @@ If we keep at this, creating branches and committing on them, then the project h
 ◊margin-note{
   ◊figure{◊figure{◊svg{images/merge.svg}}}
 
-  The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊acronym{DAG})}.
+  The merge commit contains changes from both parents. The result no longer looks like a tree, the technical term for this data structure is ◊technical-term{Directed Acyclic Graph (◊initialism{DAG})}.
 }
 
 When the development of the brownies recipe is complete, it is time to bring it to the main line of development, on the ◊code/inline{master} branch. In our running example, the result bringing together the brownies recipe on the ◊code/inline{brownies} branch and the directions for the cookies recipe on the second commit of the ◊code/inline{master} branch. Git calls this operation a ◊technical-term{merge}.
 
-Start by checking ◊code/inline{master} out. On the ◊acronym{GUI}, use the ◊emphasis{Branch} > ◊emphasis{Checkout…} menu option:
+Start by checking ◊code/inline{master} out. On the ◊initialism{GUI}, use the ◊emphasis{Branch} > ◊emphasis{Checkout…} menu option:
 
 ◊image["images/checkout-master.png"]{The checkout dialog.}
 
@@ -963,7 +963,7 @@ Check the branch deletion on the project history by refreshing:
 
 ◊image["images/after-branch-deletion.png"]{History after branch deletion.}
 
-On the ◊acronym{CLI}, start by checking ◊code/inline{master} out using the ◊code/inline{◊git/verb{checkout}} command:
+On the ◊initialism{CLI}, start by checking ◊code/inline{master} out using the ◊code/inline{◊git/verb{checkout}} command:
 
 ◊code/block{
 $ git ◊git/verb{checkout} ◊git/object{master}
@@ -1015,7 +1015,7 @@ Deleted branch brownies (was 9ea8492).
 
 ◊new-thought{Tags are the last} kind of ◊refernece['references]{reference} covered in this article. They are similar to ◊reference['branches]{branches} in that they point to arbitrary commits and are identified by a name. The difference is that they ◊emphasis{do not move}. Tags are immutable, they always point to the same commit at which they pointed when created. Their main utility is to mark special points in history, for example, released versions or the last version before a big structural change on the project.
 
-To create a tag on the ◊acronym{GUI}, go to the window showing the project history, right-click on the commit of interest and use the ◊emphasis{Create tag} option:
+To create a tag on the ◊initialism{GUI}, go to the window showing the project history, right-click on the commit of interest and use the ◊emphasis{Create tag} option:
 
 ◊image["images/tag.png"]{Tag creation.}
 
@@ -1023,7 +1023,7 @@ After clicking on the ◊emphasis{Tag} button, the project history shows the tag
 
 ◊image["images/history-after-tag.png"]{Project history with a tag.}
 
-On the ◊acronym{CLI}, the process is similar to creating a branch. First, checkout the commit of interest, then run the following command:
+On the ◊initialism{CLI}, the process is similar to creating a branch. First, checkout the commit of interest, then run the following command:
 
 ◊code/block{
 $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
@@ -1120,11 +1120,11 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊link["http://keepachangelog.com"]{changelog entries}, and a detailed commit message
 
-◊; ◊margin-note{The reader interested in the ◊acronym{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code/inline{git-add(1)}} manual page.}
+◊; ◊margin-note{The reader interested in the ◊initialism{CLI} support for selectively adding changes to the index should refer to the ◊code/inline{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code/inline{git-add(1)}} manual page.}
 
-◊; It is possible to be selective and add changes to the index line-by-line. The ◊acronym{CLI} has this feature, but the interface for it is cumbersome; the ◊acronym{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
+◊; It is possible to be selective and add changes to the index line-by-line. The ◊initialism{CLI} has this feature, but the interface for it is cumbersome; the ◊initialism{GUI} is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
 
-◊; ◊margin-note{Unfortunately, on the ◊acronym{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊acronym{GUI}s have this missing feature.}
+◊; ◊margin-note{Unfortunately, on the ◊initialism{GUI} we are using, the option of selectively staging parts of a ◊emphasis{new} (untracked) file is unavailable. The example in the figure is from another repository in which there are changes in the working directory for a tracked file (one which Git already knows about). Other ◊initialism{GUI}s have this missing feature.}
 
 ◊; ◊image["images/selective-staging.png"]{Selective staging.}
 
@@ -1134,7 +1134,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; During development, one should use a personal space in the repository, ◊emphasis{commit early, and commit often}, using the commit messages as notes to self. When a feature stabilizes, all tests are passing, and the development is ready to be part of the project, then Git offers ways to ◊reference['crafting-the-perfect-commit]{rewrite the history} and craft a carefully constructed commit. This approach is more advanced, but it is better to follow it than to wait too long to commit, and risk losing work in the process.
 
-◊; ◊margin-note{Pay attention to the line-length limits in carefully constructed commit messages. They are important for people using tools which do not soft-wrap the text, including the ◊acronym{CLI}.}
+◊; ◊margin-note{Pay attention to the line-length limits in carefully constructed commit messages. They are important for people using tools which do not soft-wrap the text, including the ◊initialism{CLI}.}
 
 ◊; ‘rebase --interactive’
 

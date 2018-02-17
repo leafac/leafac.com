@@ -4,7 +4,7 @@
 
 ◊margin-note{See the ◊link/internal["/software/www.leafac.com/"]{source code for the website}.}
 
-◊new-thought{The license} for all written material in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{◊acronym{GNU FDL}}:
+◊new-thought{The license} for all written material in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{◊initialism{GNU FDL}}:
 
 ◊full-width{
  ◊code/block{
@@ -18,7 +18,7 @@
  }
 }
 
-The license for all the code in the website is ◊link["https://www.gnu.org/licenses/gpl.html"]{◊acronym{GNU GPL}}:
+The license for all the code in the website is ◊link["https://www.gnu.org/licenses/gpl.html"]{◊initialism{GNU GPL}}:
 
 ◊full-width{
  ◊code/block{

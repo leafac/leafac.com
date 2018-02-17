@@ -70,13 +70,24 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; FONTS
 
-(define font/serif (css-expr #:font-family "Charter")) ; 400, 400 italic, 700
+; 400, 400 italic, 700
+(define font/serif
+  (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
 
-(define font/sans-serif (css-expr #:font-family "Fira Sans")) ; 300, 400, 600
+; 300, 400, 600
+(define font/sans-serif
+  (css-expr #:font-family "Fira Sans" "Gill Sans"
+            -apple-system BlinkMacSystemFont "Helvetica Neue" "Helvetica" "Verdana" sans-serif))
 
-(define font/monospace (css-expr #:font-family "Fira Mono")) ; 400, 500
+; 400, 500
+(define font/monospace
+  (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
 
-(define font/display (css-expr #:font-family "Cooper Hewitt" #:font-weight 700)) ; 700
+; 700
+(define font/display
+  (css-expr #:font-family "Cooper Hewitt" "Fira Sans" "Gill Sans"
+            -apple-system BlinkMacSystemFont "Helvetica Neue" "Helvetica" "Verdana" sans-serif
+            #:font-weight 700))
 
 (define font/main font/serif)
 
@@ -84,8 +95,7 @@
 
 (define font/capitals
   (css-expr #:text-transform uppercase
-            #:letter-spacing 0.1em
-            #:margin-right -0.1em))
+            #:letter-spacing 0.1em))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORS
@@ -497,7 +507,7 @@
 
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
-  #:css (css-expr [.new-thought ,@font/capitals]))
+  #:css (css-expr [.new-thought ,@font/secondary ,@font/capitals]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -600,9 +610,9 @@
 (define-component path
   #:html (default-tag-function 'code #:class "path"))
 
-(define-component acronym
-  #:html (default-tag-function 'span #:class "acronym")
-  #:css (css-expr [span.acronym
+(define-component initialism
+  #:html (default-tag-function 'span #:class "initialism")
+  #:css (css-expr [span.initialism
                    ,@font/capitals]))
 
 (define-component full-width
@@ -685,7 +695,7 @@
                   [.fraction--denominator #:vertical-align sub]
                   [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
 
-(define-component roman-number #:html acronym)
+(define-component roman-number #:html initialism)
 
 (define-component production #:html emphasis)
 
@@ -819,7 +829,7 @@
   #:css (css-expr [.skill
                    ,@(inline-block-enumeration (modular-scale 1))
                    #:line-height 2
-                   [.acronym
+                   [.initialism
                     #:margin-right 0]]
                   [.skill::before
                    #:content ""

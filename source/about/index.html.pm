@@ -111,12 +111,12 @@ I read about a book per week. Both fiction and non-fiction.
 }
 
 ◊work-experience{
- ◊work-experience/institution['work-experience--uol]{◊link["http://www.uol.com.br/"]{Universo Online (◊acronym{UOL})}}
+ ◊work-experience/institution['work-experience--uol]{◊link["http://www.uol.com.br/"]{Universo Online (◊initialism{UOL})}}
  ◊work-experience/title{Junior System Analyst}
  ◊work-experience/from{2012-03}
  ◊work-experience/to{2013-02}
  ◊work-experience/highlights{
-  ◊work-experience/highlight{◊acronym{UOL} is a major Internet publishing company in Brazil.}
+  ◊work-experience/highlight{◊initialism{UOL} is a major Internet publishing company in Brazil.}
   ◊work-experience/highlight{I used Java EE to build and maintain several web products with millions of users.}
   ◊work-experience/highlight{I improved the development process of front-end code by introducing new technologies and building internal tools.}
  }
@@ -149,7 +149,7 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['intermediate]{Type Theory}
  ◊skill['intermediate]{Program Analysis}
  ◊skill['intermediate]{Abstract Interpretation}
- ◊skill['intermediate]{◊acronym{PLT} Redex}
+ ◊skill['intermediate]{◊initialism{PLT} Redex}
  ◊skill['advanced]{Unit Testing}
  ◊skill['intermediate]{Cryptography}
  ◊skill['intermediate]{Natural Language Processing}
@@ -160,19 +160,19 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['intermediate]{Lisp}
  ◊skill['beginner]{Golang}
  ◊skill['intermediate]{Number Theory}
- ◊skill['intermediate]{◊acronym{GPG}}
+ ◊skill['intermediate]{◊initialism{GPG}}
  ◊skill['intermediate]{OpenSSL}
- ◊skill['advanced]{◊acronym{TDD}}
- ◊skill['advanced]{◊acronym{BDD}}
+ ◊skill['advanced]{◊initialism{TDD}}
+ ◊skill['advanced]{◊initialism{BDD}}
  ◊skill['advanced]{RSpec}
  ◊skill['advanced]{MiniTest}
  ◊skill['beginner]{Cucumber}
  ◊skill['beginner]{Ant}
  ◊skill['beginner]{Maven}
  ◊skill['advanced]{Git}
- ◊skill['intermediate]{◊acronym{SVN}}
- ◊skill['intermediate]{◊acronym{C}}
- ◊skill['intermediate]{◊acronym{PHP}}
+ ◊skill['intermediate]{◊initialism{SVN}}
+ ◊skill['intermediate]{◊initialism{C}}
+ ◊skill['intermediate]{◊initialism{PHP}}
  ◊skill['advanced]{Guitar}
  ◊skill['intermediate]{Keyboard}
  ◊skill['intermediate]{Ableton Live}
@@ -181,8 +181,8 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['beginner]{Meteor}
  ◊skill['advanced]{JQuery}
  ◊skill['advanced]{JavaScript}
- ◊skill['intermediate]{◊acronym{CSS} 3}
- ◊skill['intermediate]{◊acronym{HTML} 5}
+ ◊skill['intermediate]{◊initialism{CSS} 3}
+ ◊skill['intermediate]{◊initialism{HTML} 5}
  ◊skill['intermediate]{SQLite}
  ◊skill['beginner]{Oracle Database}
  ◊skill['intermediate]{MySQL}
@@ -194,7 +194,7 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['intermediate]{Server Automation}
  ◊skill['intermediate]{Compilers}
  ◊skill['advanced]{Ruby on Rails}
- ◊skill['beginner]{◊acronym{HAML}}
+ ◊skill['beginner]{◊initialism{HAML}}
  ◊skill['intermediate]{Sass}
  ◊skill['intermediate]{Compass}
  ◊skill['intermediate]{CoffeeScript}
@@ -215,19 +215,19 @@ I read about a book per week. Both fiction and non-fiction.
  ◊skill['beginner]{Varnishd}
  ◊skill['intermediate]{Shell Scripting}
  ◊skill['advanced]{Linux}
- ◊skill['advanced]{◊acronym{UML} 2.0}
+ ◊skill['advanced]{◊initialism{UML} 2.0}
  ◊skill['advanced]{Scrum}
  ◊skill['advanced]{Agile Methodologies}
  ◊skill['advanced]{Vim}
  ◊skill['advanced]{Emacs}
  ◊skill['advanced]{Eclipse}
  ◊skill['advanced]{Web Services}
- ◊skill['intermediate]{◊acronym{REST}}
- ◊skill['intermediate]{◊acronym{TLS} (◊acronym{SSL})}
- ◊skill['beginner]{◊acronym{ITIL}}
- ◊skill['intermediate]{◊acronym{XML}}
- ◊skill['advanced]{◊acronym{JSON}}
- ◊skill['intermediate]{◊acronym{YAML}}
+ ◊skill['intermediate]{◊initialism{REST}}
+ ◊skill['intermediate]{◊initialism{TLS} (◊initialism{SSL})}
+ ◊skill['beginner]{◊initialism{ITIL}}
+ ◊skill['intermediate]{◊initialism{XML}}
+ ◊skill['advanced]{◊initialism{JSON}}
+ ◊skill['intermediate]{◊initialism{YAML}}
  ◊skill['intermediate]{Puppet}
  ◊skill['intermediate]{Vagrant}
  ◊skill['advanced]{Docker}
@@ -237,13 +237,13 @@ I read about a book per week. Both fiction and non-fiction.
 ◊section['certifications]{Certifications}
 
 ◊certification{
- ◊certification/title['certification--toefl]{◊acronym{TOEFL}}
+ ◊certification/title['certification--toefl]{◊initialism{TOEFL}}
  ◊certification/date{2013-03}
  ◊certification/score{Reading: ◊fraction[28 30]. Listening: ◊fraction[29 30]. Speaking: ◊fraction[24 30]. Writing: ◊fraction[27 30]. Total: ◊fraction[108 120].}
 }
  
 ◊certification{
- ◊certification/title['certification--gre]{◊acronym{GRE}}
+ ◊certification/title['certification--gre]{◊initialism{GRE}}
  ◊certification/date{2013-09}
  ◊certification/score{Verbal reasoning: ◊fraction[154 170]. Quantitative reasoning: ◊fraction[166 170]. Analytical writing: ◊fraction[3.5 6].}
 }
@@ -257,20 +257,20 @@ I read about a book per week. Both fiction and non-fiction.
 ◊section['events]{events}
  
 ◊event{
- ◊event/title['event--tfp-216]{◊link["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (◊acronym{TFP} 2016)}}
+ ◊event/title['event--tfp-216]{◊link["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (◊initialism{TFP} 2016)}}
  ◊event/date{2016-06-08, 2016-06-10}
  ◊event/highlight{Alexander Rozenshteyn presented the paper ◊publication{◊link/internal["/research#publication--paper--what-is-your-function"]{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
 }
  
 ◊event{
- ◊event/title['event--ibm-pl-day-2015]{◊link["http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432"]{◊acronym{IBM} Programming Languages Day 2015}}
+ ◊event/title['event--ibm-pl-day-2015]{◊link["http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432"]{◊initialism{IBM} Programming Languages Day 2015}}
  ◊event/date{2015-11-23}
 }
  
 ◊event{
  ◊event/title['event--the-developer-s-conference-florianopolis-2014]{The Developer’s Conference Florianópolis 2014}
  ◊event/date{2014-05}
- ◊event/highlight{Talked about ◊acronym{HTTP/2} and the future of web technologies.}
+ ◊event/highlight{Talked about ◊initialism{HTTP/2} and the future of web technologies.}
 }
   
 ◊event{
@@ -289,7 +289,7 @@ I read about a book per week. Both fiction and non-fiction.
 }
  
 ◊event{
- ◊event/title['event--coding-dojo-at-fai]{Coding Dojo at ◊acronym{FAI}}
+ ◊event/title['event--coding-dojo-at-fai]{Coding Dojo at ◊initialism{FAI}}
  ◊event/date{2013-08}
  ◊event/highlight{Co-hosted a full day of activities for undergraduate Computer Science students which included a lecture about Git and a Coding Dojo.}
 }
@@ -318,7 +318,7 @@ I read about a book per week. Both fiction and non-fiction.
 }
 
 ◊event{
- ◊event/title['event--guru-sp]{◊acronym{GURU SP}}
+ ◊event/title['event--guru-sp]{◊initialism{GURU SP}}
  ◊event/from{2012}
  ◊event/to{2013}
 }
@@ -340,13 +340,13 @@ I read about a book per week. Both fiction and non-fiction.
 }
  
 ◊event{
- ◊event/title['event--joint-conference-2010]{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{◊roman-number{III} Workshop on Computational Intelligence—◊acronym{WCI}. Joint Conference 2010—◊acronym{SBIA}—◊acronym{SBRN}—◊acronym{JRI}}}
+ ◊event/title['event--joint-conference-2010]{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{◊roman-number{III} Workshop on Computational Intelligence—◊initialism{WCI}. Joint Conference 2010—◊initialism{SBIA}—◊initialism{SBRN}—◊initialism{JRI}}}
  ◊event/date{2010-10-24}
  ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
 }
   
 ◊event{
- ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{◊roman-number{IV} Workshop de Iniciação Científica e Tecnológica de Computação (◊acronym{WICT})} (◊roman-number{IV} Scientific and Technologic Initiation Workshop)}
+ ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{◊roman-number{IV} Workshop de Iniciação Científica e Tecnológica de Computação (◊initialism{WICT})} (◊roman-number{IV} Scientific and Technologic Initiation Workshop)}
  ◊event/date{2010-09-22}
  ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
 }
@@ -358,7 +358,7 @@ I read about a book per week. Both fiction and non-fiction.
 }
 
 ◊event{
- ◊event/title['event--php-conference-brazil]{◊acronym{PHP} Conference Brazil}
+ ◊event/title['event--php-conference-brazil]{◊initialism{PHP} Conference Brazil}
  ◊event/date{2006}
 }
 
@@ -383,7 +383,7 @@ I read about a book per week. Both fiction and non-fiction.
 }
  
 ◊course{
- ◊course/title['course--fj-25-java-advanced-persistence-with-hibernate-and-jpa]{◊acronym{FJ}-25—Java Advanced—Persistence with Hibernate and ◊acronym{JPA}}
+ ◊course/title['course--fj-25-java-advanced-persistence-with-hibernate-and-jpa]{◊initialism{FJ}-25—Java Advanced—Persistence with Hibernate and ◊initialism{JPA}}
  ◊course/by{Caelum}
  ◊course/date{2012}
 }
@@ -397,19 +397,19 @@ I read about a book per week. Both fiction and non-fiction.
   
 ◊course{
  ◊course/title['course--secure-development-for-web-programmers]{Secure Development for Web Programmers}
- ◊course/by{Universo Online (◊acronym{UOL})}
+ ◊course/by{Universo Online (◊initialism{UOL})}
  ◊course/date{2012}
 }
  
 ◊course{
  ◊course/title['course--scrum-and-agile-methodologies]{Scrum and Agile Methodologies}
- ◊course/by{Universo Online (◊acronym{UOL})}
+ ◊course/by{Universo Online (◊initialism{UOL})}
  ◊course/date{2012}
 }
  
 ◊course{
- ◊course/title['course--itil]{◊acronym{ITIL}}
- ◊course/by{Universo Online (◊acronym{UOL})}
+ ◊course/title['course--itil]{◊initialism{ITIL}}
+ ◊course/by{Universo Online (◊initialism{UOL})}
  ◊course/date{2012}
 }
  
@@ -421,7 +421,7 @@ I read about a book per week. Both fiction and non-fiction.
  
 ◊course{
  ◊course/title['course--java-programming-intro-course]{Java Programming Intro Course}
- ◊course/by{◊acronym{SENAI}}
+ ◊course/by{◊initialism{SENAI}}
  ◊course/date{2006}
 }
  
@@ -433,6 +433,6 @@ I read about a book per week. Both fiction and non-fiction.
  
 ◊course{
  ◊course/title['course--advanced-course-of-english]{Advanced Course of English}
- ◊course/by{◊acronym{CNA}}
+ ◊course/by{◊initialism{CNA}}
  ◊course/date{2004}
 }
