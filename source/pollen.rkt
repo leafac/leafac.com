@@ -23,7 +23,7 @@
       (work-email     . ,◊~a{leandro@jhu.edu})
       (skype-handle   . ,◊~a{leafac})
       (phone-number   . ,◊~a{+14107799526})
-      (description    . ,◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. student at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, lettering, education, minimalism and veganism.})
+      (description    . ,◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
       (date-of-birth  . ,date-of-birth)
       (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
 
