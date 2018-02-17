@@ -28,16 +28,13 @@
       (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; COMPONENT SUPPORT
+;; AUXILIARY
+
+;; Components
 
 (components-output-types #:dynamic html atom #:static css)
 
-;; ---------------------------------------------------------------------------------------------------
-;; MISCELLANEOUS SUPPORT
-
-(define (in-steps start end steps)
-  (for/list ([step (in-range (add1 steps))])
-    (exact->inexact (+ start (* step (/ (- end start) steps))))))
+;; Paths
 
 (define base-path (make-parameter ""))
 
@@ -49,22 +46,31 @@
 
 (define (source-path path) (~a (current-project-root) "/" path))
 
+;; Miscellaneous
+
+(define (in-steps start end steps)
+  (for/list ([step (in-range (add1 steps))])
+    (exact->inexact (+ start (* step (/ (- end start) steps))))))
+
+;; CSS helpers
+
 (define (prefix declaration #:prefixes [prefixes '(moz webkit ms o)])
   (syntax-parse declaration
     [(name:keyword rest:expr ...)
      (define name/datum (syntax->datum #'name))
      (define rests/datum (syntax->datum #'(rest ...)))
-     (css-expr ,@(apply
-                  append
-                  (for/list ([the-prefix prefixes])
+     (css-expr ,@(append*
+                  (for/list ([a-prefix prefixes])
                     (define prefixed-name
-                      (string->keyword (~a "-" the-prefix "-" (keyword->string name/datum))))
+                      (string->keyword (~a "-" a-prefix "-" (keyword->string name/datum))))
                     (css-expr ,prefixed-name ,@rests/datum)))
                ,name/datum ,@rests/datum)]))
 
+;; Feeds
+
 (define (feed/uuid) (string-downcase (~a "urn:uuid:" (uuid-generate))))
 
-;; https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
+;; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 (define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
 
 ;; ---------------------------------------------------------------------------------------------------
@@ -140,16 +146,16 @@
                               #:distances [distances (in-steps .03 .15 4)]
                               #:thickness [thickness '1px]
                               #:top [top '90%])
-  ;; Reference: https://eager.io/blog/smarter-link-underlines/.
+  ;; Reference: https://eager.io/blog/smarter-link-underlines/
   (define/match (rules colors)
     [(`(,color/foreground ,color/background))
      (css-expr #:text-decoration none
-               #:text-shadow ,@(apply append
-                                      (for/list ([distance distances])
-                                        (css-expr ((em ,distance) 0 ,color/background)
-                                                  (0 (em ,distance) ,color/background)
-                                                  ((em ,(- distance)) 0 ,color/background)
-                                                  (0 (em ,(- distance)) ,color/background))))
+               #:text-shadow ,@(append*
+                                (for/list ([distance distances])
+                                  (css-expr ((em ,distance) 0 ,color/background)
+                                            (0 (em ,distance) ,color/background)
+                                            ((em ,(- distance)) 0 ,color/background)
+                                            (0 (em ,(- distance)) ,color/background))))
                #:background (#:image (apply linear-gradient ,color/foreground ,color/foreground)
                              #:size (,thickness ,thickness)
                              #:repeat repeat-x
@@ -228,21 +234,22 @@
 (define size/responsive/two-columns/width
   (css-expr rem ,size/responsive/two-columns/width/unitless))
 
-;; `absolute' is to use with media queries, as they are relative to the browser's default `font-size',
-;; and not to the `font-size' of the root element `html'. (See
-;; `https://www.sitepoint.com/understanding-and-using-rem-units-in-css/'.) The approach I'm taking is
-;; to use `rem' for everything, including the root `font-size', so that I /don't/ lose the information
-;; of the browser's default `font-size'. This way, I'm able to compensate the fact that media queries
-;; are /not/ relative to the `html' `font-size', but everything else is.
+;; ‘absolute’ is to use with media queries, as they are relative to the browser’s default ‘font-size’,
+;; and not to the ‘font-size’ of the root element ‘html’ [1]. The approach I’m taking is
+;; to use ‘rem’ for everything, including the root ‘font-size’, so that I don’t lose the information
+;; of the browser’s default ‘font-size’. This way, I’m able to compensate the fact that media queries
+;; are not relative to the ‘html’ ‘font-size’, but everything else is.
+;; [1]: https://www.sitepoint.com/understanding-and-using-rem-units-in-css/
 (define size/responsive/two-columns/min-width/absolute/unitless
   (modular-scale size/responsive/two-columns/min-width/step #:base size/body-text/end/ratio))
 
 (define size/responsive/two-columns/min-width/absolute
   (css-expr rem ,size/responsive/two-columns/min-width/absolute/unitless))
 
-(define size/ruler/thin '1px)
-
-(define size/ruler/thick '3px)
+(define size/ruler/thin/unitless 1)
+(define size/ruler/thin (css-expr px ,size/ruler/thin/unitless))
+(define size/ruler/thick/unitless 3)
+(define size/ruler/thick (css-expr px ,size/ruler/thick/unitless))
 
 (define size/two-columns/content (prefix (css-expr #:column-count 2)))
 
@@ -262,7 +269,7 @@
                           #:width (rem ,width)))))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; MISCELLANEOUS MIXINS
+;; MIXINS
 
 (define (inline-block-enumeration gutter)
   (css-expr
@@ -312,40 +319,45 @@
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
 
 (define-component body-text
-  #:css (css-expr [* *::before *::after #:box-sizing border-box #:outline none]
-                  [html
-                   #:font-size ,size/body-text/start
-                   ,@(for/list ([min-width size/responsive/min-width/range]
-                                [font-size (in-steps size/body-text/start/ratio
-                                                     size/body-text/end/ratio
-                                                     size/responsive/steps)])
-                       (css-expr @media (and screen (#:min-width (rem ,min-width)))
-                                 #:font-size (rem ,font-size)))]
-                  [body
-                   #:font-synthesis none
-                   ,@font/main
-                   ,@font/kerning
-                   #:line-height ,(modular-scale 2)
-                   #:margin ((rem ,(modular-scale 4)) auto)
-                   [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
-                    #:max-width ,size/responsive/min-width/end]
-                   [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-                    #:width ,size/responsive/two-columns/min-width
-                    [article #:width ,size/responsive/min-width/end]]
-                   #:padding (0 ,size/body/padding)
-                   #:background-color ,(dict-ref colorscheme 'background)
-                   #:color ,(dict-ref colorscheme 'primary-content)]
-                  [p
-                   #:margin 0
-                   [(+ p &) #:text-indent ,size/indentation]
-                   [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-                    [(+ aside &) #:text-indent ,size/indentation]
-                    [(+ .insertion aside &)
-                     (+ .insertion aside aside &) (+ .insertion aside aside aside &)
-                     (+ h1 aside &) (+ h1 aside aside &) (+ h1 aside aside aside &)
-                     (+ h2 aside &) (+ h2 aside aside &) (+ h2 aside aside aside &)
-                     #:text-indent 0]]
-                   [(: & first-of-type) #:text-indent 0 !important]]))
+  #:css
+  (define elements-that-cause-paragraph-indent-reset
+    `(,@(css-expr .insertion) ,@(css-expr h1) ,@(css-expr h2)))
+  (css-expr [* *::before *::after #:box-sizing border-box #:outline none]
+            [html
+             #:font-size ,size/body-text/start
+             ,@(for/list ([min-width (in-list size/responsive/min-width/range)]
+                          [font-size (in-steps size/body-text/start/ratio
+                                               size/body-text/end/ratio
+                                               size/responsive/steps)])
+                 (css-expr @media (and screen (#:min-width (rem ,min-width)))
+                           #:font-size (rem ,font-size)))]
+            [body
+             #:font-synthesis none
+             ,@font/main
+             ,@font/kerning
+             #:line-height ,(modular-scale 2)
+             #:margin ((rem ,(modular-scale 4)) auto)
+             [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
+              #:max-width ,size/responsive/min-width/end]
+             [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+              #:width ,size/responsive/two-columns/min-width
+              [article #:width ,size/responsive/min-width/end]]
+             #:padding (0 ,size/body/padding)
+             #:background-color ,(dict-ref colorscheme 'background)
+             #:color ,(dict-ref colorscheme 'primary-content)]
+            [p
+             #:margin 0
+             [(+ p &) #:text-indent ,size/indentation]
+             [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+              [(+ aside &) #:text-indent ,size/indentation]
+              [,@(for*/list ([an-element-that-causes-paragraph-indent-reset
+                              (in-list elements-that-cause-paragraph-indent-reset)]
+                             [quantity-of-asides (in-range 1 6)])
+                   (css-expr + ,an-element-that-causes-paragraph-indent-reset
+                             ,@(append* (make-list quantity-of-asides (css-expr aside)))
+                             &))
+               #:text-indent 0]]
+             [(: & first-of-type) #:text-indent 0 !important]]))
 
 (define-component insertion
   #:css (css-expr [.insertion
@@ -432,8 +444,7 @@
                    ,@font/secondary
                    #:font-weight 300
                    #:line-height ,(modular-scale 4)
-                   [a
-                    ,@(inline-block-enumeration (modular-scale 0))]]))
+                   [a ,@(inline-block-enumeration (modular-scale 0))]]))
 
 (define-component header
   #:css (css-expr [body>header
@@ -443,15 +454,15 @@
                    #:margin-bottom (rem ,(modular-scale 4))]
                   [article>header
                    #:margin (#:top (rem ,(modular-scale 2))
-                             #:bottom (rem ,(modular-scale -2)))
-                   [time
-                    ,@font/secondary
-                    #:font-size ,size/text/small
-                    #:position relative
-                    #:top (rem ,(- (modular-scale -3)))
-                    #:color ,(dict-ref colorscheme 'secondary-content)]]))
+                             #:bottom (rem ,(modular-scale -2)))]))
 
-(define-component time #:html (default-tag-function 'time))
+(define-component time
+  #:css (css-expr [time
+                   ,@font/secondary
+                   #:font-size ,size/text/small
+                   #:position relative
+                   #:top (rem ,(- (modular-scale -3)))
+                   #:color ,(dict-ref colorscheme 'secondary-content)]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -545,7 +556,7 @@
                      #:right (rem ,(modular-scale -1)))
                     #:color ,(dict-ref colorscheme 'secondary-content)]
                    [(> & p)
-                    #:margin-bottom -1px]])) ; FIXME: (- ,size/ruler/thin) after unary ‘-’ is implemented in ‘css-expr’
+                    #:margin-bottom (px ,(- size/ruler/thin/unitless))]]))
 
 (define-component keyboard
   #:html (default-tag-function 'kbd)
@@ -890,7 +901,7 @@
     #:display inline-block
     #:padding (#:bottom 0.1em #:left 0.2em)
     #:position absolute
-    #:left -3px ; FIXME: (- ,size/ruler/thick) after unary ‘-’ is implemented in ‘css-expr’
+    #:left (px ,(- size/ruler/thick/unitless))
     #:top 0
     ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
     ,@(prefix (css-expr #:transform-origin (top left)))]))
