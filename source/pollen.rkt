@@ -273,8 +273,8 @@
                       #:bottom (rem ,(modular-scale 0)))
             [div.full-width
              [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-                     #:width ,size/responsive/two-columns/width
-                     #:width (apply calc (- ,size/responsive/two-columns/width ,size/indentation))]]))
+              #:width ,size/responsive/two-columns/width
+              #:width (apply calc (- ,size/responsive/two-columns/width ,size/indentation))]]))
 
 ;; COMPONENTS ----------------------------------------------------------------------------------------
 
@@ -509,8 +509,8 @@
          (with-input-from-string code
            (λ ()
              (with-output-to-string
-                 (λ ()
-                   (system (~a "pygmentize -f html -l " language)))))))
+               (λ ()
+                 (system (~a "pygmentize -f html -l " language)))))))
        (make-directory* path/basedir)
        (with-output-to-file path/full
          (λ () (display code/highlighted)))
