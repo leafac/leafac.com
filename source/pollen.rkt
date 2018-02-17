@@ -291,8 +291,36 @@
               #:width ,size/responsive/two-columns/width
               #:width (apply calc (- ,size/responsive/two-columns/width ,size/indentation))]]))
 
+(define-component (show-on-hover . elements)
+  #:html (apply (default-tag-function 'span #:class "show-on-hover") elements)
+  #:css (css-expr [.show-on-hover
+                   #:transition (opacity 0.3s)
+                   #:opacity 0
+                   [(> *:hover &) #:opacity 1]]))
+
+(define (section/flag content color)
+  (css-expr
+   #:border-left (,size/ruler/thick solid ,color)
+   ,@ruler-left-spacing
+   #:position relative
+   [(:: & before)
+    #:content ,content
+    ,@font/secondary
+    ,@font/small-caps
+    #:font-size ,size/text/small
+    #:line-height 1
+    #:background-color ,color
+    #:color ,(dict-ref colorscheme 'background)
+    #:display inline-block
+    #:padding (#:bottom 0.1em #:left 0.2em)
+    #:position absolute
+    #:left (px ,(- size/ruler/thick/unitless))
+    #:top 0
+    ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
+    ,@(prefix (css-expr #:transform-origin (top left)))]))
+
 ;; ---------------------------------------------------------------------------------------------------
-;; COMPONENTS
+;; TEMPLATE
 
 (define-component (root . elements)
   #:html
@@ -380,6 +408,57 @@
                    ,@font/italics
                    #:font-weight 400]))
 
+(define-component (label key)
+  #:html ((default-tag-function 'span) #:id (~a key)))
+
+(define-component (reference key . elements)
+  #:html (apply link (~a "#" key) elements))
+
+(define-component (heading/mark . elements)
+  #:html (show-on-hover
+          (apply (default-tag-function 'span #:class "heading--mark")
+                 elements))
+  #:css (css-expr [.heading--mark
+                   #:margin-left (rem ,(modular-scale -3))
+                   [a
+                    ,@font/smart-underline/disable
+                    #:color ,(dict-ref colorscheme 'secondary-content)]]))
+
+(define-component (reference/§ key)
+  #:html (heading/mark (reference key "§")))
+
+(define-component navigation #:html (default-tag-function 'nav))
+
+(define-component (menu . elements)
+  #:html (apply navigation #:class "menu" elements)
+  #:css (css-expr [.menu
+                   ,@font/small-caps
+                   ,@font/secondary
+                   #:font-weight 300
+                   #:line-height ,(modular-scale 4)
+                   [a ,@(inline-block-enumeration (modular-scale 0))]]))
+
+(define-component header
+  #:css (css-expr [body>header
+                   #:padding-bottom (rem ,(modular-scale -4))
+                   #:border-bottom
+                   (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+                   #:margin-bottom (rem ,(modular-scale 4))]
+                  [article>header
+                   #:margin (#:top (rem ,(modular-scale 2))
+                             #:bottom (rem ,(modular-scale -2)))]))
+
+(define-component time
+  #:css (css-expr [time
+                   ,@font/secondary
+                   #:font-size ,size/text/small
+                   #:position relative
+                   #:top (rem ,(- (modular-scale -3)))
+                   #:color ,(dict-ref colorscheme 'secondary-content)]))
+
+;; ---------------------------------------------------------------------------------------------------
+;; WRITING
+
 (define-component (link path . elements)
   #:html (apply (default-tag-function 'a) #:href path
                 (if (null? elements) `(,path) elements))
@@ -434,35 +513,6 @@
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
   #:css (css-expr [.new-thought ,@font/small-caps]))
-
-(define-component navigation #:html (default-tag-function 'nav))
-
-(define-component (menu . elements)
-  #:html (apply navigation #:class "menu" elements)
-  #:css (css-expr [.menu
-                   ,@font/small-caps
-                   ,@font/secondary
-                   #:font-weight 300
-                   #:line-height ,(modular-scale 4)
-                   [a ,@(inline-block-enumeration (modular-scale 0))]]))
-
-(define-component header
-  #:css (css-expr [body>header
-                   #:padding-bottom (rem ,(modular-scale -4))
-                   #:border-bottom
-                   (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                   #:margin-bottom (rem ,(modular-scale 4))]
-                  [article>header
-                   #:margin (#:top (rem ,(modular-scale 2))
-                             #:bottom (rem ,(modular-scale -2)))]))
-
-(define-component time
-  #:css (css-expr [time
-                   ,@font/secondary
-                   #:font-size ,size/text/small
-                   #:position relative
-                   #:top (rem ,(- (modular-scale -3)))
-                   #:color ,(dict-ref colorscheme 'secondary-content)]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -585,18 +635,6 @@
 
 (define-component list/ordered/item #:html (default-tag-function 'li))
 
-(define-component (recipes . elements)
-  #:html (apply list/unordered #:class "recipes" elements)
-  #:css (css-expr [.recipes ,@size/two-columns/content #:padding-left 0]))
-
-(define-component (recipe path . elements)
-  #:html (list/unordered/item #:class "recipe"
-                              (apply link/internal (~a "/cooking/" path) elements))
-  #:css (css-expr [.recipe
-                   #:list-style none
-                   #:margin-bottom (rem ,(modular-scale -4))
-                   [a ,@font/smart-underline/disable]]))
-
 (define-component emphasis
   #:html (default-tag-function 'em)
   #:css (css-expr [(aside em)
@@ -607,32 +645,6 @@
 
 (define-component technical-term #:html emphasis)
 
-(define-component (label key)
-  #:html ((default-tag-function 'span) #:id (~a key)))
-
-(define-component (reference key . elements)
-  #:html (apply link (~a "#" key) elements))
-
-(define-component (show-on-hover . elements)
-  #:html (apply (default-tag-function 'span #:class "show-on-hover") elements)
-  #:css (css-expr [.show-on-hover
-                   #:transition (opacity 0.3s)
-                   #:opacity 0
-                   [(> *:hover &) #:opacity 1]]))
-
-(define-component (heading/mark . elements)
-  #:html (show-on-hover
-          (apply (default-tag-function 'span #:class "heading--mark")
-                 elements))
-  #:css (css-expr [.heading--mark
-                   #:margin-left (rem ,(modular-scale -3))
-                   [a
-                    ,@font/smart-underline/disable
-                    #:color ,(dict-ref colorscheme 'secondary-content)]]))
-
-(define-component (reference/§ key)
-  #:html (heading/mark (reference key "§")))
-
 (define-component (section key . elements)
   #:html (apply (default-tag-function 'h1) `(,(label key) ,@elements ,(reference/§ key))))
 
@@ -642,7 +654,7 @@
 (define-component (appendix key . elements)
   #:html (apply section key `("Appendix: " ,@elements)))
 
-(define-component paragraph-separation
+(define-component paragraph-separation ;; FIXME: Try to get rid of this using ‘@’ for splicing.
   #:html (default-tag-function 'div #:class "paragraph-separation insertion")
   #:css (css-expr [.paragraph-separation #:height 1px]))
 
@@ -679,6 +691,57 @@
                    #:font-weight 400
                    #:text-align left
                    #:padding 0 (#:right ,size/table/data/padding)]))
+
+(define-component (fraction numerator denominator)
+  #:html `(span
+           (span ((class "fraction--numerator")) ,(~a numerator))
+           (span ((class "fraction--slash")) "/")
+           (span ((class "fraction--denominator")) ,(~a denominator)))
+  #:css (css-expr [.fraction--numerator .fraction--denominator
+                   #:font-size 0.8em
+                   #:font-weight 700]
+                  [.fraction--numerator #:vertical-align super]
+                  [.fraction--denominator #:vertical-align sub]
+                  [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
+
+(define-component roman-number #:html acronym)
+
+(define-component production #:html emphasis)
+
+(define-component informal #:html emphasis)
+
+(define-component head/link #:html (default-tag-function 'link))
+
+(define-component head/title #:html (default-tag-function 'title))
+
+(define-component publication #:html emphasis)
+
+(define-component (placeholder . elements)
+  #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
+  #:css (css-expr [.placeholder #:color ,(dict-ref colorscheme 'blue)]))
+
+(define-component menu-option
+  #:html (default-tag-function 'span #:class "menu-option")
+  #:css (css-expr [.menu-option
+                   ,@font/secondary]))
+
+(define-component (menu-option/path . elements)
+  #:html (apply menu-option (add-between elements " > ")))
+
+;; ---------------------------------------------------------------------------------------------------
+;; COOKING
+
+(define-component (recipes . elements)
+  #:html (apply list/unordered #:class "recipes" elements)
+  #:css (css-expr [.recipes ,@size/two-columns/content #:padding-left 0]))
+
+(define-component (recipe path . elements)
+  #:html (list/unordered/item #:class "recipe"
+                              (apply link/internal (~a "/cooking/" path) elements))
+  #:css (css-expr [.recipe
+                   #:list-style none
+                   #:margin-bottom (rem ,(modular-scale -4))
+                   [a ,@font/smart-underline/disable]]))
 
 (define ingredients/collected (make-hash))
 
@@ -725,29 +788,8 @@
 
 (define-component source #:html list/unordered/item)
 
-(define-component (fraction numerator denominator)
-  #:html `(span
-           (span ((class "fraction--numerator")) ,(~a numerator))
-           (span ((class "fraction--slash")) "/")
-           (span ((class "fraction--denominator")) ,(~a denominator)))
-  #:css (css-expr [.fraction--numerator .fraction--denominator
-                   #:font-size 0.8em
-                   #:font-weight 700]
-                  [.fraction--numerator #:vertical-align super]
-                  [.fraction--denominator #:vertical-align sub]
-                  [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
-
-(define-component roman-number #:html acronym)
-
-(define-component production #:html emphasis)
-
-(define-component informal #:html emphasis)
-
-(define-component head/link #:html (default-tag-function 'link))
-
-(define-component head/title #:html (default-tag-function 'title))
-
-(define-component publication #:html emphasis)
+;; ---------------------------------------------------------------------------------------------------
+;; ABOUT
 
 (define-component education #:html (default-tag-function 'div #:class "big-separation"))
 
@@ -874,8 +916,16 @@
 (define-component (publication/paper/abstract . elements)
   #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
+;; ---------------------------------------------------------------------------------------------------
+;; MUSIC
+
 (define-component (lyrics . elements)
   #:html (full-width (apply code/block elements)))
+
+;; ---------------------------------------------------------------------------------------------------
+;; PROSE
+
+;; Git by Analogy
 
 (define-component git/verb
   #:html (default-tag-function 'span #:class "git--verb")
@@ -885,27 +935,6 @@
   #:html (default-tag-function 'span #:class "git--object")
   #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))
 
-(define (section/flag content color)
-  (css-expr
-   #:border-left (,size/ruler/thick solid ,color)
-   ,@ruler-left-spacing
-   #:position relative
-   [(:: & before)
-    #:content ,content
-    ,@font/secondary
-    ,@font/small-caps
-    #:font-size ,size/text/small
-    #:line-height 1
-    #:background-color ,color
-    #:color ,(dict-ref colorscheme 'background)
-    #:display inline-block
-    #:padding (#:bottom 0.1em #:left 0.2em)
-    #:position absolute
-    #:left (px ,(- size/ruler/thick/unitless))
-    #:top 0
-    ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
-    ,@(prefix (css-expr #:transform-origin (top left)))]))
-
 (define-component git/gui
   #:html (default-tag-function 'div #:class "git--gui")
   #:css (css-expr [.git--gui ,@(section/flag "GUI" (dict-ref colorscheme 'violet))]))
@@ -913,15 +942,3 @@
 (define-component git/cli
   #:html (default-tag-function 'div #:class "git--cli")
   #:css (css-expr [.git--cli ,@(section/flag "CLI" (dict-ref colorscheme 'yellow))]))
-
-(define-component (placeholder . elements)
-  #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
-  #:css (css-expr [.placeholder #:color ,(dict-ref colorscheme 'blue)]))
-
-(define-component menu-option
-  #:html (default-tag-function 'span #:class "menu-option")
-  #:css (css-expr [.menu-option
-                   ,@font/secondary]))
-
-(define-component (menu-option/path . elements)
-  #:html (apply menu-option (add-between elements " > ")))
