@@ -511,7 +511,7 @@
                    ,@font/capitals
                    #:letter-spacing 0.2em
                    #:font-weight 700
-                   #:font-size 15px]))
+                   #:font-size (rem ,(modular-scale -1))]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
