@@ -507,7 +507,11 @@
 
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
-  #:css (css-expr [.new-thought ,@font/secondary ,@font/capitals]))
+  #:css (css-expr [.new-thought
+                   ,@font/capitals
+                   #:letter-spacing 0.2em
+                   #:font-weight 700
+                   #:font-size 15px]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
