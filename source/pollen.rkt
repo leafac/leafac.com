@@ -127,24 +127,33 @@
 
 ;; Grid
 
-(define size/grid/body/unitless (modular-scale 23))
+;; |                     body                           |
+;; |                     1024                           |
+;; |         |        full-width              |         |
+;; |         |           1000                 |         |
+;; | padding | article | gutter | margin-note | padding |
+;; |    12   |   600   |   75   |     325     |    12   |
+;;                     |   margin-note/pull   |
+;;                     |       400            |
+
+(define size/grid/body/unitless (px->rem 1024))
 (define size/grid/body (css-expr rem ,size/grid/body/unitless))
-(define size/grid/article (css-expr rem ,(modular-scale 20)))
-(define size/grid/margin-note (css-expr (rem ,(modular-scale 16))))
+(define size/grid/padding (css-expr rem ,(px->rem 12)))
+(define size/grid/article (css-expr rem ,(px->rem 600)))
+(define size/grid/gutter/unitless (px->rem 75))
+(define size/grid/margin-note/unitless (px->rem 325))
+(define size/grid/margin-note (css-expr rem ,size/grid/margin-note/unitless))
+(define size/grid/margin-note/pull
+  (css-expr rem ,(- (+ size/grid/gutter/unitless size/grid/margin-note/unitless))))
 (define size/grid/breakpoint/bigger-screens
   (css-expr and screen (#:min-width (rem ,size/grid/body/unitless))))
 (define size/grid/breakpoint/smaller-screens
-  (css-expr and screen (#:max-width (rem ,(- size/grid/body/unitless 0.1)))))
-
-;; Boxes
-
-(define size/box/padding (css-expr rem ,(modular-scale -2)))
-;; TODO: Bring margins here.
+  (css-expr and screen (#:max-width (rem ,(- size/grid/body/unitless 0.01)))))
 
 ;; Text
 
 (define size/text/indentation (css-expr rem ,(modular-scale 2)))
-(define size/text/small (css-expr rem ,(px->rem 14)))
+(define size/text/small (css-expr rem ,(px->rem 13)))
 (define size/text/code/block (css-expr rem ,(px->rem 12)))
 
 ;; Rulers
@@ -277,7 +286,7 @@
                    ,@font/main
                    #:line-height ,(modular-scale 2)
                    #:margin ((rem ,(modular-scale 4)) auto)
-                   #:padding (0 ,size/box/padding)
+                   #:padding (0 ,size/grid/padding)
                    #:max-width ,size/grid/article
                    [@media ,size/grid/breakpoint/bigger-screens
                     #:max-width ,size/grid/body
@@ -427,7 +436,7 @@
                     #:clear right
                     #:width ,size/grid/margin-note !important
                     #:margin-bottom (rem ,(modular-scale 2))
-                    #:margin-right (rem ,(- (modular-scale 18)))]]))
+                    #:margin-right ,size/grid/margin-note/pull]]))
 
 (define-component figure
   #:html (default-tag-function 'figure #:class "insertion")
@@ -582,14 +591,14 @@
 
 (define-component table/data
   #:html (default-tag-function 'td)
-  #:css (css-expr [td #:padding 0 (#:right ,size/box/padding)]))
+  #:css (css-expr [td #:padding 0 (#:right ,size/grid/padding)]))
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
   #:css (css-expr [th
                    #:font-weight 700
                    #:text-align left
-                   #:padding 0 (#:right ,size/box/padding)]))
+                   #:padding 0 (#:right ,size/grid/padding)]))
 
 (define-component (fraction numerator denominator)
   #:html `(span
