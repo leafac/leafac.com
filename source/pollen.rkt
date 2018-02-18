@@ -153,6 +153,9 @@
 ;; Text
 
 (define size/text/body (css-expr rem ,(px->rem 16)))
+(define size/text/title (css-expr rem ,(px->rem 22)))
+(define size/text/heading (css-expr rem ,(px->rem 20)))
+(define size/text/name (css-expr rem ,(px->rem 30)))
 (define size/text/small (css-expr rem ,(px->rem 13)))
 (define size/text/code/block (css-expr rem ,(px->rem 12)))
 (define size/text/indentation (css-expr rem ,(modular-scale 2)))
@@ -312,11 +315,11 @@
 
 (define-component headings
   #:css (css-expr [h1
-                   #:font-size (rem ,(modular-scale 2))
+                   #:font-size ,size/text/heading
                    #:font-style italic
                    #:font-weight 400]
                   [h2
-                   #:font-size (rem ,(modular-scale 0))
+                   #:font-size ,size/text/body
                    #:font-weight 700]
                   [h1 h2
                    #:margin (#:top (rem ,(modular-scale 2))
@@ -343,19 +346,20 @@
                    #:text-transform uppercase
                    #:letter-spacing 0.2em
                    #:line-height ,(modular-scale 4)
-                   [a ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 0))))]]))
+                   [a
+                    ,@smart-underline/disable
+                    ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 0))))]]))
 
 (define-component header
   #:css (css-expr [header
-                   [a ,@smart-underline/disable]
-                   [h1
-                    #:font-size (rem ,(modular-scale 4))]
                    [(> body &)
+                    [h1 #:font-size ,size/text/name]
                     #:padding-bottom (rem ,(modular-scale -4))
                     #:border-bottom
                     (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
                     #:margin-bottom (rem ,(modular-scale 4))]
                    [(> article &)
+                    [h1 #:font-size ,size/text/title]
                     #:margin (#:top (rem ,(modular-scale 2))
                               #:bottom (rem ,(modular-scale -2)))]]))
 
