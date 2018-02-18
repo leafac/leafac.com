@@ -499,7 +499,7 @@
 
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
-  #:css (css-expr [.new-thought]))
+  #:css (css-expr #;[.new-thought]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
