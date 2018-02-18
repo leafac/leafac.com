@@ -285,13 +285,13 @@
                    #:margin 0
                    #:text-indent ,size/text/indentation
                    [(: & first-of-type) #:text-indent 0]
+                   ; FIXME: The following should be in the preceding, but there’s a performance bug
+                   ;        in ‘css-expr’.
                    ,@(for*/list ([element (in-list '(h1 h2 .insertion))]
                                  [asides (in-range 6)])
                        (css-expr (+ ,element ,@(make-list asides 'aside) &) #:text-indent 0))
                    [@media (and screen (#:max-width ,size/grid/body))
                     [(+ aside &) #:text-indent 0]]]))
-
-;; TODO: Merge CSS files?
 
 (define-component insertion
   #:css (css-expr [.insertion
