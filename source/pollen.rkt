@@ -509,6 +509,7 @@
                    [.code--block
                     #:margin-top 0]
                    [.path
+                    #:font-size ,size/text/code/block
                     #:border
                     (#:top (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
                      #:right (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
