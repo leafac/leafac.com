@@ -314,9 +314,7 @@
                  elements))
   #:css (css-expr [.heading--mark
                    #:margin-left (rem ,(modular-scale -3))
-                   [a
-                    ,@smart-underline/disable
-                    #:color ,(dict-ref colorscheme 'secondary-content)]]))
+                   [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
 
 (define-component (reference/§ key)
   #:html (heading/mark (reference key "§")))
@@ -334,6 +332,7 @@
 
 (define-component header
   #:css (css-expr [header
+                   [a ,@smart-underline/disable]
                    [h1
                     #:font-size (rem ,(modular-scale 4))]
                    [(> body &)
@@ -365,37 +364,33 @@
 (define-component (link path . elements)
   #:html (apply (default-tag-function 'a) #:href path
                 (if (null? elements) `(,path) elements))
-  #:css (css-expr [a
-                   #:text-decoration none
-                   #:color ,(dict-ref colorscheme 'primary-content)
-                   #:transition (background-color 0.3s) (text-shadow 0.3s)
-                   [(: & hover)
-                    #:background-color ,(dict-ref colorscheme 'background-highlight)
-                    #:color ,(dict-ref colorscheme 'emphasized-content)]
-                   [(article &)
-                    ,@(smart-underline
-                       #:colors `(,(dict-ref colorscheme 'secondary-content)
-                                  ,(dict-ref colorscheme 'background))
-                       #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                                        ,(dict-ref colorscheme 'background-highlight)))]
-                   [(aside &)
-                    ,@(smart-underline
-                       #:colors `(,(dict-ref colorscheme 'secondary-content)
-                                  ,(dict-ref colorscheme 'background))
-                       #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                                        ,(dict-ref colorscheme 'background-highlight))
-                       #:top '100%)
-                    [@media (and screen (#:max-width ,size/grid/body))
-                     #:color ,(dict-ref colorscheme 'emphasized-content)
-                     [(: & hover)
-                      #:background-color ,(dict-ref colorscheme 'background)
-                      #:color ,(dict-ref colorscheme 'primary-content)]
-                     ,@(smart-underline
-                        #:colors `(,(dict-ref colorscheme 'secondary-content)
-                                   ,(dict-ref colorscheme 'background-highlight))
-                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                                         ,(dict-ref colorscheme 'background))
-                        #:top '100%)]]]))
+  #:css
+  (define regular-colors
+    (css-expr
+     #:color ,(dict-ref colorscheme 'primary-content)
+     [(: & hover)
+      #:background-color ,(dict-ref colorscheme 'background-highlight)
+      #:color ,(dict-ref colorscheme 'emphasized-content)]
+     ,@(smart-underline
+        #:colors `(,(dict-ref colorscheme 'secondary-content)
+                   ,(dict-ref colorscheme 'background))
+        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
+                         ,(dict-ref colorscheme 'background-highlight)))))
+  (css-expr [a
+             #:text-decoration none
+             #:transition (background-color 0.3s) (text-shadow 0.3s)
+             ,@regular-colors
+             [(aside &)
+              #:color ,(dict-ref colorscheme 'emphasized-content)
+              [(: & hover)
+               #:background-color ,(dict-ref colorscheme 'background)
+               #:color ,(dict-ref colorscheme 'primary-content)]
+              ,@(smart-underline
+                 #:colors `(,(dict-ref colorscheme 'secondary-content)
+                            ,(dict-ref colorscheme 'background-highlight))
+                 #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
+                                  ,(dict-ref colorscheme 'background)))
+              [@media ,size/grid/breakpoint ,@regular-colors]]]))
 
 (define-component (link/internal path . elements)
   #:html (apply link (internal-url path) elements))
