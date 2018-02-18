@@ -241,53 +241,53 @@ I read about a book per week. Both fiction and non-fiction.
  ◊certification/date{2013-03}
  ◊certification/score{Reading: ◊fraction[28 30]. Listening: ◊fraction[29 30]. Speaking: ◊fraction[24 30]. Writing: ◊fraction[27 30]. Total: ◊fraction[108 120].}
 }
- 
+
 ◊certification{
  ◊certification/title['certification--gre]{◊initialism{GRE}}
  ◊certification/date{2013-09}
  ◊certification/score{Verbal reasoning: ◊fraction[154 170]. Quantitative reasoning: ◊fraction[166 170]. Analytical writing: ◊fraction[3.5 6].}
 }
- 
+
 ◊certification{
  ◊certification/title['certification--oracle-certified-java-programmer]{Oracle Certified Java Programmer}
  ◊certification/date{2012-06}
  ◊certification/score{Score: 90%}
 }
 
-◊section['events]{events}
- 
+◊section['events]{Events}
+
 ◊event{
  ◊event/title['event--tfp-216]{◊link["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (◊initialism{TFP} 2016)}}
  ◊event/date{2016-06-08, 2016-06-10}
  ◊event/highlight{Alexander Rozenshteyn presented the paper ◊publication{◊link/internal["/research#publication--paper--what-is-your-function"]{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
 }
- 
+
 ◊event{
  ◊event/title['event--ibm-pl-day-2015]{◊link["http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432"]{◊initialism{IBM} Programming Languages Day 2015}}
  ◊event/date{2015-11-23}
 }
- 
+
 ◊event{
  ◊event/title['event--the-developer-s-conference-florianopolis-2014]{The Developer’s Conference Florianópolis 2014}
  ◊event/date{2014-05}
  ◊event/highlight{Talked about ◊initialism{HTTP/2} and the future of web technologies.}
 }
-  
+
 ◊event{
  ◊event/title['event--i-masters-inter-con-2013]{iMasters InterCon 2013}
  ◊event/date{2013-11}
 }
- 
+
 ◊event{
  ◊event/title['event--i-masters-inter-con-plus-android-2013]{iMasters InterCon + Android 2013}
  ◊event/date{2013-09}
 }
- 
+
 ◊event{
  ◊event/title['event--ruby-conf-brazil-2013]{RubyConf Brazil 2013}
  ◊event/date{2013-08}
 }
- 
+
 ◊event{
  ◊event/title['event--coding-dojo-at-fai]{Coding Dojo at ◊initialism{FAI}}
  ◊event/date{2013-08}
@@ -299,17 +299,17 @@ I read about a book per week. Both fiction and non-fiction.
  ◊event/date{2013-01}
  ◊event/highlight{◊link["https://www.youtube.com/watch?v=FUzAxEV29kA"]{Talked} about modern Java development techniques and tools.}
 }
-  
+
 ◊event{
  ◊event/title['event--dev-in-sampa-2012]{Dev in Sampa 2012}
  ◊event/date{2012-05}
 }
- 
+
 ◊event{
  ◊event/title['event--ruby-conf-brazil-2012]{RubyConf Brazil 2012}
  ◊event/date{2012-08}
 }
- 
+
 ◊event{
  ◊event/title['event--coding-dojo-at-sp]{Coding Dojo@SP}
  ◊event/from{2012}
@@ -327,7 +327,7 @@ I read about a book per week. Both fiction and non-fiction.
  ◊event/title['event--profissao-java]{Profissão Java (Java Career)}
  ◊event/date{2012-08}
 }
- 
+
 ◊event{
  ◊event/title['event--conexao-java]{Conexão Java (Java Connection)}
  ◊event/date{2012-05}
@@ -338,13 +338,13 @@ I read about a book per week. Both fiction and non-fiction.
  ◊event/date{2010-11}
  ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
 }
- 
+
 ◊event{
  ◊event/title['event--joint-conference-2010]{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{◊roman-number{III} Workshop on Computational Intelligence—◊initialism{WCI}. Joint Conference 2010—◊initialism{SBIA}—◊initialism{SBRN}—◊initialism{JRI}}}
  ◊event/date{2010-10-24}
  ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
 }
-  
+
 ◊event{
  ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{◊roman-number{IV} Workshop de Iniciação Científica e Tecnológica de Computação (◊initialism{WICT})} (◊roman-number{IV} Scientific and Technologic Initiation Workshop)}
  ◊event/date{2010-09-22}
@@ -363,74 +363,74 @@ I read about a book per week. Both fiction and non-fiction.
 }
 
 ◊section['courses]{Courses}
- 
+
 ◊course{
  ◊course/title['course--introduction-to-ableton-live]{Introduction to Ableton Live}
  ◊course/by{Erin Barra in Coursera}
  ◊course/date{2016}
 }
- 
+
 ◊course{
  ◊course/title['course--introduction-to-ableton-live]{Introduction to Music Production}
  ◊course/by{Loudon Stearns in Coursera}
  ◊course/date{2015}
 }
- 
+
 ◊course{
  ◊course/title['course--natural-language-processing]{Natural Language Processing}
  ◊course/by{Michael Collins in Coursera}
  ◊course/date{2013}
 }
- 
+
 ◊course{
  ◊course/title['course--fj-25-java-advanced-persistence-with-hibernate-and-jpa]{◊initialism{FJ}-25—Java Advanced—Persistence with Hibernate and ◊initialism{JPA}}
  ◊course/by{Caelum}
  ◊course/date{2012}
 }
- 
+
 ◊course{
  ◊course/title['course--software-engineering-for-software-as-a-service-part-i]{Software Engineering for Software as a Service (Part ◊roman-number{I})}
  ◊course/by{Armando Fox and David Patterson in Coursera}
  ◊course/date{2012}
  ◊course/highlight{Scored 2120.6 out of 2126.}
 }
-  
+
 ◊course{
  ◊course/title['course--secure-development-for-web-programmers]{Secure Development for Web Programmers}
  ◊course/by{Universo Online (◊initialism{UOL})}
  ◊course/date{2012}
 }
- 
+
 ◊course{
  ◊course/title['course--scrum-and-agile-methodologies]{Scrum and Agile Methodologies}
  ◊course/by{Universo Online (◊initialism{UOL})}
  ◊course/date{2012}
 }
- 
+
 ◊course{
  ◊course/title['course--itil]{◊initialism{ITIL}}
  ◊course/by{Universo Online (◊initialism{UOL})}
  ◊course/date{2012}
 }
- 
+
 ◊course{
  ◊course/title['course--mc128-intruction-to-java-ee]{MC128—Introduction to Java EE}
  ◊course/by{Globalcode in the open4education program}
  ◊course/date{2012}
 }
- 
+
 ◊course{
  ◊course/title['course--java-programming-intro-course]{Java Programming Intro Course}
  ◊course/by{◊initialism{SENAI}}
  ◊course/date{2006}
 }
- 
+
 ◊course{
  ◊course/title['course--tableless-i]{Tableless ◊roman-number{I}}
  ◊course/by{Visie}
  ◊course/date{2006}
 }
- 
+
 ◊course{
  ◊course/title['course--advanced-course-of-english]{Advanced Course of English}
  ◊course/by{◊initialism{CNA}}
