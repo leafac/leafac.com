@@ -127,10 +127,14 @@
 
 ;; Grid
 
-(define size/grid/body (css-expr rem ,(modular-scale 23)))
+(define size/grid/body/unitless (modular-scale 23))
+(define size/grid/body (css-expr rem ,size/grid/body/unitless))
 (define size/grid/article (css-expr rem ,(modular-scale 20)))
 (define size/grid/margin-note (css-expr (rem ,(modular-scale 16))))
-(define size/grid/breakpoint (css-expr and screen (#:min-width ,size/grid/body)))
+(define size/grid/breakpoint/bigger-screens
+  (css-expr and screen (#:min-width (rem ,size/grid/body/unitless))))
+(define size/grid/breakpoint/smaller-screens
+  (css-expr and screen (#:max-width (rem ,(- size/grid/body/unitless 0.1)))))
 
 ;; Boxes
 
@@ -201,8 +205,7 @@
             #:margin (#:top (rem ,(modular-scale 0))
                       #:bottom (rem ,(modular-scale 0)))
             [.full-width
-             [@media ,size/grid/breakpoint
-              #:width ,size/grid/body
+             [@media ,size/grid/breakpoint/bigger-screens
               #:width (apply calc (- ,size/grid/body ,size/text/indentation))]]))
 
 (define-component (show-on-hover . elements)
@@ -276,7 +279,7 @@
                    #:margin ((rem ,(modular-scale 4)) auto)
                    #:padding (0 ,size/box/padding)
                    #:max-width ,size/grid/article
-                   [@media ,size/grid/breakpoint
+                   [@media ,size/grid/breakpoint/bigger-screens
                     #:max-width ,size/grid/body
                     [article #:width ,size/grid/article]]
                    #:background-color ,(dict-ref colorscheme 'background)
@@ -285,7 +288,7 @@
                    #:margin 0
                    [(+ p &)
                     #:text-indent ,size/text/indentation]
-                   [@media ,size/grid/breakpoint
+                   [@media ,size/grid/breakpoint/bigger-screens
                     [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &)
                      #:text-indent ,size/text/indentation]]]))
 
@@ -364,33 +367,29 @@
 (define-component (link path . elements)
   #:html (apply (default-tag-function 'a) #:href path
                 (if (null? elements) `(,path) elements))
-  #:css
-  (define regular-colors
-    (css-expr
-     #:color ,(dict-ref colorscheme 'primary-content)
-     [(: & hover)
-      #:background-color ,(dict-ref colorscheme 'background-highlight)
-      #:color ,(dict-ref colorscheme 'emphasized-content)]
-     ,@(smart-underline
-        #:colors `(,(dict-ref colorscheme 'secondary-content)
-                   ,(dict-ref colorscheme 'background))
-        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                         ,(dict-ref colorscheme 'background-highlight)))))
-  (css-expr [a
-             #:text-decoration none
-             #:transition (background-color 0.3s) (text-shadow 0.3s)
-             ,@regular-colors
-             [(aside &)
-              #:color ,(dict-ref colorscheme 'emphasized-content)
-              [(: & hover)
-               #:background-color ,(dict-ref colorscheme 'background)
-               #:color ,(dict-ref colorscheme 'primary-content)]
-              ,@(smart-underline
-                 #:colors `(,(dict-ref colorscheme 'secondary-content)
-                            ,(dict-ref colorscheme 'background-highlight))
-                 #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                                  ,(dict-ref colorscheme 'background)))
-              [@media ,size/grid/breakpoint ,@regular-colors]]]))
+  #:css (css-expr [a
+                   #:text-decoration none
+                   #:transition (background-color 0.3s) (text-shadow 0.3s)
+                   #:color ,(dict-ref colorscheme 'primary-content)
+                   [(: & hover)
+                    #:background-color ,(dict-ref colorscheme 'background-highlight)
+                    #:color ,(dict-ref colorscheme 'emphasized-content)]
+                   ,@(smart-underline
+                      #:colors `(,(dict-ref colorscheme 'secondary-content)
+                                 ,(dict-ref colorscheme 'background))
+                      #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
+                                       ,(dict-ref colorscheme 'background-highlight)))
+                   [@media ,size/grid/breakpoint/smaller-screens
+                    [(aside &)
+                     #:color ,(dict-ref colorscheme 'emphasized-content)
+                     [(: & hover)
+                      #:background-color ,(dict-ref colorscheme 'background)
+                      #:color ,(dict-ref colorscheme 'primary-content)]
+                     ,@(smart-underline
+                        #:colors `(,(dict-ref colorscheme 'secondary-content)
+                                   ,(dict-ref colorscheme 'background-highlight))
+                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
+                                         ,(dict-ref colorscheme 'background)))]]]))
 
 (define-component (link/internal path . elements)
   #:html (apply link (internal-url path) elements))
@@ -415,14 +414,14 @@
 (define-component margin-note
   #:html (default-tag-function 'aside)
   #:css (css-expr [aside
-                   [@media (and screen (#:max-width ,size/grid/body))
+                   [@media ,size/grid/breakpoint/smaller-screens
                     #:color ,(dict-ref colorscheme 'emphasized-content)
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:border-left
                     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
                     ,@ruler-left-spacing
                     #:padding-right (rem ,(modular-scale -4))]
-                   [@media ,size/grid/breakpoint
+                   [@media ,size/grid/breakpoint/bigger-screens
                     #:font-size ,size/text/small
                     #:float right
                     #:clear right
@@ -524,7 +523,7 @@
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
   #:css (css-expr [.full-width
-                   [@media ,size/grid/breakpoint
+                   [@media ,size/grid/breakpoint/bigger-screens
                     #:clear both
                     #:width ,size/grid/body]]))
 
