@@ -142,50 +142,26 @@
 
 (define size/text/small (css-expr rem ,(modular-scale -1)))
 (define size/indentation (css-expr rem ,(modular-scale 2)))
-(define size/body/padding/unitless (modular-scale -2))
-(define size/body/padding (css-expr rem ,size/body/padding/unitless))
+(define size/padding/unitless (modular-scale -2))
+(define size/padding (css-expr rem ,size/padding/unitless))
 
 ;; Grid
 
-(define size/responsive/two-columns/min-width/step 23)
-(define size/responsive/two-columns/min-width/unitless
-  (modular-scale size/responsive/two-columns/min-width/step))
-(define size/responsive/two-columns/min-width
-  (css-expr rem ,size/responsive/two-columns/min-width/unitless))
-(define size/responsive/two-columns/width/unitless
-  (- size/responsive/two-columns/min-width/unitless (* 2 size/body/padding/unitless)))
-(define size/responsive/two-columns/width
-  (css-expr rem ,size/responsive/two-columns/width/unitless))
-(define size/responsive/two-columns/min-width/absolute/unitless
-  (modular-scale size/responsive/two-columns/min-width/step))
-(define size/responsive/two-columns/min-width/absolute
-  (css-expr rem ,size/responsive/two-columns/min-width/absolute/unitless))
+(define size/two-columns/breakpoint/unitless (modular-scale 23))
+(define size/two-columns/breakpoint (css-expr rem ,size/two-columns/breakpoint/unitless))
+(define size/two-columns/body/width
+  (css-expr rem ,(- size/two-columns/breakpoint/unitless (* 2 size/padding/unitless))))
+(define size/two-columns/article/width (css-expr rem ,(modular-scale 20)))
+(define size/two-columns/margin-note/width (css-expr (rem ,(modular-scale 17))))
 
 ;; Rulers
 
 (define size/ruler/thin/unitless 1)
 (define size/ruler/thin (css-expr px ,size/ruler/thin/unitless))
+(define size/ruler/thin/negative (css-expr px ,(- size/ruler/thin/unitless)))
 (define size/ruler/thick/unitless 3)
 (define size/ruler/thick (css-expr px ,size/ruler/thick/unitless))
-
-;; TODO: Get rid of this
-
-(define size/responsive/steps 5)
-(define size/responsive/min-width/end/unitless (modular-scale 20))
-(define size/responsive/min-width/end (css-expr rem ,size/responsive/min-width/end/unitless))
-(define size/table/data/padding (css-expr rem ,(modular-scale -2)))
-(define size/table/data/last/start (modular-scale 11))
-(define size/table/data/last/end (modular-scale 15))
-(define size/table/data/last
-  (css-expr #:width (rem ,size/table/data/last/start)
-            ,@(for/list ([min-width (in-steps (modular-scale 17)
-                                              size/responsive/min-width/end/unitless
-                                              size/responsive/steps)]
-                         [width (in-steps size/table/data/last/start
-                                          size/table/data/last/end
-                                          size/responsive/steps)])
-                (css-expr @media (and screen (#:min-width (rem ,min-width)))
-                          #:width (rem ,width)))))
+(define size/ruler/thick/negative (css-expr px ,(- size/ruler/thick/unitless)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COMPONENTS
@@ -236,9 +212,9 @@
             #:margin (#:top (rem ,(modular-scale 0))
                       #:bottom (rem ,(modular-scale 0)))
             [div.full-width
-             [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-              #:width ,size/responsive/two-columns/width
-              #:width (apply calc (- ,size/responsive/two-columns/width ,size/indentation))]]))
+             [@media (and screen (#:min-width ,size/two-columns/breakpoint))
+              #:width ,size/two-columns/body/width
+              #:width (apply calc (- ,size/two-columns/body/width ,size/indentation))]]))
 
 (define-component (show-on-hover . elements)
   #:html (apply (default-tag-function 'span #:class "show-on-hover") elements)
@@ -265,7 +241,7 @@
     #:display inline-block
     #:padding (#:bottom 0.1em #:left 0.2em)
     #:position absolute
-    #:left (px ,(- size/ruler/thick/unitless))
+    #:left ,size/ruler/thick/negative
     #:top 0
     ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
     ,@(prefix (css-expr #:transform-origin (top left)))]))
@@ -311,18 +287,18 @@
              ,@font/main
              #:line-height ,(modular-scale 2)
              #:margin ((rem ,(modular-scale 4)) auto)
-             [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
-              #:max-width ,size/responsive/min-width/end]
-             [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-              #:width ,size/responsive/two-columns/min-width
-              [article #:width ,size/responsive/min-width/end]]
-             #:padding (0 ,size/body/padding)
+             [@media (and screen (#:max-width ,size/two-columns/breakpoint))
+              #:max-width ,size/two-columns/article/width]
+             [@media (and screen (#:min-width ,size/two-columns/breakpoint))
+              #:width ,size/two-columns/breakpoint
+              [article #:width ,size/two-columns/article/width]]
+             #:padding (0 ,size/padding)
              #:background-color ,(dict-ref colorscheme 'background)
              #:color ,(dict-ref colorscheme 'primary-content)]
             [p
              #:margin 0
              [(+ p &) #:text-indent ,size/indentation]
-             [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+             [@media (and screen (#:min-width ,size/two-columns/breakpoint))
               [(+ aside &) #:text-indent ,size/indentation]
               [,@(for*/list ([an-element-that-causes-paragraph-indent-reset
                               (in-list elements-that-cause-paragraph-indent-reset)]
@@ -430,7 +406,7 @@
                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
                                         ,(dict-ref colorscheme 'background-highlight))
                        #:top '100%)
-                    [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
+                    [@media (and screen (#:max-width ,size/two-columns/breakpoint))
                      #:color ,(dict-ref colorscheme 'emphasized-content)
                      [(: & hover)
                       #:background-color ,(dict-ref colorscheme 'background)
@@ -465,18 +441,18 @@
 (define-component margin-note
   #:html (default-tag-function 'aside)
   #:css (css-expr [aside
-                   [@media (and screen (#:max-width ,size/responsive/two-columns/min-width/absolute))
+                   [@media (and screen (#:max-width ,size/two-columns/breakpoint))
                     #:color ,(dict-ref colorscheme 'emphasized-content)
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:border-left
                     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
                     ,@ruler-left-spacing
                     #:padding-right (rem ,(modular-scale -4))]
-                   [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+                   [@media (and screen (#:min-width ,size/two-columns/breakpoint))
                     #:font-size ,size/text/small
                     #:float right
                     #:clear right
-                    #:width (rem ,(modular-scale 17)) !important
+                    #:width ,size/two-columns/margin-note/width !important
                     #:margin-bottom (rem ,(modular-scale 2))
                     #:margin-right (rem ,(- (modular-scale 18)))]]))
 
@@ -555,7 +531,7 @@
                      #:right (rem ,(modular-scale -1)))
                     #:color ,(dict-ref colorscheme 'secondary-content)]
                    [(> & p)
-                    #:margin-bottom (px ,(- size/ruler/thin/unitless))]]))
+                    #:margin-bottom ,size/ruler/thin/negative]]))
 
 (define-component keyboard
   #:html (default-tag-function 'kbd)
@@ -572,9 +548,9 @@
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
   #:css (css-expr [div.full-width
-                   [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
+                   [@media (and screen (#:min-width ,size/two-columns/breakpoint))
                     #:clear both
-                    #:width ,size/responsive/two-columns/width]]))
+                    #:width ,size/two-columns/body/width]]))
 
 (define-component list/unordered #:html (default-tag-function 'ul #:class "insertion"))
 
@@ -616,7 +592,7 @@
   #:css (css-expr [(.table--aligned-last-data td:last-child)
                    #:width 40%
                    #;[(ol &) (ul &) ;; FIXME
-                    #:width (apply calc (- 40% 40px))]]))
+                      #:width (apply calc (- 40% 40px))]]))
 
 (define-component table/header #:html (default-tag-function 'thead))
 
@@ -631,14 +607,14 @@
 
 (define-component table/data
   #:html (default-tag-function 'td)
-  #:css (css-expr [td #:padding 0 (#:right ,size/table/data/padding)]))
+  #:css (css-expr [td #:padding 0 (#:right ,size/padding)]))
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
   #:css (css-expr [th
                    ,@font/secondary
                    #:text-align left
-                   #:padding 0 (#:right ,size/table/data/padding)]))
+                   #:padding 0 (#:right ,size/padding)]))
 
 (define-component (fraction numerator denominator)
   #:html `(span
