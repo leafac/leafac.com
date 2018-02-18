@@ -73,7 +73,7 @@
 (define font/serif
   (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
 
-; 300, 400, 600
+; 400, 600
 (define font/sans-serif
   (css-expr #:font-family "Fira Sans" "Gill Sans"
             -apple-system BlinkMacSystemFont "Helvetica Neue" "Helvetica" "Verdana" sans-serif))
@@ -81,12 +81,6 @@
 ; 400, 500
 (define font/monospace
   (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
-
-; 700
-(define font/display
-  (css-expr #:font-family "Cooper Hewitt" "Fira Sans" "Gill Sans"
-            -apple-system BlinkMacSystemFont "Helvetica Neue" "Helvetica" "Verdana" sans-serif
-            #:font-weight 700))
 
 (define font/main font/serif)
 
@@ -227,7 +221,6 @@
     ,@font/secondary
     #:text-transform uppercase
     #:letter-spacing 0.1em
-    #:font-weight 300
     #:font-size ,size/text/small
     #:line-height 1
     #:background-color ,color
@@ -309,15 +302,15 @@
 
 (define-component headings
   #:css (css-expr [h1 h2
-                   ,@font/secondary
-                   #:font-size (rem ,(modular-scale 1))
+                   #:font-style italic
+                   #:font-weight 400
                    #:margin (#:top (rem ,(modular-scale 2))
                              #:bottom (rem ,(modular-scale -2)))
                    [a ,@smart-underline/disable]]
                   [h1
-                   #:font-weight 600]
+                   #:font-size (rem ,(modular-scale 2))]
                   [h2
-                   #:font-weight 400]))
+                   #:font-size (rem ,(modular-scale 1))]))
 
 (define-component (heading/mark . elements)
   #:html (show-on-hover
@@ -337,16 +330,16 @@
 (define-component (menu . elements)
   #:html (apply navigation #:class "menu" elements)
   #:css (css-expr [.menu
-                   ,@font/secondary
-                   #:font-weight 300
+                   #:font-size ,size/text/small
+                   #:text-transform uppercase
+                   #:letter-spacing 0.2em
                    #:line-height ,(modular-scale 4)
                    [a ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 0))))]]))
 
 (define-component header
   #:css (css-expr [header
                    [h1
-                    ,@font/display
-                    #:font-size (rem ,(modular-scale 2))]
+                    #:font-size (rem ,(modular-scale 4))]
                    [(> body &)
                     #:padding-bottom (rem ,(modular-scale -4))
                     #:border-bottom
@@ -359,8 +352,6 @@
 (define-component time
   #:html (default-tag-function 'time)
   #:css (css-expr [time
-                   ,@font/secondary
-                   #:font-weight 300
                    #:font-size ,size/text/small
                    #:position relative
                    #:top (rem ,(- (modular-scale -3)))
