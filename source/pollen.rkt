@@ -265,43 +265,41 @@
        (if (empty? classes)
            non-classes
            (cons `(class ,classes/concatenated) non-classes)))))
-  (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
+  (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes)
 
-(define-component body-text
-  #:css
-  (define elements-that-cause-paragraph-indent-reset
-    `(,@(css-expr .insertion) ,@(css-expr h1) ,@(css-expr h2)))
-  (css-expr [* *::before *::after #:box-sizing border-box #:outline none]
-            [body
-             ,@(prefix (css-expr #:font-synthesis none))
-             ,@(prefix (css-expr #:font-kerning normal))
-             ,@(prefix (css-expr #:font-variant-ligatures (common-ligatures contextual)))
-             ,@(prefix (css-expr #:text-rendering optimizeLegibility))
-             ,@(prefix (css-expr #:font-feature-settings "kern" "rlig" "liga" "clig" "calt"))
-             ,@font/main
-             #:line-height ,(modular-scale 2)
-             #:margin ((rem ,(modular-scale 4)) auto)
-             [@media (and screen (#:max-width ,size/grid/body))
-              #:max-width ,size/grid/article]
-             [@media (and screen (#:min-width ,size/grid/body))
-              #:width ,size/grid/body
-              [article #:width ,size/grid/article]]
-             #:padding (0 ,size/box/padding)
-             #:background-color ,(dict-ref colorscheme 'background)
-             #:color ,(dict-ref colorscheme 'primary-content)]
-            [p
-             #:margin 0
-             [(+ p &) #:text-indent ,size/text/indentation]
-             [@media (and screen (#:min-width ,size/grid/body))
-              [(+ aside &) #:text-indent ,size/text/indentation]
-              [,@(for*/list ([an-element-that-causes-paragraph-indent-reset
-                              (in-list elements-that-cause-paragraph-indent-reset)]
-                             [quantity-of-asides (in-range 1 6)])
-                   (css-expr + ,an-element-that-causes-paragraph-indent-reset
-                             ,@(append* (make-list quantity-of-asides (css-expr aside)))
-                             &))
-               #:text-indent 0]]
-             [(: & first-of-type) #:text-indent 0 !important]]))
+  #:css (css-expr [* *::before *::after
+                   #:box-sizing border-box
+                   #:outline none]))
+
+(define-component body
+  #:css (css-expr [body
+                   ,@(prefix (css-expr #:font-synthesis none))
+                   ,@(prefix (css-expr #:font-kerning normal))
+                   ,@(prefix (css-expr #:font-variant-ligatures (common-ligatures contextual)))
+                   ,@(prefix (css-expr #:text-rendering optimizeLegibility))
+                   ,@(prefix (css-expr #:font-feature-settings "kern" "rlig" "liga" "clig" "calt"))
+                   ,@font/main
+                   #:line-height ,(modular-scale 2)
+                   #:margin ((rem ,(modular-scale 4)) auto)
+                   #:padding (0 ,size/box/padding)
+                   [@media (and screen (#:max-width ,size/grid/body))
+                    #:max-width ,size/grid/article]
+                   [@media (and screen (#:min-width ,size/grid/body))
+                    #:width ,size/grid/body
+                    [article #:width ,size/grid/article]]
+                   #:background-color ,(dict-ref colorscheme 'background)
+                   #:color ,(dict-ref colorscheme 'primary-content)]
+                  [p
+                   #:margin 0
+                   #:text-indent ,size/text/indentation
+                   [(: & first-of-type) #:text-indent 0]
+                   ,@(for*/list ([element (in-list '(h1 h2 .insertion))]
+                                 [asides (in-range 6)])
+                       (css-expr (+ ,element ,@(make-list asides 'aside) &) #:text-indent 0))
+                   [@media (and screen (#:max-width ,size/grid/body))
+                    [(+ aside &) #:text-indent 0]]]))
+
+;; TODO: Merge CSS files?
 
 (define-component insertion
   #:css (css-expr [.insertion
