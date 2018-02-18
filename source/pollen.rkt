@@ -129,7 +129,7 @@
 
 (define size/grid/body (css-expr rem ,(modular-scale 23)))
 (define size/grid/article (css-expr rem ,(modular-scale 20)))
-(define size/grid/margin-note (css-expr (rem ,(modular-scale 17))))
+(define size/grid/margin-note (css-expr (rem ,(modular-scale 16))))
 
 ;; Boxes
 
