@@ -93,10 +93,6 @@
 
 (define font/secondary font/sans-serif)
 
-(define font/capitals
-  (css-expr #:text-transform uppercase
-            #:letter-spacing 0.1em))
-
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORS
 
@@ -136,91 +132,55 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; SIZES
 
+;; Modular Scale
+
 ;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
 (define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
   (* base (expt ratio step)))
 
-(define size/body-text/start/unitless 15)
+;; Text
 
-(define size/body-text/default/unitless 16)
-
-(define size/body-text/end/unitless (modular-scale 1 #:base size/body-text/start/unitless))
-
-(define size/body-text/start/ratio
-  (exact->inexact (/ size/body-text/start/unitless size/body-text/default/unitless)))
-
-(define size/body-text/end/ratio
-  (exact->inexact (/ size/body-text/end/unitless size/body-text/default/unitless)))
-
-(define size/body-text/start (css-expr rem ,size/body-text/start/ratio))
-
-(define size/body-text/end (css-expr rem ,size/body-text/end/ratio))
-
-(define size/text/small (css-expr rem ,(modular-scale -2)))
-
+(define size/text/small (css-expr rem ,(modular-scale -1)))
 (define size/indentation (css-expr rem ,(modular-scale 2)))
-
-(define size/responsive/steps 5)
-
-(define size/responsive/min-width/start/unitless (modular-scale 17))
-
-(define size/responsive/min-width/start (css-expr rem ,size/responsive/min-width/start/unitless))
-
-(define size/responsive/min-width/end/unitless (modular-scale 20))
-
-(define size/responsive/min-width/end (css-expr rem ,size/responsive/min-width/end/unitless))
-
-(define size/responsive/min-width/range
-  (in-steps size/responsive/min-width/start/unitless
-            size/responsive/min-width/end/unitless
-            size/responsive/steps))
-
 (define size/body/padding/unitless (modular-scale -2))
-
 (define size/body/padding (css-expr rem ,size/body/padding/unitless))
 
-(define size/responsive/two-columns/min-width/step 23)
+;; Grid
 
+(define size/responsive/two-columns/min-width/step 23)
 (define size/responsive/two-columns/min-width/unitless
   (modular-scale size/responsive/two-columns/min-width/step))
-
 (define size/responsive/two-columns/min-width
   (css-expr rem ,size/responsive/two-columns/min-width/unitless))
-
 (define size/responsive/two-columns/width/unitless
   (- size/responsive/two-columns/min-width/unitless (* 2 size/body/padding/unitless)))
-
 (define size/responsive/two-columns/width
   (css-expr rem ,size/responsive/two-columns/width/unitless))
-
-;; ‘absolute’ is to use with media queries, as they are relative to the browser’s default ‘font-size’,
-;; and not to the ‘font-size’ of the root element ‘html’ [1]. The approach I’m taking is
-;; to use ‘rem’ for everything, including the root ‘font-size’, so that I don’t lose the information
-;; of the browser’s default ‘font-size’. This way, I’m able to compensate the fact that media queries
-;; are not relative to the ‘html’ ‘font-size’, but everything else is.
-;; [1]: https://www.sitepoint.com/understanding-and-using-rem-units-in-css/
 (define size/responsive/two-columns/min-width/absolute/unitless
-  (modular-scale size/responsive/two-columns/min-width/step #:base size/body-text/end/ratio))
-
+  (modular-scale size/responsive/two-columns/min-width/step))
 (define size/responsive/two-columns/min-width/absolute
   (css-expr rem ,size/responsive/two-columns/min-width/absolute/unitless))
+
+;; Rulers
 
 (define size/ruler/thin/unitless 1)
 (define size/ruler/thin (css-expr px ,size/ruler/thin/unitless))
 (define size/ruler/thick/unitless 3)
 (define size/ruler/thick (css-expr px ,size/ruler/thick/unitless))
 
-(define size/two-columns/content (prefix (css-expr #:column-count 2)))
+;; TODO: Get rid of this
 
+(define size/responsive/steps 5)
+(define size/responsive/min-width/end/unitless (modular-scale 20))
+(define size/responsive/min-width/end (css-expr rem ,size/responsive/min-width/end/unitless))
 (define size/table/data/padding (css-expr rem ,(modular-scale -2)))
-
 (define size/table/data/last/start (modular-scale 11))
-
 (define size/table/data/last/end (modular-scale 15))
-
 (define size/table/data/last
   (css-expr #:width (rem ,size/table/data/last/start)
-            ,@(for/list ([min-width size/responsive/min-width/range]
+            ,@(for/list ([min-width (in-steps (modular-scale 17)
+                                              size/responsive/min-width/end/unitless
+                                              size/responsive/steps)]
                          [width (in-steps size/table/data/last/start
                                           size/table/data/last/end
                                           size/responsive/steps)])
@@ -295,7 +255,8 @@
    [(:: & before)
     #:content ,content
     ,@font/secondary
-    ,@font/capitals
+    #:text-transform uppercase
+    #:letter-spacing 0.1em
     #:font-weight 300
     #:font-size ,size/text/small
     #:line-height 1
@@ -381,7 +342,7 @@
 (define-component headings
   #:css (css-expr [h1 h2
                    ,@font/secondary
-                   #:font-size (rem ,(modular-scale 0))
+                   #:font-size (rem ,(modular-scale 1))
                    #:margin (#:top (rem ,(modular-scale 2))
                              #:bottom (rem ,(modular-scale -2)))
                    [a ,@smart-underline/disable]]
@@ -512,7 +473,7 @@
                     ,@ruler-left-spacing
                     #:padding-right (rem ,(modular-scale -4))]
                    [@media (and screen (#:min-width ,size/responsive/two-columns/min-width/absolute))
-                    #:font-size (rem ,(modular-scale -1))
+                    #:font-size ,size/text/small
                     #:float right
                     #:clear right
                     #:width (rem ,(modular-scale 17)) !important
@@ -546,7 +507,7 @@
   #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
   #:css (css-expr [pre
                    ,@font/monospace
-                   #:font-size (rem ,(modular-scale -1))
+                   #:font-size ,size/text/small
                    #:overflow auto
                    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
                    #:padding ,size/indentation
@@ -605,8 +566,8 @@
 
 (define-component initialism
   #:html (default-tag-function 'span #:class "initialism")
-  #:css (css-expr [span.initialism
-                   ,@font/capitals]))
+  #:css (css-expr #;[span.initialism
+                     ,@font/capitals]))
 
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
@@ -652,7 +613,10 @@
 (define-component table #:html (default-tag-function 'table #:class "insertion"))
 
 (define-component table/aligned-last-data
-  #:css (css-expr [(.table--aligned-last-data td:last-child) ,@size/table/data/last]))
+  #:css (css-expr [(.table--aligned-last-data td:last-child)
+                   #:width 40%
+                   #;[(ol &) (ul &) ;; FIXME
+                    #:width (apply calc (- 40% 40px))]]))
 
 (define-component table/header #:html (default-tag-function 'thead))
 
@@ -717,7 +681,9 @@
 
 (define-component (recipes . elements)
   #:html (apply list/unordered #:class "recipes" elements)
-  #:css (css-expr [.recipes ,@size/two-columns/content #:padding-left 0]))
+  #:css (css-expr [.recipes
+                   ,@(prefix (css-expr #:column-count 2))
+                   #:padding-left 0]))
 
 (define-component (recipe path . elements)
   #:html (list/unordered/item #:class "recipe"
