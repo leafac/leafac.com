@@ -130,6 +130,7 @@
 (define size/grid/body (css-expr rem ,(modular-scale 23)))
 (define size/grid/article (css-expr rem ,(modular-scale 20)))
 (define size/grid/margin-note (css-expr (rem ,(modular-scale 16))))
+(define size/grid/breakpoint (css-expr and screen (#:min-width ,size/grid/body)))
 
 ;; Boxes
 
@@ -200,7 +201,7 @@
             #:margin (#:top (rem ,(modular-scale 0))
                       #:bottom (rem ,(modular-scale 0)))
             [.full-width
-             [@media (and screen (#:min-width ,size/grid/body))
+             [@media ,size/grid/breakpoint
               #:width ,size/grid/body
               #:width (apply calc (- ,size/grid/body ,size/text/indentation))]]))
 
@@ -274,24 +275,19 @@
                    #:line-height ,(modular-scale 2)
                    #:margin ((rem ,(modular-scale 4)) auto)
                    #:padding (0 ,size/box/padding)
-                   [@media (and screen (#:max-width ,size/grid/body))
-                    #:max-width ,size/grid/article]
-                   [@media (and screen (#:min-width ,size/grid/body))
-                    #:width ,size/grid/body
+                   #:max-width ,size/grid/article
+                   [@media ,size/grid/breakpoint
+                    #:max-width ,size/grid/body
                     [article #:width ,size/grid/article]]
                    #:background-color ,(dict-ref colorscheme 'background)
                    #:color ,(dict-ref colorscheme 'primary-content)]
                   [p
                    #:margin 0
-                   #:text-indent ,size/text/indentation
-                   [(: & first-of-type) #:text-indent 0]
-                   ; FIXME: The following should be in the preceding, but there’s a performance bug
-                   ;        in ‘css-expr’.
-                   ,@(for*/list ([element (in-list '(h1 h2 .insertion))]
-                                 [asides (in-range 6)])
-                       (css-expr (+ ,element ,@(make-list asides 'aside) &) #:text-indent 0))
-                   [@media (and screen (#:max-width ,size/grid/body))
-                    [(+ aside &) #:text-indent 0]]]))
+                   [(+ p &)
+                    #:text-indent ,size/text/indentation]
+                   [@media ,size/grid/breakpoint
+                    [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &)
+                     #:text-indent ,size/text/indentation]]]))
 
 (define-component insertion
   #:css (css-expr [.insertion
@@ -431,7 +427,7 @@
                     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
                     ,@ruler-left-spacing
                     #:padding-right (rem ,(modular-scale -4))]
-                   [@media (and screen (#:min-width ,size/grid/body))
+                   [@media ,size/grid/breakpoint
                     #:font-size ,size/text/small
                     #:float right
                     #:clear right
@@ -533,7 +529,7 @@
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
   #:css (css-expr [.full-width
-                   [@media (and screen (#:min-width ,size/grid/body))
+                   [@media ,size/grid/breakpoint
                     #:clear both
                     #:width ,size/grid/body]]))
 
