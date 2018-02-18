@@ -341,14 +341,6 @@
   (define elements-that-cause-paragraph-indent-reset
     `(,@(css-expr .insertion) ,@(css-expr h1) ,@(css-expr h2)))
   (css-expr [* *::before *::after #:box-sizing border-box #:outline none]
-            [html
-             #:font-size ,size/body-text/start
-             ,@(for/list ([min-width (in-list size/responsive/min-width/range)]
-                          [font-size (in-steps size/body-text/start/ratio
-                                               size/body-text/end/ratio
-                                               size/responsive/steps)])
-                 (css-expr @media (and screen (#:min-width (rem ,min-width)))
-                           #:font-size (rem ,font-size)))]
             [body
              ,@(prefix (css-expr #:font-synthesis none))
              ,@(prefix (css-expr #:font-kerning normal))
@@ -507,11 +499,7 @@
 
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
-  #:css (css-expr [.new-thought
-                   ,@font/capitals
-                   #:letter-spacing 0.2em
-                   #:font-weight 700
-                   #:font-size (rem ,(modular-scale -1))]))
+  #:css (css-expr [.new-thought]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -558,6 +546,7 @@
   #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
   #:css (css-expr [pre
                    ,@font/monospace
+                   #:font-size (rem ,(modular-scale -1))
                    #:overflow auto
                    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
                    #:padding ,size/indentation
