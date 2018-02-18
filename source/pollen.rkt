@@ -218,7 +218,6 @@
    #:position relative
    [(:: & before)
     #:content ,content
-    ,@font/secondary
     #:text-transform uppercase
     #:letter-spacing 0.1em
     #:font-size ,size/text/small
@@ -301,16 +300,17 @@
                              #:bottom (rem ,(modular-scale -2)))]))
 
 (define-component headings
-  #:css (css-expr [h1 h2
+  #:css (css-expr [h1
+                   #:font-size (rem ,(modular-scale 2))
                    #:font-style italic
-                   #:font-weight 400
+                   #:font-weight 400]
+                  [h2
+                   #:font-size (rem ,(modular-scale 0))
+                   #:font-weight 700]
+                  [h1 h2
                    #:margin (#:top (rem ,(modular-scale 2))
                              #:bottom (rem ,(modular-scale -2)))
-                   [a ,@smart-underline/disable]]
-                  [h1
-                   #:font-size (rem ,(modular-scale 2))]
-                  [h2
-                   #:font-size (rem ,(modular-scale 1))]))
+                   [a ,@smart-underline/disable]]))
 
 (define-component (heading/mark . elements)
   #:html (show-on-hover
@@ -445,7 +445,9 @@
 
 (define-component figure/caption
   #:html (default-tag-function 'figcaption)
-  #:css (css-expr [figcaption ,@font/secondary #:text-align center]))
+  #:css (css-expr [figcaption
+                   #:font-style italic
+                   #:text-align center]))
 
 (define-component (image path [caption ""])
   #:html (figure ((default-tag-function 'div #:class "image-in-figure")
@@ -595,7 +597,7 @@
 (define-component table/data/header
   #:html (default-tag-function 'th)
   #:css (css-expr [th
-                   ,@font/secondary
+                   #:font-weight 700
                    #:text-align left
                    #:padding 0 (#:right ,size/box/padding)]))
 
@@ -605,8 +607,7 @@
            (span ((class "fraction--slash")) "/")
            (span ((class "fraction--denominator")) ,(~a denominator)))
   #:css (css-expr [.fraction--numerator .fraction--denominator
-                   #:font-size 0.8em
-                   #:font-weight 700]
+                   #:font-size 0.8em]
                   [.fraction--numerator #:vertical-align super]
                   [.fraction--denominator #:vertical-align sub]
                   [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
