@@ -33,20 +33,12 @@
 ;; Paths
 
 (define base-path (make-parameter ""))
-
 (define (internal-url path) (~a (base-path) path))
-
 (define base-absolute (make-parameter "https://www.leafac.com"))
-
 (define (absolute-url path) (~a (base-absolute) path))
-
 (define (source-path path) (~a (current-project-root) "/" path))
 
 ;; CSS helpers
-
-(define (in-steps start end steps)
-  (for/list ([step (in-range (add1 steps))])
-    (exact->inexact (+ start (* step (/ (- end start) steps))))))
 
 (define (prefix declaration #:prefixes [prefixes '(moz webkit ms o)])
   (syntax-parse declaration
@@ -59,6 +51,13 @@
                       (string->keyword (~a "-" a-prefix "-" (keyword->string name/datum))))
                     (css-expr ,prefixed-name ,@rests/datum)))
                ,name/datum ,@rests/datum)]))
+
+(define (px->rem px #:html/font-size [html/font-size 16])
+  (exact->inexact (/ px html/font-size)))
+
+;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
+(define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
+  (* base (expt ratio step)))
 
 ;; Feeds
 
@@ -132,27 +131,22 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; SIZES
 
-;; Modular Scale
+;; Grid
 
-;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
-(define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
-  (* base (expt ratio step)))
+(define size/grid/body (css-expr rem ,(modular-scale 23)))
+(define size/grid/article (css-expr rem ,(modular-scale 20)))
+(define size/grid/margin-note (css-expr (rem ,(modular-scale 17))))
+
+;; Boxes
+
+(define size/box/padding (css-expr rem ,(modular-scale -2)))
+;; TODO: Bring margins here.
 
 ;; Text
 
-(define size/text/small (css-expr rem ,(modular-scale -1)))
-(define size/indentation (css-expr rem ,(modular-scale 2)))
-(define size/padding/unitless (modular-scale -2))
-(define size/padding (css-expr rem ,size/padding/unitless))
-
-;; Grid
-
-(define size/two-columns/breakpoint/unitless (modular-scale 23))
-(define size/two-columns/breakpoint (css-expr rem ,size/two-columns/breakpoint/unitless))
-(define size/two-columns/body/width
-  (css-expr rem ,(- size/two-columns/breakpoint/unitless (* 2 size/padding/unitless))))
-(define size/two-columns/article/width (css-expr rem ,(modular-scale 20)))
-(define size/two-columns/margin-note/width (css-expr (rem ,(modular-scale 17))))
+(define size/text/indentation (css-expr rem ,(modular-scale 2)))
+(define size/text/small (css-expr rem ,(px->rem 14)))
+(define size/text/code/block (css-expr rem ,(px->rem 12)))
 
 ;; Rulers
 
@@ -174,9 +168,9 @@
 ;; Reference: https://eager.io/blog/smarter-link-underlines/
 (define (smart-underline #:colors colors
                          #:colors/hover [colors/hover #f]
-                         #:distances [distances (in-steps .03 .15 4)]
+                         #:distances [distances '(0.03 0.06 0.09 0.12 0.15)]
                          #:thickness [thickness '1px]
-                         #:top [top '90%])
+                         #:top [top '100%])
   (define/match (rules colors)
     [(`(,color/foreground ,color/background))
      (css-expr #:text-decoration none
@@ -199,7 +193,7 @@
 (define (inline-block-enumeration gutter)
   (css-expr
    #:display inline-block
-   #:margin-right (rem ,gutter)
+   #:margin-right ,gutter
    [(: & last-child)
     #:margin-right 0]))
 
@@ -207,14 +201,14 @@
   (css-expr #:padding
             (#:top (rem ,(modular-scale -4))
              #:bottom (rem ,(modular-scale -4))
-             #:left ,size/indentation
-             #:left (apply calc (- ,size/indentation ,size/ruler/thick)))
+             #:left ,size/text/indentation
+             #:left (apply calc (- ,size/text/indentation ,size/ruler/thick)))
             #:margin (#:top (rem ,(modular-scale 0))
                       #:bottom (rem ,(modular-scale 0)))
-            [div.full-width
-             [@media (and screen (#:min-width ,size/two-columns/breakpoint))
-              #:width ,size/two-columns/body/width
-              #:width (apply calc (- ,size/two-columns/body/width ,size/indentation))]]))
+            [.full-width
+             [@media (and screen (#:min-width ,size/grid/body))
+              #:width ,size/grid/body
+              #:width (apply calc (- ,size/grid/body ,size/text/indentation))]]))
 
 (define-component (show-on-hover . elements)
   #:html (apply (default-tag-function 'span #:class "show-on-hover") elements)
@@ -287,19 +281,19 @@
              ,@font/main
              #:line-height ,(modular-scale 2)
              #:margin ((rem ,(modular-scale 4)) auto)
-             [@media (and screen (#:max-width ,size/two-columns/breakpoint))
-              #:max-width ,size/two-columns/article/width]
-             [@media (and screen (#:min-width ,size/two-columns/breakpoint))
-              #:width ,size/two-columns/breakpoint
-              [article #:width ,size/two-columns/article/width]]
-             #:padding (0 ,size/padding)
+             [@media (and screen (#:max-width ,size/grid/body))
+              #:max-width ,size/grid/article]
+             [@media (and screen (#:min-width ,size/grid/body))
+              #:width ,size/grid/body
+              [article #:width ,size/grid/article]]
+             #:padding (0 ,size/box/padding)
              #:background-color ,(dict-ref colorscheme 'background)
              #:color ,(dict-ref colorscheme 'primary-content)]
             [p
              #:margin 0
-             [(+ p &) #:text-indent ,size/indentation]
-             [@media (and screen (#:min-width ,size/two-columns/breakpoint))
-              [(+ aside &) #:text-indent ,size/indentation]
+             [(+ p &) #:text-indent ,size/text/indentation]
+             [@media (and screen (#:min-width ,size/grid/body))
+              [(+ aside &) #:text-indent ,size/text/indentation]
               [,@(for*/list ([an-element-that-causes-paragraph-indent-reset
                               (in-list elements-that-cause-paragraph-indent-reset)]
                              [quantity-of-asides (in-range 1 6)])
@@ -348,7 +342,7 @@
                    ,@font/secondary
                    #:font-weight 300
                    #:line-height ,(modular-scale 4)
-                   [a ,@(inline-block-enumeration (modular-scale 0))]]))
+                   [a ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 0))))]]))
 
 (define-component header
   #:css (css-expr [header
@@ -406,7 +400,7 @@
                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
                                         ,(dict-ref colorscheme 'background-highlight))
                        #:top '100%)
-                    [@media (and screen (#:max-width ,size/two-columns/breakpoint))
+                    [@media (and screen (#:max-width ,size/grid/body))
                      #:color ,(dict-ref colorscheme 'emphasized-content)
                      [(: & hover)
                       #:background-color ,(dict-ref colorscheme 'background)
@@ -441,18 +435,18 @@
 (define-component margin-note
   #:html (default-tag-function 'aside)
   #:css (css-expr [aside
-                   [@media (and screen (#:max-width ,size/two-columns/breakpoint))
+                   [@media (and screen (#:max-width ,size/grid/body))
                     #:color ,(dict-ref colorscheme 'emphasized-content)
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:border-left
                     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
                     ,@ruler-left-spacing
                     #:padding-right (rem ,(modular-scale -4))]
-                   [@media (and screen (#:min-width ,size/two-columns/breakpoint))
+                   [@media (and screen (#:min-width ,size/grid/body))
                     #:font-size ,size/text/small
                     #:float right
                     #:clear right
-                    #:width ,size/two-columns/margin-note/width !important
+                    #:width ,size/grid/margin-note !important
                     #:margin-bottom (rem ,(modular-scale 2))
                     #:margin-right (rem ,(- (modular-scale 18)))]]))
 
@@ -483,11 +477,11 @@
   #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
   #:css (css-expr [pre
                    ,@font/monospace
-                   #:font-size ,size/text/small
+                   #:font-size ,size/text/code/block
                    #:overflow auto
                    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                   #:padding ,size/indentation
-                   #:padding (apply calc (- ,size/indentation ,size/ruler/thin))]))
+                   #:padding ,size/text/indentation
+                   #:padding (apply calc (- ,size/text/indentation ,size/ruler/thin))]))
 
 (define-component (code/block/highlighted language . elements)
   #:html
@@ -547,10 +541,10 @@
 
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
-  #:css (css-expr [div.full-width
-                   [@media (and screen (#:min-width ,size/two-columns/breakpoint))
+  #:css (css-expr [.full-width
+                   [@media (and screen (#:min-width ,size/grid/body))
                     #:clear both
-                    #:width ,size/two-columns/body/width]]))
+                    #:width ,size/grid/body]]))
 
 (define-component list/unordered #:html (default-tag-function 'ul #:class "insertion"))
 
@@ -607,14 +601,14 @@
 
 (define-component table/data
   #:html (default-tag-function 'td)
-  #:css (css-expr [td #:padding 0 (#:right ,size/padding)]))
+  #:css (css-expr [td #:padding 0 (#:right ,size/box/padding)]))
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
   #:css (css-expr [th
                    ,@font/secondary
                    #:text-align left
-                   #:padding 0 (#:right ,size/padding)]))
+                   #:padding 0 (#:right ,size/box/padding)]))
 
 (define-component (fraction numerator denominator)
   #:html `(span
@@ -762,7 +756,7 @@
 (define-component (skill level . elements)
   #:html (apply list/unordered/item #:class (~a "skill " level) elements)
   #:css (css-expr [.skill
-                   ,@(inline-block-enumeration (modular-scale 1))
+                   ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 1))))
                    #:line-height 2
                    [.initialism
                     #:margin-right 0]]
