@@ -284,11 +284,9 @@
   #:css (css-expr [body
                    ,@(prefix (css-expr #:font-synthesis none))
                    ,@(prefix (css-expr #:font-kerning normal))
-                   ,@(prefix (css-expr #:font-variant-ligatures (common-ligatures contextual)))
                    ,@(prefix (css-expr #:text-rendering optimizeLegibility))
-                   ,@(prefix (css-expr #:font-feature-settings "kern" "rlig" "liga" "clig" "calt"))
                    ,@font/main
-                    #:font-size ,size/text/body
+                   #:font-size ,size/text/body
                    #:line-height ,(modular-scale 2)
                    #:margin ((rem ,(modular-scale 4)) auto)
                    #:padding (0 ,size/grid/padding)
