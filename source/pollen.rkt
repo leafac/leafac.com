@@ -68,6 +68,11 @@
 (define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
 
 ;; ---------------------------------------------------------------------------------------------------
+;; COMPONENTS
+
+(components-output-types #:dynamic html atom #:static css)
+
+;; ---------------------------------------------------------------------------------------------------
 ;; SIZES
 
 ;; Grid
@@ -126,14 +131,59 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; FONTS
 
-;; TODO: Add font imports
-;;       @font-face {font-family, font-style, font-weight, font-stretch, src: url()}
-;; TODO: Remove ‘insertion’ as a class (let it be a mixin)?
+(define-component fonts
+  #:css
+  (css-expr
+   [@font-face
+    #:font-family "Charter"
+    #:font-style normal
+    #:font-weight 400
+    #:font-stretch normal
+    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_regular-webfont.woff"))
+           (apply format "woff"))]
+   [@font-face
+    #:font-family "Charter"
+    #:font-style italic
+    #:font-weight 400
+    #:font-stretch normal
+    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_italic-webfont.woff"))
+           (apply format "woff"))]
+   [@font-face
+    #:font-family "Charter"
+    #:font-style normal
+    #:font-weight 700
+    #:font-stretch normal
+    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_bold-webfont.woff"))
+           (apply format "woff"))]
+   [@font-face
+    #:font-family "Charter"
+    #:font-style italic
+    #:font-weight 700
+    #:font-stretch normal
+    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_bold_italic-webfont.woff"))
+           (apply format "woff"))]
+   [@font-face
+    #:font-family "Fira Mono"
+    #:font-style normal
+    #:font-weight 400
+    #:font-stretch normal
+    #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Regular.woff"))
+           (apply format "woff"))]
+   [@font-face
+    #:font-family "Fira Mono"
+    #:font-style normal
+    #:font-weight 500
+    #:font-stretch normal
+    #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Medium.woff"))
+           (apply format "woff"))]))
 
-; 400, 400 italic, 700
+;; TODO: Create a ‘Grid’ section.
+;; TODO: Remove ‘insertion’ as a class (let it be a mixin)?
+;; TODO: Give more white lines for ‘#:css’.
+;; TODO: Let these font specifications give the size and more…
+
 (define font/main (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
 
-; 400, 500
 (define font/monospace (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
 
 ;; ---------------------------------------------------------------------------------------------------
@@ -173,11 +223,6 @@
     (green                . ,(dict-ref solarized 'green))))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; COMPONENTS
-
-(components-output-types #:dynamic html atom #:static css)
-
-;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
 
 (define (inline-block-enumeration margin)
@@ -189,16 +234,16 @@
 (define ruler-left-spacing
   (css-expr)
   #;(css-expr #;(#:box-sizing border-box ?)
-            #:padding
-            (#:top (rem ,(modular-scale -4))
-             #:bottom (rem ,(modular-scale -4))
-             #:left ,size/text/indentation
-             #:left (apply calc (- ,size/text/indentation ,size/ruler/thick)))
-            #:margin (#:top (rem ,(modular-scale 0))
-                      #:bottom (rem ,(modular-scale 0)))
-            [.full-width
-             [@media ,size/grid/breakpoint/bigger-screens
-              #:width (apply calc (- ,size/grid/body ,size/text/indentation))]]))
+              #:padding
+              (#:top (rem ,(modular-scale -4))
+               #:bottom (rem ,(modular-scale -4))
+               #:left ,size/text/indentation
+               #:left (apply calc (- ,size/text/indentation ,size/ruler/thick)))
+              #:margin (#:top (rem ,(modular-scale 0))
+                        #:bottom (rem ,(modular-scale 0)))
+              [.full-width
+               [@media ,size/grid/breakpoint/bigger-screens
+                #:width (apply calc (- ,size/grid/body ,size/text/indentation))]]))
 
 (define show-on-hover
   (css-expr #:transition (opacity 0.3s)
