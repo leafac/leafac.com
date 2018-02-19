@@ -70,6 +70,8 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; FONTS
 
+;; TODO: Add font imports
+
 ; 400, 400 italic, 700
 (define font/main (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
 
