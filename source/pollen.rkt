@@ -71,12 +71,10 @@
 ;; FONTS
 
 ; 400, 400 italic, 700
-(define font/main
-  (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
+(define font/main (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
 
 ; 400, 500
-(define font/monospace
-  (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
+(define font/monospace (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORS
@@ -153,13 +151,13 @@
 
 ;; Text
 
-(define size/text/body (css-expr rem ,(px->rem 16)))
+(define size/text/name (css-expr rem ,(px->rem 30)))
 (define size/text/title (css-expr rem ,(px->rem 22)))
 (define size/text/heading (css-expr rem ,(px->rem 20)))
-(define size/text/name (css-expr rem ,(px->rem 30)))
+(define size/text/body (css-expr rem ,(px->rem 16)))
 (define size/text/small (css-expr rem ,(px->rem 13)))
 (define size/text/code/block (css-expr rem ,(px->rem 12)))
-(define size/text/indentation (css-expr rem ,(modular-scale 2)))
+(define size/text/indentation '1.5rem)
 
 ;; Rulers
 
@@ -203,15 +201,15 @@
 (define smart-underline/disable
   (css-expr #:background-image none !important))
 
-(define (inline-block-enumeration gutter)
+(define (inline-block-enumeration margin)
   (css-expr
    #:display inline-block
-   #:margin-right ,gutter
-   [(: & last-child)
-    #:margin-right 0]))
+   #:margin-right ,margin
+   [(: & last-child) #:margin-right 0]))
 
 (define ruler-left-spacing
-  (css-expr #;(#:box-sizing border-box ?)
+  (css-expr)
+  #;(css-expr #;(#:box-sizing border-box ?)
             #:padding
             (#:top (rem ,(modular-scale -4))
              #:bottom (rem ,(modular-scale -4))
@@ -223,12 +221,10 @@
              [@media ,size/grid/breakpoint/bigger-screens
               #:width (apply calc (- ,size/grid/body ,size/text/indentation))]]))
 
-(define-component (show-on-hover . elements)
-  #:html (apply (default-tag-function 'span #:class "show-on-hover") elements)
-  #:css (css-expr [.show-on-hover
-                   #:transition (opacity 0.3s)
-                   #:opacity 0
-                   [(> *:hover &) #:opacity 1]]))
+(define show-on-hover
+  (css-expr #:transition (opacity 0.3s)
+            #:opacity 0
+            [(> *:hover &) #:opacity 1]))
 
 (define (section/flag content color)
   (css-expr
@@ -280,6 +276,61 @@
 
   #:css (css-expr [* *::before *::after #:outline none]))
 
+(define-component header
+  #:css (css-expr [body>header
+                   [h1 #:font-size ,size/text/name]
+                   #:border-bottom
+                   (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+                   #:margin-bottom 2rem]))
+
+(define-component navigation #:html (default-tag-function 'nav))
+
+(define-component (menu . elements)
+  #:html (apply navigation #:class "menu" elements)
+  #:css (css-expr [.menu
+                   #:font-size ,size/text/small
+                   #:text-transform uppercase
+                   #:letter-spacing 0.2em
+                   #:line-height 2
+                   #:margin-bottom 0.5rem
+                   [a
+                    ,@smart-underline/disable
+                    ,@(inline-block-enumeration '1rem)]]))
+
+(define-component title
+  #:css (css-expr [article>header
+                   [h1
+                    #:font-size ,size/text/title
+                    #:margin-bottom 0.2rem]
+                   #:margin-bottom 1rem]))
+
+(define-component time
+  #:html (default-tag-function 'time)
+  #:css (css-expr [time
+                   #:font-size ,size/text/small
+                   #:color ,(dict-ref colorscheme 'secondary-content)]))
+
+(define-component headings
+  #:css (css-expr [h1
+                   #:font-size ,size/text/heading
+                   #:font-style italic
+                   #:font-weight 400]
+                  [h2
+                   #:font-size ,size/text/body
+                   #:font-weight 700]
+                  [h1 h2
+                   #:margin (#:top 1.5rem
+                             #:bottom 0.5rem)
+                   #:line-height 1.3
+                   [a ,@smart-underline/disable]]))
+
+(define-component (heading/mark . elements)
+  #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
+  #:css (css-expr [.heading--mark
+                   ,@show-on-hover
+                   #:margin-left 0.5rem
+                   [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
+
 (define-component body
   #:css (css-expr [body
                    ,@(prefix (css-expr #:font-synthesis none))
@@ -287,8 +338,8 @@
                    ,@(prefix (css-expr #:text-rendering optimizeLegibility))
                    ,@font/main
                    #:font-size ,size/text/body
-                   #:line-height ,(modular-scale 2)
-                   #:margin ((rem ,(modular-scale 4)) auto)
+                   #:line-height 1.5
+                   #:margin (2rem auto)
                    #:padding (0 ,size/grid/padding)
                    #:max-width ,size/grid/article
                    [@media ,size/grid/breakpoint/bigger-screens
@@ -306,67 +357,9 @@
 
 (define-component insertion
   #:css (css-expr [.insertion
+                   #;(#:box-sizing border-box ?)
                    #:width 100%
-                   #:margin (#:top (rem ,(modular-scale -2))
-                             #:bottom (rem ,(modular-scale -2)))]))
-
-(define-component headings
-  #:css (css-expr [h1
-                   #:font-size ,size/text/heading
-                   #:font-style italic
-                   #:font-weight 400]
-                  [h2
-                   #:font-size ,size/text/body
-                   #:font-weight 700]
-                  [h1 h2
-                   #:margin (#:top (rem ,(modular-scale 2))
-                             #:bottom (rem ,(modular-scale -2)))
-                   [a ,@smart-underline/disable]]))
-
-(define-component (heading/mark . elements)
-  #:html (show-on-hover
-          (apply (default-tag-function 'span #:class "heading--mark")
-                 elements))
-  #:css (css-expr [.heading--mark
-                   #:margin-left (rem ,(modular-scale -3))
-                   [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
-
-(define-component (reference/§ key)
-  #:html (heading/mark (reference key "§")))
-
-(define-component navigation #:html (default-tag-function 'nav))
-
-(define-component (menu . elements)
-  #:html (apply navigation #:class "menu" elements)
-  #:css (css-expr [.menu
-                   #:font-size ,size/text/small
-                   #:text-transform uppercase
-                   #:letter-spacing 0.2em
-                   #:line-height ,(modular-scale 4)
-                   [a
-                    ,@smart-underline/disable
-                    ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 0))))]]))
-
-(define-component header
-  #:css (css-expr [header
-                   [(> body &)
-                    [h1 #:font-size ,size/text/name]
-                    #:padding-bottom (rem ,(modular-scale -4))
-                    #:border-bottom
-                    (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                    #:margin-bottom (rem ,(modular-scale 4))]
-                   [(> article &)
-                    [h1 #:font-size ,size/text/title]
-                    #:margin (#:top (rem ,(modular-scale 2))
-                              #:bottom (rem ,(modular-scale -2)))]]))
-
-(define-component time
-  #:html (default-tag-function 'time)
-  #:css (css-expr [time
-                   #:font-size ,size/text/small
-                   #:position relative
-                   #:top (rem ,(- (modular-scale -3)))
-                   #:color ,(dict-ref colorscheme 'secondary-content)]))
+                   #:margin (0.5rem 0)]))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
@@ -376,6 +369,9 @@
 
 (define-component (reference key . elements)
   #:html (apply link (~a "#" key) elements))
+
+(define-component (reference/§ key)
+  #:html (heading/mark (reference key "§")))
 
 (define-component (link path . elements)
   #:html (apply (default-tag-function 'a) #:href path
