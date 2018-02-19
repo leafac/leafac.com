@@ -58,6 +58,7 @@
 ;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
 (define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
   (* base (expt ratio step)))
+;; TODO: Get rid of ‘modular-scale’?
 
 ;; Feeds
 
@@ -118,42 +119,37 @@
 
 ;; Grid
 
-;;                  bigger-screens
-;;
-;; |                     body                           |
-;; |                     1024                           |
-;; |         |        full-width              |         |
-;; |         |           1000                 |         |
+;; |                   bigger-screens                   |
+;; |                        1024                        |
+;; |         |              body              |         |
+;; |         |              1000              |         |
 ;; | padding | article | gutter | margin-note | padding |
-;; |    12   |   600   |   75   |     325     |    12   |
+;; |   12    |   600   |   75   |     325     |   12    |
 ;;                     |   margin-note/pull   |
-;;                     |       400            |
+;;                     |         400          |
 ;;
 ;;
-;;         smaller-screens
-;;
-;; |       article+padding       |
+;; |       smaller-screens       |
 ;; |             624             |
 ;; | padding | article | padding |
-;; |    12   |   600   |    12   |
+;; |   12    |   600   |   12    |
 
-(define size/grid/body/unitless (px->rem 1024))
+(define size/grid/body/unitless (px->rem 1000))
 (define size/grid/body (css-expr rem ,size/grid/body/unitless))
 (define size/grid/padding/unitless (px->rem 12))
 (define size/grid/padding (css-expr rem ,size/grid/padding/unitless))
 (define size/grid/article/unitless (px->rem 600))
 (define size/grid/article (css-expr rem ,size/grid/article/unitless))
-(define size/grid/article+padding
-  (css-expr rem ,(+ size/grid/article/unitless (* size/grid/padding/unitless 2))))
 (define size/grid/gutter/unitless (px->rem 75))
 (define size/grid/margin-note/unitless (px->rem 325))
 (define size/grid/margin-note (css-expr rem ,size/grid/margin-note/unitless))
 (define size/grid/margin-note/pull
   (css-expr rem ,(- (+ size/grid/gutter/unitless size/grid/margin-note/unitless))))
+(define size/grid/bigger-screens (+ size/grid/body/unitless (* size/grid/padding/unitless 2)))
 (define size/grid/breakpoint/bigger-screens
-  (css-expr and screen (#:min-width (rem ,size/grid/body/unitless))))
+  (css-expr and screen (#:min-width (rem ,size/grid/bigger-screens))))
 (define size/grid/breakpoint/smaller-screens
-  (css-expr and screen (#:max-width (rem ,(- size/grid/body/unitless 0.01)))))
+  (css-expr and screen (#:max-width (rem ,(- size/grid/bigger-screens 0.01)))))
 
 ;; Text
 
@@ -215,7 +211,8 @@
     #:margin-right 0]))
 
 (define ruler-left-spacing
-  (css-expr #:padding
+  (css-expr #;(#:box-sizing border-box ?)
+            #:padding
             (#:top (rem ,(modular-scale -4))
              #:bottom (rem ,(modular-scale -4))
              #:left ,size/text/indentation
@@ -281,9 +278,7 @@
            (cons `(class ,classes/concatenated) non-classes)))))
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes)
 
-  #:css (css-expr [* *::before *::after
-                   #:box-sizing border-box
-                   #:outline none]))
+  #:css (css-expr [* *::before *::after #:outline none]))
 
 (define-component body
   #:css (css-expr [body
@@ -295,7 +290,7 @@
                    #:line-height ,(modular-scale 2)
                    #:margin ((rem ,(modular-scale 4)) auto)
                    #:padding (0 ,size/grid/padding)
-                   #:max-width ,size/grid/article+padding
+                   #:max-width ,size/grid/article
                    [@media ,size/grid/breakpoint/bigger-screens
                     #:max-width ,size/grid/body
                     [article #:width ,size/grid/article]]
@@ -476,6 +471,7 @@
   #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
   #:css (css-expr [pre
                    ,@font/monospace
+                   #;(#:box-sizing border-box ?)
                    #:font-size ,size/text/code/block
                    #:overflow auto
                    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
