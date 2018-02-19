@@ -107,6 +107,9 @@
 (define size/grid/breakpoint/smaller-screens
   (css-expr and screen (#:max-width (rem ,(- size/grid/bigger-screens 0.01)))))
 
+;; TODO: Consolidate spacing from ‘Template’ section.
+;; TODO: Bring here the rules for ‘Grid’, currently at the ‘Template’ section?
+
 ;; Rulers
 
 (define size/ruler/thin/unitless 1)
@@ -164,11 +167,6 @@
     #:font-stretch normal
     #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Medium.woff"))
            (apply format "woff"))]))
-
-;; TODO: Create a ‘Grid’ section.
-;; TODO: Remove ‘insertion’ as a class (let it be a mixin)?
-;; TODO: Give more white lines for ‘#:css’.
-;; TODO: Let these font specifications give the size and more…
 
 (define size/text/name (css-expr rem ,(px->rem 30)))
 (define size/text/title (css-expr rem ,(px->rem 22)))
@@ -297,89 +295,107 @@
   #:css (css-expr [* *::before *::after #:outline none]))
 
 (define-component header
-  #:css (css-expr [body>header
-                   [h1 #:font-size ,size/text/name]
-                   #:border-bottom
-                   (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                   #:margin-bottom 2rem]))
+  #:css
+  (css-expr
+   [body>header
+    [h1 #:font-size ,size/text/name]
+    #:border-bottom
+    (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+    #:margin-bottom 2rem]))
 
 (define-component navigation #:html (default-tag-function 'nav))
 
 (define-component (menu . elements)
   #:html (apply navigation #:class "menu" elements)
-  #:css (css-expr [.menu
-                   #:font-size ,size/text/small
-                   #:text-transform uppercase
-                   #:letter-spacing 0.2em
-                   #:line-height 2
-                   #:margin-bottom 0.5rem
-                   [a
-                    #:text-decoration none
-                    ,@(inline-block-enumeration '1rem)]]))
+  #:css
+  (css-expr
+   [.menu
+    #:font-size ,size/text/small
+    #:text-transform uppercase
+    #:letter-spacing 0.2em
+    #:line-height 2
+    #:margin-bottom 0.5rem
+    [a
+     #:text-decoration none
+     ,@(inline-block-enumeration '1rem)]]))
 
 (define-component title
-  #:css (css-expr [article>header
-                   [h1
-                    #:font-size ,size/text/title
-                    #:margin-bottom 0.2rem]
-                   #:margin-bottom 1rem]))
+  #:css
+  (css-expr
+   [article>header
+    [h1
+     #:font-size ,size/text/title
+     #:margin-bottom 0.2rem]
+    #:margin-bottom 1rem]))
 
 (define-component time
   #:html (default-tag-function 'time)
-  #:css (css-expr [time
-                   #:font-size ,size/text/small
-                   #:color ,(dict-ref colorscheme 'secondary-content)]))
+  #:css
+  (css-expr
+   [time
+    #:font-size ,size/text/small
+    #:color ,(dict-ref colorscheme 'secondary-content)]))
 
 (define-component headings
-  #:css (css-expr [h1
-                   #:font-size ,size/text/heading
-                   #:font-style italic
-                   #:font-weight 400]
-                  [h2
-                   #:font-size ,size/text/body
-                   #:font-weight 700]
-                  [h1 h2
-                   #:margin (#:top 1.5rem
-                             #:bottom 0.5rem)
-                   #:line-height 1.3
-                   [a #:text-decoration none]]))
+  #:css
+  (css-expr
+   [h1
+    #:font-size ,size/text/heading
+    #:font-style italic
+    #:font-weight 400]
+   [h2
+    #:font-size ,size/text/body
+    #:font-weight 700]
+   [h1 h2
+    #:margin (#:top 1.5rem
+              #:bottom 0.5rem)
+    #:line-height 1.3
+    [a #:text-decoration none]]))
 
 (define-component (heading/mark . elements)
   #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
-  #:css (css-expr [.heading--mark
-                   ,@show-on-hover
-                   #:margin-left 0.5rem
-                   [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
+  #:css
+  (css-expr
+   [.heading--mark
+    ,@show-on-hover
+    #:margin-left 0.5rem
+    [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
 
 (define-component body
-  #:css (css-expr [body
-                   ,@(prefix (css-expr #:font-synthesis none))
-                   ,@(prefix (css-expr #:font-kerning normal))
-                   ,@(prefix (css-expr #:text-rendering optimizeLegibility))
-                   ,@font/main
-                   #:font-size ,size/text/body
-                   #:line-height 1.5
-                   #:margin (2rem auto)
-                   #:padding (0 ,size/grid/padding)
-                   #:max-width ,size/grid/article
-                   [@media ,size/grid/breakpoint/bigger-screens
-                    #:max-width ,size/grid/body
-                    [article #:width ,size/grid/article]]
-                   #:background-color ,(dict-ref colorscheme 'background)
-                   #:color ,(dict-ref colorscheme 'primary-content)]
-                  [p
-                   #:margin 0
-                   [(+ p &)
-                    #:text-indent ,size/text/indentation]
-                   [@media ,size/grid/breakpoint/bigger-screens
-                    [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &)
-                     #:text-indent ,size/text/indentation]]]))
+  #:css
+  (css-expr
+   [body
+    ,@(prefix (css-expr #:font-synthesis none))
+    ,@(prefix (css-expr #:font-kerning normal))
+    ,@(prefix (css-expr #:text-rendering optimizeLegibility))
+    ,@font/main
+    #:font-size ,size/text/body
+    #:line-height 1.5
+    #:margin (2rem auto)
+    #:padding (0 ,size/grid/padding)
+    #:max-width ,size/grid/article
+    [@media ,size/grid/breakpoint/bigger-screens
+     #:max-width ,size/grid/body
+     [article #:width ,size/grid/article]]
+    #:background-color ,(dict-ref colorscheme 'background)
+    #:color ,(dict-ref colorscheme 'primary-content)]
+   [p
+    #:margin 0
+    [(+ p &)
+     #:text-indent ,size/text/indentation]
+    [@media ,size/grid/breakpoint/bigger-screens
+     [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &)
+      #:text-indent ,size/text/indentation]]]))
 
+
+;; TODO: Remove this as a class (let it be a mixin)?
 (define-component insertion
-  #:css (css-expr [.insertion
-                   #;(#:box-sizing border-box ?)
-                   #:width 100%
-                   #:margin (0.5rem 0)]))
+  #:css
+  (css-expr
+   [.insertion
+    #;(#:box-sizing border-box ?)
+    #:width 100%
+    #:margin (0.5rem 0)]))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
@@ -396,18 +412,20 @@
 (define-component (link path . elements)
   #:html (apply (default-tag-function 'a) #:href path
                 (if (null? elements) `(,path) elements))
-  #:css (css-expr [a
-                   #:transition (background-color 0.3s)
-                   #:color ,(dict-ref colorscheme 'primary-content)
-                   [(: & hover)
-                    #:background-color ,(dict-ref colorscheme 'background-highlight)
-                    #:color ,(dict-ref colorscheme 'emphasized-content)]
-                   [@media ,size/grid/breakpoint/smaller-screens
-                    [(aside &)
-                     #:color ,(dict-ref colorscheme 'emphasized-content)
-                     [(: & hover)
-                      #:background-color ,(dict-ref colorscheme 'background)
-                      #:color ,(dict-ref colorscheme 'primary-content)]]]]))
+  #:css
+  (css-expr
+   [a
+    #:transition (background-color 0.3s)
+    #:color ,(dict-ref colorscheme 'primary-content)
+    [(: & hover)
+     #:background-color ,(dict-ref colorscheme 'background-highlight)
+     #:color ,(dict-ref colorscheme 'emphasized-content)]
+    [@media ,size/grid/breakpoint/smaller-screens
+     [(aside &)
+      #:color ,(dict-ref colorscheme 'emphasized-content)
+      [(: & hover)
+       #:background-color ,(dict-ref colorscheme 'background)
+       #:color ,(dict-ref colorscheme 'primary-content)]]]]))
 
 (define-component (link/internal path . elements)
   #:html (apply link (internal-url path) elements))
@@ -425,27 +443,30 @@
 (define-component (phone number)
   #:html ((default-tag-function '@) number))
 
+;; TODO: Remove this?
 (define-component new-thought
   #:html (default-tag-function 'span #:class "new-thought")
   #:css (css-expr #;[.new-thought]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
-  #:css (css-expr [aside
-                   [@media ,size/grid/breakpoint/smaller-screens
-                    #:color ,(dict-ref colorscheme 'emphasized-content)
-                    #:background-color ,(dict-ref colorscheme 'background-highlight)
-                    #:border-left
-                    (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
-                    ,@ruler-left-spacing
-                    #:padding-right (rem ,(modular-scale -4))]
-                   [@media ,size/grid/breakpoint/bigger-screens
-                    #:font-size ,size/text/small
-                    #:float right
-                    #:clear right
-                    #:width ,size/grid/margin-note !important
-                    #:margin-bottom (rem ,(modular-scale 2))
-                    #:margin-right ,size/grid/margin-note/pull]]))
+  #:css
+  (css-expr
+   [aside
+    [@media ,size/grid/breakpoint/smaller-screens
+     #:color ,(dict-ref colorscheme 'emphasized-content)
+     #:background-color ,(dict-ref colorscheme 'background-highlight)
+     #:border-left
+     (,size/ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
+     ,@ruler-left-spacing
+     #:padding-right (rem ,(modular-scale -4))]
+    [@media ,size/grid/breakpoint/bigger-screens
+     #:font-size ,size/text/small
+     #:float right
+     #:clear right
+     #:width ,size/grid/margin-note !important
+     #:margin-bottom (rem ,(modular-scale 2))
+     #:margin-right ,size/grid/margin-note/pull]]))
 
 (define-component figure
   #:html (default-tag-function 'figure #:class "insertion")
@@ -453,16 +474,13 @@
 
 (define-component figure/caption
   #:html (default-tag-function 'figcaption)
-  #:css (css-expr [figcaption
-                   #:font-style italic
-                   #:text-align center]))
+  #:css (css-expr [figcaption #:font-style italic #:text-align center]))
 
 (define-component (image path [caption ""])
   #:html (figure ((default-tag-function 'div #:class "image-in-figure")
                   ((default-tag-function 'img) #:src path #:alt caption))
                  (figure/caption caption))
-  #:css (css-expr [img #:max-width 100%]
-                  [.image-in-figure #:text-align center]))
+  #:css (css-expr [img #:max-width 100%] [.image-in-figure #:text-align center]))
 
 (define-component (svg path)
   #:html (string->xexpr (file->string path))
@@ -474,14 +492,16 @@
 
 (define-component (code/block . elements)
   #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
-  #:css (css-expr [pre
-                   ,@font/monospace
-                   #;(#:box-sizing border-box ?)
-                   #:font-size ,size/text/code/block
-                   #:overflow auto
-                   #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                   #:padding ,size/text/indentation
-                   #:padding (apply calc (- ,size/text/indentation ,size/ruler/thin))]))
+  #:css
+  (css-expr
+   [pre
+    ,@font/monospace
+    #;(#:box-sizing border-box ?)
+    #:font-size ,size/text/code/block
+    #:overflow auto
+    #:border (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+    #:padding ,size/text/indentation
+    #:padding (apply calc (- ,size/text/indentation ,size/ruler/thin))]))
 
 (define-component (code/block/highlighted language . elements)
   #:html
@@ -512,21 +532,23 @@
           (if language
               (apply code/block/highlighted language elements)
               (apply code/block elements)))
-  #:css (css-expr [.file-listing
-                   [.code--block
-                    #:margin-top 0]
-                   [.path
-                    #:font-size ,size/text/code/block
-                    #:border
-                    (#:top (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                     #:right (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-                     #:left (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content)))
-                    #:padding
-                    (#:left (rem ,(modular-scale -1))
-                     #:right (rem ,(modular-scale -1)))
-                    #:color ,(dict-ref colorscheme 'secondary-content)]
-                   [(> & p)
-                    #:margin-bottom ,size/ruler/thin/negative]]))
+  #:css
+  (css-expr
+   [.file-listing
+    [.code--block
+     #:margin-top 0]
+    [.path
+     #:font-size ,size/text/code/block
+     #:border
+     (#:top (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+      #:right (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+      #:left (,size/ruler/thin solid ,(dict-ref colorscheme 'secondary-content)))
+     #:padding
+     (#:left (rem ,(modular-scale -1))
+      #:right (rem ,(modular-scale -1)))
+     #:color ,(dict-ref colorscheme 'secondary-content)]
+    [(> & p)
+     #:margin-bottom ,size/ruler/thin/negative]]))
 
 (define-component keyboard
   #:html (default-tag-function 'kbd)
@@ -537,15 +559,16 @@
 
 (define-component initialism
   #:html (default-tag-function 'span #:class "initialism")
-  #:css (css-expr #;[span.initialism
-                     ,@font/capitals]))
+  #:css (css-expr #;[span.initialism ,@font/capitals]))
 
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width insertion")
-  #:css (css-expr [.full-width
-                   [@media ,size/grid/breakpoint/bigger-screens
-                    #:clear both
-                    #:width ,size/grid/body]]))
+  #:css
+  (css-expr
+   [.full-width
+    [@media ,size/grid/breakpoint/bigger-screens
+     #:clear both
+     #:width ,size/grid/body]]))
 
 (define-component list/unordered #:html (default-tag-function 'ul #:class "insertion"))
 
@@ -584,19 +607,23 @@
 (define-component table #:html (default-tag-function 'table #:class "insertion"))
 
 (define-component table/aligned-last-data
-  #:css (css-expr [(.table--aligned-last-data td:last-child)
-                   #:width 40%
-                   #;[(ol &) (ul &) ;; FIXME
-                      #:width (apply calc (- 40% 40px))]]))
+  #:css
+  (css-expr
+   [(.table--aligned-last-data td:last-child)
+    #:width 40%
+    #;[(ol &) (ul &) ;; FIXME
+       #:width (apply calc (- 40% 40px))]]))
 
 (define-component table/header #:html (default-tag-function 'thead))
 
 (define-component table/body
   #:html (default-tag-function 'tbody)
-  #:css (css-expr [tbody+tbody::before
-                   #:content ""
-                   #:display block
-                   #:margin-top (rem ,(modular-scale -4))]))
+  #:css
+  (css-expr
+   [tbody+tbody::before
+    #:content ""
+    #:display block
+    #:margin-top (rem ,(modular-scale -4))]))
 
 (define-component table/row #:html (default-tag-function 'tr))
 
@@ -606,21 +633,25 @@
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
-  #:css (css-expr [th
-                   #:font-weight 700
-                   #:text-align left
-                   #:padding 0 (#:right ,size/grid/padding)]))
+  #:css
+  (css-expr
+   [th
+             #:font-weight 700
+             #:text-align left
+             #:padding 0 (#:right ,size/grid/padding)]))
 
 (define-component (fraction numerator denominator)
   #:html `(span
            (span ((class "fraction--numerator")) ,(~a numerator))
            (span ((class "fraction--slash")) "/")
            (span ((class "fraction--denominator")) ,(~a denominator)))
-  #:css (css-expr [.fraction--numerator .fraction--denominator
-                   #:font-size 0.8em]
-                  [.fraction--numerator #:vertical-align super]
-                  [.fraction--denominator #:vertical-align sub]
-                  [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
+  #:css
+  (css-expr
+   [.fraction--numerator .fraction--denominator
+    #:font-size 0.8em]
+   [.fraction--numerator #:vertical-align super]
+   [.fraction--denominator #:vertical-align sub]
+   [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
 
 (define-component roman-number #:html initialism)
 
@@ -640,8 +671,7 @@
 
 (define-component menu-option
   #:html (default-tag-function 'span #:class "menu-option")
-  #:css (css-expr [.menu-option
-                   #:font-style italic]))
+  #:css (css-expr [.menu-option #:font-style italic]))
 
 (define-component (menu-option/path . elements)
   #:html (apply menu-option (add-between elements " > ")))
@@ -651,14 +681,14 @@
 
 (define-component (recipes . elements)
   #:html (apply list/unordered #:class "recipes" elements)
-  #:css (css-expr [.recipes
-                   ,@(prefix (css-expr #:column-count 2))
-                   #:padding-left 0]))
+  #:css (css-expr [.recipes ,@(prefix (css-expr #:column-count 2)) #:padding-left 0]))
 
 (define-component (recipe path . elements)
   #:html (list/unordered/item #:class "recipe"
                               (apply link/internal (~a "/cooking/" path) elements))
-  #:css (css-expr [.recipe
+  #:css
+  (css-expr
+   [.recipe
                    #:list-style none
                    #:margin-bottom (rem ,(modular-scale -4))
                    [a #:text-decoration none]]))
@@ -750,12 +780,13 @@
 
 (define-component (skills . elements)
   #:html (apply list/unordered #:class "skills" elements)
-  #:css (css-expr [.skills
-                   #:padding-left 0]))
+  #:css (css-expr [.skills #:padding-left 0]))
 
 (define-component (skill level . elements)
   #:html (apply list/unordered/item #:class (~a "skill " level) elements)
-  #:css (css-expr [.skill
+  #:css
+  (css-expr
+   [.skill
                    ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 1))))
                    #:line-height 2
                    [.initialism
