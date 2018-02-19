@@ -70,21 +70,12 @@
 ;; FONTS
 
 ; 400, 400 italic, 700
-(define font/serif
+(define font/main
   (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
-
-; 400, 600
-(define font/sans-serif
-  (css-expr #:font-family "Fira Sans" "Gill Sans"
-            -apple-system BlinkMacSystemFont "Helvetica Neue" "Helvetica" "Verdana" sans-serif))
 
 ; 400, 500
 (define font/monospace
   (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
-
-(define font/main font/serif)
-
-(define font/secondary font/sans-serif)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORS
@@ -649,7 +640,7 @@
 (define-component menu-option
   #:html (default-tag-function 'span #:class "menu-option")
   #:css (css-expr [.menu-option
-                   ,@font/secondary]))
+                   #:font-style italic]))
 
 (define-component (menu-option/path . elements)
   #:html (apply menu-option (add-between elements " > ")))
