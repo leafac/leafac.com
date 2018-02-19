@@ -127,6 +127,8 @@
 
 ;; Grid
 
+;;                  bigger-screens
+;;
 ;; |                     body                           |
 ;; |                     1024                           |
 ;; |         |        full-width              |         |
@@ -135,11 +137,23 @@
 ;; |    12   |   600   |   75   |     325     |    12   |
 ;;                     |   margin-note/pull   |
 ;;                     |       400            |
+;;
+;;
+;;         smaller-screens
+;;
+;; |       article+padding       |
+;; |             624             |
+;; | padding | article | padding |
+;; |    12   |   600   |    12   |
 
 (define size/grid/body/unitless (px->rem 1024))
 (define size/grid/body (css-expr rem ,size/grid/body/unitless))
-(define size/grid/padding (css-expr rem ,(px->rem 12)))
-(define size/grid/article (css-expr rem ,(px->rem 600)))
+(define size/grid/padding/unitless (px->rem 12))
+(define size/grid/padding (css-expr rem ,size/grid/padding/unitless))
+(define size/grid/article/unitless (px->rem 600))
+(define size/grid/article (css-expr rem ,size/grid/article/unitless))
+(define size/grid/article+padding
+  (css-expr rem ,(+ size/grid/article/unitless (* size/grid/padding/unitless 2))))
 (define size/grid/gutter/unitless (px->rem 75))
 (define size/grid/margin-note/unitless (px->rem 325))
 (define size/grid/margin-note (css-expr rem ,size/grid/margin-note/unitless))
@@ -290,7 +304,7 @@
                    #:line-height ,(modular-scale 2)
                    #:margin ((rem ,(modular-scale 4)) auto)
                    #:padding (0 ,size/grid/padding)
-                   #:max-width ,size/grid/article
+                   #:max-width ,size/grid/article+padding
                    [@media ,size/grid/breakpoint/bigger-screens
                     #:max-width ,size/grid/body
                     [article #:width ,size/grid/article]]
