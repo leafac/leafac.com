@@ -1,5 +1,5 @@
 #lang pollen
-◊(string-join
+◊(string-append*
   (for/list ([file (in-list '("/vendor/assets/stylesheets/normalize.css"
                               "/vendor/assets/stylesheets/syntax-highlight.css"))])
     (file->string (source-path file))))
