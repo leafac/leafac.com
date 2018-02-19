@@ -71,6 +71,7 @@
 ;; FONTS
 
 ;; TODO: Add font imports
+;;       @font-face {font-family, font-style, font-weight, font-stretch, src: url()}
 
 ; 400, 400 italic, 700
 (define font/main (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
