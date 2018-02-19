@@ -73,9 +73,7 @@
 (components-output-types #:dynamic html atom #:static css)
 
 ;; ---------------------------------------------------------------------------------------------------
-;; SIZES
-
-;; Grid
+;; GRID
 
 ;; |                   bigger-screens                   |
 ;; |                        1024                        |
@@ -108,16 +106,6 @@
   (css-expr and screen (#:min-width (rem ,size/grid/bigger-screens))))
 (define size/grid/breakpoint/smaller-screens
   (css-expr and screen (#:max-width (rem ,(- size/grid/bigger-screens 0.01)))))
-
-;; Text
-
-(define size/text/name (css-expr rem ,(px->rem 30)))
-(define size/text/title (css-expr rem ,(px->rem 22)))
-(define size/text/heading (css-expr rem ,(px->rem 20)))
-(define size/text/body (css-expr rem ,(px->rem 16)))
-(define size/text/small (css-expr rem ,(px->rem 13)))
-(define size/text/code/block (css-expr rem ,(px->rem 12)))
-(define size/text/indentation '1.5rem)
 
 ;; Rulers
 
@@ -181,6 +169,14 @@
 ;; TODO: Remove ‘insertion’ as a class (let it be a mixin)?
 ;; TODO: Give more white lines for ‘#:css’.
 ;; TODO: Let these font specifications give the size and more…
+
+(define size/text/name (css-expr rem ,(px->rem 30)))
+(define size/text/title (css-expr rem ,(px->rem 22)))
+(define size/text/heading (css-expr rem ,(px->rem 20)))
+(define size/text/body (css-expr rem ,(px->rem 16)))
+(define size/text/small (css-expr rem ,(px->rem 13)))
+(define size/text/code/block (css-expr rem ,(px->rem 12)))
+(define size/text/indentation '1.5rem)
 
 (define font/main (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
 
