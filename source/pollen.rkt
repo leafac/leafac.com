@@ -180,31 +180,6 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
 
-;; Reference: https://eager.io/blog/smarter-link-underlines/
-(define (smart-underline #:colors colors
-                         #:colors/hover [colors/hover #f]
-                         #:distances [distances '(0.03 0.06 0.09 0.12 0.15)]
-                         #:thickness [thickness '1px]
-                         #:top [top '100%])
-  (define/match (rules colors)
-    [(`(,color/foreground ,color/background))
-     (css-expr #:text-decoration none
-               #:text-shadow ,@(append*
-                                (for/list ([distance distances])
-                                  (css-expr ((em ,distance) 0 ,color/background)
-                                            (0 (em ,distance) ,color/background)
-                                            ((em ,(- distance)) 0 ,color/background)
-                                            (0 (em ,(- distance)) ,color/background))))
-               #:background (#:image (apply linear-gradient ,color/foreground ,color/foreground)
-                             #:size (,thickness ,thickness)
-                             #:repeat repeat-x
-                             #:position (0% ,top)))])
-  (css-expr ,@(rules colors)
-            ,@(if colors/hover (css-expr [(: & hover) ,@(rules colors/hover)]) (css-expr))))
-
-(define smart-underline/disable
-  (css-expr #:background-image none !important))
-
 (define (inline-block-enumeration margin)
   (css-expr
    #:display inline-block
@@ -298,7 +273,7 @@
                    #:line-height 2
                    #:margin-bottom 0.5rem
                    [a
-                    ,@smart-underline/disable
+                    #:text-decoration none
                     ,@(inline-block-enumeration '1rem)]]))
 
 (define-component title
@@ -326,7 +301,7 @@
                    #:margin (#:top 1.5rem
                              #:bottom 0.5rem)
                    #:line-height 1.3
-                   [a ,@smart-underline/disable]]))
+                   [a #:text-decoration none]]))
 
 (define-component (heading/mark . elements)
   #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
@@ -381,28 +356,17 @@
   #:html (apply (default-tag-function 'a) #:href path
                 (if (null? elements) `(,path) elements))
   #:css (css-expr [a
-                   #:text-decoration none
-                   #:transition (background-color 0.3s) (text-shadow 0.3s)
+                   #:transition (background-color 0.3s)
                    #:color ,(dict-ref colorscheme 'primary-content)
                    [(: & hover)
                     #:background-color ,(dict-ref colorscheme 'background-highlight)
                     #:color ,(dict-ref colorscheme 'emphasized-content)]
-                   ,@(smart-underline
-                      #:colors `(,(dict-ref colorscheme 'secondary-content)
-                                 ,(dict-ref colorscheme 'background))
-                      #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                                       ,(dict-ref colorscheme 'background-highlight)))
                    [@media ,size/grid/breakpoint/smaller-screens
                     [(aside &)
                      #:color ,(dict-ref colorscheme 'emphasized-content)
                      [(: & hover)
                       #:background-color ,(dict-ref colorscheme 'background)
-                      #:color ,(dict-ref colorscheme 'primary-content)]
-                     ,@(smart-underline
-                        #:colors `(,(dict-ref colorscheme 'secondary-content)
-                                   ,(dict-ref colorscheme 'background-highlight))
-                        #:colors/hover `(,(dict-ref colorscheme 'secondary-content)
-                                         ,(dict-ref colorscheme 'background)))]]]))
+                      #:color ,(dict-ref colorscheme 'primary-content)]]]]))
 
 (define-component (link/internal path . elements)
   #:html (apply link (internal-url path) elements))
@@ -656,7 +620,7 @@
   #:css (css-expr [.recipe
                    #:list-style none
                    #:margin-bottom (rem ,(modular-scale -4))
-                   [a ,@smart-underline/disable]]))
+                   [a #:text-decoration none]]))
 
 (define ingredients/collected (make-hash))
 
