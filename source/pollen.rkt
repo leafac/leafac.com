@@ -288,13 +288,12 @@
                    ,@(prefix (css-expr #:text-rendering optimizeLegibility))
                    ,@(prefix (css-expr #:font-feature-settings "kern" "rlig" "liga" "clig" "calt"))
                    ,@font/main
-                   #:font-size ,size/text/small
+                    #:font-size ,size/text/body
                    #:line-height ,(modular-scale 2)
                    #:margin ((rem ,(modular-scale 4)) auto)
                    #:padding (0 ,size/grid/padding)
                    #:max-width ,size/grid/article
                    [@media ,size/grid/breakpoint/bigger-screens
-                    #:font-size ,size/text/body
                     #:max-width ,size/grid/body
                     [article #:width ,size/grid/article]]
                    #:background-color ,(dict-ref colorscheme 'background)
