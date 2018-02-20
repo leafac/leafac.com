@@ -103,20 +103,13 @@
 (define grid/bigger-screens (css-expr #:min-width (rem ,grid/bigger-screens/unitless)))
 (define grid/smaller-screens (css-expr #:max-width (rem ,(- grid/bigger-screens/unitless 0.01))))
 
+;; ---------------------------------------------------------------------------------------------------
+;; VERTICAL RHYTHM
+
 ;; TODO: Consolidate spacing from ‘Template’ section.
 
 ;; ---------------------------------------------------------------------------------------------------
-;; RULERS
-
-(define ruler/thin/unitless 1)
-(define ruler/thin (css-expr px ,ruler/thin/unitless))
-(define ruler/thin/negative (css-expr px ,(- ruler/thin/unitless)))
-(define ruler/thick/unitless 3)
-(define ruler/thick (css-expr px ,ruler/thick/unitless))
-(define ruler/thick/negative (css-expr px ,(- ruler/thick/unitless)))
-
-;; ---------------------------------------------------------------------------------------------------
-;; FONTS
+;; TEXT
 
 (define-component @font-face
   #:css
@@ -214,6 +207,16 @@
     (green                . ,(dict-ref solarized 'green))))
 
 ;; ---------------------------------------------------------------------------------------------------
+;; RULERS
+
+(define ruler/thin/unitless 1)
+(define ruler/thin (css-expr px ,ruler/thin/unitless))
+(define ruler/thin/negative (css-expr px ,(- ruler/thin/unitless)))
+(define ruler/thick/unitless 3)
+(define ruler/thick (css-expr px ,ruler/thick/unitless))
+(define ruler/thick/negative (css-expr px ,(- ruler/thick/unitless)))
+
+;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
 
 (define (inline-block-enumeration margin)
@@ -291,13 +294,12 @@
 
   #:css (css-expr [* *::before *::after #:outline none]))
 
-(define-component header
+(define-component body/header
   #:css
   (css-expr
    [body>header
     [h1 #:font-size ,font-size/name]
-    #:border-bottom
-    (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+    #:border-bottom (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
     #:margin-bottom 2rem]))
 
 (define-component navigation #:html (default-tag-function 'nav))
@@ -316,7 +318,7 @@
      #:text-decoration none
      ,@(inline-block-enumeration '1rem)]]))
 
-(define-component title
+(define-component article/header
   #:css
   (css-expr
    [article>header
@@ -383,7 +385,6 @@
     [@media ,grid/bigger-screens
      [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &)
       #:text-indent ,text-indent]]]))
-
 
 ;; TODO: Remove this as a class (let it be a mixin)?
 (define-component insertion
