@@ -490,10 +490,10 @@
    [pre
     ,@insertion
     ,@font-family/monospace
-    #;(#:box-sizing border-box ?)
     #:font-size ,font-size/code/block
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+    #:box-sizing border-box
     #:padding ,text-indent
     #:padding (apply calc (- ,text-indent ,ruler/thin))]))
 
