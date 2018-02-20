@@ -104,9 +104,12 @@
 (define grid/smaller-screens (css-expr #:max-width (rem ,(- grid/bigger-screens/unitless 0.01))))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; VERTICAL RHYTHM
+;; SIZES
 
-;; TODO: Consolidate spacing from ‘Template’ section.
+(define size/small '0.5rem)
+(define size/medium '1rem)
+(define size/large '1.5rem)
+(define size/huge '2rem)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEXT
@@ -300,7 +303,7 @@
    [body>header
     [h1 #:font-size ,font-size/name]
     #:border-bottom (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-    #:margin-bottom 2rem]))
+    #:margin-bottom ,size/huge]))
 
 (define-component navigation #:html (default-tag-function 'nav))
 
@@ -313,7 +316,7 @@
     #:text-transform uppercase
     #:letter-spacing 0.2em
     #:line-height 2
-    #:margin-bottom 0.5rem
+    #:margin-bottom ,size/small
     [a
      #:text-decoration none
      ,@(inline-block-enumeration '1rem)]]))
@@ -322,10 +325,8 @@
   #:css
   (css-expr
    [article>header
-    [h1
-     #:font-size ,font-size/title
-     #:margin-bottom 0.2rem]
-    #:margin-bottom 1rem]))
+    [h1 #:font-size ,font-size/title]
+    #:margin-bottom ,size/medium]))
 
 (define-component time
   #:html (default-tag-function 'time)
@@ -346,8 +347,7 @@
     #:font-size ,font-size/body
     #:font-weight 700]
    [h1 h2
-    #:margin (#:top 1.5rem
-              #:bottom 0.5rem)
+    #:margin (#:top ,size/huge #:bottom ,size/small)
     #:line-height 1.3
     [a #:text-decoration none]]))
 
@@ -357,7 +357,7 @@
   (css-expr
    [.heading--mark
     ,@show-on-hover
-    #:margin-left 0.5rem
+    #:margin-left ,size/small
     [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
 
 (define-component body
@@ -370,7 +370,7 @@
     ,@font-family/main
     #:font-size ,font-size/body
     #:line-height 1.5
-    #:margin (2rem auto)
+    #:margin (,size/large auto)
     #:padding (0 ,grid/padding)
     #:max-width ,grid/article
     [@media ,grid/bigger-screens
@@ -380,10 +380,9 @@
     #:color ,(dict-ref colorscheme 'primary-content)]
    [p
     #:margin 0
-    [(+ p &)
-     #:text-indent ,text-indent]
+    [(+ p &) #:text-indent ,text-indent]
     [@media ,grid/bigger-screens
-     [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &)
+     [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &) (+ p aside aside aside aside &)
       #:text-indent ,text-indent]]]))
 
 ;; TODO: Remove this as a class (let it be a mixin)?
@@ -393,7 +392,7 @@
    [.insertion
     #;(#:box-sizing border-box ?)
     #:width 100%
-    #:margin (0.5rem 0)]))
+    #:margin (,size/small 0)]))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
