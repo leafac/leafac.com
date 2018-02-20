@@ -166,6 +166,9 @@
 (define font-size/body (css-expr rem ,(px->rem 16)))
 (define font-size/small (css-expr rem ,(px->rem 13)))
 (define font-size/code/block (css-expr rem ,(px->rem 12)))
+(define line-height/small 1.3)
+(define line-height/medium 1.5)
+(define line-height/large 2)
 (define text-indent '1.5rem)
 
 (define font-family/main
@@ -222,10 +225,11 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
 
-(define (inline-block-enumeration margin)
+(define inline-block-enumeration
   (css-expr
+   #:line-height ,line-height/large
    #:display inline-block
-   #:margin-right ,margin
+   #:margin-right ,size/medium
    [(: & last-child) #:margin-right 0]))
 
 (define ruler-left-spacing
@@ -247,13 +251,13 @@
             #:opacity 0
             [(> *:hover &) #:opacity 1]))
 
-(define (section/flag content color)
+(define (section/flag label color)
   (css-expr
    #:border-left (,ruler/thick solid ,color)
    ,@ruler-left-spacing
    #:position relative
    [(:: & before)
-    #:content ,content
+    #:content ,label
     #:text-transform uppercase
     #:letter-spacing 0.1em
     #:font-size ,font-size/small
@@ -320,11 +324,10 @@
     #:font-size ,font-size/small
     #:text-transform uppercase
     #:letter-spacing 0.2em
-    #:line-height 2
     #:margin-bottom ,size/small
     [a
      #:text-decoration none
-     ,@(inline-block-enumeration '1rem)]]))
+     ,@inline-block-enumeration]]))
 
 (define-component article/header
   #:css
@@ -353,7 +356,7 @@
     #:font-weight 700]
    [h1 h2
     #:margin (#:top ,size/huge #:bottom ,size/small)
-    #:line-height 1.3
+    #:line-height ,line-height/small
     [a #:text-decoration none]]))
 
 (define-component (heading/mark . elements)
@@ -374,7 +377,7 @@
     ,@(prefix (css-expr #:text-rendering optimizeLegibility))
     ,@font-family/main
     #:font-size ,font-size/body
-    #:line-height 1.5
+    #:line-height ,line-height/medium
     #:margin (,size/large auto)
     #:padding (0 ,grid/padding)
     #:max-width ,grid/article
@@ -787,8 +790,7 @@
   #:css
   (css-expr
    [.skill
-    ,@(inline-block-enumeration (css-expr (rem ,(modular-scale 1))))
-    #:line-height 2
+    ,@inline-block-enumeration
     [.initialism
      #:margin-right 0]]
    [.skill::before
