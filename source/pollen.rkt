@@ -268,6 +268,11 @@
     ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
     ,@(prefix (css-expr #:transform-origin (top left)))]))
 
+(define insertion
+  (css-expr
+   #:width 100%
+   #:margin (,size/small 0)))
+
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE
 
@@ -385,15 +390,6 @@
      [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &) (+ p aside aside aside aside &)
       #:text-indent ,text-indent]]]))
 
-;; TODO: Remove this as a class (let it be a mixin)?
-(define-component insertion
-  #:css
-  (css-expr
-   [.insertion
-    #;(#:box-sizing border-box ?)
-    #:width 100%
-    #:margin (,size/small 0)]))
-
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
 
@@ -466,8 +462,8 @@
      #:margin-right ,grid/margin-note/pull]]))
 
 (define-component figure
-  #:html (default-tag-function 'figure #:class "insertion")
-  #:css (css-expr [figure #:margin 0 #:text-align center]))
+  #:html (default-tag-function 'figure)
+  #:css (css-expr [figure ,@insertion #:text-align center]))
 
 (define-component figure/caption
   #:html (default-tag-function 'figcaption)
@@ -488,10 +484,11 @@
   #:css (css-expr [code ,@font-family/monospace]))
 
 (define-component (code/block . elements)
-  #:html ((default-tag-function 'pre #:class "code--block insertion") (apply code/inline elements))
+  #:html ((default-tag-function 'pre) (apply code/inline elements))
   #:css
   (css-expr
    [pre
+    ,@insertion
     ,@font-family/monospace
     #;(#:box-sizing border-box ?)
     #:font-size ,font-size/code/block
@@ -521,10 +518,10 @@
        (with-output-to-file path/full
          (λ () (display code/highlighted)))
        code/highlighted]))
-  ((default-tag-function 'div #:class "code--block insertion") (string->xexpr code/highlighted)))
+  (string->xexpr code/highlighted))
 
 (define-component (file-listing a-path #:language [language #f] . elements)
-  #:html ((default-tag-function 'div #:class "file-listing insertion")
+  #:html ((default-tag-function 'div #:class "file-listing")
           (path a-path)
           (if language
               (apply code/block/highlighted language elements)
@@ -532,8 +529,7 @@
   #:css
   (css-expr
    [.file-listing
-    [.code--block
-     #:margin-top 0]
+    ,@insertion
     [.path
      #:font-size ,font-size/code/block
      #:border
@@ -559,19 +555,24 @@
   #:css (css-expr #;[span.initialism ,@font/capitals]))
 
 (define-component full-width
-  #:html (default-tag-function 'div #:class "full-width insertion")
+  #:html (default-tag-function 'div #:class "full-width")
   #:css
   (css-expr
    [.full-width
+    ,@insertion
     [@media ,grid/bigger-screens
      #:clear both
      #:width ,grid/body]]))
 
-(define-component list/unordered #:html (default-tag-function 'ul #:class "insertion"))
+(define-component list/unordered
+  #:html (default-tag-function 'ul)
+  #:css (css-expr [ul ,@insertion]))
 
 (define-component list/unordered/item #:html (default-tag-function 'li))
 
-(define-component list/ordered #:html (default-tag-function 'ol #:class "insertion"))
+(define-component list/ordered
+  #:html (default-tag-function 'ol)
+  #:css (css-expr [ol ,@insertion]))
 
 (define-component list/ordered/item #:html (default-tag-function 'li))
 
@@ -592,8 +593,8 @@
   #:html (apply section key `("Appendix: " ,@elements)))
 
 (define-component paragraph-separation ;; FIXME: Try to get rid of this using ‘@’ for splicing.
-  #:html (default-tag-function 'div #:class "paragraph-separation insertion")
-  #:css (css-expr [.paragraph-separation #:height 1px]))
+  #:html (default-tag-function 'div #:class "paragraph-separation")
+  #:css (css-expr [.paragraph-separation #:height ,size/huge]))
 
 (define-component new-line
   #:html (default-tag-function 'br))
@@ -601,7 +602,9 @@
 (define-component big-separation
   #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))
 
-(define-component table #:html (default-tag-function 'table #:class "insertion"))
+(define-component table
+  #:html (default-tag-function 'table)
+  #:css (css-expr [table ,@insertion]))
 
 (define-component table/aligned-last-data
   #:css
