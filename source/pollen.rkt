@@ -99,17 +99,17 @@
 (define grid/margin-note/unitless (px->rem 325))
 (define grid/margin-note (css-expr rem ,grid/margin-note/unitless))
 (define grid/margin-note/pull (css-expr rem ,(- (+ grid/gutter/unitless grid/margin-note/unitless))))
-(define grid/bigger-screens/unitless (+ grid/body/unitless (* grid/padding/unitless 2)))
-(define grid/bigger-screens (css-expr #:min-width (rem ,grid/bigger-screens/unitless)))
-(define grid/smaller-screens (css-expr #:max-width (rem ,(- grid/bigger-screens/unitless 0.01))))
+(define grid/breakpoint (+ grid/body/unitless (* grid/padding/unitless 2)))
+(define grid/bigger-screens (css-expr #:min-width (rem ,grid/breakpoint)))
+(define grid/smaller-screens (css-expr #:max-width (rem ,(- grid/breakpoint 0.01))))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; SIZES
+;; SPACES
 
-(define size/small '0.5rem)
-(define size/medium '1rem)
-(define size/large '1.5rem)
-(define size/huge '2rem)
+(define space/small '0.5rem)
+(define space/medium '1rem)
+(define space/large '1.5rem)
+(define space/extra-large '2rem)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEXT
@@ -160,12 +160,12 @@
     #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Medium.woff"))
            (apply format "woff"))]))
 
-(define font-size/name (css-expr rem ,(px->rem 30)))
-(define font-size/title (css-expr rem ,(px->rem 22)))
-(define font-size/heading (css-expr rem ,(px->rem 20)))
-(define font-size/body (css-expr rem ,(px->rem 16)))
+(define font-size/extra-small (css-expr rem ,(px->rem 12)))
 (define font-size/small (css-expr rem ,(px->rem 13)))
-(define font-size/code/block (css-expr rem ,(px->rem 12)))
+(define font-size/medium (css-expr rem ,(px->rem 16)))
+(define font-size/large (css-expr rem ,(px->rem 20)))
+(define font-size/extra-large (css-expr rem ,(px->rem 22)))
+(define font-size/extra-extra-large (css-expr rem ,(px->rem 30)))
 (define line-height/small 1.3)
 (define line-height/medium 1.5)
 (define line-height/large 2)
@@ -229,7 +229,7 @@
   (css-expr
    #:line-height ,line-height/large
    #:display inline-block
-   #:margin-right ,size/medium
+   #:margin-right ,space/medium
    [(: & last-child) #:margin-right 0]))
 
 (define ruler-left-spacing
@@ -275,7 +275,7 @@
 (define insertion
   (css-expr
    #:width 100%
-   #:margin (,size/small 0)))
+   #:margin (,space/small 0)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE
@@ -310,9 +310,9 @@
   #:css
   (css-expr
    [body>header
-    [h1 #:font-size ,font-size/name]
+    [h1 #:font-size ,font-size/extra-extra-large]
     #:border-bottom (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-    #:margin-bottom ,size/huge]))
+    #:margin-bottom ,space/extra-large]))
 
 (define-component navigation #:html (default-tag-function 'nav))
 
@@ -324,7 +324,7 @@
     #:font-size ,font-size/small
     #:text-transform uppercase
     #:letter-spacing 0.2em
-    #:margin-bottom ,size/small
+    #:margin-bottom ,space/small
     [a
      #:text-decoration none
      ,@inline-block-enumeration]]))
@@ -333,8 +333,8 @@
   #:css
   (css-expr
    [article>header
-    [h1 #:font-size ,font-size/title]
-    #:margin-bottom ,size/medium]))
+    [h1 #:font-size ,font-size/extra-large]
+    #:margin-bottom ,space/medium]))
 
 (define-component time
   #:html (default-tag-function 'time)
@@ -348,14 +348,14 @@
   #:css
   (css-expr
    [h1
-    #:font-size ,font-size/heading
+    #:font-size ,font-size/large
     #:font-style italic
     #:font-weight 400]
    [h2
-    #:font-size ,font-size/body
+    #:font-size ,font-size/medium
     #:font-weight 700]
    [h1 h2
-    #:margin (#:top ,size/huge #:bottom ,size/small)
+    #:margin (#:top ,space/extra-large #:bottom ,space/small)
     #:line-height ,line-height/small
     [a #:text-decoration none]]))
 
@@ -365,7 +365,7 @@
   (css-expr
    [.heading--mark
     ,@show-on-hover
-    #:margin-left ,size/small
+    #:margin-left ,space/small
     [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
 
 (define-component body
@@ -376,9 +376,9 @@
     ,@(prefix (css-expr #:font-kerning normal))
     ,@(prefix (css-expr #:text-rendering optimizeLegibility))
     ,@font-family/main
-    #:font-size ,font-size/body
+    #:font-size ,font-size/medium
     #:line-height ,line-height/medium
-    #:margin (,size/large auto)
+    #:margin (,space/large auto)
     #:padding (0 ,grid/padding)
     #:max-width ,grid/article
     [@media ,grid/bigger-screens
@@ -493,7 +493,7 @@
    [pre
     ,@insertion
     ,@font-family/monospace
-    #:font-size ,font-size/code/block
+    #:font-size ,font-size/extra-small
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
     #:box-sizing border-box
@@ -534,7 +534,7 @@
    [.file-listing
     ,@insertion
     [.path
-     #:font-size ,font-size/code/block
+     #:font-size ,font-size/extra-small
      #:border
      (#:top (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
       #:right (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
@@ -597,7 +597,7 @@
 
 (define-component paragraph-separation ;; FIXME: Try to get rid of this using ‘@’ for splicing.
   #:html (default-tag-function 'div #:class "paragraph-separation")
-  #:css (css-expr [.paragraph-separation #:height ,size/huge]))
+  #:css (css-expr [.paragraph-separation #:height ,space/extra-large]))
 
 (define-component new-line
   #:html (default-tag-function 'br))
