@@ -448,11 +448,10 @@
 (define-component (reference key . elements)
   #:html (apply link (~a "#" key) elements))
 
-;; ---------------------------------------------------------------------------------------------------
+;; Data
 
 (define-component (email address . elements)
-  #:html (apply link (~a "mailto:" address)
-                (if (empty? elements) `(,address) elements)))
+  #:html (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
 
 (define-component (github-user handle)
   #:html (link (~a "https://github.com/" handle) (~a "@" handle)))
@@ -462,6 +461,8 @@
 
 (define-component (phone number)
   #:html ((default-tag-function '@) number))
+
+;; ---------------------------------------------------------------------------------------------------
 
 ;; TODO: Remove this?
 (define-component new-thought
