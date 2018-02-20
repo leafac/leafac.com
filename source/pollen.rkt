@@ -353,30 +353,6 @@
     #:font-size ,font-size/small
     #:color ,(dict-ref colors 'secondary-content)]))
 
-(define-component headings
-  #:css
-  (css-expr
-   [h1
-    #:font-size ,font-size/large
-    #:font-style italic
-    #:font-weight 400]
-   [h2
-    #:font-size ,font-size/medium
-    #:font-weight 700]
-   [h1 h2
-    #:margin (#:top ,space/extra-large #:bottom ,space/small)
-    #:line-height ,line-height/small
-    [a #:text-decoration none]]))
-
-(define-component (heading/mark . elements)
-  #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
-  #:css
-  (css-expr
-   [.heading--mark
-    ,@show-on-hover
-    #:margin-left ,space/small
-    [a #:color ,(dict-ref colors 'secondary-content)]]))
-
 (define-component body
   #:css
   (css-expr
@@ -405,18 +381,48 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
 
-(define-component (label key)
-  #:html ((default-tag-function 'span) #:id (~a key)))
+;; Headings
 
-(define-component (reference key . elements)
-  #:html (apply link (~a "#" key) elements))
+(define-component (heading type key . elements)
+  #:html
+  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§"))))
+  #:css
+  (css-expr
+   [h1 h2
+    #:margin (#:top ,space/extra-large #:bottom ,space/small)
+    #:line-height ,line-height/small
+    [a #:text-decoration none]]))
 
-(define-component (reference/§ key)
-  #:html (heading/mark (reference key "§")))
+(define-component (section key . elements)
+  #:html (apply heading 'h1 key elements)
+  #:css
+  (css-expr
+   [h1
+    #:font-size ,font-size/large
+    #:font-style italic
+    #:font-weight 400]))
+
+(define-component (subsection key . elements)
+  #:html (apply heading 'h2 key elements)
+  #:css
+  (css-expr
+   [h2
+    #:font-size ,font-size/medium
+    #:font-weight 700]))
+
+(define-component (heading/mark . elements)
+  #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
+  #:css
+  (css-expr
+   [.heading--mark
+    ,@show-on-hover
+    #:margin-left ,space/small
+    [a #:color ,(dict-ref colors 'secondary-content)]]))
+
+;; Links
 
 (define-component (link path . elements)
-  #:html (apply (default-tag-function 'a) #:href path
-                (if (null? elements) `(,path) elements))
+  #:html (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements))
   #:css
   (css-expr
    [a
@@ -432,12 +438,21 @@
        #:background-color ,(dict-ref colors 'background)
        #:color ,(dict-ref colors 'primary-content)]]]]))
 
-(define-component (link/internal path . elements)
-  #:html (apply link (internal-url path) elements))
+(define-component (link/internal path . elements) #:html (apply link (internal-url path) elements))
+
+;; References
+
+(define-component (label key)
+  #:html ((default-tag-function 'span) #:id (~a key)))
+
+(define-component (reference key . elements)
+  #:html (apply link (~a "#" key) elements))
+
+;; ---------------------------------------------------------------------------------------------------
 
 (define-component (email address . elements)
   #:html (apply link (~a "mailto:" address)
-                (if (null? elements) `(,address) elements)))
+                (if (empty? elements) `(,address) elements)))
 
 (define-component (github-user handle)
   #:html (link (~a "https://github.com/" handle) (~a "@" handle)))
@@ -593,12 +608,6 @@
 (define-component foreign #:html emphasis)
 
 (define-component technical-term #:html emphasis)
-
-(define-component (section key . elements)
-  #:html (apply (default-tag-function 'h1) `(,(label key) ,@elements ,(reference/§ key))))
-
-(define-component (subsection key . elements)
-  #:html (apply (default-tag-function 'h2) `(,(label key) ,@elements ,(reference/§ key))))
 
 (define-component (appendix key . elements)
   #:html (apply section key `("Appendix: " ,@elements)))
