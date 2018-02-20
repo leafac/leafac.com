@@ -315,7 +315,7 @@
 
   #:css (css-expr [* *::before *::after #:outline none]))
 
-(define-component body/header
+(define-component header/body
   #:css
   (css-expr
    [body>header
@@ -338,7 +338,7 @@
      #:text-decoration none
      ,@inline-block-enumeration]]))
 
-(define-component article/header
+(define-component header/article
   #:css
   (css-expr
    [article>header
