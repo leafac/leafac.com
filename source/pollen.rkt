@@ -11,6 +11,8 @@
                        pollen/core pollen/file
                        css-expr))
 
+;; TODO: Get rid of dictionaries?
+
 ;; ---------------------------------------------------------------------------------------------------
 ;; PERSONAL DATA
 
@@ -106,6 +108,7 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; SPACES
 
+(define space/none 0)
 (define space/small '0.5rem)
 (define space/medium '1rem)
 (define space/large '1.5rem)
@@ -160,6 +163,10 @@
     #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Medium.woff"))
            (apply format "woff"))]))
 
+(define font-family/main
+  (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
+(define font-family/monospace
+  (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
 (define font-size/extra-small (css-expr rem ,(px->rem 12)))
 (define font-size/small (css-expr rem ,(px->rem 13)))
 (define font-size/medium (css-expr rem ,(px->rem 16)))
@@ -170,11 +177,7 @@
 (define line-height/medium 1.5)
 (define line-height/large 2)
 (define text-indent '1.5rem)
-
-(define font-family/main
-  (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
-(define font-family/monospace
-  (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
+(define letter-spacing '0.2em)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORS
@@ -197,7 +200,7 @@
     (cyan    . |#2aa198|)
     (green   . |#859900|)))
 
-(define colorscheme
+(define colors
   `((background           . ,(dict-ref solarized 'base3))
     (background-highlight . ,(dict-ref solarized 'base2))
     (secondary-content    . ,(dict-ref solarized 'base1))
@@ -223,6 +226,11 @@
 (define ruler/thick/negative (css-expr px ,(- ruler/thick/unitless)))
 
 ;; ---------------------------------------------------------------------------------------------------
+;; ANIMATIONS
+
+(define animation/duration '0.3s)
+
+;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
 
 (define inline-block-enumeration
@@ -230,7 +238,7 @@
    #:line-height ,line-height/large
    #:display inline-block
    #:margin-right ,space/medium
-   [(: & last-child) #:margin-right 0]))
+   [(: & last-child) #:margin-right ,space/none]))
 
 (define ruler-left-spacing
   (css-expr)
@@ -247,7 +255,7 @@
                 #:width (apply calc (- ,grid/body ,font-size/indentation))]]))
 
 (define show-on-hover
-  (css-expr #:transition (opacity 0.3s)
+  (css-expr #:transition (opacity ,animation/duration)
             #:opacity 0
             [(> *:hover &) #:opacity 1]))
 
@@ -259,23 +267,23 @@
    [(:: & before)
     #:content ,label
     #:text-transform uppercase
-    #:letter-spacing 0.1em
+    #:letter-spacing ,letter-spacing
     #:font-size ,font-size/small
     #:line-height 1
     #:background-color ,color
-    #:color ,(dict-ref colorscheme 'background)
+    #:color ,(dict-ref colors 'background)
     #:display inline-block
     #:padding (#:bottom 0.1em #:left 0.2em)
     #:position absolute
     #:left ,ruler/thick/negative
-    #:top 0
+    #:top ,space/none
     ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
     ,@(prefix (css-expr #:transform-origin (top left)))]))
 
 (define insertion
   (css-expr
    #:width 100%
-   #:margin (,space/small 0)))
+   #:margin (,space/small ,space/none)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE
@@ -311,7 +319,7 @@
   (css-expr
    [body>header
     [h1 #:font-size ,font-size/extra-extra-large]
-    #:border-bottom (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+    #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:margin-bottom ,space/extra-large]))
 
 (define-component navigation #:html (default-tag-function 'nav))
@@ -323,7 +331,7 @@
    [.menu
     #:font-size ,font-size/small
     #:text-transform uppercase
-    #:letter-spacing 0.2em
+    #:letter-spacing ,letter-spacing
     #:margin-bottom ,space/small
     [a
      #:text-decoration none
@@ -342,7 +350,7 @@
   (css-expr
    [time
     #:font-size ,font-size/small
-    #:color ,(dict-ref colorscheme 'secondary-content)]))
+    #:color ,(dict-ref colors 'secondary-content)]))
 
 (define-component headings
   #:css
@@ -366,7 +374,7 @@
    [.heading--mark
     ,@show-on-hover
     #:margin-left ,space/small
-    [a #:color ,(dict-ref colorscheme 'secondary-content)]]))
+    [a #:color ,(dict-ref colors 'secondary-content)]]))
 
 (define-component body
   #:css
@@ -379,15 +387,15 @@
     #:font-size ,font-size/medium
     #:line-height ,line-height/medium
     #:margin (,space/large auto)
-    #:padding (0 ,grid/padding)
+    #:padding (,space/none ,grid/padding)
     #:max-width ,grid/article
     [@media ,grid/bigger-screens
      #:max-width ,grid/body
      [article #:width ,grid/article]]
-    #:background-color ,(dict-ref colorscheme 'background)
-    #:color ,(dict-ref colorscheme 'primary-content)]
+    #:background-color ,(dict-ref colors 'background)
+    #:color ,(dict-ref colors 'primary-content)]
    [p
-    #:margin 0
+    #:margin ,space/none
     [(+ p &) #:text-indent ,text-indent]
     [@media ,grid/bigger-screens
      [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &) (+ p aside aside aside aside &)
@@ -411,17 +419,17 @@
   #:css
   (css-expr
    [a
-    #:transition (background-color 0.3s)
-    #:color ,(dict-ref colorscheme 'primary-content)
+    #:transition (background-color ,animation/duration)
+    #:color ,(dict-ref colors 'primary-content)
     [(: & hover)
-     #:background-color ,(dict-ref colorscheme 'background-highlight)
-     #:color ,(dict-ref colorscheme 'emphasized-content)]
+     #:background-color ,(dict-ref colors 'background-highlight)
+     #:color ,(dict-ref colors 'emphasized-content)]
     [@media ,grid/smaller-screens
      [(aside &)
-      #:color ,(dict-ref colorscheme 'emphasized-content)
+      #:color ,(dict-ref colors 'emphasized-content)
       [(: & hover)
-       #:background-color ,(dict-ref colorscheme 'background)
-       #:color ,(dict-ref colorscheme 'primary-content)]]]]))
+       #:background-color ,(dict-ref colors 'background)
+       #:color ,(dict-ref colors 'primary-content)]]]]))
 
 (define-component (link/internal path . elements)
   #:html (apply link (internal-url path) elements))
@@ -450,10 +458,10 @@
   (css-expr
    [aside
     [@media ,grid/smaller-screens
-     #:color ,(dict-ref colorscheme 'emphasized-content)
-     #:background-color ,(dict-ref colorscheme 'background-highlight)
+     #:color ,(dict-ref colors 'emphasized-content)
+     #:background-color ,(dict-ref colors 'background-highlight)
      #:border-left
-     (,ruler/thick solid ,(dict-ref colorscheme 'secondary-content))
+     (,ruler/thick solid ,(dict-ref colors 'secondary-content))
      ,@ruler-left-spacing
      #:padding-right (rem ,(modular-scale -4))]
     [@media ,grid/bigger-screens
@@ -495,7 +503,7 @@
     ,@font-family/monospace
     #:font-size ,font-size/extra-small
     #:overflow auto
-    #:border (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
+    #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:box-sizing border-box
     #:padding ,text-indent
     #:padding (apply calc (- ,text-indent ,ruler/thin))]))
@@ -536,13 +544,13 @@
     [.path
      #:font-size ,font-size/extra-small
      #:border
-     (#:top (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-      #:right (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content))
-      #:left (,ruler/thin solid ,(dict-ref colorscheme 'secondary-content)))
+     (#:top (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+      #:right (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+      #:left (,ruler/thin solid ,(dict-ref colors 'secondary-content)))
      #:padding
      (#:left (rem ,(modular-scale -1))
       #:right (rem ,(modular-scale -1)))
-     #:color ,(dict-ref colorscheme 'secondary-content)]
+     #:color ,(dict-ref colors 'secondary-content)]
     [(> & p)
      #:margin-bottom ,ruler/thin/negative]]))
 
@@ -670,7 +678,7 @@
 
 (define-component (placeholder . elements)
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
-  #:css (css-expr [.placeholder #:color ,(dict-ref colorscheme 'blue)]))
+  #:css (css-expr [.placeholder #:color ,(dict-ref colors 'blue)]))
 
 (define-component menu-option
   #:html (default-tag-function 'span #:class "menu-option")
@@ -800,13 +808,13 @@
     #:border-left ((rem ,(modular-scale -5)) solid)]
    [.beginner::before
     #:height .3em
-    #:border-left-color ,(dict-ref colorscheme 'red)]
+    #:border-left-color ,(dict-ref colors 'red)]
    [.intermediate::before
     #:height .6em
-    #:border-left-color ,(dict-ref colorscheme 'yellow)]
+    #:border-left-color ,(dict-ref colors 'yellow)]
    [.advanced::before
     #:height .9em
-    #:border-left-color ,(dict-ref colorscheme 'green)]))
+    #:border-left-color ,(dict-ref colors 'green)]))
 
 (define-component certification #:html (default-tag-function 'div #:class "big-separation"))
 
@@ -882,16 +890,16 @@
 
 (define-component git/verb
   #:html (default-tag-function 'span #:class "git--verb")
-  #:css (css-expr [.git--verb #:color ,(dict-ref colorscheme 'blue)]))
+  #:css (css-expr [.git--verb #:color ,(dict-ref colors 'blue)]))
 
 (define-component git/object
   #:html (default-tag-function 'span #:class "git--object")
-  #:css (css-expr [.git--object #:color ,(dict-ref colorscheme 'green)]))
+  #:css (css-expr [.git--object #:color ,(dict-ref colors 'green)]))
 
 (define-component git/gui
   #:html (default-tag-function 'div #:class "git--gui")
-  #:css (css-expr [.git--gui ,@(section/flag "GUI" (dict-ref colorscheme 'violet))]))
+  #:css (css-expr [.git--gui ,@(section/flag "GUI" (dict-ref colors 'violet))]))
 
 (define-component git/cli
   #:html (default-tag-function 'div #:class "git--cli")
-  #:css (css-expr [.git--cli ,@(section/flag "CLI" (dict-ref colorscheme 'yellow))]))
+  #:css (css-expr [.git--cli ,@(section/flag "CLI" (dict-ref colors 'yellow))]))
