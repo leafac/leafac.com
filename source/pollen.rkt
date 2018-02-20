@@ -315,6 +315,10 @@
 
   #:css (css-expr [* *::before *::after #:outline none]))
 
+(define-component head/link #:html (default-tag-function 'link))
+
+(define-component head/title #:html (default-tag-function 'title))
+
 (define-component header/body
   #:css
   (css-expr
@@ -679,10 +683,6 @@
 (define-component production #:html emphasis)
 
 (define-component informal #:html emphasis)
-
-(define-component head/link #:html (default-tag-function 'link))
-
-(define-component head/title #:html (default-tag-function 'title))
 
 (define-component publication #:html emphasis)
 
