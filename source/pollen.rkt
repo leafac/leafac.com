@@ -282,6 +282,7 @@
 
 (define insertion
   (css-expr
+   #:box-sizing border-box
    #:width 100%
    #:margin (,space/small ,space/none)))
 
@@ -504,7 +505,6 @@
     #:font-size ,font-size/extra-small
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-    #:box-sizing border-box
     #:padding ,text-indent
     #:padding (apply calc (- ,text-indent ,ruler/thin))]))
 
