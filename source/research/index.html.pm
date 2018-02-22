@@ -65,14 +65,14 @@
 ◊publication/paper{
  ◊publication/paper/title['publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens]{◊link/internal["/research/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens.pdf"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}
  ◊publication/paper/authors{Leandro Facchinetti and Fernando Santos Osório}
- ◊publication/paper/venue{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{◊roman-number{III} Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
+ ◊publication/paper/venue{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
  ◊publication/paper/date{2010-10-24}
 }
 
 ◊publication/paper{
  ◊publication/paper/title['publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens]{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}
  ◊publication/paper/authors{Leandro Facchinetti and Fernando Santos Osório}
- ◊publication/paper/venue{◊foreign{◊roman-number{IV} Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (◊roman-number{IV} Scientific and Technologic Initiation Workshop)}
+ ◊publication/paper/venue{◊foreign{IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (IV Scientific and Technologic Initiation Workshop)}
  ◊publication/paper/date{2010-09-22}
 }
 

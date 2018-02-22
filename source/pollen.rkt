@@ -657,9 +657,6 @@
    [.fraction--denominator #:vertical-align sub]
    [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
 
-;; TODO
-(define-component roman-number)
-
 (define-component production #:html emphasis)
 
 (define-component informal #:html emphasis)

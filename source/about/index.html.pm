@@ -340,19 +340,19 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 }
 
 ◊event{
- ◊event/title['event--joint-conference-2010]{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{◊roman-number{III} Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
+ ◊event/title['event--joint-conference-2010]{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
  ◊event/date{2010-10-24}
  ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
 }
 
 ◊event{
- ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{◊roman-number{IV} Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (◊roman-number{IV} Scientific and Technologic Initiation Workshop)}
+ ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (IV Scientific and Technologic Initiation Workshop)}
  ◊event/date{2010-09-22}
  ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
 }
 
 ◊event{
- ◊event/title['event--ii-computer-science-bachelor-s-workshop]{◊roman-number{II} Computer Science Bachelor’s Workshop from Universidade de São Paulo}
+ ◊event/title['event--ii-computer-science-bachelor-s-workshop]{II Computer Science Bachelor’s Workshop from Universidade de São Paulo}
  ◊event/date{2009}
  ◊event/highlight{Represented students in discussion with professors about improvements on the structure of the Computer Science course.}
 }
@@ -389,7 +389,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 }
 
 ◊course{
- ◊course/title['course--software-engineering-for-software-as-a-service-part-i]{Software Engineering for Software as a Service (Part ◊roman-number{I})}
+ ◊course/title['course--software-engineering-for-software-as-a-service-part-i]{Software Engineering for Software as a Service (Part I)}
  ◊course/by{Armando Fox and David Patterson in Coursera}
  ◊course/date{2012}
  ◊course/highlight{Scored 2120.6 out of 2126.}
@@ -426,7 +426,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 }
 
 ◊course{
- ◊course/title['course--tableless-i]{Tableless ◊roman-number{I}}
+ ◊course/title['course--tableless-i]{Tableless I}
  ◊course/by{Visie}
  ◊course/date{2006}
 }
