@@ -596,9 +596,9 @@
 (define-component (appendix key . elements)
   #:html (apply section key `("Appendix: " ,@elements)))
 
-(define-component paragraph-separation ;; FIXME: Try to get rid of this using ‘@’ for splicing.
-  #:html (default-tag-function 'div #:class "paragraph-separation")
-  #:css (css-expr [.paragraph-separation #:height ,space/extra-large]))
+(define-component new-thought
+  #:html (default-tag-function 'div #:class "new-thought")
+  #:css (css-expr [.new-thought #:height ,space/extra-large]))
 
 (define-component new-line
   #:html (default-tag-function 'br))

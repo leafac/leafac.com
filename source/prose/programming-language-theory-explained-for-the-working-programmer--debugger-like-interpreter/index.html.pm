@@ -25,7 +25,7 @@ If we inspected interpretation in the midst of ◊code/inline{substitute}, we wo
 
 Alternatively, if we inspected interpretation after a few function applications, we would potentially miss some nuances of the process. So a single function application is the best level of granularity for a ◊technical-term{step} in our ◊technical-term{debugger-like interpreter}.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 We start with a function called ◊code/inline{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code/inline{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code/inline{step} function is similar to ◊code/inline{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code/inline{step}’s definition:
 
@@ -82,7 +82,7 @@ Because the ◊code/inline{reduction-expression} is a function application ready
      (fill-hole reduced-expression context)]))
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 There are still two missing pieces in our ◊technical-term{debugger-like interpreter}: the auxiliary functions ◊code/inline{split-program} and ◊code/inline{fill-hole}. We start by addressing ◊code/inline{split-program}.
 
@@ -179,7 +179,7 @@ We can test this final case with a ◊code/inline{program-fragment} similar to o
 '((hole) (λ (z) z))
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The final auxiliary function is ◊code/inline{fill-hole}, which receives as arguments a ◊code/inline{program-fragment} and a ◊code/inline{context}. It is called by ◊code/inline{step} after evaluating the ◊code/inline{reduction-expression} selected by ◊code/inline{split-program} and fills the ◊technical-term{hole} in the ◊code/inline{context} with the ◊code/inline{program-fragment}. For example, when given the ◊code/inline{program-fragment} ◊code/inline{(λ (y) y)} and the ◊code/inline{context} ◊code/inline{((hole) (λ (z) z))}, then ◊code/inline{fill-hole} returns ◊code/inline{((λ (y) y) (λ (z) z))}.
 
@@ -261,7 +261,7 @@ We can now test ◊code/inline{fill-hole} in the general case:
 '((λ (z) z) (λ (x) x))
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 We finished implementing the auxiliary functions, so ◊code/inline{step} is complete:
 
@@ -289,7 +289,7 @@ To keep compatibility with our first interpreter, we implement an ◊code/inline
 
 This version of ◊code/inline{interpret} follows the ◊code/inline{traverse} form: it ◊technical-term{pattern matches} on the given ◊code/inline{program}; if it is already a value, then return it unaltered; otherwise, call ◊code/inline{step} and recurse. The effect is that ◊code/inline{interpret} calls ◊code/inline{step} as many times as necessary to completely evaluate the ◊code/inline{expression} into a value. While the calls to ◊code/inline{step} are guaranteed to terminate, ◊code/inline{interpret} might run forever, if given a non-terminating ◊code/inline{program}, because it might need to call ◊code/inline{step} infinitely many times. But, with our current implementation, we could inspect the process, by looking at the intermediary ◊code/inline{program} after any number of calls to ◊code/inline{step}, whereas in our first interpreter, the whole process was opaque.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 In this section we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
 
@@ -307,7 +307,7 @@ The alternative approach is to ◊emphasis{delay} the substitution, storing the 
 
 This solution is similar to most ◊technical-term{step-debuggers}, which do not work by substitution. They show the current execution point in terms of the original program the programmer wrote, and have a panel showing the current values of the variables. These mappings between free variables and values are called ◊technical-term{environments}.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The implementation of our ◊technical-term{variable-inspecting debugger-like interpreter} is similar in structure to our ◊technical-term{debugger-like interpreter}. The most important function is ◊code/inline{step}, which evaluates the next ◊technical-term{reduction expression}. There is one important difference between this interpreter and the previous, though. For interpreters up to this point in the article, all information necessary to evaluate the program was present in the intermediary programs generated during interpretation. The ◊code/inline{step} function received a ◊code/inline{program} as argument. Now, besides the intermediary program, it is also necessary to have information about the ◊technical-term{environment}. Together, they represent the current ◊technical-term{state} of computation. We start our implementation by defining a data structure for ◊technical-term{states}:
 
@@ -335,7 +335,7 @@ For example, given the program ◊code/inline{(λ (x) x)}, the initial state is:
 (state '(λ (x) x) '())
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The next big change in our interpreter is that ◊emphasis{functions are no longer values in our language}! A function in an intermediary program might include references to variables which have not been substituted yet; the information for that substitution is in an ◊code/inline{environment}. For example, consider the program ◊code/inline{((λ (x) (λ (y) x)) (λ (z) z))}. In the interpreters we implemented in previous sections, this evaluates to ◊code/inline{(λ (y) (λ (z) z))}, because the ◊code/inline{x} in ◊code/inline{(λ (y) x)} is substituted for the argument ◊code/inline{(λ (z) z)}. But in our current interpreter this does not happen, the resulting program would be ◊code/inline{(λ (y) x)}, which cannot be a value because the variable ◊code/inline{x} is free and, consequently, the program is open.
 

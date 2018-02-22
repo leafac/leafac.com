@@ -32,7 +32,7 @@ To guarantee that the system would be reliable, she committed to never changing 
 
 As she progressed, the boxes in the cabinet formed a timeline of her recipes evolution. Alice uniquely identified each box, and, when creating them, she included in their label a reference to the identifier of the previous box in the sequence. The result was an unidirectional chain, a new box pointed to its immediate predecessor, but not the other way around. This is in line with Alice’s rule of never modifying a box in the cabinet: when creating a new box, she knew the ancestor so she included a reference to it, but she did not allow herself to modify the old box to mention the new box.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊new-thought{The cabinet contained} the history of her recipes over time. Alice could investigate it by following the labels in each box to recreate the chain, and then open each box to inspect the changes. The high-level descriptions in the box labels helped her to find the boxes of her interest. Moreover, she could navigate in history, and bring the recipes in her desk to any point in the timeline. The slips of paper recording changes included both the old and the new values, so she could diligently follow the chain of boxes applying the changes in the appropriate direction.
 
@@ -40,7 +40,7 @@ Even when she navigated to a point in the past, she did not lose any information
 
 This index card had an special meaning: it pointed at the box in the cabinet which represented the current state of her desk contents. But Alice also maintained other index cards. For example, she had an index card pointing at the most recent box in the timeline. Even when the desk contents traveled in time, this index card remained fixed. She only updated it when she added a new box to the cabinet. This allowed her to find the start of the timeline chain, regardless of her desk state.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊new-thought{These index cards} were inexpensive, so Alice created even more of them. More importantly, they were independent of one another, and Alice thought she could use this to create multiple different timelines for her recipes. With different timelines, Alice could experiment more freely. For example, she had two ideas: adding more sugar to the cookies, and more flour to the brownies. These experiments were unrelated, and she did not want to couple the changes related to them. If she tried the ideas and only liked one, then she wanted to discard the changes related to the bad without impacting the changes related to the good. So she created two index cards. At first, they both pointed at the same box in the cabinet: the most recent in the history.
 
@@ -48,7 +48,7 @@ Then Alice started working on the experiments, creating boxes as she went. But, 
 
 She had more ideas, and created more independent timelines to test them. She even thought of experiments within experiments, for example, varying the increase in sugar to the cookies. Soon her project history started to look like a tree, with several chains which shared common ancestors, but then diverged.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊new-thought{Eventually, Alice concluded} an experiment. She tried the recipe variation a few times, gathered opinions from her friends, and decided whether it was a success of a failure. If it was a failure, then it was easy for Alice to discard the whole timeline, regardless of how many boxes it included. She just had to discard the index card corresponding to this experiment. A box without an index card pointing to it—either directly or indirectly via a newer box in the chain—became inaccessible, and she would just ignore it. Once in a while Alice would go through the cabinet and permanently remove inaccessible boxes, but storage space was ample, so this rarely happened.
 
@@ -60,7 +60,7 @@ Nonetheless, reconciling diverging timelines was not as simple as updating an in
 
 Alice followed one of the processes described above and brought the boxes corresponding to the successful experiment into the main timeline. Then, its index card became redundant: the main timeline now contained the boxes in question, which would not become inaccessible. Alice runs a clean kitchen, and does the same with her version control system. There is no point in keeping an index card for a finished experiment, so she discarded it. Finally, the recipes in her desk contained the changes from both sides: the experiment and the main timeline.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊new-thought{Alice developed} an elaborate system, and her cabinet contained precious—not mention delicious—information. Not only did she want to avoid losing any recipe, she wanted to keep the whole development history safe. So she contacted her friend Bob. Bob is the opposite of Alice in the kitchen, he cannot microwave a frozen pizza to save his life. But he lived nearby, and was often on the receiving end of Alice’s generosity. Over cookies and brownies, Alice and Bob bonded. And now it was time for Bob to do something for Alice.
 
@@ -68,7 +68,7 @@ Alice asked Bob to go to the stationery store and buy a cabinet of his own. Beca
 
 Alice had a copying machine that was idle since she started using her new version control system, and she was going to use it again, but not for the same purpose as before. She would not keep slightly different copies of the same recipes, as she used to do, but use the copying machine to created copies of the timelines in her cabinet. Once in a while, she copied slips of paper, box labels and index cards, and created an exact replica of her cabinet’s contents. Then she went to Bob’s house and handed it to him, who stored it in his own cabinet. Even if something happened to Alice’s copy, she could recover her entire cookbook history from Bob’s cabinet.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊;{
 
@@ -189,7 +189,7 @@ $ git ◊git/verb{config} ◊git/object{--global user.email "alice@leafac.com"}
   }
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊; TODO: Double-check link to macOS.
 
@@ -301,7 +301,7 @@ nothing to commit (create/copy files and use "git add" to track)
 
 Git created the cabinet in a folder called ◊path{.git/} under the project directory. This path starts with a dot (◊path{.}), which means it is ◊technical-term{hidden}: most file browsers will not show it by default. But, otherwise, there is nothing special about hidden files and folders, it is just a naming convention. The contents of the ◊path{.git/} directory are just files and folders which Git uses to represent the cabinet. Regardless, ◊emphasis{do not directly edit the contents of} ◊path{.git/}, instead, ask the robot to perform the operations.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊margin-note{◊figure{◊svg{images/folders-vs-repositories.svg}}}
 
@@ -572,7 +572,7 @@ $ git ◊git/verb{commit}
   }
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊margin-note{◊figure{◊svg{images/commit-often.svg}}}
 
@@ -665,7 +665,7 @@ index 0000000..5bc1d5e
   }
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊margin-note{◊figure{◊svg{images/blame.svg}}}
 
@@ -751,7 +751,7 @@ HEAD is now at 464f886... Add first recipes
 
 Inspect the contents of the working directory, the files ◊path{cookies.txt}	and ◊path{muffins.txt} should be there, but the file ◊path{pancakes.txt} should not. The working directory now reflects the point in time right after the first commit was created, when there was no pancakes recipe in the cookbook. But it is not lost, the repository still tracks the whole history, regardless of the situation of the working directory, and it contains the commit which introduced that recipe. We could navigate back to the second commit by checking it out.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊margin-note{There is a reason to prefer the simpler version control systems embedded in other tools, in some situations. Binary files, for example, images and files created by word processors, are opaque to Git. This limits features like blaming files, because Git cannot specify which lines changed in the files. It records that the whole file changed, even if the modification was adding a single comma. Specialized version control systems embedded in the editing tools do not have this restriction.}
 
@@ -1005,7 +1005,7 @@ $ git ◊git/verb{branch} ◊git/object{-d brownies}
 Deleted branch brownies (was 9ea8492).
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊new-thought{Iterate on the process} above and, eventually, a version of the cookbook will be ready for release. It does not mean that work on it will halt, but that a certain point in history is special, and we want to mark it. That is the topic of the ◊reference['tags]{next section}.
 
@@ -1029,7 +1029,7 @@ On the CLI, the process is similar to creating a branch. First, checkout the com
 $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊new-thought{This concludes} the overview of the basic features for using Git locally. Next, we discuss how to distribute the repository to remote computers.
 
@@ -1085,7 +1085,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; push, fetch+merge, pull
 
-◊; ◊paragraph-separation[]
+◊; ◊new-thought[]
 
 ◊; BUILD UP TO “GIT FOR COLLABORATION”
 

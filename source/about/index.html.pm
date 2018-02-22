@@ -9,7 +9,7 @@ I am a writer of ◊link/internal["/prose"]{prose}, ◊link/internal["/software"
 
 My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link/internal["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 I am ◊~a[(dict-ref personal-data 'age)] years old and I have been writing software for over a decade. Most of my career has been in web products and I also developed natural-language-processing applications, system administration tools and programming-language theory.
 
@@ -27,7 +27,7 @@ I am ◊link/internal["/cooking"]{vegan}. I do not eat and do not use any animal
 
 I read about a book per week. Both fiction and non-fiction.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The rest of this page lists my accomplishments. Work experiences, education, publications and more.
 

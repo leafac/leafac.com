@@ -219,7 +219,7 @@ The function ◊code/inline{pretty-print} makes a careful choice of arguments wi
     (add1 0))))) ;; => 5
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 Now that we have an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code/inline{sum-up-to}, we just change the return from ◊code/inline{0} (the native Racket number) to ◊code/inline{zero} (our encoding as defined above):
 
@@ -271,7 +271,7 @@ So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initi
 #f
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 To implement addition (◊code/inline{+}), we can use the following observation: if the number ◊code/inline{number-left} means “do something to the argument ◊code/inline{number-left} times,” and the number ◊code/inline{number-right} means “do something to the argument ◊code/inline{number-right} times,” then the number ◊code/inline{number-left + number-right} means “do something to the argument ◊code/inline{number-left + number-right} times.” In particular, we can ◊informal{do something} to the argument ◊code/inline{number-right} times and use the result as the initial value to ◊informal{do something} to the argument ◊code/inline{number-left} times:
 
@@ -299,7 +299,7 @@ The following listing is an example of ◊code/inline{+} in use:
 10
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 For the last operation on numbers, ◊code/inline{sub1}, we start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero} instead of ◊code/inline{-1} as it should according to mathematics.
 
@@ -336,7 +336,7 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 4
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 At this point, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we address the only other primitive data type used in our program: booleans.
 
@@ -437,7 +437,7 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
 
 The key observation regarding the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, the code ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 Our work with booleans is complete. There are no longer any native Racket booleans in our program, they have been encoded into functions. Moreover, our program contains no primitive values (numbers, booleans, strings, and so on), and it continues to have the same meaning:
 
@@ -546,13 +546,13 @@ More importantly, our program is working with this encoding for pairs in terms o
 15
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 Before we move on to other programming-language features that we might question as either ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures which are ◊technical-term{essential} features in programming languages?
 
 One more time, the answer is that data structures in general are ◊informal{encodeable} in terms of simpler features. And, once again, there are different encodings available. In particular, it is possible to encode all data structures in terms of pairs; and, ultimately, in terms functions, by the result of this section. The figure below illustrates examples of encodings:
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊margin-note{Encodings only depend on previously defined data structures, so the whole construction is well-founded.}
 
@@ -570,7 +570,7 @@ Finally, with records it is possible to encode objects. Some fields are non-func
 
 Objects can get more complicated, with features such as inheritance and polymorphism. Also, there exists many other data structures: tuples, trees and more. But, with varying degrees of difficulty, they are all encodeable in terms of pairs, the simplest way to couple data together. So, ultimately, this section shows that all data structures can be defined in terms of functions.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The next features we have to address are those in functions themselves, because they are the only kind of value left in our program. What aspects of functions are essential features of programming languages? What aspects can be ◊informal{encoded away}? In the next section, we address the most powerful feature of functions: ◊emphasis{recursion}.
 
@@ -808,7 +808,7 @@ The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and �
 15
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The result of this section is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to its argument, so it works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, then ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking fewer than ten lines. What allows us to compact the definition this way is recursion.
 
@@ -891,7 +891,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 (else dummy)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The change described in this section is pervasive. It affects most defined functions and their invocations:
 
@@ -985,7 +985,7 @@ The change described in this section is pervasive. It affects most defined funct
 (pretty-print (sum-up-to five)) ;; => 15
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The program above is difficult to read. The only way to understand it is to retrace the steps we have took so far. Despite this difficulty, it is very ◊emphasis{simple}. It uses almost no features from Racket, which means that we are near the essence of programming languages. The next section is about the last transformation we apply to our program.
 
@@ -1343,7 +1343,7 @@ The output of this program is still the same as when we started:
 15
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊margin-note{The set of features that are left in the program goes by the name of Lambda calculus, which explains the use of the lambda (λ) in the anonymous-function notation in Racket.}
 
@@ -1387,7 +1387,7 @@ The minimal set of features at which we arrived after our rewrites is particular
 
 But, in one way or another, with more or less elegance, all the minimal sets of features at which we could have arrived—for example, Turing Machines and the SKI combinator calculus—have the same essential capacity of enabling arbitrary ◊emphasis{communication} of data across the system.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊emphasis{Communication is the essence of programming languages and of computation.}
 
@@ -1429,7 +1429,7 @@ The final practical lesson for working programmers in this article comes from th
 
 Again, coming from a different direction, we acknowledge the importance of ◊emphasis{communication}. We have now come full circle:
 
-◊paragraph-separation[]
+◊new-thought[]
 
 ◊emphasis{The essence of programming languages is communication.}
 

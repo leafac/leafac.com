@@ -53,7 +53,7 @@ Our first program is an example of function definition—◊code/inline{(λ ...)
 
 This program is an application of the function ◊code/inline{(λ (x) x)} to the argument ◊code/inline{(λ (y) y)}. The interpretation of this is the same as in mathematics and most programming languages: to replace every occurrence of the argument name ◊code/inline{x} in ◊code/inline{(λ (x) x)}’s body with the argument ◊code/inline{(λ (y) y)}. Because ◊code/inline{(λ (x) x)}’s body is just ◊code/inline{x}, the result of this program is ◊code/inline{(λ (y) y)}.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 We covered all features of our target language, but there are two corner cases that we need to address: variable-name reuse and variable references that have not been defined. The first case, variable-name reuse, can occur in two ways, the simplest of which is illustrated by the following listing:
 
@@ -144,7 +144,7 @@ The second responsibility of the well-formedness checker is to check whether all
 
 This implementation is simplistic, because it receives a ◊code/inline{program} as input and just delegates the responsibilities described above to two auxiliary functions ◊code/inline{syntactically-valid?} and ◊code/inline{closed?}. For the rest of this section, we implement these two auxiliary functions.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 We start with ◊code/inline{syntactically-valid?}:
 
@@ -176,7 +176,7 @@ This simple implementation is just calling Racket’s ◊code/inline{symbol?} fu
 #f
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The next form of ◊code/inline{program-fragment} we address in ◊code/inline{syntactically-valid?} is the anonymous function definition, for example:
 
@@ -258,7 +258,7 @@ The ◊code/inline{syntactically-valid?} function is once again working on the �
 #f
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 Now that ◊code/inline{syntactically-valid?} can distinguish between the different forms of ◊code/inline{program-fragment}, we return to the issue of checking the syntactical validity of anonymous function definitions. Two conditions must hold: (1) the ◊code/inline{argument-name} must be a symbol (similar to variable references); and (2) the ◊code/inline{body} must be a ◊code/inline{syntactically-valid?} ◊code/inline{program-fragment}.
 
@@ -287,7 +287,7 @@ To test our implementation, we use the syntactically valid anonymous function �
 #f
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 To complete the implementation of ◊code/inline{syntactically-valid?}, we consider the case of function applications. The condition for syntactical validity in this case is just that both ◊code/inline{function} and ◊code/inline{argument} are syntactically valid themselves, and we can use ◊code/inline{syntactically-valid?} recursively to check for that:
 
@@ -317,7 +317,7 @@ The function call ◊code/inline{(f a b)} is syntactically invalid because it ha
 
 The implementation of ◊code/inline{syntactically-valid?} is complete. Let us turn to ◊code/inline{closed?}, the other well-formedness condition.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The implementation of the ◊code/inline{closed?} function is simple because it delegates most of the work to an auxiliary function, a strategy similar to the one used in ◊code/inline{well-formed?}. Specifically, ◊code/inline{closed?} receives a ◊code/inline{program} as argument and calls ◊code/inline{free-variables} on it. This auxiliary function returns the set of free variables in the program, in other words, the set of variables which are used before definition. If this set is empty, then the program is closed:
 
@@ -435,7 +435,7 @@ We can test this case with the examples mentioned above:
 (set)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 This completes the implementation of ◊code/inline{free-variables} and, consequently, the implementations of ◊code/inline{closed?} and ◊code/inline{well-formed?} as well. Hereafter, we only discuss interpretation of programs which are valid with respect to the ◊code/inline{well-formed?} predicate.
 
@@ -508,7 +508,7 @@ This implementation is enough to interpret our first valid example program corre
 '(λ (x) x)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The final case is function application. The following is an example of function application in our language:
 
@@ -574,7 +574,7 @@ This is enough to interpret our example:
 '(λ (y) y)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 But there are more details regarding function application that we need to consider. The first is that the implementation of ◊code/inline{substitute} for variable references above is overly simplistic. It replaces every ◊code/inline{variable} with ◊code/inline{argument}, not only those ◊code/inline{variable}s equal to the ◊code/inline{argument-name}. For example, if the ◊code/inline{body} had been ◊code/inline{z}, then ◊code/inline{substitute} would have substituted it for the ◊code/inline{argument}, which would have been incorrect, since the ◊code/inline{argument-name} was ◊code/inline{x}. We can simulate this scenario by calling ◊code/inline{substitute} directly:
 
@@ -632,7 +632,7 @@ The following listing includes examples of uses of ◊code/inline{substitute}. T
 '(z (λ (y) y))
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 In our next program, the ◊code/inline{function} to be applied is not immediately available. Instead, it is itself the result of a function application:
 
@@ -691,7 +691,7 @@ Our interpreter now works for the given example:
 '(λ (z) z)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 For our next program, the result of a function application is another function application:
 
@@ -736,7 +736,7 @@ Now ◊code/inline{interpret} works correctly for the running example:
 '(λ (y) y)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 The next programs we address are those concerning variable-name reuse. First, the case in which the reused name occurs in separate functions:
 
@@ -799,7 +799,7 @@ Our program now works as we expected:
 '(λ (z) z)
 }
 
-◊paragraph-separation[]
+◊new-thought[]
 
 This concludes the implementation of our interpreter. To test it in a realistic setting, we can use the final version of the program ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}, which calculates the sum ◊code/inline{1 + 2 + 3 + 4 + 5}:
 
@@ -993,7 +993,7 @@ This concludes the implementation of our interpreter. To test it in a realistic 
 
 The output is what we expected, ◊code/inline{15}. Our interpreter is fully functional for any program in our target language.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 But this interpreter is not revealing all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation. Furthermore, if given a ◊code/inline{program} which does not terminate, then ◊code/inline{interpret} itself does not terminate, and there is no way to inspect the computations that are happening during interpretation.
 

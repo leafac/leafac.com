@@ -13,7 +13,7 @@ Besides assistants in email clients themselves, there exist many tools for conve
 
 In fact, people on the Internet have suggested this method before. And they recommend using the email provider the person already has, for example, ◊link["https://www.google.com/gmail/"]{Gmail} or ◊link["https://www.icloud.com"]{iCloud}. This is simple to setup, because it just reuses the configuration already in the email client. For this simplicity, it is the most recommended approach to people not familiar with the command-line. But it has an important drawback: it involves uploading and re-downloading the whole message history! Depending on the size of the history, this can take days. It is a ◊emphasis{ridiculous} solution.
 
-◊paragraph-separation[]
+◊new-thought[]
 
 In this article, we introduce an alternative that brings together the two non-solutions discussed above. ◊emphasis{It is the ultimate solution to the ridiculous problem of email migration}. It is a compromise between running conversion tools locally and using a remote email server to intermediate the migration: ◊emphasis{setup a temporary local email server}.
 
