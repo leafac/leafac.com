@@ -7,7 +7,7 @@
 
 ◊margin-note{◊figure{◊svg{images/peg.svg}◊figure/caption{A peg. Solitary.}}}
 
-◊link["https://redex.racket-lang.org/"]{◊initialism{PLT} Redex is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, ◊initialism{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
+◊link["https://redex.racket-lang.org/"]{◊initialism{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, ◊initialism{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
 Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊initialism{PLT} Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we will cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
