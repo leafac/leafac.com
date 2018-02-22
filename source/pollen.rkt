@@ -389,6 +389,13 @@
     #:font-size ,font-size/medium
     #:font-weight 700]))
 
+(define-component new-thought
+  #:html (default-tag-function 'div #:class "new-thought")
+  #:css (css-expr [.new-thought #:height ,space/extra-large]))
+
+(define-component (appendix key . elements)
+  #:html (apply section key `("Appendix: " ,@elements)))
+
 (define-component (heading type key . elements)
   #:html
   (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§"))))
@@ -592,13 +599,6 @@
 (define-component foreign #:html emphasis)
 
 (define-component technical-term #:html emphasis)
-
-(define-component (appendix key . elements)
-  #:html (apply section key `("Appendix: " ,@elements)))
-
-(define-component new-thought
-  #:html (default-tag-function 'div #:class "new-thought")
-  #:css (css-expr [.new-thought #:height ,space/extra-large]))
 
 (define-component new-line
   #:html (default-tag-function 'br))
