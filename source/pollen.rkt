@@ -240,20 +240,6 @@
    #:margin-right ,space/medium
    [(: & last-child) #:margin-right ,space/none]))
 
-(define ruler-left-spacing
-  (css-expr)
-  #;(css-expr #;(#:box-sizing border-box ?)
-              #:padding
-              (#:top (rem ,(modular-scale -4))
-               #:bottom (rem ,(modular-scale -4))
-               #:left ,font-size/indentation
-               #:left (apply calc (- ,font-size/indentation ,ruler/thick)))
-              #:margin (#:top (rem ,(modular-scale 0))
-                        #:bottom (rem ,(modular-scale 0)))
-              [.full-width
-               [@media ,grid/breakpoint/bigger-screens
-                #:width (apply calc (- ,grid/body ,font-size/indentation))]]))
-
 (define show-on-hover
   (css-expr #:transition (opacity ,animation/duration)
             #:opacity 0
@@ -262,7 +248,6 @@
 (define (section/flag label color)
   (css-expr
    #:border-left (,ruler/thick solid ,color)
-   ,@ruler-left-spacing
    #:position relative
    [(:: & before)
     #:content ,label
@@ -466,7 +451,7 @@
 (define-component (phone number)
   #:html ((default-tag-function '@) number))
 
-;; ---------------------------------------------------------------------------------------------------
+;; Margin note
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -474,19 +459,22 @@
   (css-expr
    [aside
     [@media ,grid/smaller-screens
+     ,@insertion
+     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thick)))
      #:color ,(dict-ref colors 'emphasized-content)
      #:background-color ,(dict-ref colors 'background-highlight)
-     #:border-left
-     (,ruler/thick solid ,(dict-ref colors 'secondary-content))
-     ,@ruler-left-spacing
-     #:padding-right (rem ,(modular-scale -4))]
+     #:border-left (,ruler/thick solid ,(dict-ref colors 'secondary-content))]
     [@media ,grid/bigger-screens
      #:font-size ,font-size/small
+     #:width ,grid/margin-note
      #:float right
      #:clear right
-     #:width ,grid/margin-note !important
-     #:margin-bottom (rem ,(modular-scale 2))
-     #:margin-right ,grid/margin-note/pull]]))
+     #:margin (#:right ,grid/margin-note/pull #:bottom ,space/large)]]))
+
+;; TODO: Add ‘foot-note’.
+;; TODO: Generalize ‘side-note’. (But with better names than these.)
+
+;; ---------------------------------------------------------------------------------------------------
 
 (define-component figure
   #:html (default-tag-function 'figure)
