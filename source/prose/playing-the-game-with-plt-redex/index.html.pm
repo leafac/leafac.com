@@ -7,7 +7,7 @@
 
 ◊margin-note{◊figure{◊svg{images/peg.svg}◊figure/caption{A peg. Solitary.}}}
 
-◊new-thought{◊link["https://redex.racket-lang.org/"]{◊initialism{PLT} Redex} is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, ◊initialism{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
+◊link["https://redex.racket-lang.org/"]{◊initialism{PLT} Redex is a ◊link["https://racket-lang.org/"]{Racket} library} for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, ◊initialism{PLT} Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
 Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to ◊initialism{PLT} Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we will cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
@@ -15,7 +15,7 @@ Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond th
 
 ◊margin-note{This section explains the rules of Peg Solitaire. If you already know them, ◊reference['data-structures]{skip ahead}.}
 
-◊new-thought{Peg Solitaire} is a 1-player board game. The initial arrangement of the board is the following:
+Peg Solitaire is a 1-player board game. The initial arrangement of the board is the following:
 
 ◊margin-note{There are other possible initial arrangements. We are considering the most common American variation.}
 
@@ -77,7 +77,7 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{We need data structures} to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a ◊emphasis{language} as our data structure definition. Terms in the language will represent board configurations. ◊initialism{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊initialism{BNF}} form:
+We need data structures to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a ◊emphasis{language} as our data structure definition. Terms in the language will represent board configurations. ◊initialism{PLT} Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{◊initialism{BNF}} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
@@ -145,7 +145,7 @@ We define the configuration for the initial Peg Solitaire board as a term in the
 
 ◊section['moves]{Moves}
 
-◊new-thought{We need to specify} how pegs can to move on the board. We do this by defining a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable in one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
+We need to specify how pegs can to move on the board. We do this by defining a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable in one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
 
 ◊code/block/highlighted['racket]{
 (--> (any_1
@@ -268,7 +268,7 @@ One way of thinking about ◊code/inline{move} is that it is a function returnin
 
 ◊section['game-play]{Game Play}
 
-◊new-thought{We can use} the visualization tools that come with ◊initialism{PLT} Redex to play Peg Solitaire. These tools are designed for interactive exploration of evaluation rules; one can expand certain paths and backtrack, while seeing the differences highlighted. The following demonstrates game play:
+We can use the visualization tools that come with ◊initialism{PLT} Redex to play Peg Solitaire. These tools are designed for interactive exploration of evaluation rules; one can expand certain paths and backtrack, while seeing the differences highlighted. The following demonstrates game play:
 
 ◊code/block/highlighted['racket]{
 > (stepper move (term initial-board))
@@ -278,7 +278,7 @@ One way of thinking about ◊code/inline{move} is that it is a function returnin
 
 ◊section['winning]{Winning}
 
-◊new-thought{Now that we can} play Peg Solitaire, a natural question is: can we use what we have to compute a solution to the game? We can use another visualization tool from ◊initialism{PLT} Redex to understand what the search for an answer would look like:
+Now that we can play Peg Solitaire, a natural question is: can we use what we have to compute a solution to the game? We can use another visualization tool from ◊initialism{PLT} Redex to understand what the search for an answer would look like:
 
 ◊code/block/highlighted['racket]{
 > (traces move (term initial-board))
@@ -355,7 +355,7 @@ To find an answer within a reasonable time, we would need a ◊technical-term{go
 
 ◊margin-note{For more on cellular automata, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
 
-◊new-thought{Peg Solitaire is similar} to simple cellular automata. Like cellular automata, Peg Solitaire is based on a grid of cells that can assume certain states and evolve over time. So, could ◊initialism{PLT} Redex model cellular automata as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular kinds of cellular automata?
+Peg Solitaire is similar to simple cellular automata. Like cellular automata, Peg Solitaire is based on a grid of cells that can assume certain states and evolve over time. So, could ◊initialism{PLT} Redex model cellular automata as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular kinds of cellular automata?
 
 ◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities for moves in Peg Solitaire, in the Game of Life each move consists of multiple updates to the board.}
 
@@ -377,7 +377,7 @@ The comma in the snippet above means “escape back to Racket, run this arbitrar
 
 ◊section['conclusion]{Conclusion}
 
-◊new-thought{We showed how a language} can work as data structure definitions. We used a language and the evaluation mechanisms in ◊initialism{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊initialism{PLT} Redex to play the game.
+We showed how a language can work as data structure definitions. We used a language and the evaluation mechanisms in ◊initialism{PLT} Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with ◊initialism{PLT} Redex to play the game.
 
 Along the way, we introduced a model for computation that is unusual in most programming languages: non-deterministic computation. When faced with multiple paths, non-deterministic computations ◊informal{create different universes} and follow them all.
 
@@ -387,4 +387,4 @@ Finally, we discussed ◊initialism{PLT} Redex’s limitations. It cannot be use
 
 ◊section['acknowledgments]{Acknowledgments}
 
-◊new-thought{Thank you} ◊link["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar}, ◊link["http://www.thinkmoore.net/"]{Scott Moore}, ◊link["http://www.allanvital.com/"]{Allan Vital} and ◊link["http://rafaelalmeida.net/"]{Rafael da Silva Almeida} for your feedback on this article.
+Thank you ◊link["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar}, ◊link["http://www.thinkmoore.net/"]{Scott Moore}, ◊link["http://www.allanvital.com/"]{Allan Vital} and ◊link["http://rafaelalmeida.net/"]{Rafael da Silva Almeida} for your feedback on this article.

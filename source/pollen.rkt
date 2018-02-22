@@ -1,13 +1,13 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
-         racket/function racket/list racket/file racket/dict racket/string file/sha1
+         racket/format racket/function racket/list racket/file racket/dict racket/string file/sha1
          css-expr libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
 
 (provide (all-defined-out)
-         (all-from-out racket/function racket/list racket/file racket/dict racket/string file/sha1
-                       gregor gregor/period sugar xml
+         (all-from-out racket/format racket/function racket/list racket/file racket/dict racket/string
+                       file/sha1 gregor gregor/period sugar xml
                        pollen/core pollen/file
                        css-expr))
 
@@ -387,16 +387,6 @@
 
 ;; Headings
 
-(define-component (heading type key . elements)
-  #:html
-  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§"))))
-  #:css
-  (css-expr
-   [h1 h2
-    #:margin (#:top ,space/extra-large #:bottom ,space/small)
-    #:line-height ,line-height/small
-    [a #:text-decoration none]]))
-
 (define-component (section key . elements)
   #:html (apply heading 'h1 key elements)
   #:css
@@ -413,6 +403,16 @@
    [h2
     #:font-size ,font-size/medium
     #:font-weight 700]))
+
+(define-component (heading type key . elements)
+  #:html
+  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§"))))
+  #:css
+  (css-expr
+   [h1 h2
+    #:margin (#:top ,space/extra-large #:bottom ,space/small)
+    #:line-height ,line-height/small
+    [a #:text-decoration none]]))
 
 (define-component (heading/mark . elements)
   #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
@@ -467,11 +467,6 @@
   #:html ((default-tag-function '@) number))
 
 ;; ---------------------------------------------------------------------------------------------------
-
-;; TODO: Remove this?
-(define-component new-thought
-  #:html (default-tag-function 'span #:class "new-thought")
-  #:css (css-expr #;[.new-thought]))
 
 (define-component margin-note
   #:html (default-tag-function 'aside)

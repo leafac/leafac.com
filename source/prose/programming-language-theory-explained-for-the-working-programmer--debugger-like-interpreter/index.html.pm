@@ -17,7 +17,7 @@
 
 ◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of ◊technical-term{contexts}, which we introduce later in this section.}
 
-◊new-thought{Our first interpreter} defined in the ◊reference['first-interpreter]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, the ◊code/inline{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code/inline{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
+Our first interpreter defined in the ◊reference['first-interpreter]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, the ◊code/inline{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code/inline{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
 
 In this section, we rewrite our interpreter to take a different approach, more similar to that of ◊technical-term{step-debuggers}. ◊technical-term{Step-debuggers} are tools that aid program understanding and debugging, they allow the user to run a program step-by-step (line-by-line, expression-by-expression, and so forth). In our case, the level of granularity that is interesting is the function application, because function applications are the smallest pieces of computation that preserve meaning.
 
@@ -27,7 +27,7 @@ Alternatively, if we inspected interpretation after a few function applications,
 
 ◊paragraph-separation[]
 
-◊new-thought{We start with} a function called ◊code/inline{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code/inline{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code/inline{step} function is similar to ◊code/inline{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code/inline{step}’s definition:
+We start with a function called ◊code/inline{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code/inline{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code/inline{step} function is similar to ◊code/inline{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code/inline{step}’s definition:
 
 ◊code/block/highlighted['racket]{
 (define (step program)
@@ -84,7 +84,7 @@ Because the ◊code/inline{reduction-expression} is a function application ready
 
 ◊paragraph-separation[]
 
-◊new-thought{There are still} two missing pieces in our ◊technical-term{debugger-like interpreter}: the auxiliary functions ◊code/inline{split-program} and ◊code/inline{fill-hole}. We start by addressing ◊code/inline{split-program}.
+There are still two missing pieces in our ◊technical-term{debugger-like interpreter}: the auxiliary functions ◊code/inline{split-program} and ◊code/inline{fill-hole}. We start by addressing ◊code/inline{split-program}.
 
 First, note that ◊code/inline{split-program} is only called with ◊code/inline{program-fragment}s which are function applications; otherwise, the ◊code/inline{program} given to ◊code/inline{step} would be an anonymous function definition, which it would return unaltered, without calling ◊code/inline{split-program}. The task of ◊code/inline{split-program} is to chose which of the potentially arbitrarily nested function applications to compute next. The only constraint is that the function application must be ready for computation, which means both the ◊code/inline{function} and the ◊code/inline{argument} must already be values, and not other nested function applications.
 
@@ -181,7 +181,7 @@ We can test this final case with a ◊code/inline{program-fragment} similar to o
 
 ◊paragraph-separation[]
 
-◊new-thought{The final auxiliary function} is ◊code/inline{fill-hole}, which receives as arguments a ◊code/inline{program-fragment} and a ◊code/inline{context}. It is called by ◊code/inline{step} after evaluating the ◊code/inline{reduction-expression} selected by ◊code/inline{split-program} and fills the ◊technical-term{hole} in the ◊code/inline{context} with the ◊code/inline{program-fragment}. For example, when given the ◊code/inline{program-fragment} ◊code/inline{(λ (y) y)} and the ◊code/inline{context} ◊code/inline{((hole) (λ (z) z))}, then ◊code/inline{fill-hole} returns ◊code/inline{((λ (y) y) (λ (z) z))}.
+The final auxiliary function is ◊code/inline{fill-hole}, which receives as arguments a ◊code/inline{program-fragment} and a ◊code/inline{context}. It is called by ◊code/inline{step} after evaluating the ◊code/inline{reduction-expression} selected by ◊code/inline{split-program} and fills the ◊technical-term{hole} in the ◊code/inline{context} with the ◊code/inline{program-fragment}. For example, when given the ◊code/inline{program-fragment} ◊code/inline{(λ (y) y)} and the ◊code/inline{context} ◊code/inline{((hole) (λ (z) z))}, then ◊code/inline{fill-hole} returns ◊code/inline{((λ (y) y) (λ (z) z))}.
 
 The structure for the implementation of ◊code/inline{fill-hole} is similar to ◊code/inline{traverse}, but it considers different ◊technical-term{patterns}:
 
@@ -263,7 +263,7 @@ We can now test ◊code/inline{fill-hole} in the general case:
 
 ◊paragraph-separation[]
 
-◊new-thought{We finished implementing} the auxiliary functions, so ◊code/inline{step} is complete:
+We finished implementing the auxiliary functions, so ◊code/inline{step} is complete:
 
 ◊code/block/highlighted['racket]{
 > (step `(((λ (x) x) (λ (y) y)) (λ (z) z)))
@@ -291,13 +291,13 @@ This version of ◊code/inline{interpret} follows the ◊code/inline{traverse} f
 
 ◊paragraph-separation[]
 
-◊new-thought{In this section} we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
+In this section we made explicit an important aspect of interpretation: evaluation of nested function applications occurs in steps, and the order in which they happen is meaningful. In our language, inner function applications are evaluated first, from left to right.
 
 Our ◊technical-term{debugger-like interpreter} allows us to reason about the interpretation of function application in terms of substitution. When the ◊code/inline{function} ◊code/inline{(λ (x) ___)} is applied, every occurrence of ◊code/inline{x} in the body ◊code/inline{___} is substituted by the ◊code/inline{argument}. After a number of ◊code/inline{step}s, the intermediary ◊code/inline{program} has been through several substitutions, and might become unrecognizable with respect to the original ◊code/inline{program} under interpretation. While our ◊technical-term{debugger-like interpreter} clarifies what are the exact ◊code/inline{program-fragment}s as interpretation progresses, it conceals the relationship between these ◊code/inline{program-fragment}s and those originally written by the programmer. The interpreter in the next section explores the other end of this trade-off.
 
 ◊section['variable-inspecting-debugger-like-interpreter]{Variable-Inspecting Debugger-Like Interpreter}
 
-◊new-thought{Interpreters and debuggers} generally do not work by substituting arguments in place and creating new program fragments. First, because this can disorient programmers, as the original program they wrote is no longer recognizable after some steps of interpretation. Also, it is inefficient to create program fragments, which tend to be big data structures.
+Interpreters and debuggers generally do not work by substituting arguments in place and creating new program fragments. First, because this can disorient programmers, as the original program they wrote is no longer recognizable after some steps of interpretation. Also, it is inefficient to create program fragments, which tend to be big data structures.
 
 ◊margin-note{Technically, the interpreters we wrote in previous sections are called ◊technical-term{substitution-based interpreters}, and the one write in section is a ◊technical-term{environment-based interpreter}.}
 
@@ -309,7 +309,7 @@ This solution is similar to most ◊technical-term{step-debuggers}, which do not
 
 ◊paragraph-separation[]
 
-◊new-thought{The implementation of our} ◊technical-term{variable-inspecting debugger-like interpreter} is similar in structure to our ◊technical-term{debugger-like interpreter}. The most important function is ◊code/inline{step}, which evaluates the next ◊technical-term{reduction expression}. There is one important difference between this interpreter and the previous, though. For interpreters up to this point in the article, all information necessary to evaluate the program was present in the intermediary programs generated during interpretation. The ◊code/inline{step} function received a ◊code/inline{program} as argument. Now, besides the intermediary program, it is also necessary to have information about the ◊technical-term{environment}. Together, they represent the current ◊technical-term{state} of computation. We start our implementation by defining a data structure for ◊technical-term{states}:
+The implementation of our ◊technical-term{variable-inspecting debugger-like interpreter} is similar in structure to our ◊technical-term{debugger-like interpreter}. The most important function is ◊code/inline{step}, which evaluates the next ◊technical-term{reduction expression}. There is one important difference between this interpreter and the previous, though. For interpreters up to this point in the article, all information necessary to evaluate the program was present in the intermediary programs generated during interpretation. The ◊code/inline{step} function received a ◊code/inline{program} as argument. Now, besides the intermediary program, it is also necessary to have information about the ◊technical-term{environment}. Together, they represent the current ◊technical-term{state} of computation. We start our implementation by defining a data structure for ◊technical-term{states}:
 
 ◊margin-note{The ◊code/inline{#:transparent} flag is there just to make the data structure print nicely for debugging.}
 
@@ -337,7 +337,7 @@ For example, given the program ◊code/inline{(λ (x) x)}, the initial state is:
 
 ◊paragraph-separation[]
 
-◊new-thought{The next big change} in our interpreter is that ◊emphasis{functions are no longer values in our language}! A function in an intermediary program might include references to variables which have not been substituted yet; the information for that substitution is in an ◊code/inline{environment}. For example, consider the program ◊code/inline{((λ (x) (λ (y) x)) (λ (z) z))}. In the interpreters we implemented in previous sections, this evaluates to ◊code/inline{(λ (y) (λ (z) z))}, because the ◊code/inline{x} in ◊code/inline{(λ (y) x)} is substituted for the argument ◊code/inline{(λ (z) z)}. But in our current interpreter this does not happen, the resulting program would be ◊code/inline{(λ (y) x)}, which cannot be a value because the variable ◊code/inline{x} is free and, consequently, the program is open.
+The next big change in our interpreter is that ◊emphasis{functions are no longer values in our language}! A function in an intermediary program might include references to variables which have not been substituted yet; the information for that substitution is in an ◊code/inline{environment}. For example, consider the program ◊code/inline{((λ (x) (λ (y) x)) (λ (z) z))}. In the interpreters we implemented in previous sections, this evaluates to ◊code/inline{(λ (y) (λ (z) z))}, because the ◊code/inline{x} in ◊code/inline{(λ (y) x)} is substituted for the argument ◊code/inline{(λ (z) z)}. But in our current interpreter this does not happen, the resulting program would be ◊code/inline{(λ (y) x)}, which cannot be a value because the variable ◊code/inline{x} is free and, consequently, the program is open.
 
 The solution is to pair functions with ◊code/inline{environment}s, which contain mappings for the variables free in the function body. In the running example, the function ◊code/inline{(λ (y) x)} is paired with an ◊code/inline{environment} containing a mapping for name ◊code/inline{x}. When the interpreter has to evaluate the variable reference ◊code/inline{x} in ◊code/inline{(λ (y) x)}, it looks up the name in the ◊code/inline{environment} associated with that function. This construct comprising a function and a corresponding ◊code/inline{environment} is called a ◊technical-term{closure}.
 

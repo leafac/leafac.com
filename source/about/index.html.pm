@@ -5,13 +5,13 @@
 
 ◊margin-note{◊image["/assets/images/avatar.png"]}
 
-◊new-thought{I am a writer} of ◊link/internal["/prose"]{prose}, ◊link/internal["/software"]{software} and ◊link/internal["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link/internal["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
+I am a writer of ◊link/internal["/prose"]{prose}, ◊link/internal["/software"]{software} and ◊link/internal["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link/internal["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
 
 My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link/internal["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
 ◊paragraph-separation[]
 
-◊new-thought{I am ◊(number->string (dict-ref personal-data 'age)) years old} and I have been writing software for over a decade. Most of my career has been in web products and I also developed natural-language-processing applications, system administration tools and programming-language theory.
+I am ◊~a[(dict-ref personal-data 'age)] years old and I have been writing software for over a decade. Most of my career has been in web products and I also developed natural-language-processing applications, system administration tools and programming-language theory.
 
 ◊margin-note{Feel free to invite me for a pair-programming session and to talk at conferences and user-group meetings.}
 
@@ -29,7 +29,7 @@ I read about a book per week. Both fiction and non-fiction.
 
 ◊paragraph-separation[]
 
-◊new-thought{The rest of this page} lists my accomplishments. Work experiences, education, publications and more.
+The rest of this page lists my accomplishments. Work experiences, education, publications and more.
 
 ◊section['education]{Education}
 

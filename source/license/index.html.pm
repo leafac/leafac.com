@@ -4,7 +4,7 @@
 
 ◊margin-note{See the ◊link/internal["/software/www.leafac.com/"]{source code for the website}.}
 
-◊new-thought{The license} for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{◊initialism{GNU FDL}}:
+The license for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{◊initialism{GNU FDL}}:
 
 ◊code/block{
 Copyright (C) ◊(->string (->year (today))) ◊(dict-ref personal-data 'author).

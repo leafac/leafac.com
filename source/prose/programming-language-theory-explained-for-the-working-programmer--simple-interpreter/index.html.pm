@@ -7,11 +7,11 @@
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter/programming-language-theory-explained-for-the-working-programmer--simple-interpreter.rkt"]{Here} is the code for this entire article.}
 
-◊new-thought{Interpreters are programs} for running programs. They receive a program as input, evaluate it, and output the results. How does this process work? In this article we start to address this question by writing a simple interpreter. The goal is to explore the underlying principles of computation and to understand how programming languages support ◊emphasis{communication}, which is their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but we introduce ideas and techniques that are generally applicable to everyday problem solving. In subsequent articles we will explore the question further, developing variants of the simple interpreter from this article. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
+Interpreters are programs for running programs. They receive a program as input, evaluate it, and output the results. How does this process work? In this article we start to address this question by writing a simple interpreter. The goal is to explore the underlying principles of computation and to understand how programming languages support ◊emphasis{communication}, which is their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but we introduce ideas and techniques that are generally applicable to everyday problem solving. In subsequent articles we will explore the question further, developing variants of the simple interpreter from this article. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
 
 ◊section['language]{Language}
 
-◊new-thought{To start writing} our interpreter, we need to answer two questions: Which language do we use to write it? Which language does it interpret? For the former, we choose Racket. It has features that make interpreters easier to read, for example, ◊technical-term{pattern matching} and ◊technical-term{quasiquoting}—which we introduce in due time. This choice is solely based on convenience, this article could be rewritten in any other programming language.
+To start writing our interpreter, we need to answer two questions: Which language do we use to write it? Which language does it interpret? For the former, we choose Racket. It has features that make interpreters easier to read, for example, ◊technical-term{pattern matching} and ◊technical-term{quasiquoting}—which we introduce in due time. This choice is solely based on convenience, this article could be rewritten in any other programming language.
 
 More interesting than the choice of base language is the choice of target language. Our interpreter evaluates programs written in which language? We are not interested in language design, our objective is not to understand how particular language features are interpreted. Instead, we are interested in studying interpretation itself, and in understanding how interpreters support the fundamental principles behind computation. So the target language should be as ◊technical-term{simple} as possible.
 
@@ -55,7 +55,7 @@ This program is an application of the function ◊code/inline{(λ (x) x)} to the
 
 ◊paragraph-separation[]
 
-◊new-thought{We covered all features} of our target language, but there are two corner cases that we need to address: variable-name reuse and variable references that have not been defined. The first case, variable-name reuse, can occur in two ways, the simplest of which is illustrated by the following listing:
+We covered all features of our target language, but there are two corner cases that we need to address: variable-name reuse and variable references that have not been defined. The first case, variable-name reuse, can occur in two ways, the simplest of which is illustrated by the following listing:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (x) x))
@@ -89,7 +89,7 @@ The program consists of a variable reference to ◊code/inline{x}, but ◊code/i
 
 ◊section['representation]{Representation}
 
-◊new-thought{How do we represent} in our base language (Racket) the programs from our target language? Generally, programs are plain text files, which interpreters read from the disk. They transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} (◊technical-term{lexing}) and ◊technical-term{syntactic analysis} (◊technical-term{parsing}). This would be easy to do because our target language is a subset of Racket, which comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from the ◊reference['language]{previous section}:
+How do we represent in our base language (Racket) the programs from our target language? Generally, programs are plain text files, which interpreters read from the disk. They transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} (◊technical-term{lexing}) and ◊technical-term{syntactic analysis} (◊technical-term{parsing}). This would be easy to do because our target language is a subset of Racket, which comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from the ◊reference['language]{previous section}:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y))
@@ -129,7 +129,7 @@ Nevertheless, there are many problematic programs that one can still write. For 
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: Separate the checking of exceptional cases from the computation. Program confidently, instead of defensively.}
 
-◊new-thought{Before we start} the implementation of our first interpreter, we address the issue of checking whether a program is well-formed. In this section, we introduce a well-formedness checker, which runs before the interpreter, so it does not have to account for error cases. Also, the well-formedness checker is illustrative of the techniques we use to process programs in our language.
+Before we start the implementation of our first interpreter, we address the issue of checking whether a program is well-formed. In this section, we introduce a well-formedness checker, which runs before the interpreter, so it does not have to account for error cases. Also, the well-formedness checker is illustrative of the techniques we use to process programs in our language.
 
 The well-formedness checker has two responsibilities: (1) check whether the program is syntactically valid; and (2) check whether all variables are defined before use. The first check rejects programs which are not in the forms defined by our target language. For example, ◊code/inline{(λ (a b) a)} is invalid because it is an anonymous function with two arguments (◊code/inline{a} and ◊code/inline{b}), whereas our target language only allows for functions with one argument. Another example of syntactically invalid program is ◊code/inline{(f a b)}, which is a call to function ◊code/inline{f} with arguments ◊code/inline{a} and ◊code/inline{b}; this too is disallowed because functions only receive one argument.
 
@@ -146,7 +146,7 @@ This implementation is simplistic, because it receives a ◊code/inline{program}
 
 ◊paragraph-separation[]
 
-◊new-thought{We start with} ◊code/inline{syntactically-valid?}:
+We start with ◊code/inline{syntactically-valid?}:
 
 ◊margin-note{Texts after the semicolon (◊code/inline{;}) are comments.}
 
@@ -178,7 +178,7 @@ This simple implementation is just calling Racket’s ◊code/inline{symbol?} fu
 
 ◊paragraph-separation[]
 
-◊new-thought{The next form of} ◊code/inline{program-fragment} we address in ◊code/inline{syntactically-valid?} is the anonymous function definition, for example:
+The next form of ◊code/inline{program-fragment} we address in ◊code/inline{syntactically-valid?} is the anonymous function definition, for example:
 
 ◊code/block/highlighted['racket]{
 (λ (x) (x x))
@@ -260,7 +260,7 @@ The ◊code/inline{syntactically-valid?} function is once again working on the �
 
 ◊paragraph-separation[]
 
-◊new-thought{Now that} ◊code/inline{syntactically-valid?} can distinguish between the different forms of ◊code/inline{program-fragment}, we return to the issue of checking the syntactical validity of anonymous function definitions. Two conditions must hold: (1) the ◊code/inline{argument-name} must be a symbol (similar to variable references); and (2) the ◊code/inline{body} must be a ◊code/inline{syntactically-valid?} ◊code/inline{program-fragment}.
+Now that ◊code/inline{syntactically-valid?} can distinguish between the different forms of ◊code/inline{program-fragment}, we return to the issue of checking the syntactical validity of anonymous function definitions. Two conditions must hold: (1) the ◊code/inline{argument-name} must be a symbol (similar to variable references); and (2) the ◊code/inline{body} must be a ◊code/inline{syntactically-valid?} ◊code/inline{program-fragment}.
 
 For the first condition, we can use Racket’s ◊code/inline{symbol?} function, as we did before for variable references. For the second, we can call ◊code/inline{syntactically-valid?} recursively on the ◊code/inline{program-fragment} which is the anonymous function ◊code/inline{body}:
 
@@ -289,7 +289,7 @@ To test our implementation, we use the syntactically valid anonymous function �
 
 ◊paragraph-separation[]
 
-◊new-thought{To complete the implementation} of ◊code/inline{syntactically-valid?}, we consider the case of function applications. The condition for syntactical validity in this case is just that both ◊code/inline{function} and ◊code/inline{argument} are syntactically valid themselves, and we can use ◊code/inline{syntactically-valid?} recursively to check for that:
+To complete the implementation of ◊code/inline{syntactically-valid?}, we consider the case of function applications. The condition for syntactical validity in this case is just that both ◊code/inline{function} and ◊code/inline{argument} are syntactically valid themselves, and we can use ◊code/inline{syntactically-valid?} recursively to check for that:
 
 ◊full-width{
  ◊code/block/highlighted['racket]{
@@ -319,7 +319,7 @@ The implementation of ◊code/inline{syntactically-valid?} is complete. Let us t
 
 ◊paragraph-separation[]
 
-◊new-thought{The implementation of the} ◊code/inline{closed?} function is simple because it delegates most of the work to an auxiliary function, a strategy similar to the one used in ◊code/inline{well-formed?}. Specifically, ◊code/inline{closed?} receives a ◊code/inline{program} as argument and calls ◊code/inline{free-variables} on it. This auxiliary function returns the set of free variables in the program, in other words, the set of variables which are used before definition. If this set is empty, then the program is closed:
+The implementation of the ◊code/inline{closed?} function is simple because it delegates most of the work to an auxiliary function, a strategy similar to the one used in ◊code/inline{well-formed?}. Specifically, ◊code/inline{closed?} receives a ◊code/inline{program} as argument and calls ◊code/inline{free-variables} on it. This auxiliary function returns the set of free variables in the program, in other words, the set of variables which are used before definition. If this set is empty, then the program is closed:
 
 ◊margin-note{Racket comes with ◊link["https://docs.racket-lang.org/reference/sets.html"]{functions for sets}, including ◊code/inline{set} to create them, ◊code/inline{set-empty?} to check their emptiness and so forth.}
 
@@ -437,7 +437,7 @@ We can test this case with the examples mentioned above:
 
 ◊paragraph-separation[]
 
-◊new-thought{This completes the implementation} of ◊code/inline{free-variables} and, consequently, the implementations of ◊code/inline{closed?} and ◊code/inline{well-formed?} as well. Hereafter, we only discuss interpretation of programs which are valid with respect to the ◊code/inline{well-formed?} predicate.
+This completes the implementation of ◊code/inline{free-variables} and, consequently, the implementations of ◊code/inline{closed?} and ◊code/inline{well-formed?} as well. Hereafter, we only discuss interpretation of programs which are valid with respect to the ◊code/inline{well-formed?} predicate.
 
 More importantly, note the similarities between the implementations of ◊code/inline{syntactically-valid?} and ◊code/inline{free-variables}. Both of these functions have to traverse the given ◊code/inline{program-fragment}, and they accomplish it using the same technique: first, ◊code/inline{match} on the given ◊code/inline{program-fragment} to detect its form; then, call the function recursively if it is necessary to traverse smaller ◊code/inline{program-fragment}s contained within the given ◊code/inline{program-fragment}. Abstractly, these functions that ◊technical-term{traverse} the given ◊code/inline{program-fragment} have the shape:
 
@@ -458,7 +458,7 @@ Our interpreter and auxiliary functions will follow the ◊code/inline{traverse}
 
 ◊section['interpreter]{Interpreter}
 
-◊new-thought{Our interpreter} is a function which receives a ◊code/inline{program} in our target language as argument and evaluates it to a value in our target language. We start with the template for ◊technical-term{traversing} a ◊code/inline{program}, which we established in the ◊reference['well-formedness-checker]{previous section}:
+Our interpreter is a function which receives a ◊code/inline{program} in our target language as argument and evaluates it to a value in our target language. We start with the template for ◊technical-term{traversing} a ◊code/inline{program}, which we established in the ◊reference['well-formedness-checker]{previous section}:
 
 ◊code/block/highlighted['racket]{
 (define (interpret program)
@@ -510,7 +510,7 @@ This implementation is enough to interpret our first valid example program corre
 
 ◊paragraph-separation[]
 
-◊new-thought{The final case} is function application. The following is an example of function application in our language:
+The final case is function application. The following is an example of function application in our language:
 
 ◊code/block/highlighted['racket]{
 ((λ (x) x) (λ (y) y)) ;; => (λ (y) y)
@@ -576,7 +576,7 @@ This is enough to interpret our example:
 
 ◊paragraph-separation[]
 
-◊new-thought{But there are more details} regarding function application that we need to consider. The first is that the implementation of ◊code/inline{substitute} for variable references above is overly simplistic. It replaces every ◊code/inline{variable} with ◊code/inline{argument}, not only those ◊code/inline{variable}s equal to the ◊code/inline{argument-name}. For example, if the ◊code/inline{body} had been ◊code/inline{z}, then ◊code/inline{substitute} would have substituted it for the ◊code/inline{argument}, which would have been incorrect, since the ◊code/inline{argument-name} was ◊code/inline{x}. We can simulate this scenario by calling ◊code/inline{substitute} directly:
+But there are more details regarding function application that we need to consider. The first is that the implementation of ◊code/inline{substitute} for variable references above is overly simplistic. It replaces every ◊code/inline{variable} with ◊code/inline{argument}, not only those ◊code/inline{variable}s equal to the ◊code/inline{argument-name}. For example, if the ◊code/inline{body} had been ◊code/inline{z}, then ◊code/inline{substitute} would have substituted it for the ◊code/inline{argument}, which would have been incorrect, since the ◊code/inline{argument-name} was ◊code/inline{x}. We can simulate this scenario by calling ◊code/inline{substitute} directly:
 
 ◊code/block/highlighted['racket]{
 > (substitute `z `x `(λ (y) y))
@@ -634,7 +634,7 @@ The following listing includes examples of uses of ◊code/inline{substitute}. T
 
 ◊paragraph-separation[]
 
-◊new-thought{In our next program}, the ◊code/inline{function} to be applied is not immediately available. Instead, it is itself the result of a function application:
+In our next program, the ◊code/inline{function} to be applied is not immediately available. Instead, it is itself the result of a function application:
 
 ◊code/block/highlighted['racket]{
 (((λ (x) x) (λ (y) y)) (λ (z) z)) ;; => (λ (z) z)
@@ -693,7 +693,7 @@ Our interpreter now works for the given example:
 
 ◊paragraph-separation[]
 
-◊new-thought{For our next program}, the result of a function application is another function application:
+For our next program, the result of a function application is another function application:
 
 ◊code/block/highlighted['racket]{
 ((λ (i) ((λ (x) x) (λ (y) y))) (λ (z) z)) ;; => (λ (y) y)
@@ -738,7 +738,7 @@ Now ◊code/inline{interpret} works correctly for the running example:
 
 ◊paragraph-separation[]
 
-◊new-thought{The next programs} we address are those concerning variable-name reuse. First, the case in which the reused name occurs in separate functions:
+The next programs we address are those concerning variable-name reuse. First, the case in which the reused name occurs in separate functions:
 
 ◊code/block/highlighted['racket]{
 > (interpret `((λ (x) x) (λ (x) x)))
@@ -801,7 +801,7 @@ Our program now works as we expected:
 
 ◊paragraph-separation[]
 
-◊new-thought{This concludes the implementation} of our interpreter. To test it in a realistic setting, we can use the final version of the program ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}, which calculates the sum ◊code/inline{1 + 2 + 3 + 4 + 5}:
+This concludes the implementation of our interpreter. To test it in a realistic setting, we can use the final version of the program ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}, which calculates the sum ◊code/inline{1 + 2 + 3 + 4 + 5}:
 
 ◊margin-note{In this listing, we use Racket’s ◊code/inline{eval} function to transform the result of ◊code/inline{interpret}—a Racket data structure representing a program in our target language—into a Racket function. For example, ◊code/inline{(eval `(λ (x) x))} results in the Racket function ◊code/inline{(λ (x) x)}—note that there is no quasiquoting in this result, it is a native Racket function. We then use ◊code/inline{pretty-print} to inspect the outputs of our program. The ◊code/inline{pretty-print} is defined in ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{the article that introduces our target language}.}
 
@@ -995,16 +995,16 @@ The output is what we expected, ◊code/inline{15}. Our interpreter is fully fun
 
 ◊paragraph-separation[]
 
-◊new-thought{But this interpreter is not revealing} all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation. Furthermore, if given a ◊code/inline{program} which does not terminate, then ◊code/inline{interpret} itself does not terminate, and there is no way to inspect the computations that are happening during interpretation.
+But this interpreter is not revealing all interesting aspects of interpretation. For example, it depends on Racket’s support for recursive functions to compute nested expressions—see the recursive calls in ◊code/inline{interpret}’s implementation. When our interpreter finds a function application, it starts processing it; if the ◊code/inline{function} or the ◊code/inline{argument} are function applications themselves, then it defers the rest of the processing of the outer function application, interprets the inner function applications, and then resumes the work on the outer function application. This whole process is implicit, hidden by the recursive nature of ◊code/inline{interpret}’s implementation. Furthermore, if given a ◊code/inline{program} which does not terminate, then ◊code/inline{interpret} itself does not terminate, and there is no way to inspect the computations that are happening during interpretation.
 
 We will address these aspects of interpretation in subsequent articles, making our interpreter more transparent and revealing more interesting facets of computation.
 
 ◊section['conclusion]{Conclusion}
 
-◊new-thought{We started with} a fundamental question: How do interpreters evaluate programs to values? The find an answer, we implemented a simple interpreter for a simple language. Despite the lack of features, this is machinery capable of general computation; adding support for numbers, data structures, more control-flow constructs and so forth would be a matter of convenience for humans, not enhancing the fundamental computational power. In the process of writing our interpreter, we used ◊technical-term{pattern matching} and devised a template for traversing hierarchical data structures. Finally, we observed the limitations of the interpreter we implemented; there are a few interesting aspects of evaluation that it conceals for relying on the host language (Racket). We will address these issues by modifying our interpreter in subsequent articles.
+We started with a fundamental question: How do interpreters evaluate programs to values? The find an answer, we implemented a simple interpreter for a simple language. Despite the lack of features, this is machinery capable of general computation; adding support for numbers, data structures, more control-flow constructs and so forth would be a matter of convenience for humans, not enhancing the fundamental computational power. In the process of writing our interpreter, we used ◊technical-term{pattern matching} and devised a template for traversing hierarchical data structures. Finally, we observed the limitations of the interpreter we implemented; there are a few interesting aspects of evaluation that it conceals for relying on the host language (Racket). We will address these issues by modifying our interpreter in subsequent articles.
 
 ◊section['references]{References}
 
 ◊margin-note{For more on ◊initialism{PLT} Redex, read ◊link/internal["/prose/playing-the-game-with-plt-redex/"]{◊publication{Playing the Game with ◊initialism{PLT} Redex}}.}
 
-◊new-thought{The approach to} interpretation followed by this article is inspired by ◊link["https://mitpress.mit.edu/sicp/full-text/book/book.html"]{◊publication{Structure and Interpretation of Computer Programs}}, the classic textbook. We follow a more modern approach using pattern matching, which is based on ◊link["https://redex.racket-lang.org/"]{◊initialism{PLT} Redex} and ◊link["https://mitpress.mit.edu/books/semantics-engineering-plt-redex"]{◊publication{Semantics Engineering with ◊initialism{PLT} Redex}}. A great source for learning about interpretation in depth is the ◊link["http://library.readscheme.org/page1.html"]{Lambda Papers}. People interested in reading more recent research papers need to understand the associated formal notation, for which the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{◊publication{Principles of Programming Languages}} is a gentle introduction (disclaimer, the author is my advisor).
+The approach to interpretation followed by this article is inspired by ◊link["https://mitpress.mit.edu/sicp/full-text/book/book.html"]{◊publication{Structure and Interpretation of Computer Programs}}, the classic textbook. We follow a more modern approach using pattern matching, which is based on ◊link["https://redex.racket-lang.org/"]{◊initialism{PLT} Redex} and ◊link["https://mitpress.mit.edu/books/semantics-engineering-plt-redex"]{◊publication{Semantics Engineering with ◊initialism{PLT} Redex}}. A great source for learning about interpretation in depth is the ◊link["http://library.readscheme.org/page1.html"]{Lambda Papers}. People interested in reading more recent research papers need to understand the associated formal notation, for which the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{◊publication{Principles of Programming Languages}} is a gentle introduction (disclaimer, the author is my advisor).
