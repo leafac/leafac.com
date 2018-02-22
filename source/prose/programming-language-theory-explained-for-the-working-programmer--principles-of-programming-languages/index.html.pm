@@ -356,7 +356,7 @@ There is only one place in which we use a boolean in our program: the conditiona
   (number always-false #t))
 }
 
-◊margin-note{We are considering ◊initialism{ANSI} C 89 in this discussion.}
+◊margin-note{We are considering ANSI C 89 in this discussion.}
 
 Are booleans an essential feature of programming languages, or can we ◊informal{encode them away}? Programmers familiar with C know that the answer to this question is negative, because in C there are no booleans. They are encoded in terms of numbers: zero represents ◊technical-term{false} and any other number represents ◊technical-term{true}.
 
@@ -1359,11 +1359,11 @@ We iterated until we reached a minimal, irreducible set of features: definition 
 
 Not quite. One evidence is that we had to choose our base programming language (Racket) based on certain criteria. For example, it had to a language in which functions were values. If our resulting program represented the essence of programming languages, then C—a language in which functions are not values—would not qualify as a programming language. And it does.
 
-◊margin-note{Explaining the inner workings of Turing Machines, ◊initialism{SKI} combinator calculus and tag systems is beyond the scope of this article. The only aspect relevant to this discussion is that each of these system constitutes minimal, irreducible sets of features for programming languages.}
+◊margin-note{Explaining the inner workings of Turing Machines, SKI combinator calculus and tag systems is beyond the scope of this article. The only aspect relevant to this discussion is that each of these system constitutes minimal, irreducible sets of features for programming languages.}
 
 ◊margin-note{A counterintuitive and interesting observation is that minimal, irreducible sets of features suitable for programming languages are remarkably common in systems with very simple rules. They occur frequently in nature, even in systems not commonly associated with computation. We reason about the Lambda calculus, Turing Machines and similar systems because they have features which make them convenient to analyze, not because their computational power is particularly special or rare.}
 
-Moreover, had we taken a different turn on the road, we would have reached a different set of essential features. For example, we could have arrived at a machine with an infinite tape of cells, a moving head that reads and writes to the tape and a set of rules to follow for reading, writing and moving through the tape. This machine is known as Turing Machine. Or we could have arrived at something more esoteric, like the ◊initialism{SKI} combinator calculus or a tag system.
+Moreover, had we taken a different turn on the road, we would have reached a different set of essential features. For example, we could have arrived at a machine with an infinite tape of cells, a moving head that reads and writes to the tape and a set of rules to follow for reading, writing and moving through the tape. This machine is known as Turing Machine. Or we could have arrived at something more esoteric, like the SKI combinator calculus or a tag system.
 
 ◊margin-note{The process of encoding anonymous inner functions in terms of regular C functions is called ◊technical-term{closure conversion}. It is a technique commonly used in compilers for functional programming languages.}
 
@@ -1385,7 +1385,7 @@ The minimal set of features at which we arrived after our rewrites is particular
 
 ◊margin-note{Another conclusion from our journey is that, apart from matters of convenience and taste, all general-purpose programming languages are equivalent in computational power. In other words, any existing program could be translated to any existing language. It might not be practical to pursue this task for some programs, but it is at least theoretically possible.}
 
-But, in one way or another, with more or less elegance, all the minimal sets of features at which we could have arrived—for example, Turing Machines and the ◊initialism{SKI} combinator calculus—have the same essential capacity of enabling arbitrary ◊emphasis{communication} of data across the system.
+But, in one way or another, with more or less elegance, all the minimal sets of features at which we could have arrived—for example, Turing Machines and the SKI combinator calculus—have the same essential capacity of enabling arbitrary ◊emphasis{communication} of data across the system.
 
 ◊paragraph-separation[]
 
@@ -1437,7 +1437,7 @@ Again, coming from a different direction, we acknowledge the importance of ◊em
 
 The main inspiration for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version, in ◊link["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version, in ◊link["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊link["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊link["http://computationbook.com/"]{Understanding Computation} were major influences. Together, Weirich and Stuart not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
 
-Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in ◊initialism{OOPSLA} 1998. His presentation skills are remarkable.
+Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in OOPSLA 1998. His presentation skills are remarkable.
 
 But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
 

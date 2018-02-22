@@ -564,10 +564,6 @@
 (define-component path
   #:html (default-tag-function 'code #:class "path"))
 
-(define-component initialism
-  #:html (default-tag-function 'span #:class "initialism")
-  #:css (css-expr #;[span.initialism ,@font/capitals]))
-
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width")
   #:css
@@ -661,7 +657,8 @@
    [.fraction--denominator #:vertical-align sub]
    [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
 
-(define-component roman-number #:html initialism)
+;; TODO
+(define-component roman-number)
 
 (define-component production #:html emphasis)
 
@@ -791,9 +788,7 @@
   #:css
   (css-expr
    [.skill
-    ,@inline-block-enumeration
-    [.initialism
-     #:margin-right 0]]
+    ,@inline-block-enumeration]
    [.skill::before
     #:content ""
     #:display inline-block

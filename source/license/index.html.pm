@@ -4,7 +4,7 @@
 
 ◊margin-note{See the ◊link/internal["/software/www.leafac.com/"]{source code for the website}.}
 
-The license for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{◊initialism{GNU FDL}}:
+The license for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{GNU FDL}:
 
 ◊code/block{
 Copyright (C) ◊(->string (->year (today))) ◊(dict-ref personal-data 'author).
@@ -18,7 +18,7 @@ A copy of the license is included in the section entitled "GNU
 Free Documentation License".
 }
 
-The license for all the code in the website is ◊link["https://www.gnu.org/licenses/gpl.html"]{◊initialism{GNU GPL}}:
+The license for all the code in the website is ◊link["https://www.gnu.org/licenses/gpl.html"]{GNU GPL}:
 
 ◊code/block{
 Copyright (C) ◊(->string (->year (today))) ◊(dict-ref personal-data 'author)
