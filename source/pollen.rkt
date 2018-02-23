@@ -462,6 +462,17 @@
 (define-component (phone number)
   #:html ((default-tag-function '@) number))
 
+;; Full width
+
+(define-component full-width
+  #:html (default-tag-function 'div #:class "full-width")
+  #:css
+  (css-expr
+   [.full-width
+    ,@insertion
+    #:clear both
+    [@media ,grid/bigger-screens #:width ,grid/body]]))
+
 ;; Margin notes
 
 (define-component margin-note
@@ -563,24 +574,14 @@
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
 
+;; ---------------------------------------------------------------------------------------------------
+
 (define-component keyboard
   #:html (default-tag-function 'kbd)
   #:css (css-expr [kbd ,@font-family/monospace]))
 
 (define-component path
-  #:html (default-tag-function 'code #:class "path"))
-
-;; ---------------------------------------------------------------------------------------------------
-
-(define-component full-width
-  #:html (default-tag-function 'div #:class "full-width")
-  #:css
-  (css-expr
-   [.full-width
-    ,@insertion
-    [@media ,grid/bigger-screens
-     #:clear both
-     #:width ,grid/body]]))
+  #:html (default-tag-function 'code))
 
 (define-component list/unordered
   #:html (default-tag-function 'ul)
