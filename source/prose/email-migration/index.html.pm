@@ -43,7 +43,7 @@ $ mkdir ◊placeholder{migration-directory}
 
 Configure Dovecot with a ◊path{dovecot.conf} file, by  replacing the ◊code{◊placeholder{placeholders}} in the following template:
 
-◊file-listing["/usr/local/etc/dovecot/dovecot.conf"]{
+◊code/block[#:caption ◊path{/usr/local/etc/dovecot/dovecot.conf}]{
 protocols = imap
 
 default_login_user = ◊placeholder{user}

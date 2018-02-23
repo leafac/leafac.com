@@ -547,6 +547,7 @@
   #:css
   (css-expr
    [.code-block-caption
+    #:font-size ,font-size/small
     #:margin (#:top ,space/small
               #:bottom ,space/small/negative
               #:bottom (apply calc (- ,space/small/negative 1px)))
@@ -561,27 +562,6 @@
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
-
-(define-component (file-listing a-path #:language [language #f] . elements)
-  #:html ((default-tag-function 'div #:class "file-listing")
-          (path a-path)
-          (apply code/block language elements))
-  #:css
-  (css-expr
-   [.file-listing
-    ,@insertion
-    [.path
-     #:font-size ,font-size/extra-small
-     #:border
-     (#:top (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-      #:right (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-      #:left (,ruler/thin solid ,(dict-ref colors 'secondary-content)))
-     #:padding
-     (#:left (rem ,(modular-scale -1))
-      #:right (rem ,(modular-scale -1)))
-     #:color ,(dict-ref colors 'secondary-content)]
-    [(> & p)
-     #:margin-bottom ,ruler/thin/negative]]))
 
 (define-component keyboard
   #:html (default-tag-function 'kbd)
