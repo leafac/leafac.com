@@ -81,7 +81,7 @@ We need data structures to represent the pegs and the board. Normally one would 
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define-language peg-solitaire
   [position ::= █ ○ ●]
   [board ::= ([position ...] ...)])
@@ -100,7 +100,7 @@ The second data structure is the ◊code{board}, represented as a matrix of ◊c
 ◊margin-note{
  Even ill-formed boards like the following are valid terms in this data structure definition:
 
- ◊code/block/highlighted['racket]{
+ ◊code/block[#:language 'racket]{
 ([●])
 
 ([● ○ ●]
@@ -112,7 +112,7 @@ The second data structure is the ◊code{board}, represented as a matrix of ◊c
 
 Examples of terms in the language (boards) are:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 ([█ █ ● ● ● █ █]
  [█ █ ● ● ○ █ █]
  [● ○ ● ○ ● ● ●]
@@ -132,7 +132,7 @@ Examples of terms in the language (boards) are:
 
 We define the configuration for the initial Peg Solitaire board as a term in the language:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define-term initial-board
   ([█ █ ● ● ● █ █]
    [█ █ ● ● ● █ █]
@@ -147,7 +147,7 @@ We define the configuration for the initial Peg Solitaire board as a term in the
 
 We need to specify how pegs can to move on the board. We do this by defining a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable in one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (--> (any_1
       ...
       [any_2 ... ● ● ○ any_3 ...]
@@ -167,7 +167,7 @@ The rule above starts with ◊code{-->} to indicate that it is a transformation.
 
 The following is the function with all the rules in the game:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define move
   (reduction-relation
    peg-solitaire
@@ -230,7 +230,7 @@ The function above starts by stating that it works over the language ◊code{peg
 
 The function ◊code{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (apply-reduction-relation move (term initial-board))
 '(((█ █ ● ● ● █ █)
    (█ █ ● ● ● █ █)
@@ -270,7 +270,7 @@ One way of thinking about ◊code{move} is that it is a function returning multi
 
 We can use the visualization tools that come with PLT Redex to play Peg Solitaire. These tools are designed for interactive exploration of evaluation rules; one can expand certain paths and backtrack, while seeing the differences highlighted. The following demonstrates game play:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (stepper move (term initial-board))
 }
 
@@ -280,7 +280,7 @@ We can use the visualization tools that come with PLT Redex to play Peg Solitair
 
 Now that we can play Peg Solitaire, a natural question is: can we use what we have to compute a solution to the game? We can use another visualization tool from PLT Redex to understand what the search for an answer would look like:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (traces move (term initial-board))
 }
 
@@ -290,7 +290,7 @@ Starting with the initial board—on the top left—we repeatedly follow every p
 
 First, we encode the definition of a winning board:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (winning? board)
   (define pegs-left-on-board
     (count (curry equal? '●) (flatten board)))
@@ -305,7 +305,7 @@ Finally, we need a function that traverses the graph. We want not only to determ
 
 ◊margin-note{There is no need to understand every detail of how ◊code{search-for-solution} works. It uses ◊link["https://docs.racket-lang.org/guide/qq.html"]{quasiquoting} to build lists, ◊link["https://docs.racket-lang.org/guide/match.html"]{pattern matching} to destruct them, and other Racket features beyond the scope of the article.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (search-for-solution board)
   (define (step board-with-move)
     (match-define `(,_ ,board) board-with-move)
@@ -324,7 +324,7 @@ Finally, we need a function that traverses the graph. We want not only to determ
 
 The function ◊code{search-for-solution} works by recursion, accumulating the path it has been through. Its most unusual feature is the use of ◊code{ormap}, which guarantees we stop the search after finding the first solution. The following are examples of using ◊code{search-for-solution} on sections of the board:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (search-for-solution (term ([● ● ○])))
 '(("initial" ((● ● ○))) ("→" ((○ ○ ●))))
 > (search-for-solution (term ([● ● ○ ●])))
@@ -340,7 +340,7 @@ The snippet above demonstrates how ◊code{search-for-solution} finds a solution
 
 Finally, we can call ◊code{search-for-solution} on the full board and solve Peg Solitaire:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (search-for-solution (term initial-board))
 ∞
 }
@@ -365,7 +365,7 @@ There are two ways to work around this limitation. The first is to break apart t
 
 The second way to implement the Game of Life in PLT Redex is to cheat. Languages and functions in PLT Redex are Racket programs, so it is possible to escape out to arbitrary Racket code. This is less clean than pattern-matching in PLT Redex, as the following example illustrates:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define step
   (reduction-relation
    game-of-life

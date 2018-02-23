@@ -511,8 +511,30 @@
   #:html (default-tag-function 'code)
   #:css (css-expr [code ,@font-family/monospace]))
 
-(define-component (code/block . elements)
-  #:html ((default-tag-function 'pre) (apply code elements))
+(define-component (code/block #:language [language #f] . elements)
+  #:html
+  (cond
+    [language
+     (define code (string-append* elements))
+     (define digest (sha1 (open-input-string code)))
+     (define path/basedir "compiled/code-block-highlighted/")
+     (define path/full (~a path/basedir language "-" digest  ".html"))
+     (define code/highlighted
+       (cond
+         [(file-exists? path/full) (file->string path/full)]
+         [else
+          (define code/highlighted
+            (with-input-from-string code
+              (λ ()
+                (with-output-to-string
+                  (λ ()
+                    (system (~a "pygmentize -f html -l " language)))))))
+          (make-directory* path/basedir)
+          (with-output-to-file path/full
+            (λ () (display code/highlighted)))
+          code/highlighted]))
+     (string->xexpr code/highlighted)]
+    [else ((default-tag-function 'pre) (apply code elements))])
   #:css
   (css-expr
    [pre
@@ -524,34 +546,10 @@
     #:padding ,text-indent
     #:padding-left (apply calc (- ,text-indent ,ruler/thin))]))
 
-(define-component (code/block/highlighted language . elements)
-  #:html
-  (define code (string-append* elements))
-  (define digest (sha1 (open-input-string code)))
-  (define path/basedir "compiled/code-block-highlighted/")
-  (define path/full (~a path/basedir digest ".html"))
-  (define code/highlighted
-    (cond
-      [(file-exists? path/full) (file->string path/full)]
-      [else
-       (define code/highlighted
-         (with-input-from-string code
-           (λ ()
-             (with-output-to-string
-               (λ ()
-                 (system (~a "pygmentize -f html -l " language)))))))
-       (make-directory* path/basedir)
-       (with-output-to-file path/full
-         (λ () (display code/highlighted)))
-       code/highlighted]))
-  (string->xexpr code/highlighted))
-
 (define-component (file-listing a-path #:language [language #f] . elements)
   #:html ((default-tag-function 'div #:class "file-listing")
           (path a-path)
-          (if language
-              (apply code/block/highlighted language elements)
-              (apply code/block elements)))
+          (apply code/block language elements))
   #:css
   (css-expr
    [.file-listing

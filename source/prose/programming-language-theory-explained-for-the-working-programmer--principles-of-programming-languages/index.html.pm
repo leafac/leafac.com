@@ -17,7 +17,7 @@ Consider the following program:
 
 ◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code{+}) and control-flow primitives (for example, ◊code{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs in this article. There are static type systems with the necessary expressiveness, but they are rare.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 ;; Racket
 (define (sum-up-to number)
   (if (zero? number)
@@ -27,7 +27,7 @@ Consider the following program:
 (sum-up-to 5)
 }
 
-◊code/block/highlighted['ruby]{
+◊code/block[#:language 'ruby]{
 # Ruby
 def sum_up_to number
   if number.zero?
@@ -40,7 +40,7 @@ end
 sum_up_to 5
 }
 
-◊code/block/highlighted['java]{
+◊code/block[#:language 'java]{
 // Java
 public class Main {
   public static int sumUpTo(int number) {
@@ -75,7 +75,7 @@ It is important to note that simplicity is not the same as easiness. As we advan
 
 For convenience, here is the initial program again:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (if (zero? number)
       0
@@ -88,7 +88,7 @@ The first features we remove via encoding are numbers and operations on them. Th
 
 ◊margin-note{The ◊code{___} in the code represent code omitted for simplicity.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero? number)
   (equal? "0" number))
 
@@ -108,7 +108,7 @@ The first features we remove via encoding are numbers and operations on them. Th
 
 Alternatively, we could encode numbers with strings not using their string representation, but the string length. In this encoding, the contents of the strings representing numbers would be irrelevant, only their length would be meaningful. For example, ◊code{0} would become ◊code{""}, ◊code{1} would become ◊code{"☺"}, ◊code{5} would become ◊code{"☺☺☺☺☺"}, and so on. The running example would look like the following in this encoding:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero? number)
   (equal? "" number))
 
@@ -130,7 +130,7 @@ Alternatively, we could encode numbers with strings not using their string repre
 
 On a related idea, we could encode numbers as list lengths. Again, the contents of the lists would be irrelevant, only their length would be meaningful:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero? number)
   (equal? '() number))
 
@@ -163,7 +163,7 @@ We are not seeking easiness, though. So, from all the possible encodings, we cho
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: Our encoding for numbers is based on ◊emphasis{what they do} (to count), instead of ◊emphasis{what they are} (data). When designing a system, consider what the entities in it do, besides what they are. This might lead to a better overall design. For example, instead of modeling ◊emphasis{student} and ◊emphasis{staff} as data types, consider modeling ◊emphasis{enroll in classes} and ◊emphasis{budget planning} as actions. This fits better a case in which a person is part of the staff and wants to take classes at the same institution, for example.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero function argument)
   argument)
 
@@ -184,21 +184,21 @@ For ◊code{zero}, the given function is not applied, the argument is returned u
 
 When we print these numbers to inspect them, this is what Racket outputs:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > five
 #<procedure:five>
 }
 
 As the listing above illustrates, functions are opaque, so we introduce extra machinery. This is a non-essential feature of programming languages and is not part of our program, but it helps us read the program’s output:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (pretty-print number)
   (number add1 0))
 }
 
 The function ◊code{pretty-print} is not part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code{0} and ◊code{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print zero)
 0
 > (pretty-print one)
@@ -211,7 +211,7 @@ The way ◊code{pretty-print} works reveals how this encoding of numbers using f
 
 The function ◊code{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code{0}, and the function to be repeatedly applied is ◊code{add1}. So, ◊code{(pretty-print five)} evaluates as the following:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (add1
  (add1
   (add1
@@ -223,7 +223,7 @@ The function ◊code{pretty-print} makes a careful choice of arguments with whic
 
 Now that we have an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code{sum-up-to}, we just change the return from ◊code{0} (the native Racket number) to ◊code{zero} (our encoding as defined above):
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (if (zero? number)
       zero
@@ -236,7 +236,7 @@ The next step is to modify the functions that work on the numbers so that they a
 
 To implement ◊code{zero?}, we can use an idea similar to ◊code{pretty-print}: call the number—which is a function—with carefully chosen arguments. For the initial value, we choose ◊code{#t}, and for the function we choose one that always returns ◊code{#f}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero? number)
   (define (always-false ignored-argument)
     #f)
@@ -245,7 +245,7 @@ To implement ◊code{zero?}, we can use an idea similar to ◊code{pretty-print}
 
 Remember that these are the encoded numbers:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero function argument)
   argument)
 
@@ -262,7 +262,7 @@ Remember that these are the encoded numbers:
 
 So, if ◊code{zero?} is called with ◊code{zero}, then the initial value ◊code{#t} is returned unaltered. If ◊code{zero?} is called with ◊code{one}, then it becomes ◊code{(one always-false #t)}, which then becomes ◊code{(always-false #t)}, and evaluates to ◊code{#f}. The same happens to any number that is not ◊code{zero}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (zero? zero)
 #t
 > (zero? one)
@@ -278,14 +278,14 @@ To implement addition (◊code{+}), we can use the following observation: if the
 ◊margin-note{
  Addition is a commutative operation (◊code{number-left + number-right = number-right + number-left}). So inverting ◊code{number-left} and ◊code{number-right} does not change the meaning of ◊code{+}. The return value ◊code{result} could equivalently be defined as the following:
 
- ◊code/block/highlighted['racket]{
+ ◊code/block[#:language 'racket]{
 (number-left function
   (number-right function
                 argument))
  }
 }
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (+ number-left number-right)
   (define (result function argument)
     (number-left function (number-right function argument)))
@@ -294,7 +294,7 @@ To implement addition (◊code{+}), we can use the following observation: if the
 
 The following listing is an example of ◊code{+} in use:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (+ five five))
 10
 }
@@ -313,7 +313,7 @@ With this restriction in place, we can define ◊code{sub1} for positive integer
 
 ◊margin-note{To represent pairs, we use ◊code{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code{cons}, ◊code{car} and ◊code{cdr} are not intuitive.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (struct pair (left right))
 
 (define (sub1 number)
@@ -331,7 +331,7 @@ With this restriction in place, we can define ◊code{sub1} for positive integer
 
 We can test ◊code{sub1} and see the result using ◊code{pretty-print}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (sub1 five))
 4
 }
@@ -344,7 +344,7 @@ At this point, we have all the numeric operations necessary for ◊code{sum-up-t
 
 There is only one place in which we use a boolean in our program: the conditional (◊code{if}) in ◊code{sum-up-to}’s body. Its condition depends on ◊code{zero?}, which is the only function generating booleans. For convenience, the following lists their current definitions again:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (if (zero? number)
       zero
@@ -368,7 +368,7 @@ A particularly interesting choice would be to follow C’s example and use numbe
 
 ◊margin-note{There is nothing special about the names ◊code{true} and ◊code{false}. They are regular functions, like ◊code{sub1}, ◊code{pretty-print} and so on.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (true first second)
   first)
 
@@ -382,7 +382,7 @@ In our encoding, booleans are functions that receive two arguments. The value �
 
 We can now adapt ◊code{zero?} to use these values:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (zero? number)
   (define (always-false ignored-argument)
     false)
@@ -395,14 +395,14 @@ Because we changed the representation of booleans, we need to modify the conditi
 
 ◊margin-note{Conditionals are so natural to encode because our choice of encoding for booleans was deliberate to make this happen.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (if condition then else)
   (condition then else))
 }
 
 We introduced a problem in ◊code{sum-up-to}, though. Here is its current definition one more time:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (if (zero? number)
       zero
@@ -419,7 +419,7 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: Avoid unnecessary expensive computations by ◊technical-term{delaying} them with ◊informal{wrapper functions}. For example, a debug logging entry might involve expensive computations that can be avoided if the appropriate log level is not reached.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (define (then)
     zero)
@@ -441,7 +441,7 @@ The key observation regarding the listing above is that ◊code{(define (then) _
 
 Our work with booleans is complete. There are no longer any native Racket booleans in our program, they have been encoded into functions. Moreover, our program contains no primitive values (numbers, booleans, strings, and so on), and it continues to have the same meaning:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (sum-up-to five))
 15
 }
@@ -460,7 +460,7 @@ Encodings for pairs are not as natural as, for example, the encoding for numbers
 
 ◊margin-note{Similar to ◊code{then} and ◊code{else} in ◊code{sum-up-to} (see ◊reference['booleans]{previous section}), ◊code{retriever} is a function that receives no arguments.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (store value)
   (define (retriever)
     value)
@@ -480,7 +480,7 @@ To implement a pair, we can use the idea from ◊code{store}, but with two ◊co
 
 The solution is to modify ◊code{retriever} to receive an argument, a ◊code{selector} function. Then ◊code{retriever} calls ◊code{selector} with both values in the pair and let it decide which one to return. With that, the ◊code{pair} function is complete:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (pair left right)
   (define (retriever selector)
     (selector left right))
@@ -491,7 +491,7 @@ We can now create pairs, but to retrieve the values from it we still have to def
 
 ◊margin-note{Apart from identifiers, ◊code{selector-left} is the same function as ◊code{true} and ◊code{selector-right} is the same function as ◊code{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code{true} ◊emphasis{or} ◊code{false}) and conjunction (a pair holds a ◊code{left} ◊emphasis{and} a ◊code{right} elements). They are two sides of the same coin. This is a fundamental result of ◊link["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (selector-left left right)
   left)
 
@@ -501,7 +501,7 @@ We can now create pairs, but to retrieve the values from it we still have to def
 
 With the selectors defined above, pairs are functional, as the listing below exemplifies:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define number-pair (pair five one))
 
 > (pretty-print (number-pair selector-left))
@@ -516,7 +516,7 @@ We are now one step away from defining the accessor functions ◊code{pair-left}
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: When refactoring, do not change the interface to existing functionality.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (pair-left pair)
   (define (selector-left left right)
     left)
@@ -532,7 +532,7 @@ We are now one step away from defining the accessor functions ◊code{pair-left}
 
 The following is an example of these accessor functions in use:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (pair-left number-pair))
 5
 > (pretty-print (pair-right number-pair))
@@ -541,7 +541,7 @@ The following is an example of these accessor functions in use:
 
 More importantly, our program is working with this encoding for pairs in terms of functions:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (sum-up-to five))
 15
 }
@@ -576,7 +576,7 @@ The next features we have to address are those in functions themselves, because 
 
 There is only one recursive function in our program: ◊code{sum-up-to}. The following is its current definition, for convenience:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (define (then)
     zero)
@@ -594,7 +594,7 @@ The particular point of recursion is the call to ◊code{sum-up-to} in the ◊co
 
 Surprisingly, the answer to this question is positive. And there are multiple possible encodings; the simplest is known as ◊technical-term{tying the knot}. To ◊technical-term{tie the knot} in our program, we start by introducing an auxiliary function ◊code{sum-up-to/rest} which ◊code{sum-up-to} calls in place of the recursive call:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (define (then)
     zero)
@@ -612,7 +612,7 @@ The name ◊code{sum-up-to/rest} for this auxiliary function is appropriate beca
 
 A first idea would be to copy and paste the implementation for ◊code{sum-up-to}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to/rest number)
   (define (then)
     zero)
@@ -632,7 +632,7 @@ Because we do not know how to implement ◊code{sum-up-to/rest}, we can leave it
 
 ◊margin-note{The implementation of ◊code{sum-up-to/rest} must appear before the one for ◊code{sum-up-to}, and it must not refer to ◊code{sum-up-to}. Otherwise it would again be (indirectly) relying on Racket’s support for recursion.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to/rest number)
   "TEMPORARY IMPLEMENTATION")
 
@@ -651,7 +651,7 @@ Because we do not know how to implement ◊code{sum-up-to/rest}, we can leave it
 
 Before we can use ◊code{sum-up-to}, we have to provide an implementation for ◊code{sum-up-to/rest}. But, once ◊code{sum-up-to} has been defined, we can use it to implement ◊code{sum-up-to/rest}. The resulting program is still non-recursive, because all variables are defined before they are used. We can use mutation (◊code{set!}) to ◊emphasis{change} the placeholder definition of ◊code{sum-up-to/rest} into ◊code{sum-up-to} itself:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to/rest number)
   "TEMPORARY IMPLEMENTATION")
 
@@ -672,14 +672,14 @@ Before we can use ◊code{sum-up-to}, we have to provide an implementation for �
 
 After the ◊code{set!} operation, the name ◊code{sum-up-to/rest} refers to the function ◊code{sum-up-to}, instead of the placeholder implementation. So ◊code{sum-up-to} can call itself via ◊code{sum-up-to/rest}, restoring its original functionality. With this change, the program is no longer recursive, and it still outputs the same value:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (sum-up-to five))
 15
 }
 
 We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be a pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field. The following extract illustrates this idea:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define initial-state (empty-record))
 
 (define (sum-up-to/rest number program-state)
@@ -703,7 +703,7 @@ While feasible, this solution is not elegant. It affects even the functions that
 
 So we backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code{sum-up-to} before we ◊technical-term{tied the knot}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (define (then)
     zero)
@@ -717,7 +717,7 @@ So we backtrack and reconsider our encoding for recursion, avoiding mutation. Th
 
 It still depends on ◊code{sum-up-to/rest}, which we do not know how to implement. But, this time, instead of coming up with a placeholder implementation for it, we change ◊code{sum-up-to} so that it receives ◊code{sum-up-to/rest} as an argument:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to sum-up-to/rest number)
   (define (then)
     zero)
@@ -731,13 +731,13 @@ It still depends on ◊code{sum-up-to/rest}, which we do not know how to impleme
 
 Now it is the job of ◊code{sum-up-to}’s callers to provide a suitable ◊code{sum-up-to/rest}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (pretty-print (sum-up-to ___ five))
 }
 
 What can we use to fill in the ◊code{___} above? A good candidate is ◊code{sum-up-to} itself:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (pretty-print (sum-up-to sum-up-to five))
 }
 
@@ -755,7 +755,7 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: When a function does not have enough information to implement part of its functionality, it can delegate to a helper function, which it receives as argument.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to sum-up-to/rest number)
   (define (then)
     zero)
@@ -772,14 +772,14 @@ Again, we can use the same idea as before to solve this issue. We can pass ◊co
 
 With this change, we successfully encoded recursion in terms of non-recursive functions:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (sum-up-to sum-up-to five))
 15
 }
 
 Unfortunately, we changed the interface to ◊code{sum-up-to} in this process. Now callers need to be aware of the recursion encoding, and call the function with ◊code{(sum-up-to sum-up-to number)}, which is inconvenient. We can make this better by introducing an auxiliary function ◊code{sum-up-to/partial}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (define (sum-up-to/partial sum-up-to/rest number)
     (define (then)
@@ -801,7 +801,7 @@ Unfortunately, we changed the interface to ◊code{sum-up-to} in this process. N
 
 The algorithm for adding numbers is in ◊code{sum-up-to/partial}, and ◊code{sum-up-to} is only a façade to fix ◊code{sum-up-to/partial}’s interface. This brings us back to the original:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (pretty-print (sum-up-to five))
 15
 }
@@ -826,7 +826,7 @@ We ◊reference['pairs]{already established} an encoding for pairs and discussed
 
 This new idea stems from two observations we have already explored: first, that functions can return functions as their return value; second, that inner functions (functions defined within other functions) have access to outer functions’ arguments. We used both of these features when defining our encoding for ◊code{pair}s, for example. The following is its implementation one more time:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (pair left right)
   (define (retriever selector)
     (selector left right))
@@ -840,7 +840,7 @@ In the listing above, the inner function ◊code{retriever} has access to the ar
 ◊margin-note{
  ◊emphasis{Everyday programming takeaway}: Partial application generally results in concise code. For example, consider the following two equivalent function definitions:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (wheatley? x)
   (equal? 'wheatley x))
 
@@ -853,7 +853,7 @@ In the listing above, the inner function ◊code{retriever} has access to the ar
 
 We can extend this idea to ◊informal{break apart} ◊code{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (pair left)
   (define (pair/intermediary right)
     (define (retriever selector)
@@ -864,14 +864,14 @@ We can extend this idea to ◊informal{break apart} ◊code{pair} into a ◊info
 
 The implementation above works the same as before, but the way to call it has changed. Every invocation of ◊code{pair} has to go through the cascade. Instead of writing, for example, ◊code{(define number-pair (pair five one))}, the following is necessary:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define number-pair/intermediary (pair five))
 (define number-pair (number-pair/intermediary one))
 }
 
 More compactly, we can skip giving a name to the intermediary function and call it immediately:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define number-pair ((pair five) one))
 }
 
@@ -879,7 +879,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 ◊margin-note{It is important that the omitted part ◊code{___} does not refer to ◊code{dummy}, otherwise we would have changed the meaning of the program.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (else dummy)
   ___)
 
@@ -895,7 +895,7 @@ The change described in this section is pervasive. It affects most defined funct
 
 ◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program consists of adding parentheses and ◊informal{dummy} arguments.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   (define ((sum-up-to/partial sum-up-to/rest) number)
     (define (then dummy)
@@ -991,7 +991,7 @@ The program above is difficult to read. The only way to understand it is to retr
 
 We defined functions and intermediary values using the ◊code{(define ___ ___)} form all over our program. This form is convenient because it allows us to give names to concepts and computations. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other. Consider the following excerpt:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sum-up-to number)
   ___ (sub1 number) ___)
 
@@ -1009,7 +1009,7 @@ When programming, it is often better to represent the high-level constructs (for
 
 The answer one more time is negative. Named definitions are not an essential feature and we can ◊informal{encode them away}, in terms of simpler features. What can be simpler than a function with a name? A function with no name (◊technical-term{anonymous function}). In Racket, ◊technical-term{anonymous functions} are spelled ◊code{(λ (argument) body)}, in which ◊code{argument} is an identifier naming the argument that the function receives, and ◊code{body} is the expression representing the computation of its return value. For example, the following two definitions are equivalent:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (sub1 number)
   ___)
 
@@ -1022,7 +1022,7 @@ To ◊informal{encode away} named definitions, we first reorder them so that the
 
 ◊margin-note{This step is only possible because we ◊informal{encoded recursion away} on a ◊reference['recursion]{previous section}.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define ((true first) second)
   first)
 
@@ -1112,7 +1112,7 @@ To ◊informal{encode away} named definitions, we first reorder them so that the
 
 Now, we can ◊emphasis{inline} the definitions where they are used. For example, ◊code{zero?}’s current definition is:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (always-false ignored-argument)
   false)
 ((number always-false) true)
@@ -1123,7 +1123,7 @@ We can rewrite the above such that each reference to the ◊code{always-false} f
 ◊margin-note{
  While performing this rewrite, it is important that we avoid accidentally changing the meanings of the identifiers. For example, the following rewrite would be invalid:
 
- ◊code/block/highlighted['racket]{
+ ◊code/block[#:language 'racket]{
 (define (always-false
          ignored-argument)
   false)
@@ -1141,7 +1141,7 @@ We can rewrite the above such that each reference to the ◊code{always-false} f
  The reason is the difference between the meanings of ◊code{false} in ◊code{always-false}’s definition and in ◊code{(λ (false) ___)}. The solution is to rename the identifier ◊code{false} in ◊code{(λ (false) ___)} to, for example, ◊code{(λ (false2) ___)}. And rename all uses of ◊code{false} in the anonymous function accordingly. Fortunately, this issue does not occur in our program.
 }
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 ((number (λ (ignored-argument) false)) true)
 }
 
@@ -1151,7 +1151,7 @@ We are ready to see the final version of our program, in which all definitions a
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: One of the most important skills when designing systems is naming the concepts appropriately. The lack of good names is what makes this final version of our program unintelligible. In particular, only use anonymous functions for small functions whose meaning is evident.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (pretty-print number)
   ((number add1) 0))
 
@@ -1337,7 +1337,7 @@ We are ready to see the final version of our program, in which all definitions a
 
 The output of this program is still the same as when we started:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 15
 }
 

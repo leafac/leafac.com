@@ -29,7 +29,7 @@ Alternatively, if we inspected interpretation after a few function applications,
 
 We start with a function called ◊code{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code{step} function is similar to ◊code{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code{step}’s definition:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (step program)
   (match program
     [`(λ (,argument-name) ,body)
@@ -41,7 +41,7 @@ We start with a function called ◊code{step}. It has this name because its purp
 
 The case of function application works in three parts: first, find which function application should happen at the current step; then, perform it, substituting the ◊code{argument-name} for the ◊code{argument} in the ◊code{function} ◊code{body}; finally, build the resulting partially interpreted program. This process is necessary because the components of a function application might be function applications themselves. For example, consider again the following program from the previous section:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (((λ (x) x) (λ (y) y)) (λ (z) z))
 }
 
@@ -55,13 +55,13 @@ In the general case, function applications might be arbitrarily nested, and more
 
 The function application which we resolve next is called ◊technical-term{reduction expression}, because ◊technical-term{reduction} is the technical term for what we have been informally calling ◊informal{resolving a function application}. We represent ◊technical-term{reduction expression} as any other program fragment, for example, ◊code{`((λ (x) x) (λ (y) y))}. The rest of the ◊code{program}, from which we extracted the ◊technical-term{reduction expression}, is called ◊technical-term{context}, because it represents the context in which the ◊technical-term{reduction expression} occurs. We represent ◊technical-term{contexts} as ◊informal{programs with a hole}, and the ◊technical-term{hole} is identified by ◊code{(hole)}, for example:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 `((hole) (λ (z) z))
 }
 
 The ◊code{split-program} function has to return two values: the ◊technical-term{reduction expression} and the ◊technical-term{context}. In Racket, functions can return multiple values using the form ◊code{values}, for example, ◊code{(values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z)))}. To bind these results to variables, we use the ◊code{define-values} form, for example:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define-values (reduction-expression context)
   (values `((λ (x) x) (λ (y) y)) `((hole) (λ (z) z))))
 }
@@ -70,7 +70,7 @@ The ◊code{reduction-expression} returned by ◊code{split-program} is guarante
 
 Because the ◊code{reduction-expression} is a function application ready for evaluation, we can use the same ◊code{substitute} from the ◊reference['first-interpreter]{previous section} and substitute the ◊code{argument-name} for the ◊code{argument} in the ◊code{body}. Then, we fill the ◊technical-term{hole} in the ◊code{context} with the resulting program fragment. We use another auxiliary function ◊code{fill-hole}, which we define later, for this last part. This is the complete listing for ◊code{step}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (step program)
   (match program
     [`(λ (,argument-name) ,body)
@@ -92,7 +92,7 @@ But multiple function applications in a given ◊code{expression} might be in th
 
 The structure of the ◊code{split-program} function is similar to the ◊code{traverse} pattern. It receives a ◊code{program-fragment} as argument and ◊technical-term{pattern matches} on it using the ◊code{match} form. But the ◊technical-term{patterns} in ◊code{split-program} are different, because it considers different cases: (1) both the ◊code{function} and the ◊code{argument} are already values, so the given ◊code{program-fragment} is ready for evaluation; (2) the ◊code{function} is already a value, but the ◊code{argument} is a nested application that needs to be resolved first; or (3) the ◊code{function} is not a value yet, it needs to be resolved first:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (split-program program-fragment)
   (match program-fragment
     #;[`((λ (,argument-name/function) ,body/function) (λ (,argument-name/argument) ,body/argument))
@@ -110,7 +110,7 @@ This order guarantees left-to-right evaluation, because we only consider the pos
 
 In the first case, both ◊code{function} and ◊code{argument} are already values—functions—which means the ◊code{program-fragment} is ready for evaluation. So ◊code{split-program} returns the ◊code{program-fragment} as the ◊code{reduction-expression} and the ◊code{context} is just ◊code{(hole)}, because there is no other context around the given ◊code{expression}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (split-program program-fragment)
   (match program-fragment
     [`((λ (,argument-name/function) ,body/function) (λ (,argument-name/argument) ,body/argument))
@@ -127,7 +127,7 @@ For example, if the ◊code{program-fragment} is ◊code{((λ (x) x) (λ (y) y))
 
 ◊margin-note{Each of the two values that ◊code{split-program} outputs occupies a separate line in the output.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (split-program `((λ (x) x) (λ (y) y)))
 '((λ (x) x) (λ (y) y))
 '(hole)
@@ -135,7 +135,7 @@ For example, if the ◊code{program-fragment} is ◊code{((λ (x) x) (λ (y) y))
 
 In the second case, the ◊code{function} is already a value, but the ◊code{argument} is not, for example, ◊code{((λ (x) x) ((λ (y) y) (λ (z) z)))}. The next immediately resolvable function application—the ◊code{reduction-expression}—must be in the program fragment represented by ◊code{argument}. In our example, that is ◊code{((λ (y) y) (λ (z) z))}. The ◊code{split-program} function recursively calls itself with ◊code{argument} and propagates the resulting ◊code{reduction-expression} and ◊code{context}, taking care of wrapping the ◊code{context} with the function application in ◊code{expression}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (split-program program-fragment)
   (match program-fragment
     [`((λ (,argument-name/function) ,body/function) (λ (,argument-name/argument) ,body/argument))
@@ -150,7 +150,7 @@ In the second case, the ◊code{function} is already a value, but the ◊code{ar
 
 We can test this implementation with our example:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (split-program `((λ (x) x) ((λ (y) y) (λ (z) z))))
 '((λ (y) y) (λ (z) z))
 '((λ (x) x) (hole))
@@ -158,7 +158,7 @@ We can test this implementation with our example:
 
 The final case is similar to the second, except that the subject of the recursive call is ◊code{function}. The strategy is the same: call ◊code{split-program} itself with the ◊code{function} and forward the resulting ◊code{reduction-expression} and ◊code{context}, taking care of wrapping the ◊code{context} with the function application in ◊code{expression}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (split-program program-fragment)
   (match program-fragment
     [`((λ (,argument-name/function) ,body/function) (λ (,argument-name/argument) ,body/argument))
@@ -173,7 +173,7 @@ The final case is similar to the second, except that the subject of the recursiv
 
 We can test this final case with a ◊code{program-fragment} similar to our previous example:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (split-program `(((λ (x) x) (λ (y) y)) (λ (z) z)))
 '((λ (x) x) (λ (y) y))
 '((hole) (λ (z) z))
@@ -187,7 +187,7 @@ The structure for the implementation of ◊code{fill-hole} is similar to ◊code
 
 ◊margin-note{The ◊code{_} pattern matches anything.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (fill-hole program-fragment context)
   (match context
     #;[`(hole)
@@ -203,7 +203,7 @@ The structure for the implementation of ◊code{fill-hole} is similar to ◊code
 
 When the context is just a ◊technical-term{hole}, then ◊code{fill-hole} returns the given ◊code{program-fragment}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (fill-hole program-fragment context)
   (match context
     [`(hole)
@@ -218,14 +218,14 @@ When the context is just a ◊technical-term{hole}, then ◊code{fill-hole} retu
 
 For example:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (fill-hole `(λ (y) y) `(hole))
 '(λ (y) y)
 }
 
 In the case of a function application, ◊code{fill-hole} does not know if the ◊technical-term{hole} is in the ◊code{function} or the ◊code{argument}, so it just continues traversing the ◊code{program-fragment} via recursive calls:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (fill-hole program-fragment context)
   (match context
     [`(hole)
@@ -239,7 +239,7 @@ In the case of a function application, ◊code{fill-hole} does not know if the �
 
 Finally, if the ◊technical-term{pattern match} reaches the final case, it means the ◊technical-term{hole} is not in the given ◊code{program-fragment}. In this case, ◊code{fill-hole} returns the ◊code{context}, unaltered:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (fill-hole program-fragment context)
   (match context
     [`(hole)
@@ -252,7 +252,7 @@ Finally, if the ◊technical-term{pattern match} reaches the final case, it mean
 
 We can now test ◊code{fill-hole} in the general case:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (fill-hole `(λ (z) z) `(λ (x) x))
 '(λ (x) x)
 > (fill-hole `(λ (z) z) `((λ (x) x) (hole)))
@@ -265,7 +265,7 @@ We can now test ◊code{fill-hole} in the general case:
 
 We finished implementing the auxiliary functions, so ◊code{step} is complete:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (step `(((λ (x) x) (λ (y) y)) (λ (z) z)))
 '((λ (y) y) (λ (z) z))
 > (step `((λ (y) y) (λ (z) z)))
@@ -278,7 +278,7 @@ Each call to ◊code{step} evaluates only a single function application, the fir
 
 To keep compatibility with our first interpreter, we implement an ◊code{interpret} function, which works by repeatedly calling ◊code{step} until it reaches a value:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (interpret program)
   (match program
     [`(λ (,argument-name) ,body)
@@ -313,7 +313,7 @@ The implementation of our ◊technical-term{variable-inspecting debugger-like in
 
 ◊margin-note{The ◊code{#:transparent} flag is there just to make the data structure print nicely for debugging.}
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (struct state (program environment) #:transparent)
 }
 
@@ -323,14 +323,14 @@ The snippet above defines a data structure called ◊code{state}, which has two 
 
 To start interpretation, it is necessary to inject the given ◊code{program} into an ◊code{initial-state}. No ◊code{environment} information is available yet, so we use the empty ◊code{environment}:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 (define (initial-state program)
   (state program empty))
 }
 
 For example, given the program ◊code{(λ (x) x)}, the initial state is:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 > (initial-state `(λ (x) x))
 (state '(λ (x) x) '())
 }
@@ -353,7 +353,7 @@ Which ◊code{environment} to use (calling site or definition site) is a matter 
 
 Our language has lexical scoping, and that is why we need closures: to carry around the ◊code{environment} in which a function was defined along with the function itself, to be used at the calling sites. We represent closures as values in our language using the form ◊code{`(closure (λ (,argument-name) ,body) ,closure-environment)}. Coming back to our example above, the following is a value in our language:
 
-◊code/block/highlighted['racket]{
+◊code/block[#:language 'racket]{
 `(closure (λ (y) x) ((x . (closure (λ (z) z) ()))))
 }
 
