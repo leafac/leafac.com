@@ -15,7 +15,7 @@ Besides satisfying curiosity, this article introduces programming techniques tha
 
 Consider the following program:
 
-◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code/inline{+}) and control-flow primitives (for example, ◊code/inline{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs in this article. There are static type systems with the necessary expressiveness, but they are rare.}
+◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code{+}) and control-flow primitives (for example, ◊code{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs in this article. There are static type systems with the necessary expressiveness, but they are rare.}
 
 ◊code/block/highlighted['racket]{
 ;; Racket
@@ -57,9 +57,9 @@ public class Main {
 }
 }
 
-◊margin-note{◊code/inline{0 + 1 + 2 + 3 + 4 + 5 = 15}}
+◊margin-note{◊code{0 + 1 + 2 + 3 + 4 + 5 = 15}}
 
-This program defines a function that sums integers from zero up to a given number, then calls this function with ◊code/inline{5}, outputting ◊code/inline{15}. What are the essential features in programming languages that allow this program to be written? To address this question, we first have to consider what ◊emphasis{is} an essential feature.
+This program defines a function that sums integers from zero up to a given number, then calls this function with ◊code{5}, outputting ◊code{15}. What are the essential features in programming languages that allow this program to be written? To address this question, we first have to consider what ◊emphasis{is} an essential feature.
 
 Suppose one wants to write an application that tracks information about bicycle trips. If one could find a programming language that comes with native constructs for distances, weather conditions and so on, then that would be a perfect fit. But programming languages generally do not have these features, so one has to use numbers, functions, lists, records, objects and other simpler features to ◊emphasis{encode} the necessary functionality.
 
@@ -86,7 +86,7 @@ For convenience, here is the initial program again:
 
 The first features we remove via encoding are numbers and operations on them. There many different ways to rewrite the program above without numbers. For example, one could use strings to represent numbers, redefining the operations on them accordingly:
 
-◊margin-note{The ◊code/inline{___} in the code represent code omitted for simplicity.}
+◊margin-note{The ◊code{___} in the code represent code omitted for simplicity.}
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -106,7 +106,7 @@ The first features we remove via encoding are numbers and operations on them. Th
 (sum-up-to "5")
 }
 
-Alternatively, we could encode numbers with strings not using their string representation, but the string length. In this encoding, the contents of the strings representing numbers would be irrelevant, only their length would be meaningful. For example, ◊code/inline{0} would become ◊code/inline{""}, ◊code/inline{1} would become ◊code/inline{"☺"}, ◊code/inline{5} would become ◊code/inline{"☺☺☺☺☺"}, and so on. The running example would look like the following in this encoding:
+Alternatively, we could encode numbers with strings not using their string representation, but the string length. In this encoding, the contents of the strings representing numbers would be irrelevant, only their length would be meaningful. For example, ◊code{0} would become ◊code{""}, ◊code{1} would become ◊code{"☺"}, ◊code{5} would become ◊code{"☺☺☺☺☺"}, and so on. The running example would look like the following in this encoding:
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -159,7 +159,7 @@ Some encodings are more convenient than others. For example, it is more difficul
 
 We are not seeking easiness, though. So, from all the possible encodings, we choose one that is unnatural and inconvenient, but interesting: we encode numbers using ◊emphasis{functions}. Each number is a function of two arguments: the first, another arbitrary function; and the second, an arbitrary argument. These functions representing numbers repeatedly apply the first argument to the second, and the amount of applications represents the number being encoded:
 
-◊margin-note{Another interpretation for this encoding is that ◊code/inline{zero} means “do not do anything to the argument,” ◊code/inline{one} means “do something to the argument once,” ◊code/inline{five} means “do something to the argument five times,” and so on.}
+◊margin-note{Another interpretation for this encoding is that ◊code{zero} means “do not do anything to the argument,” ◊code{one} means “do something to the argument once,” ◊code{five} means “do something to the argument five times,” and so on.}
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: Our encoding for numbers is based on ◊emphasis{what they do} (to count), instead of ◊emphasis{what they are} (data). When designing a system, consider what the entities in it do, besides what they are. This might lead to a better overall design. For example, instead of modeling ◊emphasis{student} and ◊emphasis{staff} as data types, consider modeling ◊emphasis{enroll in classes} and ◊emphasis{budget planning} as actions. This fits better a case in which a person is part of the staff and wants to take classes at the same institution, for example.}
 
@@ -178,9 +178,9 @@ We are not seeking easiness, though. So, from all the possible encodings, we cho
       (function argument))))))
 }
 
-◊margin-note{The encoding only supports non-negative integers. This is fine for our purposes in ◊code/inline{sum-up-to}, which only works over non-negative integers.}
+◊margin-note{The encoding only supports non-negative integers. This is fine for our purposes in ◊code{sum-up-to}, which only works over non-negative integers.}
 
-For ◊code/inline{zero}, the given function is not applied, the argument is returned unaltered. For ◊code/inline{one}, the given function is applied once. For ◊code/inline{five}, the given function is applied five times. And so on.
+For ◊code{zero}, the given function is not applied, the argument is returned unaltered. For ◊code{one}, the given function is applied once. For ◊code{five}, the given function is applied five times. And so on.
 
 When we print these numbers to inspect them, this is what Racket outputs:
 
@@ -196,7 +196,7 @@ As the listing above illustrates, functions are opaque, so we introduce extra ma
   (number add1 0))
 }
 
-The function ◊code/inline{pretty-print} is not part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code/inline{0} and ◊code/inline{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
+The function ◊code{pretty-print} is not part of our main program, it only exists as a helper. That is why it is allowed to contain regular Racket numbers and operations on them—namely, ◊code{0} and ◊code{add1}. It receives as argument a number encoded in terms of functions and transforms it back into a regular number, so that we can read it:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print zero)
@@ -207,9 +207,9 @@ The function ◊code/inline{pretty-print} is not part of our main program, it on
 5
 }
 
-The way ◊code/inline{pretty-print} works reveals how this encoding of numbers using functions works. Numbers are functions, so ◊code/inline{pretty-print} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
+The way ◊code{pretty-print} works reveals how this encoding of numbers using functions works. Numbers are functions, so ◊code{pretty-print} ◊emphasis{applies that function}. As arguments, numbers receive another function and an initial value. Then the number repeatedly applies that given function to the initial value; the amount of applications corresponds to the number we want to encode.
 
-The function ◊code/inline{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code/inline{0}, and the function to be repeatedly applied is ◊code/inline{add1}. So, ◊code/inline{(pretty-print five)} evaluates as the following:
+The function ◊code{pretty-print} makes a careful choice of arguments with which it calls the number. The initial value is ◊code{0}, and the function to be repeatedly applied is ◊code{add1}. So, ◊code{(pretty-print five)} evaluates as the following:
 
 ◊code/block/highlighted['racket]{
 (add1
@@ -221,7 +221,7 @@ The function ◊code/inline{pretty-print} makes a careful choice of arguments wi
 
 ◊new-thought[]
 
-Now that we have an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code/inline{sum-up-to}, we just change the return from ◊code/inline{0} (the native Racket number) to ◊code/inline{zero} (our encoding as defined above):
+Now that we have an encoding for numbers, we need to adapt out program to use it. For the main function, ◊code{sum-up-to}, we just change the return from ◊code{0} (the native Racket number) to ◊code{zero} (our encoding as defined above):
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -230,11 +230,11 @@ Now that we have an encoding for numbers, we need to adapt out program to use it
       (+ number (sum-up-to (sub1 number)))))
 }
 
-The next step is to modify the functions that work on the numbers so that they are aware of the encoding we introduced. There are three of them: ◊code/inline{zero?}, ◊code/inline{sub1} and ◊code/inline{+}.
+The next step is to modify the functions that work on the numbers so that they are aware of the encoding we introduced. There are three of them: ◊code{zero?}, ◊code{sub1} and ◊code{+}.
 
-◊margin-note{In Racket, ◊technical-term{true} is spelled ◊code/inline{#t} and ◊technical-term{false} is spelled ◊code/inline{#f}.}
+◊margin-note{In Racket, ◊technical-term{true} is spelled ◊code{#t} and ◊technical-term{false} is spelled ◊code{#f}.}
 
-To implement ◊code/inline{zero?}, we can use an idea similar to ◊code/inline{pretty-print}: call the number—which is a function—with carefully chosen arguments. For the initial value, we choose ◊code/inline{#t}, and for the function we choose one that always returns ◊code/inline{#f}:
+To implement ◊code{zero?}, we can use an idea similar to ◊code{pretty-print}: call the number—which is a function—with carefully chosen arguments. For the initial value, we choose ◊code{#t}, and for the function we choose one that always returns ◊code{#f}:
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -260,7 +260,7 @@ Remember that these are the encoded numbers:
       (function argument))))))
 }
 
-So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initial value ◊code/inline{#t} is returned unaltered. If ◊code/inline{zero?} is called with ◊code/inline{one}, then it becomes ◊code/inline{(one always-false #t)}, which then becomes ◊code/inline{(always-false #t)}, and evaluates to ◊code/inline{#f}. The same happens to any number that is not ◊code/inline{zero}:
+So, if ◊code{zero?} is called with ◊code{zero}, then the initial value ◊code{#t} is returned unaltered. If ◊code{zero?} is called with ◊code{one}, then it becomes ◊code{(one always-false #t)}, which then becomes ◊code{(always-false #t)}, and evaluates to ◊code{#f}. The same happens to any number that is not ◊code{zero}:
 
 ◊code/block/highlighted['racket]{
 > (zero? zero)
@@ -273,10 +273,10 @@ So, if ◊code/inline{zero?} is called with ◊code/inline{zero}, then the initi
 
 ◊new-thought[]
 
-To implement addition (◊code/inline{+}), we can use the following observation: if the number ◊code/inline{number-left} means “do something to the argument ◊code/inline{number-left} times,” and the number ◊code/inline{number-right} means “do something to the argument ◊code/inline{number-right} times,” then the number ◊code/inline{number-left + number-right} means “do something to the argument ◊code/inline{number-left + number-right} times.” In particular, we can ◊informal{do something} to the argument ◊code/inline{number-right} times and use the result as the initial value to ◊informal{do something} to the argument ◊code/inline{number-left} times:
+To implement addition (◊code{+}), we can use the following observation: if the number ◊code{number-left} means “do something to the argument ◊code{number-left} times,” and the number ◊code{number-right} means “do something to the argument ◊code{number-right} times,” then the number ◊code{number-left + number-right} means “do something to the argument ◊code{number-left + number-right} times.” In particular, we can ◊informal{do something} to the argument ◊code{number-right} times and use the result as the initial value to ◊informal{do something} to the argument ◊code{number-left} times:
 
 ◊margin-note{
- Addition is a commutative operation (◊code/inline{number-left + number-right = number-right + number-left}). So inverting ◊code/inline{number-left} and ◊code/inline{number-right} does not change the meaning of ◊code/inline{+}. The return value ◊code/inline{result} could equivalently be defined as the following:
+ Addition is a commutative operation (◊code{number-left + number-right = number-right + number-left}). So inverting ◊code{number-left} and ◊code{number-right} does not change the meaning of ◊code{+}. The return value ◊code{result} could equivalently be defined as the following:
 
  ◊code/block/highlighted['racket]{
 (number-left function
@@ -292,7 +292,7 @@ To implement addition (◊code/inline{+}), we can use the following observation:
   result)
 }
 
-The following listing is an example of ◊code/inline{+} in use:
+The following listing is an example of ◊code{+} in use:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (+ five five))
@@ -301,17 +301,17 @@ The following listing is an example of ◊code/inline{+} in use:
 
 ◊new-thought[]
 
-For the last operation on numbers, ◊code/inline{sub1}, we start by simplifying the problem by reducing its scope. In ◊code/inline{sum-up-to}, the function ◊code/inline{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we define ◊code/inline{(sub1 zero)} to output ◊code/inline{zero} instead of ◊code/inline{-1} as it should according to mathematics.
+For the last operation on numbers, ◊code{sub1}, we start by simplifying the problem by reducing its scope. In ◊code{sum-up-to}, the function ◊code{sub1} is only called with positive numbers. Also, our encoding using functions can only represent non-negative numbers. So, we define ◊code{(sub1 zero)} to output ◊code{zero} instead of ◊code{-1} as it should according to mathematics.
 
 ◊margin-note{
  ◊figure/svg{images/sub1.svg}
 
-  In the figure above there are ◊emphasis{five} blue arrows, representing the steps we take to calculate ◊code/inline{sub1} of ◊code/inline{five}.
+  In the figure above there are ◊emphasis{five} blue arrows, representing the steps we take to calculate ◊code{sub1} of ◊code{five}.
 }
 
-With this restriction in place, we can define ◊code/inline{sub1} for positive integers using a ◊technical-term{sliding window} over the number line. Starting with a pair ◊code/inline{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is one behind it. We take that step ◊code/inline{number} times and the predecessor of the given ◊code/inline{number} is the element on the left of the pair:
+With this restriction in place, we can define ◊code{sub1} for positive integers using a ◊technical-term{sliding window} over the number line. Starting with a pair ◊code{(zero, zero)}, for each step, the right element goes to the left, and the new right element is the current plus one. Another way of interpreting this is that the right element is traversing the number line and the left element is one behind it. We take that step ◊code{number} times and the predecessor of the given ◊code{number} is the element on the left of the pair:
 
-◊margin-note{To represent pairs, we use ◊code/inline{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code/inline{cons}, ◊code/inline{car} and ◊code/inline{cdr} are not intuitive.}
+◊margin-note{To represent pairs, we use ◊code{(struct pair (left right))}, instead of Racket’s native pairs, because the names ◊code{cons}, ◊code{car} and ◊code{cdr} are not intuitive.}
 
 ◊code/block/highlighted['racket]{
 (struct pair (left right))
@@ -329,7 +329,7 @@ With this restriction in place, we can define ◊code/inline{sub1} for positive 
   (pair-left final-pair))
 }
 
-We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-print}:
+We can test ◊code{sub1} and see the result using ◊code{pretty-print}:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sub1 five))
@@ -338,11 +338,11 @@ We can test ◊code/inline{sub1} and see the result using ◊code/inline{pretty-
 
 ◊new-thought[]
 
-At this point, we have all the numeric operations necessary for ◊code/inline{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we address the only other primitive data type used in our program: booleans.
+At this point, we have all the numeric operations necessary for ◊code{sum-up-to} encoded in terms of functions. This means that numbers are not an essential feature of programming languages. On the next section, we address the only other primitive data type used in our program: booleans.
 
 ◊section['booleans]{Booleans}
 
-There is only one place in which we use a boolean in our program: the conditional (◊code/inline{if}) in ◊code/inline{sum-up-to}’s body. Its condition depends on ◊code/inline{zero?}, which is the only function generating booleans. For convenience, the following lists their current definitions again:
+There is only one place in which we use a boolean in our program: the conditional (◊code{if}) in ◊code{sum-up-to}’s body. Its condition depends on ◊code{zero?}, which is the only function generating booleans. For convenience, the following lists their current definitions again:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -360,13 +360,13 @@ There is only one place in which we use a boolean in our program: the conditiona
 
 Are booleans an essential feature of programming languages, or can we ◊informal{encode them away}? Programmers familiar with C know that the answer to this question is negative, because in C there are no booleans. They are encoded in terms of numbers: zero represents ◊technical-term{false} and any other number represents ◊technical-term{true}.
 
-As was the case with numbers, different encodings are possible. For example, we could use the strings ◊code/inline{"true"} and ◊code/inline{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊technical-term{true}. And, as before, some encodings are more convenient than others.
+As was the case with numbers, different encodings are possible. For example, we could use the strings ◊code{"true"} and ◊code{"false"}; or an empty list could mean ◊technical-term{false} and lists with at least one element could represent ◊technical-term{true}. And, as before, some encodings are more convenient than others.
 
 ◊margin-note{This encoding of booleans using functions is also called ◊technical-term{Church Encoding}.}
 
 A particularly interesting choice would be to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are consistent and use functions to encode booleans:
 
-◊margin-note{There is nothing special about the names ◊code/inline{true} and ◊code/inline{false}. They are regular functions, like ◊code/inline{sub1}, ◊code/inline{pretty-print} and so on.}
+◊margin-note{There is nothing special about the names ◊code{true} and ◊code{false}. They are regular functions, like ◊code{sub1}, ◊code{pretty-print} and so on.}
 
 ◊code/block/highlighted['racket]{
 (define (true first second)
@@ -378,9 +378,9 @@ A particularly interesting choice would be to follow C’s example and use numbe
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: Our encoding for booleans is another example of reasoning about ◊emphasis{what things do} (to select either ◊technical-term{true} or ◊technical-term{false}), instead of ◊emphasis{what they are} (data).}
 
-In our encoding, booleans are functions that receive two arguments. The value ◊code/inline{true} returns the first argument, and ◊code/inline{false} returns the second argument.
+In our encoding, booleans are functions that receive two arguments. The value ◊code{true} returns the first argument, and ◊code{false} returns the second argument.
 
-We can now adapt ◊code/inline{zero?} to use these values:
+We can now adapt ◊code{zero?} to use these values:
 
 ◊code/block/highlighted['racket]{
 (define (zero? number)
@@ -389,9 +389,9 @@ We can now adapt ◊code/inline{zero?} to use these values:
   (number always-false true))
 }
 
-Because we changed the representation of booleans, we need to modify the conditional (◊code/inline{if}) accordingly. It receives as arguments a condition, a value (◊code/inline{then}) to return in case the condition is ◊technical-term{true} and another value (◊code/inline{else}) in case it is ◊technical-term{false}. The condition is a boolean which we encoded as a function, and this function is already capable of choosing which value to return:
+Because we changed the representation of booleans, we need to modify the conditional (◊code{if}) accordingly. It receives as arguments a condition, a value (◊code{then}) to return in case the condition is ◊technical-term{true} and another value (◊code{else}) in case it is ◊technical-term{false}. The condition is a boolean which we encoded as a function, and this function is already capable of choosing which value to return:
 
-◊margin-note{Again, there is nothing special about the names ◊code/inline{if},  ◊code/inline{then} and ◊code/inline{else}. To this point, the name ◊code/inline{if} was referring to Racket’s conditionals, but after this definition it became just another function. And ◊code/inline{then} and ◊code/inline{else} are regular variables, like ◊code/inline{number-left}, ◊code/inline{number-right} and so on.}
+◊margin-note{Again, there is nothing special about the names ◊code{if},  ◊code{then} and ◊code{else}. To this point, the name ◊code{if} was referring to Racket’s conditionals, but after this definition it became just another function. And ◊code{then} and ◊code{else} are regular variables, like ◊code{number-left}, ◊code{number-right} and so on.}
 
 ◊margin-note{Conditionals are so natural to encode because our choice of encoding for booleans was deliberate to make this happen.}
 
@@ -400,7 +400,7 @@ Because we changed the representation of booleans, we need to modify the conditi
   (condition then else))
 }
 
-We introduced a problem in ◊code/inline{sum-up-to}, though. Here is its current definition one more time:
+We introduced a problem in ◊code{sum-up-to}, though. Here is its current definition one more time:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -411,9 +411,9 @@ We introduced a problem in ◊code/inline{sum-up-to}, though. Here is its curren
 
 ◊margin-note{This termination problem only occurs because of Racket’s evaluation order. Racket is a call-by-value language, which means function arguments are evaluated to values before the function starts to execute. There exists other languages with other evaluation orders, and in them this issue would not arise. For example, Haskell is a call-by-need language: arguments to a function are only evaluated when they are used. Arguments that are not used are never evaluated. So a program equivalent to ours written in Haskell would not run forever.}
 
-Before we encoded ◊code/inline{if}, this code was using Racket’s ◊code/inline{if}. And Racket’s ◊code/inline{if} only executes a branch if necessary. In particular, the part ◊code/inline{(+ number (sum-up-to (sub1 number)))} only ran if ◊code/inline{(zero? number)} was ◊technical-term{false}. But now, because ◊code/inline{if} is a function call, by the time we check the condition to make a decision, this part already ran. And it contains a recursive call to ◊code/inline{sum-up-to}, which leads to an infinite sequence of recursive calls. This program does not terminate.
+Before we encoded ◊code{if}, this code was using Racket’s ◊code{if}. And Racket’s ◊code{if} only executes a branch if necessary. In particular, the part ◊code{(+ number (sum-up-to (sub1 number)))} only ran if ◊code{(zero? number)} was ◊technical-term{false}. But now, because ◊code{if} is a function call, by the time we check the condition to make a decision, this part already ran. And it contains a recursive call to ◊code{sum-up-to}, which leads to an infinite sequence of recursive calls. This program does not terminate.
 
-To solve this issue, we ◊informal{wrap} the conditional branches in functions, so that they do not execute right away. We then use ◊code/inline{if} to choose the right function to call:
+To solve this issue, we ◊informal{wrap} the conditional branches in functions, so that they do not execute right away. We then use ◊code{if} to choose the right function to call:
 
 ◊margin-note{Another way of thinking about this step is that the functions in which we ◊informal{wrap} the conditional branches are ◊technical-term{delaying} the computation until it is necessary—at which point we call the function.}
 
@@ -433,9 +433,9 @@ To solve this issue, we ◊informal{wrap} the conditional branches in functions,
   (branch-to-take))
 }
 
-◊margin-note{To define ◊code/inline{then} and ◊code/inline{else} as non-function values, one would write ◊code/inline{(define then ___)}, without the parentheses around ◊code/inline{then}.}
+◊margin-note{To define ◊code{then} and ◊code{else} as non-function values, one would write ◊code{(define then ___)}, without the parentheses around ◊code{then}.}
 
-The key observation regarding the listing above is that ◊code/inline{(define (then) ___)} and ◊code/inline{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code/inline{then} and ◊code/inline{else}. These functions receive no arguments, that is why we define them with ◊code/inline{(define (then) ___)} and not ◊code/inline{(define (then x y z) ___)}. Similarly, the code ◊code/inline{(branch-to-take)} is calling the function ◊code/inline{branch-to-take} without any arguments.
+The key observation regarding the listing above is that ◊code{(define (then) ___)} and ◊code{(define (else) ___)} are defining two ◊emphasis{functions} called ◊code{then} and ◊code{else}. These functions receive no arguments, that is why we define them with ◊code{(define (then) ___)} and not ◊code{(define (then x y z) ___)}. Similarly, the code ◊code{(branch-to-take)} is calling the function ◊code{branch-to-take} without any arguments.
 
 ◊new-thought[]
 
@@ -450,15 +450,15 @@ So we can conclude that primitive values are not essential features to programmi
 
 ◊section['pairs]{Pairs}
 
-The only instance of a data structure in our program is a ◊technical-term{pair}, used in ◊code/inline{sub1}. There are three functions to interact with pairs: the function ◊code/inline{(pair left right)}, which creates a pair with the elements ◊code/inline{left} and ◊code/inline{right}; the function ◊code/inline{(pair-left pair)}, which receives a pair and returns the element on the left; and the function ◊code/inline{(pair-right pair)}, which receives a pair and returns the element on the right.
+The only instance of a data structure in our program is a ◊technical-term{pair}, used in ◊code{sub1}. There are three functions to interact with pairs: the function ◊code{(pair left right)}, which creates a pair with the elements ◊code{left} and ◊code{right}; the function ◊code{(pair-left pair)}, which receives a pair and returns the element on the left; and the function ◊code{(pair-right pair)}, which receives a pair and returns the element on the right.
 
 ◊margin-note{The compound of a function and the outer variable references whose value it ◊informal{remembers} is called a ◊technical-term{closure}.}
 
-◊margin-note{◊emphasis{Everyday programming takeaway}: This ◊informal{memory} capability that inner functions have is necessary for some important features in popular programming languages. For example, Ruby blocks and JavaScript functions passed to (for example) ◊code/inline{.forEach()} can refer to variables local to their definition site, not their calling site inside (for example) ◊code/inline{.forEach()}’s implementation.}
+◊margin-note{◊emphasis{Everyday programming takeaway}: This ◊informal{memory} capability that inner functions have is necessary for some important features in popular programming languages. For example, Ruby blocks and JavaScript functions passed to (for example) ◊code{.forEach()} can refer to variables local to their definition site, not their calling site inside (for example) ◊code{.forEach()}’s implementation.}
 
 Encodings for pairs are not as natural as, for example, the encoding for numbers in terms of strings. But can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following listing illustrates this:
 
-◊margin-note{Similar to ◊code/inline{then} and ◊code/inline{else} in ◊code/inline{sum-up-to} (see ◊reference['booleans]{previous section}), ◊code/inline{retriever} is a function that receives no arguments.}
+◊margin-note{Similar to ◊code{then} and ◊code{else} in ◊code{sum-up-to} (see ◊reference['booleans]{previous section}), ◊code{retriever} is a function that receives no arguments.}
 
 ◊code/block/highlighted['racket]{
 (define (store value)
@@ -474,11 +474,11 @@ Encodings for pairs are not as natural as, for example, the encoding for numbers
 (pretty-print (stored-1)) ;; => 1
 }
 
-In the code above, ◊code/inline{store} is a function which receives a ◊code/inline{value} and stores it for later. The way to retrieve the value is to apply the function returned by the call to ◊code/inline{store}. It works by defining and returning an inner function, ◊code/inline{retriever}, which has access to the outer ◊code/inline{value} and ◊informal{remembers} it, even after ◊code/inline{store} itself has returned.
+In the code above, ◊code{store} is a function which receives a ◊code{value} and stores it for later. The way to retrieve the value is to apply the function returned by the call to ◊code{store}. It works by defining and returning an inner function, ◊code{retriever}, which has access to the outer ◊code{value} and ◊informal{remembers} it, even after ◊code{store} itself has returned.
 
-To implement a pair, we can use the idea from ◊code/inline{store}, but with two ◊code/inline{value}s as arguments to ◊informal{remember}. The problem then becomes: when retrieving, which of the two values to return? This is not a decision we can make at the point of defining ◊code/inline{retriever}, because information about which of the two values to return is only known when retrieving.
+To implement a pair, we can use the idea from ◊code{store}, but with two ◊code{value}s as arguments to ◊informal{remember}. The problem then becomes: when retrieving, which of the two values to return? This is not a decision we can make at the point of defining ◊code{retriever}, because information about which of the two values to return is only known when retrieving.
 
-The solution is to modify ◊code/inline{retriever} to receive an argument, a ◊code/inline{selector} function. Then ◊code/inline{retriever} calls ◊code/inline{selector} with both values in the pair and let it decide which one to return. With that, the ◊code/inline{pair} function is complete:
+The solution is to modify ◊code{retriever} to receive an argument, a ◊code{selector} function. Then ◊code{retriever} calls ◊code{selector} with both values in the pair and let it decide which one to return. With that, the ◊code{pair} function is complete:
 
 ◊code/block/highlighted['racket]{
 (define (pair left right)
@@ -487,9 +487,9 @@ The solution is to modify ◊code/inline{retriever} to receive an argument, a �
   retriever)
 }
 
-We can now create pairs, but to retrieve the values from it we still have to define the selectors. They receive ◊code/inline{left} and ◊code/inline{right} and return the correct element in the pair:
+We can now create pairs, but to retrieve the values from it we still have to define the selectors. They receive ◊code{left} and ◊code{right} and return the correct element in the pair:
 
-◊margin-note{Apart from identifiers, ◊code/inline{selector-left} is the same function as ◊code/inline{true} and ◊code/inline{selector-right} is the same function as ◊code/inline{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code/inline{true} ◊emphasis{or} ◊code/inline{false}) and conjunction (a pair holds a ◊code/inline{left} ◊emphasis{and} a ◊code/inline{right} elements). They are two sides of the same coin. This is a fundamental result of ◊link["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
+◊margin-note{Apart from identifiers, ◊code{selector-left} is the same function as ◊code{true} and ◊code{selector-right} is the same function as ◊code{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code{true} ◊emphasis{or} ◊code{false}) and conjunction (a pair holds a ◊code{left} ◊emphasis{and} a ◊code{right} elements). They are two sides of the same coin. This is a fundamental result of ◊link["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
 
 ◊code/block/highlighted['racket]{
 (define (selector-left left right)
@@ -510,9 +510,9 @@ With the selectors defined above, pairs are functional, as the listing below exe
 1
 }
 
-We are now one step away from defining the accessor functions ◊code/inline{pair-left} and ◊code/inline{pair-right} used by ◊code/inline{sub1}. We only need to wrap the usage pattern from the listing above:
+We are now one step away from defining the accessor functions ◊code{pair-left} and ◊code{pair-right} used by ◊code{sub1}. We only need to wrap the usage pattern from the listing above:
 
-◊margin-note{The technique to turn selectors (◊code/inline{selector-left} and ◊code/inline{selector-right}) into accessors (◊code/inline{pair-left} and ◊code/inline{pair-right}) is the same to turn booleans (◊code/inline{true} and ◊code/inline{false}) into conditionals (◊code/inline{if}).}
+◊margin-note{The technique to turn selectors (◊code{selector-left} and ◊code{selector-right}) into accessors (◊code{pair-left} and ◊code{pair-right}) is the same to turn booleans (◊code{true} and ◊code{false}) into conditionals (◊code{if}).}
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: When refactoring, do not change the interface to existing functionality.}
 
@@ -548,7 +548,7 @@ More importantly, our program is working with this encoding for pairs in terms o
 
 ◊new-thought[]
 
-Before we move on to other programming-language features that we might question as either ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code/inline{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures which are ◊technical-term{essential} features in programming languages?
+Before we move on to other programming-language features that we might question as either ◊technical-term{essential} or ◊informal{encodeable}, let us appreciate the importance of the result above. We used functions to encode pairs, but what about other data structures? They are not used ◊code{sum-up-to}, but, if they were, could we ◊informal{encode them away}? Or are there data structures which are ◊technical-term{essential} features in programming languages?
 
 One more time, the answer is that data structures in general are ◊informal{encodeable} in terms of simpler features. And, once again, there are different encodings available. In particular, it is possible to encode all data structures in terms of pairs; and, ultimately, in terms functions, by the result of this section. The figure below illustrates examples of encodings:
 
@@ -564,7 +564,7 @@ A list containing pairs of elements could be interpreted as a record (also known
 
 ◊margin-note{How can we create a record including a reference to itself? We can start by adapting the techniques from the ◊reference['recursion]{next section} on recursion, but the details of this particular construction are beyond the scope of this article.}
 
-Finally, with records it is possible to encode objects. Some fields are non-function values (for example, ◊code/inline{name} and ◊code/inline{birthdate}), and some are functions (for example, ◊code/inline{age}), which can be interpreted as methods. One special record field (◊code/inline{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code/inline{age}) can refer to other object attributes (for example, ◊code/inline{birthdate}).
+Finally, with records it is possible to encode objects. Some fields are non-function values (for example, ◊code{name} and ◊code{birthdate}), and some are functions (for example, ◊code{age}), which can be interpreted as methods. One special record field (◊code{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code{age}) can refer to other object attributes (for example, ◊code{birthdate}).
 
 Objects can get more complicated, with features such as inheritance and polymorphism. Also, there exists many other data structures: tuples, trees and more. But, with varying degrees of difficulty, they are all encodeable in terms of pairs, the simplest way to couple data together. So, ultimately, this section shows that all data structures can be defined in terms of functions.
 
@@ -574,7 +574,7 @@ The next features we have to address are those in functions themselves, because 
 
 ◊section['recursion]{Recursion}
 
-There is only one recursive function in our program: ◊code/inline{sum-up-to}. The following is its current definition, for convenience:
+There is only one recursive function in our program: ◊code{sum-up-to}. The following is its current definition, for convenience:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -590,9 +590,9 @@ There is only one recursive function in our program: ◊code/inline{sum-up-to}. 
   (branch-to-take))
 }
 
-The particular point of recursion is the call to ◊code/inline{sum-up-to} in the ◊code/inline{else} branch. This works because, in Racket, when defining the function using ◊code/inline{(define (sum-up-to number) ___)} the binding for ◊code/inline{sum-up-to} is available in the body. Can we ◊informal{encode this feature away}?
+The particular point of recursion is the call to ◊code{sum-up-to} in the ◊code{else} branch. This works because, in Racket, when defining the function using ◊code{(define (sum-up-to number) ___)} the binding for ◊code{sum-up-to} is available in the body. Can we ◊informal{encode this feature away}?
 
-Surprisingly, the answer to this question is positive. And there are multiple possible encodings; the simplest is known as ◊technical-term{tying the knot}. To ◊technical-term{tie the knot} in our program, we start by introducing an auxiliary function ◊code/inline{sum-up-to/rest} which ◊code/inline{sum-up-to} calls in place of the recursive call:
+Surprisingly, the answer to this question is positive. And there are multiple possible encodings; the simplest is known as ◊technical-term{tying the knot}. To ◊technical-term{tie the knot} in our program, we start by introducing an auxiliary function ◊code{sum-up-to/rest} which ◊code{sum-up-to} calls in place of the recursive call:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -608,9 +608,9 @@ Surprisingly, the answer to this question is positive. And there are multiple po
   (branch-to-take))
 }
 
-The name ◊code/inline{sum-up-to/rest} for this auxiliary function is appropriate because, as implemented, ◊code/inline{sum-up-to} is only performing one step of the computation; it delegates the rest of the computation to ◊code/inline{sum-up-to/rest}. The question then becomes: how do we implement ◊code/inline{sum-up-to/rest}?
+The name ◊code{sum-up-to/rest} for this auxiliary function is appropriate because, as implemented, ◊code{sum-up-to} is only performing one step of the computation; it delegates the rest of the computation to ◊code{sum-up-to/rest}. The question then becomes: how do we implement ◊code{sum-up-to/rest}?
 
-A first idea would be to copy and paste the implementation for ◊code/inline{sum-up-to}:
+A first idea would be to copy and paste the implementation for ◊code{sum-up-to}:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to/rest number)
@@ -626,11 +626,11 @@ A first idea would be to copy and paste the implementation for ◊code/inline{su
   (branch-to-take))
 }
 
-But this idea is bad, because now ◊code/inline{sum-up-to/rest} is using recursion, the exact feature we are trying to ◊informal{encode away}. Alternatively, we could reuse our previous idea and rewrite ◊code/inline{sum-up-to/rest} to delegate to another auxiliary function ◊code/inline{sum-up-to/rest2}. But this idea is also bad, because we would be just delaying the problem: how would we write ◊code/inline{sum-up-to/rest2}?
+But this idea is bad, because now ◊code{sum-up-to/rest} is using recursion, the exact feature we are trying to ◊informal{encode away}. Alternatively, we could reuse our previous idea and rewrite ◊code{sum-up-to/rest} to delegate to another auxiliary function ◊code{sum-up-to/rest2}. But this idea is also bad, because we would be just delaying the problem: how would we write ◊code{sum-up-to/rest2}?
 
-Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can leave it for later, defining just a placeholder:
+Because we do not know how to implement ◊code{sum-up-to/rest}, we can leave it for later, defining just a placeholder:
 
-◊margin-note{The implementation of ◊code/inline{sum-up-to/rest} must appear before the one for ◊code/inline{sum-up-to}, and it must not refer to ◊code/inline{sum-up-to}. Otherwise it would again be (indirectly) relying on Racket’s support for recursion.}
+◊margin-note{The implementation of ◊code{sum-up-to/rest} must appear before the one for ◊code{sum-up-to}, and it must not refer to ◊code{sum-up-to}. Otherwise it would again be (indirectly) relying on Racket’s support for recursion.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to/rest number)
@@ -649,7 +649,7 @@ Because we do not know how to implement ◊code/inline{sum-up-to/rest}, we can l
   (branch-to-take))
 }
 
-Before we can use ◊code/inline{sum-up-to}, we have to provide an implementation for ◊code/inline{sum-up-to/rest}. But, once ◊code/inline{sum-up-to} has been defined, we can use it to implement ◊code/inline{sum-up-to/rest}. The resulting program is still non-recursive, because all variables are defined before they are used. We can use mutation (◊code/inline{set!}) to ◊emphasis{change} the placeholder definition of ◊code/inline{sum-up-to/rest} into ◊code/inline{sum-up-to} itself:
+Before we can use ◊code{sum-up-to}, we have to provide an implementation for ◊code{sum-up-to/rest}. But, once ◊code{sum-up-to} has been defined, we can use it to implement ◊code{sum-up-to/rest}. The resulting program is still non-recursive, because all variables are defined before they are used. We can use mutation (◊code{set!}) to ◊emphasis{change} the placeholder definition of ◊code{sum-up-to/rest} into ◊code{sum-up-to} itself:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to/rest number)
@@ -670,14 +670,14 @@ Before we can use ◊code/inline{sum-up-to}, we have to provide an implementatio
 (set! sum-up-to/rest sum-up-to)
 }
 
-After the ◊code/inline{set!} operation, the name ◊code/inline{sum-up-to/rest} refers to the function ◊code/inline{sum-up-to}, instead of the placeholder implementation. So ◊code/inline{sum-up-to} can call itself via ◊code/inline{sum-up-to/rest}, restoring its original functionality. With this change, the program is no longer recursive, and it still outputs the same value:
+After the ◊code{set!} operation, the name ◊code{sum-up-to/rest} refers to the function ◊code{sum-up-to}, instead of the placeholder implementation. So ◊code{sum-up-to} can call itself via ◊code{sum-up-to/rest}, restoring its original functionality. With this change, the program is no longer recursive, and it still outputs the same value:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
 15
 }
 
-We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code/inline{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be a pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field. The following extract illustrates this idea:
+We have successfully encoded recursion, but the encoding relies on mutation of the program’s state (◊code{set!}). Can we then ◊informal{encode mutation away}? Yes, but it would be a pervasive change to the program—the encoding would require modifications to ◊emphasis{every} function definition and ◊emphasis{every} function application. In addition to their existing arguments, functions would receive a record representing the current global state of the program. This record would map the variable names to their current value. Also, in addition to their existing return value, functions would return a possibly modified record representing a possibly modified state of the program. Then, every function application would be changed to thread this global state throughout the program. And, finally, every variable reference would need to access the record, selecting the corresponding field. The following extract illustrates this idea:
 
 ◊code/block/highlighted['racket]{
 (define initial-state (empty-record))
@@ -697,11 +697,11 @@ We have successfully encoded recursion, but the encoding relies on mutation of t
               "sum-up-to/rest" sum-up-to))
 }
 
-In the listing above, the placeholder implementation of ◊code/inline{sum-up-to/rest} and ◊code/inline{sum-up-to} were modified to receive an extra argument representing the ◊code/inline{program-state}. Also, they return pairs of their output value and a possibly modified ◊code/inline{program-state}. Then, when using ◊code/inline{sum-up-to/rest} in ◊code/inline{sum-up-to}, it is necessary to lookup its definition in the given ◊code/inline{program-state}. Finally, we have to manage the global ◊code/inline{program-state}, first creating it as an ◊code/inline{empty-record}, then adding ◊code/inline{sum-up-to/rest} as it is implemented and overwriting its value when ◊code/inline{sum-up-to} is available.
+In the listing above, the placeholder implementation of ◊code{sum-up-to/rest} and ◊code{sum-up-to} were modified to receive an extra argument representing the ◊code{program-state}. Also, they return pairs of their output value and a possibly modified ◊code{program-state}. Then, when using ◊code{sum-up-to/rest} in ◊code{sum-up-to}, it is necessary to lookup its definition in the given ◊code{program-state}. Finally, we have to manage the global ◊code{program-state}, first creating it as an ◊code{empty-record}, then adding ◊code{sum-up-to/rest} as it is implemented and overwriting its value when ◊code{sum-up-to} is available.
 
 While feasible, this solution is not elegant. It affects even the functions that do not need to change the global state of the program, because they need to thread it appropriately.
 
-So we backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code/inline{sum-up-to} before we ◊technical-term{tied the knot}:
+So we backtrack and reconsider our encoding for recursion, avoiding mutation. This is ◊code{sum-up-to} before we ◊technical-term{tied the knot}:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -715,7 +715,7 @@ So we backtrack and reconsider our encoding for recursion, avoiding mutation. Th
     (if (zero? number) then else))
 }
 
-It still depends on ◊code/inline{sum-up-to/rest}, which we do not know how to implement. But, this time, instead of coming up with a placeholder implementation for it, we change ◊code/inline{sum-up-to} so that it receives ◊code/inline{sum-up-to/rest} as an argument:
+It still depends on ◊code{sum-up-to/rest}, which we do not know how to implement. But, this time, instead of coming up with a placeholder implementation for it, we change ◊code{sum-up-to} so that it receives ◊code{sum-up-to/rest} as an argument:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to sum-up-to/rest number)
@@ -729,27 +729,27 @@ It still depends on ◊code/inline{sum-up-to/rest}, which we do not know how to 
     (if (zero? number) then else))
 }
 
-Now it is the job of ◊code/inline{sum-up-to}’s callers to provide a suitable ◊code/inline{sum-up-to/rest}:
+Now it is the job of ◊code{sum-up-to}’s callers to provide a suitable ◊code{sum-up-to/rest}:
 
 ◊code/block/highlighted['racket]{
 (pretty-print (sum-up-to ___ five))
 }
 
-What can we use to fill in the ◊code/inline{___} above? A good candidate is ◊code/inline{sum-up-to} itself:
+What can we use to fill in the ◊code{___} above? A good candidate is ◊code{sum-up-to} itself:
 
 ◊code/block/highlighted['racket]{
 (pretty-print (sum-up-to sum-up-to five))
 }
 
-This choice is similar to the one in the line ◊code/inline{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code/inline{sum-up-to} as the ◊code/inline{sum-up-to/rest} argument when calling ◊code/inline{sum-up-to} itself. So, in ◊code/inline{sum-up-to}’s body, when ◊code/inline{sum-up-to/rest} is called, this is actually a call to ◊code/inline{sum-up-to}. And ◊code/inline{sum-up-to} requires a ◊code/inline{sum-up-to/rest} as its first argument:
+This choice is similar to the one in the line ◊code{(set! sum-up-to/rest sum-up-to)} when ◊technical-term{tying the knot}. But this time there is a problem. We passed ◊code{sum-up-to} as the ◊code{sum-up-to/rest} argument when calling ◊code{sum-up-to} itself. So, in ◊code{sum-up-to}’s body, when ◊code{sum-up-to/rest} is called, this is actually a call to ◊code{sum-up-to}. And ◊code{sum-up-to} requires a ◊code{sum-up-to/rest} as its first argument:
 
 ◊figure/image["images/incomplete-self-passing.png"]{The code above, failing to execute because of the missing argument.}
 
-Again, we can use the same idea as before to solve this issue. We can pass ◊code/inline{sum-up-to/rest} itself as the argument:
+Again, we can use the same idea as before to solve this issue. We can pass ◊code{sum-up-to/rest} itself as the argument:
 
 ◊margin-note{The name of this technique is ◊emphasis{self-passing}. Unsurprisingly.}
 
-◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code/inline{sum-up-to/rest}, ◊code/inline{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating this unbounded sequence of functions is not possible. Instead, in the self-passing encoding, each call of the form ◊code/inline{(sum-up-to/rest sum-up-to/rest ___)} is creating the next ◊code/inline{sum-up-to/rest} in the chain. It is taking one step and carrying along another copy of itself as the function capable of taking the next steps.}
+◊margin-note{The effect of self-passing is similar to the hierarchy of ◊code{sum-up-to/rest}, ◊code{sum-up-to/rest2} and so on that we proposed above. But, as we already noted, explicitly creating this unbounded sequence of functions is not possible. Instead, in the self-passing encoding, each call of the form ◊code{(sum-up-to/rest sum-up-to/rest ___)} is creating the next ◊code{sum-up-to/rest} in the chain. It is taking one step and carrying along another copy of itself as the function capable of taking the next steps.}
 
 ◊margin-note{Most static type systems are not capable of typing programs using self-passing. This is reason why OCaml, Haskell and similar languages could not be base languages for this article.}
 
@@ -777,7 +777,7 @@ With this change, we successfully encoded recursion in terms of non-recursive fu
 15
 }
 
-Unfortunately, we changed the interface to ◊code/inline{sum-up-to} in this process. Now callers need to be aware of the recursion encoding, and call the function with ◊code/inline{(sum-up-to sum-up-to number)}, which is inconvenient. We can make this better by introducing an auxiliary function ◊code/inline{sum-up-to/partial}:
+Unfortunately, we changed the interface to ◊code{sum-up-to} in this process. Now callers need to be aware of the recursion encoding, and call the function with ◊code{(sum-up-to sum-up-to number)}, which is inconvenient. We can make this better by introducing an auxiliary function ◊code{sum-up-to/partial}:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -797,9 +797,9 @@ Unfortunately, we changed the interface to ◊code/inline{sum-up-to} in this pro
   (sum-up-to/partial sum-up-to/partial number))
 }
 
-◊margin-note{The ◊code/inline{sum-up-to} façade is not specific to the job of adding numbers, all the actual computation is defined in ◊code/inline{sum-up-to/partial}. So ◊code/inline{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstract façade is called ◊technical-term{Y-combinator}.}
+◊margin-note{The ◊code{sum-up-to} façade is not specific to the job of adding numbers, all the actual computation is defined in ◊code{sum-up-to/partial}. So ◊code{sum-up-to} can be abstracted to work as a façade for any recursive function encoded via self-passing. This abstract façade is called ◊technical-term{Y-combinator}.}
 
-The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and ◊code/inline{sum-up-to} is only a façade to fix ◊code/inline{sum-up-to/partial}’s interface. This brings us back to the original:
+The algorithm for adding numbers is in ◊code{sum-up-to/partial}, and ◊code{sum-up-to} is only a façade to fix ◊code{sum-up-to/partial}’s interface. This brings us back to the original:
 
 ◊code/block/highlighted['racket]{
 > (pretty-print (sum-up-to five))
@@ -808,7 +808,7 @@ The algorithm for adding numbers is in ◊code/inline{sum-up-to/partial}, and �
 
 ◊new-thought[]
 
-The result of this section is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code/inline{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to its argument, so it works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, then ◊code/inline{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking fewer than ten lines. What allows us to compact the definition this way is recursion.
+The result of this section is the most important in this article to this point. We encoded recursion in terms of non-recursive functions, using self-passing. And recursion was the ingredient that allowed ◊code{sum-up-to} to calculate sums up to arbitrarily large numbers. There is no upper bound to its argument, so it works for infinitely many inputs. If we think of a function as a lookup table from inputs to outputs, then ◊code{sum-up-to} is a table with infinitely many rows. But its definition is still finite, taking fewer than ten lines. What allows us to compact the definition this way is recursion.
 
 ◊margin-note{In other words, non-recursive functions are ◊technical-term{Turing complete}.}
 
@@ -818,13 +818,13 @@ There are few features left in our program. It is composed solely of (non-recurs
 
 ◊section['functions-with-multiple-arguments]{Functions with Multiple Arguments}
 
-Almost all functions in our program receive multiple arguments. In some of them, for example, ◊code/inline{(pair left right)}, it seems like the ability to receive multiple arguments is essential to their functionality. After all, the purpose of ◊code/inline{pair} is exactly to couple the arguments ◊code/inline{left} and ◊code/inline{right} together. But is this an essential feature of programming languages, or can functions with multiple arguments be ◊informal{encoded away}, so that only functions with a single argument remain?
+Almost all functions in our program receive multiple arguments. In some of them, for example, ◊code{(pair left right)}, it seems like the ability to receive multiple arguments is essential to their functionality. After all, the purpose of ◊code{pair} is exactly to couple the arguments ◊code{left} and ◊code{right} together. But is this an essential feature of programming languages, or can functions with multiple arguments be ◊informal{encoded away}, so that only functions with a single argument remain?
 
-If we allow the encoding to include data structures, then we can find an intuitive encoding. For example, instead of ◊code/inline{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code/inline{(+ number-pair)}. Then, in its body, ◊code/inline{+} would extract the operands from the pair and proceed as before.
+If we allow the encoding to include data structures, then we can find an intuitive encoding. For example, instead of ◊code{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code{(+ number-pair)}. Then, in its body, ◊code{+} would extract the operands from the pair and proceed as before.
 
-We ◊reference['pairs]{already established} an encoding for pairs and discussed how to use it to encode lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code/inline{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
+We ◊reference['pairs]{already established} an encoding for pairs and discussed how to use it to encode lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
 
-This new idea stems from two observations we have already explored: first, that functions can return functions as their return value; second, that inner functions (functions defined within other functions) have access to outer functions’ arguments. We used both of these features when defining our encoding for ◊code/inline{pair}s, for example. The following is its implementation one more time:
+This new idea stems from two observations we have already explored: first, that functions can return functions as their return value; second, that inner functions (functions defined within other functions) have access to outer functions’ arguments. We used both of these features when defining our encoding for ◊code{pair}s, for example. The following is its implementation one more time:
 
 ◊code/block/highlighted['racket]{
 (define (pair left right)
@@ -833,7 +833,7 @@ This new idea stems from two observations we have already explored: first, that 
   retriever)
 }
 
-In the listing above, the inner function ◊code/inline{retriever} has access to the arguments of the outer function ◊code/inline{pair}. Also, ◊code/inline{pair} outputs the function ◊code/inline{retriever} as its return value.
+In the listing above, the inner function ◊code{retriever} has access to the arguments of the outer function ◊code{pair}. Also, ◊code{pair} outputs the function ◊code{retriever} as its return value.
 
 ◊margin-note{The name of this idea of ◊informal{cascading functions} is ◊technical-term{currying}. In the intermediary stages, when some arguments are still missing, the function is said to be ◊technical-term{partially applied}.}
 
@@ -848,10 +848,10 @@ In the listing above, the inner function ◊code/inline{retriever} has access to
   (curry equal? 'wheatley))
  }
 
- The ◊code/inline{curry} Racket function takes a function and some arguments for it, resulting in a partially applied function. This conciseness is welcome in small functions, for example those passed into ◊code/inline{map} or ◊code/inline{filter}. Bigger programs using this technique frequently tend to be difficult to read.
+ The ◊code{curry} Racket function takes a function and some arguments for it, resulting in a partially applied function. This conciseness is welcome in small functions, for example those passed into ◊code{map} or ◊code{filter}. Bigger programs using this technique frequently tend to be difficult to read.
 }
 
-We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
+We can extend this idea to ◊informal{break apart} ◊code{pair} into a ◊informal{cascade of functions}, each receiving a single argument and returning an intermediary function:
 
 ◊code/block/highlighted['racket]{
 (define (pair left)
@@ -862,7 +862,7 @@ We can extend this idea to ◊informal{break apart} ◊code/inline{pair} into a 
   pair/intermediary)
 }
 
-The implementation above works the same as before, but the way to call it has changed. Every invocation of ◊code/inline{pair} has to go through the cascade. Instead of writing, for example, ◊code/inline{(define number-pair (pair five one))}, the following is necessary:
+The implementation above works the same as before, but the way to call it has changed. Every invocation of ◊code{pair} has to go through the cascade. Instead of writing, for example, ◊code{(define number-pair (pair five one))}, the following is necessary:
 
 ◊code/block/highlighted['racket]{
 (define number-pair/intermediary (pair five))
@@ -875,9 +875,9 @@ More compactly, we can skip giving a name to the intermediary function and call 
 (define number-pair ((pair five) one))
 }
 
-Cascades of this form extend to functions with arbitrarily many parameters. But what about functions with zero parameters? Our program includes a few of them, for example ◊code/inline{else} in ◊code/inline{sum-up-to}, which ◊informal{guards} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, which the function does not use. Also, we change the places that call such functions to pass a ◊informal{dummy} argument in. The following is an extract of ◊code/inline{sum-up-to} including this treatment:
+Cascades of this form extend to functions with arbitrarily many parameters. But what about functions with zero parameters? Our program includes a few of them, for example ◊code{else} in ◊code{sum-up-to}, which ◊informal{guards} the computation of the recursive call. In these cases, the encoding is to add a ◊informal{dummy} argument, which the function does not use. Also, we change the places that call such functions to pass a ◊informal{dummy} argument in. The following is an extract of ◊code{sum-up-to} including this treatment:
 
-◊margin-note{It is important that the omitted part ◊code/inline{___} does not refer to ◊code/inline{dummy}, otherwise we would have changed the meaning of the program.}
+◊margin-note{It is important that the omitted part ◊code{___} does not refer to ◊code{dummy}, otherwise we would have changed the meaning of the program.}
 
 ◊code/block/highlighted['racket]{
 (define (else dummy)
@@ -893,7 +893,7 @@ Cascades of this form extend to functions with arbitrarily many parameters. But 
 
 The change described in this section is pervasive. It affects most defined functions and their invocations:
 
-◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code/inline{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code/inline{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program consists of adding parentheses and ◊informal{dummy} arguments.}
+◊margin-note{In this listing, we used Racket’s syntax sugar for defining ◊informal{cascades of functions}. For example, ◊code{(define ((pair left) right) ___)} is equivalent to the construction above including ◊code{pair/intermediary}, but it saves us from having to name each intermediary function in the ◊informal{cascade}. As a result, the transformation to the program consists of adding parentheses and ◊informal{dummy} arguments.}
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -989,7 +989,7 @@ The program above is difficult to read. The only way to understand it is to retr
 
 ◊section['named-definitions]{Named Definitions}
 
-We defined functions and intermediary values using the ◊code/inline{(define ___ ___)} form all over our program. This form is convenient because it allows us to give names to concepts and computations. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other. Consider the following excerpt:
+We defined functions and intermediary values using the ◊code{(define ___ ___)} form all over our program. This form is convenient because it allows us to give names to concepts and computations. And this form is powerful. For example, using it we can define functions in any order, regardless of how they depend on each other. Consider the following excerpt:
 
 ◊code/block/highlighted['racket]{
 (define (sum-up-to number)
@@ -1001,13 +1001,13 @@ We defined functions and intermediary values using the ◊code/inline{(define __
 
 ◊margin-note{In C, for example, a direct translation of this listing would not be valid. The C compiler insists on knowing at least the function name and the types of its arguments and return—if not its implementation—before allowing other functions to use it.}
 
-When programming, it is often better to represent the high-level constructs (for example, ◊code/inline{sum-up-to}) first, and the details (for example, ◊code/inline{sub1}) later. That is why ◊code/inline{(define ___ ___)} form allows ◊code/inline{sum-up-to} to refer to ◊code/inline{sub1} even though it is only defined later. Is this an essential feature of programming languages?
+When programming, it is often better to represent the high-level constructs (for example, ◊code{sum-up-to}) first, and the details (for example, ◊code{sub1}) later. That is why ◊code{(define ___ ___)} form allows ◊code{sum-up-to} to refer to ◊code{sub1} even though it is only defined later. Is this an essential feature of programming languages?
 
-◊margin-note{We have managed to discuss theory with only a single Greek letter (◊code/inline{λ}), and it is only introduced in the last encoding. Success.}
+◊margin-note{We have managed to discuss theory with only a single Greek letter (◊code{λ}), and it is only introduced in the last encoding. Success.}
 
-◊margin-note{Racket’s ◊technical-term{anonymous functions} can receive multiple arguments and include multiple internal definitions and expressions. So the full form is more complex than ◊code/inline{(λ (argument) body)}, but these extra features are not necessary for our purposes.}
+◊margin-note{Racket’s ◊technical-term{anonymous functions} can receive multiple arguments and include multiple internal definitions and expressions. So the full form is more complex than ◊code{(λ (argument) body)}, but these extra features are not necessary for our purposes.}
 
-The answer one more time is negative. Named definitions are not an essential feature and we can ◊informal{encode them away}, in terms of simpler features. What can be simpler than a function with a name? A function with no name (◊technical-term{anonymous function}). In Racket, ◊technical-term{anonymous functions} are spelled ◊code/inline{(λ (argument) body)}, in which ◊code/inline{argument} is an identifier naming the argument that the function receives, and ◊code/inline{body} is the expression representing the computation of its return value. For example, the following two definitions are equivalent:
+The answer one more time is negative. Named definitions are not an essential feature and we can ◊informal{encode them away}, in terms of simpler features. What can be simpler than a function with a name? A function with no name (◊technical-term{anonymous function}). In Racket, ◊technical-term{anonymous functions} are spelled ◊code{(λ (argument) body)}, in which ◊code{argument} is an identifier naming the argument that the function receives, and ◊code{body} is the expression representing the computation of its return value. For example, the following two definitions are equivalent:
 
 ◊code/block/highlighted['racket]{
 (define (sub1 number)
@@ -1110,7 +1110,7 @@ To ◊informal{encode away} named definitions, we first reorder them so that the
 (pretty-print (sum-up-to five)) ;; => 15
 }
 
-Now, we can ◊emphasis{inline} the definitions where they are used. For example, ◊code/inline{zero?}’s current definition is:
+Now, we can ◊emphasis{inline} the definitions where they are used. For example, ◊code{zero?}’s current definition is:
 
 ◊code/block/highlighted['racket]{
 (define (always-false ignored-argument)
@@ -1118,7 +1118,7 @@ Now, we can ◊emphasis{inline} the definitions where they are used. For example
 ((number always-false) true)
 }
 
-We can rewrite the above such that each reference to the ◊code/inline{always-false} function is replaced with ◊code/inline{always-false}’s implementation, using anonymous functions:
+We can rewrite the above such that each reference to the ◊code{always-false} function is replaced with ◊code{always-false}’s implementation, using anonymous functions:
 
 ◊margin-note{
  While performing this rewrite, it is important that we avoid accidentally changing the meanings of the identifiers. For example, the following rewrite would be invalid:
@@ -1138,7 +1138,7 @@ We can rewrite the above such that each reference to the ◊code/inline{always-f
    true))
  }
 
- The reason is the difference between the meanings of ◊code/inline{false} in ◊code/inline{always-false}’s definition and in ◊code/inline{(λ (false) ___)}. The solution is to rename the identifier ◊code/inline{false} in ◊code/inline{(λ (false) ___)} to, for example, ◊code/inline{(λ (false2) ___)}. And rename all uses of ◊code/inline{false} in the anonymous function accordingly. Fortunately, this issue does not occur in our program.
+ The reason is the difference between the meanings of ◊code{false} in ◊code{always-false}’s definition and in ◊code{(λ (false) ___)}. The solution is to rename the identifier ◊code{false} in ◊code{(λ (false) ___)} to, for example, ◊code{(λ (false2) ___)}. And rename all uses of ◊code{false} in the anonymous function accordingly. Fortunately, this issue does not occur in our program.
 }
 
 ◊code/block/highlighted['racket]{
@@ -1147,7 +1147,7 @@ We can rewrite the above such that each reference to the ◊code/inline{always-f
 
 We are ready to see the final version of our program, in which all definitions are inlined:
 
-◊margin-note{We did not inline ◊code/inline{pretty-print} because it is external to our program. It only exists for us to inspect the result of the computation, which is a number encoded in terms of functions.}
+◊margin-note{We did not inline ◊code{pretty-print} because it is external to our program. It only exists for us to inspect the result of the computation, which is a number encoded in terms of functions.}
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: One of the most important skills when designing systems is naming the concepts appropriately. The lack of good names is what makes this final version of our program unintelligible. In particular, only use anonymous functions for small functions whose meaning is evident.}
 
@@ -1399,21 +1399,21 @@ The first and most important lesson regarding encodings is that whenever a langu
 
 When encoding numbers, we chose to use functions. With this choice, we encoded numbers not by what ◊emphasis{they are}, but by what ◊emphasis{they do}. The primary utility of numbers is to count, so our encoding for them was to repeatedly apply a function, which effectively is performing a count. This shows that data (what numbers ◊emphasis{are}) and computation (what they do ◊emphasis{do}, in our encoding) are two sides of the same coin. Our final conclusion about the dual nature of functions manifested from the start.
 
-The most complicated operation to implement in our encoded numbers was ◊code/inline{sub1}. We did it using a ◊technical-term{sliding window} over the number line. This technique is applicable to all sorts of search in series in which each element depends on the previous ones. For example, calculating the Fibonacci numbers, in which each element is the sum of the previous two.
+The most complicated operation to implement in our encoded numbers was ◊code{sub1}. We did it using a ◊technical-term{sliding window} over the number line. This technique is applicable to all sorts of search in series in which each element depends on the previous ones. For example, calculating the Fibonacci numbers, in which each element is the sum of the previous two.
 
 For the encoding of booleans, we again used an encoding in terms of what ◊emphasis{they do}, instead of what ◊emphasis{they are}. The purpose of booleans in to choose between two options—◊technical-term{true} and ◊technical-term{false}—so our encoding for them were functions that received two arguments and chose one of them.
 
-While encoding conditionals (◊code/inline{if}), we had a problem due to the order in which Racket evaluates programs. Function arguments are evaluated to values before the function starts to execute. In the case of our program, this led to infinite recursion and a non-terminating program. The solution was to ◊informal{wrap} the computations in functions to ◊informal{delay} them. This technique is useful in situations when a computation does not need to happen immediately. For example, calls to a logger might include an expensive computation that should only occur in ◊technical-term{debug} mode. In this case, the call might be ◊informal{delayed} by ◊informal{wrapping} it in a function, which the logger only calls if its log-level is ◊technical-term{debug}.
+While encoding conditionals (◊code{if}), we had a problem due to the order in which Racket evaluates programs. Function arguments are evaluated to values before the function starts to execute. In the case of our program, this led to infinite recursion and a non-terminating program. The solution was to ◊informal{wrap} the computations in functions to ◊informal{delay} them. This technique is useful in situations when a computation does not need to happen immediately. For example, calls to a logger might include an expensive computation that should only occur in ◊technical-term{debug} mode. In this case, the call might be ◊informal{delayed} by ◊informal{wrapping} it in a function, which the logger only calls if its log-level is ◊technical-term{debug}.
 
 ◊margin-note{This capability to ◊informal{remember} that functions have is related to ◊technical-term{lexical scoping}. Languages with ◊technical-term{dynamic scoping} (for example, Emacs Lisp) behave differently and the result would not be the same in them.}
 
 The encoding of pairs used an important capability of functions: they ◊informal{remember} the values they had in scope when defined. A fundamental part of this encoding were the inner functions that ◊informal{remembered} the arguments of the outer functions even after the outer functions had returned.
 
-Another interesting technique we introduced in the encoding for pairs is that, when a function does not have enough information to act, it can delegate to a helper function, which it receives as an argument. In the particular case of pairs, the ◊code/inline{retriever} did not know which element of the pair (◊code/inline{left} or ◊code/inline{right}) to retrieve. So it received a ◊code/inline{selector} function as an argument, transferring the responsibility of deciding which element to retrieve to the calling site. The calling site knows which element of the pair it needs, and that is why this technique works.
+Another interesting technique we introduced in the encoding for pairs is that, when a function does not have enough information to act, it can delegate to a helper function, which it receives as an argument. In the particular case of pairs, the ◊code{retriever} did not know which element of the pair (◊code{left} or ◊code{right}) to retrieve. So it received a ◊code{selector} function as an argument, transferring the responsibility of deciding which element to retrieve to the calling site. The calling site knows which element of the pair it needs, and that is why this technique works.
 
-The final lesson from the encoding of pairs is that any data structure is, in its essence, just a construct to couple data together. There is a wide variety of data structures to solve particular issues, for example, optimizing access time for certain elements. But their fundamental purpose is still simple: couple data together. Moreover, it is possible to construct sophisticated data structures from simpler ones—for example, construct lists out of pairs. To solve a complex problem, in many cases it is better to build more sophisticated data structures in which the problem can be phrased more naturally than to try to solve the problem directly. This was precisely the approach we took when introducing pairs in ◊code/inline{sub1}.
+The final lesson from the encoding of pairs is that any data structure is, in its essence, just a construct to couple data together. There is a wide variety of data structures to solve particular issues, for example, optimizing access time for certain elements. But their fundamental purpose is still simple: couple data together. Moreover, it is possible to construct sophisticated data structures from simpler ones—for example, construct lists out of pairs. To solve a complex problem, in many cases it is better to build more sophisticated data structures in which the problem can be phrased more naturally than to try to solve the problem directly. This was precisely the approach we took when introducing pairs in ◊code{sub1}.
 
-The encoding for recursion was another instance of the technique “if a function does not have enough information to act, it should receive another function that does as an argument.” In this case, the function that needs more information and the function that has the information happen to be the same. Even the ◊technical-term{tying the knot} technique is an example of this. It relies on mutation of the program state (◊code/inline{set!}), and mutation can be interpreted as an extra argument to every function, carrying the global program state. When using the ◊technical-term{tying the knot} technique, the global program state includes the ◊informal{function that has the necessary information to act}.
+The encoding for recursion was another instance of the technique “if a function does not have enough information to act, it should receive another function that does as an argument.” In this case, the function that needs more information and the function that has the information happen to be the same. Even the ◊technical-term{tying the knot} technique is an example of this. It relies on mutation of the program state (◊code{set!}), and mutation can be interpreted as an extra argument to every function, carrying the global program state. When using the ◊technical-term{tying the knot} technique, the global program state includes the ◊informal{function that has the necessary information to act}.
 
 ◊margin-note{Functional programming languages are increasingly popular, and some of their features appear in traditionally non-functional languages—for example, Java 8 includes closures. This contributes to blur the line between paradigms, rendering obsolete distinctions such as ◊technical-term{object-oriented} and ◊technical-term{functional}.}
 

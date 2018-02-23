@@ -7,7 +7,7 @@
 
 ◊margin-note{I personally experienced all the issues listed here in a recent email migration.}
 
-Migration tools in email clients do not work. Most applications, for example, ◊link["https://www.mozilla.org/en-US/thunderbird/"]{Thunderbird} and ◊link["https://support.apple.com/mail"]{Apple Mail}, come with assistants to import the email archives from other applications. These features do not work: they lose email; concatenate all history in a single giant email; create a new mailbox for each individual message, breaking the organization system; and so forth. This is frustrating, because email migration was supposed to be a solved problem: standard email exchange formats do exist, ◊code/inline{.eml} and ◊code/inline{.mbox} files being the most common examples. Unfortunately, problems arise because every application has a slightly different understanding of those formats. This is a ◊emphasis{ridiculous} problem.
+Migration tools in email clients do not work. Most applications, for example, ◊link["https://www.mozilla.org/en-US/thunderbird/"]{Thunderbird} and ◊link["https://support.apple.com/mail"]{Apple Mail}, come with assistants to import the email archives from other applications. These features do not work: they lose email; concatenate all history in a single giant email; create a new mailbox for each individual message, breaking the organization system; and so forth. This is frustrating, because email migration was supposed to be a solved problem: standard email exchange formats do exist, ◊code{.eml} and ◊code{.mbox} files being the most common examples. Unfortunately, problems arise because every application has a slightly different understanding of those formats. This is a ◊emphasis{ridiculous} problem.
 
 Besides assistants in email clients themselves, there exist many tools for converting between message formats. Unfortunately, they generally are not well maintained or paid products. However, there is an alternative, simple solution: while email clients might not agree on the storage formats, they must all talk the same protocols to email servers! The source client can upload messages to the server, and the target client can download them. This method might not preserve tags and other client-specific advanced features. But it preserves the ◊emphasis{read} status, the folder structure, and other fundamental attributes of email archives. Moreover, this method is guaranteed to work regardless of the email clients involved.
 
@@ -41,7 +41,7 @@ $ mkdir ◊placeholder{migration-directory}
 
 ◊margin-note{See the ◊reference['dovecot-configuration-explained]{appendix} for more details on this configuration file.}
 
-Configure Dovecot with a ◊path{dovecot.conf} file, by  replacing the ◊code/inline{◊placeholder{placeholders}} in the following template:
+Configure Dovecot with a ◊path{dovecot.conf} file, by  replacing the ◊code{◊placeholder{placeholders}} in the following template:
 
 ◊file-listing["/usr/local/etc/dovecot/dovecot.conf"]{
 protocols = imap
@@ -76,27 +76,27 @@ mail_debug = yes
 verbose_ssl = yes
 }
 
-Use ◊code/inline{id(1)} to identify the ◊code/inline{◊placeholder{user}} and  the ◊code/inline{◊placeholder{group}}. For example, in my case, the ◊code/inline{◊placeholder{user}} is ◊code/inline{leafac} and the ◊code/inline{◊placeholder{group}} is ◊code/inline{staff}:
+Use ◊code{id(1)} to identify the ◊code{◊placeholder{user}} and  the ◊code{◊placeholder{group}}. For example, in my case, the ◊code{◊placeholder{user}} is ◊code{leafac} and the ◊code{◊placeholder{group}} is ◊code{staff}:
 
 ◊code/block{
 $ id
 uid=501(leafac) gid=20(staff) [...]
 }
 
-Choose an arbitrary ◊code/inline{◊placeholder{password}} and use the ◊path{◊placeholder{migration-directory}} created during ◊reference['setup]{setup}.
+Choose an arbitrary ◊code{◊placeholder{password}} and use the ◊path{◊placeholder{migration-directory}} created during ◊reference['setup]{setup}.
 
 ◊section['migrate]{Migrate}
 
 Start the migration email server:
 
 ◊margin-note{
-  The path to the ◊code/inline{dovecot(1)} executable depends on the installation. The given path works for the installation using Homebrew, another common location is ◊path{/usr/sbin/dovecot}.
+  The path to the ◊code{dovecot(1)} executable depends on the installation. The given path works for the installation using Homebrew, another common location is ◊path{/usr/sbin/dovecot}.
 
-  The call to ◊code/inline{ulimit} is necessary because Dovecot wants to be able to open more than 256 files, the default limit.
+  The call to ◊code{ulimit} is necessary because Dovecot wants to be able to open more than 256 files, the default limit.
 
-  The call to ◊code/inline{sudo} is necessary because Dovecot needs to bind to a network port below 1024—specifically, the port for IMAP, 143.
+  The call to ◊code{sudo} is necessary because Dovecot needs to bind to a network port below 1024—specifically, the port for IMAP, 143.
 
-  The ◊code/inline{-F} flag for Dovecot tells it to run on the foreground, instead of becoming a daemon. This makes it easy to see the logs as the server runs, and to kill it with ◊keyboard{Ctrl} + ◊keyboard{C}.
+  The ◊code{-F} flag for Dovecot tells it to run on the foreground, instead of becoming a daemon. This makes it easy to see the logs as the server runs, and to kill it with ◊keyboard{Ctrl} + ◊keyboard{C}.
 }
 
 ◊code/block{
@@ -121,12 +121,12 @@ $ sudo doveadm reload
 
 ◊table{
   ◊table/body{
-    ◊table/row{◊table/data{Email address} ◊table/data{◊code/inline{◊placeholder{user}@localhost}}}
-    ◊table/row{◊table/data{Server} ◊table/data{◊code/inline{localhost}}}
+    ◊table/row{◊table/data{Email address} ◊table/data{◊code{◊placeholder{user}@localhost}}}
+    ◊table/row{◊table/data{Server} ◊table/data{◊code{localhost}}}
     ◊table/row{◊table/data{Protocol} ◊table/data{IMAP}}
     ◊table/row{◊table/data{Port} ◊table/data{143}}
-    ◊table/row{◊table/data{User} ◊table/data{◊code/inline{◊placeholder{user}}}}
-    ◊table/row{◊table/data{Password} ◊table/data{◊code/inline{◊placeholder{password}}}}
+    ◊table/row{◊table/data{User} ◊table/data{◊code{◊placeholder{user}}}}
+    ◊table/row{◊table/data{Password} ◊table/data{◊code{◊placeholder{password}}}}
   }
 }
 

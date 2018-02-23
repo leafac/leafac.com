@@ -507,12 +507,12 @@
 
 ;; Code
 
-(define-component code/inline
+(define-component code
   #:html (default-tag-function 'code)
   #:css (css-expr [code ,@font-family/monospace]))
 
 (define-component (code/block . elements)
-  #:html ((default-tag-function 'pre) (apply code/inline elements))
+  #:html ((default-tag-function 'pre) (apply code elements))
   #:css
   (css-expr
    [pre

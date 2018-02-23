@@ -87,15 +87,15 @@ We need data structures to represent the pegs and the board. Normally one would 
   [board ::= ([position ...] ...)])
 }
 
-◊margin-note{The ◊code/inline{position} data structure is analogous to an enumeration.}
+◊margin-note{The ◊code{position} data structure is analogous to an enumeration.}
 
-The code above defines two data structures. The first, ◊code/inline{position}, represents a position on the board. It can be one of following: ◊code/inline{█} is an uninitialized position that only serves as padding and is not really part of the board; ◊code/inline{○} is an empty position; and ◊code/inline{●} is a position containing a peg.
+The code above defines two data structures. The first, ◊code{position}, represents a position on the board. It can be one of following: ◊code{█} is an uninitialized position that only serves as padding and is not really part of the board; ◊code{○} is an empty position; and ◊code{●} is a position containing a peg.
 
-◊margin-note{In Racket, different kinds of brackets—◊code/inline{()}, ◊code/inline{[]} and ◊code/inline{{}}—mean the same. The only constraint is that open and close brackets match; ◊code/inline{(]} is invalid. Which bracket to use is a matter of readability.}
+◊margin-note{In Racket, different kinds of brackets—◊code{()}, ◊code{[]} and ◊code{{}}—mean the same. The only constraint is that open and close brackets match; ◊code{(]} is invalid. Which bracket to use is a matter of readability.}
 
-◊margin-note{The ellipsis (◊code/inline{...}) in PLT Redex are similar to the Kleene star (◊code/inline{*}) in regular expressions.}
+◊margin-note{The ellipsis (◊code{...}) in PLT Redex are similar to the Kleene star (◊code{*}) in regular expressions.}
 
-The second data structure is the ◊code/inline{board}, represented as a matrix of ◊code/inline{position}s, or, more specifically, a list of lists of ◊code/inline{position}s. In PLT Redex, the ellipsis (◊code/inline{...}) means “the previous element repeated any number of times.” So ◊code/inline{[position ...]} means a list of ◊code/inline{position}s, and ◊code/inline{([position ...] ...)} means a list of lists of ◊code/inline{position}s.
+The second data structure is the ◊code{board}, represented as a matrix of ◊code{position}s, or, more specifically, a list of lists of ◊code{position}s. In PLT Redex, the ellipsis (◊code{...}) means “the previous element repeated any number of times.” So ◊code{[position ...]} means a list of ◊code{position}s, and ◊code{([position ...] ...)} means a list of lists of ◊code{position}s.
 
 ◊margin-note{
  Even ill-formed boards like the following are valid terms in this data structure definition:
@@ -163,7 +163,7 @@ We need to specify how pegs can to move on the board. We do this by defining a f
 
 ◊margin-note{The code closely resembles the ◊reference['rules-of-the-game]{game specification}.}
 
-The rule above starts with ◊code/inline{-->} to indicate that it is a transformation. Then it states that, if ◊code/inline{● ● ○} exists anywhere on the board, then the peg on the left can jump to the right—over the peg in the middle—resulting in ◊code/inline{○ ○ ●}. The occurrences of ◊code/inline{any_*} are just preserving the rest of the board unaffected. Finally, the rule is given the name ◊code/inline{→}.
+The rule above starts with ◊code{-->} to indicate that it is a transformation. Then it states that, if ◊code{● ● ○} exists anywhere on the board, then the peg on the left can jump to the right—over the peg in the middle—resulting in ◊code{○ ○ ●}. The occurrences of ◊code{any_*} are just preserving the rest of the board unaffected. Finally, the rule is given the name ◊code{→}.
 
 The following is the function with all the rules in the game:
 
@@ -226,9 +226,9 @@ The following is the function with all the rules in the game:
         ↑)))
 }
 
-The function above starts by stating that it works over the language ◊code/inline{peg-solitaire}, more specifically over the ◊code/inline{board}s in that language. Then follow the rules as discussed above. The only construct not explained thus far are the named ellipsis (◊code/inline{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
+The function above starts by stating that it works over the language ◊code{peg-solitaire}, more specifically over the ◊code{board}s in that language. Then follow the rules as discussed above. The only construct not explained thus far are the named ellipsis (◊code{..._1}); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.
 
-The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel:
+The function ◊code{move} is ◊emphasis{not} performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel:
 
 ◊code/block/highlighted['racket]{
 > (apply-reduction-relation move (term initial-board))
@@ -264,7 +264,7 @@ The function ◊code/inline{move} is ◊emphasis{not} performing regular pattern
 
 ◊margin-note{In accurate mathematical terms, a reduction relation is not a function, but a general relation, because of this non-deterministic behavior. But thinking of them as functions that execute in different universes is a good approximation.}
 
-One way of thinking about ◊code/inline{move} is that it is a function returning multiple values—or, equivalently, a set of values. Another way of thinking about ◊code/inline{move} is that it is a function living in multiple universes. When multiple patterns match the input, functions have to decide which path (or paths) to take. In most programming languages featuring pattern matching, the first pattern that matches takes precedence over the rest, but ◊code/inline{move} explores all of them by creating multiple universes and following one path in each. This model of computation is called ◊technical-term{non-deterministic computation} and PLT Redex gives the name ◊technical-term{reduction relations} to these super-powered functions capable of non-deterministic computations.
+One way of thinking about ◊code{move} is that it is a function returning multiple values—or, equivalently, a set of values. Another way of thinking about ◊code{move} is that it is a function living in multiple universes. When multiple patterns match the input, functions have to decide which path (or paths) to take. In most programming languages featuring pattern matching, the first pattern that matches takes precedence over the rest, but ◊code{move} explores all of them by creating multiple universes and following one path in each. This model of computation is called ◊technical-term{non-deterministic computation} and PLT Redex gives the name ◊technical-term{reduction relations} to these super-powered functions capable of non-deterministic computations.
 
 ◊section['game-play]{Game Play}
 
@@ -297,13 +297,13 @@ First, we encode the definition of a winning board:
   (= pegs-left-on-board 1))
 }
 
-◊margin-note{The function ◊code/inline{curry} is performing ◊technical-term{partial application}. The function ◊code/inline{equal?} takes two arguments, so ◊code/inline{curry} is storing the first argument—the symbol ◊code/inline{●}—and yielding a function that takes the second argument for ◊code/inline{equal?}. This function that ◊code/inline{curry} yields is the predicate used for counting.}
+◊margin-note{The function ◊code{curry} is performing ◊technical-term{partial application}. The function ◊code{equal?} takes two arguments, so ◊code{curry} is storing the first argument—the symbol ◊code{●}—and yielding a function that takes the second argument for ◊code{equal?}. This function that ◊code{curry} yields is the predicate used for counting.}
 
 This function works by flattening the board—turning the matrix (or list of lists) into a single long list—and counting the number of pegs. Then it checks if this count is equal to one.
 
 Finally, we need a function that traverses the graph. We want not only to determine whether a solution exists, but also to keep track of the path we followed in the graph to reach the solution, which is the sequence of winning moves:
 
-◊margin-note{There is no need to understand every detail of how ◊code/inline{search-for-solution} works. It uses ◊link["https://docs.racket-lang.org/guide/qq.html"]{quasiquoting} to build lists, ◊link["https://docs.racket-lang.org/guide/match.html"]{pattern matching} to destruct them, and other Racket features beyond the scope of the article.}
+◊margin-note{There is no need to understand every detail of how ◊code{search-for-solution} works. It uses ◊link["https://docs.racket-lang.org/guide/qq.html"]{quasiquoting} to build lists, ◊link["https://docs.racket-lang.org/guide/match.html"]{pattern matching} to destruct them, and other Racket features beyond the scope of the article.}
 
 ◊code/block/highlighted['racket]{
 (define (search-for-solution board)
@@ -322,7 +322,7 @@ Finally, we need a function that traverses the graph. We want not only to determ
   (step `("initial" ,board)))
 }
 
-The function ◊code/inline{search-for-solution} works by recursion, accumulating the path it has been through. Its most unusual feature is the use of ◊code/inline{ormap}, which guarantees we stop the search after finding the first solution. The following are examples of using ◊code/inline{search-for-solution} on sections of the board:
+The function ◊code{search-for-solution} works by recursion, accumulating the path it has been through. Its most unusual feature is the use of ◊code{ormap}, which guarantees we stop the search after finding the first solution. The following are examples of using ◊code{search-for-solution} on sections of the board:
 
 ◊code/block/highlighted['racket]{
 > (search-for-solution (term ([● ● ○])))
@@ -336,9 +336,9 @@ The function ◊code/inline{search-for-solution} works by recursion, accumulatin
 
 ◊margin-note{Returning false when no solutions are available is a common Racket pattern, inherited from its Scheme origins.}
 
-The snippet above demonstrates how ◊code/inline{search-for-solution} finds a solution and returns the whole path to reconstruct it. If the board is unsolvable, then ◊code/inline{search-for-solution} returns ◊technical-term{false} (◊code/inline{#f}).
+The snippet above demonstrates how ◊code{search-for-solution} finds a solution and returns the whole path to reconstruct it. If the board is unsolvable, then ◊code{search-for-solution} returns ◊technical-term{false} (◊code{#f}).
 
-Finally, we can call ◊code/inline{search-for-solution} on the full board and solve Peg Solitaire:
+Finally, we can call ◊code{search-for-solution} on the full board and solve Peg Solitaire:
 
 ◊code/block/highlighted['racket]{
 > (search-for-solution (term initial-board))
