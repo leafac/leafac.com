@@ -505,7 +505,7 @@
 (define-component (figure/svg path [caption ""])
   #:html (figure (svg path) (figure/caption caption)))
 
-;; ---------------------------------------------------------------------------------------------------
+;; Code
 
 (define-component code/inline
   #:html (default-tag-function 'code)
@@ -522,18 +522,17 @@
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:padding ,text-indent
-    #:padding (apply calc (- ,text-indent ,ruler/thin))]))
+    #:padding-left (apply calc (- ,text-indent ,ruler/thin))]))
 
 (define-component (code/block/highlighted language . elements)
   #:html
-  (define code (string-join elements ""))
+  (define code (string-append* elements))
   (define digest (sha1 (open-input-string code)))
   (define path/basedir "compiled/code-block-highlighted/")
   (define path/full (~a path/basedir digest ".html"))
   (define code/highlighted
     (cond
-      [(file-exists? path/full)
-       (file->string path/full)]
+      [(file-exists? path/full) (file->string path/full)]
       [else
        (define code/highlighted
          (with-input-from-string code
@@ -576,6 +575,8 @@
 
 (define-component path
   #:html (default-tag-function 'code #:class "path"))
+
+;; ---------------------------------------------------------------------------------------------------
 
 (define-component full-width
   #:html (default-tag-function 'div #:class "full-width")
