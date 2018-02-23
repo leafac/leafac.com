@@ -17,8 +17,7 @@ Consider the following program:
 
 ◊margin-note{The same program is given in three popular programming languages to help people who can read them get started. But, from now on, we proceed only in Racket. Racket is a convenient language for this article, because it allows us to redefine even core constructs like operators (for example, ◊code{+}) and control-flow primitives (for example, ◊code{if}). But, convenience aside, there is nothing special about Racket. Any dynamically typed language in which functions are values would work as well. This includes Ruby, Python, JavaScript, and many more. This does not include C, for example, in which pointers to functions are values, but functions themselves are not. It also does not include OCaml or Haskell, because while functions are values in these languages, their static type systems are not expressive enough for some of the programs in this article. There are static type systems with the necessary expressiveness, but they are rare.}
 
-◊code/block[#:language 'racket]{
-;; Racket
+◊code/block[#:language 'racket #:caption "Racket"]{
 (define (sum-up-to number)
   (if (zero? number)
       0
@@ -27,8 +26,7 @@ Consider the following program:
 (sum-up-to 5)
 }
 
-◊code/block[#:language 'ruby]{
-# Ruby
+◊code/block[#:language 'ruby #:caption "Ruby"]{
 def sum_up_to number
   if number.zero?
     0
@@ -40,8 +38,7 @@ end
 sum_up_to 5
 }
 
-◊code/block[#:language 'java]{
-// Java
+◊code/block[#:language 'java #:caption "Java"]{
 public class Main {
   public static int sumUpTo(int number) {
     if (number == 0) {

@@ -110,9 +110,13 @@
 
 (define space/none 0)
 (define space/small '0.5rem)
+(define space/small/negative '-0.5rem)
 (define space/medium '1rem)
+(define space/medium/negative '-1rem)
 (define space/large '1.5rem)
+(define space/large/negative '-1.5rem)
 (define space/extra-large '2rem)
+(define space/extra-large/negative '-2rem)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEXT
@@ -511,40 +515,52 @@
   #:html (default-tag-function 'code)
   #:css (css-expr [code ,@font-family/monospace]))
 
-(define-component (code/block #:language [language #f] . elements)
+(define-component (code/block #:language [language #f] #:caption [caption #f] . elements)
   #:html
-  (cond
-    [language
-     (define code (string-append* elements))
-     (define digest (sha1 (open-input-string code)))
-     (define path/basedir "compiled/code-block-highlighted/")
-     (define path/full (~a path/basedir language "-" digest  ".html"))
-     (define code/highlighted
-       (cond
-         [(file-exists? path/full) (file->string path/full)]
-         [else
-          (define code/highlighted
-            (with-input-from-string code
-              (λ ()
-                (with-output-to-string
-                  (λ ()
-                    (system (~a "pygmentize -f html -l " language)))))))
-          (make-directory* path/basedir)
-          (with-output-to-file path/full
-            (λ () (display code/highlighted)))
-          code/highlighted]))
-     (string->xexpr code/highlighted)]
-    [else ((default-tag-function 'pre) (apply code elements))])
+  ((default-tag-function '@)
+   (if caption
+       ((default-tag-function 'div #:class "code-block-caption")
+        ((default-tag-function 'span) caption))
+       "")
+   (cond
+     [language
+      (define code (string-append* elements))
+      (define digest (sha1 (open-input-string code)))
+      (define path/basedir "compiled/code-block/")
+      (define path/full (~a path/basedir language "-" digest  ".html"))
+      (define code/highlighted
+        (cond
+          [(file-exists? path/full) (file->string path/full)]
+          [else
+           (define code/highlighted
+             (with-input-from-string code
+               (λ ()
+                 (with-output-to-string
+                   (λ ()
+                     (system (~a "pygmentize -f html -l " language)))))))
+           (make-directory* path/basedir)
+           (with-output-to-file path/full
+             (λ () (display code/highlighted)))
+           code/highlighted]))
+      (string->xexpr code/highlighted)]
+     [else ((default-tag-function 'pre) (apply code elements))]))
   #:css
   (css-expr
+   [.code-block-caption
+    #:margin (#:top ,space/small
+              #:bottom ,space/small/negative
+              #:bottom (apply calc (- ,space/small/negative 1px)))
+    [(> & span)
+     #:display inline-block
+     #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))
+     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))]]
    [pre
     ,@insertion
     ,@font-family/monospace
     #:font-size ,font-size/extra-small
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-    #:padding ,text-indent
-    #:padding-left (apply calc (- ,text-indent ,ruler/thin))]))
+    #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
 
 (define-component (file-listing a-path #:language [language #f] . elements)
   #:html ((default-tag-function 'div #:class "file-listing")
