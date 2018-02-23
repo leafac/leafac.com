@@ -2,6 +2,6 @@
 
 ◊define-meta[title]{500 Internal Server Error}
 
-◊margin-note{◊figure{◊svg{◊source-path{/assets/images/sad-face.svg}}}}
+◊margin-note{◊figure/svg{◊source-path{/assets/images/sad-face.svg}}}
 
 A serious error happened, please ◊email[◊(dict-ref personal-data 'personal-email)]{report it}.

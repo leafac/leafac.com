@@ -5,7 +5,7 @@
 
 ◊margin-note{This article assumes prior knowledge on programming in general and some exposure to functional programming in particular—specially immutable data structures and pattern matching. Racket experience is helpful, but not mandatory.}
 
-◊margin-note{◊figure{◊svg{images/peg.svg}◊figure/caption{A peg. Solitary.}}}
+◊margin-note{◊figure/svg["images/peg.svg"]{A peg. Solitary.}}
 
 ◊link["https://redex.racket-lang.org/"]{PLT Redex} is a ◊link["https://racket-lang.org/"]{Racket} library for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, PLT Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
@@ -274,7 +274,7 @@ We can use the visualization tools that come with PLT Redex to play Peg Solitair
 > (stepper move (term initial-board))
 }
 
-◊image["images/game-play.gif"]{A sample game play.}
+◊figure/image["images/game-play.gif"]{A sample game play.}
 
 ◊section['winning]{Winning}
 
@@ -284,7 +284,7 @@ Now that we can play Peg Solitaire, a natural question is: can we use what we ha
 > (traces move (term initial-board))
 }
 
-◊image["images/search-space.gif"]{The search space.}
+◊figure/image["images/search-space.gif"]{The search space.}
 
 Starting with the initial board—on the top left—we repeatedly follow every possible move. The result is a graph of boards which we can traverse looking for a board in the winning state, with a single peg left. The path in the graph from the initial board to the winning board is the sequence of moves to win the game.
 

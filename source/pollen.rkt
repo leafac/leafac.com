@@ -492,12 +492,18 @@
   #:css (css-expr [figcaption #:font-style italic]))
 
 (define-component (image path [caption ""])
-  #:html (figure ((default-tag-function 'img) #:src path #:alt caption) (figure/caption caption))
+  #:html ((default-tag-function 'img) #:src path #:alt caption)
   #:css (css-expr [img #:max-width 100%]))
+
+(define-component (figure/image path [caption ""])
+  #:html (figure (image path caption) (figure/caption caption)))
 
 (define-component (svg path)
   #:html (string->xexpr (file->string path))
   #:css (css-expr [svg #:max-width 100% #:height auto]))
+
+(define-component (figure/svg path [caption ""])
+  #:html (figure (svg path) (figure/caption caption)))
 
 ;; ---------------------------------------------------------------------------------------------------
 

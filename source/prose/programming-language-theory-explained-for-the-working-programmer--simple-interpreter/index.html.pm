@@ -70,7 +70,7 @@ A more interesting corner case occurs when a variable name is reused not by func
 }
 
 ◊margin-note{
- ◊figure{◊svg{images/shadowing.svg}}
+ ◊figure/svg{images/shadowing.svg}
 
  This phenomenon is known as ◊technical-term{shadowing}, because the argument of the inner function ◊technical-term{shadows} the argument of the outer function. In the inner function body there is no way to refer to the outer function argument.
 }
@@ -210,7 +210,7 @@ In ◊code/inline{syntactically-valid?}, the data structure which is ◊technica
 
 ◊margin-note{The ◊code/inline{match} form is similar to multiway branches (for example, ◊code/inline{switch} and ◊code/inline{case}) in other programming languages. And it works with arbitrary ◊technical-term{patterns} for arbitrary data structures, the same as ◊code/inline{match-define}.}
 
-◊figure{◊svg{images/match.svg}}
+◊figure/svg{images/match.svg}
 
 The ◊technical-term{pattern match} with the ◊code/inline{match} form works by matching the ◊technical-term{subject} with each of the ◊technical-term{patterns}, in order. The first ◊technical-term{pattern} that matches determines which ◊technical-term{match clause} has its ◊technical-term{body} executed. In the example above, the ◊technical-term{subject} and the ◊technical-term{patterns} are simple data: numbers. The first ◊technical-term{match clause} whose ◊technical-term{pattern} matches the ◊technical-term{subject} is ◊code/inline{[5 "five"]}, so the ◊technical-term{result} of the ◊technical-term{pattern match} is the ◊technical-term{clause body} ◊code/inline{"five"}.
 
@@ -749,7 +749,7 @@ Our interpreter already handles this program correctly. But it does not work for
 
 ◊margin-note{The arrows above the program represent variable bindings; the arrows below the program represent data flow.}
 
-◊figure{◊svg{images/shadowing-interpretation.svg}}
+◊figure/svg{images/shadowing-interpretation.svg}
 
 We expect the result of this program to be ◊code/inline{(λ (z) z)}, and not ◊code/inline{(λ (y) y)}. But the current implementation outputs the wrong value:
 
