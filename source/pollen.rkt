@@ -458,7 +458,7 @@
 (define-component (phone number)
   #:html ((default-tag-function '@) number))
 
-;; Margin note
+;; Margin notes
 
 (define-component margin-note
   #:html (default-tag-function 'aside)
@@ -481,7 +481,7 @@
 ;; TODO: Add ‘foot-note’.
 ;; TODO: Generalize ‘side-note’. (But with better names than these.)
 
-;; ---------------------------------------------------------------------------------------------------
+;; Figures
 
 (define-component figure
   #:html (default-tag-function 'figure)
@@ -489,17 +489,17 @@
 
 (define-component figure/caption
   #:html (default-tag-function 'figcaption)
-  #:css (css-expr [figcaption #:font-style italic #:text-align center]))
+  #:css (css-expr [figcaption #:font-style italic]))
 
 (define-component (image path [caption ""])
-  #:html (figure ((default-tag-function 'div #:class "image-in-figure")
-                  ((default-tag-function 'img) #:src path #:alt caption))
-                 (figure/caption caption))
-  #:css (css-expr [img #:max-width 100%] [.image-in-figure #:text-align center]))
+  #:html (figure ((default-tag-function 'img) #:src path #:alt caption) (figure/caption caption))
+  #:css (css-expr [img #:max-width 100%]))
 
 (define-component (svg path)
   #:html (string->xexpr (file->string path))
   #:css (css-expr [svg #:max-width 100% #:height auto]))
+
+;; ---------------------------------------------------------------------------------------------------
 
 (define-component code/inline
   #:html (default-tag-function 'code)
