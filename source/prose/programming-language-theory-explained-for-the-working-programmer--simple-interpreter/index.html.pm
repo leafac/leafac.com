@@ -264,8 +264,7 @@ Now that ◊code{syntactically-valid?} can distinguish between the different for
 
 For the first condition, we can use Racket’s ◊code{symbol?} function, as we did before for variable references. For the second, we can call ◊code{syntactically-valid?} recursively on the ◊code{program-fragment} which is the anonymous function ◊code{body}:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (syntactically-valid? program-fragment)
   (match program-fragment
     [`(λ (,argument-name) ,body)
@@ -275,7 +274,6 @@ For the first condition, we can use Racket’s ◊code{symbol?} function, as we 
        ]
     [`,variable
      (symbol? variable)]))
- }
 }
 
 To test our implementation, we use the syntactically valid anonymous function ◊code{(λ (x) x)} and the syntactically ◊emphasis{invalid} anonymous function ◊code{(λ (x y) x)}, which has more arguments than the one allowed:
@@ -291,8 +289,7 @@ To test our implementation, we use the syntactically valid anonymous function �
 
 To complete the implementation of ◊code{syntactically-valid?}, we consider the case of function applications. The condition for syntactical validity in this case is just that both ◊code{function} and ◊code{argument} are syntactically valid themselves, and we can use ◊code{syntactically-valid?} recursively to check for that:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (syntactically-valid? program-fragment)
   (match program-fragment
     [`(λ (,argument-name) ,body)
@@ -301,7 +298,6 @@ To complete the implementation of ◊code{syntactically-valid?}, we consider the
      (and (syntactically-valid? function) (syntactically-valid? argument))]
     [`,variable
      (symbol? variable)]))
- }
 }
 
 To test this final case, we again consider one syntactically valid and one syntactically ◊emphasis{invalid} ◊code{program-fragment}:
@@ -388,8 +384,7 @@ Coming back to the case of function application, consider the program ◊code{(f
 
 In general, the ◊code{free-variables} of a function application are those from the ◊code{function} expression, ◊emphasis{and} those from the ◊code{argument} expression. We can call ◊code{free-variables} recursively on the ◊code{function} and ◊code{argument} expressions and union the resulting sets:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (free-variables program-fragment)
   (match program-fragment
     #;[`(λ (,argument-name) ,body)
@@ -399,7 +394,6 @@ In general, the ◊code{free-variables} of a function application are those from
      (set-union (free-variables function) (free-variables argument))]
     [`,variable
      (set variable)]))
- }
 }
 
 Let us test this implementation:
@@ -413,8 +407,7 @@ Finally, we consider the case of anonymous function definitions. In the program 
 
 In general, the set of free variables for an anonymous function definition is the set of free variables in its body ◊emphasis{minus} the variable it defines:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (free-variables program-fragment)
   (match program-fragment
     [`(λ (,argument-name) ,body)
@@ -423,7 +416,6 @@ In general, the set of free variables for an anonymous function definition is th
      (set-union (free-variables function) (free-variables argument))]
     [`,variable
      (set variable)]))
- }
 }
 
 We can test this case with the examples mentioned above:
@@ -585,8 +577,7 @@ But there are more details regarding function application that we need to consid
 
 To fix this, we check if the ◊code{variable} we found in the ◊code{body} is equal to the ◊code{argument-name}. If it is, then we substitute, otherwise, we leave it unaltered:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (substitute body argument-name argument)
   (match body
     #;[`(λ (,other-argument-name) ,other-body)
@@ -597,7 +588,6 @@ To fix this, we check if the ◊code{variable} we found in the ◊code{body} is 
        ]
     [`,variable
      (if (equal? argument-name variable) argument variable)]))
- }
 }
 
 With this modification, ◊code{substitute} works as intended:
@@ -609,18 +599,17 @@ With this modification, ◊code{substitute} works as intended:
 
 For the rest of its implementation, ◊code{substitute} just calls itself recursively on the parts of the given ◊code{body}. The effect is that it traverses the data structure representing our program fragment. This guarantees that every occurrence of ◊code{argument-name} in ◊code{body} is substituted, even those that occur deeper in the data structure:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (substitute body argument-name argument)
   (match body
     [`(λ (,other-argument-name) ,other-body)
-     `(λ (,other-argument-name) ,(substitute other-body argument-name argument))]
+     `(λ (,other-argument-name)
+        ,(substitute other-body argument-name argument))]
     [`(,function ,other-argument)
      `(,(substitute function argument-name argument)
        ,(substitute other-argument argument-name argument))]
     [`,variable
      (if (equal? argument-name variable) argument variable)]))
- }
 }
 
 The following listing includes examples of uses of ◊code{substitute}. These examples require traversing the ◊code{body} with the recursive calls to ◊code{substitute} we implemented above, because the ◊code{argument-name} ◊code{x} occurs deeper in the ◊code{body}. In the first example, it occurs inside an anonymous function definition; and, in the second example, it occurs inside a function application:
@@ -642,8 +631,7 @@ In our next program, the ◊code{function} to be applied is not immediately avai
 
 At the top level, this program is a function application, which matches the ◊code{`(,function ,argument)} ◊technical-term{pattern}. The ◊code{function} is ◊code{((λ (x) x) (λ (y) y))} and the ◊code{argument} is ◊code{(λ (z) z)}. The ◊code{function} is not immediately available, it is a function application ◊code{((λ (x) x) (λ (y) y))} itself. We can use ◊code{interpret} on ◊code{function} to evaluate it into a value:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (interpret program)
   (match program
     [`(λ (,argument-name) ,body)
@@ -652,7 +640,6 @@ At the top level, this program is a function application, which matches the ◊c
      (define interpreted-function (interpret function))
      (match-define `(λ (,argument-name) ,body) interpreted-function)
      (substitute body argument-name argument)]))
- }
 }
 
 In the listing above, note the recursive call to ◊code{interpret}. The result of this recursive call is a value, because ◊code{interpret} returns values in our language. And values in our language are functions, which we can then ◊technical-term{destruct} with ◊code{match-define}. With this change, ◊code{interpret} works for our program:
@@ -670,8 +657,7 @@ An issue similar to the one addressed above occurs in the ◊code{argument} of a
 
 In this function application, the ◊code{argument} is ◊code{((λ (y) y) (λ (z) z))}, which is not a value. So we have to call ◊code{interpret} on the ◊code{argument} before the substitution as well:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (interpret program)
   (match program
     [`(λ (,argument-name) ,body)
@@ -681,7 +667,6 @@ In this function application, the ◊code{argument} is ◊code{((λ (y) y) (λ (
      (define interpreted-argument (interpret argument))
      (match-define `(λ (,argument-name) ,body) interpreted-function)
      (substitute body argument-name interpreted-argument)]))
- }
 }
 
 Our interpreter now works for the given example:
@@ -712,8 +697,7 @@ Our interpreter does not work on this program:
 
 This output is the result of the substitution of the throwaway argument ◊code{(λ (z) z)} in the body of the function ◊code{(λ (i) ((λ (x) x) (λ (y) y)))}. There were no occurrences of the argument name ◊code{i} in the body, because it is an ignored argument. So the result of the substitution is just the body, ◊code{((λ (x) x) (λ (y) y))}. But the interpreter should not stop at this point, it needs to proceed interpreting these intermediary program, until it reaches a value. To accomplish this, we call ◊code{interpret} recursively, with the result of the substitution:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊code/block[#:language 'racket]{
 (define (interpret program)
   (match program
     [`(λ (,argument-name) ,body)
@@ -722,9 +706,9 @@ This output is the result of the substitution of the throwaway argument ◊code{
      (define interpreted-function (interpret function))
      (define interpreted-argument (interpret argument))
      (match-define `(λ (,argument-name) ,body) interpreted-function)
-     (define substituted-body (substitute body argument-name interpreted-argument))
+     (define substituted-body
+       (substitute body argument-name interpreted-argument))
      (interpret substituted-body)]))
- }
 }
 
 ◊margin-note{The recursion in ◊code{interpret} is grounded because eventually it reaches a value, which it returns unaltered instead of following the second ◊technical-term{match clause}.}
@@ -774,23 +758,22 @@ This program fragment is a function application, in which the ◊code{function} 
 
 The ◊code{x} in the body of the function ◊code{(λ (x) x)} refers to its argument, not the outer declaration of ◊code{x}, which we are currently substituting. The problem is in ◊code{substitute}: when it finds a function definition whose ◊code{other-argument-name} is the same as the given ◊code{argument-name}, it should stop traversing the program fragment. It should not try to substitute occurrences of the ◊code{argument-name} any further, because they refer to ◊code{other-argument-name}:
 
-◊full-width{
- ◊code/block[#:language 'racket]{
+◊margin-note{While ◊code{argument-name} and ◊code{other-argument-name} have the same identifier (◊code{x}, in the example), they are different bindings—similar to how two people might have the same name despite not being the same person. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} in particular and ◊technical-term{lexical scoping} in general work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments what they want, without global knowledge of the program and all identifiers in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
+
+◊code/block[#:language 'racket]{
 (define (substitute body argument-name argument)
   (match body
     [`(λ (,other-argument-name) ,other-body)
      (if (equal? argument-name other-argument-name)
          body
-         `(λ (,other-argument-name) ,(substitute other-body argument-name argument)))]
+         `(λ (,other-argument-name)
+            ,(substitute other-body argument-name argument)))]
     [`(,function ,other-argument)
      `(,(substitute function argument-name argument)
        ,(substitute other-argument argument-name argument))]
     [`,variable
      (if (equal? argument-name variable) argument variable)]))
- }
 }
-
-◊margin-note{While ◊code{argument-name} and ◊code{other-argument-name} have the same identifier (◊code{x}, in the example), they are different bindings—similar to how two people might have the same name despite not being the same person. This observation that multiple bindings might have the same name is what makes ◊technical-term{shadowing} in particular and ◊technical-term{lexical scoping} in general work. This feature is important because it allows program fragments to ◊emphasis{compose} better. Writers of a function can name the arguments what they want, without global knowledge of the program and all identifiers in it. This is particularly desirable when different parts of a program are written by different people and may even come from different packages.}
 
 Our program now works as we expected:
 
