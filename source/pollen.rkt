@@ -553,8 +553,8 @@
               #:bottom (apply calc (- ,space/small/negative 1px)))
     [(> & span)
      #:display inline-block
-     #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))
-     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))]]
+     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+     #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))]]
    [pre
     ,@insertion
     ,@font-family/monospace
