@@ -583,6 +583,12 @@
 
 (define-component list/ordered/item #:html (default-tag-function 'li))
 
+(define-component lists
+  #:css
+  (css-expr
+   [ul ol
+    #:padding-left ,text-indent]))
+
 ;; Tables
 
 (define-component table
