@@ -859,8 +859,7 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; MUSIC
 
-(define-component (lyrics . elements)
-  #:html (full-width (apply code/block elements)))
+(define-component lyrics #:html code/block)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; PROSE
