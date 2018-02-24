@@ -528,11 +528,8 @@
 
 (define-component (code/block #:language [language #f] #:caption [caption #f] . elements)
   #:html
-  ((default-tag-function '@)
-   (if caption
-       ((default-tag-function 'div #:class "code-block-caption")
-        ((default-tag-function 'span) caption))
-       "")
+  ((default-tag-function 'div #:class "code-block")
+   (if caption ((default-tag-function 'span #:class "caption") caption) "")
    (cond
      [language
       (define code (string-append* elements))
@@ -557,19 +554,17 @@
      [else ((default-tag-function 'pre) (apply code elements))]))
   #:css
   (css-expr
-   [.code-block-caption
-    #:font-size ,font-size/small
-    #:margin (#:top ,space/small
-              #:bottom ,space/small/negative
-              #:bottom (apply calc (- ,space/small/negative 1px)))
-    [(> & span)
+   [.code-block
+    ,@insertion
+    #:font-size ,font-size/extra-small
+    [.caption
      #:display inline-block
      #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-     #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))]]
+     #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))
+     #:margin-bottom -1px]]
    [pre
-    ,@insertion
     ,@font-family/monospace
-    #:font-size ,font-size/extra-small
+    #:margin ,space/none
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
