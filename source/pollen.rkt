@@ -109,6 +109,8 @@
 ;; SPACES
 
 (define space/none 0)
+(define space/extra-small '0.2rem)
+(define space/extra-small/negative '-0.2rem)
 (define space/small '0.5rem)
 (define space/small/negative '-0.5rem)
 (define space/medium '1rem)
@@ -335,7 +337,7 @@
   #:css
   (css-expr
    [article>header
-    [h1 #:font-size ,font-size/extra-large]
+    [h1 #:font-size ,font-size/extra-large #:margin-bottom ,space/extra-small]
     #:margin-bottom ,space/medium]))
 
 (define-component time
