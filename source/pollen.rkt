@@ -332,8 +332,8 @@
    (default-tag-function 'span #:class
      (if (and activation-path
               (string-prefix? (select-from-metas 'here-path metas) (source-path activation-path)))
-         "menu-item"
-         "menu-item inactive"))
+         "menu-item active"
+         "menu-item"))
    elements)
   #:css
   (css-expr
@@ -342,7 +342,8 @@
     #:font-size ,font-size/small
     #:text-transform uppercase
     #:letter-spacing ,letter-spacing
-    [((|.| & inactive) a) #:text-decoration none]]))
+    [a #:text-decoration none]
+    [((|.| & active) a) #:border-bottom (,ruler/thick solid ,(dict-ref colors 'secondary-content))]]))
 
 (define-component header/article
   #:css
