@@ -639,9 +639,6 @@
 (define-component new-line
   #:html (default-tag-function 'br))
 
-(define-component big-separation
-  #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))
-
 (define-component (fraction numerator denominator)
   #:html `(span
            (span ((class "fraction--numerator")) ,(~a numerator))
@@ -736,7 +733,7 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; ABOUT
 
-(define-component education #:html (default-tag-function 'div #:class "big-separation"))
+(define-component education #:html (default-tag-function 'div))
 
 (define-component education/title #:html subsection)
 
@@ -756,7 +753,7 @@
 
 (define-component education/highlight #:html list/unordered/item)
 
-(define-component work-experience #:html (default-tag-function 'div #:class "big-separation"))
+(define-component work-experience #:html (default-tag-function 'div))
 
 (define-component work-experience/institution #:html subsection)
 
@@ -798,7 +795,7 @@
     #:height .9em
     #:border-left-color ,(dict-ref colors 'green)]))
 
-(define-component certification #:html (default-tag-function 'div #:class "big-separation"))
+(define-component certification #:html (default-tag-function 'div))
 
 (define-component certification/title #:html subsection)
 
@@ -807,7 +804,7 @@
 (define-component (certification/score . elements)
   #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component event #:html (default-tag-function 'div #:class "big-separation"))
+(define-component event #:html (default-tag-function 'div))
 
 (define-component event/title #:html subsection)
 
@@ -822,7 +819,7 @@
 (define-component (event/highlight . elements)
   #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component course #:html (default-tag-function 'div #:class "big-separation"))
+(define-component course #:html (default-tag-function 'div))
 
 (define-component course/title #:html subsection)
 
@@ -842,7 +839,7 @@
 (define-component (service/reviewer/date . elements)
   #:html (apply (default-tag-function '@) `(,@elements ".")))
 
-(define-component publication/paper #:html (default-tag-function 'div #:class "big-separation"))
+(define-component publication/paper #:html (default-tag-function 'div))
 
 (define-component publication/paper/title #:html subsection)
 
