@@ -342,10 +342,10 @@
     #:font-size ,font-size/small
     #:text-transform uppercase
     #:letter-spacing ,letter-spacing
-    [a
-     #:text-decoration none
-     #:padding (,letter-spacing 0)]
-    [((|.| & active) a) #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))]]))
+    [a #:text-decoration none]
+    [(|.| & active)
+     #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+     #:margin-bottom ,ruler/thin/negative]]))
 
 (define-component header/article
   #:css
