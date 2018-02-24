@@ -595,14 +595,6 @@
   #:html (default-tag-function 'table)
   #:css (css-expr [table ,@insertion]))
 
-(define-component table/aligned-last-data
-  #:css
-  (css-expr
-   [(.table--aligned-last-data td:last-child)
-    #:width 40%
-    #;[(ol &) (ul &) ;; FIXME
-       #:width (apply calc (- 40% 40px))]]))
-
 (define-component table/header #:html (default-tag-function 'thead))
 
 (define-component table/body
@@ -612,13 +604,13 @@
    [tbody+tbody::before
     #:content ""
     #:display block
-    #:margin-top (rem ,(modular-scale -4))]))
+    #:height ,space/small]))
 
 (define-component table/row #:html (default-tag-function 'tr))
 
 (define-component table/data
   #:html (default-tag-function 'td)
-  #:css (css-expr [td #:padding 0 (#:right ,grid/padding)]))
+  #:css (css-expr [td th #:padding 0 (#:right ,space/medium)]))
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
@@ -626,8 +618,7 @@
   (css-expr
    [th
     #:font-weight 700
-    #:text-align left
-    #:padding 0 (#:right ,grid/padding)]))
+    #:text-align left]))
 
 ;; ---------------------------------------------------------------------------------------------------
 
@@ -700,8 +691,7 @@
 
 (define ingredients/collected (make-hash))
 
-(define-component (ingredients . elements)
-  #:html (apply table #:class "table--aligned-last-data" elements))
+(define-component ingredients #:html table)
 
 (define-component (ingredients/section name . elements)
   #:html
