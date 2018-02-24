@@ -19,16 +19,16 @@
      (body
       (header
        (h1 ◊link/internal["/"]{◊(dict-ref personal-data 'name)})
-       ◊menu[◊link/internal["/about"]{About}
-                           ◊link/internal["/contact"]{Contact}
-                           ◊link/internal["/research"]{Research}
-                           ◊link/internal["/prose"]{Prose}
-                           ◊link/internal["/software"]{Software}
-                           ◊link/internal["/music"]{Music}
-                           ◊link/internal["/cooking"]{Cooking}
-                           ◊link/internal["/feed.atom"]{Atom feed}
-                           ◊link/internal["/license"]{License}
-                           ◊link/internal["/colophon"]{Colophon}])
+       ◊menu{◊menu/item[#:activation-path "about/"]{◊link/internal["/about"]{About}}
+                       ◊menu/item[#:activation-path "contact/"]{◊link/internal["/contact"]{Contact}}
+                       ◊menu/item[#:activation-path "research/"]{◊link/internal["/research"]{Research}}
+                       ◊menu/item[#:activation-path "prose/"]{◊link/internal["/prose"]{Prose}}
+                       ◊menu/item[#:activation-path "software/"]{◊link/internal["/software"]{Software}}
+                       ◊menu/item[#:activation-path "music/"]{◊link/internal["/music"]{Music}}
+                       ◊menu/item[#:activation-path "cooking/"]{◊link/internal["/cooking"]{Cooking}}
+                       ◊menu/item{◊link/internal["/feed.atom"]{Atom feed}}
+                       ◊menu/item[#:activation-path "license/"]{◊link/internal["/license"]{License}}
+                       ◊menu/item[#:activation-path "colophon/"]{◊link/internal["/colophon"]{Colophon}}})
       (apply
        article
        ◊when/splice[title]{◊header{◊h1{◊title} ◊when/splice[date]{◊time{◊date}}}}

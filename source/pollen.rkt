@@ -38,7 +38,7 @@
 (define (internal-url path) (~a (base-path) path))
 (define base-absolute (make-parameter "https://www.leafac.com"))
 (define (absolute-url path) (~a (base-absolute) path))
-(define (source-path path) (~a (current-project-root) "/" path))
+(define (source-path path) (~a (current-project-root) path))
 
 ;; CSS helpers
 
@@ -324,14 +324,25 @@
   #:html (apply navigation #:class "menu" elements)
   #:css
   (css-expr
-   [.menu
+   [.menu #:margin-bottom ,space/small]))
+
+(define-component (menu/item #:activation-path [activation-path #f] . elements)
+  #:html
+  (apply
+   (default-tag-function 'span #:class
+     (if (and activation-path
+              (string-prefix? (select-from-metas 'here-path metas) (source-path activation-path)))
+         "menu-item"
+         "menu-item inactive"))
+   elements)
+  #:css
+  (css-expr
+   [.menu-item
+    ,@inline-block-enumeration
     #:font-size ,font-size/small
     #:text-transform uppercase
     #:letter-spacing ,letter-spacing
-    #:margin-bottom ,space/small
-    [a
-     #:text-decoration none
-     ,@inline-block-enumeration]]))
+    [((|.| & inactive) a) #:text-decoration none]]))
 
 (define-component header/article
   #:css
