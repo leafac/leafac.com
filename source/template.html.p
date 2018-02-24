@@ -32,6 +32,5 @@
                            ◊link/internal["/colophon"]{Colophon}])
       (apply
        article
-       ◊when/splice[(equal? document-class 'recipe)]{◊margin-note{See ◊link/internal["/cooking"]{all recipes}.}}
-       ◊when/splice[title]{◊(header (h1 ◊title) ◊when/splice[date]{◊time{◊date}})}
+       ◊when/splice[title]{◊header{◊h1{◊title} ◊when/splice[date]{◊time{◊date}}}}
        (select-from-doc 'root doc))))))
