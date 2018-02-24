@@ -569,14 +569,7 @@
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
 
-;; ---------------------------------------------------------------------------------------------------
-
-(define-component keyboard
-  #:html (default-tag-function 'kbd)
-  #:css (css-expr [kbd ,@font-family/monospace]))
-
-(define-component path
-  #:html (default-tag-function 'code))
+;; Lists
 
 (define-component list/unordered
   #:html (default-tag-function 'ul)
@@ -590,18 +583,7 @@
 
 (define-component list/ordered/item #:html (default-tag-function 'li))
 
-(define-component emphasis
-  #:html (default-tag-function 'em))
-
-(define-component foreign #:html emphasis)
-
-(define-component technical-term #:html emphasis)
-
-(define-component new-line
-  #:html (default-tag-function 'br))
-
-(define-component big-separation
-  #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))
+;; Tables
 
 (define-component table
   #:html (default-tag-function 'table)
@@ -640,6 +622,28 @@
     #:font-weight 700
     #:text-align left
     #:padding 0 (#:right ,grid/padding)]))
+
+;; ---------------------------------------------------------------------------------------------------
+
+(define-component keyboard
+  #:html (default-tag-function 'kbd)
+  #:css (css-expr [kbd ,@font-family/monospace]))
+
+(define-component path
+  #:html (default-tag-function 'code))
+
+(define-component emphasis
+  #:html (default-tag-function 'em))
+
+(define-component foreign #:html emphasis)
+
+(define-component technical-term #:html emphasis)
+
+(define-component new-line
+  #:html (default-tag-function 'br))
+
+(define-component big-separation
+  #:css (css-expr [.big-separation #:margin-bottom (rem ,(modular-scale 5))]))
 
 (define-component (fraction numerator denominator)
   #:html `(span
