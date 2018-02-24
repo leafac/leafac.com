@@ -435,49 +435,6 @@
     #:margin-left ,space/small
     [a #:color ,(dict-ref colors 'secondary-content)]]))
 
-;; Links
-
-(define-component (link path . elements)
-  #:html (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements))
-  #:css
-  (css-expr
-   [a
-    #:transition (background-color ,animation/duration)
-    #:color ,(dict-ref colors 'primary-content)
-    [(: & hover)
-     #:background-color ,(dict-ref colors 'background-highlight)
-     #:color ,(dict-ref colors 'emphasized-content)]
-    [@media ,grid/smaller-screens
-     [(aside &)
-      #:color ,(dict-ref colors 'emphasized-content)
-      [(: & hover)
-       #:background-color ,(dict-ref colors 'background)
-       #:color ,(dict-ref colors 'primary-content)]]]]))
-
-(define-component (link/internal path . elements) #:html (apply link (internal-url path) elements))
-
-;; References
-
-(define-component (label key)
-  #:html ((default-tag-function 'span) #:id (~a key)))
-
-(define-component (reference key . elements)
-  #:html (apply link (~a "#" key) elements))
-
-;; Data
-
-(define-component (email address . elements)
-  #:html (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
-
-(define-component (github-user handle)
-  #:html (link (~a "https://github.com/" handle) (~a "@" handle)))
-
-(define-component (skype-user handle)
-  #:html ((default-tag-function 'em) handle))
-
-(define-component (phone number)
-  #:html ((default-tag-function '@) number))
-
 ;; Full width
 
 (define-component full-width
@@ -635,6 +592,49 @@
    [th
     #:font-weight 700
     #:text-align left]))
+
+;; Links
+
+(define-component (link path . elements)
+  #:html (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements))
+  #:css
+  (css-expr
+   [a
+    #:transition (background-color ,animation/duration)
+    #:color ,(dict-ref colors 'primary-content)
+    [(: & hover)
+     #:background-color ,(dict-ref colors 'background-highlight)
+     #:color ,(dict-ref colors 'emphasized-content)]
+    [@media ,grid/smaller-screens
+     [(aside &)
+      #:color ,(dict-ref colors 'emphasized-content)
+      [(: & hover)
+       #:background-color ,(dict-ref colors 'background)
+       #:color ,(dict-ref colors 'primary-content)]]]]))
+
+(define-component (link/internal path . elements) #:html (apply link (internal-url path) elements))
+
+;; References
+
+(define-component (label key)
+  #:html ((default-tag-function 'span) #:id (~a key)))
+
+(define-component (reference key . elements)
+  #:html (apply link (~a "#" key) elements))
+
+;; Data
+
+(define-component (email address . elements)
+  #:html (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
+
+(define-component (github-user handle)
+  #:html (link (~a "https://github.com/" handle) (~a "@" handle)))
+
+(define-component (skype-user handle)
+  #:html ((default-tag-function 'em) handle))
+
+(define-component (phone number)
+  #:html ((default-tag-function '@) number))
 
 ;; ---------------------------------------------------------------------------------------------------
 
