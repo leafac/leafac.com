@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{Rice}
 
 ◊section['ingredients]{Ingredients}

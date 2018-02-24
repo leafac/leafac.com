@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{Whole Wheat Pizza Crust}
 
 ◊section['ingredients]{Ingredients}

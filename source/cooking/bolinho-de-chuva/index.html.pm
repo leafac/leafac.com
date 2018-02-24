@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{Bolinho de Chuva}
 
 ◊section['ingredients]{Ingredients}

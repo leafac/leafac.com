@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{Medium Pizza Crust}
 
 ◊section['ingredients]{Ingredients}

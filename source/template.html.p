@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 ◊(begin
-   (define document-class (select-from-metas 'document-class metas))
    (define title (select-from-metas 'title metas))
    (define date (select-from-metas 'date metas))
    

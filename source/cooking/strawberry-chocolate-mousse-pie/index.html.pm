@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{Strawberry Chocolate Mousse Pie}
 
 ◊section['ingredients]{Ingredients}

@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{Pancake}
 
 ◊margin-note{This recipe is for sweet pancakes. For savory pancakes, add a bit more salt and less sugar.}

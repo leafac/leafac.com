@@ -1,7 +1,5 @@
 #lang pollen
 
-◊define-meta[document-class recipe]
-
 ◊define-meta[title]{No-Knead Whole Wheat Bread}
 
 ◊section['ingredients]{Ingredients}
