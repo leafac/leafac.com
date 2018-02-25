@@ -676,7 +676,7 @@
 
 (define-component (menu-option . elements)
   #:html ((default-tag-function 'span #:class "menu-option") (add-between elements " > "))
-  #:css (css-expr [.menu-option #:font-style italic]))
+  #:css (css-expr [.menu-option #:font-weight 700]))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING
