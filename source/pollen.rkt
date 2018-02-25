@@ -390,7 +390,7 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
 
-;; Headings
+;; Outline
 
 (define-component (section key . elements)
   #:html (apply heading 'h1 key elements)
@@ -583,7 +583,8 @@
 
 (define-component table/data
   #:html (default-tag-function 'td)
-  #:css (css-expr [td th #:padding 0 (#:right ,space/medium)]))
+  #:css (css-expr [td th #:padding 0 (#:right ,space/medium)
+                   [(: & last-child) #:padding-right 0]]))
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
