@@ -580,8 +580,10 @@
 
 (define-component table/data
   #:html (default-tag-function 'td)
-  #:css (css-expr [td th #:padding 0 (#:right ,space/medium)
-                   [(: & last-child) #:padding-right 0]]))
+  #:css
+  (css-expr
+   [td th #:padding ,space/none (#:right ,space/medium)
+    [(: & last-child) #:padding-right ,space/none]]))
 
 (define-component table/data/header
   #:html (default-tag-function 'th)
@@ -683,7 +685,7 @@
 
 (define-component (recipes . elements)
   #:html (apply list/unordered #:class "recipes" elements)
-  #:css (css-expr [.recipes ,@(prefix (css-expr #:column-count 2)) #:padding-left 0]))
+  #:css (css-expr [.recipes ,@(prefix (css-expr #:column-count 2)) #:padding-left ,space/none]))
 
 (define-component (recipe path . elements)
   #:html (list/unordered/item #:class "recipe" (apply link/internal (~a "/cooking/" path) elements))
@@ -716,7 +718,7 @@
 
 (define-component (baking . elements)
   #:html
-  (set-box! baking/collected (table #:class "table--aligned-last-data" (apply table/body elements)))
+  (set-box! baking/collected (table (apply table/body elements)))
   (baking/repeat))
 
 (define-component (baking/repeat)
@@ -780,7 +782,7 @@
 
 (define-component (skills . elements)
   #:html (apply list/unordered #:class "skills" elements)
-  #:css (css-expr [.skills #:padding-left 0]))
+  #:css (css-expr [.skills #:padding-left ,space/none]))
 
 (define-component (skill level . elements)
   #:html (apply list/unordered/item #:class (~a "skill " level) elements)
