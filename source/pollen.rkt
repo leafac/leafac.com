@@ -11,8 +11,6 @@
                        pollen/core pollen/file
                        css-expr))
 
-;; TODO: Get rid of dictionaries?
-
 ;; ---------------------------------------------------------------------------------------------------
 ;; PERSONAL DATA
 
@@ -459,9 +457,6 @@
      #:float right
      #:clear right
      #:margin (#:right ,grid/margin-note/pull #:bottom ,space/large)]]))
-
-;; TODO: Add ‘foot-note’.
-;; TODO: Generalize ‘side-note’. (But with better names than these.)
 
 ;; Figures
 
