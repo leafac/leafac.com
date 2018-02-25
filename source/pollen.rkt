@@ -294,7 +294,6 @@
        (define classes/concatenated (string-join classes/strings " "))
        (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes)
-
   #:css (css-expr [* *::before *::after #:outline none]))
 
 (define-component head/link #:html (default-tag-function 'link))
@@ -313,9 +312,7 @@
 
 (define-component (menu . elements)
   #:html (apply navigation #:class "menu" elements)
-  #:css
-  (css-expr
-   [.menu #:margin-bottom ,space/small]))
+  #:css (css-expr [.menu #:margin-bottom ,space/small]))
 
 (define-component (menu/item #:activation-path [activation-path #f] . elements)
   #:html
@@ -403,6 +400,9 @@
 (define-component new-thought
   #:html (default-tag-function 'div #:class "new-thought")
   #:css (css-expr [.new-thought #:height ,space/extra-large]))
+
+(define-component new-line
+  #:html (default-tag-function 'br))
 
 (define-component (appendix key . elements)
   #:html (apply section key `("Appendix: " ,@elements)))
@@ -546,10 +546,7 @@
 (define-component list/ordered/item #:html (default-tag-function 'li))
 
 (define-component lists
-  #:css
-  (css-expr
-   [ul ol
-    #:padding-left ,text-indent]))
+  #:css (css-expr [ul ol #:padding-left ,text-indent]))
 
 ;; Tables
 
@@ -647,9 +644,6 @@
 
 (define-component path
   #:html (default-tag-function 'code))
-
-(define-component new-line
-  #:html (default-tag-function 'br))
 
 (define-component (fraction numerator denominator)
   #:html ((default-tag-function 'span)
