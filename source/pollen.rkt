@@ -677,12 +677,9 @@
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
   #:css (css-expr [.placeholder #:color ,(dict-ref colors 'blue)]))
 
-(define-component menu-option
-  #:html (default-tag-function 'span #:class "menu-option")
+(define-component (menu-option . elements)
+  #:html ((default-tag-function 'span #:class "menu-option") (add-between elements " > "))
   #:css (css-expr [.menu-option #:font-style italic]))
-
-(define-component (menu-option/path . elements)
-  #:html (apply menu-option (add-between elements " > ")))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING
