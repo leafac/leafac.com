@@ -96,7 +96,7 @@ Start the migration email server:
 
   The call to ◊code{sudo} is necessary because Dovecot needs to bind to a network port below 1024—specifically, the port for IMAP, 143.
 
-  The ◊code{-F} flag for Dovecot tells it to run on the foreground, instead of becoming a daemon. This makes it easy to see the logs as the server runs, and to kill it with ◊keyboard{Ctrl} + ◊keyboard{C}.
+  The ◊code{-F} flag for Dovecot tells it to run on the foreground, instead of becoming a daemon. This makes it easy to see the logs as the server runs, and to kill it with ◊keyboard{Ctrl + C}.
 }
 
 ◊code/block{
