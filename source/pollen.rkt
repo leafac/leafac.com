@@ -686,13 +686,12 @@
   #:css (css-expr [.recipes ,@(prefix (css-expr #:column-count 2)) #:padding-left 0]))
 
 (define-component (recipe path . elements)
-  #:html (list/unordered/item #:class "recipe"
-                              (apply link/internal (~a "/cooking/" path) elements))
+  #:html (list/unordered/item #:class "recipe" (apply link/internal (~a "/cooking/" path) elements))
   #:css
   (css-expr
    [.recipe
     #:list-style none
-    #:margin-bottom (rem ,(modular-scale -4))
+    #:margin-bottom ,space/medium
     [a #:text-decoration none]]))
 
 (define ingredients/collected (make-hash))
