@@ -421,7 +421,8 @@
    [h1 h2
     #:margin (#:top ,space/extra-large #:bottom ,space/small)
     #:line-height ,line-height/small
-    [a #:text-decoration none]]))
+    [a #:text-decoration none]]
+   [h1+h2 #:margin-top ,space/medium]))
 
 (define-component (heading/mark . elements)
   #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
@@ -743,7 +744,7 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; ABOUT
 
-(define-component education #:html (default-tag-function 'div))
+(define-component education #:html (default-tag-function '@))
 
 (define-component education/title #:html subsection)
 
@@ -753,17 +754,14 @@
 (define-component (education/from . elements)
   #:html (apply (default-tag-function '@) `("from " ,@elements " ")))
 
-(define-component (education/to . elements)
-  #:html (apply (default-tag-function '@) `("to " ,@elements " ")))
-
-(define-component (education/to/estimation . elements)
-  #:html (apply education/to `(,@elements " (estimated)")))
+(define-component (education/to #:estimated? [estimated? #f] . elements)
+  #:html (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
 
 (define-component education/highlights #:html list/unordered)
 
 (define-component education/highlight #:html list/unordered/item)
 
-(define-component work-experience #:html (default-tag-function 'div))
+(define-component work-experience #:html (default-tag-function '@))
 
 (define-component work-experience/institution #:html subsection)
 
@@ -789,23 +787,23 @@
   #:css
   (css-expr
    [.skill
-    ,@inline-block-enumeration]
-   [.skill::before
-    #:content ""
-    #:display inline-block
-    #:margin-right (rem ,(modular-scale -8))
-    #:border-left ((rem ,(modular-scale -5)) solid)]
+    ,@inline-block-enumeration
+    [(:: & before)
+     #:content ""
+     #:display inline-block
+     #:margin-right ,space/extra-small
+     #:border-left (,space/small solid)]]
    [.beginner::before
-    #:height .3em
+    #:height .3rem
     #:border-left-color ,(dict-ref colors 'red)]
    [.intermediate::before
-    #:height .6em
+    #:height .6rem
     #:border-left-color ,(dict-ref colors 'yellow)]
    [.advanced::before
-    #:height .9em
+    #:height .9rem
     #:border-left-color ,(dict-ref colors 'green)]))
 
-(define-component certification #:html (default-tag-function 'div))
+(define-component certification #:html (default-tag-function '@))
 
 (define-component certification/title #:html subsection)
 
@@ -814,7 +812,7 @@
 (define-component (certification/score . elements)
   #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component event #:html (default-tag-function 'div))
+(define-component event #:html (default-tag-function '@))
 
 (define-component event/title #:html subsection)
 
@@ -829,7 +827,7 @@
 (define-component (event/highlight . elements)
   #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component course #:html (default-tag-function 'div))
+(define-component course #:html (default-tag-function '@))
 
 (define-component course/title #:html subsection)
 
@@ -849,7 +847,7 @@
 (define-component (service/reviewer/date . elements)
   #:html (apply (default-tag-function '@) `(,@elements ".")))
 
-(define-component publication/paper #:html (default-tag-function 'div))
+(define-component publication/paper #:html (default-tag-function '@))
 
 (define-component publication/paper/title #:html subsection)
 

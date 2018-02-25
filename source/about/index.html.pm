@@ -37,7 +37,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
  ◊education/title['education--phd]{Ph.D. student in Computer Science, Programming Languages}
  ◊education/institution{◊link["https://jhu.edu"]{Johns Hopkins University}}
  ◊education/from{2014-09}
- ◊education/to/estimation{2019-09}
+ ◊education/to[#:estimated? #t]{2019-09}
  ◊education/highlights{
   ◊education/highlight{I am part of ◊link["http://pl.cs.jhu.edu/"]{The Programming Languages Laboratory}, under ◊link["http://www.cs.jhu.edu/~scott/"]{Dr. Scott Smith’s} advisory.}
   ◊education/highlight{I ◊link/internal["/research"]{research} a new approach to high-order program analysis called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis (DDPA)}.}
