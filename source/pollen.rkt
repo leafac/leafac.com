@@ -637,6 +637,10 @@
 (define-component (phone number)
   #:html ((default-tag-function '@) number))
 
+(define-component publication #:html emphasis)
+
+(define-component informal #:html emphasis)
+
 ;; ---------------------------------------------------------------------------------------------------
 
 (define-component keyboard
@@ -668,12 +672,6 @@
    [.fraction--numerator #:vertical-align super]
    [.fraction--denominator #:vertical-align sub]
    [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
-
-(define-component production #:html emphasis)
-
-(define-component informal #:html emphasis)
-
-(define-component publication #:html emphasis)
 
 (define-component (placeholder . elements)
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))

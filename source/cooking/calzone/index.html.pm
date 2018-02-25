@@ -77,5 +77,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊production{The High-Protein Vegetarian Cookbook}, by Katie Parker and Kristen Smith.}
+ ◊source{◊publication{The High-Protein Vegetarian Cookbook}, by Katie Parker and Kristen Smith.}
 }
