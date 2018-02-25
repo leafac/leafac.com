@@ -287,8 +287,7 @@
      elements
      #:txexpr-elements-proc
      (λ (elements)
-       (filter-not (curry equal? '(p "\n"))
-                   (decode-paragraphs elements #:linebreak-proc values)))
+       (filter-not (curry equal? '(p "\n")) (decode-paragraphs elements #:linebreak-proc values)))
      #:exclude-tags '(pre code)))
   (define elements/with-paragraphs/with-merged-classes
     (decode-elements
@@ -296,12 +295,10 @@
      #:txexpr-attrs-proc
      (λ (attributes)
        (define-values (classes non-classes)
-         (partition (λ (attribute) (equal? 'class (car attribute))) attributes))
+         (partition (match-lambda [`(,key ,_) (equal? 'class key)]) attributes))
        (define classes/strings (map second classes))
        (define classes/concatenated (string-join classes/strings " "))
-       (if (empty? classes)
-           non-classes
-           (cons `(class ,classes/concatenated) non-classes)))))
+       (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes)
 
   #:css (css-expr [* *::before *::after #:outline none]))
