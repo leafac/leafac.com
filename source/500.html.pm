@@ -4,4 +4,4 @@
 
 ◊margin-note{◊figure/svg{◊source-path{/assets/images/sad-face.svg}}}
 
-A serious error happened, please ◊email[◊(dict-ref personal-data 'personal-email)]{report it}.
+A serious error happened, please report it to ◊email[◊(dict-ref personal-data 'personal-email)].
