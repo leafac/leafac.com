@@ -42,11 +42,6 @@
 
 ;; CSS helpers
 
-;; TODO: Get rid of ‘modular-scale’?
-;; Reference: http://www.modularscale.com/?1&em&1.2&js&table
-(define (modular-scale step #:base [base 1] #:ratio [ratio 1.2])
-  (* base (expt ratio step)))
-
 (define (px->rem px #:html/font-size [html/font-size 16])
   (exact->inexact (/ px html/font-size)))
 
@@ -179,6 +174,7 @@
 (define font-size/large (css-expr rem ,(px->rem 20)))
 (define font-size/extra-large (css-expr rem ,(px->rem 22)))
 (define font-size/extra-extra-large (css-expr rem ,(px->rem 30)))
+(define line-height/extra-small 1)
 (define line-height/small 1.3)
 (define line-height/medium 1.5)
 (define line-height/large 2)
@@ -260,11 +256,11 @@
     #:text-transform uppercase
     #:letter-spacing ,letter-spacing
     #:font-size ,font-size/small
-    #:line-height 1
+    #:line-height ,line-height/extra-small
     #:background-color ,color
     #:color ,(dict-ref colors 'background)
     #:display inline-block
-    #:padding (#:bottom 0.1em #:left 0.2em)
+    #:padding (,space/none ,space/extra-small)
     #:position absolute
     #:left ,ruler/thick/negative
     #:top ,space/none
