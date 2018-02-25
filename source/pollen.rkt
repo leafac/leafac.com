@@ -534,7 +534,7 @@
      #:display inline-block
      #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
      #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))
-     #:margin-bottom -1px]]
+     #:margin-bottom ,ruler/thin/negative]]
    [pre
     ,@font-family/monospace
     #:margin ,space/none
@@ -639,16 +639,7 @@
 
 (define-component publication #:html emphasis)
 
-(define-component informal #:html emphasis)
-
-;; ---------------------------------------------------------------------------------------------------
-
-(define-component keyboard
-  #:html (default-tag-function 'kbd)
-  #:css (css-expr [kbd ,@font-family/monospace]))
-
-(define-component path
-  #:html (default-tag-function 'code))
+;; Inline elements
 
 (define-component emphasis
   #:html (default-tag-function 'em))
@@ -657,21 +648,30 @@
 
 (define-component technical-term #:html emphasis)
 
+(define-component informal #:html emphasis)
+
+(define-component keyboard
+  #:html (default-tag-function 'kbd)
+  #:css (css-expr [kbd ,@font-family/monospace]))
+
+(define-component path
+  #:html (default-tag-function 'code))
+
 (define-component new-line
   #:html (default-tag-function 'br))
 
 (define-component (fraction numerator denominator)
-  #:html `(span
-           (span ((class "fraction--numerator")) ,(~a numerator))
-           (span ((class "fraction--slash")) "/")
-           (span ((class "fraction--denominator")) ,(~a denominator)))
+  #:html ((default-tag-function 'span)
+          ((default-tag-function 'span) #:class "fraction--numerator" (~a numerator))
+          ((default-tag-function 'span) #:class "fraction--slash" "/")
+          ((default-tag-function 'span) #:class "fraction--denominator" (~a denominator)))
   #:css
   (css-expr
-   [.fraction--numerator .fraction--denominator
-    #:font-size 0.8em]
+   [.fraction--numerator .fraction--denominator #:font-size ,font-size/small]
    [.fraction--numerator #:vertical-align super]
    [.fraction--denominator #:vertical-align sub]
-   [.fraction--slash #:margin (#:left -0.1em #:right -0.1em)]))
+   [.fraction--slash #:margin (#:left ,space/extra-small/negative
+                               #:right ,space/extra-small/negative)]))
 
 (define-component (placeholder . elements)
   #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
