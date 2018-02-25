@@ -691,7 +691,7 @@
   (css-expr
    [.recipe
     #:list-style none
-    #:margin-bottom ,space/medium
+    #:margin-bottom ,space/small
     [a #:text-decoration none]]))
 
 (define ingredients/collected (make-hash))
