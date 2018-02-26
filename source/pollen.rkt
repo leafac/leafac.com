@@ -475,14 +475,15 @@
   #:css (css-expr [img #:max-width 100%]))
 
 (define-component (figure/image path [caption ""])
-  #:html (figure (image path caption) (figure/caption caption)))
+  #:html
+  (figure (image path caption) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
 (define-component (svg path)
   #:html (string->xexpr (file->string path))
   #:css (css-expr [svg #:max-width 100% #:height auto]))
 
 (define-component (figure/svg path [caption ""])
-  #:html (figure (svg path) (figure/caption caption)))
+  #:html (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
 ;; Code
 
