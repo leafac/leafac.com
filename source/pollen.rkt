@@ -450,7 +450,8 @@
      #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thick)))
      #:color ,(dict-ref colors 'emphasized-content)
      #:background-color ,(dict-ref colors 'background-highlight)
-     #:border-left (,ruler/thick solid ,(dict-ref colors 'secondary-content))]
+     #:border-left (,ruler/thick solid ,(dict-ref colors 'secondary-content))
+     #:border-radius ,space/extra-small]
     [@media ,grid/bigger-screens
      #:font-size ,font-size/small
      #:width ,grid/margin-note
@@ -522,6 +523,7 @@
     [.caption
      #:display inline-block
      #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+     #:border-radius ,space/extra-small
      #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))
      #:margin-bottom ,ruler/thin/negative]]
    [pre
@@ -529,6 +531,7 @@
     #:margin ,space/none
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+    #:border-radius ,space/extra-small
     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
 
 ;; Lists
