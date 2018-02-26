@@ -493,7 +493,7 @@
 (define-component (code/block #:language [language #f] #:caption [caption #f] . elements)
   #:html
   ((default-tag-function 'div #:class "code-block")
-   (if caption ((default-tag-function 'span #:class "caption") caption) "")
+   (if caption ((default-tag-function 'span) caption) "")
    (cond
      [language
       (define code (string-append* elements))
@@ -520,13 +520,7 @@
   (css-expr
    [.code-block
     ,@insertion
-    #:font-size ,font-size/extra-small
-    [.caption
-     #:display inline-block
-     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-     #:border-radius ,space/extra-small
-     #:padding (,space/small ,text-indent) (#:left (apply calc (- ,text-indent ,ruler/thin)))
-     #:margin-bottom ,ruler/thin/negative]]
+    #:font-size ,font-size/extra-small]
    [pre
     ,@font-family/monospace
     #:margin ,space/none
