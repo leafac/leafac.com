@@ -9,9 +9,9 @@
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
-   viewBox="0 0 324.82626 59"
-   height="59"
-   width="324.82626"
+   viewBox="0 0 277.50982 49.362736"
+   height="49.362736"
+   width="277.50983"
    sodipodi:docname="convenience-vs-simplicity.svg"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06">
   <sodipodi:namedview
@@ -23,17 +23,19 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="719"
+     inkscape:window-width="1440"
+     inkscape:window-height="855"
      id="namedview42"
      showgrid="false"
-     inkscape:zoom="1"
-     inkscape:cx="162.41313"
-     inkscape:cy="29.273376"
+     inkscape:zoom="1.8498728"
+     inkscape:cx="165.60943"
+     inkscape:cy="24.401"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <defs
      id="defs4">
     <marker
@@ -91,47 +93,51 @@
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#TriangleInL);marker-end:url(#StopL)"
-     d="M 217.88116,20.737757 H 83.777706"
+     d="M 194.99059,17.199491 H 60.887131"
      id="path3338" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     x="-0.75599998"
-     y="25.108564"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1000%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="-0.77999997"
+     y="21.570299"
      id="text4886"><tspan
        id="tspan4888"
-       x="-0.75599998"
-       y="25.108564">Simplicity</tspan></text>
+       x="-0.77999997"
+       y="21.570299"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:Charter;-inkscape-font-specification:Charter">Simplicity</tspan></text>
   <text
      id="text5179"
-     y="12.261266"
-     x="118.84661"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     y="8.7229996"
+     x="106.4985"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1000%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       y="12.261266"
-       x="118.84661"
-       id="tspan5181">Features</tspan></text>
+       y="8.7229996"
+       x="106.4985"
+       id="tspan5181"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:Charter;-inkscape-font-specification:Charter">Features</tspan></text>
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     x="106.12344"
-     y="58.784"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1000%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     x="99.224602"
+     y="49.245735"
      id="text5349"><tspan
        id="tspan5351"
-       x="106.12344"
-       y="58.784">This article</tspan></text>
+       x="99.224602"
+       y="49.245735"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:Charter;-inkscape-font-specification:Charter">This article</tspan></text>
   <path
      inkscape:connector-curvature="0"
      style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#TriangleOutL)"
-     d="m 197.11879,30.133687 c -5.77246,4.25385 -11.30672,11.36611 -18.38084,0 -14.23444,13.50997 -17.22287,2.65359 -23.9972,0 -13.41677,11.81384 -22.07581,6.97564 -30.12415,0 -9.36061,12.70025 -17.18949,4.85997 -28.081844,0"
+     d="m 174.22822,26.595421 c -5.77246,4.25385 -11.30672,11.36611 -18.38084,0 -14.23444,13.50997 -17.22287,2.65359 -23.9972,0 -13.41677,11.81384 -22.07581,6.97564 -30.12415,0 -9.360615,12.70025 -17.189495,4.85997 -28.081849,0"
      id="path5377" />
   <text
      id="text7010"
-     y="25.108564"
-     x="228.58617"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     y="21.570299"
+     x="205.69559"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1000%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
      xml:space="preserve"><tspan
-       y="25.108564"
-       x="228.58617"
-       id="tspan7012">Convenience</tspan></text>
+       y="21.570299"
+       x="205.69559"
+       id="tspan7012"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;font-family:Charter;-inkscape-font-specification:Charter">Convenience</tspan></text>
 </svg>
