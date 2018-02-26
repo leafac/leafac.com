@@ -5,13 +5,14 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
-   viewBox="0 0 644.21223 724.00002"
-   height="724"
-   width="644.21222"
+   viewBox="0 0 599.1584 594.62868"
+   height="594.62866"
+   width="599.15839"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
    sodipodi:docname="data-structures.svg">
   <sodipodi:namedview
@@ -23,19 +24,36 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1366"
-     inkscape:window-height="719"
+     inkscape:window-width="1440"
+     inkscape:window-height="855"
      id="namedview217"
      showgrid="false"
      inkscape:zoom="1"
-     inkscape:cx="263.26141"
-     inkscape:cy="-0.9878313"
+     inkscape:cx="337.59438"
+     inkscape:cy="336.59909"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     showguides="true"
+     inkscape:guide-bbox="true" />
   <defs
      id="defs4">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker6814"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="DotL">
+      <path
+         transform="matrix(0.4,0,0,0.4,2.96,0.4)"
+         style="fill:#657b83;fill-opacity:1;fill-rule:evenodd;stroke:#657b83;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="m -2.5,-1 c 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path6812"
+         inkscape:connector-curvature="0" />
+    </marker>
     <marker
        orient="auto"
        refY="0"
@@ -77,7 +95,7 @@
     </marker>
     <marker
        style="overflow:visible"
-       id="TriangleOutL"
+       id="marker7354"
        refX="0"
        refY="0"
        orient="auto">
@@ -102,26 +120,26 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(-149.08108,-19.492014)"
+     transform="translate(-86.576249,-148.85532)"
      id="g8661">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="441.92462"
-       y="451.58658"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="361.40707"
+       y="481.58658"
        id="text6914"><tspan
          id="tspan6916"
-         x="441.92462"
-         y="451.58658"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Objects</tspan></text>
+         x="361.40707"
+         y="481.58658"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1000%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Objects</tspan></text>
     <g
        transform="translate(33.750137)"
        id="g8589">
       <path
          inkscape:connector-curvature="0"
          id="path6920"
-         d="m 418.21382,576.14313 h 28.70172"
-         style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7163)" />
+         d="m 334.21382,576.14313 h 28.70172"
+         style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7163)" />
       <g
          transform="translate(-31.177557)"
          id="g8011">
@@ -130,26 +148,28 @@
            id="g7935">
           <text
              xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              x="220.65004"
              y="773.53113"
              id="text7792"><tspan
                id="tspan7794"
                x="220.65004"
-               y="773.53113"><tspan
-   id="tspan7811"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'">λ</tspan> is a function</tspan></text>
+               y="773.53113"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Charter;-inkscape-font-specification:Charter"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'"
+   id="tspan6430">λ</tspan> is a function</tspan></text>
           <text
              id="text7807"
              y="746.29327"
              x="220.65004"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              xml:space="preserve"><tspan
                y="746.29327"
                x="220.65004"
-               id="tspan7809"><tspan
-   id="tspan7813"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'">●</tspan> is a reference</tspan></text>
+               id="tspan7809"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Charter;-inkscape-font-specification:Charter"><tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'"
+   id="tspan6434">•</tspan> is a reference</tspan></text>
         </g>
         <g
            id="g7977">
@@ -159,23 +179,23 @@
                y="508.95633"
                x="147.2585"
                height="177.70694"
-               width="289.99194"
+               width="201.99194"
                id="rect7030"
                style="opacity:1;fill:none;fill-opacity:0.92156863;stroke:#d33682;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
             <path
                inkscape:connector-curvature="0"
                id="path7032"
-               d="M 436.7215,551.69539 H 147.60875"
+               d="M 348.88201,551.69539 H 147.50246"
                style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
             <path
                inkscape:connector-curvature="0"
                style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-               d="M 436.7215,599.52842 H 147.60875"
+               d="M 348.88201,599.52842 H 147.50246"
                id="path7034" />
             <path
                inkscape:connector-curvature="0"
                id="path7805"
-               d="M 436.7215,643.21312 H 147.60875"
+               d="M 348.88201,643.21312 H 147.50246"
                style="fill:none;fill-rule:evenodd;stroke:#d33682;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
           </g>
           <g
@@ -186,118 +206,113 @@
                  id="text7006"
                  y="581.79828"
                  x="165.64236"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="581.79828"
                    x="165.64236"
-                   id="tspan7008">name</tspan></text>
+                   id="tspan7008"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">name</tspan></text>
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 x="314.50467"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 x="260.50467"
                  y="581.79828"
                  id="text7010"><tspan
                    id="tspan7012"
-                   x="314.50467"
-                   y="581.79828">&quot;Wheatley&quot;</tspan></text>
+                   x="260.50467"
+                   y="581.79828"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">&quot;Wheatley&quot;</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  id="path7014"
-                 d="m 292.25487,570.78583 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 248.25487,573.26851 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
             </g>
             <g
                id="g7921">
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="165.64236"
                  y="627.11279"
                  id="text7018"><tspan
                    id="tspan7020"
                    x="165.64236"
-                   y="627.11279">birthdate</tspan></text>
+                   y="627.11279"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">birthdate</tspan></text>
               <text
                  id="text7022"
                  y="627.11279"
-                 x="314.50467"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 x="260.50467"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="627.11279"
-                   x="314.50467"
-                   id="tspan7024">2011-04-19</tspan></text>
+                   x="260.50467"
+                   id="tspan7024"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2011-04-19</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 d="m 292.25487,616.10033 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 248.25487,618.58301 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  id="path7026" />
             </g>
             <g
                id="g7928">
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 x="314.50467"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 x="260.50467"
                  y="669.8764"
                  id="text7777"><tspan
                    id="tspan7779"
-                   x="314.50467"
-                   y="669.8764">λ</tspan></text>
+                   x="260.50467"
+                   y="669.8764"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">λ</tspan></text>
               <text
                  id="text7497"
                  y="669.8764"
                  x="165.64236"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="669.8764"
                    x="165.64236"
-                   id="tspan7499">age</tspan></text>
+                   id="tspan7499"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">age</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  id="path7796"
-                 d="m 292.25487,659.26699 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 248.25487,661.74967 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
             </g>
             <g
                id="g7892">
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="165.64236"
                  y="536.95557"
                  id="text6994"><tspan
                    id="tspan6996"
                    x="165.64236"
-                   y="536.95557">self</tspan></text>
+                   y="536.95557"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">self</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 d="m 292.25487,525.94308 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 248.25487,528.42576 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  id="path7002" />
-              <g
-                 id="g7887">
-                <text
-                   xml:space="preserve"
-                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                   x="314.50467"
-                   y="536.95557"
-                   id="text6998"><tspan
-                     id="tspan7000"
-                     x="314.50467"
-                     y="536.95557">●</tspan></text>
-                <path
-                   inkscape:connector-curvature="0"
-                   style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7823)"
-                   d="m 319.30556,531.64847 c 0,0 39.29914,-35.7265 33.047,-48.67735 -6.25213,-12.95086 -36.7061,-8.43007 -39.74572,-3.58646 -3.03962,4.84361 -2.55485,12.19964 -2.67949,20.98931"
-                   id="path7815"
-                   sodipodi:nodetypes="cszc" />
-              </g>
+              <path
+                 inkscape:connector-curvature="0"
+                 style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker6814);marker-end:url(#marker7823)"
+                 d="m 265.30556,531.64847 c 0,0 39.29914,-35.7265 33.047,-48.67735 -6.25213,-12.95086 -36.7061,-8.43007 -39.74572,-3.58646 -3.03962,4.84361 -2.55485,12.19964 -2.67949,20.98931"
+                 id="path6810"
+                 sodipodi:nodetypes="cszc" />
             </g>
           </g>
         </g>
       </g>
       <g
-         transform="translate(-69.375892,-28.708663)"
+         transform="translate(-153.37589,-28.708663)"
          id="g8554">
         <g
            id="g8529">
@@ -306,19 +321,19 @@
             <rect
                style="opacity:1;fill:none;fill-opacity:0.92156863;stroke:#2aa198;stroke-width:1.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                id="rect8079"
-               width="287.83746"
+               width="207.23454"
                height="134.50232"
-               x="540.3316"
+               x="540.30902"
                y="552.16101" />
             <path
                inkscape:connector-curvature="0"
                id="path8083"
-               d="M 827.6401,599.52842 H 540.25094"
+               d="M 747.16271,599.52842 H 540.25094"
                style="fill:none;fill-rule:evenodd;stroke:#2aa198;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
             <path
                inkscape:connector-curvature="0"
                style="fill:none;fill-rule:evenodd;stroke:#2aa198;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-               d="M 827.6401,643.21312 H 540.25094"
+               d="M 747.16271,643.21312 H 540.25094"
                id="path8085" />
           </g>
           <g
@@ -328,26 +343,28 @@
                transform="translate(390.9186)">
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="166.01712"
                  y="581.79828"
                  id="text8091"><tspan
                    id="tspan8093"
                    x="166.01712"
-                   y="581.79828">name</tspan></text>
+                   y="581.79828"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">name</tspan></text>
               <text
                  id="text8095"
                  y="581.79828"
-                 x="314.50467"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 x="268.50467"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="581.79828"
-                   x="314.50467"
-                   id="tspan8097">&quot;Wheatley&quot;</tspan></text>
+                   x="268.50467"
+                   id="tspan8097"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">&quot;Wheatley&quot;</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 d="m 292.25487,570.78583 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 254.25487,573.91889 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  id="path8099" />
             </g>
             <g
@@ -357,24 +374,26 @@
                  id="text8103"
                  y="627.11279"
                  x="166.01712"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="627.11279"
                    x="166.01712"
-                   id="tspan8105">birthdate</tspan></text>
+                   id="tspan8105"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">birthdate</tspan></text>
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 x="314.50467"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 x="268.50467"
                  y="627.11279"
                  id="text8107"><tspan
                    id="tspan8109"
-                   x="314.50467"
-                   y="627.11279">2011-04-19</tspan></text>
+                   x="268.50467"
+                   y="627.11279"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2011-04-19</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  id="path8111"
-                 d="m 292.25487,616.10033 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 254.25487,619.23339 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
             </g>
             <g
@@ -383,62 +402,65 @@
               <text
                  id="text8115"
                  y="669.8764"
-                 x="314.50467"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 x="268.50467"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="669.8764"
-                   x="314.50467"
-                   id="tspan8117">m</tspan></text>
+                   x="268.50467"
+                   id="tspan8117"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">m</tspan></text>
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="166.01712"
                  y="669.8764"
                  id="text8119"><tspan
                    id="tspan8121"
                    x="166.01712"
-                   y="669.8764">age</tspan></text>
+                   y="669.8764"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">age</tspan></text>
               <path
                  inkscape:connector-curvature="0"
                  style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                 d="m 292.25487,659.26699 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+                 d="m 254.25487,662.40005 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                  id="path8123" />
             </g>
           </g>
         </g>
         <text
            xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="607.4306"
            y="715.09906"
            id="text8252"><tspan
              id="tspan8254"
              x="607.4306"
-             y="715.09906"><tspan
+             y="715.09906"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Charter;-inkscape-font-specification:Charter"><tspan
    id="tspan8256"
-   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'">m</tspan> is a method</tspan></text>
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">m</tspan> is a method</tspan></text>
       </g>
     </g>
   </g>
   <g
-     transform="translate(2.5036909,-26.669174)"
+     transform="translate(2.5036886,-95.949413)"
      id="g6849">
     <text
        id="text5473"
-       y="243.53342"
-       x="291.74573"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       y="259.53342"
+       x="270.14151"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="243.53342"
-         x="291.74573"
+         y="259.53342"
+         x="270.14151"
          id="tspan5475"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Records</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1000%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Records</tspan></text>
     <g
        id="g6789"
        transform="translate(0,40)">
       <path
          inkscape:connector-curvature="0"
-         style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5811)"
+         style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker5811)"
          d="m 361.45142,289.14313 h 28.70172"
          id="path5581" />
       <g
@@ -487,22 +509,24 @@
                id="g5740">
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="40.378288"
                  y="92.075348"
                  id="text5698"><tspan
                    id="tspan5700"
                    x="40.378288"
-                   y="92.075348">a</tspan></text>
+                   y="92.075348"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">a</tspan></text>
               <text
                  id="text5708"
                  y="92.075348"
                  x="75.404129"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="92.075348"
                    x="75.404129"
-                   id="tspan5710">1</tspan></text>
+                   id="tspan5710"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">1</tspan></text>
             </g>
           </g>
           <g
@@ -529,20 +553,22 @@
                  id="text5756"
                  y="92.075348"
                  x="40.378288"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="92.075348"
                    x="40.378288"
-                   id="tspan5758">b</tspan></text>
+                   id="tspan5758"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">b</tspan></text>
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="75.404129"
                  y="92.075348"
                  id="text5760"><tspan
                    id="tspan5762"
                    x="75.404129"
-                   y="92.075348">2</tspan></text>
+                   y="92.075348"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2</tspan></text>
             </g>
           </g>
           <g
@@ -567,22 +593,24 @@
                id="g5772">
               <text
                  xml:space="preserve"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  x="40.378288"
                  y="92.075348"
                  id="text5774"><tspan
                    id="tspan5776"
                    x="40.378288"
-                   y="92.075348">c</tspan></text>
+                   y="92.075348"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">c</tspan></text>
               <text
                  id="text5778"
                  y="92.075348"
                  x="75.404129"
-                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                  xml:space="preserve"><tspan
                    y="92.075348"
                    x="75.404129"
-                   id="tspan5780">3</tspan></text>
+                   id="tspan5780"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">3</tspan></text>
             </g>
           </g>
         </g>
@@ -596,26 +624,28 @@
              id="g6502">
             <text
                xml:space="preserve"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                x="443.3002"
                y="295.34927"
                id="text6344"><tspan
                  id="tspan6346"
                  x="443.3002"
-                 y="295.34927">a</tspan></text>
+                 y="295.34927"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">a</tspan></text>
             <text
                id="text6348"
                y="295.34927"
                x="505.82407"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                xml:space="preserve"><tspan
                  y="295.34927"
                  x="505.82407"
-                 id="tspan6350">1</tspan></text>
+                 id="tspan6350"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">1</tspan></text>
             <path
                inkscape:connector-curvature="0"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-               d="m 483.57426,284.3368 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+               d="m 483.57426,286.3368 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                id="path6489" />
           </g>
           <g
@@ -625,24 +655,26 @@
                id="text6511"
                y="295.34927"
                x="443.3002"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                xml:space="preserve"><tspan
                  y="295.34927"
                  x="443.3002"
-                 id="tspan6513">b</tspan></text>
+                 id="tspan6513"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">b</tspan></text>
             <text
                xml:space="preserve"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                x="505.82407"
                y="295.34927"
                id="text6515"><tspan
                  id="tspan6517"
                  x="505.82407"
-                 y="295.34927">2</tspan></text>
+                 y="295.34927"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2</tspan></text>
             <path
                inkscape:connector-curvature="0"
                id="path6519"
-               d="m 483.57426,284.3368 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+               d="m 483.57426,286.3368 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
           </g>
           <g
@@ -650,26 +682,28 @@
              transform="translate(0,90.15725)">
             <text
                xml:space="preserve"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                x="443.3002"
                y="295.34927"
                id="text6523"><tspan
                  id="tspan6525"
                  x="443.3002"
-                 y="295.34927">c</tspan></text>
+                 y="295.34927"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">c</tspan></text>
             <text
                id="text6527"
                y="295.34927"
                x="505.82407"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                xml:space="preserve"><tspan
                  y="295.34927"
                  x="505.82407"
-                 id="tspan6529">3</tspan></text>
+                 id="tspan6529"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">3</tspan></text>
             <path
                inkscape:connector-curvature="0"
                style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:medium;line-height:1000%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-               d="m 483.57426,284.3368 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
+               d="m 483.57426,286.3368 -0.75586,0.82813 3.61914,3.36718 h -13.8418 v -3.39453 h -1.22461 v 8.01172 h 1.22461 v -3.39453 h 13.8418 l -3.61914,3.36719 0.75586,0.82812 4.91406,-4.77148 v -0.0723 l -4.91406,-4.76953 z"
                id="path6531" />
           </g>
         </g>
@@ -697,18 +731,18 @@
     </g>
   </g>
   <g
-     transform="translate(60.725468,-26.669174)"
+     transform="translate(15.725466,-39.949413)"
      id="g5399">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="370.6684"
-       y="39.533413"
+       y="51.533413"
        id="text4204"><tspan
          id="tspan4206"
          x="370.6684"
-         y="39.533413"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Lists</tspan></text>
+         y="51.533413"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1000%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Lists</tspan></text>
     <g
        id="g5355">
       <g
@@ -778,53 +812,48 @@
                            id="text4277"
                            y="91.465561"
                            x="276.10223"
-                           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                            xml:space="preserve"><tspan
                              y="91.465561"
                              x="276.10223"
-                             id="tspan4279">4</tspan></text>
-                        <text
-                           xml:space="preserve"
-                           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-                           x="311.12805"
-                           y="96.201141"
-                           id="text4287"><tspan
-                             id="tspan4289"
-                             x="311.12805"
-                             y="96.201141">┴</tspan></text>
+                             id="tspan4279"
+                             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">4</tspan></text>
                       </g>
                     </g>
                     <text
                        xml:space="preserve"
-                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                        x="232.62927"
                        y="91.465561"
                        id="text4312"><tspan
                          id="tspan4314"
                          x="232.62927"
-                         y="91.465561">3</tspan></text>
+                         y="91.465561"
+                         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">3</tspan></text>
                   </g>
                 </g>
                 <text
                    id="text4318"
                    y="91.465561"
                    x="188.30046"
-                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+                   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                    xml:space="preserve"><tspan
                      y="91.465561"
                      x="188.30046"
-                     id="tspan4320">2</tspan></text>
+                     id="tspan4320"
+                     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2</tspan></text>
               </g>
             </g>
             <text
                xml:space="preserve"
-               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
                x="141.11148"
                y="91.465561"
                id="text4326"><tspan
                  id="tspan4328"
                  x="141.11148"
-                 y="91.465561">1</tspan></text>
+                 y="91.465561"
+                 style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">1</tspan></text>
           </g>
           <g
              id="g5250">
@@ -845,24 +874,34 @@
         <g
            id="g4358"
            transform="translate(-25.162699)">
-          <text
-             xml:space="preserve"
+          <g
+             aria-label="┴"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-             x="143.79117"
-             y="150.96342"
-             id="text4336"><tspan
-               id="tspan4338"
-               x="143.79117"
-               y="150.96342">┴</tspan></text>
+             id="text4336">
+            <path
+               d="m 143.16717,146.78742 h 10.848 v -1.248 h -4.8 v -10.576 h -1.248 v 10.576 h -4.8 z"
+               style="font-size:16px"
+               id="path6436"
+               inkscape:connector-curvature="0" />
+            <use
+               x="0"
+               y="0"
+               xlink:href="#path6436"
+               id="use6463"
+               width="100%"
+               height="100%"
+               transform="translate(192,-55.210048)" />
+          </g>
           <text
              xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:Charter;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              x="161.51447"
              y="145.99042"
              id="text4340"><tspan
                id="tspan4342"
                x="161.51447"
-               y="145.99042">is a distinguished empty pair</tspan></text>
+               y="145.99042"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16px;font-family:Charter;-inkscape-font-specification:Charter">is a distinguished empty pair</tspan></text>
         </g>
       </g>
       <g
@@ -873,38 +912,42 @@
              id="text4366"
              y="91.465561"
              x="558.26196"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              xml:space="preserve"><tspan
                y="91.465561"
                x="558.26196"
-               id="tspan4368">4</tspan></text>
+               id="tspan4368"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">4</tspan></text>
           <text
              xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              x="518.61182"
              y="91.465561"
              id="text4370"><tspan
                id="tspan4372"
                x="518.61182"
-               y="91.465561">3</tspan></text>
+               y="91.465561"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">3</tspan></text>
           <text
              id="text4374"
              y="91.465561"
              x="479.21359"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              xml:space="preserve"><tspan
                y="91.465561"
                x="479.21359"
-               id="tspan4376">2</tspan></text>
+               id="tspan4376"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2</tspan></text>
           <text
              xml:space="preserve"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
              x="439.94135"
              y="91.465561"
              id="text4378"><tspan
                id="tspan4380"
                x="439.94135"
-               y="91.465561">1</tspan></text>
+               y="91.465561"
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">1</tspan></text>
         </g>
         <g
            id="g5120">
@@ -934,35 +977,36 @@
       </g>
       <path
          inkscape:connector-curvature="0"
-         id="path4390"
+         id="path7020"
          d="m 368.24536,85.143133 h 28.70172"
-         style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#TriangleOutL)" />
+         style="fill:none;fill-rule:evenodd;stroke:#657b83;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker7354)" />
     </g>
   </g>
   <g
-     transform="translate(-26.797319,-26.669174)"
+     transform="translate(-26.797321,-39.949413)"
      id="g5130">
     <text
        id="text4159"
-       y="39.533413"
+       y="51.533413"
        x="43.755474"
-       style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:0%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="39.533413"
+         y="51.533413"
          x="43.755474"
          id="tspan4161"
-         style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:18px;line-height:1000%;font-family:'Source Sans Pro';-inkscape-font-specification:'Source Sans Pro, Semi-Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Pairs</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1000%;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:start;writing-mode:lr-tb;text-anchor:start">Pairs</tspan></text>
     <g
        id="g4181">
       <text
          id="text4165"
          y="92.075348"
          x="40.378288"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
            y="92.075348"
            x="40.378288"
-           id="tspan4167">1</tspan></text>
+           id="tspan4167"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">1</tspan></text>
       <g
          id="g4177">
         <rect
@@ -980,13 +1024,14 @@
       </g>
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18px;line-height:0%;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;line-height:0%;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          x="75.404129"
          y="92.075348"
          id="text4173"><tspan
            id="tspan4175"
            x="75.404129"
-           y="92.075348">2</tspan></text>
+           y="92.075348"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12px;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono'">2</tspan></text>
     </g>
   </g>
 </svg>
