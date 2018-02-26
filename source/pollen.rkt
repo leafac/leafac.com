@@ -251,6 +251,7 @@
    #:position relative
    [(:: & before)
     #:content ,label
+    #:border-radius ,space/extra-small
     #:text-transform uppercase
     #:letter-spacing ,letter-spacing
     #:font-size ,font-size/small
@@ -593,6 +594,7 @@
   (css-expr
    [a
     #:transition (background-color ,animation/duration)
+    #:border-radius ,space/extra-small
     #:color ,(dict-ref colors 'primary-content)
     [(: & hover)
      #:background-color ,(dict-ref colors 'background-highlight)
@@ -780,16 +782,17 @@
      #:content ""
      #:display inline-block
      #:margin-right ,space/extra-small
-     #:border-left (,space/small solid)]]
+     #:border-radius ,space/extra-small
+     #:width ,space/small]]
    [.beginner::before
     #:height .3rem
-    #:border-left-color ,(dict-ref colors 'red)]
+    #:background-color ,(dict-ref colors 'red)]
    [.intermediate::before
     #:height .6rem
-    #:border-left-color ,(dict-ref colors 'yellow)]
+    #:background-color ,(dict-ref colors 'yellow)]
    [.advanced::before
     #:height .9rem
-    #:border-left-color ,(dict-ref colors 'green)]))
+    #:background-color ,(dict-ref colors 'green)]))
 
 (define-component certification #:html (default-tag-function '@))
 
