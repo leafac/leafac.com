@@ -5,7 +5,7 @@ server:
 
 install:
 	pip install pygments
-	raco pkg install --name www-leafac-com $$(pwd)
+	raco pkg install --name www-leafac-com $(CURDIR)
 
 deploy:
 	raco pollen reset && \
