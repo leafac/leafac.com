@@ -34,5 +34,5 @@ $ pip install pygments
 Start the preview server with:
 
 @nested[#:style 'code-inset @verbatim{
-$ raco pollen start source/
+$ make
 }]

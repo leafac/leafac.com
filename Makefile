@@ -1,4 +1,7 @@
-.PHONY: deploy documentation documentation/deploy
+.PHONY: server deploy documentation documentation/deploy
+
+server:
+	raco pollen start source/
 
 deploy:
 	raco pollen reset && \
