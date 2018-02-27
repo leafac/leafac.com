@@ -525,6 +525,7 @@
     #:font-size ,font-size/extra-small]
    [pre
     ,@font-family/monospace
+    #:background-color ,(dict-ref colors 'background)
     #:margin ,space/none
     #:overflow auto
     #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
