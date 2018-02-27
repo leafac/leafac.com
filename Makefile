@@ -1,7 +1,11 @@
-.PHONY: server deploy documentation documentation/deploy
+.PHONY: server install deploy documentation documentation/deploy
 
 server:
 	raco pollen start source/
+
+install:
+	pip install pygments
+	raco pkg install --name www-leafac-com $$(pwd)
 
 deploy:
 	raco pollen reset && \
