@@ -1,6 +1,7 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
-         racket/format racket/function racket/list racket/file racket/dict racket/string file/sha1
+         racket/string racket/format racket/function racket/list racket/dict
+         racket/runtime-path racket/file file/sha1
          css-expr libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
@@ -36,7 +37,8 @@
 (define (internal-url path) (~a (base-path) path))
 (define base-absolute (make-parameter "https://www.leafac.com"))
 (define (absolute-url path) (~a (base-absolute) path))
-(define (source-path path) (~a (current-project-root) path))
+(define-runtime-path project-path "./")
+(define (source-path path) (~a project-path path))
 
 ;; CSS helpers
 
