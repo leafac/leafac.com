@@ -1,6 +1,14 @@
 #lang pollen
 
 ◊entry{
+ ◊title{Redesign}
+ ◊link[#:href ◊absolute-url["/"]]
+ ◊id{urn:uuid:400ec6e1-dae5-4fdf-b0de-1a48273ae13b}
+ ◊updated{2018-02-27T06:00:43-05:00}
+ ◊summary{The website has been redesigned in subtle ways to improve readability and load time.}
+}
+
+◊entry{
  ◊title{My First Robot}
  ◊link[#:href ◊absolute-url["/music/my-first-robot"]]
  ◊id{urn:uuid:f567c62e-852e-48b1-b9b0-c87f3cbfefc6}
