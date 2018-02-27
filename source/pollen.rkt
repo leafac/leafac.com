@@ -419,7 +419,9 @@
     #:color ,(dict-ref colors 'emphasized-content)
     #:margin (#:top ,space/extra-large #:bottom ,space/small)
     #:line-height ,line-height/small
-    [a #:text-decoration none]]
+    [a
+     #:text-decoration none
+     #:color ,(dict-ref colors 'emphasized-content)]]
    [h1+h2 #:margin-top ,space/medium]))
 
 (define-component (heading/mark . elements)
