@@ -414,6 +414,7 @@
   #:css
   (css-expr
    [h1 h2
+    #:color ,(dict-ref colors 'emphasized-content)
     #:margin (#:top ,space/extra-large #:bottom ,space/small)
     #:line-height ,line-height/small
     [a #:text-decoration none]]
