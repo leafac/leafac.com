@@ -1,4 +1,4 @@
-.PHONY: server install deploy documentation documentation/deploy
+.PHONY: server install clean deploy documentation documentation/deploy
 
 server:
 	raco pollen start source/
@@ -7,8 +7,10 @@ install:
 	pip install pygments
 	raco pkg install --name www-leafac-com $(CURDIR)
 
-deploy:
-	raco pollen reset && \
+clean:
+	raco pollen reset
+
+deploy: clean
 	raco pollen render --recursive $(CURDIR)/source && \
 	temporary_directory=$$(mktemp -d) && \
 	raco pollen publish $(CURDIR)/source $$temporary_directory && \
