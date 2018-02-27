@@ -24,7 +24,7 @@ Source for Leandro Facchinetti’s personal website.
 
 ◊subsection['leafac-com]{◊link/internal["/software/leafac.com"]{leafac.com}}
 
-Configuration for Leandro Facchinetti’s personal server “leafac.com”.
+Configuration for Leandro Facchinetti’s personal server ‘leafac.com’.
 
 ◊subsection['laptop]{◊link/internal["/software/laptop"]{laptop}}
 
