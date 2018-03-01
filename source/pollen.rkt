@@ -1,17 +1,17 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
-         racket/string racket/format racket/function racket/list racket/dict
+         racket/string racket/format racket/function racket/list racket/dict racket/match
          racket/file file/sha1 racket/runtime-path
          css-expr libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
-         pollen/core pollen/decode pollen/tag pollen/file pollen/setup pollen-component)
+         pollen/core pollen/file pollen/decode pollen/tag pollen/setup pollen-component)
 
 (provide (all-defined-out)
          (all-from-out
-          racket/string racket/format racket/function racket/list racket/dict
-          racket/file file/sha1 gregor gregor/period sugar xml
-          pollen/core pollen/file
-          css-expr))
+          racket/string racket/format racket/function racket/list racket/dict racket/match
+          racket/file file/sha1
+          css-expr libuuid gregor gregor/period sugar xml
+          pollen/core pollen/file))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; PERSONAL DATA
