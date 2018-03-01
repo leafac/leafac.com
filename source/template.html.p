@@ -2,7 +2,7 @@
 ◊(begin
    (define title (select-from-metas 'title metas))
    (define date (select-from-metas 'date metas))
-   
+
    (->html
     (html
      (head
