@@ -58,12 +58,6 @@
                     (css-expr ,prefixed-name ,@rests/datum)))
                ,name/datum ,@rests/datum)]))
 
-;; Feeds
-
-;; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
-(define (feed/uuid) (string-downcase (~a "urn:uuid:" (uuid-generate))))
-(define (feed/date) (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx"))
-
 ;; ---------------------------------------------------------------------------------------------------
 ;; COMPONENTS
 

@@ -1,5 +1,17 @@
 #lang pollen
 
+◊; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
+◊(define (template)
+   (displayln (~a "
+◊entry{
+ ◊title{}
+ ◊link[#:href ◊absolute-url{/}]
+ ◊id{" (string-downcase (~a "urn:uuid:" (uuid-generate))) "}
+ ◊updated{" (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx") "}
+ ◊summary{}
+}
+")))
+
 ◊entry{
  ◊title{Redesign}
  ◊link[#:href ◊absolute-url["/"]]
