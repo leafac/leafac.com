@@ -1,5 +1,8 @@
 #lang pollen
 
+◊define-meta[title]{Atom Feed}
+
+◊;{
 ◊; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 ◊(define (template)
    (displayln (~a "
@@ -98,4 +101,5 @@
  ◊id{urn:uuid:22db8aa9-1c0f-4f0f-9f2e-170a6d58bb9c}
  ◊updated{2016-12-27T07:54:08-05:00}
  ◊summary{Published new website.}
+}
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+◊(local-require pollen/setup)
 ◊(define title (select-from-metas 'title metas))
 ◊(define date (select-from-metas 'date metas))
 <html>
@@ -17,19 +18,11 @@
       <h1>◊(->html ◊link["/"]{◊(select 'name personal-data)})</h1>
       <nav>
         ◊string-append*[
-          (for/list ([(path label)
-                      (in-dict '(("about"     . "About")
-                                 ("contact"   . "Contact")
-                                 ("research"  . "Research")
-                                 ("prose"     . "Prose")
-                                 ("software"  . "Software")
-                                 ("music"     . "Music")
-                                 ("cooking"   . "Cooking")
-                                 ("feed.atom" . "Atom Feed")
-                                 ("license"   . "License")
-                                 ("colophon"  . "Colophon")))])
-            (define class (if (string-prefix? (~a here) path) ◊~a{class="active"} ""))
-            ◊~a{<a href="/◊|path|" ◊|class|>◊|label|</a>})]
+          (for/list ([pagenode (in-list (pagetree->list (~a (current-project-root) "index.ptree")))])
+            (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
+            (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
+            (define active? (string-prefix? (~a here) path))
+            ◊~a{<a href="/◊|path|"◊(if active? ◊~a{ class="active"} "")>◊|title|</a>})]
       </nav>
     </header>
     <article>

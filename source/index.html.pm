@@ -10,6 +10,7 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
 
 ◊section['news]{News}
 
+◊;{
 ◊(require (prefix-in feed: "feed.atom.pm"))
 
 ◊(apply
@@ -30,3 +31,4 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
        (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
        ◊@{◊subsection[key]{◊link[href]{◊title · ◊time{◊entry/time}}}◊summary}]
       [_ ◊@{}])))
+}
