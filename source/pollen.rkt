@@ -304,8 +304,6 @@
     #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
     #:margin-bottom ,space/extra-large]))
 
-(define-component navigation #:html (default-tag-function 'nav))
-
 (define-component menu
   #:css
   (css-expr
