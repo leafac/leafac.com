@@ -18,16 +18,16 @@
       <nav>
         ◊string-append*[
           (for/list ([(path label)
-                      (in-dict '(("about" . "About")
-                                 ("contact" . "Contact")
-                                 ("research" . "Research")
-                                 ("prose" . "Prose")
-                                 ("software" . "Software")
-                                 ("music" . "Music")
-                                 ("cooking" . "Cooking")
+                      (in-dict '(("about"     . "About")
+                                 ("contact"   . "Contact")
+                                 ("research"  . "Research")
+                                 ("prose"     . "Prose")
+                                 ("software"  . "Software")
+                                 ("music"     . "Music")
+                                 ("cooking"   . "Cooking")
                                  ("feed.atom" . "Atom Feed")
-                                 ("license" . "License")
-                                 ("colophon" . "Colophon")))])
+                                 ("license"   . "License")
+                                 ("colophon"  . "Colophon")))])
             (define class (if (string-prefix? (~a here) path) ◊~a{class="active"} ""))
             ◊~a{<a href="/◊|path|" ◊|class|>◊|label|</a>})]
       </nav>
