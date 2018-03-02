@@ -34,8 +34,6 @@
 
 ;; Paths
 
-(define base-path (make-parameter ""))
-(define (internal-url path) (~a (base-path) path))
 (define base-absolute (make-parameter "https://www.leafac.com"))
 (define (absolute-url path) (~a (base-absolute) path))
 (define-runtime-path project-path "./")
@@ -121,42 +119,42 @@
     #:font-style normal
     #:font-weight 400
     #:font-stretch normal
-    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_regular-webfont.woff"))
+    #:src ((apply url "/vendor/assets/fonts/charter_regular-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Charter"
     #:font-style italic
     #:font-weight 400
     #:font-stretch normal
-    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_italic-webfont.woff"))
+    #:src ((apply url "/vendor/assets/fonts/charter_italic-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Charter"
     #:font-style normal
     #:font-weight 700
     #:font-stretch normal
-    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_bold-webfont.woff"))
+    #:src ((apply url "/vendor/assets/fonts/charter_bold-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Charter"
     #:font-style italic
     #:font-weight 700
     #:font-stretch normal
-    #:src ((apply url ,(internal-url "/vendor/assets/fonts/charter_bold_italic-webfont.woff"))
+    #:src ((apply url "/vendor/assets/fonts/charter_bold_italic-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Fira Mono"
     #:font-style normal
     #:font-weight 400
     #:font-stretch normal
-    #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Regular.woff"))
+    #:src ((apply url "/vendor/assets/fonts/FiraMono-Regular.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Fira Mono"
     #:font-style normal
     #:font-weight 500
     #:font-stretch normal
-    #:src ((apply url ,(internal-url "/vendor/assets/fonts/FiraMono-Medium.woff"))
+    #:src ((apply url "/vendor/assets/fonts/FiraMono-Medium.woff")
            (apply format "woff"))]))
 
 (define font-family/main
@@ -602,8 +600,6 @@
        #:background-color ,(dict-ref colors 'background)
        #:color ,(dict-ref colors 'primary-content)]]]]))
 
-(define-component (link/internal path . elements) #:html (apply link (internal-url path) elements))
-
 ;; References
 
 (define-component (label key)
@@ -675,7 +671,7 @@
   #:css (css-expr [.recipes ,@(prefix (css-expr #:column-count 2)) #:padding-left ,space/none]))
 
 (define-component (recipe path . elements)
-  #:html (list/unordered/item #:class "recipe" (apply link/internal (~a "/cooking/" path) elements))
+  #:html (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements))
   #:css
   (css-expr
    [.recipe

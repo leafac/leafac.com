@@ -14,19 +14,19 @@
   </head>
   <body>
     <header>
-      <h1>◊(->html ◊link/internal["/"]{◊(select 'name personal-data)})</h1>
+      <h1>◊(->html ◊link["/"]{◊(select 'name personal-data)})</h1>
       <nav>
         ◊(->html ◊@[
-        ◊menu/item[#:activation-path "about/"]{◊link/internal["/about"]{About}}
-        ◊menu/item[#:activation-path "contact/"]{◊link/internal["/contact"]{Contact}}
-        ◊menu/item[#:activation-path "research/"]{◊link/internal["/research"]{Research}}
-        ◊menu/item[#:activation-path "prose/"]{◊link/internal["/prose"]{Prose}}
-        ◊menu/item[#:activation-path "software/"]{◊link/internal["/software"]{Software}}
-        ◊menu/item[#:activation-path "music/"]{◊link/internal["/music"]{Music}}
-        ◊menu/item[#:activation-path "cooking/"]{◊link/internal["/cooking"]{Cooking}}
-        ◊menu/item{◊link/internal["/feed.atom"]{Atom feed}}
-        ◊menu/item[#:activation-path "license/"]{◊link/internal["/license"]{License}}
-        ◊menu/item[#:activation-path "colophon/"]{◊link/internal["/colophon"]{Colophon}}])
+        ◊menu/item[#:activation-path "about/"]{◊link["/about"]{About}}
+        ◊menu/item[#:activation-path "contact/"]{◊link["/contact"]{Contact}}
+        ◊menu/item[#:activation-path "research/"]{◊link["/research"]{Research}}
+        ◊menu/item[#:activation-path "prose/"]{◊link["/prose"]{Prose}}
+        ◊menu/item[#:activation-path "software/"]{◊link["/software"]{Software}}
+        ◊menu/item[#:activation-path "music/"]{◊link["/music"]{Music}}
+        ◊menu/item[#:activation-path "cooking/"]{◊link["/cooking"]{Cooking}}
+        ◊menu/item{◊link["/feed.atom"]{Atom feed}}
+        ◊menu/item[#:activation-path "license/"]{◊link["/license"]{License}}
+        ◊menu/item[#:activation-path "colophon/"]{◊link["/colophon"]{Colophon}}])
       </nav>
     </header>
     <article>

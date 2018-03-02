@@ -2,7 +2,7 @@
 
 ◊define-meta[title]{License}
 
-◊margin-note{See the ◊link/internal["/software/www.leafac.com/"]{source code for the website}.}
+◊margin-note{See the ◊link["/software/www.leafac.com/"]{source code for the website}.}
 
 The license for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{GNU FDL}:
 

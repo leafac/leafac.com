@@ -5,9 +5,9 @@
 
 ◊margin-note{◊figure/image{/assets/images/avatar.png}}
 
-I am a writer of ◊link/internal["/prose"]{prose}, ◊link/internal["/software"]{software} and ◊link/internal["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link/internal["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
+I am a writer of ◊link["/prose"]{prose}, ◊link["/software"]{software} and ◊link["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
 
-My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link/internal["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
+My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
 ◊new-thought[]
 
@@ -21,9 +21,9 @@ I was born in Brazil and lived there most of my life. My undergraduate degree is
 
 I enjoy a frugal, simple, minimalist lifestyle. I own as few things as possible. I do not own a cell phone or participate in Internet social networks.
 
-I play the guitar and ◊link/internal["/songs"]{write my own songs}. I am also into electronic music production and computer generated music.
+I play the guitar and ◊link["/songs"]{write my own songs}. I am also into electronic music production and computer generated music.
 
-I am ◊link/internal["/cooking"]{vegan}. I do not eat and do not use any animal-derived products. I cook most of my meals, instead of eating out.
+I am ◊link["/cooking"]{vegan}. I do not eat and do not use any animal-derived products. I cook most of my meals, instead of eating out.
 
 I read about a book per week. Both fiction and non-fiction.
 
@@ -40,7 +40,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
  ◊education/to[#:estimated? #t]{2019-09}
  ◊education/highlights{
   ◊education/highlight{I am part of ◊link["http://pl.cs.jhu.edu/"]{The Programming Languages Laboratory}, under ◊link["http://www.cs.jhu.edu/~scott/"]{Dr. Scott Smith’s} advisory.}
-  ◊education/highlight{I ◊link/internal["/research"]{research} a new approach to high-order program analysis called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis (DDPA)}.}
+  ◊education/highlight{I ◊link["/research"]{research} a new approach to high-order program analysis called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis (DDPA)}.}
   ◊education/highlight{I took courses in programming languages, logic, software engineering, cryptography, natural language processing and databases.}
   ◊education/highlight{I was a course assistant for the ◊link["http://pl.cs.jhu.edu/oose/index.shtml"]{Object-Oriented Software Engineering} course on Fall 2015. I advised groups of students on their semester-long project and lectured about Git.}
   ◊education/highlight{I am system administrator for the laboratory.}
@@ -259,7 +259,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊event{
  ◊event/title['event--tfp-216]{◊link["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (TFP 2016)}}
  ◊event/date{2016-06-08, 2016-06-10}
- ◊event/highlight{Alexander Rozenshteyn presented the paper ◊publication{◊link/internal["/research#publication--paper--what-is-your-function"]{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
+ ◊event/highlight{Alexander Rozenshteyn presented the paper ◊publication{◊link["/research#publication--paper--what-is-your-function"]{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
 }
 
 ◊event{
@@ -336,19 +336,19 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊event{
  ◊event/title['event--18th-international-scientific-initiation-symposium]{◊foreign{18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo} (18th International Scientific Initiation Symposium from Universidade de São Paulo)}
  ◊event/date{2010-11}
- ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
+ ◊event/highlight{Presented the paper ◊publication{◊link["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
 }
 
 ◊event{
  ◊event/title['event--joint-conference-2010]{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
  ◊event/date{2010-10-24}
- ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
+ ◊event/highlight{Presented the paper ◊publication{◊link["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
 }
 
 ◊event{
  ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (IV Scientific and Technologic Initiation Workshop)}
  ◊event/date{2010-09-22}
- ◊event/highlight{Presented the paper ◊publication{◊link/internal["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
+ ◊event/highlight{Presented the paper ◊publication{◊link["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
 }
 
 ◊event{

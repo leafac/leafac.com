@@ -3,7 +3,7 @@
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Simple Interpreter}
 ◊define-meta[date]{2017-06-26}
 
-◊margin-note{This article assumes knowledge of the ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
+◊margin-note{This article assumes knowledge of the ◊link["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
 ◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter/programming-language-theory-explained-for-the-working-programmer--simple-interpreter.rkt"]{Here} is the code for this entire article.}
 
@@ -17,7 +17,7 @@ More interesting than the choice of base language is the choice of target langua
 
 We choose ◊technical-term{simplicity} over ◊technical-term{convenience}. Our target language preferably includes as few features as possible, so that our interpreter is small and understandable, and changing it requires minimal effort. The price we pay is that our target language is ◊technical-term{difficult} to use; programs written in it are verbose and unintelligible. This would be a bad choice for everyday programming tasks, but it is a good target language for this article, because, despite its simplicity, it remains a programming language with enough features to support arbitrary computations.
 
-◊margin-note{For more on our target language, refer to ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{◊publication{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}}.}
+◊margin-note{For more on our target language, refer to ◊link["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{◊publication{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}}.}
 
 There exist many languages that fit our requirements. From all of them, we choose one that is particularly elegant, for its compactness. This target language represents a minimal core with only the following features: (1) definitions of anonymous functions of single argument and single return value; (2) applications of these functions; and (3) variable references. The following listing is an example of a program in this language:
 
@@ -35,7 +35,7 @@ There exist many languages that fit our requirements. From all of them, we choos
 
 The program above defines a function which has no name (anonymous function). Function definitions are enclosed in parentheses, and start with the Greek letter lambda (◊code{λ}). After the ◊code{λ} there is the name of the argument received by the function, also in parentheses, ◊code{(x)}. Finally, there is the function body, an expression specifying which computation the function performs. In the example, the computation is to just return the argument ◊code{x}, unaltered.
 
-In our target language, functions are values. They are the only kind of value; there are no numbers, booleans, strings, data structures and other constructs usually found in programming languages. This highlights how ◊technical-term{simple} the language is. Despite its simplicity, our target language is ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{capable of performing arbitrary computations}. In the case of the listing above, the function definition is the whole program. This is similar to how the following is a complete program in languages including Racket, Ruby, JavaScript and Python:
+In our target language, functions are values. They are the only kind of value; there are no numbers, booleans, strings, data structures and other constructs usually found in programming languages. This highlights how ◊technical-term{simple} the language is. Despite its simplicity, our target language is ◊link["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{capable of performing arbitrary computations}. In the case of the listing above, the function definition is the whole program. This is similar to how the following is a complete program in languages including Racket, Ruby, JavaScript and Python:
 
 ◊code/block[#:language 'racket]{
 5
@@ -784,9 +784,9 @@ Our program now works as we expected:
 
 ◊new-thought[]
 
-This concludes the implementation of our interpreter. To test it in a realistic setting, we can use the final version of the program ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}, which calculates the sum ◊code{1 + 2 + 3 + 4 + 5}:
+This concludes the implementation of our interpreter. To test it in a realistic setting, we can use the final version of the program ◊link["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{from the article that introduces our target language}, which calculates the sum ◊code{1 + 2 + 3 + 4 + 5}:
 
-◊margin-note{In this listing, we use Racket’s ◊code{eval} function to transform the result of ◊code{interpret}—a Racket data structure representing a program in our target language—into a Racket function. For example, ◊code{(eval `(λ (x) x))} results in the Racket function ◊code{(λ (x) x)}—note that there is no quasiquoting in this result, it is a native Racket function. We then use ◊code{pretty-print} to inspect the outputs of our program. The ◊code{pretty-print} is defined in ◊link/internal["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{the article that introduces our target language}.}
+◊margin-note{In this listing, we use Racket’s ◊code{eval} function to transform the result of ◊code{interpret}—a Racket data structure representing a program in our target language—into a Racket function. For example, ◊code{(eval `(λ (x) x))} results in the Racket function ◊code{(λ (x) x)}—note that there is no quasiquoting in this result, it is a native Racket function. We then use ◊code{pretty-print} to inspect the outputs of our program. The ◊code{pretty-print} is defined in ◊link["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{the article that introduces our target language}.}
 
 ◊margin-note{To reproduce this result in DrRacket, enter the listing in the ◊technical-term{interactions} window (on the bottom or the right), instead of the ◊technical-term{definitions} window (on the top or the left). The reason is that ◊code{eval}, as written, only works in the ◊technical-term{interactions} window.}
 
@@ -988,6 +988,6 @@ We started with a fundamental question: How do interpreters evaluate programs to
 
 ◊section['references]{References}
 
-◊margin-note{For more on PLT Redex, read ◊link/internal["/prose/playing-the-game-with-plt-redex/"]{◊publication{Playing the Game with PLT Redex}}.}
+◊margin-note{For more on PLT Redex, read ◊link["/prose/playing-the-game-with-plt-redex/"]{◊publication{Playing the Game with PLT Redex}}.}
 
 The approach to interpretation followed by this article is inspired by ◊link["https://mitpress.mit.edu/sicp/full-text/book/book.html"]{◊publication{Structure and Interpretation of Computer Programs}}, the classic textbook. We follow a more modern approach using pattern matching, which is based on ◊link["https://redex.racket-lang.org/"]{PLT Redex} and ◊link["https://mitpress.mit.edu/books/semantics-engineering-plt-redex"]{◊publication{Semantics Engineering with PLT Redex}}. A great source for learning about interpretation in depth is the ◊link["http://library.readscheme.org/page1.html"]{Lambda Papers}. People interested in reading more recent research papers need to understand the associated formal notation, for which the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{◊publication{Principles of Programming Languages}} is a gentle introduction (disclaimer, the author is my advisor).

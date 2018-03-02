@@ -2,7 +2,7 @@
 
 ◊define-meta[title]{Software}
 
-◊subsection['kill-the-newsletter]{◊link/internal["/software/kill-the-newsletter"]{Kill the Newsletter!}}
+◊subsection['kill-the-newsletter]{◊link["/software/kill-the-newsletter"]{Kill the Newsletter!}}
 
 Convert email newsletters into Atom feeds.
 
@@ -18,24 +18,24 @@ Component-based development for ◊link["http://pollenpub.com/"]{Pollen}.
 
 A solution to the expression problem in Typed Racket.
 
-◊subsection['www-leafac-com]{◊link/internal["/software/www.leafac.com"]{www.leafac.com}}
+◊subsection['www-leafac-com]{◊link["/software/www.leafac.com"]{www.leafac.com}}
 
 Source for Leandro Facchinetti’s personal website.
 
-◊subsection['leafac-com]{◊link/internal["/software/leafac.com"]{leafac.com}}
+◊subsection['leafac-com]{◊link["/software/leafac.com"]{leafac.com}}
 
 Configuration for Leandro Facchinetti’s personal server ‘leafac.com’.
 
-◊subsection['laptop]{◊link/internal["/software/laptop"]{laptop}}
+◊subsection['laptop]{◊link["/software/laptop"]{laptop}}
 
 Configuration for Leandro Facchinetti’s personal machine.
 
 ◊section['archived]{Archived}
 
-◊subsection['org-password-manager]{◊link/internal["/software/org-password-manager"]{Org Password Manager}}
+◊subsection['org-password-manager]{◊link["/software/org-password-manager"]{Org Password Manager}}
 
 Password manager for ◊link["https://orgmode.org"]{Org Mode}.
 
-◊subsection['programmable-foot-keyboard]{◊link/internal["/software/programmable-foot-keyboard"]{Programmable Foot Keyboard}}
+◊subsection['programmable-foot-keyboard]{◊link["/software/programmable-foot-keyboard"]{Programmable Foot Keyboard}}
 
 A programmable foot keyboard using ◊link["https://learn.adafruit.com/introducing-trinket"]{Adafruit’s Trinket}.

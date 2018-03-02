@@ -5,7 +5,7 @@
 ◊section['publications]{Publications}
 
 ◊publication/paper{
- ◊publication/paper/title['publication--paper--relative-store-fragment-for-singleton-abstraction]{◊link/internal["/research/relative-store-fragment-for-singleton-abstraction/relative-store-fragment-for-singleton-abstraction.pdf"]{Relative Store Fragment for Singleton Abstraction}}
+ ◊publication/paper/title['publication--paper--relative-store-fragment-for-singleton-abstraction]{◊link["/research/relative-store-fragment-for-singleton-abstraction/relative-store-fragment-for-singleton-abstraction.pdf"]{Relative Store Fragment for Singleton Abstraction}}
  ◊publication/paper/authors{Leandro Facchinetti, Zachary Palmer and Scott F. Smith}
  ◊publication/paper/venue{◊link["http://staticanalysis.org/sas2017/sas2017.html"]{24th Static Analysis Symposium}}
  ◊publication/paper/date{2017}
@@ -13,7 +13,7 @@
 }
 
 ◊publication/paper{
- ◊publication/paper/title['publication--paper--practical-demand-driven-program-analysis-with-recursion]{◊link/internal["/research/practical-demand-driven-program-analysis-with-recursion/practical-demand-driven-program-analysis-with-recursion.pdf"]{Practical Demand-Driven Program Analysis with Recursion}}
+ ◊publication/paper/title['publication--paper--practical-demand-driven-program-analysis-with-recursion]{◊link["/research/practical-demand-driven-program-analysis-with-recursion/practical-demand-driven-program-analysis-with-recursion.pdf"]{Practical Demand-Driven Program Analysis with Recursion}}
  ◊publication/paper/authors{Leandro Facchinetti}
  ◊publication/paper/venue{Research project report to fulfill a qualifying requirement of the Ph.D. program at The Johns Hopkins University}
  ◊publication/paper/date{2016}
@@ -37,7 +37,7 @@
 }
 
 ◊publication/paper{
- ◊publication/paper/title['publication--paper--what-is-your-function]{◊link/internal["/research/what-is-your-function/what-is-your-function.pdf"]{What is Your Function? Static Pattern Matching on Function Behavior}}
+ ◊publication/paper/title['publication--paper--what-is-your-function]{◊link["/research/what-is-your-function/what-is-your-function.pdf"]{What is Your Function? Static Pattern Matching on Function Behavior}}
  ◊publication/paper/authors{Leandro Facchinetti, Pottayil Harisanker Menon, Zachary Palmer, Alexander Rozenshteyn and Scott F. Smith}
  ◊publication/paper/venue{◊link["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (TFP 2016)}}
  ◊publication/paper/date{2016}
@@ -49,21 +49,21 @@
 }
 
 ◊publication/paper{
- ◊publication/paper/title['publication--paper--pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos]{◊link/internal["/research/pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos/pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos.pdf"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Táticos para Ambientes Internos} (Research and Development of Tactical Robots for Indoor Environments)}}
+ ◊publication/paper/title['publication--paper--pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos]{◊link["/research/pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos/pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos.pdf"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Táticos para Ambientes Internos} (Research and Development of Tactical Robots for Indoor Environments)}}
  ◊publication/paper/authors{Fernando Osório, Denis Wolf, Kalinka Castelo Branco, Jó Ueyama, Gustavo Pessin, Leandro Fernandes, Maurício Dias, Leandro Couto, Daniel Sales, Diogo Correa, Matheus Nin, Leandro Lourenço Silva, Leonardo Bonetti, Leandro Facchinetti and Fabiano Hessel}
  ◊publication/paper/venue{Internal Workshop of INCT-SEC}
  ◊publication/paper/date{2011}
 }
 
 ◊publication/paper{
- ◊publication/paper/title['publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes]{◊link/internal["/research/sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes/sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes.pdf"]{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}
+ ◊publication/paper/title['publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes]{◊link["/research/sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes/sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes.pdf"]{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}
  ◊publication/paper/authors{Leandro Facchinetti and Fernando Santos Osório}
  ◊publication/paper/venue{◊foreign{18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo} (18th International Scientific Initiation Symposium from Universidade de São Paulo)}
  ◊publication/paper/date{2010-11}
 }
 
 ◊publication/paper{
- ◊publication/paper/title['publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens]{◊link/internal["/research/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens.pdf"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}
+ ◊publication/paper/title['publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens]{◊link["/research/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens.pdf"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}
  ◊publication/paper/authors{Leandro Facchinetti and Fernando Santos Osório}
  ◊publication/paper/venue{◊link["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
  ◊publication/paper/date{2010-10-24}
