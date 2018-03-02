@@ -306,30 +306,21 @@
 
 (define-component navigation #:html (default-tag-function 'nav))
 
-(define-component (menu . elements)
-  #:html (apply navigation #:class "menu" elements)
-  #:css (css-expr [(header nav) #:margin-bottom ,space/small]))
-
-(define-component (menu/item #:activation-path [activation-path #f] . elements)
-  #:html
-  (apply
-   (default-tag-function 'span #:class
-     (if (and activation-path
-              (string-prefix? (select-from-metas 'here-path metas) (source-path activation-path)))
-         "menu-item active"
-         "menu-item"))
-   elements)
+(define-component menu
   #:css
   (css-expr
-   [.menu-item
-    ,@inline-block-enumeration
-    #:font-size ,font-size/small
-    #:text-transform uppercase
-    #:letter-spacing ,letter-spacing
-    [a #:text-decoration none]
-    [(|.| & active)
-     #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-     #:margin-bottom ,ruler/thin/negative]]))
+   [(header nav)
+    #:margin-bottom ,space/small
+    [a
+     ,@inline-block-enumeration
+     #:font-size ,font-size/small
+     #:text-transform uppercase
+     #:letter-spacing ,letter-spacing
+     #:text-decoration none
+     [(|.| & active)
+      #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+      #:border-radius ,space/none
+      #:margin-bottom ,ruler/thin/negative]]]))
 
 (define-component header/article
   #:css

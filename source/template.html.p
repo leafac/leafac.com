@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 ◊(define title (select-from-metas 'title metas))
 ◊(define date (select-from-metas 'date metas))
+◊(define (menu-item path label)
+   ◊~a{<a href="/◊|path|" ◊(if (string-prefix? (~a here) path) ◊~a{class="active"} "")>◊|label|</a>})
 <html>
   <head>
     <meta charset="utf-8">
@@ -16,17 +18,16 @@
     <header>
       <h1>◊(->html ◊link["/"]{◊(select 'name personal-data)})</h1>
       <nav>
-        ◊(->html ◊@[
-        ◊menu/item[#:activation-path "about/"]{◊link["/about"]{About}}
-        ◊menu/item[#:activation-path "contact/"]{◊link["/contact"]{Contact}}
-        ◊menu/item[#:activation-path "research/"]{◊link["/research"]{Research}}
-        ◊menu/item[#:activation-path "prose/"]{◊link["/prose"]{Prose}}
-        ◊menu/item[#:activation-path "software/"]{◊link["/software"]{Software}}
-        ◊menu/item[#:activation-path "music/"]{◊link["/music"]{Music}}
-        ◊menu/item[#:activation-path "cooking/"]{◊link["/cooking"]{Cooking}}
-        ◊menu/item{◊link["/feed.atom"]{Atom feed}}
-        ◊menu/item[#:activation-path "license/"]{◊link["/license"]{License}}
-        ◊menu/item[#:activation-path "colophon/"]{◊link["/colophon"]{Colophon}}])
+        ◊menu-item["about"]{About}
+        ◊menu-item["contact"]{Contact}
+        ◊menu-item["research"]{Research}
+        ◊menu-item["prose"]{Prose}
+        ◊menu-item["software"]{Software}
+        ◊menu-item["music"]{Music}
+        ◊menu-item["cooking"]{Cooking}
+        ◊menu-item["feed.atom"]{Atom Feed}
+        ◊menu-item["license"]{License}
+        ◊menu-item["colophon"]{Colophon}
       </nav>
     </header>
     <article>
