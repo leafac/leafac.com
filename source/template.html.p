@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 ◊(define title (select-from-metas 'title metas))
 ◊(define date (select-from-metas 'date metas))
-◊(define (menu-item path label)
-   ◊~a{<a href="/◊|path|" ◊(if (string-prefix? (~a here) path) ◊~a{class="active"} "")>◊|label|</a>})
 <html>
   <head>
     <meta charset="utf-8">
@@ -18,16 +16,20 @@
     <header>
       <h1>◊(->html ◊link["/"]{◊(select 'name personal-data)})</h1>
       <nav>
-        ◊menu-item["about"]{About}
-        ◊menu-item["contact"]{Contact}
-        ◊menu-item["research"]{Research}
-        ◊menu-item["prose"]{Prose}
-        ◊menu-item["software"]{Software}
-        ◊menu-item["music"]{Music}
-        ◊menu-item["cooking"]{Cooking}
-        ◊menu-item["feed.atom"]{Atom Feed}
-        ◊menu-item["license"]{License}
-        ◊menu-item["colophon"]{Colophon}
+        ◊string-append*[
+          (for/list ([(path label)
+                      (in-dict '(("about" . "About")
+                                 ("contact" . "Contact")
+                                 ("research" . "Research")
+                                 ("prose" . "Prose")
+                                 ("software" . "Software")
+                                 ("music" . "Music")
+                                 ("cooking" . "Cooking")
+                                 ("feed.atom" . "Atom Feed")
+                                 ("license" . "License")
+                                 ("colophon" . "Colophon")))])
+            (define class (if (string-prefix? (~a here) path) ◊~a{class="active"} ""))
+            ◊~a{<a href="/◊|path|" ◊|class|>◊|label|</a>})]
       </nav>
     </header>
     <article>
