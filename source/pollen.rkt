@@ -302,23 +302,19 @@
    [body>header
     [h1 #:font-size ,font-size/extra-extra-large]
     #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-    #:margin-bottom ,space/extra-large]))
-
-(define-component menu
-  #:css
-  (css-expr
-   [(header nav)
-    #:margin-bottom ,space/small
-    [a
-     ,@inline-block-enumeration
-     #:font-size ,font-size/small
-     #:text-transform uppercase
-     #:letter-spacing ,letter-spacing
-     #:text-decoration none
-     [(|.| & active)
-      #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-      #:border-radius ,space/none
-      #:margin-bottom ,ruler/thin/negative]]]))
+    #:margin-bottom ,space/extra-large
+    [nav
+     #:margin-bottom ,space/small
+     [a
+      ,@inline-block-enumeration
+      #:font-size ,font-size/small
+      #:text-transform uppercase
+      #:letter-spacing ,letter-spacing
+      #:text-decoration none
+      [(|.| & active)
+       #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
+       #:border-radius ,space/none
+       #:margin-bottom ,ruler/thin/negative]]]]))
 
 (define-component header/article
   #:css
