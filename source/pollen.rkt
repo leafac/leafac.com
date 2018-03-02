@@ -18,16 +18,16 @@
 
 (define personal-data
   (let ([date-of-birth (date 1990 10 20)])
-    `((name           . ,◊~a{Leandro Facchinetti})
-      (author         . ,◊~a{Leandro Facchinetti})
-      (github-handle  . ,◊~a{leafac})
-      (personal-email . ,◊~a{me@leafac.com})
-      (work-email     . ,◊~a{leandro@jhu.edu})
-      (skype-handle   . ,◊~a{leafac})
-      (phone-number   . ,◊~a{+14107799526})
-      (description    . ,◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
-      (date-of-birth  . ,date-of-birth)
-      (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
+    `#hash((name           . ,◊~a{Leandro Facchinetti})
+           (author         . ,◊~a{Leandro Facchinetti})
+           (github-handle  . ,◊~a{leafac})
+           (personal-email . ,◊~a{me@leafac.com})
+           (work-email     . ,◊~a{leandro@jhu.edu})
+           (skype-handle   . ,◊~a{leafac})
+           (phone-number   . ,◊~a{+14107799526})
+           (description    . ,◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
+           (date-of-birth  . ,date-of-birth)
+           (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; AUXILIARY
@@ -310,7 +310,7 @@
 
 (define-component (menu . elements)
   #:html (apply navigation #:class "menu" elements)
-  #:css (css-expr [.menu #:margin-bottom ,space/small]))
+  #:css (css-expr [(header nav) #:margin-bottom ,space/small]))
 
 (define-component (menu/item #:activation-path [activation-path #f] . elements)
   #:html
