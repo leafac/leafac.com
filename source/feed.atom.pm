@@ -19,7 +19,7 @@
 
 ◊entry{
  ◊title{Website Redesign}
- ◊link[#:href ◊base-url]
+ ◊link[#:href ◊~a{◊|base-url|}]
  ◊id{urn:uuid:400ec6e1-dae5-4fdf-b0de-1a48273ae13b}
  ◊updated{2018-02-27T06:00:43-05:00}
  ◊summary{Published a website redesign that improves readability and load time.}
