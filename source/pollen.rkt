@@ -119,42 +119,42 @@
     #:font-style normal
     #:font-weight 400
     #:font-stretch normal
-    #:src ((apply url "/vendor/assets/fonts/charter_regular-webfont.woff")
+    #:src ((apply url "/fonts/charter_regular-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Charter"
     #:font-style italic
     #:font-weight 400
     #:font-stretch normal
-    #:src ((apply url "/vendor/assets/fonts/charter_italic-webfont.woff")
+    #:src ((apply url "/fonts/charter_italic-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Charter"
     #:font-style normal
     #:font-weight 700
     #:font-stretch normal
-    #:src ((apply url "/vendor/assets/fonts/charter_bold-webfont.woff")
+    #:src ((apply url "/fonts/charter_bold-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Charter"
     #:font-style italic
     #:font-weight 700
     #:font-stretch normal
-    #:src ((apply url "/vendor/assets/fonts/charter_bold_italic-webfont.woff")
+    #:src ((apply url "/fonts/charter_bold_italic-webfont.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Fira Mono"
     #:font-style normal
     #:font-weight 400
     #:font-stretch normal
-    #:src ((apply url "/vendor/assets/fonts/FiraMono-Regular.woff")
+    #:src ((apply url "/fonts/FiraMono-Regular.woff")
            (apply format "woff"))]
    [@font-face
     #:font-family "Fira Mono"
     #:font-style normal
     #:font-weight 500
     #:font-stretch normal
-    #:src ((apply url "/vendor/assets/fonts/FiraMono-Medium.woff")
+    #:src ((apply url "/fonts/FiraMono-Medium.woff")
            (apply format "woff"))]))
 
 (define font-family/main
