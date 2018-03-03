@@ -9,7 +9,7 @@
   <author>
     <name>◊(select 'author personal-data)</name>
   </author>
-  <icon>◊|base-url|assets/images/favicon.jpg</icon>
+  <icon>◊|base-url|favicon.jpg</icon>
   <id>urn:uuid:0d99d85a-bb09-45a9-8735-3344f8a105e6</id>
   ◊(map xexpr->string (select-from-doc 'root doc))
 </feed>

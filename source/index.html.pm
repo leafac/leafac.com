@@ -1,6 +1,6 @@
 #lang pollen
 
-◊margin-note{◊figure/image{/assets/images/avatar.png}}
+◊margin-note{◊figure/image{/avatar.png}}
 
 I am a writer of ◊link["/prose"]{prose}, ◊link["/software"]{software} and ◊link["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
 
