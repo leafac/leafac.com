@@ -2,7 +2,7 @@
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
          racket/string racket/format racket/function racket/list racket/dict racket/match
          racket/file file/sha1 racket/runtime-path
-         css-expr libuuid gregor gregor/period sugar xml net/base64
+         libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/file pollen/decode pollen/tag pollen/setup pollen-component)
 
@@ -10,7 +10,7 @@
          (all-from-out
           racket/string racket/format racket/function racket/list racket/dict racket/match
           racket/file file/sha1
-          css-expr libuuid gregor gregor/period sugar xml
+          libuuid gregor gregor/period sugar xml
           pollen/core pollen/file))
 
 ;; ---------------------------------------------------------------------------------------------------
@@ -54,7 +54,7 @@
      #:txexpr-elements-proc
      (λ (elements)
        (filter-not (curry equal? '(p "\n")) (decode-paragraphs elements #:linebreak-proc values)))
-     #:exclude-tags '(pre code)))
+     #:exclude-tags '(style pre code)))
   (define elements/with-paragraphs/with-merged-classes
     (decode-elements
      elements/with-paragraphs
@@ -415,6 +415,9 @@
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; HELPERS
+
+(define (style . elements)
+  (apply (default-tag-function 'style) (map ~a elements)))
 
 (define (px->rem px #:html/font-size [html/font-size 16])
   (exact->inexact (/ px html/font-size)))
