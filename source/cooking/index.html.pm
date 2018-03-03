@@ -5,8 +5,8 @@
 ◊style{
   .recipes {
     ◊prefix['column-count]{2}
-    padding-left: ◊|space/none|rem;
-    line-height: ◊|line-height/large|rem;
+    padding-left: ◊|space/none|;
+    line-height: ◊|line-height/large|;
   }
 
   .recipe {

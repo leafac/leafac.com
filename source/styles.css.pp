@@ -64,25 +64,25 @@
 }
 
 body {
-  margin: ◊|space/large|rem auto;
-  padding: ◊|space/none|rem ◊|grid/padding|rem;
-  max-width: ◊|grid/article|rem;
+  margin: ◊|space/large| auto;
+  padding: ◊|space/none| ◊|grid/padding|;
+  max-width: ◊|grid/article|;
 }
 
 @media ◊grid/bigger-screens {
   body {
-    max-width: ◊|grid/body|rem;
+    max-width: ◊|grid/body|;
   }
 
   article {
-    width: ◊|grid/article|rem;
+    width: ◊|grid/article|;
   }
 
   aside {
-    width: ◊|grid/margin-note|rem;
+    width: ◊|grid/margin-note|;
     float: right;
     clear: right;
-    margin-right: -◊|grid/margin-note/pull|rem;
+    margin-right: -◊|grid/margin-note/pull|;
   }
 }
 
@@ -93,7 +93,7 @@ body {
 
 @media ◊grid/bigger-screens {
   .full-width {
-    width: ◊|grid/body|rem;
+    width: ◊|grid/body|;
   }
 }
 
@@ -101,36 +101,36 @@ body {
 /* HEADERS */
 
 body > header {
-  border-bottom: ◊|border-width/thin|px solid ◊|color/secondary-content|;
-  margin-bottom: ◊|space/extra-large|rem;
+  border-bottom: ◊|border-width/thin| solid ◊|color/secondary-content|;
+  margin-bottom: ◊|space/extra-large|;
 }
 
 body > header nav {
-  margin-bottom: ◊|space/small|rem;
+  margin-bottom: ◊|space/small|;
 }
 
 body > header nav a {
   ◊inline-block-enumeration
-  font-size: ◊|font-size/small|rem;
+  font-size: ◊|font-size/small|;
   text-transform: uppercase;
-  letter-spacing: ◊|letter-spacing|em;
+  letter-spacing: ◊|letter-spacing|;
   text-decoration: none;
 }
 
 body > header nav a.active {
-  border-bottom-left-radius: ◊|border-radius/none|rem;
-  border-bottom-right-radius: ◊|border-radius/none|rem;
-  border-bottom: ◊|border-width/thin|px solid ◊|color/secondary-content|;
-  margin-bottom: -◊|border-width/thin|px;
+  border-bottom-left-radius: ◊|border-radius/none|;
+  border-bottom-right-radius: ◊|border-radius/none|;
+  border-bottom: ◊|border-width/thin| solid ◊|color/secondary-content|;
+  margin-bottom: -◊|border-width/thin|;
 }
 
 article > header {
-  margin-bottom: ◊|space/medium|rem;
+  margin-bottom: ◊|space/medium|;
 }
 
 time {
   font-weight: 400;
-  font-size: ◊|font-size/small|rem;
+  font-size: ◊|font-size/small|;
   color: ◊|color/secondary-content|;
 }
 
@@ -139,8 +139,8 @@ time {
 
 h1, h2, h3, h4  {
   color: ◊|color/emphasized-content|;
-  margin-top: ◊|space/extra-large|rem;
-  margin-bottom: ◊|space/small|rem;
+  margin-top: ◊|space/extra-large|;
+  margin-bottom: ◊|space/small|;
   line-height: ◊|line-height/small|;
 }
 
@@ -150,37 +150,37 @@ h1 a, h2 a, h3 a, h4 a {
 }
 
 h1 {
-  font-size: ◊|font-size/extra-extra-large|rem;
+  font-size: ◊|font-size/extra-extra-large|;
   font-style: italic;
   font-weight: 400;
 }
 
 h2 {
-  font-size: ◊|font-size/extra-large|rem;
+  font-size: ◊|font-size/extra-large|;
   font-style: italic;
   font-weight: 400;
-  margin-bottom: ◊|space/extra-small|rem;
+  margin-bottom: ◊|space/extra-small|;
 }
 
 h3 {
-  font-size: ◊|font-size/large|rem;
+  font-size: ◊|font-size/large|;
   font-style: italic;
   font-weight: 400;
 }
 
 h4 {
-  font-size: ◊|font-size/medium|rem;
+  font-size: ◊|font-size/medium|;
   font-weight: 700;
 }
 
 h3 + h4, header + h4 {
-  margin-top: ◊|space/medium|rem;
+  margin-top: ◊|space/medium|;
 }
 
 h3 .mark, h4 .mark {
-  transition: opacity ◊|animation/duration|s;
+  transition: opacity ◊|animation/duration|;
   opacity: 0;
-  margin-left: ◊|space/small|rem;
+  margin-left: ◊|space/small|;
   color: ◊|color/secondary-content|;
 }
 
@@ -193,7 +193,7 @@ h3 .mark a, h4 .mark a {
 }
 
 .new-thought {
-  height: ◊|space/extra-large|rem;
+  height: ◊|space/extra-large|;
 }
 
 /****************************************************************************************************/
@@ -204,18 +204,18 @@ body {
   ◊prefix['font-kerning]{normal}
   ◊prefix['text-rendering]{optimizeLegibility}
   font-family: ◊|font-family/main|;
-  font-size: ◊|font-size/medium|rem;
+  font-size: ◊|font-size/medium|;
   background-color: ◊|color/background|;
   color: ◊|color/primary-content|;
   line-height: ◊|line-height/medium|;
 }
 
 p {
-  margin: ◊|space/none|rem;
+  margin: ◊|space/none|;
 }
 
 p + p {
-  text-indent: ◊|text-indent|rem;
+  text-indent: ◊|text-indent|;
 }
 
 @media ◊grid/bigger-screens {
@@ -224,7 +224,7 @@ p + p {
   p                 + aside + aside + aside + p,
   p         + aside + aside + aside + aside + p,
   p + aside + aside + aside + aside + aside + p {
-    text-indent: ◊|text-indent|rem;
+    text-indent: ◊|text-indent|;
   }
 }
 
@@ -234,10 +234,10 @@ p + p {
 @media ◊grid/smaller-screens {
   aside {
     ◊insertion
-    border-left: ◊|border-width/thick|px solid ◊|color/secondary-content|;
-    border-radius: ◊|border-radius|rem;
-    padding: ◊|text-indent|rem;
-    padding-left: calc(◊|text-indent|rem - ◊|border-width/thick|px);
+    border-left: ◊|border-width/thick| solid ◊|color/secondary-content|;
+    border-radius: ◊|border-radius|;
+    padding: ◊|text-indent|;
+    padding-left: calc(◊|text-indent| - ◊|border-width/thick|);
     background-color: ◊|color/background-highlight|;
     color: ◊|color/emphasized-content|;
   }
@@ -245,8 +245,8 @@ p + p {
 
 @media ◊grid/bigger-screens {
   aside {
-    font-size: ◊|font-size/small|rem;
-    margin-bottom: ◊|space/large|rem;
+    font-size: ◊|font-size/small|;
+    margin-bottom: ◊|space/large|;
   }
 }
 
@@ -276,18 +276,18 @@ code {
 
 .code-block {
   ◊insertion
-  font-size: ◊|font-size/extra-small|rem;
+  font-size: ◊|font-size/extra-small|;
 }
 
 pre {
   font-family: ◊|font-family/monospace|;
   background-color: ◊|color/background|;
   overflow: auto;
-  padding: ◊|text-indent|rem;
-  padding-left: calc(◊|text-indent|rem - ◊|border-width/thin|px);
-  border: ◊|border-width/thin|px solid ◊|color/secondary-content|;
-  border-radius: ◊|border-radius|rem;
-  margin: ◊|space/none|rem;
+  padding: ◊|text-indent|;
+  padding-left: calc(◊|text-indent| - ◊|border-width/thin|);
+  border: ◊|border-width/thin| solid ◊|color/secondary-content|;
+  border-radius: ◊|border-radius|;
+  margin: ◊|space/none|;
 }
 
 ◊(file->string "stylesheets/solarized-light.css.p")
@@ -297,7 +297,7 @@ pre {
 
 ul, ol {
   ◊insertion
-  padding-left: ◊|text-indent|rem;
+  padding-left: ◊|text-indent|;
 }
 
 /****************************************************************************************************/
@@ -310,16 +310,16 @@ table {
 tbody + tbody::before {
   content: "";
   display: block;
-  height: ◊|space/small|rem;
+  height: ◊|space/small|;
 }
 
 th, td {
-  padding: ◊|space/none|rem;
-  padding-right: ◊|space/medium|rem;
+  padding: ◊|space/none|;
+  padding-right: ◊|space/medium|;
 }
 
 th:last-child, td:last-child {
-  padding-right: ◊|space/none|rem;
+  padding-right: ◊|space/none|;
 }
 
 th {
@@ -331,8 +331,8 @@ th {
 /* INLINE */
 
 a {
-  transition: background-color ◊|animation/duration|s;
-  border-radius: ◊|border-radius|rem;
+  transition: background-color ◊|animation/duration|;
+  border-radius: ◊|border-radius|;
   color: ◊|color/primary-content|;
 }
 
@@ -357,7 +357,7 @@ kbd {
 }
 
 .fraction {
-  font-size: ◊|font-size/small|rem;
+  font-size: ◊|font-size/small|;
 }
 
 .fraction .numerator {
@@ -369,7 +369,7 @@ kbd {
 }
 
 .fraction .slash {
-  margin: ◊|space/none|rem -◊|space/extra-extra-small|rem;
+  margin: ◊|space/none| -◊|space/extra-extra-small|;
 }
 
 .placeholder {

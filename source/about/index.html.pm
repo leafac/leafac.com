@@ -5,7 +5,7 @@
 
 ◊style{
   .skills {
-    padding-left: ◊|space/none|rem;
+    padding-left: ◊|space/none|;
   }
 
   .skill {
@@ -15,9 +15,9 @@
   .skill::before {
     content: "";
     display: inline-block;
-    margin-right: ◊|space/extra-small|rem;
-    border-radius: ◊|border-radius|rem;
-    width: ◊|space/small|rem;
+    margin-right: ◊|space/extra-small|;
+    border-radius: ◊|border-radius|;
+    width: ◊|space/small|;
   }
 
   .beginner::before {

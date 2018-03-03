@@ -416,11 +416,11 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; HELPERS
 
-(define (style . elements)
-  (apply (default-tag-function 'style) (map ~a elements)))
-
 (define (px->rem px #:html/font-size [html/font-size 16])
-  (exact->inexact (/ px html/font-size)))
+  (~a (~r #:precision 2 (/ px html/font-size)) "rem"))
+
+(define (magnitude value)
+  (string->number (regexp-replace #rx"rem$" value "")))
 
 (define (prefix #:prefixes [prefixes '(moz webkit ms o)] name . values)
   (define values/string (string-join values))
@@ -433,7 +433,6 @@
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; GRID
-
 
 ;; |                   bigger-screens                   |
 ;; |                        1024                        |
@@ -450,44 +449,43 @@
 ;; |   12    |   600   |   12    |
 
 
-(define grid/body             (px->rem 1000))
-(define grid/padding          (px->rem 12))
-(define grid/article          (px->rem 600))
-(define grid/gutter           (px->rem 75))
-(define grid/margin-note      (px->rem 325))
-(define grid/margin-note/pull (+ grid/gutter grid/margin-note))
-(define grid/breakpoint       (+ grid/body (* grid/padding 2)))
-(define grid/bigger-screens   ◊~a{(min-width:◊|grid/breakpoint|rem)})
-(define grid/smaller-screens  ◊~a{(max-width:◊(- grid/breakpoint 0.01)rem)})
+(define grid/body             ◊px->rem[1000])
+(define grid/padding          ◊px->rem[12])
+(define grid/article          ◊px->rem[600])
+(define grid/gutter           ◊px->rem[75])
+(define grid/margin-note      ◊px->rem[325])
+(define grid/margin-note/pull ◊px->rem[400])
+(define grid/bigger-screens   ◊~a{(min-width:◊px->rem[1024])})
+(define grid/smaller-screens  ◊~a{(max-width:◊px->rem[1023])})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; SPACES
 
-(define space/none              0)
-(define space/extra-extra-small 0.1)
-(define space/extra-small       0.2)
-(define space/small             0.5)
-(define space/medium            1)
-(define space/large             1.5)
-(define space/extra-large       2)
+(define space/none              ◊~a{0})
+(define space/extra-extra-small ◊~a{0.1rem})
+(define space/extra-small       ◊~a{0.2rem})
+(define space/small             ◊~a{0.5rem})
+(define space/medium            ◊~a{1rem})
+(define space/large             ◊~a{1.5rem})
+(define space/extra-large       ◊~a{2rem})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEXT
 
 (define font-family/main            ◊~a{"Charter", "Iowan Old Style", "Georgia", serif})
 (define font-family/monospace       ◊~a{"Fira Mono", "Menlo", "Monaco", "Courier New", monospace})
-(define font-size/extra-small       (px->rem 12))
-(define font-size/small             (px->rem 13))
-(define font-size/medium            (px->rem 16))
-(define font-size/large             (px->rem 20))
-(define font-size/extra-large       (px->rem 22))
-(define font-size/extra-extra-large (px->rem 30))
-(define line-height/extra-small     1)
-(define line-height/small           1.3)
-(define line-height/medium          1.5)
-(define line-height/large           2)
-(define text-indent                 1.5)
-(define letter-spacing              0.2)
+(define font-size/extra-small       ◊px->rem[12])
+(define font-size/small             ◊px->rem[13])
+(define font-size/medium            ◊px->rem[16])
+(define font-size/large             ◊px->rem[20])
+(define font-size/extra-large       ◊px->rem[22])
+(define font-size/extra-extra-large ◊px->rem[30])
+(define line-height/extra-small     ◊~a{1})
+(define line-height/small           ◊~a{1.3})
+(define line-height/medium          ◊~a{1.5})
+(define line-height/large           ◊~a{2})
+(define text-indent                 ◊~a{1.5rem})
+(define letter-spacing              ◊~a{0.2em})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COLORS
@@ -509,46 +507,46 @@
 (define solarized/cyan    ◊~a{#2aa198})
 (define solarized/green   ◊~a{#859900})
 
-(define color/background           solarized/base3)
-(define color/background-highlight solarized/base2)
-(define color/secondary-content    solarized/base1)
-(define color/primary-content      solarized/base00)
-(define color/emphasized-content   solarized/base01)
-(define color/yellow               solarized/yellow)
-(define color/orange               solarized/orange)
-(define color/red                  solarized/red)
-(define color/magenta              solarized/magenta)
-(define color/violet               solarized/violet)
-(define color/blue                 solarized/blue)
-(define color/cyan                 solarized/cyan)
-(define color/green                solarized/green)
+(define color/background           ◊solarized/base3)
+(define color/background-highlight ◊solarized/base2)
+(define color/secondary-content    ◊solarized/base1)
+(define color/primary-content      ◊solarized/base00)
+(define color/emphasized-content   ◊solarized/base01)
+(define color/yellow               ◊solarized/yellow)
+(define color/orange               ◊solarized/orange)
+(define color/red                  ◊solarized/red)
+(define color/magenta              ◊solarized/magenta)
+(define color/violet               ◊solarized/violet)
+(define color/blue                 ◊solarized/blue)
+(define color/cyan                 ◊solarized/cyan)
+(define color/green                ◊solarized/green)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; BORDERS
 
-(define border-width/thin  1)
-(define border-width/thick 3)
-(define border-radius/none space/none)
-(define border-radius      space/extra-small)
+(define border-width/thin  ◊~a{1px})
+(define border-width/thick ◊~a{3px})
+(define border-radius/none ◊space/none)
+(define border-radius      ◊space/extra-small)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; ANIMATIONS
 
-(define animation/duration 0.3)
+(define animation/duration ◊~a{0.3s})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; MIXINS
 
 (define inline-block-enumeration
   ◊~a{
- line-height: ◊|line-height/large|rem;
+ line-height: ◊|line-height/large|;
  display: inline-block;
- margin-right: ◊|space/medium|rem;
+ margin-right: ◊|space/medium|;
  })
 
 (define insertion
   ◊~a{
  box-sizing: border-box;
  width: 100%;
- margin: ◊|space/small|rem ◊|space/none|rem;
+ margin: ◊|space/small| ◊|space/none|;
  })
