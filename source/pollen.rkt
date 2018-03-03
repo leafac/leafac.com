@@ -448,7 +448,6 @@
 ;; | padding | article | padding |
 ;; |   12    |   600   |   12    |
 
-
 (define grid/body             ◊px->rem[1000])
 (define grid/padding          ◊px->rem[12])
 (define grid/article          ◊px->rem[600])
