@@ -28,7 +28,7 @@
     <article>
       ◊when/splice[title]{
         <header>
-          <h1>◊|title|</h1>
+          <h2>◊|title|</h2>
           ◊when/splice[date]{<time>◊|date|</time>}
         </header>
       }

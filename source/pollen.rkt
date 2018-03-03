@@ -224,21 +224,10 @@
 ;; Outline
 
 (define-component (section key . elements)
-  #:html (apply heading 'h1 key elements)
-  #:css
-  (css-expr
-   [h1
-    #:font-size ,font-size/large
-    #:font-style italic
-    #:font-weight 400]))
+  #:html (apply heading 'h3 key elements))
 
 (define-component (subsection key . elements)
-  #:html (apply heading 'h2 key elements)
-  #:css
-  (css-expr
-   [h2
-    #:font-size ,font-size/medium
-    #:font-weight 700]))
+  #:html (apply heading 'h4 key elements))
 
 (define-component new-thought
   #:html (default-tag-function 'div #:class "new-thought")
@@ -252,28 +241,10 @@
 
 (define-component (heading type key . elements)
   #:html
-  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§"))))
-  #:css
-  (css-expr
-   [h1 h2
-    #:color ,(dict-ref colors 'emphasized-content)
-    #:margin (#:top ,space/extra-large #:bottom ,space/small)
-    #:line-height ,line-height/small
-    [a
-     #:text-decoration none
-     #:color ,(dict-ref colors 'emphasized-content)]]
-   [h1+h2 header+h2 #:margin-top ,space/medium]))
+  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§")))))
 
 (define-component (heading/mark . elements)
-  #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
-  #:css
-  (css-expr
-   [.heading--mark
-    #:transition (opacity ,animation/duration)
-    #:opacity 0
-    [(> *:hover &) #:opacity 1]
-    #:margin-left ,space/small
-    [a #:color ,(dict-ref colors 'secondary-content)]]))
+  #:html (apply (default-tag-function 'span #:class "mark") elements))
 
 ;; Full width
 

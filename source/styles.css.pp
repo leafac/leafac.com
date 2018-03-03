@@ -198,17 +198,9 @@
 }
 
 body {
-  ◊prefix['font-synthesis]{none}
-  ◊prefix['font-kerning]{normal}
-  ◊prefix['text-rendering]{optimizeLegibility}
-  ◊font-family/main
-  font-size: ◊|font-size/medium|rem;
-  line-height: ◊|line-height/medium|;
   margin: ◊|space/large|rem auto;
   padding: ◊|space/none|rem ◊|grid/padding|rem;
   max-width: ◊|grid/article|rem;
-  background-color: ◊|color/background|;
-  color: ◊|color/primary-content|;
 }
 
 @media ◊grid/bigger-screens {
@@ -226,10 +218,6 @@ body > header {
   margin-bottom: ◊|space/extra-large|rem;
 }
 
-body > header h1 {
-  font-size: ◊|font-size/extra-extra-large|rem;
-}
-
 body > header nav {
   margin-bottom: ◊|space/small|rem;
 }
@@ -243,7 +231,8 @@ body > header nav a {
 }
 
 body > header nav a.active {
-  border-radius: ◊|space/none|rem;
+  border-bottom-left-radius: ◊|space/none|rem;
+  border-bottom-right-radius: ◊|space/none|rem;
   border-bottom: ◊|ruler/thin|px solid ◊|color/secondary-content|;
   margin-bottom: -◊|ruler/thin|px;
 }
@@ -252,9 +241,76 @@ article > header {
   margin-bottom: ◊|space/medium|rem;
 }
 
-article > header h1 {
+/****************************************************************************************************/
+/* HEADINGS */
+
+h1, h2, h3, h4  {
+  color: ◊|color/emphasized-content|;
+  margin-top: ◊|space/extra-large|rem;
+  margin-bottom: ◊|space/small|rem;
+  line-height: ◊|line-height/small|;
+}
+
+h1 a, h2 a, h3 a, h4 a {
+  text-decoration: none;
+  color: ◊|color/emphasized-content|;
+}
+
+h1 {
+  font-size: ◊|font-size/extra-extra-large|rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+h2 {
   font-size: ◊|font-size/extra-large|rem;
+  font-style: italic;
+  font-weight: 400;
   margin-bottom: ◊|space/extra-small|rem;
+}
+
+h3 {
+  font-size: ◊|font-size/large|rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: ◊|font-size/medium|rem;
+  font-weight: 700;
+}
+
+h3 + h4, header + h4 {
+  margin-top: ◊|space/medium|rem;
+}
+
+h3 .mark, h4 .mark {
+  transition: opacity ◊|animation/duration|s;
+  opacity: 0;
+  margin-left: ◊|space/small|rem;
+  color: ◊|color/secondary-content|;
+}
+
+h3:hover .mark, h4:hover .mark {
+opacity: 1;
+}
+
+h3 .mark a, h4 .mark a {
+  color: ◊|color/secondary-content|;
+}
+
+/****************************************************************************************************/
+/* BODY */
+
+body {
+  ◊prefix['font-synthesis]{none}
+  ◊prefix['font-kerning]{normal}
+  ◊prefix['text-rendering]{optimizeLegibility}
+  ◊font-family/main
+  font-size: ◊|font-size/medium|rem;
+  background-color: ◊|color/background|;
+  color: ◊|color/primary-content|;
+  line-height: ◊|line-height/medium|;
 }
 
 p {
