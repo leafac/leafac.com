@@ -311,36 +311,24 @@
 ;; Lists
 
 (define-component list/unordered
-  #:html (default-tag-function 'ul)
-  #:css (css-expr [ul ,@insertion]))
+  #:html (default-tag-function 'ul))
 
 (define-component list/unordered/item #:html (default-tag-function 'li))
 
 (define-component list/ordered
-  #:html (default-tag-function 'ol)
-  #:css (css-expr [ol ,@insertion]))
+  #:html (default-tag-function 'ol))
 
 (define-component list/ordered/item #:html (default-tag-function 'li))
-
-(define-component lists
-  #:css (css-expr [ul ol #:padding-left ,text-indent]))
 
 ;; Tables
 
 (define-component table
-  #:html (default-tag-function 'table)
-  #:css (css-expr [table ,@insertion]))
+  #:html (default-tag-function 'table))
 
 (define-component table/header #:html (default-tag-function 'thead))
 
 (define-component table/body
-  #:html (default-tag-function 'tbody)
-  #:css
-  (css-expr
-   [tbody+tbody::before
-    #:content ""
-    #:display block
-    #:height ,space/small]))
+  #:html (default-tag-function 'tbody))
 
 (define-component table/row #:html (default-tag-function 'tr))
 

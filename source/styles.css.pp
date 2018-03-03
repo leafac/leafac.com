@@ -397,8 +397,6 @@ img, svg {
 /****************************************************************************************************/
 /* CODE */
 
-◊(file->string "stylesheets/solarized-light.css.p")
-
 code {
   font-family: ◊|font-family/monospace|;
 }
@@ -417,6 +415,29 @@ pre {
   border: ◊|border-width/thin|px solid ◊|color/secondary-content|;
   border-radius: ◊|border-radius|rem;
   margin: ◊|space/none|rem;
+}
+
+◊(file->string "stylesheets/solarized-light.css.p")
+
+/****************************************************************************************************/
+/* LISTS */
+
+ul, ol {
+  ◊insertion
+  padding-left: ◊|text-indent|rem;
+}
+
+/****************************************************************************************************/
+/* TABLES */
+
+table {
+  ◊insertion
+}
+
+tbody + tbody::before {
+  content: "";
+  display: block;
+  height: ◊|space/small|rem;
 }
 
 /****************************************************************************************************/
