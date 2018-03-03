@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-◊(define base-url (select-from-metas 'base-url metas))
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>◊(select 'name personal-data)</title>
   <subtitle>◊(select 'description personal-data)</subtitle>

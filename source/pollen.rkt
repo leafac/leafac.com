@@ -34,8 +34,7 @@
 
 ;; Paths
 
-(define base-absolute (make-parameter "https://www.leafac.com"))
-(define (absolute-url path) (~a (base-absolute) "/" path))
+(define base-url "https://www.leafac.com/")
 (define-runtime-path project-path "./")
 (define (source-path path) (~a project-path path))
 

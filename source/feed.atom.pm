@@ -1,9 +1,6 @@
 #lang pollen
 
 ◊define-meta[title]{Atom Feed}
-◊define-meta[base-url]{https://www.leafac.com/}
-
-◊(define base-url (select-from-metas 'base-url metas))
 
 ◊; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 ◊(define (new-entry)
