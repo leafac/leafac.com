@@ -401,7 +401,7 @@
     [a
      #:text-decoration none
      #:color ,(dict-ref colors 'emphasized-content)]]
-   [h1+h2 #:margin-top ,space/medium]))
+   [h1+h2 header+h2 #:margin-top ,space/medium]))
 
 (define-component (heading/mark . elements)
   #:html (apply (default-tag-function 'span #:class "heading--mark") elements)
