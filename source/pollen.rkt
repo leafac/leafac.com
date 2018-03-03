@@ -218,51 +218,6 @@
        (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
 
-(define-component head/link #:html (default-tag-function 'link))
-
-(define-component head/title #:html (default-tag-function 'title))
-
-(define-component header/article
-  #:css
-  (css-expr
-   [article>header
-    [h1 #:font-size ,font-size/extra-large #:margin-bottom ,space/extra-small]
-    #:margin-bottom ,space/medium]))
-
-(define-component time
-  #:html (default-tag-function 'time)
-  #:css
-  (css-expr
-   [time
-    #:font-weight 400
-    #:font-size ,font-size/small
-    #:color ,(dict-ref colors 'secondary-content)]))
-
-(define-component body
-  #:css
-  (css-expr
-   [body
-    ,@(prefix (css-expr #:font-synthesis none))
-    ,@(prefix (css-expr #:font-kerning normal))
-    ,@(prefix (css-expr #:text-rendering optimizeLegibility))
-    ,@font-family/main
-    #:font-size ,font-size/medium
-    #:line-height ,line-height/medium
-    #:margin (,space/large auto)
-    #:padding (,space/none ,grid/padding)
-    #:max-width ,grid/article
-    [@media ,grid/bigger-screens
-     #:max-width ,grid/body
-     [article #:width ,grid/article]]
-    #:background-color ,(dict-ref colors 'background)
-    #:color ,(dict-ref colors 'primary-content)]
-   [p
-    #:margin ,space/none
-    [(+ p &) #:text-indent ,text-indent]
-    [@media ,grid/bigger-screens
-     [(+ p aside &) (+ p aside aside &) (+ p aside aside aside &) (+ p aside aside aside aside &)
-      #:text-indent ,text-indent]]]))
-
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
 
@@ -517,6 +472,15 @@
   #:html ((default-tag-function '@) number))
 
 (define-component publication #:html emphasis)
+
+(define-component time
+  #:html (default-tag-function 'time)
+  #:css
+  (css-expr
+   [time
+    #:font-weight 400
+    #:font-size ,font-size/small
+    #:color ,(dict-ref colors 'secondary-content)]))
 
 ;; Inline elements
 

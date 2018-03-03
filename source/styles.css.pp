@@ -202,6 +202,23 @@ body {
   ◊prefix['font-kerning]{normal}
   ◊prefix['text-rendering]{optimizeLegibility}
   ◊font-family/main
+  font-size: ◊|font-size/medium|rem;
+  line-height: ◊|line-height/medium|;
+  margin: ◊|space/large|rem auto;
+  padding: ◊|space/none|rem ◊|grid/padding|rem;
+  max-width: ◊|grid/article|rem;
+  background-color: ◊|color/background|;
+  color: ◊|color/primary-content|;
+}
+
+@media ◊grid/bigger-screens {
+  body {
+    max-width: ◊|grid/body|rem;
+  }
+
+  article {
+    width: ◊|grid/article|rem;
+  }
 }
 
 body > header {
@@ -229,6 +246,33 @@ body > header nav a.active {
   border-radius: ◊|space/none|rem;
   border-bottom: ◊|ruler/thin|px solid ◊|color/secondary-content|;
   margin-bottom: -◊|ruler/thin|px;
+}
+
+article > header {
+  margin-bottom: ◊|space/medium|rem;
+}
+
+article > header h1 {
+  font-size: ◊|font-size/extra-large|rem;
+  margin-bottom: ◊|space/extra-small|rem;
+}
+
+p {
+  margin: ◊|space/none|rem;
+}
+
+p + p {
+  text-indent: ◊|text-indent|rem;
+}
+
+@media ◊grid/bigger-screens {
+  p                                 + aside + p,
+  p                         + aside + aside + p,
+  p                 + aside + aside + aside + p,
+  p         + aside + aside + aside + aside + p,
+  p + aside + aside + aside + aside + aside + p {
+    text-indent: ◊|text-indent|rem;
+  }
 }
 
 /****************************************************************************************************/
