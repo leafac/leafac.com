@@ -419,9 +419,6 @@
 (define (px->rem px #:html/font-size [html/font-size 16])
   (~a (~r #:precision 2 (/ px html/font-size)) "rem"))
 
-(define (magnitude value)
-  (string->number (regexp-replace #rx"rem$" value "")))
-
 (define (prefix #:prefixes [prefixes '(moz webkit ms o)] name . values)
   (define values/string (string-join values))
   ◊~a{
