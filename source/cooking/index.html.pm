@@ -2,13 +2,11 @@
 
 ◊define-meta[title]{Cooking}
 
-◊(require (prefix-in style: "../styles.css.pp"))
-
 ◊style{
   .recipes {
-    ◊style:prefix['column-count]{2}
-    padding-left: ◊|style:space/none|rem;
-    line-height: ◊|style:line-height/large|rem;
+    ◊prefix['column-count]{2}
+    padding-left: ◊|space/none|rem;
+    line-height: ◊|line-height/large|rem;
   }
 
   .recipe {
