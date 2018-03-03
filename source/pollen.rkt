@@ -273,10 +273,7 @@
      #:border-radius ,space/extra-small]
     [@media ,grid/bigger-screens
      #:font-size ,font-size/small
-     #:width ,grid/margin-note
-     #:float right
-     #:clear right
-     #:margin (#:right ,grid/margin-note/pull #:bottom ,space/large)]]))
+     #:margin-bottom ,space/large]]))
 
 ;; Figures
 

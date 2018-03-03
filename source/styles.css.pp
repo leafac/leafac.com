@@ -113,8 +113,8 @@
   src: url("/fonts/FiraMono-Medium.woff") format("woff");
 }
 
-◊(define font-family/main ◊~a{font-family: "Charter", "Iowan Old Style", "Georgia", serif;}))
-◊(define font-family/monospace ◊~a{font-family: "Fira Mono", "Menlo", "Monaco", "Courier New", monospace;}))
+◊(define font-family/main ◊~a{"Charter", "Iowan Old Style", "Georgia", serif}))
+◊(define font-family/monospace ◊~a{"Fira Mono", "Menlo", "Monaco", "Courier New", monospace}))
 ◊(define font-size/extra-small (px->rem 12))
 ◊(define font-size/small (px->rem 13))
 ◊(define font-size/medium (px->rem 16))
@@ -163,10 +163,10 @@
 ◊(define color/green                solarized/green)
 
 /****************************************************************************************************/
-/* RULERS */
+/* BORDERS */
 
-◊(define ruler/thin 1)
-◊(define ruler/thick 3)
+◊(define border-width/thin 1)
+◊(define border-width/thick 3)
 
 /****************************************************************************************************/
 /* ANIMATIONS */
@@ -191,7 +191,7 @@
  })
 
 /****************************************************************************************************/
-/* TEMPLATE */
+/* GRID */
 
 *, *::before, *::after {
   outline: none;
@@ -211,10 +211,20 @@ body {
   article {
     width: ◊|grid/article|rem;
   }
+
+  aside {
+    width: ◊|grid/margin-note|rem;
+    float: right;
+    clear: right;
+    margin-right: -◊|grid/margin-note/pull|rem;
+  }
 }
 
+/****************************************************************************************************/
+/* HEADERS */
+
 body > header {
-  border-bottom: ◊|ruler/thin|px solid ◊|color/secondary-content|;
+  border-bottom: ◊|border-width/thin|px solid ◊|color/secondary-content|;
   margin-bottom: ◊|space/extra-large|rem;
 }
 
@@ -233,8 +243,8 @@ body > header nav a {
 body > header nav a.active {
   border-bottom-left-radius: ◊|space/none|rem;
   border-bottom-right-radius: ◊|space/none|rem;
-  border-bottom: ◊|ruler/thin|px solid ◊|color/secondary-content|;
-  margin-bottom: -◊|ruler/thin|px;
+  border-bottom: ◊|border-width/thin|px solid ◊|color/secondary-content|;
+  margin-bottom: -◊|border-width/thin|px;
 }
 
 article > header {
@@ -306,7 +316,7 @@ body {
   ◊prefix['font-synthesis]{none}
   ◊prefix['font-kerning]{normal}
   ◊prefix['text-rendering]{optimizeLegibility}
-  ◊font-family/main
+  font-family: ◊|font-family/main|;
   font-size: ◊|font-size/medium|rem;
   background-color: ◊|color/background|;
   color: ◊|color/primary-content|;
