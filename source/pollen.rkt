@@ -328,6 +328,7 @@
   #:css
   (css-expr
    [time
+    #:font-weight 400
     #:font-size ,font-size/small
     #:color ,(dict-ref colors 'secondary-content)]))
 
