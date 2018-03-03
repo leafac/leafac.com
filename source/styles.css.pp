@@ -1,11 +1,6 @@
 #lang pollen
 
 /****************************************************************************************************/
-/* NORMALIZE */
-
-◊(file->string "stylesheets/normalize.css.p")
-
-/****************************************************************************************************/
 /* HELPERS */
 
 ◊(define (px->rem px #:html/font-size [html/font-size 16])
@@ -62,54 +57,6 @@
 
 /****************************************************************************************************/
 /* TEXT */
-
-@font-face {
-  font-family: "Charter";
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: normal;
-  src: url("/fonts/charter_regular-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Charter";
-  font-style: italic;
-  font-weight: 400;
-  font-stretch: normal;
-  src: url("/fonts/charter_italic-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Charter";
-  font-style: normal;
-  font-weight: 700;
-  font-stretch: normal;
-  src: url("/fonts/charter_bold-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Charter";
-  font-style: italic;
-  font-weight: 700;
-  font-stretch: normal;
-  src: url("/fonts/charter_bold_italic-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  font-style: normal;
-  font-weight: 400;
-  font-stretch: normal;
-  src: url("/fonts/FiraMono-Regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Fira Mono";
-  font-style: normal;
-  font-weight: 500;
-  font-stretch: normal;
-  src: url("/fonts/FiraMono-Medium.woff") format("woff");
-}
 
 ◊(define font-family/main            ◊~a{"Charter", "Iowan Old Style", "Georgia", serif}))
 ◊(define font-family/monospace       ◊~a{"Fira Mono", "Menlo", "Monaco", "Courier New", monospace}))
@@ -189,6 +136,62 @@
      width: 100%;
      margin: ◊|space/small|rem ◊|space/none|rem;
    })
+
+/****************************************************************************************************/
+/* NORMALIZE */
+
+◊(file->string "stylesheets/normalize.css.p")
+
+/****************************************************************************************************/
+/* FONTS */
+
+@font-face {
+  font-family: "Charter";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/charter_regular-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Charter";
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/charter_italic-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Charter";
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url("/fonts/charter_bold-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Charter";
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url("/fonts/charter_bold_italic-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/FiraMono-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  src: url("/fonts/FiraMono-Medium.woff") format("woff");
+}
 
 /****************************************************************************************************/
 /* GRID */
