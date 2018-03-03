@@ -1,12 +1,9 @@
 #lang pollen
 
 /****************************************************************************************************/
-/* IMPORTS */
+/* NORMALIZE */
 
-◊(string-append*
-  (for/list ([file '("stylesheets/normalize.css.p"
-                     "stylesheets/solarized-light.css.p")])
-    (file->string file)))
+◊(file->string "stylesheets/normalize.css.p")
 
 /****************************************************************************************************/
 /* HELPERS */
@@ -378,6 +375,48 @@ p + p {
     font-size: ◊|font-size/small|rem;
     margin-bottom: ◊|space/large|rem;
   }
+}
+
+/****************************************************************************************************/
+/* FIGURES */
+
+figure {
+  ◊insertion
+  text-align: center;
+}
+
+figcaption {
+  font-style: italic;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/****************************************************************************************************/
+/* CODE */
+
+◊(file->string "stylesheets/solarized-light.css.p")
+
+code {
+  font-family: ◊|font-family/monospace|;
+}
+
+.code-block {
+  ◊insertion
+  font-size: ◊|font-size/extra-small|rem;
+}
+
+pre {
+  font-family: ◊|font-family/monospace|;
+  background-color: ◊|color/background|;
+  overflow: auto;
+  padding: ◊|text-indent|rem;
+  padding-left: calc(◊|text-indent|rem - ◊|border-width/thin|px);
+  border: ◊|border-width/thin|px solid ◊|color/secondary-content|;
+  border-radius: ◊|border-radius|rem;
+  margin: ◊|space/none|rem;
 }
 
 /****************************************************************************************************/

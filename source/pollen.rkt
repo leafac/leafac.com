@@ -258,24 +258,20 @@
 ;; Figures
 
 (define-component figure
-  #:html (default-tag-function 'figure)
-  #:css (css-expr [figure ,@insertion #:text-align center]))
+  #:html (default-tag-function 'figure))
 
 (define-component figure/caption
-  #:html (default-tag-function 'figcaption)
-  #:css (css-expr [figcaption #:font-style italic]))
+  #:html (default-tag-function 'figcaption))
 
 (define-component (image path [caption ""])
-  #:html ((default-tag-function 'img) #:src path #:alt caption)
-  #:css (css-expr [img #:max-width 100%]))
+  #:html ((default-tag-function 'img) #:src path #:alt caption))
 
 (define-component (figure/image path [caption ""])
   #:html
   (figure (image path caption) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
 (define-component (svg path)
-  #:html (string->xexpr (file->string path))
-  #:css (css-expr [svg #:max-width 100% #:height auto]))
+  #:html (string->xexpr (file->string path)))
 
 (define-component (figure/svg path [caption ""])
   #:html (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
@@ -283,8 +279,7 @@
 ;; Code
 
 (define-component code
-  #:html (default-tag-function 'code)
-  #:css (css-expr [code ,@font-family/monospace]))
+  #:html (default-tag-function 'code))
 
 (define-component (code/block #:language [language #f] #:caption [caption #f] . elements)
   #:html
@@ -311,20 +306,7 @@
              (λ () (display code/highlighted)))
            code/highlighted]))
       (string->xexpr code/highlighted)]
-     [else ((default-tag-function 'pre) (apply code elements))]))
-  #:css
-  (css-expr
-   [.code-block
-    ,@insertion
-    #:font-size ,font-size/extra-small]
-   [pre
-    ,@font-family/monospace
-    #:background-color ,(dict-ref colors 'background)
-    #:margin ,space/none
-    #:overflow auto
-    #:border (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-    #:border-radius ,space/extra-small
-    #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thin)))]))
+     [else ((default-tag-function 'pre) (apply code elements))])))
 
 ;; Lists
 
