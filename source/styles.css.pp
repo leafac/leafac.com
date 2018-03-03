@@ -220,6 +220,17 @@ body {
   }
 }
 
+.full-width {
+  ◊insertion
+  clear: both;
+}
+
+@media ◊grid/bigger-screens {
+  .full-width {
+    width: ◊|grid/body|rem;
+  }
+}
+
 /****************************************************************************************************/
 /* HEADERS */
 
@@ -307,6 +318,10 @@ opacity: 1;
 
 h3 .mark a, h4 .mark a {
   color: ◊|color/secondary-content|;
+}
+
+.new-thought {
+  height: ◊|space/extra-large|rem;
 }
 
 /****************************************************************************************************/

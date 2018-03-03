@@ -230,8 +230,7 @@
   #:html (apply heading 'h4 key elements))
 
 (define-component new-thought
-  #:html (default-tag-function 'div #:class "new-thought")
-  #:css (css-expr [.new-thought #:height ,space/extra-large]))
+  #:html (default-tag-function 'div #:class "new-thought"))
 
 (define-component new-line
   #:html (default-tag-function 'br))
@@ -249,13 +248,7 @@
 ;; Full width
 
 (define-component full-width
-  #:html (default-tag-function 'div #:class "full-width")
-  #:css
-  (css-expr
-   [.full-width
-    ,@insertion
-    #:clear both
-    [@media ,grid/bigger-screens #:width ,grid/body]]))
+  #:html (default-tag-function 'div #:class "full-width"))
 
 ;; Margin notes
 
