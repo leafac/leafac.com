@@ -17,11 +17,11 @@
 ◊(define (prefix #:prefixes [prefixes '(moz webkit ms o)] name . values)
    (define values/string (string-join values))
    ◊~a{
- ◊(string-append*
-   (for/list ([prefix prefixes])
-     ◊~a{-◊|prefix|-◊|name|:◊|values/string|;}))
- ◊|name|:◊|values/string|;
- })
+     ◊(string-append*
+       (for/list ([prefix prefixes])
+         ◊~a{-◊|prefix|-◊|name|:◊|values/string|;}))
+     ◊|name|:◊|values/string|;
+   })
 
 /****************************************************************************************************/
 /* GRID */
@@ -42,24 +42,24 @@
 |   12    |   600   |   12    |
 */
 
-◊(define grid/body (px->rem 1000))
-◊(define grid/padding (px->rem 12))
-◊(define grid/article (px->rem 600))
-◊(define grid/gutter (px->rem 75))
-◊(define grid/margin-note (px->rem 325))
+◊(define grid/body             (px->rem 1000))
+◊(define grid/padding          (px->rem 12))
+◊(define grid/article          (px->rem 600))
+◊(define grid/gutter           (px->rem 75))
+◊(define grid/margin-note      (px->rem 325))
 ◊(define grid/margin-note/pull (+ grid/gutter grid/margin-note))
-◊(define grid/breakpoint (+ grid/body (* grid/padding 2)))
-◊(define grid/bigger-screens ◊~a{(min-width:◊|grid/breakpoint|rem)})
-◊(define grid/smaller-screens ◊~a{(max-width:◊(- grid/breakpoint 0.01)rem)})
+◊(define grid/breakpoint       (+ grid/body (* grid/padding 2)))
+◊(define grid/bigger-screens   ◊~a{(min-width:◊|grid/breakpoint|rem)})
+◊(define grid/smaller-screens  ◊~a{(max-width:◊(- grid/breakpoint 0.01)rem)})
 
 /****************************************************************************************************/
 /* SPACES */
 
-◊(define space/none 0)
+◊(define space/none        0)
 ◊(define space/extra-small 0.2)
-◊(define space/small 0.5)
-◊(define space/medium 1)
-◊(define space/large 1.5)
+◊(define space/small       0.5)
+◊(define space/medium      1)
+◊(define space/large       1.5)
 ◊(define space/extra-large 2)
 
 /****************************************************************************************************/
@@ -113,20 +113,20 @@
   src: url("/fonts/FiraMono-Medium.woff") format("woff");
 }
 
-◊(define font-family/main ◊~a{"Charter", "Iowan Old Style", "Georgia", serif}))
-◊(define font-family/monospace ◊~a{"Fira Mono", "Menlo", "Monaco", "Courier New", monospace}))
-◊(define font-size/extra-small (px->rem 12))
-◊(define font-size/small (px->rem 13))
-◊(define font-size/medium (px->rem 16))
-◊(define font-size/large (px->rem 20))
-◊(define font-size/extra-large (px->rem 22))
+◊(define font-family/main            ◊~a{"Charter", "Iowan Old Style", "Georgia", serif}))
+◊(define font-family/monospace       ◊~a{"Fira Mono", "Menlo", "Monaco", "Courier New", monospace}))
+◊(define font-size/extra-small       (px->rem 12))
+◊(define font-size/small             (px->rem 13))
+◊(define font-size/medium            (px->rem 16))
+◊(define font-size/large             (px->rem 20))
+◊(define font-size/extra-large       (px->rem 22))
 ◊(define font-size/extra-extra-large (px->rem 30))
-◊(define line-height/extra-small 1)
-◊(define line-height/small 1.3)
-◊(define line-height/medium 1.5)
-◊(define line-height/large 2)
-◊(define text-indent 1.5)
-◊(define letter-spacing 0.2)
+◊(define line-height/extra-small     1)
+◊(define line-height/small           1.3)
+◊(define line-height/medium          1.5)
+◊(define line-height/large           2)
+◊(define text-indent                 1.5)
+◊(define letter-spacing              0.2)
 
 /****************************************************************************************************/
 /* COLORS */
@@ -165,7 +165,7 @@
 /****************************************************************************************************/
 /* BORDERS */
 
-◊(define border-width/thin 1)
+◊(define border-width/thin  1)
 ◊(define border-width/thick 3)
 
 /****************************************************************************************************/
@@ -177,18 +177,18 @@
 /* MIXINS */
 
 ◊(define inline-block-enumeration
-   ◊~a{
-  line-height: ◊|line-height/large|rem;
-  display: inline-block;
-  margin-right: ◊|space/medium|rem;
- })
+  ◊~a{
+    line-height: ◊|line-height/large|rem;
+    display: inline-block;
+    margin-right: ◊|space/medium|rem;
+  })
 
 ◊(define insertion
    ◊~a{
- box-sizing: border-box;
- width: 100%;
- margin: ◊|space/small|rem ◊|space/none|rem;
- })
+     box-sizing: border-box;
+     width: 100%;
+     margin: ◊|space/small|rem ◊|space/none|rem;
+   })
 
 /****************************************************************************************************/
 /* GRID */
