@@ -173,7 +173,6 @@
 
 ◊(define animation/duration 0.3)
 
-
 /****************************************************************************************************/
 /* MIXINS */
 
@@ -190,6 +189,47 @@
  width: 100%;
  margin: ◊|space/small|rem ◊|space/none|rem;
  })
+
+/****************************************************************************************************/
+/* TEMPLATE */
+
+*, *::before, *::after {
+  outline: none;
+}
+
+body {
+  ◊prefix['font-synthesis]{none}
+  ◊prefix['font-kerning]{normal}
+  ◊prefix['text-rendering]{optimizeLegibility}
+  ◊font-family/main
+}
+
+body > header {
+  border-bottom: ◊|ruler/thin|px solid ◊|color/secondary-content|;
+  margin-bottom: ◊|space/extra-large|rem;
+}
+
+body > header h1 {
+  font-size: ◊|font-size/extra-extra-large|rem;
+}
+
+body > header nav {
+  margin-bottom: ◊|space/small|rem;
+}
+
+body > header nav a {
+  ◊inline-block-enumeration
+  font-size: ◊|font-size/small|rem;
+  text-transform: uppercase;
+  letter-spacing: ◊|letter-spacing|em;
+  text-decoration: none;
+}
+
+body > header nav a.active {
+  border-radius: ◊|space/none|rem;
+  border-bottom: ◊|ruler/thin|px solid ◊|color/secondary-content|;
+  margin-bottom: -◊|ruler/thin|px;
+}
 
 /****************************************************************************************************/
 /* REMOVE ME! */

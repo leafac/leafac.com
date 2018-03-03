@@ -216,32 +216,11 @@
        (define classes/strings (map second classes))
        (define classes/concatenated (string-join classes/strings " "))
        (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
-  (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes)
-  #:css (css-expr [* *::before *::after #:outline none]))
+  (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
 
 (define-component head/link #:html (default-tag-function 'link))
 
 (define-component head/title #:html (default-tag-function 'title))
-
-(define-component header/body
-  #:css
-  (css-expr
-   [body>header
-    [h1 #:font-size ,font-size/extra-extra-large]
-    #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-    #:margin-bottom ,space/extra-large
-    [nav
-     #:margin-bottom ,space/small
-     [a
-      ,@inline-block-enumeration
-      #:font-size ,font-size/small
-      #:text-transform uppercase
-      #:letter-spacing ,letter-spacing
-      #:text-decoration none
-      [(|.| & active)
-       #:border-bottom (,ruler/thin solid ,(dict-ref colors 'secondary-content))
-       #:border-radius ,space/none
-       #:margin-bottom ,ruler/thin/negative]]]]))
 
 (define-component header/article
   #:css
