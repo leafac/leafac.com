@@ -167,6 +167,8 @@
 
 ◊(define border-width/thin  1)
 ◊(define border-width/thick 3)
+◊(define border-radius/none space/none)
+◊(define border-radius      space/extra-small)
 
 /****************************************************************************************************/
 /* ANIMATIONS */
@@ -252,8 +254,8 @@ body > header nav a {
 }
 
 body > header nav a.active {
-  border-bottom-left-radius: ◊|space/none|rem;
-  border-bottom-right-radius: ◊|space/none|rem;
+  border-bottom-left-radius: ◊|border-radius/none|rem;
+  border-bottom-right-radius: ◊|border-radius/none|rem;
   border-bottom: ◊|border-width/thin|px solid ◊|color/secondary-content|;
   margin-bottom: -◊|border-width/thin|px;
 }
@@ -353,6 +355,28 @@ p + p {
   p         + aside + aside + aside + aside + p,
   p + aside + aside + aside + aside + aside + p {
     text-indent: ◊|text-indent|rem;
+  }
+}
+
+/****************************************************************************************************/
+/* MARGIN NOTES */
+
+@media ◊grid/smaller-screens {
+  aside {
+    ◊insertion
+    border-left: ◊|border-width/thick|px solid ◊|color/secondary-content|;
+    border-radius: ◊|border-radius|rem;
+    padding: ◊|text-indent|rem;
+    padding-left: calc(◊|text-indent|rem - ◊|border-width/thick|px);
+    background-color: ◊|color/background-highlight|;
+    color: ◊|color/emphasized-content|;
+  }
+}
+
+@media ◊grid/bigger-screens {
+  aside {
+    font-size: ◊|font-size/small|rem;
+    margin-bottom: ◊|space/large|rem;
   }
 }
 

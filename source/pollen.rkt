@@ -253,20 +253,7 @@
 ;; Margin notes
 
 (define-component margin-note
-  #:html (default-tag-function 'aside)
-  #:css
-  (css-expr
-   [aside
-    [@media ,grid/smaller-screens
-     ,@insertion
-     #:padding ,text-indent (#:left (apply calc (- ,text-indent ,ruler/thick)))
-     #:color ,(dict-ref colors 'emphasized-content)
-     #:background-color ,(dict-ref colors 'background-highlight)
-     #:border-left (,ruler/thick solid ,(dict-ref colors 'secondary-content))
-     #:border-radius ,space/extra-small]
-    [@media ,grid/bigger-screens
-     #:font-size ,font-size/small
-     #:margin-bottom ,space/large]]))
+  #:html (default-tag-function 'aside))
 
 ;; Figures
 
