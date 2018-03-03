@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="◊(select 'author personal-data)">
     <meta name="description" content="◊(select 'description personal-data)">
-    <link rel="stylesheet" type="text/css" href="/assets/stylesheets/styles.css">
+    <link rel="stylesheet" type="text/css" href="/styles.css">
     <link rel="icon" type="image/jpeg" href="/assets/images/favicon.jpg">
     <link rel="alternate" type="application/atom+xml" title="◊(select 'name personal-data)" href="/feed.atom">
     <title>◊(->html ◊@[◊when/splice[title]{◊title · } (select 'name personal-data)])</title>
