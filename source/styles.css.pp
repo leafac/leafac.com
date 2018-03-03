@@ -486,6 +486,10 @@ a:hover {
   }
 }
 
+kbd {
+  font-family: ◊|font-family/monospace|;
+}
+
 .fraction {
   font-size: ◊|font-size/small|rem;
 }

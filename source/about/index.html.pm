@@ -3,6 +3,39 @@
 ◊define-meta[title]{About}
 ◊define-meta[date]{2016-11-09}
 
+◊style{
+  .skills {
+    padding-left: ◊|space/none|rem;
+  }
+
+  .skill {
+    ◊inline-block-enumeration
+  }
+
+  .skill::before {
+    content: "";
+    display: inline-block;
+    margin-right: ◊|space/extra-small|rem;
+    border-radius: ◊|border-radius|rem;
+    width: ◊|space/small|rem;
+  }
+
+  .beginner::before {
+    height: .3rem;
+    background-color: ◊|color/red|;
+  }
+
+  .intermediate::before {
+    height: .6rem;
+    background-color: ◊|color/yellow|;
+  }
+
+  .advanced::before {
+    height: .9rem;
+    background-color: ◊|color/green|;
+  }
+}
+
 ◊margin-note{◊figure/image{/avatar.png}}
 
 I am a writer of ◊link["/prose"]{prose}, ◊link["/software"]{software} and ◊link["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.

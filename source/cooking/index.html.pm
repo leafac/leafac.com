@@ -2,6 +2,24 @@
 
 ◊define-meta[title]{Cooking}
 
+◊(require (prefix-in style: "../styles.css.pp"))
+
+◊style{
+  .recipes {
+    ◊style:prefix['column-count]{2}
+    padding-left: ◊|style:space/none|rem;
+    line-height: ◊|style:line-height/large|rem;
+  }
+
+  .recipe {
+    list-style: none;
+  }
+
+  .recipe a {
+    text-decoration: none;
+  }
+}
+
 ◊margin-note{My favorite vegan recipes. Tried at home and adapted for best results.}
 
 ◊recipes{

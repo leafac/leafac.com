@@ -38,161 +38,10 @@
 (define-runtime-path project-path "./")
 (define (source-path path) (~a project-path path))
 
-;; CSS helpers
-
-(define (px->rem px #:html/font-size [html/font-size 16])
-  (exact->inexact (/ px html/font-size)))
-
-(define (prefix declaration #:prefixes [prefixes '(moz webkit ms o)])
-  (syntax-parse declaration
-    [(name:keyword rest:expr ...)
-     (define name/datum (syntax->datum #'name))
-     (define rests/datum (syntax->datum #'(rest ...)))
-     (css-expr ,@(append*
-                  (for/list ([a-prefix prefixes])
-                    (define prefixed-name
-                      (string->keyword (~a "-" a-prefix "-" (keyword->string name/datum))))
-                    (css-expr ,prefixed-name ,@rests/datum)))
-               ,name/datum ,@rests/datum)]))
-
 ;; ---------------------------------------------------------------------------------------------------
 ;; COMPONENTS
 
-(components-output-types #:dynamic html atom #:static css)
-
-;; ---------------------------------------------------------------------------------------------------
-;; GRID
-
-;; |                   bigger-screens                   |
-;; |                        1024                        |
-;; |         |              body              |         |
-;; |         |              1000              |         |
-;; | padding | article | gutter | margin-note | padding |
-;; |   12    |   600   |   75   |     325     |   12    |
-;;                     |   margin-note/pull   |
-;;                     |         400          |
-;;
-;;
-;; |       smaller-screens       |
-;; |             624             |
-;; | padding | article | padding |
-;; |   12    |   600   |   12    |
-
-(define grid/body/unitless (px->rem 1000))
-(define grid/body (css-expr rem ,grid/body/unitless))
-(define grid/padding/unitless (px->rem 12))
-(define grid/padding (css-expr rem ,grid/padding/unitless))
-(define grid/article/unitless (px->rem 600))
-(define grid/article (css-expr rem ,grid/article/unitless))
-(define grid/gutter/unitless (px->rem 75))
-(define grid/margin-note/unitless (px->rem 325))
-(define grid/margin-note (css-expr rem ,grid/margin-note/unitless))
-(define grid/margin-note/pull (css-expr rem ,(- (+ grid/gutter/unitless grid/margin-note/unitless))))
-(define grid/breakpoint (+ grid/body/unitless (* grid/padding/unitless 2)))
-(define grid/bigger-screens (css-expr #:min-width (rem ,grid/breakpoint)))
-(define grid/smaller-screens (css-expr #:max-width (rem ,(- grid/breakpoint 0.01))))
-
-;; ---------------------------------------------------------------------------------------------------
-;; SPACES
-
-(define space/none 0)
-(define space/extra-small '0.2rem)
-(define space/extra-small/negative '-0.2rem)
-(define space/small '0.5rem)
-(define space/small/negative '-0.5rem)
-(define space/medium '1rem)
-(define space/medium/negative '-1rem)
-(define space/large '1.5rem)
-(define space/large/negative '-1.5rem)
-(define space/extra-large '2rem)
-(define space/extra-large/negative '-2rem)
-
-;; ---------------------------------------------------------------------------------------------------
-;; TEXT
-
-(define font-family/main
-  (css-expr #:font-family "Charter" "Iowan Old Style" "Georgia" serif))
-(define font-family/monospace
-  (css-expr #:font-family "Fira Mono" "Menlo" "Monaco" "Courier New" monospace))
-(define font-size/extra-small (css-expr rem ,(px->rem 12)))
-(define font-size/small (css-expr rem ,(px->rem 13)))
-(define font-size/medium (css-expr rem ,(px->rem 16)))
-(define font-size/large (css-expr rem ,(px->rem 20)))
-(define font-size/extra-large (css-expr rem ,(px->rem 22)))
-(define font-size/extra-extra-large (css-expr rem ,(px->rem 30)))
-(define line-height/extra-small 1)
-(define line-height/small 1.3)
-(define line-height/medium 1.5)
-(define line-height/large 2)
-(define text-indent '1.5rem)
-(define letter-spacing '0.2em)
-
-;; ---------------------------------------------------------------------------------------------------
-;; COLORS
-
-(define solarized
-  '((base03  . |#002b36|)
-    (base02  . |#073642|)
-    (base01  . |#586e75|)
-    (base00  . |#657b83|)
-    (base0   . |#839496|)
-    (base1   . |#93a1a1|)
-    (base2   . |#eee8d5|)
-    (base3   . |#fdf6e3|)
-    (yellow  . |#b58900|)
-    (orange  . |#cb4b16|)
-    (red     . |#dc322f|)
-    (magenta . |#d33682|)
-    (violet  . |#6c71c4|)
-    (blue    . |#268bd2|)
-    (cyan    . |#2aa198|)
-    (green   . |#859900|)))
-
-(define colors
-  `((background           . ,(dict-ref solarized 'base3))
-    (background-highlight . ,(dict-ref solarized 'base2))
-    (secondary-content    . ,(dict-ref solarized 'base1))
-    (primary-content      . ,(dict-ref solarized 'base00))
-    (emphasized-content   . ,(dict-ref solarized 'base01))
-    (yellow               . ,(dict-ref solarized 'yellow))
-    (orange               . ,(dict-ref solarized 'orange))
-    (red                  . ,(dict-ref solarized 'red))
-    (magenta              . ,(dict-ref solarized 'magenta))
-    (violet               . ,(dict-ref solarized 'violet))
-    (blue                 . ,(dict-ref solarized 'blue))
-    (cyan                 . ,(dict-ref solarized 'cyan))
-    (green                . ,(dict-ref solarized 'green))))
-
-;; ---------------------------------------------------------------------------------------------------
-;; RULERS
-
-(define ruler/thin/unitless 1)
-(define ruler/thin (css-expr px ,ruler/thin/unitless))
-(define ruler/thin/negative (css-expr px ,(- ruler/thin/unitless)))
-(define ruler/thick/unitless 3)
-(define ruler/thick (css-expr px ,ruler/thick/unitless))
-(define ruler/thick/negative (css-expr px ,(- ruler/thick/unitless)))
-
-;; ---------------------------------------------------------------------------------------------------
-;; ANIMATIONS
-
-(define animation/duration '0.3s)
-
-;; ---------------------------------------------------------------------------------------------------
-;; MIXINS
-
-(define inline-block-enumeration
-  (css-expr
-   #:line-height ,line-height/large
-   #:display inline-block
-   #:margin-right ,space/medium
-   [(: & last-child) #:margin-right ,space/none]))
-
-(define insertion
-  (css-expr
-   #:box-sizing border-box
-   #:width 100%
-   #:margin (,space/small ,space/none)))
+(components-output-types #:dynamic html atom)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE
@@ -382,8 +231,7 @@
 (define-component informal #:html emphasis)
 
 (define-component keyboard
-  #:html (default-tag-function 'kbd)
-  #:css (css-expr [kbd ,@font-family/monospace]))
+  #:html (default-tag-function 'kbd))
 
 (define-component path
   #:html (default-tag-function 'code))
@@ -404,17 +252,10 @@
 ;; COOKING
 
 (define-component (recipes . elements)
-  #:html (apply list/unordered #:class "recipes" elements)
-  #:css (css-expr [.recipes ,@(prefix (css-expr #:column-count 2)) #:padding-left ,space/none]))
+  #:html (apply list/unordered #:class "recipes" elements))
 
 (define-component (recipe path . elements)
-  #:html (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements))
-  #:css
-  (css-expr
-   [.recipe
-    #:list-style none
-    #:margin-bottom ,space/small
-    [a #:text-decoration none]]))
+  #:html (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements)))
 
 (define ingredients/collected (make-hash))
 
@@ -498,30 +339,10 @@
 (define-component work-experience/highlight #:html list/unordered/item)
 
 (define-component (skills . elements)
-  #:html (apply list/unordered #:class "skills" elements)
-  #:css (css-expr [.skills #:padding-left ,space/none]))
+  #:html (apply list/unordered #:class "skills" elements))
 
 (define-component (skill level . elements)
-  #:html (apply list/unordered/item #:class (~a "skill " level) elements)
-  #:css
-  (css-expr
-   [.skill
-    ,@inline-block-enumeration
-    [(:: & before)
-     #:content ""
-     #:display inline-block
-     #:margin-right ,space/extra-small
-     #:border-radius ,space/extra-small
-     #:width ,space/small]]
-   [.beginner::before
-    #:height .3rem
-    #:background-color ,(dict-ref colors 'red)]
-   [.intermediate::before
-    #:height .6rem
-    #:background-color ,(dict-ref colors 'yellow)]
-   [.advanced::before
-    #:height .9rem
-    #:background-color ,(dict-ref colors 'green)]))
+  #:html (apply list/unordered/item #:class (~a "skill " level) elements))
 
 (define-component certification #:html (default-tag-function '@))
 
@@ -588,47 +409,3 @@
 ;; MUSIC
 
 (define-component lyrics #:html code/block)
-
-;; ---------------------------------------------------------------------------------------------------
-;; PROSE
-
-;; Git by Analogy
-
-
-
-(define (section/flag label color)
-  (css-expr
-   #:border-left (,ruler/thick solid ,color)
-   #:position relative
-   [(:: & before)
-    #:content ,label
-    #:border-radius ,space/extra-small
-    #:text-transform uppercase
-    #:letter-spacing ,letter-spacing
-    #:font-size ,font-size/small
-    #:line-height ,line-height/extra-small
-    #:background-color ,color
-    #:color ,(dict-ref colors 'background)
-    #:display inline-block
-    #:padding (,space/none ,space/extra-small)
-    #:position absolute
-    #:left ,ruler/thick/negative
-    #:top ,space/none
-    ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
-    ,@(prefix (css-expr #:transform-origin (top left)))]))
-
-(define-component git/verb
-  #:html (default-tag-function 'span #:class "git--verb")
-  #:css (css-expr [.git--verb #:color ,(dict-ref colors 'blue)]))
-
-(define-component git/object
-  #:html (default-tag-function 'span #:class "git--object")
-  #:css (css-expr [.git--object #:color ,(dict-ref colors 'green)]))
-
-(define-component git/gui
-  #:html (default-tag-function 'div #:class "git--gui")
-  #:css (css-expr [.git--gui ,@(section/flag "GUI" (dict-ref colors 'violet))]))
-
-(define-component git/cli
-  #:html (default-tag-function 'div #:class "git--cli")
-  #:css (css-expr [.git--cli ,@(section/flag "CLI" (dict-ref colors 'yellow))]))
