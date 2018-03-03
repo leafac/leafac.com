@@ -368,13 +368,7 @@
 (define-component publication #:html emphasis)
 
 (define-component time
-  #:html (default-tag-function 'time)
-  #:css
-  (css-expr
-   [time
-    #:font-weight 400
-    #:font-size ,font-size/small
-    #:color ,(dict-ref colors 'secondary-content)]))
+  #:html (default-tag-function 'time))
 
 ;; Inline elements
 
@@ -395,25 +389,16 @@
   #:html (default-tag-function 'code))
 
 (define-component (fraction numerator denominator)
-  #:html ((default-tag-function 'span)
-          ((default-tag-function 'span) #:class "fraction--numerator" (~a numerator))
-          ((default-tag-function 'span) #:class "fraction--slash" "/")
-          ((default-tag-function 'span) #:class "fraction--denominator" (~a denominator)))
-  #:css
-  (css-expr
-   [.fraction--numerator .fraction--denominator #:font-size ,font-size/small]
-   [.fraction--numerator #:vertical-align super]
-   [.fraction--denominator #:vertical-align sub]
-   [.fraction--slash #:margin (#:left ,space/extra-small/negative
-                               #:right ,space/extra-small/negative)]))
+  #:html ((default-tag-function 'span #:class "fraction")
+          ((default-tag-function 'span) #:class "numerator" (~a numerator))
+          ((default-tag-function 'span) #:class "slash" "/")
+          ((default-tag-function 'span) #:class "denominator" (~a denominator))))
 
 (define-component (placeholder . elements)
-  #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">"))
-  #:css (css-expr [.placeholder #:color ,(dict-ref colors 'blue)]))
+  #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
 
 (define-component (menu-option . elements)
-  #:html ((default-tag-function 'span #:class "menu-option") (add-between elements " > "))
-  #:css (css-expr [.menu-option #:font-weight 700]))
+  #:html ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING

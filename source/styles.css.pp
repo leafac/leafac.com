@@ -52,12 +52,13 @@
 /****************************************************************************************************/
 /* SPACES */
 
-◊(define space/none        0)
-◊(define space/extra-small 0.2)
-◊(define space/small       0.5)
-◊(define space/medium      1)
-◊(define space/large       1.5)
-◊(define space/extra-large 2)
+◊(define space/none              0)
+◊(define space/extra-extra-small 0.1)
+◊(define space/extra-small       0.2)
+◊(define space/small             0.5)
+◊(define space/medium            1)
+◊(define space/large             1.5)
+◊(define space/extra-large       2)
 
 /****************************************************************************************************/
 /* TEXT */
@@ -259,6 +260,12 @@ body > header nav a.active {
 
 article > header {
   margin-bottom: ◊|space/medium|rem;
+}
+
+time {
+  font-weight: 400;
+  font-size: ◊|font-size/small|rem;
+  color: ◊|color/secondary-content|;
 }
 
 /****************************************************************************************************/
@@ -477,6 +484,30 @@ a:hover {
     background-color: ◊|color/background|;
     color: ◊|color/primary-content|;
   }
+}
+
+.fraction {
+  font-size: ◊|font-size/small|rem;
+}
+
+.fraction .numerator {
+  vertical-align: super;
+}
+
+.fraction .denominator {
+  vertical-align: sub;
+}
+
+.fraction .slash {
+  margin: ◊|space/none|rem -◊|space/extra-extra-small|rem;
+}
+
+.placeholder {
+  color: ◊|color/blue|;
+}
+
+.menu-option {
+  font-weight: 700;
 }
 
 /****************************************************************************************************/
