@@ -440,6 +440,45 @@ tbody + tbody::before {
   height: ◊|space/small|rem;
 }
 
+th, td {
+  padding: ◊|space/none|rem;
+  padding-right: ◊|space/medium|rem;
+}
+
+th:last-child, td:last-child {
+  padding-right: ◊|space/none|rem;
+}
+
+th {
+  font-weight: 700;
+  text-align: left;
+}
+
+/****************************************************************************************************/
+/* INLINE */
+
+a {
+  transition: background-color ◊|animation/duration|s;
+  border-radius: ◊|border-radius|rem;
+  color: ◊|color/primary-content|;
+}
+
+a:hover {
+  background-color: ◊|color/background-highlight|;
+  color: ◊|color/emphasized-content|;
+}
+
+@media ◊grid/smaller-screens {
+  aside a {
+    color: ◊|color/emphasized-content|;
+  }
+
+  aside a:hover {
+    background-color: ◊|color/background|;
+    color: ◊|color/primary-content|;
+  }
+}
+
 /****************************************************************************************************/
 /* REMOVE ME! */
 

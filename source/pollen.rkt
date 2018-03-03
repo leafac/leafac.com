@@ -333,39 +333,15 @@
 (define-component table/row #:html (default-tag-function 'tr))
 
 (define-component table/data
-  #:html (default-tag-function 'td)
-  #:css
-  (css-expr
-   [td th #:padding ,space/none (#:right ,space/medium)
-    [(: & last-child) #:padding-right ,space/none]]))
+  #:html (default-tag-function 'td))
 
 (define-component table/data/header
-  #:html (default-tag-function 'th)
-  #:css
-  (css-expr
-   [th
-    #:font-weight 700
-    #:text-align left]))
+  #:html (default-tag-function 'th))
 
 ;; Links
 
 (define-component (link path . elements)
-  #:html (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements))
-  #:css
-  (css-expr
-   [a
-    #:transition (background-color ,animation/duration)
-    #:border-radius ,space/extra-small
-    #:color ,(dict-ref colors 'primary-content)
-    [(: & hover)
-     #:background-color ,(dict-ref colors 'background-highlight)
-     #:color ,(dict-ref colors 'emphasized-content)]
-    [@media ,grid/smaller-screens
-     [(aside &)
-      #:color ,(dict-ref colors 'emphasized-content)
-      [(: & hover)
-       #:background-color ,(dict-ref colors 'background)
-       #:color ,(dict-ref colors 'primary-content)]]]]))
+  #:html (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
 
 ;; References
 
