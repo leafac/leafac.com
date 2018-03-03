@@ -188,32 +188,6 @@
    #:margin-right ,space/medium
    [(: & last-child) #:margin-right ,space/none]))
 
-(define show-on-hover
-  (css-expr #:transition (opacity ,animation/duration)
-            #:opacity 0
-            [(> *:hover &) #:opacity 1]))
-
-(define (section/flag label color)
-  (css-expr
-   #:border-left (,ruler/thick solid ,color)
-   #:position relative
-   [(:: & before)
-    #:content ,label
-    #:border-radius ,space/extra-small
-    #:text-transform uppercase
-    #:letter-spacing ,letter-spacing
-    #:font-size ,font-size/small
-    #:line-height ,line-height/extra-small
-    #:background-color ,color
-    #:color ,(dict-ref colors 'background)
-    #:display inline-block
-    #:padding (,space/none ,space/extra-small)
-    #:position absolute
-    #:left ,ruler/thick/negative
-    #:top ,space/none
-    ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
-    ,@(prefix (css-expr #:transform-origin (top left)))]))
-
 (define insertion
   (css-expr
    #:box-sizing border-box
@@ -361,7 +335,9 @@
   #:css
   (css-expr
    [.heading--mark
-    ,@show-on-hover
+    #:transition (opacity ,animation/duration)
+    #:opacity 0
+    [(> *:hover &) #:opacity 1]
     #:margin-left ,space/small
     [a #:color ,(dict-ref colors 'secondary-content)]]))
 
@@ -795,6 +771,29 @@
 ;; PROSE
 
 ;; Git by Analogy
+
+
+
+(define (section/flag label color)
+  (css-expr
+   #:border-left (,ruler/thick solid ,color)
+   #:position relative
+   [(:: & before)
+    #:content ,label
+    #:border-radius ,space/extra-small
+    #:text-transform uppercase
+    #:letter-spacing ,letter-spacing
+    #:font-size ,font-size/small
+    #:line-height ,line-height/extra-small
+    #:background-color ,color
+    #:color ,(dict-ref colors 'background)
+    #:display inline-block
+    #:padding (,space/none ,space/extra-small)
+    #:position absolute
+    #:left ,ruler/thick/negative
+    #:top ,space/none
+    ,@(prefix (css-expr #:transform ((apply rotate -90deg) (apply translate -100% 0))))
+    ,@(prefix (css-expr #:transform-origin (top left)))]))
 
 (define-component git/verb
   #:html (default-tag-function 'span #:class "git--verb")

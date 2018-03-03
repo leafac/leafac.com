@@ -173,6 +173,24 @@
 
 ◊(define animation/duration 0.3)
 
+
+/****************************************************************************************************/
+/* MIXINS */
+
+◊(define inline-block-enumeration
+   ◊~a{
+  line-height: ◊|line-height/large|rem;
+  display: inline-block;
+  margin-right: ◊|space/medium|rem;
+ })
+
+◊(define insertion
+   ◊~a{
+ box-sizing: border-box;
+ width: 100%;
+ margin: ◊|space/small|rem ◊|space/none|rem;
+ })
+
 /****************************************************************************************************/
 /* REMOVE ME! */
 
