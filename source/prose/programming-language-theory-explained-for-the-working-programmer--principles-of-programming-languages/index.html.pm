@@ -361,7 +361,7 @@ As was the case with numbers, different encodings are possible. For example, we 
 
 ◊margin-note{This encoding of booleans using functions is also called ◊technical-term{Church Encoding}.}
 
-A particularly interesting choice would be to follow C’s example and use numbers to encode booleans. But, since in the ◊reference['numbers]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are consistent and use functions to encode booleans:
+A particularly interesting choice would be to follow C’s example and use numbers to encode booleans. But, since in the ◊reference["#numbers"]{previous section} we ◊informal{encoded numbers away} in terms of functions, we are consistent and use functions to encode booleans:
 
 ◊margin-note{There is nothing special about the names ◊code{true} and ◊code{false}. They are regular functions, like ◊code{sub1}, ◊code{pretty-print} and so on.}
 
@@ -455,7 +455,7 @@ The only instance of a data structure in our program is a ◊technical-term{pair
 
 Encodings for pairs are not as natural as, for example, the encoding for numbers in terms of strings. But can it be done at all? In particular, can we use functions for that purpose, since we have used them for primitive data types in the previous sections? It turns out that we can. And the crucial insight is that inner functions (functions defined within other functions) can refer to arguments of the outer function. They ◊informal{remember} those arguments even after the outer function has returned. The following listing illustrates this:
 
-◊margin-note{Similar to ◊code{then} and ◊code{else} in ◊code{sum-up-to} (see ◊reference['booleans]{previous section}), ◊code{retriever} is a function that receives no arguments.}
+◊margin-note{Similar to ◊code{then} and ◊code{else} in ◊code{sum-up-to} (see ◊reference["#booleans"]{previous section}), ◊code{retriever} is a function that receives no arguments.}
 
 ◊code/block[#:language 'racket]{
 (define (store value)
@@ -557,7 +557,7 @@ In the figure above, lists (also known as arrays and vectors) are composed of pa
 
 A list containing pairs of elements could be interpreted as a record (also known as dictionary, hash and associative array). The left element of the pair is the key and the right element is the value.
 
-◊margin-note{How can we create a record including a reference to itself? We can start by adapting the techniques from the ◊reference['recursion]{next section} on recursion, but the details of this particular construction are beyond the scope of this article.}
+◊margin-note{How can we create a record including a reference to itself? We can start by adapting the techniques from the ◊reference["#recursion"]{next section} on recursion, but the details of this particular construction are beyond the scope of this article.}
 
 Finally, with records it is possible to encode objects. Some fields are non-function values (for example, ◊code{name} and ◊code{birthdate}), and some are functions (for example, ◊code{age}), which can be interpreted as methods. One special record field (◊code{self}) contains a reference to the whole record itself. This self-awareness is necessary so that methods (for example, ◊code{age}) can refer to other object attributes (for example, ◊code{birthdate}).
 
@@ -817,7 +817,7 @@ Almost all functions in our program receive multiple arguments. In some of them,
 
 If we allow the encoding to include data structures, then we can find an intuitive encoding. For example, instead of ◊code{(+ number-left number-right)} receiving two arguments, it could receive a pair containing the operands: ◊code{(+ number-pair)}. Then, in its body, ◊code{+} would extract the operands from the pair and proceed as before.
 
-We ◊reference['pairs]{already established} an encoding for pairs and discussed how to use it to encode lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
+We ◊reference["#pairs"]{already established} an encoding for pairs and discussed how to use it to encode lists of arbitrary size, so the reasoning above would apply to functions with arbitrary number of arguments. But then how could we implement the encoding for pairs? Remember that ◊code{(pair left right)} is itself a function with multiple arguments. To solve this impossible situation in which each encoding depends on one other, we need a new idea.
 
 This new idea stems from two observations we have already explored: first, that functions can return functions as their return value; second, that inner functions (functions defined within other functions) have access to outer functions’ arguments. We used both of these features when defining our encoding for ◊code{pair}s, for example. The following is its implementation one more time:
 
@@ -1015,7 +1015,7 @@ The answer one more time is negative. Named definitions are not an essential fea
 
 To ◊informal{encode away} named definitions, we first reorder them so that they can only refer to previously defined names:
 
-◊margin-note{This step is only possible because we ◊informal{encoded recursion away} on a ◊reference['recursion]{previous section}.}
+◊margin-note{This step is only possible because we ◊informal{encoded recursion away} on a ◊reference["#recursion"]{previous section}.}
 
 ◊code/block[#:language 'racket]{
 (define ((true first) second)

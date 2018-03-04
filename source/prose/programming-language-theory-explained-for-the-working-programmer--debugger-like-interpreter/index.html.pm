@@ -17,7 +17,7 @@
 
 ◊margin-note{Another motivation for a ◊technical-term{debugger-like interpreter} is that, in our first interpreter, the ◊technical-term{stack} of pending work was implicit in the base language (Racket) stack. In the ◊technical-term{debugger-like interpreter} the remaining work becomes a first-class citizen that we can reason about—in the form of ◊technical-term{contexts}, which we introduce later in this section.}
 
-Our first interpreter defined in the ◊reference['first-interpreter]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code{function} or the ◊code{argument} are function applications themselves, the ◊code{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
+Our first interpreter defined in the ◊reference["#first-interpreter"]{previous section} takes the simplest approach possible to interpretation. When considering a function application in which the ◊code{function} or the ◊code{argument} are function applications themselves, the ◊code{interpret} function recursively calls itself. The effect is that the path the interpreter takes is opaque. The ◊code{interpret} function receives a program and outputs a value, but the computations necessary to get to the result are not clear.
 
 In this section, we rewrite our interpreter to take a different approach, more similar to that of ◊technical-term{step-debuggers}. ◊technical-term{Step-debuggers} are tools that aid program understanding and debugging, they allow the user to run a program step-by-step (line-by-line, expression-by-expression, and so forth). In our case, the level of granularity that is interesting is the function application, because function applications are the smallest pieces of computation that preserve meaning.
 
@@ -27,7 +27,7 @@ Alternatively, if we inspected interpretation after a few function applications,
 
 ◊new-thought[]
 
-We start with a function called ◊code{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code{step} function is similar to ◊code{interpret} as defined in the ◊reference['first-interpreter]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code{step}’s definition:
+We start with a function called ◊code{step}. It has this name because its purpose is to take a single ◊technical-term{step} towards evaluating an ◊code{program} to a value, similar to the functionality of the ◊technical-term{step} button on a ◊technical-term{step-debugger}. The ◊code{step} function is similar to ◊code{interpret} as defined in the ◊reference["#first-interpreter"]{previous section}, but it only evaluates one function application, instead of all of them. We reuse the parts of our first interpreter that are not concerned with function application in ◊code{step}’s definition:
 
 ◊code/block[#:language 'racket]{
 (define (step program)
@@ -68,7 +68,7 @@ The ◊code{split-program} function has to return two values: the ◊technical-t
 
 The ◊code{reduction-expression} returned by ◊code{split-program} is guaranteed to be a function application in which both the ◊code{function} and ◊code{argument} are immediately available—they are values, not other function applications. Furthermore, if we fill the ◊technical-term{hole} in the ◊code{context} with the ◊code{reduction-expression}, then we have our original ◊code{program} back. In other words, this decomposition does not lose any information.
 
-Because the ◊code{reduction-expression} is a function application ready for evaluation, we can use the same ◊code{substitute} from the ◊reference['first-interpreter]{previous section} and substitute the ◊code{argument-name} for the ◊code{argument} in the ◊code{body}. Then, we fill the ◊technical-term{hole} in the ◊code{context} with the resulting program fragment. We use another auxiliary function ◊code{fill-hole}, which we define later, for this last part. This is the complete listing for ◊code{step}:
+Because the ◊code{reduction-expression} is a function application ready for evaluation, we can use the same ◊code{substitute} from the ◊reference["#first-interpreter"]{previous section} and substitute the ◊code{argument-name} for the ◊code{argument} in the ◊code{body}. Then, we fill the ◊technical-term{hole} in the ◊code{context} with the resulting program fragment. We use another auxiliary function ◊code{fill-hole}, which we define later, for this last part. This is the complete listing for ◊code{step}:
 
 ◊code/block[#:language 'racket]{
 (define (step program)

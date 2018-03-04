@@ -39,7 +39,7 @@ $ mkdir ◊placeholder{migration-directory}
 
 ◊margin-note{The location of the ◊path{dovecot.conf} file depends on the installation. The given path works for the installation using Homebrew, another common location is ◊path{/etc/dovecot/dovecot.conf}.}
 
-◊margin-note{See the ◊reference['dovecot-configuration-explained]{appendix} for more details on this configuration file.}
+◊margin-note{See the ◊reference["#dovecot-configuration-explained"]{appendix} for more details on this configuration file.}
 
 Configure Dovecot with a ◊path{dovecot.conf} file, by  replacing the ◊code{◊placeholder{placeholders}} in the following template:
 
@@ -83,7 +83,7 @@ $ id
 uid=501(leafac) gid=20(staff) [...]
 }
 
-Choose an arbitrary ◊code{◊placeholder{password}} and use the ◊path{◊placeholder{migration-directory}} created during ◊reference['setup]{setup}.
+Choose an arbitrary ◊code{◊placeholder{password}} and use the ◊path{◊placeholder{migration-directory}} created during ◊reference["#setup"]{setup}.
 
 ◊section['migrate]{Migrate}
 
@@ -110,7 +110,7 @@ Connect your email clients, for example, Thunderbird and Apple Mail to this temp
 ◊margin-note{Some email clients insist on having a server to send emails (SMTP). Let this part of the configuration fail or reuse the outgoing email configuration from other accounts.}
 
 ◊margin-note{
-  If it is necessary to change Dovecot’s configuration from the ◊reference['configure]{previous section}, restart the server or run the following command on a separate terminal:
+  If it is necessary to change Dovecot’s configuration from the ◊reference["#configure"]{previous section}, restart the server or run the following command on a separate terminal:
 
   ◊code/block{
 $ sudo doveadm reload
@@ -142,7 +142,7 @@ $ sudo doveadm stop
 
 Finally, remove Dovecot’s configuration and ◊path{◊placeholder{migration-directory}}, and uninstall it:
 
-◊margin-note{Again, the location of ◊path{dovecot.conf} varies, be consistent with the choice made at ◊reference['configuration]{configuration}.}
+◊margin-note{Again, the location of ◊path{dovecot.conf} varies, be consistent with the choice made at ◊reference["#configuration"]{configuration}.}
 
 ◊code/block{
 $ rm /usr/local/etc/dovecot/dovecot.conf

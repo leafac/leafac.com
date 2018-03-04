@@ -89,7 +89,7 @@ The program consists of a variable reference to ◊code{x}, but ◊code{x} has n
 
 ◊section['representation]{Representation}
 
-How do we represent in our base language (Racket) the programs from our target language? Generally, programs are plain text files, which interpreters read from the disk. They transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} (◊technical-term{lexing}) and ◊technical-term{syntactic analysis} (◊technical-term{parsing}). This would be easy to do because our target language is a subset of Racket, which comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from the ◊reference['language]{previous section}:
+How do we represent in our base language (Racket) the programs from our target language? Generally, programs are plain text files, which interpreters read from the disk. They transform the text of the program into data structures in memory, through processes called ◊technical-term{lexical analysis} (◊technical-term{lexing}) and ◊technical-term{syntactic analysis} (◊technical-term{parsing}). This would be easy to do because our target language is a subset of Racket, which comes with ◊technical-term{lexical} and ◊technical-term{syntactical analyzers} for itself. But we take an even easier approach, and represent our programs as data structures in Racket directly. The language has a feature to make this representation convenient: ◊link["https://docs.racket-lang.org/guide/qq.html"]{◊technical-term{quasiquoting}}. Consider the example of function application in our target language from the ◊reference["#language"]{previous section}:
 
 ◊code/block[#:language 'racket]{
 ((λ (x) x) (λ (y) y))
@@ -105,7 +105,7 @@ To turn this program in our target language into a data structure in Racket, we 
 `((λ (x) x) (λ (y) y))
 }
 
-The snippet above is a Racket program which defines a program in our target language. Programs in our target language are data from Racket’s perspective, so the Racket program above by itself just outputs ◊code{`((λ (x) x) (λ (y) y))}. In a ◊reference['interpreter]{later section} we will implement an interpreter which receives this data structure as input.
+The snippet above is a Racket program which defines a program in our target language. Programs in our target language are data from Racket’s perspective, so the Racket program above by itself just outputs ◊code{`((λ (x) x) (λ (y) y))}. In a ◊reference["#interpreter"]{later section} we will implement an interpreter which receives this data structure as input.
 
 ◊margin-note{Unquoting is similar to string interpolation in other languages, for example, Ruby. But on data structures, as opposed to strings.}
 
@@ -133,7 +133,7 @@ Before we start the implementation of our first interpreter, we address the issu
 
 The well-formedness checker has two responsibilities: (1) check whether the program is syntactically valid; and (2) check whether all variables are defined before use. The first check rejects programs which are not in the forms defined by our target language. For example, ◊code{(λ (a b) a)} is invalid because it is an anonymous function with two arguments (◊code{a} and ◊code{b}), whereas our target language only allows for functions with one argument. Another example of syntactically invalid program is ◊code{(f a b)}, which is a call to function ◊code{f} with arguments ◊code{a} and ◊code{b}; this too is disallowed because functions only receive one argument.
 
-The second responsibility of the well-formedness checker is to check whether all variables are defined before use. As mentioned in the ◊reference['language]{previous section}, the interpreter does not support these programs, which are said to be ◊technical-term{open}. With this knowledge, we are ready to implement the ◊code{well-formed?} function:
+The second responsibility of the well-formedness checker is to check whether all variables are defined before use. As mentioned in the ◊reference["#language"]{previous section}, the interpreter does not support these programs, which are said to be ◊technical-term{open}. With this knowledge, we are ready to implement the ◊code{well-formed?} function:
 
 ◊margin-note{◊emphasis{Everyday programming takeaway}: When an abstraction is evident, delegate to auxiliary functions instead of mixing responsibilities. In ◊code{well-formed?}, it is better to delegate to ◊code{syntactically-valid?} and ◊code{closed?} than to implement their functionalities directly. In general, give names to concepts whenever those names make sense.}
 
@@ -450,7 +450,7 @@ Our interpreter and auxiliary functions will follow the ◊code{traverse} patter
 
 ◊section['interpreter]{Interpreter}
 
-Our interpreter is a function which receives a ◊code{program} in our target language as argument and evaluates it to a value in our target language. We start with the template for ◊technical-term{traversing} a ◊code{program}, which we established in the ◊reference['well-formedness-checker]{previous section}:
+Our interpreter is a function which receives a ◊code{program} in our target language as argument and evaluates it to a value in our target language. We start with the template for ◊technical-term{traversing} a ◊code{program}, which we established in the ◊reference["#well-formedness-checker"]{previous section}:
 
 ◊code/block[#:language 'racket]{
 (define (interpret program)

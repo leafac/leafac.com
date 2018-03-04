@@ -120,7 +120,7 @@ But she also read that the GUIs generally do not support some of the more advanc
 
 ◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly discovered that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
 
-Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference['remote-repositories]{contributions from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
+Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference["#remote-repositories"]{contributions from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
 
 ◊git/gui{
   ◊section['gui-structure]{GUI Structure}
@@ -137,7 +137,7 @@ $ git ◊git/verb{gui}
 
   ◊image{images/gui-structure--main-screen.png}
 
-  This is the main Git GUI, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference['repository]{later}. When she does, there will be two ways for her to launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
+  This is the main Git GUI, but there is second application window specifically for visualizing the project history. It only makes sense to look at it when there is a project history, which Alice will create ◊reference["#repository"]{later}. When she does, there will be two ways for her to launch this window: through the ◊menu-option/path["Repository" "Visualize All Branch History"] menu option in the main window, or directly from the terminal with the following command:
 
   ◊code/block{
 $ gitk
@@ -166,12 +166,12 @@ $ git ◊git/verb{verb} ◊git/object{objects-and-options ...}
 
 ◊margin-note{Git configurations generally live in a plain-text file at ◊path{~/.gitconfig}, but the exact location is system dependent.}
 
-◊new-thought{After opening} a package of a new kitchen appliance, Alice goes through the setup steps, as some parts might need assembling or adjustments. The same is true of the new software she just installed. The first configuration is necessary because Git associates ◊reference['changes]{changes} in the project with their authors. For this to work, Alice had to identify herself to Git with her name and email address.
+◊new-thought{After opening} a package of a new kitchen appliance, Alice goes through the setup steps, as some parts might need assembling or adjustments. The same is true of the new software she just installed. The first configuration is necessary because Git associates ◊reference["#changes"]{changes} in the project with their authors. For this to work, Alice had to identify herself to Git with her name and email address.
 
 ◊emphasis{Alice chose a permanent email address for her Git configuration}. She considered using institutional email addresses, for example, the ones provided to her by her employer or her university. But she realized these are bad choices, because they might be reassigned to another person named Alice after her affiliation ends. Git would have trouble distinguishing contributions to the same projects made by multiple Alices that shared an email address over time.
 
 ◊git/gui{
-  Alice knew that the GUI bundled with Git had some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference['repository]{later}). For the moment, she just created a ◊informal{dummy} directory and used the ◊menu-option{Create New Repository} menu option there:
+  Alice knew that the GUI bundled with Git had some quirks, and one occurred during setup. The configurations are only accessible when there is a repository (about which she only learned ◊reference["#repository"]{later}). For the moment, she just created a ◊informal{dummy} directory and used the ◊menu-option{Create New Repository} menu option there:
 
   ◊figure{◊svg{images/local-setup--create-dummy-repository.svg}}
 
@@ -225,7 +225,7 @@ fatal: Not a git repository (or any of the parent directories): .git
 
 ◊margin-note{◊figure{◊svg{images/office.svg}}}
 
-◊new-thought{Modern operating system GUIs} make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track the progress over time. One could use, for example, a copying machine and keep copies of the different revisions. Soon, this results in the situation mentioned ◊reference['what-does-git-do]{when introducing version control}: there are many different versions of any given file and it is difficult to tell which is the current, to inspect the differences, to associate the changes to authors, and so forth. These processes take a long time, are prone to error, and require tedious manual work. Unsurprisingly, these are the exact same issues that arise in the computer when creating copies of different project revisions.
+◊new-thought{Modern operating system GUIs} make an analogy to an office environment. There is a desktop with some files organized in folders, and tools to work on them: text editors are analogous to pens and pencils, for example. Let us then consider an office environment in which it is necessary to track the progress over time. One could use, for example, a copying machine and keep copies of the different revisions. Soon, this results in the situation mentioned ◊reference["#what-does-git-do"]{when introducing version control}: there are many different versions of any given file and it is difficult to tell which is the current, to inspect the differences, to associate the changes to authors, and so forth. These processes take a long time, are prone to error, and require tedious manual work. Unsurprisingly, these are the exact same issues that arise in the computer when creating copies of different project revisions.
 
 To address this problem in an office, we could try a new system. To avoid confusion, we start by keeping only one copy of the project. After making a change, we take note of it in a slip of paper, mentioning what was the old content and what is the new content. If we are careful about managing these slips of paper, then we can recreate any point in time by following them in the appropriate direction: to go backward in time we replace the new content with the old content, and to go forward in time we replace the old content with the new content.
 
@@ -254,7 +254,7 @@ For the rest of this article we use a simple project for the examples: the writi
 ◊new-thought{The first order} we give to our Git robot is to create the cabinet which will contain the project history. Git calls it the ◊technical-term{repository}.
 
 ◊git/gui{
-  We had already created a repository ◊reference['local-setup]{during setup} to work around a quirk in the GUI. Repeat the process to ◊menu-option{Create New Repository} in the working directory:
+  We had already created a repository ◊reference["#local-setup"]{during setup} to work around a quirk in the GUI. Repeat the process to ◊menu-option{Create New Repository} in the working directory:
 
   ◊figure{◊svg{images/create-repository.svg}}
 
@@ -389,7 +389,7 @@ Thus far, Git only detected the changes in the working directory, but it has not
 
 ◊margin-note{◊figure{◊svg{images/staging-area.svg}}}
 
-◊new-thought{We want to register} the creation of ◊path{cookies.txt} and ◊path{muffins.txt} into the project history. Currently, these changes are only slips of paper on the working directory. Before they go to a box and into the cabinet, they have to be organized in the paper tray. This intermediary step might seem trivial, because the changes ware small. But even in this simple case Git gives us flexibility, for example, we can choose to only register one of the recipes in the history, while we are still working on the other. We can be even more precise and choose line-by-line which parts of the recipes we want to record at the moment. This is possible because Git reasons about ◊reference['changes]{changes}, instead of files.
+◊new-thought{We want to register} the creation of ◊path{cookies.txt} and ◊path{muffins.txt} into the project history. Currently, these changes are only slips of paper on the working directory. Before they go to a box and into the cabinet, they have to be organized in the paper tray. This intermediary step might seem trivial, because the changes ware small. But even in this simple case Git gives us flexibility, for example, we can choose to only register one of the recipes in the history, while we are still working on the other. We can be even more precise and choose line-by-line which parts of the recipes we want to record at the moment. This is possible because Git reasons about ◊reference["#changes"]{changes}, instead of files.
 
 For simplicity, we follow the most common case and add all slips of paper from the working directory to the paper tray. Git has two names for the paper tray: ◊technical-term{staging area} and ◊technical-term{index}. The act of adding slips of paper from the working directory to the paper tray is called ◊technical-term{staging the changes} or ◊technical-term{adding the changes to the index}.
 
@@ -430,7 +430,7 @@ The changes are now organized on the paper tray, the next step is to move them t
 
 ◊new-thought{The last step} to register the changes in the project history is to move them from the paper tray to a box and into the cabinet. But, later, when inspecting the boxes, we do not always want to open each one of them and look at the paper slips inside. This would be tedious and uninformative. Instead, we label the boxes with high-level descriptions of their contents. These labels contain the following information:
 
-◊margin-note{Git associates the boxes with their authors, which is why the ◊reference['local-setup]{setup} was necessary.}
+◊margin-note{Git associates the boxes with their authors, which is why the ◊reference["#local-setup"]{setup} was necessary.}
 
 ◊list/unordered{
   ◊list/unordered/item{An unique identifier.}
@@ -579,12 +579,12 @@ $ git ◊git/verb{commit}
 ◊margin-note{
   See the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history. Most commit messages in this repository are just dots (◊code{.}), to satisfy the requirement that every commit must include a message.
 
-  See the source for ◊link["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference['crafting-the-perfect-commit]{carefully crafted commits} which are often the result of rewriting the history.
+  See the source for ◊link["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference["#crafting-the-perfect-commit"]{carefully crafted commits} which are often the result of rewriting the history.
 }
 
 ◊new-thought{Creating a commit} is a straightforward process, and we should do it as often as possible. It is better to have an excess of commits than to wait for too long before committing. This avoids data loss and promotes early communication and review from collaborators. Some intermediary commits might not constitute meaningful contributions, and it is not important to write careful commit messages for them, simple reminders suffice. The writing of this article, for example, spans across hundreds of commits. Some of them include many changes, others just fix a single typo.
 
-The disadvantage of this approach is that it pollutes the project history with unimportant commits. When comfortable with creating commits, read the appendix on ◊reference['crafting-the-perfect-commit]{◊emphasis{Crafting the Perfect Commit}} to learn how to fix this issue by rewriting the history.
+The disadvantage of this approach is that it pollutes the project history with unimportant commits. When comfortable with creating commits, read the appendix on ◊reference["#crafting-the-perfect-commit"]{◊emphasis{Crafting the Perfect Commit}} to learn how to fix this issue by rewriting the history.
 
 ◊section['read-history]{Read History}
 
@@ -716,7 +716,7 @@ Git calls this process of navigating in history ◊technical-term{checkout}.
   ◊image{images/checkout.png}
 
 
-  Fill in ◊menu-option{Revision Expression} input with the identifier for the first commit, which we collect by ◊reference['read-history]{reading the history}. Then click on the ◊menu-option{Checkout} button, Git shows a warning regarding a “detached checkout,” which is the subject of the following sections:
+  Fill in ◊menu-option{Revision Expression} input with the identifier for the first commit, which we collect by ◊reference["#read-history"]{reading the history}. Then click on the ◊menu-option{Checkout} button, Git shows a warning regarding a “detached checkout,” which is the subject of the following sections:
 
   ◊image{images/detached-checkout.png}
 
@@ -726,7 +726,7 @@ Git calls this process of navigating in history ◊technical-term{checkout}.
 }
 
 ◊git/cli{
-  Use the ◊code{◊git/verb{checkout}} command with the identifier of the first commit, which we collect by ◊reference['read-history]{reading the history}:
+  Use the ◊code{◊git/verb{checkout}} command with the identifier of the first commit, which we collect by ◊reference["#read-history"]{reading the history}:
 
   ◊full-width{
     ◊code/block{
@@ -765,7 +765,7 @@ Inspect the contents of the working directory, the files ◊path{cookies.txt}	an
   The object on top of the cabinet is a rolodex with index cards.
 }
 
-◊new-thought{We ◊reference['navigate-in-history]{navigate in history}}, and the files and folders on our desktop reflect a point in the project timeline represented by a particular box in the cabinet. To orient ourselves, we need to know which box is currently checked out. So we keep an index card, which points to the appropriate box. We update this index card any time we checkout a different point in history, or when we create new boxes, for example.
+◊new-thought{We ◊reference["#navigate-in-history"]{navigate in history}}, and the files and folders on our desktop reflect a point in the project timeline represented by a particular box in the cabinet. To orient ourselves, we need to know which box is currently checked out. So we keep an index card, which points to the appropriate box. We update this index card any time we checkout a different point in history, or when we create new boxes, for example.
 
 ◊margin-note{◊figure{◊svg{images/head.svg}}}
 
@@ -794,14 +794,14 @@ Understanding ◊code{HEAD} is half of the way to solving the “detached checko
 ◊margin-note{
   ◊figure{◊svg{images/branches.svg}}
 
-  The first step in the figure above occurred when ◊reference['navigate-in-history]{navigating in history}, which resulted in the “detached ◊code{HEAD}” state in the middle. The second step is the subject of this section, evading the “detached ◊code{HEAD}” state.
+  The first step in the figure above occurred when ◊reference["#navigate-in-history"]{navigating in history}, which resulted in the “detached ◊code{HEAD}” state in the middle. The second step is the subject of this section, evading the “detached ◊code{HEAD}” state.
 }
 
-◊new-thought{While we ◊reference['navigate-in-history]{navigate in history}}, ◊code{HEAD} points at different commits, so how do we know which box in the cabinet represents the most recent point in our cookbook timeline? We need a second kind of index card, one that is not special in that it does not always point at the commit that the working directory represents. We need an index card that points at the end of the timeline, and only updates if we create new boxes.
+◊new-thought{While we ◊reference["#navigate-in-history"]{navigate in history}}, ◊code{HEAD} points at different commits, so how do we know which box in the cabinet represents the most recent point in our cookbook timeline? We need a second kind of index card, one that is not special in that it does not always point at the commit that the working directory represents. We need an index card that points at the end of the timeline, and only updates if we create new boxes.
 
-Git includes this second kind of references, which it calls ◊technical-term{branches}, for reasons which will become evident ◊reference['tree]{later}. When we started committing to the repository, Git created a branch and it has been updating it automatically ever since, keeping the branch pointing at the most recent commit in the timeline. By convention, the name of this first branch created by Git is ◊code{master}.
+Git includes this second kind of references, which it calls ◊technical-term{branches}, for reasons which will become evident ◊reference["#tree"]{later}. When we started committing to the repository, Git created a branch and it has been updating it automatically ever since, keeping the branch pointing at the most recent commit in the timeline. By convention, the name of this first branch created by Git is ◊code{master}.
 
-Branches complete the picture of the “detached checkout” or “detached ◊code{HEAD}” mystery. The ◊code{HEAD} reference can point to a commit directly or indirectly, via a branch. Initially, Git kept ◊code{HEAD} pointing to the most recent commit in the timeline ◊emphasis{indirectly}, via the ◊code{master} branch. Then, when ◊reference['navigate-in-history]{navigating in history}, we checked out a commit identifier, making ◊code{HEAD} point to a commit directly. This state is called “detached checkout” or “detached ◊code{HEAD}” by Git, because there is no branch associated with ◊code{HEAD}.
+Branches complete the picture of the “detached checkout” or “detached ◊code{HEAD}” mystery. The ◊code{HEAD} reference can point to a commit directly or indirectly, via a branch. Initially, Git kept ◊code{HEAD} pointing to the most recent commit in the timeline ◊emphasis{indirectly}, via the ◊code{master} branch. Then, when ◊reference["#navigate-in-history"]{navigating in history}, we checked out a commit identifier, making ◊code{HEAD} point to a commit directly. This state is called “detached checkout” or “detached ◊code{HEAD}” by Git, because there is no branch associated with ◊code{HEAD}.
 
 ◊margin-note{There is a method for potentially recovering inaccessible commits. Git comes with an advanced command called ◊code{◊git/verb{reflog}}, which lists the commits at which ◊code{HEAD} has recently pointed. If ◊code{HEAD} has recently been pointing at the lost commit, then it is listed by ◊code{◊git/verb{reflog}} and it is possible to recover it. If enough activity has happened in the repository, then the lost commit might have been purged from the ◊code{◊git/verb{reflog}}. Moreover, Git might have run a garbage collection routine, which permanently removes inaccessible commits from the repository. In that case the commit is unrecoverable.}
 
@@ -917,7 +917,7 @@ Directions
 
 }
 
-If we keep at this, creating branches and committing on them, then the project history starts to look like a tree, hence the name. But creating more and more of these ◊informal{parallel universes} is not enough. Eventually we conclude the development of the brownies recipe, and we want to bring it back to the main line of history for our cookbook project. That is the subject of the ◊reference['merge]{next section}.
+If we keep at this, creating branches and committing on them, then the project history starts to look like a tree, hence the name. But creating more and more of these ◊informal{parallel universes} is not enough. Eventually we conclude the development of the brownies recipe, and we want to bring it back to the main line of history for our cookbook project. That is the subject of the ◊reference["#merge"]{next section}.
 
 ◊section['merge]{Merge}
 
@@ -1007,13 +1007,13 @@ Deleted branch brownies (was 9ea8492).
 
 ◊new-thought[]
 
-◊new-thought{Iterate on the process} above and, eventually, a version of the cookbook will be ready for release. It does not mean that work on it will halt, but that a certain point in history is special, and we want to mark it. That is the topic of the ◊reference['tags]{next section}.
+◊new-thought{Iterate on the process} above and, eventually, a version of the cookbook will be ready for release. It does not mean that work on it will halt, but that a certain point in history is special, and we want to mark it. That is the topic of the ◊reference["#tags"]{next section}.
 
 ◊section['tags]{Tags}
 
 ◊margin-note{◊svg{images/tag.svg}}
 
-◊new-thought{Tags are the last} kind of ◊refernece['references]{reference} covered in this article. They are similar to ◊reference['branches]{branches} in that they point to arbitrary commits and are identified by a name. The difference is that they ◊emphasis{do not move}. Tags are immutable, they always point to the same commit at which they pointed when created. Their main utility is to mark special points in history, for example, released versions or the last version before a big structural change on the project.
+◊new-thought{Tags are the last} kind of ◊refernece['references]{reference} covered in this article. They are similar to ◊reference["#branches"]{branches} in that they point to arbitrary commits and are identified by a name. The difference is that they ◊emphasis{do not move}. Tags are immutable, they always point to the same commit at which they pointed when created. Their main utility is to mark special points in history, for example, released versions or the last version before a big structural change on the project.
 
 To create a tag on the GUI, go to the window showing the project history, right-click on the commit of interest and use the ◊emphasis{Create tag} option:
 
@@ -1132,7 +1132,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; «Example of commit message»
 
-◊; During development, one should use a personal space in the repository, ◊emphasis{commit early, and commit often}, using the commit messages as notes to self. When a feature stabilizes, all tests are passing, and the development is ready to be part of the project, then Git offers ways to ◊reference['crafting-the-perfect-commit]{rewrite the history} and craft a carefully constructed commit. This approach is more advanced, but it is better to follow it than to wait too long to commit, and risk losing work in the process.
+◊; During development, one should use a personal space in the repository, ◊emphasis{commit early, and commit often}, using the commit messages as notes to self. When a feature stabilizes, all tests are passing, and the development is ready to be part of the project, then Git offers ways to ◊reference["#crafting-the-perfect-commit"]{rewrite the history} and craft a carefully constructed commit. This approach is more advanced, but it is better to follow it than to wait too long to commit, and risk losing work in the process.
 
 ◊; ◊margin-note{Pay attention to the line-length limits in carefully constructed commit messages. They are important for people using tools which do not soft-wrap the text, including the CLI.}
 

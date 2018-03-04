@@ -69,7 +69,7 @@
   (apply section key `("Appendix: " ,@elements)))
 
 (define (heading type key . elements)
-  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§")))))
+  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference (~a "#" key) "§")))))
 
 (define (heading/mark . elements)
   (apply (default-tag-function 'span #:class "mark") elements))
@@ -175,8 +175,7 @@
 (define (label key)
   ((default-tag-function 'span) #:id (~a key)))
 
-(define (reference key . elements)
-  (apply link (~a "#" key) elements))
+(define reference link)
 
 ;; Inline elements
 

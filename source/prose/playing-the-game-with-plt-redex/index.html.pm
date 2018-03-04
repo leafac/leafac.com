@@ -13,7 +13,7 @@ Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond th
 
 ◊section['rules-of-the-game]{Rules of the Game}
 
-◊margin-note{This section explains the rules of Peg Solitaire. If you already know them, ◊reference['data-structures]{skip ahead}.}
+◊margin-note{This section explains the rules of Peg Solitaire. If you already know them, ◊reference["#data-structures"]{skip ahead}.}
 
 Peg Solitaire is a 1-player board game. The initial arrangement of the board is the following:
 
@@ -161,7 +161,7 @@ We need to specify how pegs can to move on the board. We do this by defining a f
      →)
 }
 
-◊margin-note{The code closely resembles the ◊reference['rules-of-the-game]{game specification}.}
+◊margin-note{The code closely resembles the ◊reference["#rules-of-the-game"]{game specification}.}
 
 The rule above starts with ◊code{-->} to indicate that it is a transformation. Then it states that, if ◊code{● ● ○} exists anywhere on the board, then the peg on the left can jump to the right—over the peg in the middle—resulting in ◊code{○ ○ ●}. The occurrences of ◊code{any_*} are just preserving the rest of the board unaffected. Finally, the rule is given the name ◊code{→}.
 
