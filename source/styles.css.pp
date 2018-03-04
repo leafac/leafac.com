@@ -354,19 +354,7 @@ kbd {
   font-family: ◊|font-family/monospace|;
 }
 
-.fraction {
-  font-size: ◊|font-size/small|;
-}
-
-.fraction .numerator {
-  vertical-align: super;
-}
-
-.fraction .denominator {
-  vertical-align: sub;
-}
-
-.fraction .slash {
+.fraction--slash {
   margin: ◊|space/none| -◊|space/extra-extra-small|;
 }
 

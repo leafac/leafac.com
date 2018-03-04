@@ -193,10 +193,10 @@
   (default-tag-function 'code))
 
 (define (fraction numerator denominator)
-  ((default-tag-function 'span #:class "fraction")
-   ((default-tag-function 'span) #:class "numerator" (~a numerator))
-   ((default-tag-function 'span) #:class "slash" "/")
-   ((default-tag-function 'span) #:class "denominator" (~a denominator))))
+  ((default-tag-function '@)
+   ((default-tag-function 'sup) (~a numerator))
+   ((default-tag-function 'span) #:class "fraction--slash" "/")
+   ((default-tag-function 'sub) (~a denominator))))
 
 (define (placeholder . elements)
   (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
