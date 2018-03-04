@@ -1,7 +1,24 @@
 #lang pollen
 
 ◊define-meta[title]{Research}
+◊define-meta[date]{2018-03-04}
 
+◊(define publication/paper (default-tag-function '@))
+◊(define publication/paper/title subsection)
+◊(define (publication/paper/authors . elements)
+(apply (default-tag-function '@) `(,@elements ".")))
+◊(define (publication/paper/venue . elements)
+(apply (default-tag-function '@) `(,(new-line)
+                                   ,(apply emphasis elements) ". ")))
+◊(define (publication/paper/date . elements)
+(apply (default-tag-function '@) `(,@elements ".")))
+◊(define (publication/paper/abstract . elements)
+(apply (default-tag-function '@) `(,(new-line) ,@elements)))
+◊(define service/reviewer (default-tag-function '@))
+◊(define (service/reviewer/title . elements)
+  (apply (default-tag-function '@) `(,@elements ". ")))
+◊(define (service/reviewer/date . elements)
+  (apply (default-tag-function '@) `(,@elements ".")))
 ◊section['publications]{Publications}
 
 ◊publication/paper{
