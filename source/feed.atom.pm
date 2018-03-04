@@ -7,18 +7,6 @@
 
 ◊(define link (default-tag-function 'link))
 
-◊; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
-◊(define (new-entry)
-   (displayln (~a "
-◊entry[
-  ◊id{" (string-downcase (~a "urn:uuid:" (uuid-generate))) "}
-  ◊title{}
-  ◊link[#:href ◊~a{◊|settings/url|/}]
-  ◊updated{" (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx") "}
-  ◊summary{}
-]
-")))
-
 ◊feed[
   ◊id{urn:uuid:0d99d85a-bb09-45a9-8735-3344f8a105e6}
   ◊title{◊settings/name}

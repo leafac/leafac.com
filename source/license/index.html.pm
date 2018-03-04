@@ -7,7 +7,7 @@
 The license for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{GNU FDL}:
 
 ◊code/block{
-Copyright (C) ◊(->string (->year (today))) ◊|settings/author|.
+Copyright (C) ◊settings/current-year ◊settings/author
 
 Permission is granted to copy, distribute and/or modify this document
 under the terms of the GNU Free Documentation License, Version 1.3
@@ -21,7 +21,7 @@ Free Documentation License".
 The license for all the code in the website is ◊link["https://www.gnu.org/licenses/gpl.html"]{GNU GPL}:
 
 ◊code/block{
-Copyright (C) ◊(->string (->year (today))) ◊|settings/author|
+Copyright (C) ◊settings/current-year ◊settings/author
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

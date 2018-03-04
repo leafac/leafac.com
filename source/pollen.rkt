@@ -28,6 +28,7 @@
 (define settings/date-of-birth      ◊~a{◊settings/date-of-birth/date})
 (define settings/age                ◊~a{◊(period-ref (period-between settings/date-of-birth/date (today)) 'years)})
 (define settings/url                ◊~a{https://www.leafac.com})
+(define settings/current-year       ◊~a{◊(->year (today))})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; AUXILIARY
@@ -60,7 +61,22 @@
        (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
 
+;; ---------------------------------------------------------------------------------------------------
+;; FEED
+
 (define feed (default-tag-function 'feed #:xmlns "http://www.w3.org/2005/Atom"))
+
+; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
+(define (feed/new-entry)
+  (displayln (~a "
+◊entry[
+  ◊id{" (string-downcase (~a "urn:uuid:" (uuid-generate))) "}
+  ◊title{}
+  ◊link[#:href ◊~a{◊|settings/url|/}]
+  ◊updated{" (~t (now/moment) "yyyy-MM-dd'T'HH:mm:ssxxx") "}
+  ◊summary{}
+]
+")))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
