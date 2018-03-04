@@ -34,8 +34,6 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; FEED
 
-(define feed (default-tag-function 'feed #:xmlns "http://www.w3.org/2005/Atom"))
-
 ; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 (define (feed/new-entry)
   (displayln (~a "
@@ -47,6 +45,10 @@
   ◊summary{}
 ]
 ")))
+
+(define feed (default-tag-function 'feed #:xmlns "http://www.w3.org/2005/Atom"))
+
+(define link (default-tag-function 'link))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
@@ -165,17 +167,13 @@
 (define table/data/header
   (default-tag-function 'th))
 
-;; Links
-
-(define (link path . elements)
-  (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
-
 ;; References
 
 (define (label key)
   ((default-tag-function 'span) #:id (~a key)))
 
-(define reference link)
+(define (reference path . elements)
+  (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
 
 ;; Inline elements
 

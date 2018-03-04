@@ -3,7 +3,7 @@
 ◊define-meta[title]{Git by Analogy}
 ◊define-meta[date]{2017-08-26}
 
-◊new-thought{Meet Alice}. Alice spends a lot of her free time in the kitchen, and her specialty are vegan baked goods. The alchemy of flour and water turning into dough, its soft touch when shaping a loaf, the sweet smell of cookies in the oven, she loves it all. And her friends love it too, because they often receive tasty gifts. Alice began to learn how to bake by following recipes she found on the Internet, but, as she gained experience, she started adapting them and developing her own. Her friends say that her recipes are the best, and often ask for them. But recipes are always under development: Alice tweaks the proportion of flour and water, finds better ways to replace eggs in vegan pastries, and so forth. Even her friends contribute with tips they discover when trying recipes themselves. To keep everybody updated with the latest and greatest, Alice is writing her own ◊link["/cooking"]{vegan cookbook}!
+◊new-thought{Meet Alice}. Alice spends a lot of her free time in the kitchen, and her specialty are vegan baked goods. The alchemy of flour and water turning into dough, its soft touch when shaping a loaf, the sweet smell of cookies in the oven, she loves it all. And her friends love it too, because they often receive tasty gifts. Alice began to learn how to bake by following recipes she found on the Internet, but, as she gained experience, she started adapting them and developing her own. Her friends say that her recipes are the best, and often ask for them. But recipes are always under development: Alice tweaks the proportion of flour and water, finds better ways to replace eggs in vegan pastries, and so forth. Even her friends contribute with tips they discover when trying recipes themselves. To keep everybody updated with the latest and greatest, Alice is writing her own ◊reference["/cooking"]{vegan cookbook}!
 
 ◊; TODO: Describe questions that are hard to ask here.
 
@@ -14,7 +14,7 @@ When she started baking, Alice was old-fashioned and wrote her recipes on paper.
 
 Soon Alice thought of a solution: she went to the stationery story and bought a copying machine. Before altering a recipe, she took a copy, this way she had a history of her recipes over time, and could always recover previous revisions. But it was not long before the sheer amount of slightly modified versions of the same recipe overwhelmed her. She would often find herself asking questions like “is this the version that was too sweet?” or “what did my friend Carol modify in this version that he sent me?” Alice heard that many people using computers thought of this same solution, and had similar issues. They would keep many copies of slightly different versions of the same files, send them as email attachments to their friends, and then get lost trying to manage the process. They had problems figuring what changed between versions, who contributed what, and some changes even get lost in this tedious and error-prone manual work.
 
-The copying machine approach was not working, so Alice developed a better system. She went back to the stationery store and bought slips of paper, a paper tray, boxes, labels, a cabinet and index cards. This system has been working for a while for Alice and her friends, and, now that Alice is serious about her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊link["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
+The copying machine approach was not working, so Alice developed a better system. She went back to the stationery store and bought slips of paper, a paper tray, boxes, labels, a cabinet and index cards. This system has been working for a while for Alice and her friends, and, now that Alice is serious about her cookbook, she decided it is time for her to use the same workflow in the computer. She learned that what she had developed on paper is called a ◊technical-term{version control system}, and that ◊reference["https://git-scm.com/"]{Git} is a computerized version of it. Even better, Git automates many tasks that she had to do by hand. This article describes Alice’s workflow on paper and her transition to Git.
 
 ◊section['alices-version-control-system]{Alice’s Version Control System}
 
@@ -108,9 +108,9 @@ HOW DOES ALICE FINDS THE RELEVANT BOXES WHEN “EXPLORING THE HISTORY?” IN PAR
   Different GUIs and a CLI as front-ends for the same Git features.
 }
 
-◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it, comes back home, opens the package and checks the contents. Likewise, she went to the ◊link["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (GUI) and a Command-Line Interface (CLI). The GUI is a regular application, with windows, menus and so forth, and the CLI is text-based and must be used from the terminal.
+◊new-thought{When Alice} needs a new kitchen appliance, she goes to the store to get it, comes back home, opens the package and checks the contents. Likewise, she went to the ◊reference["https://www.git-scm.com/"]{Git website} and followed the instructions to install it. She opened the package and the contents were a Graphical User Interface (GUI) and a Command-Line Interface (CLI). The GUI is a regular application, with windows, menus and so forth, and the CLI is text-based and must be used from the terminal.
 
-Alice heard that the GUI is easier to learn and more ergonomic for everyday use than the CLI. The GUI bundled with Git is not the only one, on the ◊link["https://git-scm.com/downloads/guis"]{download website} she found an assortment of other options. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to keep it simple and stick with the GUI bundled with Git for the moment. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after she is comfortable with Git, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to efficient workflows.
+Alice heard that the GUI is easier to learn and more ergonomic for everyday use than the CLI. The GUI bundled with Git is not the only one, on the ◊reference["https://git-scm.com/downloads/guis"]{download website} she found an assortment of other options. They are also called ◊technical-term{clients}, or ◊technical-term{front-ends}, because they are just different ways of interacting with the same functionalities. Alice decided to keep it simple and stick with the GUI bundled with Git for the moment. She thought it did not look too good, but it was cross-platform and required no extra setup. And she will try other options after she is comfortable with Git, because the core ideas and terminology transport to any front-end. In particular, she is interested in trying the Git support included in her text editor, as she read that the integration between the two leads to efficient workflows.
 
 But she also read that the GUIs generally do not support some of the more advanced operations. Moreover, they might not be available, for example, when Alice logs into a server without a graphical environment. So she decided to learn the CLI as well. Only readers familiar with the command line should follow her in the corresponding sections, the rest may skip them.
 
@@ -118,7 +118,7 @@ But she also read that the GUIs generally do not support some of the more advanc
 
 ◊margin-note{◊figure{◊svg{images/git-vs-github.svg}}}
 
-◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊link["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly discovered that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊link["https://gmail.com"]{Gmail}}.
+◊new-thought{When Alice} started learning about version control and Git, she was confused by the difference between Git and ◊reference["https://github.com"]{GitHub}. Some people used the two as synonyms, but she quickly discovered that they are very different. Git is a version control system, a tool, whereas GitHub is a company and a service providing hosting and extended functionality. ◊emphasis{Git is to GitHub as email is to ◊reference["https://gmail.com"]{Gmail}}.
 
 Alice decided to first learn Git, which she can do by herself on her local machine. Later, when she is ready to accept ◊reference["#remote-repositories"]{contributions from her friends}, she will use GitHub as a host, because it currently is the most popular choice.
 
@@ -193,11 +193,11 @@ $ git ◊git/verb{config} ◊git/object{--global user.email "alice@leafac.com"}
 
 ◊; TODO: Double-check link to macOS.
 
-◊new-thought{Alice knows} that there are files in her computer which should never be part of her cookbook. In general, they would never belong to any project, because they are specific to her computer, being generated by her operating system, text editor, and so forth. For example, Alice uses ◊link["https://apple.com/macos"]{macOS}, which creates ◊path{.DS_Store} files to store custom folder attributes in each directory visited with Finder. Tracking the history of these files with Git would just introduce noise, and could cause problems in her friends’ machines.
+◊new-thought{Alice knows} that there are files in her computer which should never be part of her cookbook. In general, they would never belong to any project, because they are specific to her computer, being generated by her operating system, text editor, and so forth. For example, Alice uses ◊reference["https://apple.com/macos"]{macOS}, which creates ◊path{.DS_Store} files to store custom folder attributes in each directory visited with Finder. Tracking the history of these files with Git would just introduce noise, and could cause problems in her friends’ machines.
 
 So Alice configured Git to ignore these extraneous files. Even if they exist in the directories containing her cookbook, Git will not try to track their history. The configuration consists of creating the following file:
 
-◊margin-note{The exact location and contents of this file are system dependent. Search for templates for particular operating systems and tools (for example, text editors), and see the manual page ◊link["https://git-scm.com/docs/gitignore"]{◊code{gitignore(5)}} for more on the sophisticated language to specify ignored paths.}
+◊margin-note{The exact location and contents of this file are system dependent. Search for templates for particular operating systems and tools (for example, text editors), and see the manual page ◊reference["https://git-scm.com/docs/gitignore"]{◊code{gitignore(5)}} for more on the sophisticated language to specify ignored paths.}
 
 ◊file-listing["~/.config/git/ignore"]{
 .DS_Store
@@ -245,7 +245,7 @@ Git extends the office analogy of files and folders in a desktop from the operat
 
 ◊new-thought{The first component} of the office analogy that we explore is the files and the folders, which come with the operating system. Git changes nothing about them, so that it does not interfere with other tools, for example, text editors. The only aspect particular to Git is terminology: Git calls the main project folder the ◊technical-term{working directory}.
 
-For the rest of this article we use a simple project for the examples: the writing of a ◊link["/cooking"]{vegan cookbook}. Create a working directory for the project. Readers following both the ◊git/gui/inline{GUI} and the ◊git/cli/inline{CLI} sections must create two independent working directories, and follow the instructions from the different sections in the respective working directories.
+For the rest of this article we use a simple project for the examples: the writing of a ◊reference["/cooking"]{vegan cookbook}. Create a working directory for the project. Readers following both the ◊git/gui/inline{GUI} and the ◊git/cli/inline{CLI} sections must create two independent working directories, and follow the instructions from the different sections in the respective working directories.
 
 ◊section['repository]{Repository}
 
@@ -322,7 +322,7 @@ Git created the cabinet in a folder called ◊path{.git/} under the project dire
   }
 }
 
-In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories. It is even possible to move from one approach to the other, as the organizational structure evolves. For example, ◊link["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊link["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of entire communities and took a long time to complete.
+In general, the repository structure should reflect the organizational structure of the teams working on the product. If different people work in different parts, it might be better to have them as separate repositories. It is even possible to move from one approach to the other, as the organizational structure evolves. For example, ◊reference["https://blog.racket-lang.org/2014/12/the-racket-package-system-and-planet.html"]{Racket} and ◊reference["https://github.com/Homebrew/brew/pull/2"]{Homebrew} were single repositories containing the whole project in the past. Both projects transitioned to the other approach, separating components into collections of smaller repositories. But it was not easy, these were big undertakings which required the coordination of entire communities and took a long time to complete.
 
 ◊section['changes]{Changes}
 
@@ -332,7 +332,7 @@ In general, the repository structure should reflect the organizational structure
 
 The lifecycle of changes start in the working directory, when we make changes to the project. Create two files:
 
-◊margin-note{See the ◊link["/cooking/"]{Cooking} section for the actual recipes from this article.}
+◊margin-note{See the ◊reference["/cooking/"]{Cooking} section for the actual recipes from this article.}
 
 ◊file-listing["cookies.txt"]{
 Ingredients
@@ -464,14 +464,14 @@ $ git ◊git/verb{commit }
   }
 
   ◊margin-note{
-    On most machines, the default text editor is ◊link["http://www.vim.org/"]{Vim}. Configure a different text editor with the following command:
+    On most machines, the default text editor is ◊reference["http://www.vim.org/"]{Vim}. Configure a different text editor with the following command:
 
     ◊code/block{
 $ git ◊git/verb{config} \
   ◊git/object{--global core.editor "<EDITOR>"}
     }
 
-    In many cases—particularly for GUI text editors—one has to provide extra options to the text editor for it to work with Git. For example, for ◊link["https://atom.io/"]{Atom}, one has to use ◊code{◊git/object{"atom --wait"}}.
+    In many cases—particularly for GUI text editors—one has to provide extra options to the text editor for it to work with Git. For example, for ◊reference["https://atom.io/"]{Atom}, one has to use ◊code{◊git/object{"atom --wait"}}.
   }
 
   Git starts a text editor with a special file already open. To create the commit, write the commit message, save, and close that file:
@@ -577,9 +577,9 @@ $ git ◊git/verb{commit}
 ◊margin-note{◊figure{◊svg{images/commit-often.svg}}}
 
 ◊margin-note{
-  See the ◊link["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history. Most commit messages in this repository are just dots (◊code{.}), to satisfy the requirement that every commit must include a message.
+  See the ◊reference["https://git.leafac.com/www.leafac.com/"]{source} for this article for an example of committing often, and the resulting polluted history. Most commit messages in this repository are just dots (◊code{.}), to satisfy the requirement that every commit must include a message.
 
-  See the source for ◊link["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference["#crafting-the-perfect-commit"]{carefully crafted commits} which are often the result of rewriting the history.
+  See the source for ◊reference["https://github.com/git/git/commits/master"]{Git itself} for an example of ◊reference["#crafting-the-perfect-commit"]{carefully crafted commits} which are often the result of rewriting the history.
 }
 
 ◊new-thought{Creating a commit} is a straightforward process, and we should do it as often as possible. It is better to have an excess of commits than to wait for too long before committing. This avoids data loss and promotes early communication and review from collaborators. Some intermediary commits might not constitute meaningful contributions, and it is not important to write careful commit messages for them, simple reminders suffice. The writing of this article, for example, spans across hundreds of commits. Some of them include many changes, others just fix a single typo.
@@ -1118,9 +1118,9 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; Git is flexible and supports different workflows.
 
-◊; make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊link["http://keepachangelog.com"]{changelog entries}, and a detailed commit message
+◊; make sure the changes to the code do not break the test suite, add tests for any new code, and include documentation, ◊reference["http://keepachangelog.com"]{changelog entries}, and a detailed commit message
 
-◊; ◊margin-note{The reader interested in the CLI support for selectively adding changes to the index should refer to the ◊code{◊git/object{--interactive}} option documented on the ◊link["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code{git-add(1)}} manual page.}
+◊; ◊margin-note{The reader interested in the CLI support for selectively adding changes to the index should refer to the ◊code{◊git/object{--interactive}} option documented on the ◊reference["https://git-scm.com/docs/git-add#git-add---interactive"]{◊code{git-add(1)}} manual page.}
 
 ◊; It is possible to be selective and add changes to the index line-by-line. The CLI has this feature, but the interface for it is cumbersome; the GUI is better. On the ◊technical-term{Unstaged Changes} pane, click on the relevant file and the changes appear on the right pane; then right-click on the hunk or line of interest and use the ◊technical-term{Stage Hunk For Commit} or the ◊technical-term{Stage Line For Commit} action.
 
@@ -1128,7 +1128,7 @@ $ git ◊git/verb{tag} ◊git/object{cookbook-0.1}
 
 ◊; ◊image["images/selective-staging.png"]{Selective staging.}
 
-◊; They contain modifications to the code (don’t break tests—git bisect), tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊link["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
+◊; They contain modifications to the code (don’t break tests—git bisect), tests, documentation, changelog and so forth, and the commit message includes a careful explanation of the motivation, alternative solutions, links to bug trackers and more. It should explain everything about the context for a person at the history in the future. These messages generally follow a ◊reference["http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html"]{strict format}: a short title on a line by itself, a blank line, and then paragraphs or bulleted lists with more detailed information.
 
 ◊; «Example of commit message»
 

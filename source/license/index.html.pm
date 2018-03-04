@@ -4,9 +4,9 @@
 
 ◊(define current-year ◊~a{◊(->year (today))})
 
-◊margin-note{See the ◊link["/software/www.leafac.com/"]{source code for the website}.}
+◊margin-note{See the ◊reference["/software/www.leafac.com/"]{source code for the website}.}
 
-The license for all non-code content in the website is ◊link["https://www.gnu.org/licenses/fdl.html"]{GNU FDL}:
+The license for all non-code content in the website is ◊reference["https://www.gnu.org/licenses/fdl.html"]{GNU FDL}:
 
 ◊code/block{
 Copyright (C) ◊current-year ◊settings/author
@@ -20,7 +20,7 @@ A copy of the license is included in the section entitled "GNU
 Free Documentation License".
 }
 
-The license for all the code in the website is ◊link["https://www.gnu.org/licenses/gpl.html"]{GNU GPL}:
+The license for all the code in the website is ◊reference["https://www.gnu.org/licenses/gpl.html"]{GNU GPL}:
 
 ◊code/block{
 Copyright (C) ◊current-year ◊settings/author

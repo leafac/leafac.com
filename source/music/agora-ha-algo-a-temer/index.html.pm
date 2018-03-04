@@ -4,7 +4,7 @@
 ◊define-meta[date]{2017-05-31}
 
 
-◊link["https://files.leafac.com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.mp3"]{MP3} ◊link["https://files.leafac.com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.zip"]{Source}
+◊reference["https://files.leafac.com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.mp3"]{MP3} ◊reference["https://files.leafac.com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.zip"]{Source}
 
 ◊lyrics{
 E D B

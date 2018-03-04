@@ -69,5 +69,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://www.kingarthurflour.com/recipes/ultra-thin-durum-semolina-pizza-crust-recipe"]}
+ ◊source{◊reference["http://www.kingarthurflour.com/recipes/ultra-thin-durum-semolina-pizza-crust-recipe"]}
 }

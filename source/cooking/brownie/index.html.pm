@@ -81,5 +81,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://minimalistbaker.com/simple-vegan-brownies/"]}
+ ◊source{◊reference["http://minimalistbaker.com/simple-vegan-brownies/"]}
 }

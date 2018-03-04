@@ -7,7 +7,7 @@
 
 ◊margin-note{◊figure/svg["images/peg.svg"]{A peg. Solitary.}}
 
-◊link["https://redex.racket-lang.org/"]{PLT Redex} is a ◊link["https://racket-lang.org/"]{Racket} library for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, PLT Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊link["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
+◊reference["https://redex.racket-lang.org/"]{PLT Redex} is a ◊reference["https://racket-lang.org/"]{Racket} library for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, PLT Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of ◊reference["https://en.wikipedia.org/wiki/Peg_solitaire"]{Peg Solitaire}.
 
 Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to PLT Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we will cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.
 
@@ -75,9 +75,9 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊section['data-structures]{Data Structures}
 
-◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
+◊margin-note{◊reference["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
 
-We need data structures to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a ◊emphasis{language} as our data structure definition. Terms in the language will represent board configurations. PLT Redex lets us define a grammar for a language in ◊link["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{BNF} form:
+We need data structures to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a ◊emphasis{language} as our data structure definition. Terms in the language will represent board configurations. PLT Redex lets us define a grammar for a language in ◊reference["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{BNF} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
 
@@ -303,7 +303,7 @@ This function works by flattening the board—turning the matrix (or list of lis
 
 Finally, we need a function that traverses the graph. We want not only to determine whether a solution exists, but also to keep track of the path we followed in the graph to reach the solution, which is the sequence of winning moves:
 
-◊margin-note{There is no need to understand every detail of how ◊code{search-for-solution} works. It uses ◊link["https://docs.racket-lang.org/guide/qq.html"]{quasiquoting} to build lists, ◊link["https://docs.racket-lang.org/guide/match.html"]{pattern matching} to destruct them, and other Racket features beyond the scope of the article.}
+◊margin-note{There is no need to understand every detail of how ◊code{search-for-solution} works. It uses ◊reference["https://docs.racket-lang.org/guide/qq.html"]{quasiquoting} to build lists, ◊reference["https://docs.racket-lang.org/guide/match.html"]{pattern matching} to destruct them, and other Racket features beyond the scope of the article.}
 
 ◊code/block[#:language 'racket]{
 (define (search-for-solution board)
@@ -353,9 +353,9 @@ To find an answer within a reasonable time, we would need a ◊technical-term{go
 
 ◊section['other-limitations]{Other Limitations}
 
-◊margin-note{For more on cellular automata, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
+◊margin-note{For more on cellular automata, refer to ◊reference["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.}
 
-Peg Solitaire is similar to simple cellular automata. Like cellular automata, Peg Solitaire is based on a grid of cells that can assume certain states and evolve over time. So, could PLT Redex model cellular automata as well? For example, could it model ◊link["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular kinds of cellular automata?
+Peg Solitaire is similar to simple cellular automata. Like cellular automata, Peg Solitaire is based on a grid of cells that can assume certain states and evolve over time. So, could PLT Redex model cellular automata as well? For example, could it model ◊reference["https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life"]{Conway’s Game of Life}, one of the most popular kinds of cellular automata?
 
 ◊margin-note{Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities for moves in Peg Solitaire, in the Game of Life each move consists of multiple updates to the board.}
 
@@ -387,4 +387,4 @@ Finally, we discussed PLT Redex’s limitations. It cannot be used to directly e
 
 ◊section['acknowledgments]{Acknowledgments}
 
-Thank you ◊link["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar}, ◊link["http://www.thinkmoore.net/"]{Scott Moore}, ◊link["http://www.allanvital.com/"]{Allan Vital} and ◊link["http://rafaelalmeida.net/"]{Rafael da Silva Almeida} for your feedback on this article.
+Thank you ◊reference["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar}, ◊reference["http://www.thinkmoore.net/"]{Scott Moore}, ◊reference["http://www.allanvital.com/"]{Allan Vital} and ◊reference["http://rafaelalmeida.net/"]{Rafael da Silva Almeida} for your feedback on this article.

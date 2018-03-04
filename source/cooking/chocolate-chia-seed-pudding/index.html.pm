@@ -64,5 +64,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://minimalistbaker.com/overnight-chocolate-chia-seed-pudding/"]}
+ ◊source{◊reference["http://minimalistbaker.com/overnight-chocolate-chia-seed-pudding/"]}
 }

@@ -2,11 +2,11 @@
 
 ◊margin-note{◊figure/image{/avatar.png}}
 
-I am a writer of ◊link["/prose"]{prose}, ◊link["/software"]{software} and ◊link["/music"]{music}. I am a Ph.D. student at the ◊link["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊link["https://jhu.edu"]{Johns Hopkins University}. I ◊link["/research"]{research} a program analysis technique called ◊link["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
+I am a writer of ◊reference["/prose"]{prose}, ◊reference["/software"]{software} and ◊reference["/music"]{music}. I am a Ph.D. student at the ◊reference["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊reference["https://jhu.edu"]{Johns Hopkins University}. I ◊reference["/research"]{research} a program analysis technique called ◊reference["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
 
-My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
+My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊reference["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
-Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact"]{Contact me} via email on ◊email[◊settings/email].
+Follow my productions on the ◊reference["/feed.atom"]{Atom feed}. ◊reference["/contact"]{Contact me} via email on ◊email[◊settings/email].
 
 ◊section['news]{News}
 
@@ -21,4 +21,4 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
       entry)
     (define key (substring id (string-length "urn:uuid:")))
     (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
-    ◊@{◊subsection[key]{◊link[href]{◊|title|◊time[#:datetime updated]{ · ◊entry/time}}}◊(apply @ summary)}))
+    ◊@{◊subsection[key]{◊reference[href]{◊|title|◊time[#:datetime updated]{ · ◊entry/time}}}◊(apply @ summary)}))

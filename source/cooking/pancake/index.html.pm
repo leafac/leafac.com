@@ -56,5 +56,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://www.food.com/recipe/5-minute-vegan-pancakes-132263"]}
+ ◊source{◊reference["http://www.food.com/recipe/5-minute-vegan-pancakes-132263"]}
 }

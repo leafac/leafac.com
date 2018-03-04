@@ -82,5 +82,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["https://www.youtube.com/watch?v=_Qg6YGRdTtc"]}
+ ◊source{◊reference["https://www.youtube.com/watch?v=_Qg6YGRdTtc"]}
 }

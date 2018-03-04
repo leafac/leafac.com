@@ -75,6 +75,6 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link{http://allrecipes.com/recipe/20171/quick-and-easy-pizza-crust/}}
- ◊source{◊link{http://allrecipes.com/video/1075/quick-and-easy-pizza-crust/}}
+ ◊source{◊reference{http://allrecipes.com/recipe/20171/quick-and-easy-pizza-crust/}}
+ ◊source{◊reference{http://allrecipes.com/video/1075/quick-and-easy-pizza-crust/}}
 }

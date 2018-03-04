@@ -57,5 +57,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://www.food.com/recipe/beer-bread-73440"]}
+ ◊source{◊reference["http://www.food.com/recipe/beer-bread-73440"]}
 }

@@ -83,6 +83,6 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link{http://www.simplysogood.com/2013/03/artisan-no-knead-bread.html}}
- ◊source{◊link{http://www.thefreshloaf.com}}
+ ◊source{◊reference{http://www.simplysogood.com/2013/03/artisan-no-knead-bread.html}}
+ ◊source{◊reference{http://www.thefreshloaf.com}}
 }

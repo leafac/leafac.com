@@ -78,5 +78,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://www.kingarthurflour.com/recipes/hot-buttered-soft-pretzels-and-pretzel-bites-recipe"]}
+ ◊source{◊reference["http://www.kingarthurflour.com/recipes/hot-buttered-soft-pretzels-and-pretzel-bites-recipe"]}
 }

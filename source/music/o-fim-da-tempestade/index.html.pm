@@ -4,7 +4,7 @@
 ◊define-meta[date]{2017-05-28}
 
 
-◊link["https://files.leafac.com/music/o-fim-da-tempestade/o-fim-da-tempestade.mp3"]{MP3} ◊link["https://files.leafac.com/music/o-fim-da-tempestade/o-fim-da-tempestade.zip"]{Source}
+◊reference["https://files.leafac.com/music/o-fim-da-tempestade/o-fim-da-tempestade.mp3"]{MP3} ◊reference["https://files.leafac.com/music/o-fim-da-tempestade/o-fim-da-tempestade.zip"]{Source}
 
 ◊lyrics{
 Instrumental

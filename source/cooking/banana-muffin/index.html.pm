@@ -103,5 +103,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://minimalistbaker.com/vegan-banana-crumb-muffins/"]}
+ ◊source{◊reference["http://minimalistbaker.com/vegan-banana-crumb-muffins/"]}
 }

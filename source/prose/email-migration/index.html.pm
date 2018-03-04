@@ -7,11 +7,11 @@
 
 ◊margin-note{I personally experienced all the issues listed here in a recent email migration.}
 
-Migration tools in email clients do not work. Most applications, for example, ◊link["https://www.mozilla.org/en-US/thunderbird/"]{Thunderbird} and ◊link["https://support.apple.com/mail"]{Apple Mail}, come with assistants to import the email archives from other applications. These features do not work: they lose email; concatenate all history in a single giant email; create a new mailbox for each individual message, breaking the organization system; and so forth. This is frustrating, because email migration was supposed to be a solved problem: standard email exchange formats do exist, ◊code{.eml} and ◊code{.mbox} files being the most common examples. Unfortunately, problems arise because every application has a slightly different understanding of those formats. This is a ◊emphasis{ridiculous} problem.
+Migration tools in email clients do not work. Most applications, for example, ◊reference["https://www.mozilla.org/en-US/thunderbird/"]{Thunderbird} and ◊reference["https://support.apple.com/mail"]{Apple Mail}, come with assistants to import the email archives from other applications. These features do not work: they lose email; concatenate all history in a single giant email; create a new mailbox for each individual message, breaking the organization system; and so forth. This is frustrating, because email migration was supposed to be a solved problem: standard email exchange formats do exist, ◊code{.eml} and ◊code{.mbox} files being the most common examples. Unfortunately, problems arise because every application has a slightly different understanding of those formats. This is a ◊emphasis{ridiculous} problem.
 
 Besides assistants in email clients themselves, there exist many tools for converting between message formats. Unfortunately, they generally are not well maintained or paid products. However, there is an alternative, simple solution: while email clients might not agree on the storage formats, they must all talk the same protocols to email servers! The source client can upload messages to the server, and the target client can download them. This method might not preserve tags and other client-specific advanced features. But it preserves the ◊emphasis{read} status, the folder structure, and other fundamental attributes of email archives. Moreover, this method is guaranteed to work regardless of the email clients involved.
 
-In fact, people on the Internet have suggested this method before. And they recommend using the email provider the person already has, for example, ◊link["https://www.google.com/gmail/"]{Gmail} or ◊link["https://www.icloud.com"]{iCloud}. This is simple to setup, because it just reuses the configuration already in the email client. For this simplicity, it is the most recommended approach to people not familiar with the command-line. But it has an important drawback: it involves uploading and re-downloading the whole message history! Depending on the size of the history, this can take days. It is a ◊emphasis{ridiculous} solution.
+In fact, people on the Internet have suggested this method before. And they recommend using the email provider the person already has, for example, ◊reference["https://www.google.com/gmail/"]{Gmail} or ◊reference["https://www.icloud.com"]{iCloud}. This is simple to setup, because it just reuses the configuration already in the email client. For this simplicity, it is the most recommended approach to people not familiar with the command-line. But it has an important drawback: it involves uploading and re-downloading the whole message history! Depending on the size of the history, this can take days. It is a ◊emphasis{ridiculous} solution.
 
 ◊new-thought[]
 
@@ -23,7 +23,7 @@ In this article, we introduce an alternative that brings together the two non-so
 
 Backup the mailboxes! Problems during migration might result in data loss!
 
-Install ◊link["https://www.dovecot.org"]{Dovecot}, which is our temporary email server for the migration. On ◊link["https://www.apple.com/macos/"]{macOS}, for example, use ◊link["https://brew.sh"]{Homebrew}:
+Install ◊reference["https://www.dovecot.org"]{Dovecot}, which is our temporary email server for the migration. On ◊reference["https://www.apple.com/macos/"]{macOS}, for example, use ◊reference["https://brew.sh"]{Homebrew}:
 
 ◊code/block{
 $ brew install dovecot

@@ -3,8 +3,6 @@
 ◊define-meta[title]{Atom Feed}
 ◊define-meta[date]{2018-02-27T06:00:43-05:00}
 
-◊(define link (default-tag-function 'link))
-
 ◊feed[
   ◊id{urn:uuid:0d99d85a-bb09-45a9-8735-3344f8a105e6}
   ◊title{◊settings/title}

@@ -3,9 +3,9 @@
 ◊define-meta[title]{Programming-Language Theory Explained for the Working Programmer: Principles of Programming Languages}
 ◊define-meta[date]{2017-04-05}
 
-◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊link["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊link["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
+◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊reference["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊reference["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
-◊margin-note{◊link["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
+◊margin-note{◊reference["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
 
 Programming languages come in many sizes and flavors. Working programmers have been exposed to a few of them and might wonder: What is the essence of programming languages? In this article, we explore this question, but, unlike most presentations on the topic, we avoid mathematical notation and jargon. We start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages work. The whole discussion is driven by executable code, making it approachable to all programmers.
 
@@ -486,7 +486,7 @@ The solution is to modify ◊code{retriever} to receive an argument, a ◊code{s
 
 We can now create pairs, but to retrieve the values from it we still have to define the selectors. They receive ◊code{left} and ◊code{right} and return the correct element in the pair:
 
-◊margin-note{Apart from identifiers, ◊code{selector-left} is the same function as ◊code{true} and ◊code{selector-right} is the same function as ◊code{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code{true} ◊emphasis{or} ◊code{false}) and conjunction (a pair holds a ◊code{left} ◊emphasis{and} a ◊code{right} elements). They are two sides of the same coin. This is a fundamental result of ◊link["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
+◊margin-note{Apart from identifiers, ◊code{selector-left} is the same function as ◊code{true} and ◊code{selector-right} is the same function as ◊code{false}. This is not a coincidence, but evidence of the duality between disjunction (a boolean is ◊emphasis{either} ◊code{true} ◊emphasis{or} ◊code{false}) and conjunction (a pair holds a ◊code{left} ◊emphasis{and} a ◊code{right} elements). They are two sides of the same coin. This is a fundamental result of ◊reference["https://www.infoq.com/presentations/category-theory-propositions-principle"]{category theory}.}
 
 ◊code/block[#:language 'racket]{
 (define (selector-left left right)
@@ -1428,13 +1428,13 @@ Again, coming from a different direction, we acknowledge the importance of ◊em
 
 ◊section['references]{References}
 
-The main inspiration for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version, in ◊link["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version, in ◊link["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊link["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊link["http://computationbook.com/"]{Understanding Computation} were major influences. Together, Weirich and Stuart not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
+The main inspiration for this article were the talks by Jim Weirich on the Y-combinator: the Ruby version, in ◊reference["https://www.youtube.com/watch?v=FITJMJjASUs"]{Ruby Conf 12, ◊publication{Y Not- Adventures in Functional Programming}}; and the JavaScript version, in ◊reference["https://vimeo.com/45140590"]{ScotlandJS 2012, ◊publication{Adventures in Functional Programming}}. Also, Tom Stuart’s talk and article ◊reference["https://codon.com/programming-with-nothing"]{Programming with Nothing}; and his book ◊reference["http://computationbook.com/"]{Understanding Computation} were major influences. Together, Weirich and Stuart not only inspired this article, but motivated me to pursue a Ph.D. in programming-language theory.
 
-Another talk that was hugely influential to me is ◊link["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in OOPSLA 1998. His presentation skills are remarkable.
+Another talk that was hugely influential to me is ◊reference["https://www.youtube.com/watch?v=_ahvzDzKdB0"]{◊publication{Growing a Language}}, by Guy Steele in OOPSLA 1998. His presentation skills are remarkable.
 
-But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊link["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
+But none of these sources touch on the essence of programming languages that we uncovered in this article: ◊emphasis{communication}. For more on the relation between communication and computation, refer to ◊reference["https://wolframscience.com/"]{A New Kind of Science}, by Stephen Wolfram.
 
-Finally, people interested in the academic side of programming-language theory can read the book ◊link["https://pl.cs.jhu.edu/pl/book/dist/"]{Principles of Programming Languages}, by Dr. Scott F. Smith, my advisor. It includes an introduction to the notation and jargon used in research and is essential to reach the level of understanding necessary to read conference and journal articles.
+Finally, people interested in the academic side of programming-language theory can read the book ◊reference["https://pl.cs.jhu.edu/pl/book/dist/"]{Principles of Programming Languages}, by Dr. Scott F. Smith, my advisor. It includes an introduction to the notation and jargon used in research and is essential to reach the level of understanding necessary to read conference and journal articles.
 
 ◊section['acknowledgments]{Acknowledgments}
 

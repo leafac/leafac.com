@@ -81,5 +81,5 @@ Around 12 cookies, depending on the size.
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://www.theppk.com/2013/10/rosemary-chocolate-chip-cookies-video/"]}
+ ◊source{◊reference["http://www.theppk.com/2013/10/rosemary-chocolate-chip-cookies-video/"]}
 }

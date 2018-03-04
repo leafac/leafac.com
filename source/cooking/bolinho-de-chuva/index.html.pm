@@ -54,6 +54,6 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["http://www.tudogostoso.com.br/receita/76049-bolinho-de-chuva.html"]}
- ◊source{◊link["http://presuntovegetariano.com.br/receitas/doces/bolinho-de-chuva-vegano/"]}
+ ◊source{◊reference["http://www.tudogostoso.com.br/receita/76049-bolinho-de-chuva.html"]}
+ ◊source{◊reference["http://presuntovegetariano.com.br/receitas/doces/bolinho-de-chuva-vegano/"]}
 }

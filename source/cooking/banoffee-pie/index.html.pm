@@ -111,5 +111,5 @@
 ◊section['sources]{Sources}
 
 ◊sources{
- ◊source{◊link["https://www.youtube.com/watch?v=EVTWGrzWM80"]}
+ ◊source{◊reference["https://www.youtube.com/watch?v=EVTWGrzWM80"]}
 }
