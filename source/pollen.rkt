@@ -130,7 +130,7 @@
       (define code (string-append* elements))
       (define digest (sha1 (open-input-string code)))
       (define path/basedir "compiled/code-block/")
-      (define path/full (~a path/basedir language "-" digest  ".html"))
+      (define path/full (~a path/basedir language "-" digest ".html"))
       (define code/highlighted
         (cond
           [(file-exists? path/full) (file->string path/full)]
@@ -153,24 +153,24 @@
 (define list/unordered
    (default-tag-function 'ul))
 
-(define list/unordered/item  (default-tag-function 'li))
+(define list/unordered/item (default-tag-function 'li))
 
 (define list/ordered
    (default-tag-function 'ol))
 
-(define list/ordered/item  (default-tag-function 'li))
+(define list/ordered/item (default-tag-function 'li))
 
 ;; Tables
 
 (define table
    (default-tag-function 'table))
 
-(define table/header  (default-tag-function 'thead))
+(define table/header (default-tag-function 'thead))
 
 (define table/body
    (default-tag-function 'tbody))
 
-(define table/row  (default-tag-function 'tr))
+(define table/row (default-tag-function 'tr))
 
 (define table/data
    (default-tag-function 'td))
@@ -196,11 +196,11 @@
 (define emphasis
    (default-tag-function 'em))
 
-(define foreign  emphasis)
+(define foreign emphasis)
 
-(define technical-term  emphasis)
+(define technical-term emphasis)
 
-(define informal  emphasis)
+(define informal emphasis)
 
 (define keyboard
    (default-tag-function 'kbd))
@@ -234,7 +234,7 @@
 (define (phone number)
    ((default-tag-function '@) number))
 
-(define publication  emphasis)
+(define publication emphasis)
 
 (define time
    (default-tag-function 'time))
@@ -250,17 +250,17 @@
 
 (define ingredients/collected (make-hash))
 
-(define ingredients  table)
+(define ingredients table)
 
 (define (ingredients/section name . elements)
   (dict-set! ingredients/collected name elements)
   (apply table/body elements))
 
-(define ingredient  table/row)
+(define ingredient table/row)
 
-(define ingredient/name  table/data)
+(define ingredient/name table/data)
 
-(define ingredient/quantity  table/data)
+(define ingredient/quantity table/data)
 
 (define (ingredients/repeat name)
    (apply ingredients (dict-ref ingredients/collected name)))
@@ -274,28 +274,28 @@
 (define (baking/repeat)
    (unbox baking/collected))
 
-(define baking-step  table/row)
+(define baking-step table/row)
 
-(define baking-step/temperature  table/data)
+(define baking-step/temperature table/data)
 
-(define baking-step/duration  table/data)
+(define baking-step/duration table/data)
 
-(define baking-step/details  table/data)
+(define baking-step/details table/data)
 
-(define directions  list/ordered)
+(define directions list/ordered)
 
-(define direction  list/ordered/item)
+(define direction list/ordered/item)
 
-(define sources  list/unordered)
+(define sources list/unordered)
 
-(define source  list/unordered/item)
+(define source list/unordered/item)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; ABOUT
 
-(define education  (default-tag-function '@))
+(define education (default-tag-function '@))
 
-(define education/title  subsection)
+(define education/title subsection)
 
 (define (education/institution . elements)
    (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
@@ -306,13 +306,13 @@
 (define (education/to #:estimated? [estimated? #f] . elements)
    (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
 
-(define education/highlights  list/unordered)
+(define education/highlights list/unordered)
 
-(define education/highlight  list/unordered/item)
+(define education/highlight list/unordered/item)
 
-(define work-experience  (default-tag-function '@))
+(define work-experience (default-tag-function '@))
 
-(define work-experience/institution  subsection)
+(define work-experience/institution subsection)
 
 (define (work-experience/title . elements)
    (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
@@ -323,9 +323,9 @@
 (define (work-experience/to . elements)
    (apply (default-tag-function '@) `("to " ,@elements " ")))
 
-(define work-experience/highlights  list/unordered)
+(define work-experience/highlights list/unordered)
 
-(define work-experience/highlight  list/unordered/item)
+(define work-experience/highlight list/unordered/item)
 
 (define (skills . elements)
    (apply list/unordered #:class "skills" elements))
@@ -333,20 +333,20 @@
 (define (skill level . elements)
    (apply list/unordered/item #:class (~a "skill " level) elements))
 
-(define certification  (default-tag-function '@))
+(define certification (default-tag-function '@))
 
-(define certification/title  subsection)
+(define certification/title subsection)
 
-(define certification/date  (default-tag-function '@))
+(define certification/date (default-tag-function '@))
 
 (define (certification/score . elements)
    (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define event  (default-tag-function '@))
+(define event (default-tag-function '@))
 
-(define event/title  subsection)
+(define event/title subsection)
 
-(define event/date  (default-tag-function '@))
+(define event/date (default-tag-function '@))
 
 (define (event/from . elements)
    (apply (default-tag-function '@) `("From " ,@elements)))
@@ -357,19 +357,19 @@
 (define (event/highlight . elements)
    (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define course  (default-tag-function '@))
+(define course (default-tag-function '@))
 
-(define course/title  subsection)
+(define course/title subsection)
 
 (define (course/by . elements)
    (apply (default-tag-function '@) `(,@elements ", " )))
 
-(define course/date  (default-tag-function '@))
+(define course/date (default-tag-function '@))
 
 (define (course/highlight . elements)
    (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define service/reviewer  (default-tag-function '@))
+(define service/reviewer (default-tag-function '@))
 
 (define (service/reviewer/title . elements)
    (apply (default-tag-function '@) `(,@elements ". ")))
@@ -377,9 +377,9 @@
 (define (service/reviewer/date . elements)
    (apply (default-tag-function '@) `(,@elements ".")))
 
-(define publication/paper  (default-tag-function '@))
+(define publication/paper (default-tag-function '@))
 
-(define publication/paper/title  subsection)
+(define publication/paper/title subsection)
 
 (define (publication/paper/authors . elements)
    (apply (default-tag-function '@) `(,@elements ".")))
@@ -397,7 +397,7 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; MUSIC
 
-(define lyrics  code/block)
+(define lyrics code/block)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; ---------------------------------------------------------------------------------------------------
