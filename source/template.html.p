@@ -6,16 +6,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="◊(select 'author personal-data)">
-    <meta name="description" content="◊(select 'description personal-data)">
+    <meta name="author" content="◊|settings/author|">
+    <meta name="description" content="◊|settings/description|">
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="alternate" type="application/atom+xml" title="◊(select 'name personal-data)" href="/feed.atom">
-    <title>◊(->html ◊@[◊when/splice[title]{◊title · } (select 'name personal-data)])</title>
+    <link rel="alternate" type="application/atom+xml" title="◊|settings/name|" href="/feed.atom">
+    <title>◊(->html ◊@[◊when/splice[title]{◊title · } |settings/name|])</title>
   </head>
   <body>
     <header>
-      <h1>◊(->html ◊link["/"]{◊(select 'name personal-data)})</h1>
+      <h1>◊(->html ◊link["/"]{◊|settings/name|})</h1>
       <nav>
         ◊string-append*[
           (for/list ([pagenode (in-list (pagetree->list (~a (current-project-root) "index.ptree")))])

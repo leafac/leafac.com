@@ -14,32 +14,20 @@
           pollen/core pollen/file))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; PERSONAL DATA
+;; SETTINGS
 
-(define settings/name           ◊~a{Leandro Facchinetti})
-(define settings/author         ◊~a{Leandro Facchinetti})
-(define settings/github-handle  ◊~a{leafac})
-(define settings/personal-email ◊~a{me@leafac.com})
-(define settings/work-email     ◊~a{leandro@jhu.edu})
-(define settings/skype-handle   ◊~a{leafac})
-(define settings/phone-number   ◊~a{+14107799526})
-(define settings/description    ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
-(define settings/date-of-birth  ◊(date 1990 10 20))
-(define settings/age            ◊(period-ref (period-between date-of-birth (today)) 'years))
-(define settings/url            ◊~a{https://www.leafac.com})
-
-(define personal-data
-  (let ([date-of-birth (date 1990 10 20)])
-    `#hash((name           . ,◊~a{Leandro Facchinetti})
-           (author         . ,◊~a{Leandro Facchinetti})
-           (github-handle  . ,◊~a{leafac})
-           (personal-email . ,◊~a{me@leafac.com})
-           (work-email     . ,◊~a{leandro@jhu.edu})
-           (skype-handle   . ,◊~a{leafac})
-           (phone-number   . ,◊~a{+14107799526})
-           (description    . ,◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
-           (date-of-birth  . ,date-of-birth)
-           (age            . ,(period-ref (period-between date-of-birth (today)) 'years)))))
+(define settings/name               ◊~a{Leandro Facchinetti})
+(define settings/author             ◊~a{Leandro Facchinetti})
+(define settings/github-handle      ◊~a{leafac})
+(define settings/personal-email     ◊~a{me@leafac.com})
+(define settings/work-email         ◊~a{leandro@jhu.edu})
+(define settings/skype-handle       ◊~a{leafac})
+(define settings/phone-number       ◊~a{+14107799526})
+(define settings/description        ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
+(define settings/date-of-birth/date ◊(date 1990 10 20))
+(define settings/date-of-birth      ◊~a{◊settings/date-of-birth/date})
+(define settings/age                ◊~a{◊(period-ref (period-between settings/date-of-birth/date (today)) 'years)})
+(define settings/url                ◊~a{https://www.leafac.com})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; AUXILIARY
