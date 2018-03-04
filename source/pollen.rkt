@@ -23,14 +23,6 @@
 (define settings/url         ◊~a{https://www.leafac.com})
 
 ;; ---------------------------------------------------------------------------------------------------
-;; AUXILIARY
-
-;; Paths
-
-(define-runtime-path project-path "./")
-(define (source-path path) (~a project-path path))
-
-;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE
 
 (define (root . elements)
