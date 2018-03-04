@@ -21,4 +21,4 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
       entry)
     (define key (substring id (string-length "urn:uuid:")))
     (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
-    ◊@{◊subsection[key]{◊link[href]{◊|title|◊time{ · ◊entry/time}}}◊(apply @ summary)}))
+    ◊@{◊subsection[key]{◊link[href]{◊|title|◊time[#:datetime updated]{ · ◊entry/time}}}◊(apply @ summary)}))
