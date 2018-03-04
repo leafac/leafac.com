@@ -44,7 +44,7 @@ My interests are computer programming, music, books, typography, lettering, educ
 
 ◊new-thought[]
 
-I am ◊settings/age years old and I have been writing software for over a decade. Most of my career has been in web products and I also developed natural-language-processing applications, system administration tools and programming-language theory.
+I am ◊(period-ref (period-between (date 1990 10 20) (today)) 'years) years old and I have been writing software for over a decade. Most of my career has been in web products and I also developed natural-language-processing applications, system administration tools and programming-language theory.
 
 ◊margin-note{Feel free to invite me for a pair-programming session and to talk at conferences and user-group meetings.}
 

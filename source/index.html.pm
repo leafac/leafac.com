@@ -6,7 +6,7 @@ I am a writer of ◊link["/prose"]{prose}, ◊link["/software"]{software} and �
 
 My interests are computer programming, music, books, typography, lettering, education, minimalism and ◊link["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
 
-Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact"]{Contact me} via email on ◊email[◊settings/personal-email].
+Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact"]{Contact me} via email on ◊email[◊settings/email].
 
 ◊section['news]{News}
 

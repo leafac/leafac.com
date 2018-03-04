@@ -9,7 +9,7 @@
 
 ◊feed[
   ◊id{urn:uuid:0d99d85a-bb09-45a9-8735-3344f8a105e6}
-  ◊title{◊settings/name}
+  ◊title{◊settings/title}
   ◊subtitle{◊settings/description}
   ◊link[#:href ◊~a{◊|settings/url|/}]
   ◊link[#:rel "self" #:href ◊~a{◊|settings/url|/◊|here|}]

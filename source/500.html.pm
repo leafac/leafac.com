@@ -4,4 +4,4 @@
 
 ◊margin-note{◊figure/svg{◊source-path{/500.svg}}}
 
-A serious error happened, please report it to ◊email[◊settings/personal-email].
+A serious error happened, please report it to ◊email[◊settings/email].

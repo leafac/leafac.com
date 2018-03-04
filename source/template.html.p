@@ -3,7 +3,7 @@
 ◊(define date (select-from-metas 'date metas))
 ◊(define-values (doc/body doc/head)
    (splitf-txexpr
-    doc (λ (element) (and (txexpr? element) (member (get-tag element) settings/head-tags)))))
+    doc (λ (element) (and (txexpr? element) (member (get-tag element) '(style script))))))
 ◊(define doc/body/html (->html doc/body #:splice? #t))
 <html lang="en">
   <head>
@@ -13,13 +13,13 @@
     <meta name="description" content="◊|settings/description|">
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="alternate" type="application/atom+xml" title="◊|settings/name|" href="/feed.atom">
-    <title>◊when/splice[title]{◊|title| · }◊|settings/name|</title>
+    <link rel="alternate" type="application/atom+xml" title="◊|settings/title|" href="/feed.atom">
+    <title>◊when/splice[title]{◊|title| · }◊|settings/title|</title>
     ◊(map ->html doc/head)
   </head>
   <body>
     <header>
-      <h1><a href="/">◊|settings/name|</a></h1>
+      <h1><a href="/">◊|settings/title|</a></h1>
       <nav>
         ◊(for/list ([pagenode (in-list (pagetree->list (~a (current-project-root) "index.ptree")))])
           (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
