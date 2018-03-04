@@ -4,7 +4,7 @@
          racket/file file/sha1 racket/runtime-path
          libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
-         pollen/core pollen/file pollen/decode pollen/tag pollen/setup pollen-component)
+         pollen/core pollen/file pollen/decode pollen/tag pollen/setup)
 
 (provide (all-defined-out)
          (all-from-out
@@ -39,15 +39,9 @@
 (define (source-path path) (~a project-path path))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; COMPONENTS
-
-(components-output-types #:dynamic html atom)
-
-;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE
 
-(define-component (root . elements)
-  #:html
+(define (root . elements)
   (define elements/with-paragraphs
     (decode-elements
      elements
@@ -72,66 +66,63 @@
 
 ;; Outline
 
-(define-component (section key . elements)
-  #:html (apply heading 'h3 key elements))
+(define (section key . elements)
+   (apply heading 'h3 key elements))
 
-(define-component (subsection key . elements)
-  #:html (apply heading 'h4 key elements))
+(define (subsection key . elements)
+   (apply heading 'h4 key elements))
 
-(define-component new-thought
-  #:html (default-tag-function 'div #:class "new-thought"))
+(define new-thought
+   (default-tag-function 'div #:class "new-thought"))
 
-(define-component new-line
-  #:html (default-tag-function 'br))
+(define new-line
+   (default-tag-function 'br))
 
-(define-component (appendix key . elements)
-  #:html (apply section key `("Appendix: " ,@elements)))
+(define (appendix key . elements)
+   (apply section key `("Appendix: " ,@elements)))
 
-(define-component (heading type key . elements)
-  #:html
+(define (heading type key . elements)
   (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§")))))
 
-(define-component (heading/mark . elements)
-  #:html (apply (default-tag-function 'span #:class "mark") elements))
+(define (heading/mark . elements)
+   (apply (default-tag-function 'span #:class "mark") elements))
 
 ;; Full width
 
-(define-component full-width
-  #:html (default-tag-function 'div #:class "full-width"))
+(define full-width
+   (default-tag-function 'div #:class "full-width"))
 
 ;; Margin notes
 
-(define-component margin-note
-  #:html (default-tag-function 'aside))
+(define margin-note
+   (default-tag-function 'aside))
 
 ;; Figures
 
-(define-component figure
-  #:html (default-tag-function 'figure))
+(define figure
+   (default-tag-function 'figure))
 
-(define-component figure/caption
-  #:html (default-tag-function 'figcaption))
+(define figure/caption
+   (default-tag-function 'figcaption))
 
-(define-component (image path [caption ""])
-  #:html ((default-tag-function 'img) #:src path #:alt caption))
+(define (image path [caption ""])
+   ((default-tag-function 'img) #:src path #:alt caption))
 
-(define-component (figure/image path [caption ""])
-  #:html
+(define (figure/image path [caption ""])
   (figure (image path caption) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
-(define-component (svg path)
-  #:html (string->xexpr (file->string path)))
+(define (svg path)
+   (string->xexpr (file->string path)))
 
-(define-component (figure/svg path [caption ""])
-  #:html (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
+(define (figure/svg path [caption ""])
+   (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
 ;; Code
 
-(define-component code
-  #:html (default-tag-function 'code))
+(define code
+   (default-tag-function 'code))
 
-(define-component (code/block #:language [language #f] #:caption [caption #f] . elements)
-  #:html
+(define (code/block #:language [language #f] #:caption [caption #f] . elements)
   ((default-tag-function 'div #:class "code-block")
    (if caption ((default-tag-function 'span) caption) "")
    (cond
@@ -159,256 +150,254 @@
 
 ;; Lists
 
-(define-component list/unordered
-  #:html (default-tag-function 'ul))
+(define list/unordered
+   (default-tag-function 'ul))
 
-(define-component list/unordered/item #:html (default-tag-function 'li))
+(define list/unordered/item  (default-tag-function 'li))
 
-(define-component list/ordered
-  #:html (default-tag-function 'ol))
+(define list/ordered
+   (default-tag-function 'ol))
 
-(define-component list/ordered/item #:html (default-tag-function 'li))
+(define list/ordered/item  (default-tag-function 'li))
 
 ;; Tables
 
-(define-component table
-  #:html (default-tag-function 'table))
+(define table
+   (default-tag-function 'table))
 
-(define-component table/header #:html (default-tag-function 'thead))
+(define table/header  (default-tag-function 'thead))
 
-(define-component table/body
-  #:html (default-tag-function 'tbody))
+(define table/body
+   (default-tag-function 'tbody))
 
-(define-component table/row #:html (default-tag-function 'tr))
+(define table/row  (default-tag-function 'tr))
 
-(define-component table/data
-  #:html (default-tag-function 'td))
+(define table/data
+   (default-tag-function 'td))
 
-(define-component table/data/header
-  #:html (default-tag-function 'th))
+(define table/data/header
+   (default-tag-function 'th))
 
 ;; Links
 
-(define-component (link path . elements)
-  #:html (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
+(define (link path . elements)
+   (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
 
 ;; References
 
-(define-component (label key)
-  #:html ((default-tag-function 'span) #:id (~a key)))
+(define (label key)
+   ((default-tag-function 'span) #:id (~a key)))
 
-(define-component (reference key . elements)
-  #:html (apply link (~a "#" key) elements))
-
-;; Data
-
-(define-component (email address . elements)
-  #:html (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
-
-(define-component (github-user handle)
-  #:html (link (~a "https://github.com/" handle) (~a "@" handle)))
-
-(define-component (skype-user handle)
-  #:html ((default-tag-function 'em) handle))
-
-(define-component (phone number)
-  #:html ((default-tag-function '@) number))
-
-(define-component publication #:html emphasis)
-
-(define-component time
-  #:html (default-tag-function 'time))
+(define (reference key . elements)
+   (apply link (~a "#" key) elements))
 
 ;; Inline elements
 
-(define-component emphasis
-  #:html (default-tag-function 'em))
+(define emphasis
+   (default-tag-function 'em))
 
-(define-component foreign #:html emphasis)
+(define foreign  emphasis)
 
-(define-component technical-term #:html emphasis)
+(define technical-term  emphasis)
 
-(define-component informal #:html emphasis)
+(define informal  emphasis)
 
-(define-component keyboard
-  #:html (default-tag-function 'kbd))
+(define keyboard
+   (default-tag-function 'kbd))
 
-(define-component path
-  #:html (default-tag-function 'code))
+(define path
+   (default-tag-function 'code))
 
-(define-component (fraction numerator denominator)
-  #:html ((default-tag-function 'span #:class "fraction")
+(define (fraction numerator denominator)
+   ((default-tag-function 'span #:class "fraction")
           ((default-tag-function 'span) #:class "numerator" (~a numerator))
           ((default-tag-function 'span) #:class "slash" "/")
           ((default-tag-function 'span) #:class "denominator" (~a denominator))))
 
-(define-component (placeholder . elements)
-  #:html (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
+(define (placeholder . elements)
+   (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
 
-(define-component (menu-option . elements)
-  #:html ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
+(define (menu-option . elements)
+   ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
+
+;; Data
+
+(define (email address . elements)
+   (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
+
+(define (github-user handle)
+   (link (~a "https://github.com/" handle) (~a "@" handle)))
+
+(define (skype-user handle)
+   ((default-tag-function 'em) handle))
+
+(define (phone number)
+   ((default-tag-function '@) number))
+
+(define publication  emphasis)
+
+(define time
+   (default-tag-function 'time))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING
 
-(define-component (recipes . elements)
-  #:html (apply list/unordered #:class "recipes" elements))
+(define (recipes . elements)
+   (apply list/unordered #:class "recipes" elements))
 
-(define-component (recipe path . elements)
-  #:html (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements)))
+(define (recipe path . elements)
+   (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements)))
 
 (define ingredients/collected (make-hash))
 
-(define-component ingredients #:html table)
+(define ingredients  table)
 
-(define-component (ingredients/section name . elements)
-  #:html
+(define (ingredients/section name . elements)
   (dict-set! ingredients/collected name elements)
   (apply table/body elements))
 
-(define-component ingredient #:html table/row)
+(define ingredient  table/row)
 
-(define-component ingredient/name #:html table/data)
+(define ingredient/name  table/data)
 
-(define-component ingredient/quantity #:html table/data)
+(define ingredient/quantity  table/data)
 
-(define-component (ingredients/repeat name)
-  #:html (apply ingredients (dict-ref ingredients/collected name)))
+(define (ingredients/repeat name)
+   (apply ingredients (dict-ref ingredients/collected name)))
 
 (define baking/collected (box (void)))
 
-(define-component (baking . elements)
-  #:html
+(define (baking . elements)
   (set-box! baking/collected (table (apply table/body elements)))
   (baking/repeat))
 
-(define-component (baking/repeat)
-  #:html (unbox baking/collected))
+(define (baking/repeat)
+   (unbox baking/collected))
 
-(define-component baking-step #:html table/row)
+(define baking-step  table/row)
 
-(define-component baking-step/temperature #:html table/data)
+(define baking-step/temperature  table/data)
 
-(define-component baking-step/duration #:html table/data)
+(define baking-step/duration  table/data)
 
-(define-component baking-step/details #:html table/data)
+(define baking-step/details  table/data)
 
-(define-component directions #:html list/ordered)
+(define directions  list/ordered)
 
-(define-component direction #:html list/ordered/item)
+(define direction  list/ordered/item)
 
-(define-component sources #:html list/unordered)
+(define sources  list/unordered)
 
-(define-component source #:html list/unordered/item)
+(define source  list/unordered/item)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; ABOUT
 
-(define-component education #:html (default-tag-function '@))
+(define education  (default-tag-function '@))
 
-(define-component education/title #:html subsection)
+(define education/title  subsection)
 
-(define-component (education/institution . elements)
-  #:html (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
+(define (education/institution . elements)
+   (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
 
-(define-component (education/from . elements)
-  #:html (apply (default-tag-function '@) `("from " ,@elements " ")))
+(define (education/from . elements)
+   (apply (default-tag-function '@) `("from " ,@elements " ")))
 
-(define-component (education/to #:estimated? [estimated? #f] . elements)
-  #:html (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
+(define (education/to #:estimated? [estimated? #f] . elements)
+   (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
 
-(define-component education/highlights #:html list/unordered)
+(define education/highlights  list/unordered)
 
-(define-component education/highlight #:html list/unordered/item)
+(define education/highlight  list/unordered/item)
 
-(define-component work-experience #:html (default-tag-function '@))
+(define work-experience  (default-tag-function '@))
 
-(define-component work-experience/institution #:html subsection)
+(define work-experience/institution  subsection)
 
-(define-component (work-experience/title . elements)
-  #:html (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
+(define (work-experience/title . elements)
+   (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
 
-(define-component (work-experience/from . elements)
-  #:html (apply (default-tag-function '@) `("from " ,@elements " ")))
+(define (work-experience/from . elements)
+   (apply (default-tag-function '@) `("from " ,@elements " ")))
 
-(define-component (work-experience/to . elements)
-  #:html (apply (default-tag-function '@) `("to " ,@elements " ")))
+(define (work-experience/to . elements)
+   (apply (default-tag-function '@) `("to " ,@elements " ")))
 
-(define-component work-experience/highlights #:html list/unordered)
+(define work-experience/highlights  list/unordered)
 
-(define-component work-experience/highlight #:html list/unordered/item)
+(define work-experience/highlight  list/unordered/item)
 
-(define-component (skills . elements)
-  #:html (apply list/unordered #:class "skills" elements))
+(define (skills . elements)
+   (apply list/unordered #:class "skills" elements))
 
-(define-component (skill level . elements)
-  #:html (apply list/unordered/item #:class (~a "skill " level) elements))
+(define (skill level . elements)
+   (apply list/unordered/item #:class (~a "skill " level) elements))
 
-(define-component certification #:html (default-tag-function '@))
+(define certification  (default-tag-function '@))
 
-(define-component certification/title #:html subsection)
+(define certification/title  subsection)
 
-(define-component certification/date #:html (default-tag-function '@))
+(define certification/date  (default-tag-function '@))
 
-(define-component (certification/score . elements)
-  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+(define (certification/score . elements)
+   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component event #:html (default-tag-function '@))
+(define event  (default-tag-function '@))
 
-(define-component event/title #:html subsection)
+(define event/title  subsection)
 
-(define-component event/date #:html (default-tag-function '@))
+(define event/date  (default-tag-function '@))
 
-(define-component (event/from . elements)
-  #:html (apply (default-tag-function '@) `("From " ,@elements)))
+(define (event/from . elements)
+   (apply (default-tag-function '@) `("From " ,@elements)))
 
-(define-component (event/to . elements)
-  #:html (apply (default-tag-function '@) `(" to " ,@elements)))
+(define (event/to . elements)
+   (apply (default-tag-function '@) `(" to " ,@elements)))
 
-(define-component (event/highlight . elements)
-  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+(define (event/highlight . elements)
+   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component course #:html (default-tag-function '@))
+(define course  (default-tag-function '@))
 
-(define-component course/title #:html subsection)
+(define course/title  subsection)
 
-(define-component (course/by . elements)
-  #:html (apply (default-tag-function '@) `(,@elements ", " )))
+(define (course/by . elements)
+   (apply (default-tag-function '@) `(,@elements ", " )))
 
-(define-component course/date #:html (default-tag-function '@))
+(define course/date  (default-tag-function '@))
 
-(define-component (course/highlight . elements)
-  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+(define (course/highlight . elements)
+   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
-(define-component service/reviewer #:html (default-tag-function '@))
+(define service/reviewer  (default-tag-function '@))
 
-(define-component (service/reviewer/title . elements)
-  #:html (apply (default-tag-function '@) `(,@elements ". ")))
+(define (service/reviewer/title . elements)
+   (apply (default-tag-function '@) `(,@elements ". ")))
 
-(define-component (service/reviewer/date . elements)
-  #:html (apply (default-tag-function '@) `(,@elements ".")))
+(define (service/reviewer/date . elements)
+   (apply (default-tag-function '@) `(,@elements ".")))
 
-(define-component publication/paper #:html (default-tag-function '@))
+(define publication/paper  (default-tag-function '@))
 
-(define-component publication/paper/title #:html subsection)
+(define publication/paper/title  subsection)
 
-(define-component (publication/paper/authors . elements)
-  #:html (apply (default-tag-function '@) `(,@elements ".")))
+(define (publication/paper/authors . elements)
+   (apply (default-tag-function '@) `(,@elements ".")))
 
-(define-component (publication/paper/venue . elements)
-  #:html (apply (default-tag-function '@) `(,(new-line)
+(define (publication/paper/venue . elements)
+   (apply (default-tag-function '@) `(,(new-line)
                                             ,(apply emphasis elements) ". ")))
 
-(define-component (publication/paper/date . elements)
-  #:html (apply (default-tag-function '@) `(,@elements ".")))
+(define (publication/paper/date . elements)
+   (apply (default-tag-function '@) `(,@elements ".")))
 
-(define-component (publication/paper/abstract . elements)
-  #:html (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+(define (publication/paper/abstract . elements)
+   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; MUSIC
 
-(define-component lyrics #:html code/block)
+(define lyrics  code/block)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; ---------------------------------------------------------------------------------------------------

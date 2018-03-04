@@ -2,6 +2,10 @@
 
 ◊define-meta[title]{Atom Feed}
 
+◊(require pollen/tag)
+
+◊(define link (default-tag-function 'link))
+
 ◊; Reference: https://groups.google.com/forum/#!msg/pollenpub/4bOXKsIVzm4/RpzYRwqCAgAJ
 ◊(define (new-entry)
    (displayln (~a "
