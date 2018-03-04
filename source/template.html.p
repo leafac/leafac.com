@@ -28,14 +28,14 @@
            (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
            (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
            (define active? (string-prefix? (~a here) path))
-           ◊~a{<a href="/◊|path|"◊(if active? ◊~a{ class="active"} "")>◊|title|</a>})
+           ◊@{<a href="/◊|path|" ◊when/splice[active?]{class="active"}>◊|title|</a>})
       </nav>
     </header>
     <main>
       ◊when/splice[title]{
         <header>
           <h2>◊|title|</h2>
-          ◊(if date ◊~a{<time>◊|date|</time>} "")
+          ◊when/splice[date]{<time>◊|date|</time>}
         </header>
       }
       ◊(->html main #:splice? #t)
