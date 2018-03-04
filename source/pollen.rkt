@@ -147,7 +147,7 @@
 
 (define (label key) (txexpr 'span `((id ,(~a key)))))
 (define (reference path . elements)
-  (txexpr 'a `((href ,path)) (if (empty? elements) `(,path) elements)))
+  (txexpr 'a `((href ,(~a path))) (if (empty? elements) `(,path) elements)))
 (define (email address . elements)
   (apply reference (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
 (define citation (default-tag-function 'cite))
