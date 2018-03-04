@@ -11,9 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="◊|settings/author|">
     <meta name="description" content="◊|settings/description|">
-    <link rel="stylesheet" type="text/css" href="/styles.css">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="alternate" type="application/atom+xml" title="◊|settings/title|" href="/feed.atom">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" href="/feed.atom"
+          title="◊(first (select-from-doc 'title (~a (current-project-root) "feed.atom.pm")))"
+          type="application/atom+xml">
     <title>◊when/splice[title]{◊|title| · }◊|settings/title|</title>
     ◊(map ->html doc/head)
   </head>

@@ -11,7 +11,7 @@
           racket/string racket/format racket/function racket/list racket/dict racket/match
           racket/file file/sha1
           libuuid gregor gregor/period sugar xml
-          pollen/core pollen/file pollen/setup txexpr))
+          pollen/core pollen/file pollen/decode pollen/tag pollen/setup txexpr))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; SETTINGS

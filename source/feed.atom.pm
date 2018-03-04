@@ -3,8 +3,6 @@
 ◊define-meta[title]{Atom Feed}
 ◊define-meta[date]{2018-02-27T06:00:43-05:00}
 
-◊(require pollen/tag)
-
 ◊(define link (default-tag-function 'link))
 
 ◊feed[
