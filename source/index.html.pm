@@ -14,7 +14,7 @@ Follow my productions on the ◊reference["/feed.atom"]{Atom feed}. ◊reference
 
 ◊(apply
   @
-  (for/list ([entry (select-from-doc 'feed feed:doc)]
+  (for/list ([entry (in-list (select-from-doc 'feed feed:doc))]
              #:when (equal? 'entry (get-tag entry)))
     (match-define
       `(entry (id ,id) (title ,title) (link ((href ,href))) (updated ,updated) (summary ,summary ...))

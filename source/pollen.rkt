@@ -207,10 +207,10 @@
 ;; Data
 
 (define (email address . elements)
-  (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
+  (apply reference (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
 
 (define (github-user handle)
-  (link (~a "https://github.com/" handle) (~a "@" handle)))
+  (reference (~a "https://github.com/" handle) (~a "@" handle)))
 
 (define (skype-user handle)
   ((default-tag-function 'em) handle))
@@ -230,7 +230,7 @@
   (apply list/unordered #:class "recipes" elements))
 
 (define (recipe path . elements)
-  (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements)))
+  (list/unordered/item #:class "recipe" (apply reference (~a "/cooking/" path) elements)))
 
 (define ingredients/collected (make-hash))
 
