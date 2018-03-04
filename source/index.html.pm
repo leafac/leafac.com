@@ -16,14 +16,14 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
   @
   (for/list ([entry (select-from-doc 'feed feed:doc)]
              #:when (equal? 'entry (get-tag entry)))
-    (match entry
-      [`(entry
-         (id ,id)
-         (title ,title)
-         (link ((href ,href)))
-         (updated ,updated)
-         (summary ,summary))
-       (define key (substring id (string-length "urn:uuid:")))
-       (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
-       ◊@{◊subsection[key]{◊link[href]{◊|title|◊time{ · ◊entry/time}}}◊summary}]
-      [_ ◊@{}])))
+    (match-define
+      `(entry
+        (id ,id)
+        (title ,title)
+        (link ((href ,href)))
+        (updated ,updated)
+        (summary ,summary))
+      entry)
+    (define key (substring id (string-length "urn:uuid:")))
+    (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
+    ◊@{◊subsection[key]{◊link[href]{◊|title|◊time{ · ◊entry/time}}}◊summary}))
