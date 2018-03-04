@@ -67,60 +67,60 @@
 ;; Outline
 
 (define (section key . elements)
-   (apply heading 'h3 key elements))
+  (apply heading 'h3 key elements))
 
 (define (subsection key . elements)
-   (apply heading 'h4 key elements))
+  (apply heading 'h4 key elements))
 
 (define new-thought
-   (default-tag-function 'div #:class "new-thought"))
+  (default-tag-function 'div #:class "new-thought"))
 
 (define new-line
-   (default-tag-function 'br))
+  (default-tag-function 'br))
 
 (define (appendix key . elements)
-   (apply section key `("Appendix: " ,@elements)))
+  (apply section key `("Appendix: " ,@elements)))
 
 (define (heading type key . elements)
   (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference key "§")))))
 
 (define (heading/mark . elements)
-   (apply (default-tag-function 'span #:class "mark") elements))
+  (apply (default-tag-function 'span #:class "mark") elements))
 
 ;; Full width
 
 (define full-width
-   (default-tag-function 'div #:class "full-width"))
+  (default-tag-function 'div #:class "full-width"))
 
 ;; Margin notes
 
 (define margin-note
-   (default-tag-function 'aside))
+  (default-tag-function 'aside))
 
 ;; Figures
 
 (define figure
-   (default-tag-function 'figure))
+  (default-tag-function 'figure))
 
 (define figure/caption
-   (default-tag-function 'figcaption))
+  (default-tag-function 'figcaption))
 
 (define (image path [caption ""])
-   ((default-tag-function 'img) #:src path #:alt caption))
+  ((default-tag-function 'img) #:src path #:alt caption))
 
 (define (figure/image path [caption ""])
   (figure (image path caption) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
 (define (svg path)
-   (string->xexpr (file->string path)))
+  (string->xexpr (file->string path)))
 
 (define (figure/svg path [caption ""])
-   (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
+  (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
 
 ;; Code
 
 (define code
-   (default-tag-function 'code))
+  (default-tag-function 'code))
 
 (define (code/block #:language [language #f] #:caption [caption #f] . elements)
   ((default-tag-function 'div #:class "code-block")
@@ -151,50 +151,50 @@
 ;; Lists
 
 (define list/unordered
-   (default-tag-function 'ul))
+  (default-tag-function 'ul))
 
 (define list/unordered/item (default-tag-function 'li))
 
 (define list/ordered
-   (default-tag-function 'ol))
+  (default-tag-function 'ol))
 
 (define list/ordered/item (default-tag-function 'li))
 
 ;; Tables
 
 (define table
-   (default-tag-function 'table))
+  (default-tag-function 'table))
 
 (define table/header (default-tag-function 'thead))
 
 (define table/body
-   (default-tag-function 'tbody))
+  (default-tag-function 'tbody))
 
 (define table/row (default-tag-function 'tr))
 
 (define table/data
-   (default-tag-function 'td))
+  (default-tag-function 'td))
 
 (define table/data/header
-   (default-tag-function 'th))
+  (default-tag-function 'th))
 
 ;; Links
 
 (define (link path . elements)
-   (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
+  (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
 
 ;; References
 
 (define (label key)
-   ((default-tag-function 'span) #:id (~a key)))
+  ((default-tag-function 'span) #:id (~a key)))
 
 (define (reference key . elements)
-   (apply link (~a "#" key) elements))
+  (apply link (~a "#" key) elements))
 
 ;; Inline elements
 
 (define emphasis
-   (default-tag-function 'em))
+  (default-tag-function 'em))
 
 (define foreign emphasis)
 
@@ -203,50 +203,50 @@
 (define informal emphasis)
 
 (define keyboard
-   (default-tag-function 'kbd))
+  (default-tag-function 'kbd))
 
 (define path
-   (default-tag-function 'code))
+  (default-tag-function 'code))
 
 (define (fraction numerator denominator)
-   ((default-tag-function 'span #:class "fraction")
-          ((default-tag-function 'span) #:class "numerator" (~a numerator))
-          ((default-tag-function 'span) #:class "slash" "/")
-          ((default-tag-function 'span) #:class "denominator" (~a denominator))))
+  ((default-tag-function 'span #:class "fraction")
+   ((default-tag-function 'span) #:class "numerator" (~a numerator))
+   ((default-tag-function 'span) #:class "slash" "/")
+   ((default-tag-function 'span) #:class "denominator" (~a denominator))))
 
 (define (placeholder . elements)
-   (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
+  (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
 
 (define (menu-option . elements)
-   ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
+  ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
 
 ;; Data
 
 (define (email address . elements)
-   (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
+  (apply link (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
 
 (define (github-user handle)
-   (link (~a "https://github.com/" handle) (~a "@" handle)))
+  (link (~a "https://github.com/" handle) (~a "@" handle)))
 
 (define (skype-user handle)
-   ((default-tag-function 'em) handle))
+  ((default-tag-function 'em) handle))
 
 (define (phone number)
-   ((default-tag-function '@) number))
+  ((default-tag-function '@) number))
 
 (define publication emphasis)
 
 (define time
-   (default-tag-function 'time))
+  (default-tag-function 'time))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING
 
 (define (recipes . elements)
-   (apply list/unordered #:class "recipes" elements))
+  (apply list/unordered #:class "recipes" elements))
 
 (define (recipe path . elements)
-   (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements)))
+  (list/unordered/item #:class "recipe" (apply link (~a "/cooking/" path) elements)))
 
 (define ingredients/collected (make-hash))
 
@@ -263,7 +263,7 @@
 (define ingredient/quantity table/data)
 
 (define (ingredients/repeat name)
-   (apply ingredients (dict-ref ingredients/collected name)))
+  (apply ingredients (dict-ref ingredients/collected name)))
 
 (define baking/collected (box (void)))
 
@@ -272,7 +272,7 @@
   (baking/repeat))
 
 (define (baking/repeat)
-   (unbox baking/collected))
+  (unbox baking/collected))
 
 (define baking-step table/row)
 
@@ -298,13 +298,13 @@
 (define education/title subsection)
 
 (define (education/institution . elements)
-   (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
+  (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
 
 (define (education/from . elements)
-   (apply (default-tag-function '@) `("from " ,@elements " ")))
+  (apply (default-tag-function '@) `("from " ,@elements " ")))
 
 (define (education/to #:estimated? [estimated? #f] . elements)
-   (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
+  (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
 
 (define education/highlights list/unordered)
 
@@ -315,23 +315,23 @@
 (define work-experience/institution subsection)
 
 (define (work-experience/title . elements)
-   (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
+  (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
 
 (define (work-experience/from . elements)
-   (apply (default-tag-function '@) `("from " ,@elements " ")))
+  (apply (default-tag-function '@) `("from " ,@elements " ")))
 
 (define (work-experience/to . elements)
-   (apply (default-tag-function '@) `("to " ,@elements " ")))
+  (apply (default-tag-function '@) `("to " ,@elements " ")))
 
 (define work-experience/highlights list/unordered)
 
 (define work-experience/highlight list/unordered/item)
 
 (define (skills . elements)
-   (apply list/unordered #:class "skills" elements))
+  (apply list/unordered #:class "skills" elements))
 
 (define (skill level . elements)
-   (apply list/unordered/item #:class (~a "skill " level) elements))
+  (apply list/unordered/item #:class (~a "skill " level) elements))
 
 (define certification (default-tag-function '@))
 
@@ -340,7 +340,7 @@
 (define certification/date (default-tag-function '@))
 
 (define (certification/score . elements)
-   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 (define event (default-tag-function '@))
 
@@ -349,50 +349,50 @@
 (define event/date (default-tag-function '@))
 
 (define (event/from . elements)
-   (apply (default-tag-function '@) `("From " ,@elements)))
+  (apply (default-tag-function '@) `("From " ,@elements)))
 
 (define (event/to . elements)
-   (apply (default-tag-function '@) `(" to " ,@elements)))
+  (apply (default-tag-function '@) `(" to " ,@elements)))
 
 (define (event/highlight . elements)
-   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 (define course (default-tag-function '@))
 
 (define course/title subsection)
 
 (define (course/by . elements)
-   (apply (default-tag-function '@) `(,@elements ", " )))
+  (apply (default-tag-function '@) `(,@elements ", " )))
 
 (define course/date (default-tag-function '@))
 
 (define (course/highlight . elements)
-   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 (define service/reviewer (default-tag-function '@))
 
 (define (service/reviewer/title . elements)
-   (apply (default-tag-function '@) `(,@elements ". ")))
+  (apply (default-tag-function '@) `(,@elements ". ")))
 
 (define (service/reviewer/date . elements)
-   (apply (default-tag-function '@) `(,@elements ".")))
+  (apply (default-tag-function '@) `(,@elements ".")))
 
 (define publication/paper (default-tag-function '@))
 
 (define publication/paper/title subsection)
 
 (define (publication/paper/authors . elements)
-   (apply (default-tag-function '@) `(,@elements ".")))
+  (apply (default-tag-function '@) `(,@elements ".")))
 
 (define (publication/paper/venue . elements)
-   (apply (default-tag-function '@) `(,(new-line)
-                                            ,(apply emphasis elements) ". ")))
+  (apply (default-tag-function '@) `(,(new-line)
+                                     ,(apply emphasis elements) ". ")))
 
 (define (publication/paper/date . elements)
-   (apply (default-tag-function '@) `(,@elements ".")))
+  (apply (default-tag-function '@) `(,@elements ".")))
 
 (define (publication/paper/abstract . elements)
-   (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; MUSIC
