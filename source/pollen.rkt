@@ -31,6 +31,8 @@
                            #:txexpr-elements-proc decode-paragraphs
                            #:exclude-tags '(style script pre code))))
 
+(define style (default-tag-function 'style #:type "text/css"))
+
 ;; ---------------------------------------------------------------------------------------------------
 ;; FEED
 
@@ -133,60 +135,41 @@
               (string->xexpr code/highlighted)]
              [else (txexpr 'pre empty elements)])))
 
-;; Lists
+;; ---------------------------------------------------------------------------------------------------
+;; LISTS
 
-(define list/unordered
-  (default-tag-function 'ul))
-
+(define list/unordered (default-tag-function 'ul))
 (define list/unordered/item (default-tag-function 'li))
-
-(define list/ordered
-  (default-tag-function 'ol))
-
+(define list/ordered (default-tag-function 'ol))
 (define list/ordered/item (default-tag-function 'li))
 
-;; Tables
+;; ---------------------------------------------------------------------------------------------------
+;; TABLES
 
-(define table
-  (default-tag-function 'table))
-
+(define table (default-tag-function 'table))
 (define table/header (default-tag-function 'thead))
-
-(define table/body
-  (default-tag-function 'tbody))
-
+(define table/body (default-tag-function 'tbody))
 (define table/row (default-tag-function 'tr))
+(define table/data (default-tag-function 'td))
+(define table/data/header (default-tag-function 'th))
 
-(define table/data
-  (default-tag-function 'td))
+;; ---------------------------------------------------------------------------------------------------
+;; REFERENCES
 
-(define table/data/header
-  (default-tag-function 'th))
-
-;; References
-
-(define (label key)
-  ((default-tag-function 'span) #:id (~a key)))
+(define (label key) (txexpr 'span `((id ,(~a key)))))
 
 (define (reference path . elements)
-  (apply (default-tag-function 'a) #:href path (if (empty? elements) `(,path) elements)))
+  (txexpr 'a `((href ,path)) (if (empty? elements) `(,path) elements)))
 
-;; Inline elements
+;; ---------------------------------------------------------------------------------------------------
+;; INLINE
 
-(define emphasis
-  (default-tag-function 'em))
-
+(define emphasis (default-tag-function 'em))
 (define foreign emphasis)
-
 (define technical-term emphasis)
-
 (define informal emphasis)
-
-(define keyboard
-  (default-tag-function 'kbd))
-
-(define path
-  (default-tag-function 'code))
+(define keyboard (default-tag-function 'kbd))
+(define path code)
 
 (define (fraction numerator denominator)
   ((default-tag-function '@)
