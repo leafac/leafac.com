@@ -86,19 +86,21 @@
 
 (define figure/caption (default-tag-function 'figcaption))
 
-(define ((figure/full kind) path [caption ""])
+(define (image path [caption ""]) (txexpr 'img `((src ,path) (alt ,caption))))
+
+(define (figure/image path [caption ""])
   ◊figure{
- ◊kind[path]{◊caption}
+ ◊image[path]{◊caption}
  ◊when/splice[(non-empty-string? caption)]{◊figure/caption{◊caption}}
  })
 
-(define (image path [caption ""]) (txexpr 'img `((src ,path) (alt ,caption))))
-
-(define figure/image (figure/full image))
-
 (define (svg path) (string->xexpr (file->string path)))
 
-(define figure/svg (figure/full svg))
+(define (figure/svg path [caption ""])
+  ◊figure{
+ ◊svg[path]
+ ◊when/splice[(non-empty-string? caption)]{◊figure/caption{◊caption}}
+ })
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; CODE
@@ -106,30 +108,30 @@
 (define code (default-tag-function 'code))
 
 (define (code/block #:language [language #f] #:caption [caption #f] . elements)
-  ((default-tag-function 'div #:class "code-block")
-   (if caption ((default-tag-function 'span) caption) "")
-   (cond
-     [language
-      (define code (string-append* elements))
-      (define digest (sha1 (open-input-string code)))
-      (define path/basedir "compiled/code-block/")
-      (define path/full (~a path/basedir language "-" digest ".html"))
-      (define code/highlighted
-        (cond
-          [(file-exists? path/full) (file->string path/full)]
-          [else
-           (define code/highlighted
-             (with-input-from-string code
-               (λ ()
-                 (with-output-to-string
-                   (λ ()
-                     (system (~a "pygmentize -f html -l " language)))))))
-           (make-directory* path/basedir)
-           (with-output-to-file path/full
-             (λ () (display code/highlighted)))
-           code/highlighted]))
-      (string->xexpr code/highlighted)]
-     [else ((default-tag-function 'pre) (apply code elements))])))
+  (txexpr* 'div '((class "code-block"))
+           (when/splice caption (txexpr* 'span empty caption))
+           (cond
+             [language
+              (define code (string-append* elements))
+              (define digest (sha1 (open-input-string code)))
+              (define path/basedir "compiled/code-block/")
+              (define path/full (~a path/basedir language "-" digest ".html"))
+              (define code/highlighted
+                (cond
+                  [(file-exists? path/full) (file->string path/full)]
+                  [else
+                   (define code/highlighted
+                     (with-input-from-string code
+                       (λ ()
+                         (with-output-to-string
+                           (λ ()
+                             (system (~a "pygmentize -f html -l " language)))))))
+                   (make-directory* path/basedir)
+                   (with-output-to-file path/full
+                     (λ () (display code/highlighted)))
+                   code/highlighted]))
+              (string->xexpr code/highlighted)]
+             [else ((default-tag-function 'pre) (apply code elements))])))
 
 ;; Lists
 
