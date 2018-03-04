@@ -51,11 +51,15 @@
 (define link (default-tag-function 'link))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; Outline
+;; OUTLINE
 
-(define (section key . elements) ◊heading['h3 key]{◊apply[@]{◊elements}})
+(define ((heading level) key . elements)
+  (txexpr (string->symbol (~a "h" level)) empty
+          `(,◊label[key] ,@elements ,◊heading/mark{◊reference[(~a "#" key)]{§}})))
 
-(define (subsection key . elements) (apply heading 'h4 key elements))
+(define section (heading 3))
+
+(define subsection (heading 4))
 
 (define new-thought (default-tag-function 'hr))
 
@@ -63,46 +67,43 @@
 
 (define (appendix key . elements) (apply section key `("Appendix: " ,@elements)))
 
-(define (heading type key . elements)
-  (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference (~a "#" key) "§")))))
+(define heading/mark (default-tag-function 'span #:class "mark"))
 
-(define (heading/mark . elements)
-  (apply (default-tag-function 'span #:class "mark") elements))
+;; ---------------------------------------------------------------------------------------------------
+;; FULL WIDTH
 
-;; Full width
+(define full-width (default-tag-function 'div #:class "full-width"))
 
-(define full-width
-  (default-tag-function 'div #:class "full-width"))
+;; ---------------------------------------------------------------------------------------------------
+;; MARGIN NOTES
 
-;; Margin notes
+(define margin-note (default-tag-function 'aside))
 
-(define margin-note
-  (default-tag-function 'aside))
+;; ---------------------------------------------------------------------------------------------------
+;; FIGURES
 
-;; Figures
+(define figure (default-tag-function 'figure))
 
-(define figure
-  (default-tag-function 'figure))
+(define figure/caption (default-tag-function 'figcaption))
 
-(define figure/caption
-  (default-tag-function 'figcaption))
+(define ((figure/full kind) path [caption ""])
+  ◊figure{
+ ◊kind[path]{◊caption}
+ ◊when/splice[(non-empty-string? caption)]{◊figure/caption{◊caption}}
+ })
 
-(define (image path [caption ""])
-  ((default-tag-function 'img) #:src path #:alt caption))
+(define (image path [caption ""]) (txexpr 'img `((src ,path) (alt ,caption))))
 
-(define (figure/image path [caption ""])
-  (figure (image path caption) (when/splice (non-empty-string? caption) (figure/caption caption))))
+(define figure/image (figure/full image))
 
-(define (svg path)
-  (string->xexpr (file->string path)))
+(define (svg path) (string->xexpr (file->string path)))
 
-(define (figure/svg path [caption ""])
-  (figure (svg path) (when/splice (non-empty-string? caption) (figure/caption caption))))
+(define figure/svg (figure/full svg))
 
-;; Code
+;; ---------------------------------------------------------------------------------------------------
+;; CODE
 
-(define code
-  (default-tag-function 'code))
+(define code (default-tag-function 'code))
 
 (define (code/block #:language [language #f] #:caption [caption #f] . elements)
   ((default-tag-function 'div #:class "code-block")
