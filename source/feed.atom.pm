@@ -18,6 +18,8 @@
 }
 ")))
 
+◊(define root (default-tag-function 'root))
+
 ◊entry{
  ◊title{Website Redesign}
  ◊link[#:href ◊~a{◊|settings/url|/}]
