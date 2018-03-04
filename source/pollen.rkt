@@ -16,6 +16,18 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; PERSONAL DATA
 
+(define settings/name           ◊~a{Leandro Facchinetti})
+(define settings/author         ◊~a{Leandro Facchinetti})
+(define settings/github-handle  ◊~a{leafac})
+(define settings/personal-email ◊~a{me@leafac.com})
+(define settings/work-email     ◊~a{leandro@jhu.edu})
+(define settings/skype-handle   ◊~a{leafac})
+(define settings/phone-number   ◊~a{+14107799526})
+(define settings/description    ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
+(define settings/date-of-birth  ◊(date 1990 10 20))
+(define settings/age            ◊(period-ref (period-between date-of-birth (today)) 'years))
+(define settings/url            ◊~a{https://www.leafac.com})
+
 (define personal-data
   (let ([date-of-birth (date 1990 10 20)])
     `#hash((name           . ,◊~a{Leandro Facchinetti})
@@ -34,7 +46,6 @@
 
 ;; Paths
 
-(define base-url "https://www.leafac.com/")
 (define-runtime-path project-path "./")
 (define (source-path path) (~a project-path path))
 
