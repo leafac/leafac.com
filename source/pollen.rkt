@@ -131,7 +131,7 @@
                      (λ () (display code/highlighted)))
                    code/highlighted]))
               (string->xexpr code/highlighted)]
-             [else ((default-tag-function 'pre) (apply code elements))])))
+             [else (txexpr 'pre empty elements)])))
 
 ;; Lists
 
