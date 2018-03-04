@@ -30,7 +30,6 @@
           (decode-elements elements
                            #:txexpr-elements-proc decode-paragraphs
                            #:exclude-tags '(style script pre code))))
-
 (define style (default-tag-function 'style #:type "text/css"))
 
 ;; ---------------------------------------------------------------------------------------------------
@@ -47,9 +46,7 @@
   ◊summary{}
 ]
 ")))
-
 (define feed (default-tag-function 'feed #:xmlns "http://www.w3.org/2005/Atom"))
-
 (define link (default-tag-function 'link))
 
 ;; ---------------------------------------------------------------------------------------------------
@@ -58,18 +55,13 @@
 (define ((heading level) key . elements)
   (txexpr (string->symbol (~a "h" level)) empty
           `(,◊label[key] ,@elements ,◊heading/mark{◊reference[(~a "#" key)]{§}})))
-
 (define section (heading 3))
-
 (define subsection (heading 4))
-
 (define new-thought (default-tag-function 'hr))
-
 (define new-line (default-tag-function 'br))
-
 (define (appendix key . elements) (apply section key `("Appendix: " ,@elements)))
-
 (define heading/mark (default-tag-function 'span #:class "mark"))
+(define time (default-tag-function 'time))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; FULL WIDTH
@@ -85,19 +77,14 @@
 ;; FIGURES
 
 (define figure (default-tag-function 'figure))
-
 (define figure/caption (default-tag-function 'figcaption))
-
 (define (image path [caption ""]) (txexpr 'img `((src ,path) (alt ,caption))))
-
 (define (figure/image path [caption ""])
   ◊figure{
  ◊image[path]{◊caption}
  ◊when/splice[(non-empty-string? caption)]{◊figure/caption{◊caption}}
  })
-
 (define (svg path) (string->xexpr (file->string path)))
-
 (define (figure/svg path [caption ""])
   ◊figure{
  ◊svg[path]
@@ -108,7 +95,6 @@
 ;; CODE
 
 (define code (default-tag-function 'code))
-
 (define (code/block #:language [language #f] #:caption [caption #f] . elements)
   (txexpr* 'div '((class "code-block"))
            (when/splice caption (txexpr* 'span empty caption))
@@ -157,9 +143,11 @@
 ;; REFERENCES
 
 (define (label key) (txexpr 'span `((id ,(~a key)))))
-
 (define (reference path . elements)
   (txexpr 'a `((href ,path)) (if (empty? elements) `(,path) elements)))
+(define (email address . elements)
+  (apply reference (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
+(define citation (default-tag-function 'cite))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; INLINE
@@ -170,37 +158,15 @@
 (define informal emphasis)
 (define keyboard (default-tag-function 'kbd))
 (define path code)
-
 (define (fraction numerator denominator)
-  ((default-tag-function '@)
-   ((default-tag-function 'sup) (~a numerator))
-   ((default-tag-function 'span) #:class "fraction--slash" "/")
-   ((default-tag-function 'sub) (~a denominator))))
-
+  (txexpr* '@ empty
+           (txexpr* 'sup empty (~a numerator))
+           (txexpr* 'span '((class "fraction--slash")) "/")
+           (txexpr* 'sub empty (~a denominator))))
 (define (placeholder . elements)
-  (apply (default-tag-function 'span #:class "placeholder") `("<" ,@elements ">")))
-
+  (txexpr 'span '((class "placeholder")) `("<" ,@elements ">")))
 (define (menu-option . elements)
   ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
-
-;; Data
-
-(define (email address . elements)
-  (apply reference (~a "mailto:" address) (if (empty? elements) `(,address) elements)))
-
-(define (github-user handle)
-  (reference (~a "https://github.com/" handle) (~a "@" handle)))
-
-(define (skype-user handle)
-  ((default-tag-function 'em) handle))
-
-(define (phone number)
-  ((default-tag-function '@) number))
-
-(define publication emphasis)
-
-(define time
-  (default-tag-function 'time))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING

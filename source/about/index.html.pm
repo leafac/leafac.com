@@ -88,7 +88,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
  ◊education/to{2016-10}
  ◊education/highlights{
   ◊education/highlight{I got a master’s degree as part of the Ph.D. program.}
-  ◊education/highlight{My project was ◊publication{Practical Demand-Driven Program Analysis with Recursion}.}
+  ◊education/highlight{My project was ◊citation{Practical Demand-Driven Program Analysis with Recursion}.}
  }
 }
 
@@ -292,7 +292,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊event{
  ◊event/title['event--tfp-216]{◊reference["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (TFP 2016)}}
  ◊event/date{2016-06-08, 2016-06-10}
- ◊event/highlight{Alexander Rozenshteyn presented the paper ◊publication{◊reference["/research#publication--paper--what-is-your-function"]{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
+ ◊event/highlight{Alexander Rozenshteyn presented the paper ◊reference["/research#publication--paper--what-is-your-function"]{◊citation{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
 }
 
 ◊event{
@@ -369,19 +369,19 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊event{
  ◊event/title['event--18th-international-scientific-initiation-symposium]{◊foreign{18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo} (18th International Scientific Initiation Symposium from Universidade de São Paulo)}
  ◊event/date{2010-11}
- ◊event/highlight{Presented the paper ◊publication{◊reference["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
+ ◊event/highlight{Presented the paper ◊reference["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊citation{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
 }
 
 ◊event{
  ◊event/title['event--joint-conference-2010]{◊reference["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
  ◊event/date{2010-10-24}
- ◊event/highlight{Presented the paper ◊publication{◊reference["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
+ ◊event/highlight{Presented the paper ◊reference["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊citation{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
 }
 
 ◊event{
  ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (IV Scientific and Technologic Initiation Workshop)}
  ◊event/date{2010-09-22}
- ◊event/highlight{Presented the paper ◊publication{◊reference["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
+ ◊event/highlight{Presented the paper ◊reference["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊citation{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
 }
 
 ◊event{
