@@ -120,6 +120,9 @@
                    code/highlighted]))
               (string->xexpr code/highlighted)]
              [else (txexpr 'pre empty elements)])))
+(define variable (default-tag-function 'var))
+(define sample (default-tag-function 'samp))
+(define keyboard (default-tag-function 'kbd))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; LISTS
@@ -156,7 +159,6 @@
 (define foreign emphasis)
 (define technical-term emphasis)
 (define informal emphasis)
-(define keyboard (default-tag-function 'kbd))
 (define path code)
 (define (fraction numerator denominator)
   (txexpr* '@ empty
@@ -200,10 +202,7 @@
 (define lyrics code/block)
 
 ;; ---------------------------------------------------------------------------------------------------
-;; ---------------------------------------------------------------------------------------------------
-
-;; ---------------------------------------------------------------------------------------------------
-;; HELPERS
+;; CSS HELPERS
 
 (define (px->rem px #:html/font-size [html/font-size 16])
   (~a (~r #:precision 2 (/ px html/font-size)) "rem"))

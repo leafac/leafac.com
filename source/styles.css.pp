@@ -268,7 +268,7 @@ img, svg {
 /****************************************************************************************************/
 /* CODE */
 
-code {
+pre, code, var, samp, kbd {
   font-family: ◊|font-family/monospace|;
 }
 
@@ -278,7 +278,6 @@ code {
 }
 
 pre {
-  font-family: ◊|font-family/monospace|;
   background-color: ◊|color/background|;
   overflow: auto;
   padding: ◊|text-indent|;
@@ -348,10 +347,6 @@ a:hover {
     background-color: ◊|color/background|;
     color: ◊|color/primary-content|;
   }
-}
-
-kbd {
-  font-family: ◊|font-family/monospace|;
 }
 
 .fraction--slash {
