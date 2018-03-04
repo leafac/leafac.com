@@ -4,14 +4,14 @@
          racket/file file/sha1 racket/runtime-path
          libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
-         pollen/core pollen/file pollen/decode pollen/tag pollen/setup)
+         pollen/core pollen/file pollen/decode pollen/tag pollen/setup txexpr)
 
 (provide (all-defined-out)
          (all-from-out
           racket/string racket/format racket/function racket/list racket/dict racket/match
           racket/file file/sha1
           libuuid gregor gregor/period sugar xml
-          pollen/core pollen/file))
+          pollen/core pollen/file txexpr))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; SETTINGS

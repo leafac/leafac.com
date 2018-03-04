@@ -14,7 +14,8 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
 
 ◊(apply
   @
-  (for/list ([entry (select-from-doc 'feed feed:doc)])
+  (for/list ([entry (select-from-doc 'feed feed:doc)]
+             #:when (equal? 'entry (get-tag entry)))
     (match entry
       [`(entry
          (id ,id)
