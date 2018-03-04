@@ -24,7 +24,5 @@
   list/unordered
   #:class "recipes"
   (for/list ([pagenode (in-list (pagetree->list "index.ptree"))])
-    (list/unordered/item
-     #:class "recipe"
-     (reference
-      pagenode (select-from-metas 'title (~a (current-project-root) "cooking/" pagenode))))))
+    (define title (select-from-metas 'title (~a (current-project-root) "cooking/" pagenode)))
+    (list/unordered/item #:class "recipe" (reference pagenode title))))
