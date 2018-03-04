@@ -11,7 +11,7 @@
           racket/string racket/format racket/function racket/list racket/dict racket/match
           racket/file file/sha1
           libuuid gregor gregor/period sugar xml
-          pollen/core pollen/file txexpr))
+          pollen/core pollen/file pollen/setup txexpr))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; SETTINGS
@@ -29,6 +29,7 @@
 (define settings/age                ◊~a{◊(period-ref (period-between settings/date-of-birth/date (today)) 'years)})
 (define settings/url                ◊~a{https://www.leafac.com})
 (define settings/current-year       ◊~a{◊(->year (today))})
+(define settings/head-tags          '(style script))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; AUXILIARY
