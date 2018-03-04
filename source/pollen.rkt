@@ -51,24 +51,17 @@
 (define link (default-tag-function 'link))
 
 ;; ---------------------------------------------------------------------------------------------------
-;; WRITING
-
 ;; Outline
 
-(define (section key . elements)
-  (apply heading 'h3 key elements))
+(define (section key . elements) ◊heading['h3 key]{◊apply[@]{◊elements}})
 
-(define (subsection key . elements)
-  (apply heading 'h4 key elements))
+(define (subsection key . elements) (apply heading 'h4 key elements))
 
-(define new-thought
-  (default-tag-function 'hr))
+(define new-thought (default-tag-function 'hr))
 
-(define new-line
-  (default-tag-function 'br))
+(define new-line (default-tag-function 'br))
 
-(define (appendix key . elements)
-  (apply section key `("Appendix: " ,@elements)))
+(define (appendix key . elements) (apply section key `("Appendix: " ,@elements)))
 
 (define (heading type key . elements)
   (apply (default-tag-function type) `(,(label key) ,@elements ,(heading/mark (reference (~a "#" key) "§")))))
