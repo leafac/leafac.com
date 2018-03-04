@@ -66,7 +66,7 @@
 body {
   margin: ◊|space/large| auto;
   padding: ◊|space/none| ◊|grid/padding|;
-  max-width: ◊|grid/article|;
+  max-width: ◊|grid/main|;
 }
 
 @media ◊grid/bigger-screens {
@@ -74,8 +74,8 @@ body {
     max-width: ◊|grid/body|;
   }
 
-  article {
-    width: ◊|grid/article|;
+  main {
+    width: ◊|grid/main|;
   }
 
   aside {

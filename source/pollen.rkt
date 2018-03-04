@@ -438,23 +438,23 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; GRID
 
-;; |                   bigger-screens                   |
-;; |                        1024                        |
-;; |         |              body              |         |
-;; |         |              1000              |         |
-;; | padding | article | gutter | margin-note | padding |
-;; |   12    |   600   |   75   |     325     |   12    |
-;;                     |   margin-note/pull   |
-;;                     |         400          |
+;; |                bigger-screens                   |
+;; |                     1024                        |
+;; |         |           body              |         |
+;; |         |           1000              |         |
+;; | padding | main | gutter | margin-note | padding |
+;; |   12    | 600  |   75   |     325     |   12    |
+;;                  |   margin-note/pull   |
+;;                  |         400          |
 
-;; |       smaller-screens       |
-;; |             624             |
-;; | padding | article | padding |
-;; |   12    |   600   |   12    |
+;; |     smaller-screens      |
+;; |           624            |
+;; | padding | main | padding |
+;; |   12    | 600  |   12    |
 
 (define grid/body             ◊px->rem[1000])
 (define grid/padding          ◊px->rem[12])
-(define grid/article          ◊px->rem[600])
+(define grid/main             ◊px->rem[600])
 (define grid/gutter           ◊px->rem[75])
 (define grid/margin-note      ◊px->rem[325])
 (define grid/margin-note/pull ◊px->rem[400])

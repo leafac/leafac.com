@@ -4,6 +4,7 @@
 ◊(define-values (doc/body doc/head)
    (splitf-txexpr
     doc (λ (element) (and (txexpr? element) (member (get-tag element) settings/head-tags)))))
+◊(define doc/body/html (->html doc/body #:splice? #t))
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -27,14 +28,19 @@
           ◊~a{<a href="/◊|path|"◊(if active? ◊~a{ class="active"} "")>◊|title|</a>})
       </nav>
     </header>
-    <article>
-      ◊when/splice[title]{
-        <header>
-          <h2>◊|title|</h2>
-          ◊when/splice[date]{<time>◊|date|</time>}
-        </header>
-      }
-      ◊(->html doc/body #:splice? #t)
-    </article>
+    <main>
+      ◊(cond
+        [title
+          ◊~a{
+            <article>
+              <header>
+                <h2>◊|title|</h2>
+                ◊(if date ◊~a{<time>◊|date|</time>} "")
+              </header>
+              ◊doc/body/html
+            </article>
+          }]
+        [else ◊doc/body/html])
+    </main>
   </body>
 </html>
