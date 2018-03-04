@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-◊(xexpr->string (select-from-doc 'root doc))
+◊(xexpr->string (select 'root doc))

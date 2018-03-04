@@ -10,7 +10,7 @@
   ◊title{◊settings/title}
   ◊subtitle{◊settings/description}
   ◊link[#:href ◊~a{◊|settings/url|/}]
-  ◊link[#:rel "self" #:href ◊~a{◊|settings/url|/◊|here|}]
+  ◊link[#:rel "self" #:href ◊~a{◊|settings/url|/feed.atom}]
   ◊icon{◊|settings/url|/avatar.png}
   ◊author[◊name{◊settings/author}]
   ◊updated{◊(select-from-metas 'date metas)}
