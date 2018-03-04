@@ -22,25 +22,25 @@
       <h1><a href="/">◊|settings/title|</a></h1>
       <nav>
         ◊(for/list ([pagenode (in-list (pagetree->list (~a (current-project-root) "index.ptree")))])
-          (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
-          (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
-          (define active? (string-prefix? (~a here) path))
-          ◊~a{<a href="/◊|path|"◊(if active? ◊~a{ class="active"} "")>◊|title|</a>})
+           (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
+           (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
+           (define active? (string-prefix? (~a here) path))
+           ◊~a{<a href="/◊|path|"◊(if active? ◊~a{ class="active"} "")>◊|title|</a>})
       </nav>
     </header>
     <main>
       ◊(cond
-        [title
+         [title
           ◊~a{
-            <article>
+              <article>
               <header>
-                <h2>◊|title|</h2>
-                ◊(if date ◊~a{<time>◊|date|</time>} "")
+              <h2>◊|title|</h2>
+              ◊(if date ◊~a{<time>◊|date|</time>} "")
               </header>
               ◊doc/body/html
-            </article>
-          }]
-        [else ◊doc/body/html])
+              </article>
+              }]
+         [else ◊doc/body/html])
     </main>
   </body>
 </html>
