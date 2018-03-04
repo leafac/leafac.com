@@ -124,7 +124,7 @@ body > header nav a.active {
   margin-bottom: -◊|border-width/thin|;
 }
 
-article > header {
+main > header {
   margin-bottom: ◊|space/medium|;
 }
 
@@ -171,10 +171,6 @@ h3 {
 h4 {
   font-size: ◊|font-size/medium|;
   font-weight: 700;
-}
-
-h3 + h4, header + h4 {
-  margin-top: ◊|space/medium|;
 }
 
 h3 .mark, h4 .mark {

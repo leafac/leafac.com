@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 ◊(define title (select-from-metas 'title metas))
 ◊(define date (select-from-metas 'date metas))
-◊(define (txexpr-head? tx) (and (txexpr? tx) (member (get-tag tx) '(style script))))
 ◊(define-values (main head)
-   (for/fold ([main empty]
-              [head empty])
-             ([element (in-list (select-from-doc 'root doc))])
-     (match element
-       [`(p ,(? txexpr-head? a-head)) (values main `(,@head ,a-head))]
-       [else (values `(,@main ,element) head)])))
-◊(define main/html (->html main #:splice? #t))
+   (splitf-txexpr doc
+                  (match-lambda
+                    [`(p ,tx) (and (txexpr? tx) (member (get-tag tx) '(style script)))]
+                    [else #f])))
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -22,7 +18,7 @@
           title="◊(first (select-from-doc 'title (~a (current-project-root) "feed.atom.pm")))"
           type="application/atom+xml">
     <title>◊when/splice[title]{◊|title| · }◊|settings/title|</title>
-    ◊(map ->html head)
+    ◊(->html (append-map get-elements head))
   </head>
   <body>
     <header>
@@ -36,18 +32,13 @@
       </nav>
     </header>
     <main>
-      ◊(cond
-         [title
-           ◊~a{
-             <article>
-               <header>
-                 <h2>◊|title|</h2>
-                 ◊(if date ◊~a{<time>◊|date|</time>} "")
-               </header>
-               ◊main/html
-             </article>
-           }]
-         [else ◊main/html])
+      ◊when/splice[title]{
+        <header>
+          <h2>◊|title|</h2>
+          ◊(if date ◊~a{<time>◊|date|</time>} "")
+        </header>
+      }
+      ◊(->html main #:splice? #t)
     </main>
   </body>
 </html>
