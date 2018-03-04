@@ -171,157 +171,28 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING
 
-(define (recipes . elements)
-  (apply list/unordered #:class "recipes" elements))
-
-(define (recipe path . elements)
-  (list/unordered/item #:class "recipe" (apply reference (~a "/cooking/" path) elements)))
-
 (define ingredients/collected (make-hash))
-
 (define ingredients table)
-
 (define (ingredients/section name . elements)
   (dict-set! ingredients/collected name elements)
   (apply table/body elements))
-
 (define ingredient table/row)
-
 (define ingredient/name table/data)
-
 (define ingredient/quantity table/data)
-
-(define (ingredients/repeat name)
-  (apply ingredients (dict-ref ingredients/collected name)))
-
+(define (ingredients/repeat name) (apply ingredients (dict-ref ingredients/collected name)))
 (define baking/collected (box (void)))
-
 (define (baking . elements)
   (set-box! baking/collected (table (apply table/body elements)))
   (baking/repeat))
-
-(define (baking/repeat)
-  (unbox baking/collected))
-
+(define (baking/repeat) (unbox baking/collected))
 (define baking-step table/row)
-
 (define baking-step/temperature table/data)
-
 (define baking-step/duration table/data)
-
 (define baking-step/details table/data)
-
 (define directions list/ordered)
-
 (define direction list/ordered/item)
-
 (define sources list/unordered)
-
 (define source list/unordered/item)
-
-;; ---------------------------------------------------------------------------------------------------
-;; ABOUT
-
-(define education (default-tag-function '@))
-
-(define education/title subsection)
-
-(define (education/institution . elements)
-  (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
-
-(define (education/from . elements)
-  (apply (default-tag-function '@) `("from " ,@elements " ")))
-
-(define (education/to #:estimated? [estimated? #f] . elements)
-  (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
-
-(define education/highlights list/unordered)
-
-(define education/highlight list/unordered/item)
-
-(define work-experience (default-tag-function '@))
-
-(define work-experience/institution subsection)
-
-(define (work-experience/title . elements)
-  (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
-
-(define (work-experience/from . elements)
-  (apply (default-tag-function '@) `("from " ,@elements " ")))
-
-(define (work-experience/to . elements)
-  (apply (default-tag-function '@) `("to " ,@elements " ")))
-
-(define work-experience/highlights list/unordered)
-
-(define work-experience/highlight list/unordered/item)
-
-(define (skills . elements)
-  (apply list/unordered #:class "skills" elements))
-
-(define (skill level . elements)
-  (apply list/unordered/item #:class (~a "skill " level) elements))
-
-(define certification (default-tag-function '@))
-
-(define certification/title subsection)
-
-(define certification/date (default-tag-function '@))
-
-(define (certification/score . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
-
-(define event (default-tag-function '@))
-
-(define event/title subsection)
-
-(define event/date (default-tag-function '@))
-
-(define (event/from . elements)
-  (apply (default-tag-function '@) `("From " ,@elements)))
-
-(define (event/to . elements)
-  (apply (default-tag-function '@) `(" to " ,@elements)))
-
-(define (event/highlight . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
-
-(define course (default-tag-function '@))
-
-(define course/title subsection)
-
-(define (course/by . elements)
-  (apply (default-tag-function '@) `(,@elements ", " )))
-
-(define course/date (default-tag-function '@))
-
-(define (course/highlight . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
-
-(define service/reviewer (default-tag-function '@))
-
-(define (service/reviewer/title . elements)
-  (apply (default-tag-function '@) `(,@elements ". ")))
-
-(define (service/reviewer/date . elements)
-  (apply (default-tag-function '@) `(,@elements ".")))
-
-(define publication/paper (default-tag-function '@))
-
-(define publication/paper/title subsection)
-
-(define (publication/paper/authors . elements)
-  (apply (default-tag-function '@) `(,@elements ".")))
-
-(define (publication/paper/venue . elements)
-  (apply (default-tag-function '@) `(,(new-line)
-                                     ,(apply emphasis elements) ". ")))
-
-(define (publication/paper/date . elements)
-  (apply (default-tag-function '@) `(,@elements ".")))
-
-(define (publication/paper/abstract . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; MUSIC

@@ -2,6 +2,12 @@
 
 ◊define-meta[title]{Cooking}
 
+◊(define (recipes . elements)
+  (apply list/unordered #:class "recipes" elements))
+
+◊(define (recipe path . elements)
+  (list/unordered/item #:class "recipe" (apply reference (~a "/cooking/" path) elements)))
+
 ◊style{
   .recipes {
     ◊prefix['column-count]{2}
