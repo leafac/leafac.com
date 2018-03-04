@@ -91,7 +91,7 @@
   (apply heading 'h4 key elements))
 
 (define new-thought
-  (default-tag-function 'div #:class "new-thought"))
+  (default-tag-function 'hr))
 
 (define new-line
   (default-tag-function 'br))

@@ -185,15 +185,17 @@ h3 .mark, h4 .mark {
 }
 
 h3:hover .mark, h4:hover .mark {
-opacity: 1;
+  opacity: 1;
 }
 
 h3 .mark a, h4 .mark a {
   color: ◊|color/secondary-content|;
 }
 
-.new-thought {
-  height: ◊|space/extra-large|;
+hr {
+  border: none;
+  margin: ◊|space/none|;
+  height: ◊|space/large|;
 }
 
 /****************************************************************************************************/
