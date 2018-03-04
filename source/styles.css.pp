@@ -325,7 +325,7 @@ th {
 }
 
 /****************************************************************************************************/
-/* INLINE */
+/* REFERENCES */
 
 a {
   transition: background-color ◊|animation/duration|;
@@ -348,6 +348,9 @@ a:hover {
     color: ◊|color/primary-content|;
   }
 }
+
+/****************************************************************************************************/
+/* INLINE */
 
 .fraction--slash {
   margin: ◊|space/none| -◊|space/extra-extra-small|;
