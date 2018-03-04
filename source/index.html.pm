@@ -17,13 +17,8 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
   (for/list ([entry (select-from-doc 'feed feed:doc)]
              #:when (equal? 'entry (get-tag entry)))
     (match-define
-      `(entry
-        (id ,id)
-        (title ,title)
-        (link ((href ,href)))
-        (updated ,updated)
-        (summary ,summary))
+      `(entry (id ,id) (title ,title) (link ((href ,href))) (updated ,updated) (summary ,summary ...))
       entry)
     (define key (substring id (string-length "urn:uuid:")))
     (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
-    ◊@{◊subsection[key]{◊link[href]{◊|title|◊time{ · ◊entry/time}}}◊summary}))
+    ◊@{◊subsection[key]{◊link[href]{◊|title|◊time{ · ◊entry/time}}}◊(apply @ summary)}))
