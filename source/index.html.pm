@@ -14,17 +14,13 @@ Follow my productions on the ◊link["/feed.atom"]{Atom feed}. ◊link["/contact
 
 ◊(apply
   @
-  (for/list ([entry (select-from-doc 'root feed:doc)])
+  (for/list ([entry (select-from-doc 'feed feed:doc)])
     (match entry
       [`(entry
-         (title ,title)
-         ,_ ...
-         (link ((href ,href)))
-         ,_ ...
          (id ,id)
-         ,_ ...
+         (title ,title)
+         (link ((href ,href)))
          (updated ,updated)
-         ,_ ...
          (summary ,summary))
        (define key (substring id (string-length "urn:uuid:")))
        (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))

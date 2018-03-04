@@ -60,6 +60,8 @@
        (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
   (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
 
+(define feed (default-tag-function 'feed #:xmlns "http://www.w3.org/2005/Atom"))
+
 ;; ---------------------------------------------------------------------------------------------------
 ;; WRITING
 
