@@ -404,7 +404,7 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 }
 
 ◊course{
- ◊course/title['course--introduction-to-ableton-live]{Introduction to Music Production}
+ ◊course/title['course--introduction-to-music-production]{Introduction to Music Production}
  ◊course/by{Loudon Stearns in Coursera}
  ◊course/date{2015}
 }
