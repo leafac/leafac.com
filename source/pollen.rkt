@@ -26,24 +26,10 @@
 ;; TEMPLATE
 
 (define (root . elements)
-  (define elements/with-paragraphs
-    (decode-elements
-     elements
-     #:txexpr-elements-proc
-     (λ (elements)
-       (filter-not (curry equal? '(p "\n")) (decode-paragraphs elements #:linebreak-proc values)))
-     #:exclude-tags '(style pre code)))
-  (define elements/with-paragraphs/with-merged-classes
-    (decode-elements
-     elements/with-paragraphs
-     #:txexpr-attrs-proc
-     (λ (attributes)
-       (define-values (classes non-classes)
-         (partition (match-lambda [`(,key ,_) (equal? 'class key)]) attributes))
-       (define classes/strings (map second classes))
-       (define classes/concatenated (string-join classes/strings " "))
-       (if (empty? classes) non-classes `((class ,classes/concatenated) ,@non-classes)))))
-  (apply (default-tag-function 'root) elements/with-paragraphs/with-merged-classes))
+  (txexpr 'root empty
+          (decode-elements elements
+                           #:txexpr-elements-proc decode-paragraphs
+                           #:exclude-tags '(style script pre code))))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; FEED
