@@ -186,10 +186,11 @@
      (apply table
             (for/list ([group (in-list group)]
                        [ingredients (in-list ingredients)])
-              (dict-set! ingredients/collected group ingredients)
-              (tabularize ingredients)))]
+              (define table/body (tabularize ingredients))
+              (dict-set! ingredients/collected group table/body)
+              table/body))]
     [`(,ingredients ...) (table (tabularize ingredients))]))
-(define (ingredients/repeat group) (apply ingredients (dict-ref ingredients/collected group)))
+(define (ingredients/repeat group) (table (dict-ref ingredients/collected group)))
 (define baking/collected (box (void)))
 (define (baking . elements)
   (set-box! baking/collected (table (apply table/body elements)))
