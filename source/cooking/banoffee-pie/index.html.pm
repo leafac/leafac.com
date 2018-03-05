@@ -6,7 +6,7 @@
 
 ◊ingredients[
  ◊ingredients/section['caramel/dates
-  ◊ingredient{
+  ◊ingredient[
    ◊ingredient/name{Dates}
    ◊ingredient/quantity{1 cup}
   ]
