@@ -58,7 +58,7 @@
                (txexpr '@ empty the-date)
                (if (empty? highlight)
                    (txexpr '@)
-                   (apply txexpr* '@ empty (new-line) (first highlight))))]
+                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]
      [`((title ,key ,title ...)
         (from ,from ...)
         (to ,to ...)
@@ -69,14 +69,21 @@
                " to " (txexpr '@ empty to)
                (if (empty? highlight)
                    (txexpr '@)
-                   (apply txexpr* '@ empty (new-line) (first highlight))))]))
-◊(define course (default-tag-function '@))
-◊(define course/title subsection)
-◊(define (course/by . elements)
-  (apply (default-tag-function '@) `(,@elements ", " )))
-◊(define course/date (default-tag-function '@))
-◊(define (course/highlight . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]))
+◊(define (course . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (by ,by ...)
+        (the-date ,the-date ...)
+        (highlight ,highlight ...) ...)
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (txexpr '@ empty by)
+               ", "
+               (txexpr '@ empty the-date)
+               (if (empty? highlight)
+                   (txexpr '@)
+                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]))
 
 ◊style{
   .skills {
@@ -474,74 +481,74 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊section['courses]{Courses}
 
 ◊course[
- ◊course/title['course--introduction-to-ableton-live]{Introduction to Ableton Live}
- ◊course/by{Erin Barra in Coursera}
- ◊course/date{2016}
+ ◊title['course--introduction-to-ableton-live]{Introduction to Ableton Live}
+ ◊by{Erin Barra in Coursera}
+ ◊the-date{2016}
 ]
 
 ◊course[
- ◊course/title['course--introduction-to-music-production]{Introduction to Music Production}
- ◊course/by{Loudon Stearns in Coursera}
- ◊course/date{2015}
+ ◊title['course--introduction-to-music-production]{Introduction to Music Production}
+ ◊by{Loudon Stearns in Coursera}
+ ◊the-date{2015}
 ]
 
 ◊course[
- ◊course/title['course--natural-language-processing]{Natural Language Processing}
- ◊course/by{Michael Collins in Coursera}
- ◊course/date{2013}
+ ◊title['course--natural-language-processing]{Natural Language Processing}
+ ◊by{Michael Collins in Coursera}
+ ◊the-date{2013}
 ]
 
 ◊course[
- ◊course/title['course--fj-25-java-advanced-persistence-with-hibernate-and-jpa]{FJ-25—Java Advanced—Persistence with Hibernate and JPA}
- ◊course/by{Caelum}
- ◊course/date{2012}
+ ◊title['course--fj-25-java-advanced-persistence-with-hibernate-and-jpa]{FJ-25—Java Advanced—Persistence with Hibernate and JPA}
+ ◊by{Caelum}
+ ◊the-date{2012}
 ]
 
 ◊course[
- ◊course/title['course--software-engineering-for-software-as-a-service-part-i]{Software Engineering for Software as a Service (Part I)}
- ◊course/by{Armando Fox and David Patterson in Coursera}
- ◊course/date{2012}
- ◊course/highlight{Scored 2120.6 out of 2126.}
+ ◊title['course--software-engineering-for-software-as-a-service-part-i]{Software Engineering for Software as a Service (Part I)}
+ ◊by{Armando Fox and David Patterson in Coursera}
+ ◊the-date{2012}
+ ◊highlight{Scored 2120.6 out of 2126.}
 ]
 
 ◊course[
- ◊course/title['course--secure-development-for-web-programmers]{Secure Development for Web Programmers}
- ◊course/by{Universo Online (UOL)}
- ◊course/date{2012}
+ ◊title['course--secure-development-for-web-programmers]{Secure Development for Web Programmers}
+ ◊by{Universo Online (UOL)}
+ ◊the-date{2012}
 ]
 
 ◊course[
- ◊course/title['course--scrum-and-agile-methodologies]{Scrum and Agile Methodologies}
- ◊course/by{Universo Online (UOL)}
- ◊course/date{2012}
+ ◊title['course--scrum-and-agile-methodologies]{Scrum and Agile Methodologies}
+ ◊by{Universo Online (UOL)}
+ ◊the-date{2012}
 ]
 
 ◊course[
- ◊course/title['course--itil]{ITIL}
- ◊course/by{Universo Online (UOL)}
- ◊course/date{2012}
+ ◊title['course--itil]{ITIL}
+ ◊by{Universo Online (UOL)}
+ ◊the-date{2012}
 ]
 
 ◊course[
- ◊course/title['course--mc128-intruction-to-java-ee]{MC128—Introduction to Java EE}
- ◊course/by{Globalcode in the open4education program}
- ◊course/date{2012}
+ ◊title['course--mc128-intruction-to-java-ee]{MC128—Introduction to Java EE}
+ ◊by{Globalcode in the open4education program}
+ ◊the-date{2012}
 ]
 
 ◊course[
- ◊course/title['course--java-programming-intro-course]{Java Programming Intro Course}
- ◊course/by{SENAI}
- ◊course/date{2006}
+ ◊title['course--java-programming-intro-course]{Java Programming Intro Course}
+ ◊by{SENAI}
+ ◊the-date{2006}
 ]
 
 ◊course[
- ◊course/title['course--tableless-i]{Tableless I}
- ◊course/by{Visie}
- ◊course/date{2006}
+ ◊title['course--tableless-i]{Tableless I}
+ ◊by{Visie}
+ ◊the-date{2006}
 ]
 
 ◊course[
- ◊course/title['course--advanced-course-of-english]{Advanced Course of English}
- ◊course/by{CNA}
- ◊course/date{2004}
+ ◊title['course--advanced-course-of-english]{Advanced Course of English}
+ ◊by{CNA}
+ ◊the-date{2004}
 ]
