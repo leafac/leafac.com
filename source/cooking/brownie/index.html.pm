@@ -56,9 +56,9 @@
 ◊section['baking]{Baking}
 
 ◊baking[
- ◊baking-step[
-  ◊baking-step/temperature{350 °F}
-  ◊baking-step/duration{25 minutes}
+ ◊step[
+  ◊temperature{350 °F}
+  ◊duration{25 minutes}
  ]
 ]
 

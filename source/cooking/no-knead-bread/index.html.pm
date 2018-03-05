@@ -34,20 +34,20 @@
 ◊section['baking]{Baking}
 
 ◊baking[
- ◊baking-step[
-  ◊baking-step/temperature{450 °F}
-  ◊baking-step/duration{30 minutes}
-  ◊baking-step/details{Empty covered pot}
+ ◊step[
+  ◊temperature{450 °F}
+  ◊duration{30 minutes}
+  ◊details{Empty covered pot}
  ]
- ◊baking-step[
-  ◊baking-step/temperature[]
-  ◊baking-step/duration{30 minutes}
-  ◊baking-step/details{Bread in covered pot}
+ ◊step[
+  ◊temperature[]
+  ◊duration{30 minutes}
+  ◊details{Bread in covered pot}
  ]
- ◊baking-step[
-  ◊baking-step/temperature[]
-  ◊baking-step/duration{15 minutes}
-  ◊baking-step/details{Bread in uncovered pot}
+ ◊step[
+  ◊temperature[]
+  ◊duration{15 minutes}
+  ◊details{Bread in uncovered pot}
  ]
 ]
 

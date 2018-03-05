@@ -193,13 +193,28 @@
 (define (ingredients/repeat group) (table (dict-ref ingredients/collected group)))
 (define baking/collected (box (void)))
 (define (baking . elements)
-  (set-box! baking/collected (table (apply table/body elements)))
-  (baking/repeat))
+  (match elements
+    [`((step (temperature ,temperature ...)
+             (duration ,duration ...)
+             (details ,details ...) ...)
+       ...)
+     (set-box!
+      baking/collected
+      (table
+       (apply
+        table/body
+        (for/list ([temperature (in-list temperature)]
+                   [duration (in-list duration)]
+                   [details (in-list details)])
+          (apply
+           table/row
+           `(,(apply table/data temperature)
+             ,(apply table/data duration)
+             ,@(if (empty? details)
+                   empty
+                   `(,(apply table/data (first details))))))))))
+     (baking/repeat)]))
 (define (baking/repeat) (unbox baking/collected))
-(define baking-step table/row)
-(define baking-step/temperature table/data)
-(define baking-step/duration table/data)
-(define baking-step/details table/data)
 (define directions list/ordered)
 (define direction list/ordered/item)
 (define sources list/unordered)

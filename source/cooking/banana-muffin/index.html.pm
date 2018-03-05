@@ -70,15 +70,15 @@
 ◊section['baking]{Baking}
 
 ◊baking[
- ◊baking-step[
-  ◊baking-step/temperature{375 °F}
-  ◊baking-step/duration{20 minutes}
-  ◊baking-step/details{Big muffin}
+ ◊step[
+  ◊temperature{375 °F}
+  ◊duration{20 minutes}
+  ◊details{Big muffin}
  ]
- ◊baking-step[
-  ◊baking-step/temperature{}
-  ◊baking-step/duration{16 minutes}
-  ◊baking-step/details{Small muffin}
+ ◊step[
+  ◊temperature{}
+  ◊duration{16 minutes}
+  ◊details{Small muffin}
  ]
 ]
 
