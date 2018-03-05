@@ -3,16 +3,20 @@
 ◊define-meta[title]{About}
 ◊define-meta[date]{2016-11-09}
 
-◊(define education (default-tag-function '@))
-◊(define education/title subsection)
-◊(define (education/institution . elements)
-  (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
-◊(define (education/from . elements)
-  (apply (default-tag-function '@) `("from " ,@elements " ")))
-◊(define (education/to #:estimated? [estimated? #f] . elements)
-  (apply (default-tag-function '@) `("to " ,@elements ,(if estimated? " (estimated)" "") " ")))
-◊(define education/highlights list/unordered)
-◊(define education/highlight list/unordered/item)
+◊(define (education . elements )
+   (match elements
+     [`((title ,key ,title ...)
+        (institution ,institution ...)
+        (from ,from ...)
+        (to ,to ...)
+        (highlights (highlight ,highlight ...) ...))
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (apply emphasis institution)
+               ", from " (txexpr '@ empty from)
+               " to " (txexpr '@ empty to)
+               (apply list/unordered
+                      (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
 ◊(define work-experience (default-tag-function '@))
 ◊(define work-experience/institution subsection)
 ◊(define (work-experience/title . elements)
@@ -113,43 +117,44 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊section['education]{Education}
 
 ◊education[
- ◊education/title['education--phd]{Ph.D. student in Computer Science, Programming Languages}
- ◊education/institution{◊reference["https://jhu.edu"]{Johns Hopkins University}}
- ◊education/from{2014-09}
- ◊education/to[#:estimated? #t]{2019-09}
- ◊education/highlights[
-  ◊education/highlight{I am part of ◊reference["http://pl.cs.jhu.edu/"]{The Programming Languages Laboratory}, under ◊reference["http://www.cs.jhu.edu/~scott/"]{Dr. Scott Smith’s} advisory.}
-  ◊education/highlight{I ◊reference["/research"]{research} a new approach to high-order program analysis called ◊reference["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis (DDPA)}.}
-  ◊education/highlight{I took courses in programming languages, logic, software engineering, cryptography, natural language processing and databases.}
-  ◊education/highlight{I was a course assistant for the ◊reference["http://pl.cs.jhu.edu/oose/index.shtml"]{Object-Oriented Software Engineering} course on Fall 2015. I advised groups of students on their semester-long project and lectured about Git.}
-  ◊education/highlight{I am system administrator for the laboratory.}
-  ◊education/highlight{My work is supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.}
+ ◊title['education--phd]{Ph.D. student in Computer Science, Programming Languages}
+ ◊institution{◊reference["https://jhu.edu"]{Johns Hopkins University}}
+ ◊from{2014-09}
+ ◊to{2019-09 (estimated)}
+ ◊highlights[
+  ◊highlight{I am part of ◊reference["http://pl.cs.jhu.edu/"]{The Programming Languages Laboratory}, under ◊reference["http://www.cs.jhu.edu/~scott/"]{Dr. Scott Smith’s} advisory.}
+  ◊highlight{I ◊reference["/research"]{research} a new approach to high-order program analysis called ◊reference["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis (DDPA)}.}
+  ◊highlight{I took courses in programming languages, logic, software engineering, cryptography, natural language processing and databases.}
+  ◊highlight{I was a course assistant for the ◊reference["http://pl.cs.jhu.edu/oose/index.shtml"]{Object-Oriented Software Engineering} course on Fall 2015. I advised groups of students on their semester-long project and lectured about Git.}
+  ◊highlight{I am system administrator for the laboratory.}
+  ◊highlight{My work is supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.}
   ]
 ]
 
 ◊education[
- ◊education/title['education--ms]{M.S. in Computer Science}
- ◊education/institution{◊reference["https://jhu.edu"]{Johns Hopkins University}}
- ◊education/from{2014-09}
- ◊education/to{2016-10}
- ◊education/highlights[
-  ◊education/highlight{I got a master’s degree as part of the Ph.D. program.}
-  ◊education/highlight{My project was ◊citation{Practical Demand-Driven Program Analysis with Recursion}.}
+ ◊title['education--ms]{M.S. in Computer Science}
+ ◊institution{◊reference["https://jhu.edu"]{Johns Hopkins University}}
+ ◊from{2014-09}
+ ◊to{2016-10}
+ ◊highlights[
+  ◊highlight{I got a master’s degree as part of the Ph.D. program.}
+  ◊highlight{My project was ◊citation{Practical Demand-Driven Program Analysis with Recursion}.}
  ]
 ]
 
 ◊education[
- ◊education/title['education--bs]{B.S. in Computer Science}
- ◊education/institution{◊reference["http://www5.usp.br/"]{Universidade de São Paulo}}
- ◊education/from{2008-02}
- ◊education/to{2012-09}
- ◊education/highlights[
-  ◊education/highlight{
+ ◊title['education--bs]{B.S. in Computer Science}
+ ◊institution{◊reference["http://www5.usp.br/"]{Universidade de São Paulo}}
+ ◊from{2008-02}
+ ◊to{2012-09}
+ ◊highlights[
+  ◊highlight{
    ◊margin-note{During my time in Universidade de São Paulo, I played the drums in a group similar to a ◊reference["https://en.wikipedia.org/wiki/Samba_school"]{◊foreign{Escola de Samba}}. It was a lot of fun.}
    My GPA was 3.08.}
-  ◊education/highlight{I participated in an Scientific Initiation program in the field of robotics with scholarship provided by the Brazilian Government (INCT-SEC). My research was in intelligent vehicles that do not require human intervention. I developed an algorithm that helped on visual navigation.}
+  ◊highlight{I participated in an Scientific Initiation program in the field of robotics with scholarship provided by the Brazilian Government (INCT-SEC). My research was in intelligent vehicles that do not require human intervention. I developed an algorithm that helped on visual navigation.}
  ]
 ]
+
 
 ◊section['work-experience]{Work experience}
 
