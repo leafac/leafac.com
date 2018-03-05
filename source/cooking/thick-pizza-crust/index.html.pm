@@ -29,7 +29,7 @@
    ◊ingredient/quantity{3 tablepoons}
   ]
  ]
- ◊ingredients/section['dry]
+ ◊ingredients/section['dry
   ◊ingredient[
    ◊ingredient/name{Bread flour}
    ◊ingredient/quantity{3 ◊fraction[1 2] cups}
