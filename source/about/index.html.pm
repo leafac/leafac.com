@@ -3,121 +3,6 @@
 ◊define-meta[title]{About}
 ◊define-meta[date]{2016-11-09}
 
-◊(define (education . elements)
-   (match elements
-     [`((title ,key ,title ...)
-        (institution ,institution ...)
-        (from ,from ...)
-        (to ,to ...)
-        (highlights (highlight ,highlight ...) ...))
-      (txexpr* '@ empty
-               (apply subsection key title)
-               (apply emphasis institution)
-               ", from " (txexpr '@ empty from)
-               " to " (txexpr '@ empty to)
-               (apply list/unordered
-                      (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
-◊(define (work-experience . elements)
-   (match elements
-     [`((institution ,key ,institution ...)
-        (title ,title ...)
-        (from ,from ...)
-        (to ,to ...)
-        (highlights (highlight ,highlight ...) ...))
-      (txexpr* '@ empty
-               (apply subsection key institution)
-               (apply emphasis title)
-               ", from " (txexpr '@ empty from)
-               " to " (txexpr '@ empty to)
-               (apply list/unordered
-                      (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
-◊(define (skills . elements)
-   (match elements
-     [`((skill ,level ,skill ...) ...)
-      (apply list/unordered #:class "skills"
-             (map
-              (λ (level skill) (apply list/unordered/item #:class (~a level) skill))
-              level skill))]))
-◊(define (certification . elements)
-   (match elements
-     [`((title ,key ,title ...)
-        (the-date ,the-date ...)
-        (score ,score ...))
-      (txexpr* '@ empty
-               (apply subsection key title)
-               (txexpr '@ empty the-date)
-               (new-line)
-               (txexpr '@ empty score))]))
-◊(define (event . elements)
-   (match elements
-     [`((title ,key ,title ...)
-        (the-date ,the-date ...)
-        (highlight ,highlight ...) ...)
-      (txexpr* '@ empty
-               (apply subsection key title)
-               (txexpr '@ empty the-date)
-               (if (empty? highlight)
-                   (txexpr '@)
-                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]
-     [`((title ,key ,title ...)
-        (from ,from ...)
-        (to ,to ...)
-        (highlight ,highlight ...) ...)
-      (txexpr* '@ empty
-               (apply subsection key title)
-               "From " (txexpr '@ empty from)
-               " to " (txexpr '@ empty to)
-               (if (empty? highlight)
-                   (txexpr '@)
-                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]))
-◊(define (course . elements)
-   (match elements
-     [`((title ,key ,title ...)
-        (by ,by ...)
-        (the-date ,the-date ...)
-        (highlight ,highlight ...) ...)
-      (txexpr* '@ empty
-               (apply subsection key title)
-               (txexpr '@ empty by)
-               ", "
-               (txexpr '@ empty the-date)
-               (if (empty? highlight)
-                   (txexpr '@)
-                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]))
-
-◊style{
-  .skills {
-    padding-left: ◊|space/none|;
-  }
-
-  .skills > * {
-    ◊inline-block-enumeration
-  }
-
-  .skills > *::before {
-    content: "";
-    display: inline-block;
-    margin-right: ◊|space/extra-small|;
-    border-radius: ◊|border-radius|;
-    width: ◊|space/small|;
-  }
-
-  .beginner::before {
-    height: .3rem;
-    background-color: ◊|color/red|;
-  }
-
-  .intermediate::before {
-    height: .6rem;
-    background-color: ◊|color/yellow|;
-  }
-
-  .advanced::before {
-    height: .9rem;
-    background-color: ◊|color/green|;
-  }
-}
-
 ◊margin-note{◊figure/image{/avatar.png}}
 
 I am a writer of ◊reference["/prose"]{prose}, ◊reference["/software"]{software} and ◊reference["/music"]{music}. I am a Ph.D. student at the ◊reference["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊reference["https://jhu.edu"]{Johns Hopkins University}. I ◊reference["/research"]{research} a program analysis technique called ◊reference["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}.
@@ -147,6 +32,21 @@ I read about a book per week. Both fiction and non-fiction.
 The rest of this page lists my accomplishments. Work experiences, education, publications and more.
 
 ◊section['education]{Education}
+
+◊(define (education . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (institution ,institution ...)
+        (from ,from ...)
+        (to ,to ...)
+        (highlights (highlight ,highlight ...) ...))
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (apply emphasis institution)
+               ", from " (txexpr '@ empty from)
+               " to " (txexpr '@ empty to)
+               (apply list/unordered
+                      (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
 
 ◊education[
  ◊title['education--phd]{Ph.D. student in Computer Science, Programming Languages}
@@ -187,8 +87,22 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
  ]
 ]
 
-
 ◊section['work-experience]{Work experience}
+
+◊(define (work-experience . elements)
+   (match elements
+     [`((institution ,key ,institution ...)
+        (title ,title ...)
+        (from ,from ...)
+        (to ,to ...)
+        (highlights (highlight ,highlight ...) ...))
+      (txexpr* '@ empty
+               (apply subsection key institution)
+               (apply emphasis title)
+               ", from " (txexpr '@ empty from)
+               " to " (txexpr '@ empty to)
+               (apply list/unordered
+                      (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
 
 ◊work-experience[
  ◊institution['work-experience--raise-sistemas]{◊reference["http://raisesistemas.com.br/"]{Raise Sistemas}}
@@ -252,6 +166,47 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ]
 
 ◊section['skills]{Skills}
+
+◊(define (skills . elements)
+   (match elements
+     [`((skill ,level ,skill ...) ...)
+      (apply list/unordered #:class "skills"
+             (map
+              (λ (level skill) (apply list/unordered/item #:class (~a level) skill))
+              level skill))]))
+
+◊style{
+  .skills {
+    padding-left: ◊|space/none|;
+  }
+
+  .skills > * {
+    ◊inline-block-enumeration
+  }
+
+  .skills > *::before {
+    content: "";
+    display: inline-block;
+    margin-right: ◊|space/extra-small|;
+    border-radius: ◊|border-radius|;
+    width: ◊|space/small|;
+  }
+
+  .beginner::before {
+    height: .3rem;
+    background-color: ◊|color/red|;
+  }
+
+  .intermediate::before {
+    height: .6rem;
+    background-color: ◊|color/yellow|;
+  }
+
+  .advanced::before {
+    height: .9rem;
+    background-color: ◊|color/green|;
+  }
+}
 
 ◊skills[
  ◊skill['advanced]{English}
@@ -352,6 +307,17 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 
 ◊section['certifications]{Certifications}
 
+◊(define (certification . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (the-date ,the-date ...)
+        (score ,score ...))
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (txexpr '@ empty the-date)
+               (new-line)
+               (txexpr '@ empty score))]))
+
 ◊certification[
  ◊title['certification--toefl]{TOEFL}
  ◊the-date{2013-03}
@@ -371,6 +337,29 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ]
 
 ◊section['events]{Events}
+
+◊(define (event . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (the-date ,the-date ...)
+        (highlight ,highlight ...) ...)
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (txexpr '@ empty the-date)
+               (if (empty? highlight)
+                   (txexpr '@)
+                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]
+     [`((title ,key ,title ...)
+        (from ,from ...)
+        (to ,to ...)
+        (highlight ,highlight ...) ...)
+      (txexpr* '@ empty
+               (apply subsection key title)
+               "From " (txexpr '@ empty from)
+               " to " (txexpr '@ empty to)
+               (if (empty? highlight)
+                   (txexpr '@)
+                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]))
 
 ◊event[
  ◊title['event--tfp-216]{◊reference["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (TFP 2016)}}
@@ -479,6 +468,21 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ]
 
 ◊section['courses]{Courses}
+
+◊(define (course . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (by ,by ...)
+        (the-date ,the-date ...)
+        (highlight ,highlight ...) ...)
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (txexpr '@ empty by)
+               ", "
+               (txexpr '@ empty the-date)
+               (if (empty? highlight)
+                   (txexpr '@)
+                   (txexpr* '@ empty (new-line) (txexpr '@ empty (first highlight)))))]))
 
 ◊course[
  ◊title['course--introduction-to-ableton-live]{Introduction to Ableton Live}
