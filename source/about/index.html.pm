@@ -3,7 +3,7 @@
 ◊define-meta[title]{About}
 ◊define-meta[date]{2016-11-09}
 
-◊(define (education . elements )
+◊(define (education . elements)
    (match elements
      [`((title ,key ,title ...)
         (institution ,institution ...)
@@ -17,20 +17,27 @@
                " to " (txexpr '@ empty to)
                (apply list/unordered
                       (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
-◊(define work-experience (default-tag-function '@))
-◊(define work-experience/institution subsection)
-◊(define (work-experience/title . elements)
-  (apply (default-tag-function '@) `(,(apply emphasis elements) ", ")))
-◊(define (work-experience/from . elements)
-  (apply (default-tag-function '@) `("from " ,@elements " ")))
-◊(define (work-experience/to . elements)
-  (apply (default-tag-function '@) `("to " ,@elements " ")))
-◊(define work-experience/highlights list/unordered)
-◊(define work-experience/highlight list/unordered/item)
+◊(define (work-experience . elements)
+   (match elements
+     [`((institution ,key ,institution ...)
+        (title ,title ...)
+        (from ,from ...)
+        (to ,to ...)
+        (highlights (highlight ,highlight ...) ...))
+      (txexpr* '@ empty
+               (apply subsection key institution)
+               (apply emphasis title)
+               ", from " (txexpr '@ empty from)
+               " to " (txexpr '@ empty to)
+               (apply list/unordered
+                      (map (λ (highlight) (apply list/unordered/item highlight)) highlight)))]))
 ◊(define (skills . elements)
-  (apply list/unordered #:class "skills" elements))
-◊(define (skill level . elements)
-  (apply list/unordered/item #:class (~a "skill " level) elements))
+   (match elements
+     [`((skill ,level ,skill ...) ...)
+      (apply list/unordered #:class "skills"
+             (map
+              (λ (level skill) (apply list/unordered/item #:class (~a level) skill))
+              level skill))]))
 ◊(define certification (default-tag-function '@))
 ◊(define certification/title subsection)
 ◊(define certification/date (default-tag-function '@))
@@ -58,11 +65,11 @@
     padding-left: ◊|space/none|;
   }
 
-  .skill {
+  .skills > * {
     ◊inline-block-enumeration
   }
 
-  .skill::before {
+  .skills > *::before {
     content: "";
     display: inline-block;
     margin-right: ◊|space/extra-small|;
@@ -159,63 +166,63 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊section['work-experience]{Work experience}
 
 ◊work-experience[
- ◊work-experience/institution['work-experience--raise-sistemas]{◊reference["http://raisesistemas.com.br/"]{Raise Sistemas}}
- ◊work-experience/title{Software Developer}
- ◊work-experience/from{2014-02}
- ◊work-experience/to{2014-08}
- ◊work-experience/highlights[
-  ◊work-experience/highlight{
+ ◊institution['work-experience--raise-sistemas]{◊reference["http://raisesistemas.com.br/"]{Raise Sistemas}}
+ ◊title{Software Developer}
+ ◊from{2014-02}
+ ◊to{2014-08}
+ ◊highlights[
+  ◊highlight{
    ◊margin-note{I had to leave Raise Sistemas so quickly because I got accepted into a Ph.D. program.}
 
    Raise Sistemas is a product start-up.
   }
-  ◊work-experience/highlight{I maintained and developed new features for an existing medium-sized Ruby on Rails application from end to end.}
-  ◊work-experience/highlight{I improved the performance of an user-importing subsystem by a factor of 30x.}
-  ◊work-experience/highlight{I was part of an agile team that did regular code-reviews, continuous integration and continuous delivery.}
-  ◊work-experience/highlight{I worked remotely, while traveling.}
+  ◊highlight{I maintained and developed new features for an existing medium-sized Ruby on Rails application from end to end.}
+  ◊highlight{I improved the performance of an user-importing subsystem by a factor of 30x.}
+  ◊highlight{I was part of an agile team that did regular code-reviews, continuous integration and continuous delivery.}
+  ◊highlight{I worked remotely, while traveling.}
  ]
 ]
 
 ◊work-experience[
- ◊work-experience/institution['work-experience--das-dad]{Das Dad}
- ◊work-experience/title{Software Developer}
- ◊work-experience/from{2013-02}
- ◊work-experience/to{2013-12}
- ◊work-experience/highlights[
-  ◊work-experience/highlight{
+ ◊institution['work-experience--das-dad]{Das Dad}
+ ◊title{Software Developer}
+ ◊from{2013-02}
+ ◊to{2013-12}
+ ◊highlights[
+  ◊highlight{
    ◊margin-note{Unfortunately, the angel investor that backed Das Dad folded and the product was never completed.}
 
    Das Dad was a product start-up.
   }
-  ◊work-experience/highlight{I contributed to a Ruby on Rails front-end application and back-end services in Ruby and Java.}
-  ◊work-experience/highlight{The applications made a non-trivial use of natural language processing and artificial intelligence along the lines of recommendation engines, summarization and sentiment analysis.}
-  ◊work-experience/highlight{I did infrastructure work, implementing continuous integration and continuous delivery systems.}
-  ◊work-experience/highlight{I helped manage outreach activities for the local programming community. For example, I promoted coding dojos and hackathons.}
+  ◊highlight{I contributed to a Ruby on Rails front-end application and back-end services in Ruby and Java.}
+  ◊highlight{The applications made a non-trivial use of natural language processing and artificial intelligence along the lines of recommendation engines, summarization and sentiment analysis.}
+  ◊highlight{I did infrastructure work, implementing continuous integration and continuous delivery systems.}
+  ◊highlight{I helped manage outreach activities for the local programming community. For example, I promoted coding dojos and hackathons.}
  ]
 ]
 
 ◊work-experience[
- ◊work-experience/institution['work-experience--uol]{◊reference["http://www.uol.com.br/"]{Universo Online (UOL)}}
- ◊work-experience/title{Junior System Analyst}
- ◊work-experience/from{2012-03}
- ◊work-experience/to{2013-02}
- ◊work-experience/highlights[
-  ◊work-experience/highlight{UOL is a major Internet publishing company in Brazil.}
-  ◊work-experience/highlight{I used Java EE to build and maintain several web products with millions of users.}
-  ◊work-experience/highlight{I improved the development process of front-end code by introducing new technologies and building internal tools.}
+ ◊institution['work-experience--uol]{◊reference["http://www.uol.com.br/"]{Universo Online (UOL)}}
+ ◊title{Junior System Analyst}
+ ◊from{2012-03}
+ ◊to{2013-02}
+ ◊highlights[
+  ◊highlight{UOL is a major Internet publishing company in Brazil.}
+  ◊highlight{I used Java EE to build and maintain several web products with millions of users.}
+  ◊highlight{I improved the development process of front-end code by introducing new technologies and building internal tools.}
  ]
 ]
 
 ◊work-experience[
- ◊work-experience/institution['work-experience--daitan-group]{◊reference["http://www.daitangroup.com/"]{Daitan Group}}
- ◊work-experience/title{Intern in Software Development}
- ◊work-experience/from{2011-07}
- ◊work-experience/to{2012-02}
- ◊work-experience/highlights[
-  ◊work-experience/highlight{Daitan Group is an outsourcing company for Telecom applications.}
-  ◊work-experience/highlight{I had direct contact with customers in California.}
-  ◊work-experience/highlight{I developed a web service in Java EE for a telephony platform and a PHP web administration tool for a video conference system.}
-  ◊work-experience/highlight{I taught a course about Git for peer developers.}
+ ◊institution['work-experience--daitan-group]{◊reference["http://www.daitangroup.com/"]{Daitan Group}}
+ ◊title{Intern in Software Development}
+ ◊from{2011-07}
+ ◊to{2012-02}
+ ◊highlights[
+  ◊highlight{Daitan Group is an outsourcing company for Telecom applications.}
+  ◊highlight{I had direct contact with customers in California.}
+  ◊highlight{I developed a web service in Java EE for a telephony platform and a PHP web administration tool for a video conference system.}
+  ◊highlight{I taught a course about Git for peer developers.}
  ]
 ]
 
