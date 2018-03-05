@@ -38,20 +38,38 @@
              (map
               (λ (level skill) (apply list/unordered/item #:class (~a level) skill))
               level skill))]))
-◊(define certification (default-tag-function '@))
-◊(define certification/title subsection)
-◊(define certification/date (default-tag-function '@))
-◊(define (certification/score . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
-◊(define event (default-tag-function '@))
-◊(define event/title subsection)
-◊(define event/date (default-tag-function '@))
-◊(define (event/from . elements)
-  (apply (default-tag-function '@) `("From " ,@elements)))
-◊(define (event/to . elements)
-  (apply (default-tag-function '@) `(" to " ,@elements)))
-◊(define (event/highlight . elements)
-  (apply (default-tag-function '@) `(,(new-line) ,@elements)))
+◊(define (certification . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (the-date ,the-date ...)
+        (score ,score ...))
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (txexpr '@ empty the-date)
+               (new-line)
+               (txexpr '@ empty score))]))
+◊(define (event . elements)
+   (match elements
+     [`((title ,key ,title ...)
+        (the-date ,the-date ...)
+        (highlight ,highlight ...) ...)
+      (txexpr* '@ empty
+               (apply subsection key title)
+               (txexpr '@ empty the-date)
+               (if (empty? highlight)
+                   (txexpr '@)
+                   (apply txexpr* '@ empty (new-line) (first highlight))))]
+     [`((title ,key ,title ...)
+        (from ,from ...)
+        (to ,to ...)
+        (highlight ,highlight ...) ...)
+      (txexpr* '@ empty
+               (apply subsection key title)
+               "From " (txexpr '@ empty from)
+               " to " (txexpr '@ empty to)
+               (if (empty? highlight)
+                   (txexpr '@)
+                   (apply txexpr* '@ empty (new-line) (first highlight))))]))
 ◊(define course (default-tag-function '@))
 ◊(define course/title subsection)
 ◊(define (course/by . elements)
@@ -328,129 +346,129 @@ The rest of this page lists my accomplishments. Work experiences, education, pub
 ◊section['certifications]{Certifications}
 
 ◊certification[
- ◊certification/title['certification--toefl]{TOEFL}
- ◊certification/date{2013-03}
- ◊certification/score{Reading: ◊fraction[28 30]. Listening: ◊fraction[29 30]. Speaking: ◊fraction[24 30]. Writing: ◊fraction[27 30]. Total: ◊fraction[108 120].}
+ ◊title['certification--toefl]{TOEFL}
+ ◊the-date{2013-03}
+ ◊score{Reading: ◊fraction[28 30]. Listening: ◊fraction[29 30]. Speaking: ◊fraction[24 30]. Writing: ◊fraction[27 30]. Total: ◊fraction[108 120].}
 ]
 
 ◊certification[
- ◊certification/title['certification--gre]{GRE}
- ◊certification/date{2013-09}
- ◊certification/score{Verbal reasoning: ◊fraction[154 170]. Quantitative reasoning: ◊fraction[166 170]. Analytical writing: ◊fraction[3.5 6].}
+ ◊title['certification--gre]{GRE}
+ ◊the-date{2013-09}
+ ◊score{Verbal reasoning: ◊fraction[154 170]. Quantitative reasoning: ◊fraction[166 170]. Analytical writing: ◊fraction[3.5 6].}
 ]
 
 ◊certification[
- ◊certification/title['certification--oracle-certified-java-programmer]{Oracle Certified Java Programmer}
- ◊certification/date{2012-06}
- ◊certification/score{Score: 90%}
+ ◊title['certification--oracle-certified-java-programmer]{Oracle Certified Java Programmer}
+ ◊the-date{2012-06}
+ ◊score{Score: 90%}
 ]
 
 ◊section['events]{Events}
 
 ◊event[
- ◊event/title['event--tfp-216]{◊reference["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (TFP 2016)}}
- ◊event/date{2016-06-08, 2016-06-10}
- ◊event/highlight{Alexander Rozenshteyn presented the paper ◊reference["/research#publication--paper--what-is-your-function"]{◊citation{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
+ ◊title['event--tfp-216]{◊reference["http://tfp2016.org/"]{The 17th Symposium on Trends in Functional Programming (TFP 2016)}}
+ ◊the-date{2016-06-08, 2016-06-10}
+ ◊highlight{Alexander Rozenshteyn presented the paper ◊reference["/research#publication--paper--what-is-your-function"]{◊citation{What is Your Function? Static Pattern Matching on Function Behavior}}, of which I am a co-author.}
 ]
 
 ◊event[
- ◊event/title['event--ibm-pl-day-2015]{◊reference["http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432"]{IBM Programming Languages Day 2015}}
- ◊event/date{2015-11-23}
+ ◊title['event--ibm-pl-day-2015]{◊reference["http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432"]{IBM Programming Languages Day 2015}}
+ ◊the-date{2015-11-23}
 ]
 
 ◊event[
- ◊event/title['event--the-developer-s-conference-florianopolis-2014]{The Developer’s Conference Florianópolis 2014}
- ◊event/date{2014-05}
- ◊event/highlight{Talked about HTTP/2 and the future of web technologies.}
+ ◊title['event--the-developer-s-conference-florianopolis-2014]{The Developer’s Conference Florianópolis 2014}
+ ◊the-date{2014-05}
+ ◊highlight{Talked about HTTP/2 and the future of web technologies.}
 ]
 
 ◊event[
- ◊event/title['event--i-masters-inter-con-2013]{iMasters InterCon 2013}
- ◊event/date{2013-11}
+ ◊title['event--i-masters-inter-con-2013]{iMasters InterCon 2013}
+ ◊the-date{2013-11}
 ]
 
 ◊event[
- ◊event/title['event--i-masters-inter-con-plus-android-2013]{iMasters InterCon + Android 2013}
- ◊event/date{2013-09}
+ ◊title['event--i-masters-inter-con-plus-android-2013]{iMasters InterCon + Android 2013}
+ ◊the-date{2013-09}
 ]
 
 ◊event[
- ◊event/title['event--ruby-conf-brazil-2013]{RubyConf Brazil 2013}
- ◊event/date{2013-08}
+ ◊title['event--ruby-conf-brazil-2013]{RubyConf Brazil 2013}
+ ◊the-date{2013-08}
 ]
 
 ◊event[
- ◊event/title['event--coding-dojo-at-fai]{Coding Dojo at FAI}
- ◊event/date{2013-08}
- ◊event/highlight{Co-hosted a full day of activities for undergraduate Computer Science students which included a lecture about Git and a Coding Dojo.}
+ ◊title['event--coding-dojo-at-fai]{Coding Dojo at FAI}
+ ◊the-date{2013-08}
+ ◊highlight{Co-hosted a full day of activities for undergraduate Computer Science students which included a lecture about Git and a Coding Dojo.}
 ]
 
 ◊event[
- ◊event/title['event--7-masters]{7Masters}
- ◊event/date{2013-01}
- ◊event/highlight{◊reference["https://www.youtube.com/watch?v=FUzAxEV29kA"]{Talked} about modern Java development techniques and tools.}
+ ◊title['event--7-masters]{7Masters}
+ ◊the-date{2013-01}
+ ◊highlight{◊reference["https://www.youtube.com/watch?v=FUzAxEV29kA"]{Talked} about modern Java development techniques and tools.}
 ]
 
 ◊event[
- ◊event/title['event--dev-in-sampa-2012]{Dev in Sampa 2012}
- ◊event/date{2012-05}
+ ◊title['event--dev-in-sampa-2012]{Dev in Sampa 2012}
+ ◊the-date{2012-05}
 ]
 
 ◊event[
- ◊event/title['event--ruby-conf-brazil-2012]{RubyConf Brazil 2012}
- ◊event/date{2012-08}
+ ◊title['event--ruby-conf-brazil-2012]{RubyConf Brazil 2012}
+ ◊the-date{2012-08}
 ]
 
 ◊event[
- ◊event/title['event--coding-dojo-at-sp]{Coding Dojo@SP}
- ◊event/from{2012}
- ◊event/to{2013}
- ◊event/highlight{Promoted, hosted and participated in several Conding Dojos for the local developer community.}
+ ◊title['event--coding-dojo-at-sp]{Coding Dojo@SP}
+ ◊from{2012}
+ ◊to{2013}
+ ◊highlight{Promoted, hosted and participated in several Conding Dojos for the local developer community.}
 ]
 
 ◊event[
- ◊event/title['event--guru-sp]{GURU SP}
- ◊event/from{2012}
- ◊event/to{2013}
+ ◊title['event--guru-sp]{GURU SP}
+ ◊from{2012}
+ ◊to{2013}
 ]
 
 ◊event[
- ◊event/title['event--profissao-java]{Profissão Java (Java Career)}
- ◊event/date{2012-08}
+ ◊title['event--profissao-java]{Profissão Java (Java Career)}
+ ◊the-date{2012-08}
 ]
 
 ◊event[
- ◊event/title['event--conexao-java]{Conexão Java (Java Connection)}
- ◊event/date{2012-05}
+ ◊title['event--conexao-java]{Conexão Java (Java Connection)}
+ ◊the-date{2012-05}
 ]
 
 ◊event[
- ◊event/title['event--18th-international-scientific-initiation-symposium]{◊foreign{18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo} (18th International Scientific Initiation Symposium from Universidade de São Paulo)}
- ◊event/date{2010-11}
- ◊event/highlight{Presented the paper ◊reference["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊citation{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
+ ◊title['event--18th-international-scientific-initiation-symposium]{◊foreign{18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo} (18th International Scientific Initiation Symposium from Universidade de São Paulo)}
+ ◊the-date{2010-11}
+ ◊highlight{Presented the paper ◊reference["/research#publication--paper--sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes"]{◊citation{◊foreign{Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes} (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)}}.}
 ]
 
 ◊event[
- ◊event/title['event--joint-conference-2010]{◊reference["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
- ◊event/date{2010-10-24}
- ◊event/highlight{Presented the paper ◊reference["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊citation{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
+ ◊title['event--joint-conference-2010]{◊reference["http://www.jointconference.fei.edu.br/wci/index.html"]{III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI}}
+ ◊the-date{2010-10-24}
+ ◊highlight{Presented the paper ◊reference["/research#publication--paper--navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens"]{◊citation{◊foreign{Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens} (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)}}.}
 ]
 
 ◊event[
- ◊event/title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (IV Scientific and Technologic Initiation Workshop)}
- ◊event/date{2010-09-22}
- ◊event/highlight{Presented the paper ◊reference["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊citation{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
+ ◊title['event--iv-scientific-initiation-and-computataion-technology-workshop]{◊foreign{IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT)} (IV Scientific and Technologic Initiation Workshop)}
+ ◊the-date{2010-09-22}
+ ◊highlight{Presented the paper ◊reference["/research#publication--paper--pesquisa-e-desenvolvimento-de-robos-moveis-autonomos-com-navegacao-baseada-em-correlacao-de-imagens"]{◊citation{◊foreign{Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens} (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)}}.}
 ]
 
 ◊event[
- ◊event/title['event--ii-computer-science-bachelor-s-workshop]{II Computer Science Bachelor’s Workshop from Universidade de São Paulo}
- ◊event/date{2009}
- ◊event/highlight{Represented students in discussion with professors about improvements on the structure of the Computer Science course.}
+ ◊title['event--ii-computer-science-bachelor-s-workshop]{II Computer Science Bachelor’s Workshop from Universidade de São Paulo}
+ ◊the-date{2009}
+ ◊highlight{Represented students in discussion with professors about improvements on the structure of the Computer Science course.}
 ]
 
 ◊event[
- ◊event/title['event--php-conference-brazil]{PHP Conference Brazil}
- ◊event/date{2006}
+ ◊title['event--php-conference-brazil]{PHP Conference Brazil}
+ ◊the-date{2006}
 ]
 
 ◊section['courses]{Courses}
