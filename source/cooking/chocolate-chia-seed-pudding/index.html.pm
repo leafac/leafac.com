@@ -5,44 +5,44 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['chia
+ ◊group['chia
   ◊ingredient[
-   ◊ingredient/name{Chia seeds}
-   ◊ingredient/quantity{◊fraction[1 3] cup}
+   ◊name{Chia seeds}
+   ◊quantity{◊fraction[1 3] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{◊fraction[1 3] cup}
-  ]
- ]
- ◊ingredients/section['base
-  ◊ingredient[
-   ◊ingredient/name{Almond milk}
-   ◊ingredient/quantity{1 ◊fraction[1 2] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Cocoa powder}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Water}
+   ◊quantity{◊fraction[1 3] cup}
   ]
  ]
- ◊ingredients/section['dates
+ ◊group['base
   ◊ingredient[
-   ◊ingredient/name{Dates}
-   ◊ingredient/quantity{9}
+   ◊name{Almond milk}
+   ◊quantity{1 ◊fraction[1 2] cup}
+  ]
+  ◊ingredient[
+   ◊name{Cocoa powder}
+   ◊quantity{◊fraction[1 4] cup}
   ]
  ]
- ◊ingredients/section['rest
+ ◊group['dates
   ◊ingredient[
-   ◊ingredient/name{Cinnamon}
-   ◊ingredient/quantity{◊fraction[1 2] teaspoon}
+   ◊name{Dates}
+   ◊quantity{9}
+  ]
+ ]
+ ◊group['rest
+  ◊ingredient[
+   ◊name{Cinnamon}
+   ◊quantity{◊fraction[1 2] teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{◊fraction[1 4] teaspoon}
+   ◊name{Salt}
+   ◊quantity{◊fraction[1 4] teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Vanilla extract}
-   ◊ingredient/quantity{◊fraction[1 2] teaspoon}
+   ◊name{Vanilla extract}
+   ◊quantity{◊fraction[1 2] teaspoon}
   ]
  ]
 ]

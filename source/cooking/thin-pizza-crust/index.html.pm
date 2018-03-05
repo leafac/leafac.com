@@ -5,32 +5,32 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['dry
+ ◊group['dry
   ◊ingredient[
-   ◊ingredient/name{Unbleached all-purpose flour}
-   ◊ingredient/quantity{1 ◊fraction[3 4] cups}
+   ◊name{Unbleached all-purpose flour}
+   ◊quantity{1 ◊fraction[3 4] cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Semolina flour}
-   ◊ingredient/quantity{1 ◊fraction[1 4] cups}
+   ◊name{Semolina flour}
+   ◊quantity{1 ◊fraction[1 4] cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Instant yeast}
-   ◊ingredient/quantity{1 teaspoon}
+   ◊name{Instant yeast}
+   ◊quantity{1 teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{1 teaspoon}
+   ◊name{Salt}
+   ◊quantity{1 teaspoon}
   ]
  ]
- ◊ingredients/section['wet
+ ◊group['wet
   ◊ingredient[
-   ◊ingredient/name{Water at 110 °F}
-   ◊ingredient/quantity{From 1 to 1 ◊fraction[1 4] cups}
+   ◊name{Water at 110 °F}
+   ◊quantity{From 1 to 1 ◊fraction[1 4] cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Olive oil}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Olive oil}
+   ◊quantity{◊fraction[1 4] cup}
   ]
  ]
 ]

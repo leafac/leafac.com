@@ -5,34 +5,34 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['flax-egg
+ ◊group['flax-egg
   ◊ingredient[
-   ◊ingredient/name{Golden flaxseed meal}
-   ◊ingredient/quantity{2 tablespoons}
+   ◊name{Golden flaxseed meal}
+   ◊quantity{2 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{5 tablespoons}
-  ]
- ]
- ◊ingredients/section['base
-  ◊ingredient[
-   ◊ingredient/name{Granulated sugar}
-   ◊ingredient/quantity{1 cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Almond milk}
-   ◊ingredient/quantity{1 cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Baking powder}
-   ◊ingredient/quantity{1 teaspoon}
+   ◊name{Water}
+   ◊quantity{5 tablespoons}
   ]
  ]
- ◊ingredients/section['flour
+ ◊group['base
   ◊ingredient[
-   ◊ingredient/name{Bleached all-purpose flour}
-   ◊ingredient/quantity{2 ◊fraction[1 2] cup}
+   ◊name{Granulated sugar}
+   ◊quantity{1 cup}
+  ]
+  ◊ingredient[
+   ◊name{Almond milk}
+   ◊quantity{1 cup}
+  ]
+  ◊ingredient[
+   ◊name{Baking powder}
+   ◊quantity{1 teaspoon}
+  ]
+ ]
+ ◊group['flour
+  ◊ingredient[
+   ◊name{Bleached all-purpose flour}
+   ◊quantity{2 ◊fraction[1 2] cup}
   ]
  ]
 ]

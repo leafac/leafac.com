@@ -5,62 +5,62 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['crust
+ ◊group['crust
   ◊ingredient[
-   ◊ingredient/name{Dried mulberry}
-   ◊ingredient/quantity{1 ◊fraction[1 2] cups}
+   ◊name{Dried mulberry}
+   ◊quantity{1 ◊fraction[1 2] cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Pecan}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
+   ◊name{Pecan}
+   ◊quantity{◊fraction[1 2] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Date}
-   ◊ingredient/quantity{1 cup}
+   ◊name{Date}
+   ◊quantity{1 cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Cinnamon}
-   ◊ingredient/quantity{1 teaspoon}
-  ]
- ]
- ◊ingredients/section['mousse
-  ◊ingredient[
-   ◊ingredient/name{Banana}
-   ◊ingredient/quantity{3}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Avocado}
-   ◊ingredient/quantity{1}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Date}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Cocoa powder}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Maple syrup}
-   ◊ingredient/quantity{2 tablespoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Cinnamon}
-   ◊ingredient/quantity{1 tablespoon}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Cinnamon}
+   ◊quantity{1 teaspoon}
   ]
  ]
- ◊ingredients/section['topping
+ ◊group['mousse
   ◊ingredient[
-   ◊ingredient/name{Strawberry}
-   ◊ingredient/quantity{3}
+   ◊name{Banana}
+   ◊quantity{3}
   ]
   ◊ingredient[
-   ◊ingredient/name{Shredded coconut}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Avocado}
+   ◊quantity{1}
+  ]
+  ◊ingredient[
+   ◊name{Date}
+   ◊quantity{◊fraction[1 2] cup}
+  ]
+  ◊ingredient[
+   ◊name{Cocoa powder}
+   ◊quantity{◊fraction[1 4] cup}
+  ]
+  ◊ingredient[
+   ◊name{Maple syrup}
+   ◊quantity{2 tablespoons}
+  ]
+  ◊ingredient[
+   ◊name{Cinnamon}
+   ◊quantity{1 tablespoon}
+  ]
+  ◊ingredient[
+   ◊name{Water}
+   ◊quantity{◊fraction[1 4] cup}
+  ]
+ ]
+ ◊group['topping
+  ◊ingredient[
+   ◊name{Strawberry}
+   ◊quantity{3}
+  ]
+  ◊ingredient[
+   ◊name{Shredded coconut}
+   ◊quantity{◊fraction[1 4] cup}
   ]
  ]
 ]

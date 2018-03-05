@@ -5,28 +5,28 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['dry
+ ◊group['dry
   ◊ingredient[
-   ◊ingredient/name{Unbleached all-purpose flour}
-   ◊ingredient/quantity{3 cups}
+   ◊name{Unbleached all-purpose flour}
+   ◊quantity{3 cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Instant yeast}
-   ◊ingredient/quantity{◊fraction[1 2] teaspoon}
+   ◊name{Instant yeast}
+   ◊quantity{◊fraction[1 2] teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{1 ◊fraction[3 4] teaspoons}
+   ◊name{Salt}
+   ◊quantity{1 ◊fraction[3 4] teaspoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Seeds or sun-dried tomatoes ◊emphasis{(optional)}}
-   ◊ingredient/quantity{To taste}
+   ◊name{Seeds or sun-dried tomatoes ◊emphasis{(optional)}}
+   ◊quantity{To taste}
   ]
  ]
- ◊ingredients/section['wet
+ ◊group['wet
   ◊ingredient[
-   ◊ingredient/name{Water at 110 °F}
-   ◊ingredient/quantity{From 1 ◊fraction[1 4] to 1 ◊fraction[1 2] cups}
+   ◊name{Water at 110 °F}
+   ◊quantity{From 1 ◊fraction[1 4] to 1 ◊fraction[1 2] cups}
   ]
  ]
 ]

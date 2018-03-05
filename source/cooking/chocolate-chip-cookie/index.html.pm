@@ -5,52 +5,52 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['base
+ ◊group['base
   ◊ingredient[
-   ◊ingredient/name{Coconut oil}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
+   ◊name{Coconut oil}
+   ◊quantity{◊fraction[1 2] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Cocoa powder}
-   ◊ingredient/quantity{2 tablespoons}
+   ◊name{Cocoa powder}
+   ◊quantity{2 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Granulated sugar}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Granulated sugar}
+   ◊quantity{◊fraction[1 4] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Light brown sugar}
-   ◊ingredient/quantity{◊fraction[1 3] cup}
+   ◊name{Light brown sugar}
+   ◊quantity{◊fraction[1 3] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Almond milk}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Almond milk}
+   ◊quantity{◊fraction[1 4] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Golden flaxseed meal}
-   ◊ingredient/quantity{1 tablespoon}
+   ◊name{Golden flaxseed meal}
+   ◊quantity{1 tablespoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Vanilla extract}
-   ◊ingredient/quantity{2 teaspoons}
+   ◊name{Vanilla extract}
+   ◊quantity{2 teaspoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{◊fraction[1 8] teaspoon}
+   ◊name{Salt}
+   ◊quantity{◊fraction[1 8] teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Baking soda}
-   ◊ingredient/quantity{◊fraction[1 2] teaspoon}
+   ◊name{Baking soda}
+   ◊quantity{◊fraction[1 2] teaspoon}
   ]
  ]
- ◊ingredients/section['flour
+ ◊group['flour
   ◊ingredient[
-   ◊ingredient/name{Bleached all-purpose flour}
-   ◊ingredient/quantity{1 ◊fraction[1 2] cup}
+   ◊name{Bleached all-purpose flour}
+   ◊quantity{1 ◊fraction[1 2] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Chocolate chips}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
+   ◊name{Chocolate chips}
+   ◊quantity{◊fraction[1 2] cup}
   ]
  ]
 ]

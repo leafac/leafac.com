@@ -5,50 +5,50 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['flax-egg
+ ◊group['flax-egg
   ◊ingredient[
-   ◊ingredient/name{Golden flaxseed meal}
-   ◊ingredient/quantity{2 tablespoons}
+   ◊name{Golden flaxseed meal}
+   ◊quantity{2 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{5 tablespoons}
-  ]
- ]
- ◊ingredients/section['base
-  ◊ingredient[
-   ◊ingredient/name{Coconut oil}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Granulated sugar}
-   ◊ingredient/quantity{◊fraction[3 4] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Vanilla extract}
-   ◊ingredient/quantity{2 teaspoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Baking powder}
-   ◊ingredient/quantity{◊fraction[3 4] teaspoon}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{◊fraction[1 8] teaspoon}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Cocoa powder}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
+   ◊name{Water}
+   ◊quantity{5 tablespoons}
   ]
  ]
- ◊ingredients/section['flour
+ ◊group['base
   ◊ingredient[
-   ◊ingredient/name{Bleached all-purpose flour}
-   ◊ingredient/quantity{◊fraction[3 4] cup}
+   ◊name{Coconut oil}
+   ◊quantity{◊fraction[1 2] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Chocolate chips}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
+   ◊name{Granulated sugar}
+   ◊quantity{◊fraction[3 4] cup}
+  ]
+  ◊ingredient[
+   ◊name{Vanilla extract}
+   ◊quantity{2 teaspoons}
+  ]
+  ◊ingredient[
+   ◊name{Baking powder}
+   ◊quantity{◊fraction[3 4] teaspoon}
+  ]
+  ◊ingredient[
+   ◊name{Salt}
+   ◊quantity{◊fraction[1 8] teaspoon}
+  ]
+  ◊ingredient[
+   ◊name{Cocoa powder}
+   ◊quantity{◊fraction[1 2] cup}
+  ]
+ ]
+ ◊group['flour
+  ◊ingredient[
+   ◊name{Bleached all-purpose flour}
+   ◊quantity{◊fraction[3 4] cup}
+  ]
+  ◊ingredient[
+   ◊name{Chocolate chips}
+   ◊quantity{◊fraction[1 2] cup}
   ]
  ]
 ]

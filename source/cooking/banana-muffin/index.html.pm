@@ -5,64 +5,64 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['flax-egg
+ ◊group['flax-egg
   ◊ingredient[
-   ◊ingredient/name{Golden flaxseed meal}
-   ◊ingredient/quantity{2 tablespoons}
+   ◊name{Golden flaxseed meal}
+   ◊quantity{2 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{5 tablespoons}
-  ]
- ]
- ◊ingredients/section['banana
-  ◊ingredient[
-   ◊ingredient/name{Ripe bananas}
-   ◊ingredient/quantity{4}
+   ◊name{Water}
+   ◊quantity{5 tablespoons}
   ]
  ]
- ◊ingredients/section['dough
+ ◊group['banana
   ◊ingredient[
-   ◊ingredient/name{Light brown sugar}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Coconut oil}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Vanilla extract}
-   ◊ingredient/quantity{2 teaspoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Baking soda}
-   ◊ingredient/quantity{2 teaspoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{◊fraction[1 8] teaspoon}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Oats}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Bleached all-purpose flour}
-   ◊ingredient/quantity{1 ◊fraction[1 2] cup}
+   ◊name{Ripe bananas}
+   ◊quantity{4}
   ]
  ]
- ◊ingredients/section['crumbs
+ ◊group['dough
   ◊ingredient[
-   ◊ingredient/name{Light brown sugar}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Light brown sugar}
+   ◊quantity{◊fraction[1 2] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Bleached all-purpose flour}
-   ◊ingredient/quantity{5 tablespoons}
+   ◊name{Coconut oil}
+   ◊quantity{◊fraction[1 4] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Coconut oil}
-   ◊ingredient/quantity{4 tablespoons}
+   ◊name{Vanilla extract}
+   ◊quantity{2 teaspoons}
+  ]
+  ◊ingredient[
+   ◊name{Baking soda}
+   ◊quantity{2 teaspoons}
+  ]
+  ◊ingredient[
+   ◊name{Salt}
+   ◊quantity{◊fraction[1 8] teaspoon}
+  ]
+  ◊ingredient[
+   ◊name{Oats}
+   ◊quantity{◊fraction[1 2] cup}
+  ]
+  ◊ingredient[
+   ◊name{Bleached all-purpose flour}
+   ◊quantity{1 ◊fraction[1 2] cup}
+  ]
+ ]
+ ◊group['crumbs
+  ◊ingredient[
+   ◊name{Light brown sugar}
+   ◊quantity{◊fraction[1 4] cup}
+  ]
+  ◊ingredient[
+   ◊name{Bleached all-purpose flour}
+   ◊quantity{5 tablespoons}
+  ]
+  ◊ingredient[
+   ◊name{Coconut oil}
+   ◊quantity{4 tablespoons}
   ]
  ]
 ]

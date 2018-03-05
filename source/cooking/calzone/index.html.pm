@@ -5,38 +5,38 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['yeast
+ ◊group['yeast
   ◊ingredient[
-   ◊ingredient/name{Active dry yeast}
-   ◊ingredient/quantity{1 package}
+   ◊name{Active dry yeast}
+   ◊quantity{1 package}
   ]
   ◊ingredient[
-   ◊ingredient/name{Sugar}
-   ◊ingredient/quantity{2 teaspoons}
+   ◊name{Sugar}
+   ◊quantity{2 teaspoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water at 110 °F}
-   ◊ingredient/quantity{1 ◊fraction[1 3] cups}
-  ]
- ]
- ◊ingredients/section['wet
-  ◊ingredient[
-   ◊ingredient/name{Olive oil}
-   ◊ingredient/quantity{2 teaspoons}
+   ◊name{Water at 110 °F}
+   ◊quantity{1 ◊fraction[1 3] cups}
   ]
  ]
- ◊ingredients/section['dry
+ ◊group['wet
   ◊ingredient[
-   ◊ingredient/name{Whole wheat flour}
-   ◊ingredient/quantity{3 cups}
+   ◊name{Olive oil}
+   ◊quantity{2 teaspoons}
+  ]
+ ]
+ ◊group['dry
+  ◊ingredient[
+   ◊name{Whole wheat flour}
+   ◊quantity{3 cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Golden flaxseed meal}
-   ◊ingredient/quantity{3 tablespoons}
+   ◊name{Golden flaxseed meal}
+   ◊quantity{3 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{2 teaspoons}
+   ◊name{Salt}
+   ◊quantity{2 teaspoons}
   ]
  ]
 ]

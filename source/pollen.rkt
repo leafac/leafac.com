@@ -174,14 +174,22 @@
 ;; COOKING
 
 (define ingredients/collected (make-hash))
-(define ingredients table)
-(define (ingredients/section name . elements)
-  (dict-set! ingredients/collected name elements)
-  (apply table/body elements))
-(define ingredient table/row)
-(define ingredient/name table/data)
-(define ingredient/quantity table/data)
-(define (ingredients/repeat name) (apply ingredients (dict-ref ingredients/collected name)))
+(define (ingredients . elements)
+  (define/match (tabularize ingredients)
+    [(`((ingredient (name ,name ...) (quantity ,quantity ...)) ...))
+     (apply table/body
+            (for/list ([name (in-list name)]
+                       [quantity (in-list quantity)])
+              (table/row (apply table/data name) (apply table/data quantity))))])
+  (match elements
+    [`((group ,group ,ingredients ...) ...)
+     (apply table
+            (for/list ([group (in-list group)]
+                       [ingredients (in-list ingredients)])
+              (dict-set! ingredients/collected group ingredients)
+              (tabularize ingredients)))]
+    [`(,ingredients ...) (table (tabularize ingredients))]))
+(define (ingredients/repeat group) (apply ingredients (dict-ref ingredients/collected group)))
 (define baking/collected (box (void)))
 (define (baking . elements)
   (set-box! baking/collected (table (apply table/body elements)))

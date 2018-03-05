@@ -5,78 +5,78 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['caramel/dates
+ ◊group['caramel/dates
   ◊ingredient[
-   ◊ingredient/name{Dates}
-   ◊ingredient/quantity{1 cup}
+   ◊name{Dates}
+   ◊quantity{1 cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
-  ]
- ]
- ◊ingredients/section['base
-  ◊ingredient[
-   ◊ingredient/name{Water}
-   ◊ingredient/quantity{2 tablespoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Coconut oil}
-   ◊ingredient/quantity{4 tablespoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Dates}
-   ◊ingredient/quantity{4}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Almond meal}
-   ◊ingredient/quantity{1 cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Oats}
-   ◊ingredient/quantity{1 ◊fraction[1 2] cups}
+   ◊name{Water}
+   ◊quantity{◊fraction[1 2] cup}
   ]
  ]
- ◊ingredients/section['caramel/rest
+ ◊group['base
   ◊ingredient[
-   ◊ingredient/name{Vanilla extract}
-   ◊ingredient/quantity{1 teaspoon}
+   ◊name{Water}
+   ◊quantity{2 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Maple syrup}
-   ◊ingredient/quantity{3 tablespoons}
+   ◊name{Coconut oil}
+   ◊quantity{4 tablespoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Almond or peanut butter}
-   ◊ingredient/quantity{3 tablespoons}
+   ◊name{Dates}
+   ◊quantity{4}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{◊fraction[1 8] teaspoon}
-  ]
- ]
- ◊ingredients/section['cream
-  ◊ingredient[
-   ◊ingredient/name{Refrigerated coconut cream}
-   ◊ingredient/quantity{1 can}
+   ◊name{Almond meal}
+   ◊quantity{1 cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Powdered sugar}
-   ◊ingredient/quantity{2 teaspoons}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Vanilla extract}
-   ◊ingredient/quantity{1 teaspoon}
+   ◊name{Oats}
+   ◊quantity{1 ◊fraction[1 2] cups}
   ]
  ]
- ◊ingredients/section['toppings
+ ◊group['caramel/rest
   ◊ingredient[
-   ◊ingredient/name{Banana}
-   ◊ingredient/quantity{1–2}
+   ◊name{Vanilla extract}
+   ◊quantity{1 teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Chocolate sauce}
-   ◊ingredient/quantity{1 tablespoon}
+   ◊name{Maple syrup}
+   ◊quantity{3 tablespoons}
+  ]
+  ◊ingredient[
+   ◊name{Almond or peanut butter}
+   ◊quantity{3 tablespoons}
+  ]
+  ◊ingredient[
+   ◊name{Salt}
+   ◊quantity{◊fraction[1 8] teaspoon}
+  ]
+ ]
+ ◊group['cream
+  ◊ingredient[
+   ◊name{Refrigerated coconut cream}
+   ◊quantity{1 can}
+  ]
+  ◊ingredient[
+   ◊name{Powdered sugar}
+   ◊quantity{2 teaspoons}
+  ]
+  ◊ingredient[
+   ◊name{Vanilla extract}
+   ◊quantity{1 teaspoon}
+  ]
+ ]
+ ◊group['toppings
+  ◊ingredient[
+   ◊name{Banana}
+   ◊quantity{1–2}
+  ]
+  ◊ingredient[
+   ◊name{Chocolate sauce}
+   ◊quantity{1 tablespoon}
   ]
  ]
 ]

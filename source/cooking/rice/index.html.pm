@@ -6,20 +6,20 @@
 
 ◊ingredients[
  ◊ingredient[
-  ◊ingredient/name{Rice}
-  ◊ingredient/quantity{See table below}
+  ◊name{Rice}
+  ◊quantity{See table below}
  ]
  ◊ingredient[
-  ◊ingredient/name{Water}
-  ◊ingredient/quantity{See table below}
+  ◊name{Water}
+  ◊quantity{See table below}
  ]
  ◊ingredient[
-  ◊ingredient/name{Salt}
-  ◊ingredient/quantity{1 teaspoon}
+  ◊name{Salt}
+  ◊quantity{1 teaspoon}
  ]
  ◊ingredient[
-  ◊ingredient/name{Onion}
-  ◊ingredient/quantity{1 tablespoon}
+  ◊name{Onion}
+  ◊quantity{1 tablespoon}
  ]
 ]
 

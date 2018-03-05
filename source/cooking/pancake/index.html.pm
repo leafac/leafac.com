@@ -7,36 +7,36 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['dry
+ ◊group['dry
   ◊ingredient[
-   ◊ingredient/name{Bleached all-purpose flour}
-   ◊ingredient/quantity{1 cup}
+   ◊name{Bleached all-purpose flour}
+   ◊quantity{1 cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Light brown sugar}
-   ◊ingredient/quantity{1 tablespoon}
+   ◊name{Light brown sugar}
+   ◊quantity{1 tablespoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Baking powder}
-   ◊ingredient/quantity{2 teaspoons}
+   ◊name{Baking powder}
+   ◊quantity{2 teaspoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{◊fraction[1 8] teaspoon}
+   ◊name{Salt}
+   ◊quantity{◊fraction[1 8] teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Walnuts ◊emphasis{(optional)}}
-   ◊ingredient/quantity{To taste}
+   ◊name{Walnuts ◊emphasis{(optional)}}
+   ◊quantity{To taste}
   ]
  ]
- ◊ingredients/section['wet
+ ◊group['wet
   ◊ingredient[
-   ◊ingredient/name{Almond milk}
-   ◊ingredient/quantity{1 cup}
+   ◊name{Almond milk}
+   ◊quantity{1 cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Vegetable oil}
-   ◊ingredient/quantity{2 tablespoons}
+   ◊name{Vegetable oil}
+   ◊quantity{2 tablespoons}
   ]
  ]
 ]

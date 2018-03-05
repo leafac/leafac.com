@@ -5,38 +5,38 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['yeast
+ ◊group['yeast
   ◊ingredient[
-   ◊ingredient/name{Active dry yeast}
-   ◊ingredient/quantity{1 package}
+   ◊name{Active dry yeast}
+   ◊quantity{1 package}
   ]
   ◊ingredient[
-   ◊ingredient/name{Sugar}
-   ◊ingredient/quantity{1 teaspoons}
+   ◊name{Sugar}
+   ◊quantity{1 teaspoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Water at 110 °F}
-   ◊ingredient/quantity{1 cup}
-  ]
- ]
- ◊ingredients/section['wet
-  ◊ingredient[
-   ◊ingredient/name{Water at 110 °F}
-   ◊ingredient/quantity{◊fraction[1 2] cup}
-  ]
-  ◊ingredient[
-   ◊ingredient/name{Olive oil}
-   ◊ingredient/quantity{3 tablepoons}
+   ◊name{Water at 110 °F}
+   ◊quantity{1 cup}
   ]
  ]
- ◊ingredients/section['dry
+ ◊group['wet
   ◊ingredient[
-   ◊ingredient/name{Bread flour}
-   ◊ingredient/quantity{3 ◊fraction[1 2] cups}
+   ◊name{Water at 110 °F}
+   ◊quantity{◊fraction[1 2] cup}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{2 teaspoons}
+   ◊name{Olive oil}
+   ◊quantity{3 tablepoons}
+  ]
+ ]
+ ◊group['dry
+  ◊ingredient[
+   ◊name{Bread flour}
+   ◊quantity{3 ◊fraction[1 2] cups}
+  ]
+  ◊ingredient[
+   ◊name{Salt}
+   ◊quantity{2 teaspoons}
   ]
  ]
 ]

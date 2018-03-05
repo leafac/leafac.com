@@ -5,28 +5,28 @@
 ◊section['ingredients]{Ingredients}
 
 ◊ingredients[
- ◊ingredients/section['dry
+ ◊group['dry
   ◊ingredient[
-   ◊ingredient/name{Sifted unbleached flour}
-   ◊ingredient/quantity{3 cups}
+   ◊name{Sifted unbleached flour}
+   ◊quantity{3 cups}
   ]
   ◊ingredient[
-   ◊ingredient/name{Baking powder}
-   ◊ingredient/quantity{3 teaspoons}
+   ◊name{Baking powder}
+   ◊quantity{3 teaspoons}
   ]
   ◊ingredient[
-   ◊ingredient/name{Salt}
-   ◊ingredient/quantity{1 teaspoon}
+   ◊name{Salt}
+   ◊quantity{1 teaspoon}
   ]
   ◊ingredient[
-   ◊ingredient/name{Sugar}
-   ◊ingredient/quantity{◊fraction[1 4] cup}
+   ◊name{Sugar}
+   ◊quantity{◊fraction[1 4] cup}
   ]
  ]
- ◊ingredients/section['wet
+ ◊group['wet
   ◊ingredient[
-   ◊ingredient/name{Beer}
-   ◊ingredient/quantity{1 bottle}
+   ◊name{Beer}
+   ◊quantity{1 bottle}
   ]
  ]
 ]
