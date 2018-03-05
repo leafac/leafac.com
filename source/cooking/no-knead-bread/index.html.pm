@@ -57,9 +57,9 @@
  ◊direction{On a bowl, mix the dry ingredients: ◊ingredients/repeat['dry]}
  ◊direction{
   ◊margin-note{The amount of water depends on the weather. The result must be wet-to-the-hand.}
-   
+
   Mix in the wet ingredients:
-  
+
   ◊ingredients/repeat['wet]
  }
  ◊direction{Cover the bowl.}
@@ -68,9 +68,9 @@
  ◊direction{Transfer the ball of dough to a piece of parchment paper. Cover it with the upside down bowl.}
  ◊direction{
   ◊margin-note{Use the parchment paper to transfer the dough into the hot pot and let the bread bake on it.}
-   
+
   Bake the dough:
-  
+
   ◊baking/repeat[]
  }
  ◊direction{Let it rest on a cooling rack.}

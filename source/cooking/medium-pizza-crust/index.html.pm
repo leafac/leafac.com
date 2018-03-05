@@ -4,51 +4,51 @@
 
 ◊section['ingredients]{Ingredients}
 
-◊ingredients{
- ◊ingredients/section['dry]{
-  ◊ingredient{
+◊ingredients[
+ ◊ingredients/section['dry
+  ◊ingredient[
    ◊ingredient/name{Unbleached all-purpose flour}
    ◊ingredient/quantity{3 cups}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Instant yeast}
    ◊ingredient/quantity{◊fraction[1 2] teaspoon}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Salt}
    ◊ingredient/quantity{1 ◊fraction[3 4] teaspoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Seeds ◊emphasis{(optional)}}
    ◊ingredient/quantity{To taste}
-  }
- }
- ◊ingredients/section['wet]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['wet
+  ◊ingredient[
    ◊ingredient/name{Water at 110 °F}
    ◊ingredient/quantity{From 1 ◊fraction[1 4] to 1 ◊fraction[1 2] cups}
-  }
- }
-}
+  ]
+ ]
+]
 
 ◊section['baking]{Baking}
 
-◊baking{
- ◊baking-step{
+◊baking[
+ ◊baking-step[
   ◊baking-step/temperature{450 °F}
   ◊baking-step/duration{20 minutes}
- }
-}
+ ]
+]
 
 ◊section['directions]{Directions}
 
-◊directions{
+◊directions[
  ◊direction{On a bowl, mix the dry ingredients: ◊ingredients/repeat['dry]}
  ◊direction{
   ◊margin-note{The amount of water depends on the weather. The result must be wet-to-the-hand.}
-   
+
   Mix in the wet ingredients:
-  
+
   ◊ingredients/repeat['wet]
  }
  ◊direction{Cover the bowl.}
@@ -60,7 +60,7 @@
  ◊direction{Coat the crusts in olive oil.}
  ◊direction{Add tomato sauce and toppings.}
  ◊direction{Bake: ◊baking/repeat[]}
-}
+]
 
 ◊section['serving]{Serving}
 
@@ -68,7 +68,7 @@
 
 ◊section['sources]{Sources}
 
-◊sources{
+◊sources[
  ◊source{◊reference{http://www.simplysogood.com/2013/03/artisan-no-knead-bread.html}}
  ◊source{◊reference{http://www.thefreshloaf.com}}
-}
+]

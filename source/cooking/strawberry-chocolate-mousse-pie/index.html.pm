@@ -4,76 +4,76 @@
 
 ◊section['ingredients]{Ingredients}
 
-◊ingredients{
- ◊ingredients/section['crust]{
-  ◊ingredient{
+◊ingredients[
+ ◊ingredients/section['crust
+  ◊ingredient[
    ◊ingredient/name{Dried mulberry}
    ◊ingredient/quantity{1 ◊fraction[1 2] cups}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Pecan}
    ◊ingredient/quantity{◊fraction[1 2] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Date}
    ◊ingredient/quantity{1 cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Cinnamon}
    ◊ingredient/quantity{1 teaspoon}
-  }
- }
- ◊ingredients/section['mousse]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['mousse
+  ◊ingredient[
    ◊ingredient/name{Banana}
    ◊ingredient/quantity{3}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Avocado}
    ◊ingredient/quantity{1}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Date}
    ◊ingredient/quantity{◊fraction[1 2] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Cocoa powder}
    ◊ingredient/quantity{◊fraction[1 4] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Maple syrup}
    ◊ingredient/quantity{2 tablespoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Cinnamon}
    ◊ingredient/quantity{1 tablespoon}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Water}
    ◊ingredient/quantity{◊fraction[1 4] cup}
-  }
- }
- ◊ingredients/section['topping]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['topping
+  ◊ingredient[
    ◊ingredient/name{Strawberry}
    ◊ingredient/quantity{3}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Shredded coconut}
    ◊ingredient/quantity{◊fraction[1 4] cup}
-  }
- }
-}
+  ]
+ ]
+]
 
 ◊section['directions]{Directions}
 
-◊directions{
+◊directions[
  ◊direction{On a food processor, process the ingredients for the crust: ◊ingredients/repeat['crust]}
  ◊direction{Press crust into a pie pan.}
  ◊direction{On a food processor, process the ingredients for the mousse: ◊ingredients/repeat['mousse]}
  ◊direction{Pour mousse into crust.}
  ◊direction{Add toppings: ◊ingredients/repeat['topping]}
-}
+]
 
 ◊section['serving]{Serving}
 
@@ -81,6 +81,6 @@
 
 ◊section['sources]{Sources}
 
-◊sources{
+◊sources[
  ◊source{◊reference["https://www.youtube.com/watch?v=_Qg6YGRdTtc"]}
-}
+]

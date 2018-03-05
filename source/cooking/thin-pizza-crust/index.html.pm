@@ -4,49 +4,49 @@
 
 ◊section['ingredients]{Ingredients}
 
-◊ingredients{
- ◊ingredients/section['dry]{
-  ◊ingredient{
+◊ingredients[
+ ◊ingredients/section['dry
+  ◊ingredient[
    ◊ingredient/name{Unbleached all-purpose flour}
    ◊ingredient/quantity{1 ◊fraction[3 4] cups}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Semolina flour}
    ◊ingredient/quantity{1 ◊fraction[1 4] cups}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Instant yeast}
    ◊ingredient/quantity{1 teaspoon}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Salt}
    ◊ingredient/quantity{1 teaspoon}
-  }
- }
- ◊ingredients/section['wet]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['wet
+  ◊ingredient[
    ◊ingredient/name{Water at 110 °F}
    ◊ingredient/quantity{From 1 to 1 ◊fraction[1 4] cups}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Olive oil}
    ◊ingredient/quantity{◊fraction[1 4] cup}
-  }
- }
-}
+  ]
+ ]
+]
 
 ◊section['baking]{Baking}
 
-◊baking{
- ◊baking-step{
+◊baking[
+ ◊baking-step[
   ◊baking-step/temperature{450 °F}
   ◊baking-step/duration{15 minutes}
- }
-}
+ ]
+]
 
 ◊section['directions]{Directions}
 
-◊directions{
+◊directions[
  ◊direction{On a bowl, mix the dry ingredients: ◊ingredients/repeat['dry]}
  ◊direction{On a measuring cup, mix the wet ingredients: ◊ingredients/repeat['wet]}
  ◊direction{Mix the dry and the wet ingredients together.}
@@ -60,7 +60,7 @@
  ◊direction{Coat the crusts in olive oil.}
  ◊direction{Add tomato sauce and toppings.}
  ◊direction{Bake: ◊baking/repeat[]}
-}
+]
 
 ◊section['serving]{Serving}
 
@@ -68,6 +68,6 @@
 
 ◊section['sources]{Sources}
 
-◊sources{
+◊sources[
  ◊source{◊reference["http://www.kingarthurflour.com/recipes/ultra-thin-durum-semolina-pizza-crust-recipe"]}
-}
+]

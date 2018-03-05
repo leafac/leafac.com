@@ -4,87 +4,87 @@
 
 ◊section['ingredients]{Ingredients}
 
-◊ingredients{
- ◊ingredients/section['flax-egg]{
-  ◊ingredient{
+◊ingredients[
+ ◊ingredients/section['flax-egg
+  ◊ingredient[
    ◊ingredient/name{Golden flaxseed meal}
    ◊ingredient/quantity{2 tablespoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Water}
    ◊ingredient/quantity{5 tablespoons}
-  }
- }
- ◊ingredients/section['banana]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['banana
+  ◊ingredient[
    ◊ingredient/name{Ripe bananas}
    ◊ingredient/quantity{4}
-  }
- }
- ◊ingredients/section['dough]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['dough
+  ◊ingredient[
    ◊ingredient/name{Light brown sugar}
    ◊ingredient/quantity{◊fraction[1 2] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Coconut oil}
    ◊ingredient/quantity{◊fraction[1 4] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Vanilla extract}
    ◊ingredient/quantity{2 teaspoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Baking soda}
    ◊ingredient/quantity{2 teaspoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Salt}
    ◊ingredient/quantity{◊fraction[1 8] teaspoon}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Oats}
    ◊ingredient/quantity{◊fraction[1 2] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Bleached all-purpose flour}
    ◊ingredient/quantity{1 ◊fraction[1 2] cup}
-  }
- }
- ◊ingredients/section['crumbs]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['crumbs
+  ◊ingredient[
    ◊ingredient/name{Light brown sugar}
    ◊ingredient/quantity{◊fraction[1 4] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Bleached all-purpose flour}
    ◊ingredient/quantity{5 tablespoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Coconut oil}
    ◊ingredient/quantity{4 tablespoons}
-  }
- }
-}
+  ]
+ ]
+]
 
 ◊section['baking]{Baking}
 
-◊baking{
- ◊baking-step{
+◊baking[
+ ◊baking-step[
   ◊baking-step/temperature{375 °F}
   ◊baking-step/duration{20 minutes}
   ◊baking-step/details{Big muffin}
- }
- ◊baking-step{
+ ]
+ ◊baking-step[
   ◊baking-step/temperature{}
   ◊baking-step/duration{16 minutes}
   ◊baking-step/details{Small muffin}
- }
-}
+ ]
+]
 
 ◊section['directions]{Directions}
 
-◊directions{
+◊directions[
  ◊direction{On a bowl, mix ingredients for ◊informal{flax egg}: ◊ingredients/repeat['flax-egg]}
  ◊direction{Wait for 5 minutes.}
  ◊direction{Add the bananas and smash them with a fork until only small chunks remain: ◊ingredients/repeat['banana]}
@@ -94,7 +94,7 @@
  ◊direction{Add the crumbs to the top.}
  ◊direction{Bake: ◊baking/repeat[]}
  ◊direction{Let it rest on a cooling rack.}
-}
+]
 
 ◊section['serving]{Serving}
 
@@ -102,6 +102,6 @@
 
 ◊section['sources]{Sources}
 
-◊sources{
+◊sources[
  ◊source{◊reference["http://minimalistbaker.com/vegan-banana-crumb-muffins/"]}
-}
+]

@@ -4,55 +4,55 @@
 
 ◊section['ingredients]{Ingredients}
 
-◊ingredients{
- ◊ingredients/section['yeast]{
-  ◊ingredient{
+◊ingredients[
+ ◊ingredients/section['yeast
+  ◊ingredient[
    ◊ingredient/name{Active dry yeast}
    ◊ingredient/quantity{1 package}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Sugar}
    ◊ingredient/quantity{1 teaspoons}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Water at 110 °F}
    ◊ingredient/quantity{1 cup}
-  }
- }
- ◊ingredients/section['wet]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['wet
+  ◊ingredient[
    ◊ingredient/name{Water at 110 °F}
    ◊ingredient/quantity{◊fraction[1 2] cup}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Olive oil}
    ◊ingredient/quantity{3 tablepoons}
-  }
- }
- ◊ingredients/section['dry]{
-  ◊ingredient{
+  ]
+ ]
+ ◊ingredients/section['dry]
+  ◊ingredient[
    ◊ingredient/name{Bread flour}
    ◊ingredient/quantity{3 ◊fraction[1 2] cups}
-  }
-  ◊ingredient{
+  ]
+  ◊ingredient[
    ◊ingredient/name{Salt}
    ◊ingredient/quantity{2 teaspoons}
-  }
- }
-}
+  ]
+ ]
+]
 
 ◊section['baking]{Baking}
 
-◊baking{
- ◊baking-step{
+◊baking[
+ ◊baking-step[
   ◊baking-step/temperature{450 °F}
   ◊baking-step/duration{20 minutes}
- }
-}
+ ]
+]
 
 ◊section['directions]{Directions}
 
-◊directions{
+◊directions[
  ◊direction{On a bowl, activate the yeast by mixing: ◊ingredients/repeat['yeast]}
  ◊direction{Wait for 5–10 minutes until foamy.}
  ◊direction{Mix in the wet ingredients: ◊ingredients/repeat['wet]}
@@ -66,7 +66,7 @@
  ◊direction{Coat the crusts in olive oil.}
  ◊direction{Add tomato sauce and toppings.}
  ◊direction{Bake: ◊baking/repeat[]}
-}
+]
 
 ◊section['serving]{Serving}
 
@@ -74,7 +74,7 @@
 
 ◊section['sources]{Sources}
 
-◊sources{
+◊sources[
  ◊source{◊reference{http://allrecipes.com/recipe/20171/quick-and-easy-pizza-crust/}}
  ◊source{◊reference{http://allrecipes.com/video/1075/quick-and-easy-pizza-crust/}}
-}
+]
