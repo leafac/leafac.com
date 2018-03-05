@@ -215,10 +215,19 @@
                    `(,(apply table/data (first details))))))))))
      (baking/repeat)]))
 (define (baking/repeat) (unbox baking/collected))
-(define directions list/ordered)
-(define direction list/ordered/item)
-(define sources list/unordered)
-(define source list/unordered/item)
+(define (directions . elements)
+  (match elements
+    [`((direction ,direction ...) ...)
+     (apply list/ordered
+            (for/list ([direction (in-list direction)])
+              (apply list/ordered/item direction)))]))
+(define (sources . elements)
+  (match elements
+    [`((source ,source ...) ...)
+     (apply list/unordered
+            (for/list ([source (in-list source)])
+              (apply list/unordered/item source)))]))
+(define source (default-tag-function 'source))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; MUSIC
