@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/styles.css" type="text/css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link rel="alternate" href="/feed.atom"
-          title="◊(first (select-from-doc 'title (~a project-root "feed.atom.pm")))"
+          title="◊(first (select-from-doc 'title (~a settings/project-root "feed.atom.pm")))"
           type="application/atom+xml">
     <title>◊when/splice[title]{◊|title| · }◊|settings/title|</title>
     ◊(->html (append-map get-elements head))
@@ -24,8 +24,8 @@
     <header>
       <h1><a href="/">◊|settings/title|</a></h1>
       <nav>
-        ◊(for/list ([pagenode (in-list (pagetree->list (~a project-root "index.ptree")))])
-           (define title (select-from-metas 'title (~a project-root pagenode)))
+        ◊(for/list ([pagenode (in-list (pagetree->list (~a settings/project-root "index.ptree")))])
+           (define title (select-from-metas 'title (~a settings/project-root pagenode)))
            (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
            (define active? (string-prefix? (~a here) path))
            ◊@{<a href="/◊|path|" ◊when/splice[active?]{class="active"}>◊|title|</a>})
