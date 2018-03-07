@@ -24,9 +24,18 @@
     <header>
       <h1><a href="/">◊|settings/title|</a></h1>
       <nav>
-        ◊(for/list ([pagenode (in-list (pagetree->list (~a settings/project-root "menu.ptree")))])
+        ◊(for/list ([pagenode (in-list '("about/index.html"
+                                         "contact/index.html"
+                                         "research/index.html"
+                                         "prose/index.html"
+                                         "software/index.html"
+                                         "music/index.html"
+                                         "cooking/index.html"
+                                         "feed.atom"
+                                         "license/index.html"
+                                         "colophon/index.html"))])
            (define title (select-from-metas 'title (~a settings/project-root pagenode)))
-           (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
+           (define path (regexp-replace #rx"index\\.html$" pagenode ""))
            (define active? (string-prefix? (~a here) path))
            ◊@{<a href="/◊|path|" ◊when/splice[active?]{class="active"}>◊|title|</a>})
       </nav>
