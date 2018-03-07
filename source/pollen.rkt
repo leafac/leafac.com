@@ -30,7 +30,6 @@
           (decode-elements elements
                            #:txexpr-elements-proc decode-paragraphs
                            #:exclude-tags '(style script pre code))))
-(define style (default-tag-function 'style #:type "text/css"))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; FEED
