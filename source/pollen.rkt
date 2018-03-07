@@ -30,6 +30,7 @@
           (decode-elements elements
                            #:txexpr-elements-proc decode-paragraphs
                            #:exclude-tags '(style script pre code))))
+(define-runtime-path project-root "./")
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; FEED
