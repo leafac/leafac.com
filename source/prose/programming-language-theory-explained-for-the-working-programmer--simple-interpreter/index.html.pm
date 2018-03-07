@@ -991,3 +991,7 @@ We started with a fundamental question: How do interpreters evaluate programs to
 ◊margin-note{For more on PLT Redex, read ◊reference["/prose/playing-the-game-with-plt-redex/"]{◊citation{Playing the Game with PLT Redex}}.}
 
 The approach to interpretation followed by this article is inspired by ◊reference["https://mitpress.mit.edu/sicp/full-text/book/book.html"]{◊citation{Structure and Interpretation of Computer Programs}}, the classic textbook. We follow a more modern approach using pattern matching, which is based on ◊reference["https://redex.racket-lang.org/"]{PLT Redex} and ◊reference["https://mitpress.mit.edu/books/semantics-engineering-plt-redex"]{◊citation{Semantics Engineering with PLT Redex}}. A great source for learning about interpretation in depth is the ◊reference["http://library.readscheme.org/page1.html"]{Lambda Papers}. People interested in reading more recent research papers need to understand the associated formal notation, for which the book ◊reference["https://pl.cs.jhu.edu/pl/book/dist/"]{◊citation{Principles of Programming Languages}} is a gentle introduction (disclaimer, the author is my advisor).
+
+◊appendix['full-listing]{Full Listing}
+
+◊full-width{◊code/block[#:language 'racket]{◊(file->string "programming-language-theory-explained-for-the-working-programmer--simple-interpreter.rkt")}}

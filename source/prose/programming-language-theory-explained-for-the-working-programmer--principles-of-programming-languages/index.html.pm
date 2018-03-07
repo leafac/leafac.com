@@ -5,8 +5,6 @@
 
 ◊margin-note{This article assumes prior knowledge in programming. Experience with functional programming languages in general and ◊reference["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊reference["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
-◊margin-note{◊reference["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt"]{Here} is the code for this entire article.}
-
 Programming languages come in many sizes and flavors. Working programmers have been exposed to a few of them and might wonder: What is the essence of programming languages? In this article, we explore this question, but, unlike most presentations on the topic, we avoid mathematical notation and jargon. We start with a small program and remove one abstraction at a time, until we reach the core of what make programming languages work. The whole discussion is driven by executable code, making it approachable to all programmers.
 
 Besides satisfying curiosity, this article introduces programming techniques that are generally applicable in everyday programming. And, for people starting in programming-language design and analysis, this article introduces a minimal programming language core from which to build.
@@ -1439,3 +1437,7 @@ Finally, people interested in the academic side of programming-language theory c
 ◊section['acknowledgments]{Acknowledgments}
 
 Thank you David Storrs for the comments on this article.
+
+◊appendix['full-listing]{Full Listing}
+
+◊full-width{◊code/block[#:language 'racket]{◊(file->string "programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages.rkt")}}

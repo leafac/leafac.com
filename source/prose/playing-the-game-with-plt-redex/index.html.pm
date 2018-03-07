@@ -75,8 +75,6 @@ There are still two pegs remaining on the board, but they are not neighbors, so 
 
 ◊section['data-structures]{Data Structures}
 
-◊margin-note{◊reference["https://git.leafac.com/www.leafac.com/plain/source/prose/playing-the-game-with-plt-redex/peg-solitaire.rkt"]{Here} is the code for this entire article.}
-
 We need data structures to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a ◊emphasis{language} as our data structure definition. Terms in the language will represent board configurations. PLT Redex lets us define a grammar for a language in ◊reference["https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form"]{BNF} form:
 
 ◊margin-note{We are using Racket’s support for Unicode identifiers.}
@@ -388,3 +386,7 @@ Finally, we discussed PLT Redex’s limitations. It cannot be used to directly e
 ◊section['acknowledgments]{Acknowledgments}
 
 Thank you ◊reference["https://cs.jhu.edu/~shyam/"]{P.C. Shyamshankar}, ◊reference["http://www.thinkmoore.net/"]{Scott Moore}, ◊reference["http://www.allanvital.com/"]{Allan Vital} and ◊reference["http://rafaelalmeida.net/"]{Rafael da Silva Almeida} for your feedback on this article.
+
+◊appendix['full-listing]{Full Listing}
+
+◊full-width{◊code/block[#:language 'racket]{◊(file->string "peg-solitaire.rkt")}}
