@@ -9,7 +9,6 @@
 ◊subsection['programming-language-theory-explained-for-the-working-programmer]{Programming-Language Theory Explained for the Working Programmer}
 
 ◊reference["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{Principles of Programming Languages}
-◊new-line[]
 ◊reference["/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter"]{Simple Interpreter}
 
 ◊subsection['system-administration]{System Administration}
