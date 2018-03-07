@@ -23,6 +23,6 @@
 ◊(apply
   list/unordered
   #:class "recipes"
-  (for/list ([pagenode (in-list (pagetree->list "index.ptree"))])
+  (for/list ([pagenode (in-list (pagetree->list "recipes.ptree"))])
     (define title (select-from-metas 'title pagenode))
     (list/unordered/item #:class "recipe" (reference (~a "/" pagenode) title))))

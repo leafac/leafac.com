@@ -24,7 +24,7 @@
     <header>
       <h1><a href="/">◊|settings/title|</a></h1>
       <nav>
-        ◊(for/list ([pagenode (in-list (pagetree->list (~a settings/project-root "index.ptree")))])
+        ◊(for/list ([pagenode (in-list (pagetree->list (~a settings/project-root "menu.ptree")))])
            (define title (select-from-metas 'title (~a settings/project-root pagenode)))
            (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
            (define active? (string-prefix? (~a here) path))
