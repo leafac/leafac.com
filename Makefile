@@ -11,7 +11,7 @@ clean:
 	raco pollen reset
 
 deploy: clean
-	raco pollen render --recursive $(CURDIR)/source && \
+	raco pollen render --recursive $(CURDIR)/source/ && \
 	temporary_directory=$$(mktemp -d) && \
 	raco pollen publish $(CURDIR)/source $$temporary_directory && \
 	rsync -av --delete $$temporary_directory/ leafac.com:leafac.com/websites/www.leafac.com/ && \
