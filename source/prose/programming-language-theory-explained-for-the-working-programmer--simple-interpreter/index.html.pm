@@ -5,8 +5,6 @@
 
 ◊margin-note{This article assumes knowledge of the ◊reference["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{essential features of programming languages}. Experience with functional programming languages in general and ◊reference["https://racket-lang.org/"]{Racket} in particular are helpful, but not required. Refer to Racket’s ◊reference["https://docs.racket-lang.org/quick/index.html"]{quick introduction} for more.}
 
-◊margin-note{◊reference["https://git.leafac.com/www.leafac.com/plain/source/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter/programming-language-theory-explained-for-the-working-programmer--simple-interpreter.rkt"]{Here} is the code for this entire article.}
-
 Interpreters are programs for running programs. They receive a program as input, evaluate it, and output the results. How does this process work? In this article we start to address this question by writing a simple interpreter. The goal is to explore the underlying principles of computation and to understand how programming languages support ◊emphasis{communication}, which is their essential feature. We do not to produce a realistic interpreter for an industrial-grade language, but we introduce ideas and techniques that are generally applicable to everyday problem solving. In subsequent articles we will explore the question further, developing variants of the simple interpreter from this article. We avoid the mathematical notation and jargon usually associated with this kind of topic, driving the exposition by working code. So this article is approachable to all programmers.
 
 ◊section['language]{Language}
