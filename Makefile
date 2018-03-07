@@ -8,6 +8,7 @@ install:
 	raco pkg install --name www-leafac-com $(CURDIR)
 
 clean:
+	git clean -fX
 	raco pollen reset
 
 deploy: clean
