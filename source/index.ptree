@@ -1,0 +1,45 @@
+#lang pollen
+
+index.html
+about/index.html
+contact/index.html
+research/index.html
+◊prose/index.html{
+  prose/playing-the-game-with-plt-redex/index.html
+  prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages/index.html
+  prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter/index.html
+  prose/email-migration/index.html
+}
+software/index.html
+◊music/index.html{
+  music/my-first-robot/index.html
+  music/agora-ha-algo-a-temer/index.html
+  music/o-fim-da-tempestade/index.html
+  music/criatividade/index.html
+  music/united/index.html
+}
+◊cooking/index.html{
+  cooking/no-knead-bread/index.html
+  cooking/no-knead-whole-wheat-bread/index.html
+  cooking/beer-bread/index.html
+  cooking/thin-pizza-crust/index.html
+  cooking/medium-pizza-crust/index.html
+  cooking/thick-pizza-crust/index.html
+  cooking/whole-wheat-pizza-crust/index.html
+  cooking/calzone/index.html
+  cooking/chocolate-chip-cookie/index.html
+  cooking/brownie/index.html
+  cooking/banana-muffin/index.html
+  cooking/pancake/index.html
+  cooking/pretzel/index.html
+  cooking/bolinho-de-chuva/index.html
+  cooking/banoffee-pie/index.html
+  cooking/strawberry-chocolate-mousse-pie/index.html
+  cooking/chocolate-chia-seed-pudding/index.html
+  cooking/rice/index.html
+}
+feed.atom
+license/index.html
+colophon/index.html
+404.html
+500.html
