@@ -1,24 +1,28 @@
-.PHONY: server install clean build deploy documentation documentation/deploy
+.PHONY: default install server build clean deploy documentation documentation/deploy
 
-server:
-	raco pollen start source/
+source = $(CURDIR)/source/
+target = $(CURDIR)/build/
+
+default: server
 
 install:
 	pip install pygments
 	raco pkg install --name www-leafac-com $(CURDIR)
 
+server:
+	raco pollen start $(source)
+
+build:
+	raco pollen render $(source)
+	raco pollen publish $(source) $(target)
+
 clean:
 	git clean -fX
 	raco pollen reset
 
-build:
-	raco pollen render $(CURDIR)/source/
-
 deploy: clean build
-	temporary_directory=$$(mktemp -d) && \
-	raco pollen publish $(CURDIR)/source $$temporary_directory && \
-	rsync -av --delete $$temporary_directory/ leafac.com:leafac.com/websites/www.leafac.com/ && \
-	rsync -av $$temporary_directory/software/index.html leafac.com:leafac.com/websites/software/index.html
+	rsync -av --delete $(target) leafac.com:leafac.com/websites/www.leafac.com/ && \
+	rsync -av $(target)software/index.html leafac.com:leafac.com/websites/software/index.html
 
 ################################################################################
 

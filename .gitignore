@@ -10,3 +10,4 @@ compiled/
 /source/**/*.css
 /source/**/*.atom
 pollen-cache/
+/build/

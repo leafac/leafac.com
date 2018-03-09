@@ -2,6 +2,6 @@
 
 ◊define-meta[title]{404 Not Found}
 
-◊margin-note{◊figure/svg[◊~a{◊(current-project-root)404.svg}]}
+◊margin-note{◊figure/svg{404.svg}}
 
 If you think there should be a page here, please report it to ◊email[◊settings/email].

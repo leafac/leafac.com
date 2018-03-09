@@ -23,23 +23,7 @@
 ◊(apply
   list/unordered
   #:class "recipes"
-  (for/list ([pagenode (in-list '("cooking/no-knead-bread/index.html"
-                                  "cooking/no-knead-whole-wheat-bread/index.html"
-                                  "cooking/beer-bread/index.html"
-                                  "cooking/thin-pizza-crust/index.html"
-                                  "cooking/medium-pizza-crust/index.html"
-                                  "cooking/thick-pizza-crust/index.html"
-                                  "cooking/whole-wheat-pizza-crust/index.html"
-                                  "cooking/calzone/index.html"
-                                  "cooking/chocolate-chip-cookie/index.html"
-                                  "cooking/brownie/index.html"
-                                  "cooking/banana-muffin/index.html"
-                                  "cooking/pancake/index.html"
-                                  "cooking/pretzel/index.html"
-                                  "cooking/bolinho-de-chuva/index.html"
-                                  "cooking/banoffee-pie/index.html"
-                                  "cooking/strawberry-chocolate-mousse-pie/index.html"
-                                  "cooking/chocolate-chia-seed-pudding/index.html"
-                                  "cooking/rice/index.html"))])
-    (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
+  (for/list ([pagenode (in-list (children 'cooking/index.html
+                                          (~a (current-project-root) 'index.ptree)))])
+    (define title (select-from-metas 'title pagenode))
     (list/unordered/item #:class "recipe" (reference (~a "/" pagenode) title))))
