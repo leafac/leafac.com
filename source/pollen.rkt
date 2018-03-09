@@ -1,7 +1,7 @@
 #lang pollen/mode racket
 (require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
          racket/string racket/format racket/function racket/list racket/dict racket/match
-         racket/file file/sha1 racket/runtime-path
+         racket/file file/sha1
          libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
          pollen/core pollen/file pollen/decode pollen/tag pollen/setup txexpr)
@@ -16,12 +16,11 @@
 ;; ---------------------------------------------------------------------------------------------------
 ;; SETTINGS
 
-(define              settings/title        ◊~a{Leandro Facchinetti})
-(define              settings/description  ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
-(define              settings/author       ◊~a{Leandro Facchinetti})
-(define              settings/email        ◊~a{me@leafac.com})
-(define              settings/url          ◊~a{https://www.leafac.com})
-(define-runtime-path settings/project-root "./")
+(define settings/title       ◊~a{Leandro Facchinetti})
+(define settings/description ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
+(define settings/author      ◊~a{Leandro Facchinetti})
+(define settings/email       ◊~a{me@leafac.com})
+(define settings/url         ◊~a{https://www.leafac.com})
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TEMPLATE

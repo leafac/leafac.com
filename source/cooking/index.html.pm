@@ -41,5 +41,5 @@
                                   "cooking/strawberry-chocolate-mousse-pie/index.html"
                                   "cooking/chocolate-chia-seed-pudding/index.html"
                                   "cooking/rice/index.html"))])
-    (define title (select-from-metas 'title (~a settings/project-root pagenode)))
+    (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
     (list/unordered/item #:class "recipe" (reference (~a "/" pagenode) title))))
