@@ -14,9 +14,7 @@
     <meta name="description" content="◊|settings/description|">
     <link rel="stylesheet" href="/styles.css" type="text/css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <link rel="alternate" href="/feed.atom"
-          title="◊(first (select-from-doc 'title (~a (current-project-root) "feed.atom.pm")))"
-          type="application/atom+xml">
+    <link rel="alternate" href="/feed.atom" title="◊(first (select-from-doc 'title 'feed.atom))" type="application/atom+xml">
     <title>◊when/splice[title]{◊|title| · }◊|settings/title|</title>
     ◊(->html (append-map get-elements head))
   </head>
@@ -24,11 +22,12 @@
     <header>
       <h1><a href="/">◊|settings/title|</a></h1>
       <nav>
-        ◊(for/list ([pagenode (in-list (pagetree->list (~a (current-project-root) "menu.ptree")))])
-           (define title (select-from-metas 'title (~a (current-project-root) pagenode)))
-           (define path (regexp-replace #rx"index\\.html$" (~a pagenode) ""))
-           (define active? (string-prefix? (~a here) path))
-           ◊@{<a href="/◊|path|" ◊when/splice[active?]{class="active"}>◊|title|</a>})
+        ◊(for/list ([pagenode (in-list (children 'pagetree-root))])
+           (define title (select-from-metas 'title pagenode))
+           (define activated-pagenodes
+             `(,pagenode ,@(flatten (or (select* pagenode (current-pagetree)) empty))))
+           (define active? (member here activated-pagenodes))
+           ◊@{<a href="/◊|pagenode|" ◊when/splice[active?]{class="active"}>◊|title|</a>})
       </nav>
     </header>
     <main>
