@@ -17,8 +17,7 @@ build:
 	raco pollen publish $(source) $(target)
 
 clean:
-	git clean -fX
-	raco pollen reset
+	git clean -fdX
 
 deploy: clean build
 	rsync -av --delete $(target) leafac.com:leafac.com/websites/www.leafac.com/ && \
