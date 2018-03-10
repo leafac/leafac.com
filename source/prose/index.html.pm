@@ -2,15 +2,8 @@
 
 ◊define-meta[title]{Prose}
 
-◊subsection['racket]{Racket}
-
-◊reference["/prose/playing-the-game-with-plt-redex"]{Playing the Game with PLT Redex}
-
-◊subsection['programming-language-theory-explained-for-the-working-programmer]{Programming-Language Theory Explained for the Working Programmer}
-
-◊reference["/prose/programming-language-theory-explained-for-the-working-programmer--principles-of-programming-languages"]{Principles of Programming Languages}
-◊reference["/prose/programming-language-theory-explained-for-the-working-programmer--simple-interpreter"]{Simple Interpreter}
-
-◊subsection['system-administration]{System Administration}
-
-◊reference["/prose/email-migration"]{Email Migration: The Ultimate Solution to a Ridiculous Problem}
+◊(apply
+  @
+  (for/list ([pagenode (children 'prose/index.html (~a (current-project-root) "index.ptree"))])
+    (define title (select-from-metas 'title pagenode))
+    ◊subsection[title]{◊reference[(~a "/" pagenode)]{◊|title|}}))
