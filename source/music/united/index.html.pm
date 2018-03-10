@@ -3,6 +3,7 @@
 ◊define-meta[title]{United}
 ◊define-meta[date]{2017-05-04}
 
+◊audio{https://files.leafac.com/music/united/united.mp3}
 ◊reference["https://files.leafac.com/music/united/united.mp3"]{MP3} · ◊reference["https://files.leafac.com/music/united/united.zip"]{Source}
 
 ◊lyrics{

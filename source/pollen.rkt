@@ -168,7 +168,9 @@
 (define (placeholder . elements)
   (txexpr 'span '((class "placeholder")) `("<" ,@elements ">")))
 (define (menu-option . elements)
-  ((default-tag-function 'span #:class "menu-option") (add-between elements " > ")))
+  (txexpr 'span '((class "menu-option")) (add-between elements " > ")))
+(define (audio path . elements)
+  (txexpr 'audio `((controls "") (src ,path) (preload "metadata")) elements))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; COOKING
