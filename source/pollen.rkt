@@ -155,6 +155,7 @@
 ;; INLINE
 
 (define emphasis (default-tag-function 'em))
+(define deemphasis (default-tag-function 'small))
 (define foreign emphasis)
 (define technical-term emphasis)
 (define informal emphasis)

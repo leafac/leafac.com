@@ -352,6 +352,11 @@ a:hover {
 /****************************************************************************************************/
 /* INLINE */
 
+small, small a {
+  font-size: ◊|font-size/small|;
+  color: ◊|color/secondary-content|;
+}
+
 .fraction--slash {
   margin: ◊|space/none| -◊|space/extra-extra-small|;
 }

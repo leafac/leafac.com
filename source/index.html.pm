@@ -21,4 +21,4 @@ Follow my productions on the ◊reference["/feed.atom"]{Atom feed}. ◊reference
       entry)
     (define key (substring id (string-length "urn:uuid:")))
     (define entry/time (substring updated 0 (string-length "yyyy-MM-dd")))
-    ◊@{◊subsection[key]{◊reference[href]{◊|title|◊time[#:datetime updated]{ · ◊entry/time}}}◊(apply @ summary)}))
+    ◊@{◊subsection[key]{◊reference[href]{◊|title|◊deemphasis{ · ◊time{◊entry/time}}}}◊(apply @ summary)}))
