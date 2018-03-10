@@ -2,22 +2,18 @@
 
 ◊define-meta[title]{Music}
 
-◊subsection['my-first-robot]{◊reference["/music/my-first-robot"]{My First Robot}}
+◊style{
+  .music {
+    line-height: ◊|line-height/large|;
+  }
 
-◊reference["https://files.leafac.com/music/my-first-robot/my-first-robot.m4a"]{MP3} ◊reference["https://files.leafac.com/music/my-first-robot/my-first-robot.zip"]{Source}
+  .music a {
+    text-decoration: none;
+  }
+}
 
-◊subsection['agora-ha-algo-a-temer]{◊reference["/music/agora-ha-algo-a-temer"]{Agora há Algo a Temer}}
-
-◊reference["https://files.leafac.com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.mp3"]{MP3} ◊reference["https://files.leafac.com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.zip"]{Source}
-
-◊subsection['o-fim-da-tempestade]{◊reference["/music/o-fim-da-tempestade"]{O Fim da Tempestade}}
-
-◊reference["https://files.leafac.com/music/o-fim-da-tempestade/o-fim-da-tempestade.mp3"]{MP3} ◊reference["https://files.leafac.com/music/o-fim-da-tempestade/o-fim-da-tempestade.zip"]{Source}
-
-◊subsection['criatividade]{◊reference["/music/criatividade"]{Criatividade}}
-
-◊reference["https://files.leafac.com/music/criatividade/criatividade.mp3"]{MP3} ◊reference["https://files.leafac.com/music/criatividade/criatividade.zip"]{Source}
-
-◊subsection['united]{◊reference["/music/united"]{United}}
-
-◊reference["https://files.leafac.com/music/united/united.mp3"]{MP3} ◊reference["https://files.leafac.com/music/united/united.zip"]{Source}
+◊(apply
+  div #:class "music"
+  (for/list ([pagenode (children 'music/index.html (~a (current-project-root) 'index.ptree))])
+    (define title (select-from-metas 'title pagenode))
+    ◊@{◊reference[(~a "/" pagenode)]{◊|title|}◊deemphasis{ · ◊(apply @ (select-from-doc 'p pagenode))}◊(new-line)}))
