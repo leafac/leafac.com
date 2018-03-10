@@ -9,11 +9,11 @@
     line-height: ◊|line-height/large|;
   }
 
-  .recipe {
+  .recipes > * {
     list-style: none;
   }
 
-  .recipe a {
+  .recipes > * a {
     text-decoration: none;
   }
 }
@@ -26,4 +26,4 @@
   (for/list ([pagenode (in-list (children 'cooking/index.html
                                           (~a (current-project-root) 'index.ptree)))])
     (define title (select-from-metas 'title pagenode))
-    (list/unordered/item #:class "recipe" (reference (~a "/" pagenode) title))))
+    (list/unordered/item (reference (~a "/" pagenode) title))))
