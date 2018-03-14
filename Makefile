@@ -10,11 +10,11 @@ install:
 	raco pkg install --name www-leafac-com $(CURDIR)
 
 server:
-	raco pollen start $(source)
+	cd $(source) && raco pollen start
 
 build:
 	cd $(source) && raco pollen render index.ptree auxiliary.ptree
-	raco pollen publish $(source) $(target)
+	cd $(source) && raco pollen publish . $(target)
 
 clean:
 	git clean -fdX
