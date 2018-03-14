@@ -1,13 +1,15 @@
 #lang pollen/mode racket/base
-(require racket/string racket/format racket/list racket/match gregor gregor/period xml txexpr
+(require racket/string racket/format racket/list racket/match racket/file
+         gregor gregor/period xml txexpr
          pollen/core pollen/tag pollen/setup)
 
 (provide (all-defined-out)
          (all-from-out
-          racket/string racket/format racket/list racket/match gregor gregor/period xml txexpr
+          racket/string racket/format racket/list racket/match racket/file
+          gregor gregor/period xml txexpr
           pollen/core pollen/tag pollen/setup))
 
-(require racket/system racket/port racket/file file/sha1 libuuid pollen/decode)
+(require racket/system racket/port file/sha1 libuuid pollen/decode)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; SETTINGS

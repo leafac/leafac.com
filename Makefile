@@ -13,7 +13,7 @@ server:
 	raco pollen start $(source)
 
 build:
-	raco pollen render $(source)
+	cd $(source) && raco pollen render index.ptree auxiliary.ptree
 	raco pollen publish $(source) $(target)
 
 clean:
