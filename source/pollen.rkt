@@ -1,15 +1,13 @@
-#lang pollen/mode racket
-(require racket/string racket/format racket/function racket/list racket/dict racket/match
-         racket/file file/sha1
-         libuuid gregor gregor/period sugar xml
-         pollen/core pollen/file pollen/decode pollen/tag pollen/setup txexpr)
+#lang pollen/mode racket/base
+(require racket/string racket/format racket/list racket/match gregor gregor/period xml txexpr
+         pollen/core pollen/tag pollen/setup)
 
 (provide (all-defined-out)
          (all-from-out
-          racket/string racket/format racket/function racket/list racket/dict racket/match
-          racket/file file/sha1
-          libuuid gregor gregor/period sugar xml
-          pollen/core pollen/file pollen/decode pollen/tag pollen/setup txexpr))
+          racket/string racket/format racket/list racket/match gregor gregor/period xml txexpr
+          pollen/core pollen/tag pollen/setup))
+
+(require racket/system racket/port racket/file file/sha1 libuuid pollen/decode)
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; SETTINGS
@@ -187,10 +185,10 @@
             (for/list ([group (in-list group)]
                        [ingredients (in-list ingredients)])
               (define table/body (tabularize ingredients))
-              (dict-set! ingredients/collected group table/body)
+              (hash-set! ingredients/collected group table/body)
               table/body))]
     [`(,ingredients ...) (table (tabularize ingredients))]))
-(define (ingredients/repeat group) (table (dict-ref ingredients/collected group)))
+(define (ingredients/repeat group) (table (hash-ref ingredients/collected group)))
 (define baking/collected (box (void)))
 (define (baking . elements)
   (match elements
