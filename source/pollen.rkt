@@ -1,6 +1,5 @@
 #lang pollen/mode racket
-(require (for-syntax racket/base syntax/parse pollen/setup racket/dict racket/list racket/syntax)
-         racket/string racket/format racket/function racket/list racket/dict racket/match
+(require racket/string racket/format racket/function racket/list racket/dict racket/match
          racket/file file/sha1
          libuuid gregor gregor/period sugar xml net/base64
          (except-in syntax/parse attribute) syntax/parse/define
