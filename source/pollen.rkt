@@ -1,8 +1,7 @@
 #lang pollen/mode racket
 (require racket/string racket/format racket/function racket/list racket/dict racket/match
          racket/file file/sha1
-         libuuid gregor gregor/period sugar xml net/base64
-         (except-in syntax/parse attribute) syntax/parse/define
+         libuuid gregor gregor/period sugar xml
          pollen/core pollen/file pollen/decode pollen/tag pollen/setup txexpr)
 
 (provide (all-defined-out)
