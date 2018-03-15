@@ -15,7 +15,7 @@
 ;; SETTINGS
 
 (define settings/title       ◊~a{Leandro Facchinetti})
-(define settings/description ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
+(define settings/description ◊~a{Leandro Facchinetti is a writer of prose, software and songs. He is a Ph.D. candidate in Computer Science at the Programming Languages Laboratory, at the Johns Hopkins University. His interests are computer programming, music, books, typography, education, minimalism and veganism.})
 (define settings/author      ◊~a{Leandro Facchinetti})
 (define settings/email       ◊~a{me@leafac.com})
 (define settings/url         ◊~a{https://www.leafac.com})
