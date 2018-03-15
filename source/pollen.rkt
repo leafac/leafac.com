@@ -363,6 +363,7 @@
 
 (define insertion
   ◊~a{
+ display: block;
  box-sizing: border-box;
  width: 100%;
  margin: ◊|space/small| ◊|space/none|;
