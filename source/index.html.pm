@@ -2,9 +2,7 @@
 
 ◊margin-note{◊figure/image{/avatar.png}}
 
-I am a writer of ◊reference["/prose"]{prose}, ◊reference["/software"]{software} and ◊reference["/music"]{music}. I am a Ph.D. candidate in Computer Science at the ◊reference["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊reference["https://jhu.edu"]{Johns Hopkins University}. I ◊reference["/research"]{research} a program analysis technique called ◊reference["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}. Beyond research, I am interested in computer programming, music, books, typography, education, minimalism and ◊reference["/cooking"]{veganism}. I live in Baltimore, Maryland, United States.
-
-Follow my productions with the ◊reference["/feed.atom"]{Atom feed}. ◊reference["/contact"]{Contact me} on ◊email[◊settings/email].
+I am a writer of ◊reference["/prose"]{prose}, ◊reference["/software"]{software} and ◊reference["/music"]{music}. I am a Ph.D. candidate in Computer Science at the ◊reference["https://pl.cs.jhu.edu"]{Programming Languages Laboratory}, at the ◊reference["https://jhu.edu"]{Johns Hopkins University}. I ◊reference["/research"]{research} a program analysis technique called ◊reference["http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/"]{Demand-Driven Program Analysis}. Beyond research, I am interested in computer programming, music, books, typography, education, minimalism and ◊reference["/cooking"]{veganism}. I live in Baltimore, Maryland, United States. Follow my productions with the ◊reference["/feed.atom"]{Atom feed} and ◊reference["/contact"]{contact me} on ◊email[◊settings/email].
 
 ◊section['news]{News}
 
