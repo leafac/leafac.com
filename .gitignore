@@ -9,5 +9,4 @@ compiled/
 /source/**/*.html
 /source/**/*.css
 /source/**/*.atom
-pollen-cache/
 /build/
