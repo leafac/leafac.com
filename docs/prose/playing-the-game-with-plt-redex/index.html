@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Leandro Facchinetti">
+    <meta name="description" content="Leandro Facchinetti writes prose, software and music. He is a Ph.D. candidate in Computer Science at the Programming Languages Laboratory, at the Johns Hopkins University, advised by Dr. Scott Smith. Beyond research, his interests are writing, computer programming, music, typography, education, minimalism and veganism.">
+    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" href="/feed.atom" title="Leandro Facchinetti" type="application/atom+xml">
+    <title>Playing the Game with PLT Redex · Leandro Facchinetti</title>
+
+  </head>
+  <body>
+    <header>
+      <h1><a href="/">Leandro Facchinetti</a></h1>
+      <nav>
+        <a href="/about/index.html" >About</a><a href="/contact/index.html" >Contact</a><a href="/research/index.html" >Research</a><a href="/prose/index.html" class="active">Prose</a><a href="/software/index.html" >Software</a><a href="/music/index.html" >Music</a><a href="/cooking/index.html" >Cooking</a><a href="/feed.atom" >Atom Feed</a><a href="/license/index.html" >License</a><a href="/colophon/index.html" >Colophon</a>
+      </nav>
+    </header>
+    <main>
+      <header>
+        <h2>Playing the Game with PLT Redex</h2>
+        <time>2017-03-12</time>
+      </header>
+      <aside>This article assumes prior knowledge on programming in general and some exposure to functional programming in particular—specially immutable data structures and pattern matching. Racket experience is helpful, but not mandatory.</aside><aside><figure><p><svg height="40" id="svg2" inkscape:version="0.92.2 5c3e80d, 2017-08-06" sodipodi:docname="peg.svg" version="1.1" viewBox="0 0 22.299999 40" width="22.299999" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview bordercolor="#666666" borderopacity="1" gridtolerance="10" guidetolerance="10" id="namedview7" inkscape:current-layer="svg2" inkscape:cx="38.695147" inkscape:cy="-24.874997" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="719" inkscape:window-maximized="0" inkscape:window-width="1366" inkscape:window-x="0" inkscape:window-y="0" inkscape:zoom="1" objecttolerance="10" pagecolor="#ffffff" showgrid="false"></sodipodi:namedview>
+  <defs id="defs4"></defs>
+  <metadata id="metadata7"><rdf:RDF><cc:Work rdf:about=""><dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>
+        <dc:title></dc:title></cc:Work></rdf:RDF></metadata>
+  <path d="m 11.285716,24.482146 c -0.969868,0 -1.9176911,-0.110221 -2.8214303,-0.330638 v 14.437781 c 0,0.771485 0.6392303,1.410713 1.4107149,1.410713 H 12.69643 c 0.771485,0 1.410715,-0.639228 1.410715,-1.410713 V 24.151508 c -0.903739,0.220425 -1.851564,0.330638 -2.821429,0.330638 z m 0,-23.982146 C 5.0477126,0.5 0,5.5477126 0,11.785716 c 0,6.238002 5.0477126,11.285715 11.285716,11.285715 6.238001,0 11.285714,-5.047713 11.285714,-11.285715 C 22.571431,5.5477126 17.523717,0.5 11.285716,0.5 Z m 0,4.9375004 c -3.5047444,0 -6.3482156,2.8434712 -6.3482156,6.3482156 0,0.396763 -0.3085931,0.705356 -0.7053565,0.705356 -0.3967632,0 -0.7053584,-0.308593 -0.7053584,-0.705356 0,-4.276229 3.4827015,-7.7589305 7.7589305,-7.7589305 0.396763,0 0.705356,0.3085952 0.705356,0.7053583 0,0.3967635 -0.308593,0.7053566 -0.705356,0.7053566 z" id="path4140" inkscape:connector-curvature="0" style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:18.75px;line-height:1000%;font-family:FontAwesome;-inkscape-font-specification:'FontAwesome, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#657b83;fill-opacity:1;stroke:none;stroke-width:6.86666632px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"></path></svg></p><figcaption>A peg. Solitary.</figcaption></figure></aside><p><a href="https://redex.racket-lang.org/">PLT Redex</a> is a <a href="https://racket-lang.org/">Racket</a> library for semantics engineering. For people trained in programming-language theory, it is a lightweight tool to work with languages, operational semantics, type systems and more. But that is not how we will use it in this article. At its core, PLT Redex is a functional programming language with sophisticated pattern matching and visualization tools. And we will abuse them to play a game of <a href="https://en.wikipedia.org/wiki/Peg_solitaire">Peg Solitaire</a>.</p><p>Why? Mainly because it is amusing to repurpose tools for tasks clearly beyond their intended design. Also, for those new to PLT Redex, this might be a gentler introduction, avoiding the Greek letters and the jargon. Along the way, we will cover interesting topics including an alternative model of computation—non-deterministic computation—and goal-directed search.</p><h3><span id="rules-of-the-game"></span>Rules of the Game<span class="mark"><a href="#rules-of-the-game">§</a></span></h3><aside>This section explains the rules of Peg Solitaire. If you already know them, <a href="#data-structures">skip ahead</a>.</aside><p>Peg Solitaire is a 1-player board game. The initial arrangement of the board is the following:</p><aside>There are other possible initial arrangements. We are considering the most common American variation.</aside><div class="code-block"><pre>    ● ● ●
+    ● ● ●
+● ● ● ● ● ● ●
+● ● ● ○ ● ● ●
+● ● ● ● ● ● ●
+    ● ● ●
+    ● ● ●</pre></div><p>In the figures representing the board, ○ stands for holes and ● for holes containing pegs.</p><p>Pegs can jump over their immediate neighbors on the North, East, South and West—not on the diagonals—as long as they land on an empty hole. The neighbor peg that was jumped over is removed from the board. For example, the following is an allowed move:</p><div class="code-block"><pre>    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● <span class="k">● ● ○</span> ● ● ●  ⇒  ● <span class="k">○ ○ ●</span> ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●</pre></div><p>In this move, a peg jumped over its immediate neighbor on the East.</p><p>The following is an example of an <em>invalid</em> move:</p><div class="code-block"><pre>    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● <span class="x">○ ○ ● ●</span> ● ●  ⇒  ● <span class="x">● ○ ○ ○</span> ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●</pre></div><p>The problem with this move is that the peg must land on the empty hole right next to the neighbor over which it jumped.</p><p>The goal of the game is to leave a single peg on the board. The following is an example of a <em>lost</em> game:</p><div class="code-block"><pre>    ○ ○ ○
+    ○ ○ ○
+○ ○ ○ ● ○ ○ ○
+○ ○ ○ ○ ○ ○ ○
+○ ○ ○ ○ ○ ● ○
+    ○ ○ ○
+    ○ ○ ○</pre></div><p>There are still two pegs remaining on the board, but they are not neighbors, so there are no further moves to make.</p><h3><span id="data-structures"></span>Data Structures<span class="mark"><a href="#data-structures">§</a></span></h3><p>We need data structures to represent the pegs and the board. Normally one would use enumerations, lists, records, objects and so forth, but we use a <em>language</em> as our data structure definition. Terms in the language will represent board configurations. PLT Redex lets us define a grammar for a language in <a href="https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form">BNF</a> form:</p><aside>We are using Racket’s support for Unicode identifiers.</aside><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">define-language</span> <span class="n">peg-solitaire</span>
+  <span class="p">[</span><span class="n">position</span> <span class="n">::=</span> <span class="n">█</span> <span class="n">○</span> <span class="n">●</span><span class="p">]</span>
+  <span class="p">[</span><span class="n">board</span> <span class="n">::=</span> <span class="p">([</span><span class="n">position</span> <span class="k">...</span><span class="p">]</span> <span class="k">...</span><span class="p">)])</span>
+</pre></div></div><aside>The <code>position</code> data structure is analogous to an enumeration.</aside><p>The code above defines two data structures. The first, <code>position</code>, represents a position on the board. It can be one of following: <code>█</code> is an uninitialized position that only serves as padding and is not really part of the board; <code>○</code> is an empty position; and <code>●</code> is a position containing a peg.</p><aside>In Racket, different kinds of brackets—<code>()</code>, <code>[]</code> and <code>{}</code>—mean the same. The only constraint is that open and close brackets match; <code>(]</code> is invalid. Which bracket to use is a matter of readability.</aside><aside>The ellipsis (<code>...</code>) in PLT Redex are similar to the Kleene star (<code>*</code>) in regular expressions.</aside><p>The second data structure is the <code>board</code>, represented as a matrix of <code>position</code>s, or, more specifically, a list of lists of <code>position</code>s. In PLT Redex, the ellipsis (<code>...</code>) means “the previous element repeated any number of times.” So <code>[position ...]</code> means a list of <code>position</code>s, and <code>([position ...] ...)</code> means a list of lists of <code>position</code>s.</p><aside><p>Even ill-formed boards like the following are valid terms in this data structure definition:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">([</span><span class="n">●</span><span class="p">])</span>
+
+<span class="p">([</span><span class="n">●</span> <span class="n">○</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">○</span> <span class="n">█</span> <span class="n">●</span><span class="p">])</span>
+</pre></div></div><p>But we will not to consider them.</p></aside><p>Examples of terms in the language (boards) are:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">([</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">○</span> <span class="n">○</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">])</span>
+
+<span class="p">([</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">○</span> <span class="n">○</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+ <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">])</span>
+</pre></div></div><p>We define the configuration for the initial Peg Solitaire board as a term in the language:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">define-term</span> <span class="n">initial-board</span>
+  <span class="p">([</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]))</span>
+</pre></div></div><h3><span id="moves"></span>Moves<span class="mark"><a href="#moves">§</a></span></h3><p>We need to specify how pegs can to move on the board. We do this by defining a function that encodes the rules of Peg Solitaire; it receives a board as an argument and returns a set of new boards in which each board has a distinct configuration reachable in one move. Each of the rules that compose this function has the form “if the board looks this way now, then this is what the board can look like after one move.” The following is an example of a rule:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+      <span class="k">...</span>
+      <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+      <span class="n">any_4</span>
+      <span class="k">...</span><span class="p">)</span>
+     <span class="p">(</span><span class="n">any_1</span>
+      <span class="k">...</span>
+      <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">○</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+      <span class="n">any_4</span>
+      <span class="k">...</span><span class="p">)</span>
+     <span class="n">→</span><span class="p">)</span>
+</pre></div></div><aside>The code closely resembles the <a href="#rules-of-the-game">game specification</a>.</aside><p>The rule above starts with <code>--&gt;</code> to indicate that it is a transformation. Then it states that, if <code>● ● ○</code> exists anywhere on the board, then the peg on the left can jump to the right—over the peg in the middle—resulting in <code>○ ○ ●</code>. The occurrences of <code>any_*</code> are just preserving the rest of the board unaffected. Finally, the rule is given the name <code>→</code>.</p><p>The following is the function with all the rules in the game:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">define</span> <span class="n">move</span>
+  <span class="p">(</span><span class="n">reduction-relation</span>
+   <span class="n">peg-solitaire</span>
+   <span class="kd">#:domain</span> <span class="n">board</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">○</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">→</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">○</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">←</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="n">..._1</span> <span class="n">○</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="k">...</span> <span class="n">●</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">↓</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="n">..._1</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">↑</span><span class="p">)))</span>
+</pre></div></div><p>The function above starts by stating that it works over the language <code>peg-solitaire</code>, more specifically over the <code>board</code>s in that language. Then follow the rules as discussed above. The only construct not explained thus far are the named ellipsis (<code>..._1</code>); they are constrained to expand to the same number of elements throughout the rule. This guarantees that the relevant pegs are aligned in the same column.</p><p>The function <code>move</code> is <em>not</em> performing regular pattern matching as found in other functional programming languages. It is not following only the first pattern that matches, but all the patterns that match, in parallel:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="nb">&gt;</span> <span class="p">(</span><span class="n">apply-reduction-relation</span> <span class="n">move</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">))</span>
+<span class="o">&#39;</span><span class="p">(((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))</span>
+  <span class="p">((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))</span>
+  <span class="p">((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))</span>
+  <span class="p">((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+   <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)))</span>
+</pre></div></div><aside>In accurate mathematical terms, a reduction relation is not a function, but a general relation, because of this non-deterministic behavior. But thinking of them as functions that execute in different universes is a good approximation.</aside><p>One way of thinking about <code>move</code> is that it is a function returning multiple values—or, equivalently, a set of values. Another way of thinking about <code>move</code> is that it is a function living in multiple universes. When multiple patterns match the input, functions have to decide which path (or paths) to take. In most programming languages featuring pattern matching, the first pattern that matches takes precedence over the rest, but <code>move</code> explores all of them by creating multiple universes and following one path in each. This model of computation is called <em>non-deterministic computation</em> and PLT Redex gives the name <em>reduction relations</em> to these super-powered functions capable of non-deterministic computations.</p><h3><span id="game-play"></span>Game Play<span class="mark"><a href="#game-play">§</a></span></h3><p>We can use the visualization tools that come with PLT Redex to play Peg Solitaire. These tools are designed for interactive exploration of evaluation rules; one can expand certain paths and backtrack, while seeing the differences highlighted. The following demonstrates game play:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="nb">&gt;</span> <span class="p">(</span><span class="n">stepper</span> <span class="n">move</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">))</span>
+</pre></div></div><figure><p><img src="images/game-play.gif" alt="A sample game play."/></p><figcaption>A sample game play.</figcaption></figure><h3><span id="winning"></span>Winning<span class="mark"><a href="#winning">§</a></span></h3><p>Now that we can play Peg Solitaire, a natural question is: can we use what we have to compute a solution to the game? We can use another visualization tool from PLT Redex to understand what the search for an answer would look like:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="nb">&gt;</span> <span class="p">(</span><span class="n">traces</span> <span class="n">move</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">))</span>
+</pre></div></div><figure><p><img src="images/search-space.gif" alt="The search space."/></p><figcaption>The search space.</figcaption></figure><p>Starting with the initial board—on the top left—we repeatedly follow every possible move. The result is a graph of boards which we can traverse looking for a board in the winning state, with a single peg left. The path in the graph from the initial board to the winning board is the sequence of moves to win the game.</p><p>First, we encode the definition of a winning board:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">winning?</span> <span class="n">board</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">pegs-left-on-board</span>
+    <span class="p">(</span><span class="nb">count</span> <span class="p">(</span><span class="nb">curry</span> <span class="nb">equal?</span> <span class="o">&#39;</span><span class="ss">●</span><span class="p">)</span> <span class="p">(</span><span class="nb">flatten</span> <span class="n">board</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">=</span> <span class="n">pegs-left-on-board</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div></div><aside>The function <code>curry</code> is performing <em>partial application</em>. The function <code>equal?</code> takes two arguments, so <code>curry</code> is storing the first argument—the symbol <code>●</code>—and yielding a function that takes the second argument for <code>equal?</code>. This function that <code>curry</code> yields is the predicate used for counting.</aside><p>This function works by flattening the board—turning the matrix (or list of lists) into a single long list—and counting the number of pegs. Then it checks if this count is equal to one.</p><p>Finally, we need a function that traverses the graph. We want not only to determine whether a solution exists, but also to keep track of the path we followed in the graph to reach the solution, which is the sequence of winning moves:</p><aside>There is no need to understand every detail of how <code>search-for-solution</code> works. It uses <a href="https://docs.racket-lang.org/guide/qq.html">quasiquoting</a> to build lists, <a href="https://docs.racket-lang.org/guide/match.html">pattern matching</a> to destruct them, and other Racket features beyond the scope of the article.</aside><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="n">board</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">step</span> <span class="n">board-with-move</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">match-define</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="k">_</span> <span class="o">,</span><span class="n">board</span><span class="p">)</span> <span class="n">board-with-move</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">next-boards-with-moves</span>
+      <span class="p">(</span><span class="n">apply-reduction-relation/tag-with-names</span> <span class="n">move</span> <span class="n">board</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">cond</span>
+      <span class="p">[(</span><span class="nb">empty?</span> <span class="n">next-boards-with-moves</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="n">winning?</span> <span class="n">board</span><span class="p">)</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="n">board-with-move</span><span class="p">))]</span>
+      <span class="p">[</span><span class="k">else</span>
+       <span class="p">(</span><span class="k">define</span> <span class="n">rest-of-solution</span>
+         <span class="p">(</span><span class="nb">ormap</span> <span class="n">step</span> <span class="n">next-boards-with-moves</span><span class="p">))</span>
+       <span class="p">(</span><span class="k">and</span> <span class="n">rest-of-solution</span>
+            <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="n">board-with-move</span> <span class="o">,@</span><span class="n">rest-of-solution</span><span class="p">))]))</span>
+  <span class="p">(</span><span class="n">step</span> <span class="o">`</span><span class="p">(</span><span class="s2">"initial"</span> <span class="o">,</span><span class="n">board</span><span class="p">)))</span>
+</pre></div></div><p>The function <code>search-for-solution</code> works by recursion, accumulating the path it has been through. Its most unusual feature is the use of <code>ormap</code>, which guarantees we stop the search after finding the first solution. The following are examples of using <code>search-for-solution</code> on sections of the board:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="nb">&gt;</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">●</span> <span class="n">●</span> <span class="n">○</span><span class="p">])))</span>
+<span class="o">&#39;</span><span class="p">((</span><span class="s2">"initial"</span> <span class="p">((</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span><span class="p">)))</span> <span class="p">(</span><span class="s2">"→"</span> <span class="p">((</span><span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span><span class="p">))))</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span><span class="p">])))</span>
+<span class="o">&#39;</span><span class="p">((</span><span class="s2">"initial"</span> <span class="p">((</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span><span class="p">)))</span> <span class="p">(</span><span class="s2">"→"</span> <span class="p">((</span><span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)))</span>
+                          <span class="p">(</span><span class="s2">"←"</span> <span class="p">((</span><span class="ss">○</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">○</span><span class="p">))))</span>
+<span class="nb">&gt;</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span><span class="p">])))</span>
+<span class="no">#f</span>
+</pre></div></div><aside>Returning false when no solutions are available is a common Racket pattern, inherited from its Scheme origins.</aside><p>The snippet above demonstrates how <code>search-for-solution</code> finds a solution and returns the whole path to reconstruct it. If the board is unsolvable, then <code>search-for-solution</code> returns <em>false</em> (<code>#f</code>).</p><p>Finally, we can call <code>search-for-solution</code> on the full board and solve Peg Solitaire:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="nb">&gt;</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">))</span>
+<span class="n">∞</span>
+</pre></div></div><p>Unfortunately, the above did not terminate after running for a whole night, when we interrupted the computation. This goes to show one limitation of PLT Redex (and other tools that are declarative and high-level): they are not always the fastest. They are designed for expressiveness, to aid on the design of programming languages, not to brute-force a search in a space containing millions of elements.</p><aside>Any tool, when bent enough, will break. It is important to know this limit so we understand what the tool can and cannot do.</aside><p>To find an answer within a reasonable time, we would need a <em>goal-directed search</em>. This means we would prune the search space using more of our knowledge on the game. For example, we know that the board is symmetric, so we could prune search paths which are mirror images of paths we already explored. But this would complicate the model, so we will not pursue this venue in this article. Instead, we will leave open the problem of finding a solution for Peg Solitaire using PLT Redex.</p><h3><span id="other-limitations"></span>Other Limitations<span class="mark"><a href="#other-limitations">§</a></span></h3><aside>For more on cellular automata, refer to <a href="https://wolframscience.com/">A New Kind of Science</a>, by Stephen Wolfram.</aside><p>Peg Solitaire is similar to simple cellular automata. Like cellular automata, Peg Solitaire is based on a grid of cells that can assume certain states and evolve over time. So, could PLT Redex model cellular automata as well? For example, could it model <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway’s Game of Life</a>, one of the most popular kinds of cellular automata?</p><aside>Simultaneous update of cells is not the same as non-deterministic computation, which we covered above. While reduction relations explore multiple possibilities for moves in Peg Solitaire, in the Game of Life each move consists of multiple updates to the board.</aside><p>Unfortunately, it would not be a straightforward task. Unlike Peg Solitaire, the evolution of the Game of Life does not happen one cell (or peg) at a time. Instead, on every tick of the clock, all the cells on the board are updated simultaneously, in parallel. PLT Redex does not support this.</p><p>There are two ways to work around this limitation. The first is to break apart the update of the board in multiple steps. The data structures (language) would encode the notion of <em>current cell</em> and updates would occur only to the current cell. Then the neighbor of the current cell would be elected the new current cell. A single step in the evolution of the Game of Life would be complete when the current cell would have swept the whole board. Implementing this is feasible, though it is not as direct as the implementation of Peg Solitaire, which reads similar to the specification of the game.</p><p>The second way to implement the Game of Life in PLT Redex is to cheat. Languages and functions in PLT Redex are Racket programs, so it is possible to escape out to arbitrary Racket code. This is less clean than pattern-matching in PLT Redex, as the following example illustrates:</p><div class="code-block"><div class="highlight"><pre><span></span><span class="p">(</span><span class="k">define</span> <span class="n">step</span>
+  <span class="p">(</span><span class="n">reduction-relation</span>
+   <span class="n">game-of-life</span>
+   <span class="kd">#:domain</span> <span class="n">board</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="n">board</span> <span class="o">,</span><span class="p">(</span><span class="n">racket-code-goes-here</span><span class="p">))))</span>
+</pre></div></div><p>The comma in the snippet above means “escape back to Racket, run this arbitrary code, and insert the result here.” At this point, there is little benefit in using PLT Redex for this model. But, for other models that mostly fit in PLT Redex, it is useful to have the possibility for localized arbitrary extensions.</p><h3><span id="conclusion"></span>Conclusion<span class="mark"><a href="#conclusion">§</a></span></h3><p>We showed how a language can work as data structure definitions. We used a language and the evaluation mechanisms in PLT Redex to implement a game of Peg Solitaire. Then we used the visualization tools that come with PLT Redex to play the game.</p><p>Along the way, we introduced a model for computation that is unusual in most programming languages: non-deterministic computation. When faced with multiple paths, non-deterministic computations <em>create different universes</em> and follow them all.</p><p>We also used the model to look for a solution to the game. We showed how a brute-force search is a simple way to explore a space of potential solutions. It is enough for small slices of the Peg Solitaire board, but does not scale to solve the full board in a reasonable running time. We introduced the idea of <em>goal-directed search</em>, which would prune the search space and improve the performance. But it would do this at the cost of simplicity, so we did not pursue this venue and left the problem open.</p><p>Finally, we discussed PLT Redex’s limitations. It cannot be used to directly encode systems of rules like most kinds of cellular automata, in which simultaneous updates need to occur throughout a data structure. We presented ways to work around this limitation, including one that demonstrates how PLT Redex is extensible with arbitrary Racket code.</p><h3><span id="acknowledgments"></span>Acknowledgments<span class="mark"><a href="#acknowledgments">§</a></span></h3><p>Thank you <a href="https://cs.jhu.edu/~shyam/">P.C. Shyamshankar</a>, <a href="http://www.thinkmoore.net/">Scott Moore</a>, <a href="http://www.allanvital.com/">Allan Vital</a> and <a href="http://rafaelalmeida.net/">Rafael da Silva Almeida</a> for your feedback on this article.</p><h3><span id="full-listing"></span>Appendix: Full Listing<span class="mark"><a href="#full-listing">§</a></span></h3><div class="full-width"><div class="code-block"><div class="highlight"><pre><span></span><span class="kn">#lang </span><span class="nn">racket</span>
+<span class="p">(</span><span class="k">require</span> <span class="n">redex</span><span class="p">)</span>
+
+<span class="p">(</span><span class="n">define-language</span> <span class="n">peg-solitaire</span>
+  <span class="p">[</span><span class="n">position</span> <span class="n">::=</span> <span class="n">█</span> <span class="n">○</span> <span class="n">●</span><span class="p">]</span>
+  <span class="p">[</span><span class="n">board</span> <span class="n">::=</span> <span class="p">([</span><span class="n">position</span> <span class="k">...</span><span class="p">]</span> <span class="k">...</span><span class="p">)])</span>
+
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">redex-match?</span> <span class="n">peg-solitaire</span> <span class="n">board</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">█</span><span class="p">])))</span>
+              <span class="no">#t</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">redex-match?</span> <span class="n">peg-solitaire</span> <span class="n">board</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">█</span> <span class="n">●</span><span class="p">]</span>
+                                                       <span class="p">[</span><span class="n">○</span> <span class="n">█</span><span class="p">])))</span>
+              <span class="no">#t</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">redex-match?</span> <span class="n">peg-solitaire</span> <span class="n">board</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+                                                       <span class="p">[</span><span class="n">█</span> <span class="n">●</span> <span class="n">●</span><span class="p">])))</span>
+              <span class="no">#t</span><span class="p">))</span>
+
+<span class="p">(</span><span class="n">define-term</span> <span class="n">initial-board</span>
+  <span class="p">([</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]</span>
+   <span class="p">[</span><span class="n">█</span> <span class="n">█</span> <span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">█</span> <span class="n">█</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="n">move</span>
+  <span class="p">(</span><span class="n">reduction-relation</span>
+   <span class="n">peg-solitaire</span>
+   <span class="kd">#:domain</span> <span class="n">board</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">○</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">→</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">●</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">○</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_4</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">←</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="n">..._1</span> <span class="n">○</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="k">...</span> <span class="n">●</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">↓</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">--&gt;</span> <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="n">..._1</span> <span class="n">○</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="n">..._1</span> <span class="n">●</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="p">(</span><span class="n">any_1</span>
+         <span class="k">...</span>
+         <span class="p">[</span><span class="n">any_2</span> <span class="k">...</span> <span class="n">●</span> <span class="n">any_3</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_4</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_5</span> <span class="k">...</span><span class="p">]</span>
+         <span class="p">[</span><span class="n">any_6</span> <span class="k">...</span> <span class="n">○</span> <span class="n">any_7</span> <span class="k">...</span><span class="p">]</span>
+         <span class="n">any_8</span>
+         <span class="k">...</span><span class="p">)</span>
+        <span class="n">↑</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">apply-reduction-relation</span> <span class="n">move</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">))</span>
+              <span class="o">&#39;</span><span class="p">(((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))</span>
+                <span class="p">((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))</span>
+                <span class="p">((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))</span>
+                <span class="p">((</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">)</span>
+                 <span class="p">(</span><span class="ss">█</span> <span class="ss">█</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">●</span> <span class="ss">█</span> <span class="ss">█</span><span class="p">))))</span>
+
+  <span class="c">#;</span>
+  <span class="p">(</span><span class="n">stepper</span> <span class="n">move</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">))</span>
+
+  <span class="c">#;</span>
+  <span class="p">(</span><span class="n">traces</span> <span class="n">move</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">)))</span>
+
+<span class="c1">;; ---------------------------------------------------------------------------------------------------</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">winning?</span> <span class="n">board</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="n">pegs-left-on-board</span>
+    <span class="p">(</span><span class="nb">count</span> <span class="p">(</span><span class="nb">curry</span> <span class="nb">equal?</span> <span class="o">&#39;</span><span class="ss">●</span><span class="p">)</span> <span class="p">(</span><span class="nb">flatten</span> <span class="n">board</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">=</span> <span class="n">pegs-left-on-board</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="n">board</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">define</span> <span class="p">(</span><span class="n">step</span> <span class="n">board-with-move</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">match-define</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="k">_</span> <span class="o">,</span><span class="n">board</span><span class="p">)</span> <span class="n">board-with-move</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">define</span> <span class="n">next-boards-with-moves</span>
+      <span class="p">(</span><span class="n">apply-reduction-relation/tag-with-names</span> <span class="n">move</span> <span class="n">board</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">cond</span>
+      <span class="p">[(</span><span class="nb">empty?</span> <span class="n">next-boards-with-moves</span><span class="p">)</span>
+       <span class="p">(</span><span class="k">and</span> <span class="p">(</span><span class="n">winning?</span> <span class="n">board</span><span class="p">)</span> <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="n">board-with-move</span><span class="p">))]</span>
+      <span class="p">[</span><span class="k">else</span>
+       <span class="p">(</span><span class="k">define</span> <span class="n">rest-of-solution</span>
+         <span class="p">(</span><span class="nb">ormap</span> <span class="n">step</span> <span class="n">next-boards-with-moves</span><span class="p">))</span>
+       <span class="p">(</span><span class="k">and</span> <span class="n">rest-of-solution</span>
+            <span class="o">`</span><span class="p">(</span><span class="o">,</span><span class="n">board-with-move</span> <span class="o">,@</span><span class="n">rest-of-solution</span><span class="p">))]))</span>
+  <span class="p">(</span><span class="n">step</span> <span class="o">`</span><span class="p">(</span><span class="s2">"initial"</span> <span class="o">,</span><span class="n">board</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">module+</span> <span class="n">test</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">●</span> <span class="n">●</span> <span class="n">○</span><span class="p">])))</span>
+              <span class="o">&#39;</span><span class="p">((</span><span class="s2">"initial"</span> <span class="p">((</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span><span class="p">)))</span> <span class="p">(</span><span class="s2">"→"</span> <span class="p">((</span><span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span><span class="p">)))))</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">●</span> <span class="n">●</span> <span class="n">○</span> <span class="n">●</span><span class="p">])))</span>
+              <span class="o">&#39;</span><span class="p">((</span><span class="s2">"initial"</span> <span class="p">((</span><span class="ss">●</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">●</span><span class="p">)))</span> <span class="p">(</span><span class="s2">"→"</span> <span class="p">((</span><span class="ss">○</span> <span class="ss">○</span> <span class="ss">●</span> <span class="ss">●</span><span class="p">)))</span> <span class="p">(</span><span class="s2">"←"</span> <span class="p">((</span><span class="ss">○</span> <span class="ss">●</span> <span class="ss">○</span> <span class="ss">○</span><span class="p">)))))</span>
+  <span class="p">(</span><span class="n">test-equal</span> <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="p">([</span><span class="n">●</span> <span class="n">●</span> <span class="n">●</span> <span class="n">○</span><span class="p">])))</span>
+              <span class="no">#f</span><span class="p">)</span>
+
+  <span class="c">#;</span>
+  <span class="p">(</span><span class="n">search-for-solution</span> <span class="p">(</span><span class="n">term</span> <span class="n">initial-board</span><span class="p">)))</span>
+</pre></div></div></div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,821 @@
+/****************************************************************************************************/
+/* NORMALIZE */
+
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ */
+
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Remove the gray background on active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove the border on images inside links in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+
+button,
+input { /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+
+/****************************************************************************************************/
+/* FONTS */
+
+@font-face {
+  font-family: "Charter";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/charter_regular-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Charter";
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/charter_italic-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Charter";
+  font-style: normal;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url("/fonts/charter_bold-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Charter";
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url("/fonts/charter_bold_italic-webfont.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/FiraMono-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Fira Mono";
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: normal;
+  src: url("/fonts/FiraMono-Medium.woff") format("woff");
+}
+
+/****************************************************************************************************/
+/* GRID */
+
+*, *::before, *::after {
+  outline: none;
+}
+
+body {
+  margin: 1.5rem auto;
+  padding: 0 0.75rem;
+  max-width: 37.5rem;
+}
+
+@media (min-width:64rem) {
+  body {
+    max-width: 62.5rem;
+  }
+
+  main {
+    width: 37.5rem;
+  }
+
+  aside {
+    width: 20.31rem;
+    float: right;
+    clear: right;
+    margin-right: -25rem;
+  }
+}
+
+.full-width {
+  display: block;
+box-sizing: border-box;
+width: 100%;
+margin: 0.5rem 0;
+  clear: both;
+}
+
+@media (min-width:64rem) {
+  .full-width {
+    width: 62.5rem;
+  }
+}
+
+/****************************************************************************************************/
+/* HEADERS */
+
+body > header {
+  border-bottom: 1px solid #93a1a1;
+  margin-bottom: 2rem;
+}
+
+body > header nav {
+  margin-bottom: 0.5rem;
+}
+
+body > header nav a {
+  line-height: 2;
+display: inline-block;
+margin-right: 1rem;
+  font-size: 0.81rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+}
+
+body > header nav a.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid #93a1a1;
+  margin-bottom: -1px;
+}
+
+main > header {
+  margin-bottom: 1rem;
+}
+
+time {
+  font-weight: 400;
+  font-size: 0.81rem;
+  color: #93a1a1;
+}
+
+/****************************************************************************************************/
+/* HEADINGS */
+
+h1, h2, h3, h4  {
+  color: #586e75;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+
+h1 a, h2 a, h3 a, h4 a {
+  text-decoration: none;
+  color: #586e75;
+}
+
+h1 {
+  font-size: 1.88rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+h2 {
+  font-size: 1.38rem;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 0.2rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+h3 .mark, h4 .mark {
+  transition: opacity 0.3s;
+  opacity: 0;
+  margin-left: 0.5rem;
+  color: #93a1a1;
+}
+
+h3:hover .mark, h4:hover .mark {
+  opacity: 1;
+}
+
+h3 .mark a, h4 .mark a {
+  color: #93a1a1;
+}
+
+hr {
+  border: none;
+  margin: 0;
+  height: 1.5rem;
+}
+
+/****************************************************************************************************/
+/* BODY */
+
+body {
+  -moz-font-synthesis:none;-webkit-font-synthesis:none;-ms-font-synthesis:none;-o-font-synthesis:none;
+font-synthesis:none;
+  -moz-font-kerning:normal;-webkit-font-kerning:normal;-ms-font-kerning:normal;-o-font-kerning:normal;
+font-kerning:normal;
+  -moz-text-rendering:optimizeLegibility;-webkit-text-rendering:optimizeLegibility;-ms-text-rendering:optimizeLegibility;-o-text-rendering:optimizeLegibility;
+text-rendering:optimizeLegibility;
+  font-family: "Charter", "Iowan Old Style", "Georgia", serif;
+  font-size: 1rem;
+  background-color: #fdf6e3;
+  color: #657b83;
+  line-height: 1.5;
+}
+
+p {
+  margin: 0;
+}
+
+p + p {
+  text-indent: 1.5rem;
+}
+
+@media (min-width:64rem) {
+  p                                 + aside + p,
+  p                         + aside + aside + p,
+  p                 + aside + aside + aside + p,
+  p         + aside + aside + aside + aside + p,
+  p + aside + aside + aside + aside + aside + p {
+    text-indent: 1.5rem;
+  }
+}
+
+/****************************************************************************************************/
+/* MARGIN NOTES */
+
+@media (max-width:63.94rem) {
+  aside {
+    display: block;
+box-sizing: border-box;
+width: 100%;
+margin: 0.5rem 0;
+    border-left: 3px solid #93a1a1;
+    border-radius: 0.2rem;
+    padding: 1.5rem;
+    padding-left: calc(1.5rem - 3px);
+    background-color: #eee8d5;
+    color: #586e75;
+  }
+}
+
+@media (min-width:64rem) {
+  aside {
+    font-size: 0.81rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/****************************************************************************************************/
+/* FIGURES */
+
+figure {
+  display: block;
+box-sizing: border-box;
+width: 100%;
+margin: 0.5rem 0;
+  text-align: center;
+}
+
+figcaption {
+  font-style: italic;
+}
+
+img, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/****************************************************************************************************/
+/* CODE */
+
+pre, code, var, samp, kbd {
+  font-family: "Fira Mono", "Menlo", "Monaco", "Courier New", monospace;
+}
+
+.code-block {
+  display: block;
+box-sizing: border-box;
+width: 100%;
+margin: 0.5rem 0;
+  font-size: 0.75rem;
+}
+
+pre {
+  background-color: #fdf6e3;
+  overflow: auto;
+  padding: 1.5rem;
+  padding-left: calc(1.5rem - 1px);
+  border: 1px solid #93a1a1;
+  border-radius: 0.2rem;
+  margin: 0;
+}
+
+/* https://gist.github.com/qguv/7936275 */
+
+/* Solarized Light 
+
+For use with Jekyll and Pygments
+
+http://ethanschoonover.com/solarized
+
+SOLARIZED HEX      ROLE
+--------- -------- ------------------------------------------
+base01    #586e75  body text / default code / primary content
+base1     #93a1a1  comments / secondary content
+base3     #fdf6e3  background
+orange    #cb4b16  constants
+red       #dc322f  regex, special keywords
+blue      #268bd2  reserved keywords
+cyan      #2aa198  strings, numbers
+green     #859900  operators, other keywords
+*/
+
+.highlight { background-color: #fdf6e3; color: #586e75 }
+.highlight .lineno { color: #93a1a1 } /* Line Numbers */
+.highlight .c { color: #93a1a1 } /* Comment */
+.highlight .err { color: #586e75 } /* Error */
+.highlight .g { color: #586e75 } /* Generic */
+.highlight .k { color: #859900 } /* Keyword */
+.highlight .l { color: #586e75 } /* Literal */
+.highlight .n { color: #586e75 } /* Name */
+.highlight .o { color: #859900 } /* Operator */
+.highlight .x { color: #cb4b16 } /* Other */
+.highlight .p { color: #586e75 } /* Punctuation */
+.highlight .cm { color: #93a1a1 } /* Comment.Multiline */
+.highlight .cp { color: #859900 } /* Comment.Preproc */
+.highlight .c1 { color: #93a1a1 } /* Comment.Single */
+.highlight .cs { color: #859900 } /* Comment.Special */
+.highlight .gd { color: #2aa198 } /* Generic.Deleted */
+.highlight .ge { color: #586e75; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #dc322f } /* Generic.Error */
+.highlight .gh { color: #cb4b16 } /* Generic.Heading */
+.highlight .gi { color: #859900 } /* Generic.Inserted */
+.highlight .go { color: #586e75 } /* Generic.Output */
+.highlight .gp { color: #586e75 } /* Generic.Prompt */
+.highlight .gs { color: #586e75; font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #cb4b16 } /* Generic.Subheading */
+.highlight .gt { color: #586e75 } /* Generic.Traceback */
+.highlight .kc { color: #cb4b16 } /* Keyword.Constant */
+.highlight .kd { color: #268bd2 } /* Keyword.Declaration */
+.highlight .kn { color: #859900 } /* Keyword.Namespace */
+.highlight .kp { color: #859900 } /* Keyword.Pseudo */
+.highlight .kr { color: #268bd2 } /* Keyword.Reserved */
+.highlight .kt { color: #dc322f } /* Keyword.Type */
+.highlight .ld { color: #586e75 } /* Literal.Date */
+.highlight .m { color: #2aa198 } /* Literal.Number */
+.highlight .s { color: #2aa198 } /* Literal.String */
+.highlight .na { color: #586e75 } /* Name.Attribute */
+.highlight .nb { color: #B58900 } /* Name.Builtin */
+.highlight .nc { color: #268bd2 } /* Name.Class */
+.highlight .no { color: #cb4b16 } /* Name.Constant */
+.highlight .nd { color: #268bd2 } /* Name.Decorator */
+.highlight .ni { color: #cb4b16 } /* Name.Entity */
+.highlight .ne { color: #cb4b16 } /* Name.Exception */
+.highlight .nf { color: #268bd2 } /* Name.Function */
+.highlight .nl { color: #586e75 } /* Name.Label */
+.highlight .nn { color: #586e75 } /* Name.Namespace */
+.highlight .nx { color: #586e75 } /* Name.Other */
+.highlight .py { color: #586e75 } /* Name.Property */
+.highlight .nt { color: #268bd2 } /* Name.Tag */
+.highlight .nv { color: #268bd2 } /* Name.Variable */
+.highlight .ow { color: #859900 } /* Operator.Word */
+.highlight .w { color: #586e75 } /* Text.Whitespace */
+.highlight .mf { color: #2aa198 } /* Literal.Number.Float */
+.highlight .mh { color: #2aa198 } /* Literal.Number.Hex */
+.highlight .mi { color: #2aa198 } /* Literal.Number.Integer */
+.highlight .mo { color: #2aa198 } /* Literal.Number.Oct */
+.highlight .sb { color: #93a1a1 } /* Literal.String.Backtick */
+.highlight .sc { color: #2aa198 } /* Literal.String.Char */
+.highlight .sd { color: #586e75 } /* Literal.String.Doc */
+.highlight .s2 { color: #2aa198 } /* Literal.String.Double */
+.highlight .se { color: #cb4b16 } /* Literal.String.Escape */
+.highlight .sh { color: #586e75 } /* Literal.String.Heredoc */
+.highlight .si { color: #2aa198 } /* Literal.String.Interpol */
+.highlight .sx { color: #2aa198 } /* Literal.String.Other */
+.highlight .sr { color: #dc322f } /* Literal.String.Regex */
+.highlight .s1 { color: #2aa198 } /* Literal.String.Single */
+.highlight .ss { color: #2aa198 } /* Literal.String.Symbol */
+.highlight .bp { color: #268bd2 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #268bd2 } /* Name.Variable.Class */
+.highlight .vg { color: #268bd2 } /* Name.Variable.Global */
+.highlight .vi { color: #268bd2 } /* Name.Variable.Instance */
+.highlight .il { color: #2aa198 } /* Literal.Number.Integer.Long */
+
+/****************************************************************************************************/
+/* LISTS */
+
+ul, ol {
+  display: block;
+box-sizing: border-box;
+width: 100%;
+margin: 0.5rem 0;
+  padding-left: 1.5rem;
+}
+
+/****************************************************************************************************/
+/* TABLES */
+
+table {
+  display: block;
+box-sizing: border-box;
+width: 100%;
+margin: 0.5rem 0;
+}
+
+tbody + tbody::before {
+  content: "";
+  display: block;
+  height: 0.5rem;
+}
+
+th, td {
+  padding: 0;
+  padding-right: 1rem;
+}
+
+th:last-child, td:last-child {
+  padding-right: 0;
+}
+
+th {
+  font-weight: 700;
+  text-align: left;
+}
+
+/****************************************************************************************************/
+/* REFERENCES */
+
+a {
+  transition: background-color 0.3s;
+  border-radius: 0.2rem;
+  color: #657b83;
+}
+
+a:hover {
+  background-color: #eee8d5;
+  color: #586e75;
+}
+
+@media (max-width:63.94rem) {
+  aside a {
+    color: #586e75;
+  }
+
+  aside a:hover {
+    background-color: #fdf6e3;
+    color: #657b83;
+  }
+}
+
+/****************************************************************************************************/
+/* INLINE */
+
+small, small a {
+  font-size: 0.81rem;
+  color: #93a1a1;
+}
+
+.fraction--slash {
+  margin: 0 -0.1rem;
+}
+
+.placeholder {
+  color: #268bd2;
+}
+
+.menu-option {
+  font-weight: 700;
+}
