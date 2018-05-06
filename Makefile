@@ -1,7 +1,7 @@
 .PHONY: default install server build clean deploy documentation documentation/deploy
 
 source = $(CURDIR)/source/
-target = $(CURDIR)/build/
+target = $(CURDIR)/docs/
 
 default: server
 
@@ -20,8 +20,9 @@ clean:
 	git clean -fdX
 
 deploy: clean build
-	rsync -av --delete $(target) leafac.com:leafac.com/websites/www.leafac.com/
-	rsync -av $(target)software/index.html leafac.com:leafac.com/websites/software/index.html
+	git add -A
+	git commit -m "Deploy"
+	git push origin
 
 ################################################################################
 
