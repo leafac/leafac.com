@@ -371,7 +371,7 @@ pre, code, var, samp, kbd {
   font-family: $font-family--monospace;
 }
 
-.code-block {
+.code-block, pre {
   @include insertion;
   font-size: $font-size--extra-small;
 }
@@ -383,7 +383,9 @@ pre {
   padding-left: calc($text-indent - $border-width--thin);
   border: $border-width--thin solid $palette--secondary-content;
   border-radius: $border-radius;
-  margin: $space--none;
+  .code-block & {
+    margin: $space--none;
+  }
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -401,19 +403,12 @@ table {
   @include insertion;
 }
 
-tbody + tbody::before {
-  content: "";
-  display: block;
-  height: $space--small;
-}
-
 th, td {
   padding: $space--none;
   padding-right: $space--medium;
-}
-
-th:last-child, td:last-child {
-  padding-right: $space--none;
+  &:last-child {
+    padding-right: $space--none;
+  }
 }
 
 th {
@@ -428,40 +423,24 @@ a {
   transition: background-color $animation--duration;
   border-radius: $border-radius;
   color: $palette--primary-content;
-}
-
-a:hover {
-  background-color: $palette--background-highlight;
-  color: $palette--emphasized-content;
-}
-
-@include smaller-screens {
-  aside a {
+  &:hover {
+    background-color: $palette--background-highlight;
     color: $palette--emphasized-content;
   }
-
-  aside a:hover {
-    background-color: $palette--background;
-    color: $palette--primary-content;
+  @include smaller-screens {
+    aside & {
+      color: $palette--emphasized-content;
+      &:hover {
+        background-color: $palette--background;
+        color: $palette--primary-content;
+      }
+    }
   }
 }
 
 // ---------------------------------------------------------------------------------------------------
 // INLINE
 
-small, small a {
-  font-size: $font-size--small;
-  color: $palette--secondary-content;
-}
-
-.fraction--slash {
-  margin: $space--none -$space--extra-extra-small;
-}
-
 .placeholder {
   color: $palette--blue;
-}
-
-.menu-option {
-  font-weight: 700;
 }
