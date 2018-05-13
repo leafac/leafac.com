@@ -7,7 +7,7 @@
     <meta name="description" content="Leandro Facchinetti writes prose, software and music. He is a Ph.D. candidate in Computer Science.">
     <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
-    <title>{{ page.title }}</title>
+    <title>{% if page.title %}{{ page.title }} · {% endif %}Leandro Facchinetti</title>
   </head>
   <body>
     <header>
