@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="Leandro Facchinetti">
-    <meta name="description" content="TODO">
-    <link rel="stylesheet" href="/styles.css" type="text/css">
+    <meta name="description" content="Leandro Facchinetti writes prose, software and music. He is a Ph.D. candidate in Computer Science.">
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <title>{{ page.title }}</title>
   </head>
@@ -13,14 +13,14 @@
     <header>
       <h1><a href="/">Leandro Facchinetti</a></h1>
       <nav>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
-        <a href="/research">Research</a>
-        <a href="/prose">Prose</a>
-        <a href="/software">Software</a>
-        <a href="/music">Music</a>
-        <a href="/license">License</a>
-        <a href="/colophon">Colophon</a>
+        <a href="/about"{% if page.url contains "/about" %} class="active"{% endif %}>About</a>
+        <a href="/contact"{% if page.url contains "/contact" %} class="active"{% endif %}>Contact</a>
+        <a href="/research"{% if page.url contains "/research" %} class="active"{% endif %}>Research</a>
+        <a href="/prose"{% if page.url contains "/prose" %} class="active"{% endif %}>Prose</a>
+        <a href="/software"{% if page.url contains "/software" %} class="active"{% endif %}>Software</a>
+        <a href="/music"{% if page.url contains "/music" %} class="active"{% endif %}>Music</a>
+        <a href="/license"{% if page.url contains "/license" %} class="active"{% endif %}>License</a>
+        <a href="/colophon"{% if page.url contains "/colophon" %} class="active"{% endif %}>Colophon</a>
       </nav>
     </header>
     <main>
