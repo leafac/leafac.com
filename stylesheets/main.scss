@@ -225,31 +225,29 @@ body {
 // HEADERS
 
 body > header {
+  padding-bottom: $space--small;
   border-bottom: $border-width--thin solid $palette--secondary-content;
   margin-bottom: $space--extra-large;
-}
-
-body > header nav {
-  margin-bottom: $space--small;
-}
-
-body > header nav a {
-  @include inline-block-enumeration;
-  font-size: $font-size--small;
-  text-transform: uppercase;
-  letter-spacing: $letter-spacing;
-  text-decoration: none;
-}
-
-body > header nav a.active {
-  border-bottom-left-radius: $border-radius--none;
-  border-bottom-right-radius: $border-radius--none;
-  border-bottom: $border-width--thin solid $palette--secondary-content;
-  margin-bottom: -$border-width--thin;
+  nav a {
+    @include inline-block-enumeration;
+    font-size: $font-size--small;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing;
+    text-decoration: none;
+    &.active {
+      border-bottom-left-radius: $border-radius--none;
+      border-bottom-right-radius: $border-radius--none;
+      border-bottom: $border-width--thin solid $palette--secondary-content;
+      margin-bottom: -$border-width--thin;
+    }
+  }
 }
 
 main > header {
   margin-bottom: $space--medium;
+  h1 {
+    margin-bottom: $space--extra-small;
+  }
 }
 
 time {
@@ -261,55 +259,36 @@ time {
 // ---------------------------------------------------------------------------------------------------
 // HEADINGS
 
-h1, h2, h3, h4  {
+h1, h2  {
   color: $palette--emphasized-content;
   margin-top: $space--extra-large;
   margin-bottom: $space--small;
   line-height: $line-height--small;
+  font-weight: 400;
+  a {
+    text-decoration: none;
+    color: $palette--emphasized-content;
+  }
 }
 
-h1 a, h2 a, h3 a, h4 a {
-  text-decoration: none;
-  color: $palette--emphasized-content;
+body > header h1 {
+  font-size: $font-size--extra-extra-large;
+  font-style: italic;
+}
+
+main > header h1 {
+  font-size: $font-size--extra-large;
+  font-style: italic;
 }
 
 h1 {
-  font-size: $font-size--extra-extra-large;
+  font-size: $font-size--large;
   font-style: italic;
-  font-weight: 400;
 }
 
 h2 {
-  font-size: $font-size--extra-large;
-  font-style: italic;
-  font-weight: 400;
-  margin-bottom: $space--extra-small;
-}
-
-h3 {
-  font-size: $font-size--large;
-  font-style: italic;
-  font-weight: 400;
-}
-
-h4 {
   font-size: $font-size--medium;
   font-weight: 700;
-}
-
-h3 .mark, h4 .mark {
-  transition: opacity $animation--duration;
-  opacity: 0;
-  margin-left: $space--small;
-  color: $palette--secondary-content;
-}
-
-h3:hover .mark, h4:hover .mark {
-  opacity: 1;
-}
-
-h3 .mark a, h4 .mark a {
-  color: $palette--secondary-content;
 }
 
 hr {
@@ -334,27 +313,25 @@ body {
 
 p {
   margin: $space--none;
-}
-
-p + p {
-  text-indent: $text-indent;
-}
-
-@include bigger-screens {
-  p                                 + aside + p,
-  p                         + aside + aside + p,
-  p                 + aside + aside + aside + p,
-  p         + aside + aside + aside + aside + p,
-  p + aside + aside + aside + aside + aside + p {
+  p + & {
     text-indent: $text-indent;
+  }
+  @include bigger-screens {
+    p                                 + aside + &,
+    p                         + aside + aside + &,
+    p                 + aside + aside + aside + &,
+    p         + aside + aside + aside + aside + &,
+    p + aside + aside + aside + aside + aside + & {
+      text-indent: $text-indent;
+    }
   }
 }
 
 // ---------------------------------------------------------------------------------------------------
 // MARGIN NOTES
 
-@include smaller-screens {
-  aside {
+aside {
+  @include smaller-screens {
     @include insertion;
     border-left: $border-width--thick solid $palette--secondary-content;
     border-radius: $border-radius;
@@ -363,10 +340,8 @@ p + p {
     background-color: $palette--background-highlight;
     color: $palette--emphasized-content;
   }
-}
 
-@include bigger-screens {
-  aside {
+  @include bigger-screens {
     font-size: $font-size--small;
     margin-bottom: $space--large;
   }
