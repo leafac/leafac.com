@@ -34,9 +34,8 @@ $grid--main:              rem(600px);
 $grid--gutter:            rem(75px);
 $grid--margin-note:       rem(325px);
 $grid--margin-note--pull: rem(400px);
-$grid--breakpoint:        rem(1024px);
-@mixin bigger-screens  { @media (min-width: $grid--breakpoint          ) { @content; } }
-@mixin smaller-screens { @media (max-width: $grid--breakpoint - 0.01rem) { @content; } }
+@mixin bigger-screens  { @media (min-width: rem(1024px)) { @content; } }
+@mixin smaller-screens { @media (max-width: rem(1023px)) { @content; } }
 
 // ---------------------------------------------------------------------------------------------------
 // SPACES
