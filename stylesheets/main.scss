@@ -1,137 +1,137 @@
 ---
 ---
 
+// ---------------------------------------------------------------------------------------------------
+// AUXILIARY
+
 @import "normalize.css";
+@import "syntax-highlighting.css";
 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; GRID
-// 
-// ;; |                bigger-screens                   |
-// ;; |                     1024                        |
-// ;; |         |           body              |         |
-// ;; |         |           1000              |         |
-// ;; | padding | main | gutter | margin-note | padding |
-// ;; |   12    | 600  |   75   |     325     |   12    |
-// ;;                  |   margin-note/pull   |
-// ;;                  |         400          |
-// 
-// ;; |     smaller-screens      |
-// ;; |           624            |
-// ;; | padding | main | padding |
-// ;; |   12    | 600  |   12    |
-// 
-// (define grid/body             ◊px->rem[1000])
-// (define grid/padding          ◊px->rem[12])
-// (define grid/main             ◊px->rem[600])
-// (define grid/gutter           ◊px->rem[75])
-// (define grid/margin-note      ◊px->rem[325])
-// (define grid/margin-note/pull ◊px->rem[400])
-// (define grid/bigger-screens   ◊~a{(min-width:◊px->rem[1024])})
-// (define grid/smaller-screens  ◊~a{(max-width:◊px->rem[1023])})
-// 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; SPACES
-// 
-// (define space/none              ◊~a{0})
-// (define space/extra-extra-small ◊~a{0.1rem})
-// (define space/extra-small       ◊~a{0.2rem})
-// (define space/small             ◊~a{0.5rem})
-// (define space/medium            ◊~a{1rem})
-// (define space/large             ◊~a{1.5rem})
-// (define space/extra-large       ◊~a{2rem})
-// 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; TEXT
-// 
-// (define font-family/main            ◊~a{"Charter", "Iowan Old Style", "Georgia", serif})
-// (define font-family/monospace       ◊~a{"Fira Mono", "Menlo", "Monaco", "Courier New", monospace})
-// (define font-size/extra-small       ◊px->rem[12])
-// (define font-size/small             ◊px->rem[13])
-// (define font-size/medium            ◊px->rem[16])
-// (define font-size/large             ◊px->rem[20])
-// (define font-size/extra-large       ◊px->rem[22])
-// (define font-size/extra-extra-large ◊px->rem[30])
-// (define line-height/extra-small     ◊~a{1})
-// (define line-height/small           ◊~a{1.3})
-// (define line-height/medium          ◊~a{1.5})
-// (define line-height/large           ◊~a{2})
-// (define text-indent                 ◊~a{1.5rem})
-// (define letter-spacing              ◊~a{0.2em})
-// 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; COLORS
-// 
-// (define solarized/base03  ◊~a{#002b36})
-// (define solarized/base02  ◊~a{#073642})
-// (define solarized/base01  ◊~a{#586e75})
-// (define solarized/base00  ◊~a{#657b83})
-// (define solarized/base0   ◊~a{#839496})
-// (define solarized/base1   ◊~a{#93a1a1})
-// (define solarized/base2   ◊~a{#eee8d5})
-// (define solarized/base3   ◊~a{#fdf6e3})
-// (define solarized/yellow  ◊~a{#b58900})
-// (define solarized/orange  ◊~a{#cb4b16})
-// (define solarized/red     ◊~a{#dc322f})
-// (define solarized/magenta ◊~a{#d33682})
-// (define solarized/violet  ◊~a{#6c71c4})
-// (define solarized/blue    ◊~a{#268bd2})
-// (define solarized/cyan    ◊~a{#2aa198})
-// (define solarized/green   ◊~a{#859900})
-// 
-// (define color/background           ◊solarized/base3)
-// (define color/background-highlight ◊solarized/base2)
-// (define color/secondary-content    ◊solarized/base1)
-// (define color/primary-content      ◊solarized/base00)
-// (define color/emphasized-content   ◊solarized/base01)
-// (define color/yellow               ◊solarized/yellow)
-// (define color/orange               ◊solarized/orange)
-// (define color/red                  ◊solarized/red)
-// (define color/magenta              ◊solarized/magenta)
-// (define color/violet               ◊solarized/violet)
-// (define color/blue                 ◊solarized/blue)
-// (define color/cyan                 ◊solarized/cyan)
-// (define color/green                ◊solarized/green)
-// 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; BORDERS
-// 
-// (define border-width/thin  ◊~a{1px})
-// (define border-width/thick ◊~a{3px})
-// (define border-radius/none ◊space/none)
-// (define border-radius      ◊space/extra-small)
-// 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; ANIMATIONS
-// 
-// (define animation/duration ◊~a{0.3s})
-// 
-// ;; ---------------------------------------------------------------------------------------------------
-// ;; MIXINS
-// 
-// (define inline-block-enumeration
-//   ◊~a{
-//  line-height: ◊|line-height/large|;
-//  display: inline-block;
-//  margin-right: ◊|space/medium|;
-//  })
-// 
-// (define insertion
-//   ◊~a{
-//  display: block;
-//  box-sizing: border-box;
-//  width: 100%;
-//  margin: ◊|space/small| ◊|space/none|;
-//  })
+@function rem($px) {
+  @return #{round($px/16px * 100) / 100}rem;
+}
 
+// ---------------------------------------------------------------------------------------------------
+// GRID
 
-// /****************************************************************************************************/
-// /* NORMALIZE */
-// 
-// ◊(file->string "stylesheets/normalize.css.p")
-// 
+// |                bigger-screens                   |
+// |                     1024                        |
+// |         |           body              |         |
+// |         |           1000              |         |
+// | padding | main | gutter | margin-note | padding |
+// |   12    | 600  |   75   |     325     |   12    |
+//                  |   margin-note/pull   |
+//                  |         400          |
+
+// |     smaller-screens      |
+// |           624            |
+// | padding | main | padding |
+// |   12    | 600  |   12    |
+
+$grid--body:              rem(1000px);
+$grid--padding:           rem(12px);
+$grid--main:              rem(600px);
+$grid--gutter:            rem(75px);
+$grid--margin-note:       rem(325px);
+$grid--margin-note--pull: rem(400px);
+@mixin bigger-screens  { @media (min-width: rem(1024px)) { @content; } }
+@mixin smaller-screens { @media (max-width: rem(1023px)) { @content; } }
+
+// ---------------------------------------------------------------------------------------------------
+// SPACES
+
+$space--none:              0;
+$space--extra-extra-small: 0.1rem;
+$space--extra-small:       0.2rem;
+$space--small:             0.5rem;
+$space--medium:            1rem;
+$space--large:             1.5rem;
+$space--extra-large:       2rem;
+
+// ---------------------------------------------------------------------------------------------------
+// TEXT
+
+$font-family--main:            "Charter", "Iowan Old Style", "Georgia", serif;
+$font-family--monospace:       "Fira Mono", "Menlo", "Monaco", "Courier New", monospace;
+$font-size--extra-small:       rem(12px);
+$font-size--small:             rem(13px);
+$font-size--medium:            rem(16px);
+$font-size--large:             rem(20px);
+$font-size--extra-large:       rem(22px);
+$font-size--extra-extra-large: rem(30px);
+$line-height--extra-small:     1;
+$line-height--small:           1.3;
+$line-height--medium:          1.5;
+$line-height--large:           2;
+$text-indent:                  1.5rem;
+$letter-spacing:               0.2em;
+
+// ---------------------------------------------------------------------------------------------------
+// PALETTE
+
+$solarized--base03:  #002b36;
+$solarized--base02:  #073642;
+$solarized--base01:  #586e75;
+$solarized--base00:  #657b83;
+$solarized--base0:   #839496;
+$solarized--base1:   #93a1a1;
+$solarized--base2:   #eee8d5;
+$solarized--base3:   #fdf6e3;
+$solarized--yellow:  #b58900;
+$solarized--orange:  #cb4b16;
+$solarized--red:     #dc322f;
+$solarized--magenta: #d33682;
+$solarized--violet:  #6c71c4;
+$solarized--blue:    #268bd2;
+$solarized--cyan:    #2aa198;
+$solarized--green:   #859900;
+
+$palette--background:           $solarized--base3;
+$palette--background-highlight: $solarized--base2;
+$palette--secondary-content:    $solarized--base1;
+$palette--primary-content:      $solarized--base00;
+$palette--emphasized-content:   $solarized--base01;
+$palette--yellow:               $solarized--yellow;
+$palette--orange:               $solarized--orange;
+$palette--red:                  $solarized--red;
+$palette--magenta:              $solarized--magenta;
+$palette--violet:               $solarized--violet;
+$palette--blue:                 $solarized--blue;
+$palette--cyan:                 $solarized--cyan;
+$palette--green:                $solarized--green;
+
+// ---------------------------------------------------------------------------------------------------
+// BORDERS
+
+$border-width--thin:  1px;
+$border-width--thick: 3px;
+$border-radius--none: $space--none;
+$border-radius:       $space--extra-small;
+
+// ---------------------------------------------------------------------------------------------------
+// ANIMATIONS
+
+$animation--duration: 0.3s;
+
+// ---------------------------------------------------------------------------------------------------
+// MIXINS
+
+@mixin inline-block-enumeration {
+  line-height: $line-height--large;
+  display: inline-block;
+  margin-right: $space--medium;
+}
+
+@mixin insertion {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: $space--small $space--none;
+}
+
 // /****************************************************************************************************/
 // /* FONTS */
-// 
+
 // @font-face {
 //   font-family: "Charter";
 //   font-style: normal;
@@ -139,7 +139,7 @@
 //   font-stretch: normal;
 //   src: url("/fonts/charter_regular-webfont.woff") format("woff");
 // }
-// 
+
 // @font-face {
 //   font-family: "Charter";
 //   font-style: italic;
@@ -147,7 +147,7 @@
 //   font-stretch: normal;
 //   src: url("/fonts/charter_italic-webfont.woff") format("woff");
 // }
-// 
+
 // @font-face {
 //   font-family: "Charter";
 //   font-style: normal;
@@ -155,7 +155,7 @@
 //   font-stretch: normal;
 //   src: url("/fonts/charter_bold-webfont.woff") format("woff");
 // }
-// 
+
 // @font-face {
 //   font-family: "Charter";
 //   font-style: italic;
@@ -163,7 +163,7 @@
 //   font-stretch: normal;
 //   src: url("/fonts/charter_bold_italic-webfont.woff") format("woff");
 // }
-// 
+
 // @font-face {
 //   font-family: "Fira Mono";
 //   font-style: normal;
@@ -171,7 +171,7 @@
 //   font-stretch: normal;
 //   src: url("/fonts/FiraMono-Regular.woff") format("woff");
 // }
-// 
+
 // @font-face {
 //   font-family: "Fira Mono";
 //   font-style: normal;
@@ -179,29 +179,29 @@
 //   font-stretch: normal;
 //   src: url("/fonts/FiraMono-Medium.woff") format("woff");
 // }
-// 
+
 // /****************************************************************************************************/
 // /* GRID */
-// 
+
 // *, *::before, *::after {
 //   outline: none;
 // }
-// 
+
 // body {
 //   margin: ◊|space/large| auto;
 //   padding: ◊|space/none| ◊|grid/padding|;
 //   max-width: ◊|grid/main|;
 // }
-// 
+
 // @media ◊grid/bigger-screens {
 //   body {
 //     max-width: ◊|grid/body|;
 //   }
-// 
+
 //   main {
 //     width: ◊|grid/main|;
 //   }
-// 
+
 //   aside {
 //     width: ◊|grid/margin-note|;
 //     float: right;
@@ -209,30 +209,30 @@
 //     margin-right: -◊|grid/margin-note/pull|;
 //   }
 // }
-// 
+
 // .full-width {
 //   ◊insertion
 //   clear: both;
 // }
-// 
+
 // @media ◊grid/bigger-screens {
 //   .full-width {
 //     width: ◊|grid/body|;
 //   }
 // }
-// 
+
 // /****************************************************************************************************/
 // /* HEADERS */
-// 
+
 // body > header {
-//   border-bottom: ◊|border-width/thin| solid ◊|color/secondary-content|;
+//   border-bottom: ◊|border-width/thin| solid ◊|palette--secondary-content|;
 //   margin-bottom: ◊|space/extra-large|;
 // }
-// 
+
 // body > header nav {
 //   margin-bottom: ◊|space/small|;
 // }
-// 
+
 // body > header nav a {
 //   ◊inline-block-enumeration
 //   font-size: ◊|font-size/small|;
@@ -240,106 +240,106 @@
 //   letter-spacing: ◊|letter-spacing|;
 //   text-decoration: none;
 // }
-// 
+
 // body > header nav a.active {
 //   border-bottom-left-radius: ◊|border-radius/none|;
 //   border-bottom-right-radius: ◊|border-radius/none|;
-//   border-bottom: ◊|border-width/thin| solid ◊|color/secondary-content|;
+//   border-bottom: ◊|border-width/thin| solid ◊|palette--secondary-content|;
 //   margin-bottom: -◊|border-width/thin|;
 // }
-// 
+
 // main > header {
 //   margin-bottom: ◊|space/medium|;
 // }
-// 
+
 // time {
 //   font-weight: 400;
 //   font-size: ◊|font-size/small|;
-//   color: ◊|color/secondary-content|;
+//   color: ◊|palette--secondary-content|;
 // }
-// 
+
 // /****************************************************************************************************/
 // /* HEADINGS */
-// 
+
 // h1, h2, h3, h4  {
-//   color: ◊|color/emphasized-content|;
+//   color: ◊|palette--emphasized-content|;
 //   margin-top: ◊|space/extra-large|;
 //   margin-bottom: ◊|space/small|;
 //   line-height: ◊|line-height/small|;
 // }
-// 
+
 // h1 a, h2 a, h3 a, h4 a {
 //   text-decoration: none;
-//   color: ◊|color/emphasized-content|;
+//   color: ◊|palette--emphasized-content|;
 // }
-// 
+
 // h1 {
 //   font-size: ◊|font-size/extra-extra-large|;
 //   font-style: italic;
 //   font-weight: 400;
 // }
-// 
+
 // h2 {
 //   font-size: ◊|font-size/extra-large|;
 //   font-style: italic;
 //   font-weight: 400;
 //   margin-bottom: ◊|space/extra-small|;
 // }
-// 
+
 // h3 {
 //   font-size: ◊|font-size/large|;
 //   font-style: italic;
 //   font-weight: 400;
 // }
-// 
+
 // h4 {
 //   font-size: ◊|font-size/medium|;
 //   font-weight: 700;
 // }
-// 
+
 // h3 .mark, h4 .mark {
 //   transition: opacity ◊|animation/duration|;
 //   opacity: 0;
 //   margin-left: ◊|space/small|;
-//   color: ◊|color/secondary-content|;
+//   color: ◊|palette--secondary-content|;
 // }
-// 
+
 // h3:hover .mark, h4:hover .mark {
 //   opacity: 1;
 // }
-// 
+
 // h3 .mark a, h4 .mark a {
-//   color: ◊|color/secondary-content|;
+//   color: ◊|palette--secondary-content|;
 // }
-// 
+
 // hr {
 //   border: none;
 //   margin: ◊|space/none|;
 //   height: ◊|space/large|;
 // }
-// 
+
 // /****************************************************************************************************/
 // /* BODY */
-// 
+
 // body {
 //   ◊prefix['font-synthesis]{none}
 //   ◊prefix['font-kerning]{normal}
 //   ◊prefix['text-rendering]{optimizeLegibility}
 //   font-family: ◊|font-family/main|;
 //   font-size: ◊|font-size/medium|;
-//   background-color: ◊|color/background|;
-//   color: ◊|color/primary-content|;
+//   background-color: ◊|palette--background|;
+//   color: ◊|palette--primary-content|;
 //   line-height: ◊|line-height/medium|;
 // }
-// 
+
 // p {
 //   margin: ◊|space/none|;
 // }
-// 
+
 // p + p {
 //   text-indent: ◊|text-indent|;
 // }
-// 
+
 // @media ◊grid/bigger-screens {
 //   p                                 + aside + p,
 //   p                         + aside + aside + p,
@@ -349,146 +349,146 @@
 //     text-indent: ◊|text-indent|;
 //   }
 // }
-// 
+
 // /****************************************************************************************************/
 // /* MARGIN NOTES */
-// 
+
 // @media ◊grid/smaller-screens {
 //   aside {
 //     ◊insertion
-//     border-left: ◊|border-width/thick| solid ◊|color/secondary-content|;
+//     border-left: ◊|border-width/thick| solid ◊|palette--secondary-content|;
 //     border-radius: ◊|border-radius|;
 //     padding: ◊|text-indent|;
 //     padding-left: calc(◊|text-indent| - ◊|border-width/thick|);
-//     background-color: ◊|color/background-highlight|;
-//     color: ◊|color/emphasized-content|;
+//     background-color: ◊|palette--background-highlight|;
+//     color: ◊|palette--emphasized-content|;
 //   }
 // }
-// 
+
 // @media ◊grid/bigger-screens {
 //   aside {
 //     font-size: ◊|font-size/small|;
 //     margin-bottom: ◊|space/large|;
 //   }
 // }
-// 
+
 // /****************************************************************************************************/
 // /* FIGURES */
-// 
+
 // figure {
 //   ◊insertion
 //   text-align: center;
 // }
-// 
+
 // figcaption {
 //   font-style: italic;
 // }
-// 
+
 // img, svg {
 //   max-width: 100%;
 //   height: auto;
 // }
-// 
+
 // /****************************************************************************************************/
 // /* CODE */
-// 
+
 // pre, code, var, samp, kbd {
 //   font-family: ◊|font-family/monospace|;
 // }
-// 
+
 // .code-block {
 //   ◊insertion
 //   font-size: ◊|font-size/extra-small|;
 // }
-// 
+
 // pre {
-//   background-color: ◊|color/background|;
+//   background-color: ◊|palette--background|;
 //   overflow: auto;
 //   padding: ◊|text-indent|;
 //   padding-left: calc(◊|text-indent| - ◊|border-width/thin|);
-//   border: ◊|border-width/thin| solid ◊|color/secondary-content|;
+//   border: ◊|border-width/thin| solid ◊|palette--secondary-content|;
 //   border-radius: ◊|border-radius|;
 //   margin: ◊|space/none|;
 // }
-// 
+
 // ◊(file->string "stylesheets/solarized-light.css.p")
-// 
+
 // /****************************************************************************************************/
 // /* LISTS */
-// 
+
 // ul, ol {
 //   ◊insertion
 //   padding-left: ◊|text-indent|;
 // }
-// 
+
 // /****************************************************************************************************/
 // /* TABLES */
-// 
+
 // table {
 //   ◊insertion
 // }
-// 
+
 // tbody + tbody::before {
 //   content: "";
 //   display: block;
 //   height: ◊|space/small|;
 // }
-// 
+
 // th, td {
 //   padding: ◊|space/none|;
 //   padding-right: ◊|space/medium|;
 // }
-// 
+
 // th:last-child, td:last-child {
 //   padding-right: ◊|space/none|;
 // }
-// 
+
 // th {
 //   font-weight: 700;
 //   text-align: left;
 // }
-// 
+
 // /****************************************************************************************************/
 // /* REFERENCES */
-// 
+
 // a {
 //   transition: background-color ◊|animation/duration|;
 //   border-radius: ◊|border-radius|;
-//   color: ◊|color/primary-content|;
+//   color: ◊|palette--primary-content|;
 // }
-// 
+
 // a:hover {
-//   background-color: ◊|color/background-highlight|;
-//   color: ◊|color/emphasized-content|;
+//   background-color: ◊|palette--background-highlight|;
+//   color: ◊|palette--emphasized-content|;
 // }
-// 
+
 // @media ◊grid/smaller-screens {
 //   aside a {
-//     color: ◊|color/emphasized-content|;
+//     color: ◊|palette--emphasized-content|;
 //   }
-// 
+
 //   aside a:hover {
-//     background-color: ◊|color/background|;
-//     color: ◊|color/primary-content|;
+//     background-color: ◊|palette--background|;
+//     color: ◊|palette--primary-content|;
 //   }
 // }
-// 
+
 // /****************************************************************************************************/
 // /* INLINE */
-// 
+
 // small, small a {
 //   font-size: ◊|font-size/small|;
-//   color: ◊|color/secondary-content|;
+//   color: ◊|palette--secondary-content|;
 // }
-// 
+
 // .fraction--slash {
 //   margin: ◊|space/none| -◊|space/extra-extra-small|;
 // }
-// 
+
 // .placeholder {
-//   color: ◊|color/blue|;
+//   color: ◊|palette--blue|;
 // }
-// 
+
 // .menu-option {
 //   font-weight: 700;
 // }
