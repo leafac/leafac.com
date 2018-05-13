@@ -98,10 +98,11 @@ O Fim da Tempestade
 
 [MP3](https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade/o-fim-da-tempestade.mp3) · [Source](https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade/o-fim-da-tempestade.zip)
 
-Samples:
-
+<details markdown="1">
+<summary>Samples</summary>
 - <https://www.freesound.org/people/ermine/sounds/27418/>
 - <https://www.freesound.org/people/AVstudent/sounds/344994/>
+</details>
 
 Criatividade
 ============
