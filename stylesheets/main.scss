@@ -188,8 +188,8 @@ $animation--duration: 0.3s;
 }
 
 body {
-  margin: $space--large auto;
-  padding: $space--none $grid--padding;
+  margin: $space--none auto;
+  padding: $space--medium $grid--padding;
   max-width: $grid--main;
 }
 
@@ -225,9 +225,9 @@ body {
 // HEADERS
 
 body > header {
-  padding-bottom: $space--small;
-  border-bottom: $border-width--thin solid $palette--secondary-content;
-  margin-bottom: $space--extra-large;
+  h1 {
+    margin-top: $space--none;
+  }
   nav a {
     @include inline-block-enumeration;
     font-size: $font-size--small;
@@ -241,13 +241,16 @@ body > header {
       margin-bottom: -$border-width--thin;
     }
   }
+  padding-bottom: $space--small;
+  border-bottom: $border-width--thin solid $palette--secondary-content;
+  margin-bottom: $space--extra-large;
 }
 
 main > header {
-  margin-bottom: $space--medium;
   h1 {
     margin-bottom: $space--extra-small;
   }
+  margin-bottom: $space--medium;
 }
 
 time {
