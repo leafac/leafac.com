@@ -1,10 +1,4 @@
 ---
-# 1. [Zotero] Export Items to CSL JSON & BibTeX
-# 2. Upload ‘files’ to ‘files.leafac.com’
-# 3. Convert CSL JSON into YAML: ‘ruby -r yaml -e 'puts YAML.dump(YAML.load(STDIN.read))'’
-# 4. Copy ‘bibtex’ entry.
-# 5. Create ‘attachments’ entry.
-# TODO: GitHub...
 layout: default
 title: "Research"
 date: 2018-05-17
