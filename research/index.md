@@ -47,8 +47,8 @@ publications:
       	author = {{Leandro Facchinetti}},
       	month = nov,
       	year = {2017},
-      	file = {Facchinetti - SDL A DSL for Cryptographic Schemes.pdf:/Users/leafac/Zotero/storage/6A35YXPD/Facchinetti - SDL A DSL for Cryptographic Schemes.pdf:application/pdf}
       }
+    attachments: [["PDF", "Facchinetti - SDL A DSL for Cryptographic Schemes.pdf"]]
   - id: http://zotero.org/users/4828827/items/TJW5USER
     type: paper-conference
     title: Relative Store Fragments for Singleton Abstraction
@@ -85,8 +85,8 @@ publications:
           author = {{Leandro Facchinetti} and {Zachary Palmer} and {Scott F. Smith}},
           month = nov,
           year = {2017},
-          file = {Facchinetti et al. - 2017 - Relative Store Fragments for Singleton Abstraction.pdf:/Users/leafac/Zotero/storage/L9YPDZ5Q/Facchinetti et al. - 2017 - Relative Store Fragments for Singleton Abstraction.pdf:application/pdf}
       }
+    attachments: [["PDF", "Facchinetti et al. - 2017 - Relative Store Fragments for Singleton Abstraction.pdf"]]
   - id: http://zotero.org/users/4828827/items/NPG5Y85P
     type: speech
     title: Towards Practical Higher-Order Demand-Driven Program Analysis
@@ -125,8 +125,8 @@ publications:
       	author = {{Leandro Facchinetti}},
       	month = oct,
       	year = {2017},
-      	file = {Facchinetti - Towards Practical Higher-Order Demand-Driven Progr.pdf:/Users/leafac/Zotero/storage/SU3CXK8A/Facchinetti - Towards Practical Higher-Order Demand-Driven Progr.pdf:application/pdf;towards-practical-higher-order-demand-driven-program-analysis.key:/Users/leafac/Zotero/storage/BBDFG6AL/towards-practical-higher-order-demand-driven-program-analysis.key:application/x-iwork-keynote-sffkey}
       }
+    attachments: [["PDF", "Facchinetti - Towards Practical Higher-Order Demand-Driven Progr.pdf"], ["Slides", "towards-practical-higher-order-demand-driven-program-analysis.key"]]
   - id: http://zotero.org/users/4828827/items/V865FGTI
     type: report
     title: Practical Demand-Driven Program Analysis with Recursion
@@ -161,8 +161,8 @@ publications:
       	author = {{Leandro Facchinetti}},
       	month = oct,
       	year = {2016},
-      	file = {Facchinetti - Practical Demand-Driven Program Analysis with Recu.pdf:/Users/leafac/Zotero/storage/KI9GH7TW/Facchinetti - Practical Demand-Driven Program Analysis with Recu.pdf:application/pdf}
       }
+    attachments: [["PDF", "Facchinetti - Practical Demand-Driven Program Analysis with Recu.pdf"]]
   - id: http://zotero.org/users/4828827/items/AEVV98PS
     type: book
     title: Higher-Order Demand-Driven Program Analysis (Artifact)
@@ -197,8 +197,8 @@ publications:
       	month = jun,
       	year = {2016},
       	note = {Also appeared at the [Dagstuhl Artifacts Series](http://drops.dagstuhl.de/opus/volltexte/2016/6130/)},
-      	file = {DARTS-2-1-9-artifact-88e98fe9019cb2bb1e758be0ca6325f9.tgz:/Users/leafac/Zotero/storage/H6TRMXGE/DARTS-2-1-9-artifact-88e98fe9019cb2bb1e758be0ca6325f9.tgz:application/x-gzip;Leandro Facchinetti et al. - 2016 - Higher-Order Demand-Driven Program Analysis (Artif.pdf:/Users/leafac/Zotero/storage/FFQTCHT2/Leandro Facchinetti et al. - 2016 - Higher-Order Demand-Driven Program Analysis (Artif.pdf:application/pdf}
       }
+    attachments: [["PDF", "Leandro Facchinetti et al. - 2016 - Higher-Order Demand-Driven Program Analysis (Artif.pdf"], ["TGZ", "DARTS-2-1-9-artifact-88e98fe9019cb2bb1e758be0ca6325f9.tgz"]]
   - id: http://zotero.org/users/4828827/items/RKXIFGKR
     type: speech
     title: What is Your Function? Static Pattern Matching on Function Behavior
@@ -232,8 +232,8 @@ publications:
       	author = {{Leandro Facchinetti} and {Pottayil Harisanker Menon} and {Zachary Palmer} and {Alexander Rozenshteyn} and {Scott F. Smith}},
       	month = jun,
       	year = {2016},
-      	file = {Facchinetti et al. - What is Your Function Static Pattern Matching on .pdf:/Users/leafac/Zotero/storage/F9GGKD4W/Facchinetti et al. - What is Your Function Static Pattern Matching on .pdf:application/pdf}
       }
+    attachments: [["PDF", "Facchinetti et al. - What is Your Function Static Pattern Matching on .pdf"]]
   - id: http://zotero.org/users/4828827/items/IZSR5PBU
     type: paper-conference
     title: Pesquisa e Desenvolvimento de Robôs Táticos para Ambientes Internos
@@ -287,8 +287,8 @@ publications:
       	author = {{Fernando Osório} and {Denis Wolf} and {Kalinka Castelo Branco} and {Jó Ueyama} and {Gustavo Pessin} and {Leandro Fernandes} and {Maurício Dias} and {Leandro Couto} and {Daniel Sales} and {Diogo Correa} and {Matheus Nin} and {Leandro Lourenço Silva} and {Leonardo Bonetti} and {Leandro Facchinetti} and {Fabiano Hessel}},
       	month = dec,
       	year = {2011},
-      	file = {Osório et al. - Pesquisa e Desenvolvimento de Robôs Táticos para A.pdf:/Users/leafac/Zotero/storage/WM7FN8TZ/Osório et al. - Pesquisa e Desenvolvimento de Robôs Táticos para A.pdf:application/pdf}
       }
+    attachments: [["PDF", "Osório et al. - Pesquisa e Desenvolvimento de Robôs Táticos para A.pdf"]]
   - id: http://zotero.org/users/4828827/items/VUC75E8B
     type: speech
     title: Sistema de Navegação Visual baseado em Correlação de Imagens Visando a Aplicação
@@ -313,8 +313,8 @@ publications:
       	author = {{Leandro Facchinetti} and {Fernando Santos Osório}},
       	month = nov,
       	year = {2010},
-      	file = {Facchinetti and Osório - Sistema de Navegação Visual baseado em Correlação .pdf:/Users/leafac/Zotero/storage/WR3W7ECF/Facchinetti and Osório - Sistema de Navegação Visual baseado em Correlação .pdf:application/pdf}
       }
+    attachments: [["PDF", "Facchinetti and Osório - Sistema de Navegação Visual baseado em Correlação .pdf"]]
   - id: http://zotero.org/users/4828827/items/25ZBP9BS
     type: paper-conference
     title: Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação
@@ -359,8 +359,8 @@ publications:
       	author = {{Leandro Facchinetti} and {Fernando Santos Osório}},
       	month = oct,
       	year = {2010},
-      	file = {Facchinetti and Osório - 2010 - Navegação Visual de Robôs Móveis Autônomos Baseada.pdf:/Users/leafac/Zotero/storage/RB65J5TQ/Facchinetti and Osório - 2010 - Navegação Visual de Robôs Móveis Autônomos Baseada.pdf:application/pdf}
       }
+    attachments: [["PDF", "Facchinetti and Osório - 2010 - Navegação Visual de Robôs Móveis Autônomos Baseada.pdf"]]
   - id: http://zotero.org/users/4828827/items/YNQJ9ISI
     type: speech
     title: Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada
@@ -383,7 +383,7 @@ publications:
       	shorttitle = {Research and {Development} of {Autonomous} {Mobile} {Robots} with {Image}-{Correlation}-{Based} {Navigation}},
       	author = {{Leandro Facchinetti} and {Fernando Santos Osório}},
       	month = sep,
-      	year = {2010}
+      	year = {2010},
       }
 ---
 
@@ -391,7 +391,7 @@ Publications
 ============
 
 {% for publication in page.publications %}
-- **{% if publication.shortTitle %}*{{ publication.title }}* ({{ publication.shortTitle }}){% else %}{{ publication.title }}{% endif %}**. {{ publication.author | map: "literal" | array_to_sentence_string }}. {% if publication.event %}{% if publication.URL %}[{{ publication.event }}]({{ publication.URL }}){% else %}{{ publication.event }}{% endif %}.{% endif %} {% if publication.container-title %}{% if publication.container-title %}[{{ publication.container-title }}]({{ publication.URL }}){% else %}{{ publication.container-title }}{% endif %}.{% endif %} {% if publication.collection-title %}{% if publication.URL %}[{{ publication.collection-title }}]({{ publication.URL }}){% else %}{{ publication.collection-title }}{% endif %}.{% endif %} {% if publication.genre %}{{ publication.genre }}.{% endif %} {% if publication.publisher %}{{ publication.publisher }}.{% endif %} {{ publication.issued.date-parts[0][0] }}.
+- **{% if publication.shortTitle %}*{{ publication.title }}* ({{ publication.shortTitle }}){% else %}{{ publication.title }}{% endif %}**. {{ publication.author | map: "literal" | array_to_sentence_string }}. {% if publication.event %}{% if publication.URL %}[{{ publication.event }}]({{ publication.URL }}){% else %}{{ publication.event }}{% endif %}.{% endif %} {% if publication.container-title %}{% if publication.container-title %}[{{ publication.container-title }}]({{ publication.URL }}){% else %}{{ publication.container-title }}{% endif %}.{% endif %} {% if publication.collection-title %}{% if publication.URL %}[{{ publication.collection-title }}]({{ publication.URL }}){% else %}{{ publication.collection-title }}{% endif %}.{% endif %} {% if publication.genre %}{{ publication.genre }}.{% endif %} {% if publication.publisher %}{{ publication.publisher }}.{% endif %} {% if publication.note %}{{ publication.note }}.{% endif %} {{ publication.issued.date-parts[0][0] }}.
 
   {% if publication.abstract %}
   <details markdown="1">
@@ -407,12 +407,7 @@ Publications
   ```
   </details>
 
-  {% if publication.archive %}
-  [[Publisher]({{publication.archive}})]
-  {% endif %}
-  {% for attachment in publication.attachments %}
-  [[{{attachment[0]}}](https://f001.backblazeb2.com/file/files-leafac-com/research/{{attachment[1]}})]
-  {% endfor %}
+  {% for attachment in publication.attachments %}[[{{attachment[0]}}](https://f001.backblazeb2.com/file/files-leafac-com/research/{{ attachment[1] | url_encode }})]{% endfor %}{% if publication.archive %}[[Publisher]({{publication.archive}})]{% endif %}
 {% endfor %}
 
 Service
