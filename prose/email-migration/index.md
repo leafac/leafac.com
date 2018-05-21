@@ -122,7 +122,7 @@ Start the local email server:
 $ ulimit -n 1024 && sudo /usr/local/sbin/dovecot -F
 ```
 
-Confirm that email server is running by inspecting the startup log messages and the contents of the <span class="placeholder" markdown="1">\<migration-directory></span>. Dovecot must have created its administration files and directories, otherwise review the steps thus far.
+Confirm that the email server is running by inspecting the startup log messages and the contents of the <span class="placeholder" markdown="1">\<migration-directory></span>. Dovecot must have created its administration files and directories, otherwise review the steps thus far.
 
 * * *
 
