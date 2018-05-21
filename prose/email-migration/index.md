@@ -144,7 +144,7 @@ $ sudo doveadm reload
 ```
 </aside>
 
-| Email Address | <span class="placeholder" markdown="1">\<user></span>@localhost |
+| Email Address | <span class="placeholder" markdown="1">\<user></span>`@localhost` |
 | Server | `localhost` |
 | Protocol | IMAP |
 | Port | 143 |
