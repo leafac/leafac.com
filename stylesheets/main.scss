@@ -360,6 +360,7 @@ figure {
 
 figcaption {
   font-style: italic;
+  font-size: $font-size--small;
 }
 
 img, svg {
@@ -456,5 +457,6 @@ summary {
 // INLINE
 
 .placeholder {
+  @extend code;
   color: $palette--blue;
 }
