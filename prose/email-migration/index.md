@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Email Migration: The Ultimate Solution to a Ridiculous Problem"
-date: 2018-05-21
+date: 2018-05-22
 ---
 
 <aside markdown="1">
@@ -177,17 +177,15 @@ Appendix: Dovecot Configuration
 Refer to [Dovecot’s documentation](https://www.dovecot.org/documentation.html) for more details.
 </aside>
 
-Dovecot supports many kinds of services, for example, the IMAP and POP3 email server protocols, and authentication for other applications. In our local email server, we only want the IMAP service:
+Dovecot supports many kinds of services, for example, the IMAP and POP3 email server protocols. In our local email server, we only want the IMAP service:
 
 ```
 protocols = imap
 ```
 
-Dovecot supports multiple users and has a database with their credentials. The database manager might need to collaborate with other applications, for example, a web-client which allows users to change their passwords. We do not want this complexity, so we hard-code in the configuration file the credentials for a single user, ourselves:
+Dovecot supports multiple users and stores a database of their credentials. We use the simplest possible setting, with a single user whose credentials are hard-coded in the configuration file:
 
-◊margin-note{Dovecot is not a single process, but a collection of processes. They perform specific tasks and drop to only the necessary privileges, which enhances security and stability. Here we configure some of these processes to run as our user, which prevents permission problems with the files and directories Dovecot generates in the ◊path{<span class="placeholder" markdown="1">\<migration-directory></span>}.}
-
-◊code/block{
+<pre>
 default_login_user = <span class="placeholder" markdown="1">\<user></span>
 default_internal_user = <span class="placeholder" markdown="1">\<user></span>
 
@@ -200,11 +198,11 @@ passdb {
   driver = static
   args = password=<span class="placeholder" markdown="1">\<password></span>
 }
-}
+</pre>
 
 When Dovecot has identified the user, it needs to find the corresponding mailbox. Again, we hard-code the location in the configuration file:
 
-◊code/block{
+<pre>
 mail_uid = <span class="placeholder" markdown="1">\<user></span>
 mail_gid = <span class="placeholder" markdown="1">\<group></span>
 mail_location = maildir:<span class="placeholder" markdown="1">\<migration-directory></span>
@@ -212,11 +210,11 @@ mail_location = maildir:<span class="placeholder" markdown="1">\<migration-direc
 namespace inbox {
   inbox = yes
 }
-}
+</pre>
 
-Finally, we enable logging in the most verbose level, to help find configuration issues. Also, we change the log path to ◊path{/dev/stderr} so that we can read it while running Dovecot on the foreground:
+Finally, we enable the most verbose level of logging and change the log path to `/dev/stderr` so we see log entries on the console when Dovecot runs on the foreground:
 
-◊code/block{
+```
 log_path = /dev/stderr
 auth_verbose = yes
 auth_verbose_passwords = yes
@@ -224,4 +222,4 @@ auth_debug = yes
 auth_debug_passwords = yes
 mail_debug = yes
 verbose_ssl = yes
-}
+```
