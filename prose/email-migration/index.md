@@ -42,10 +42,10 @@ First, install the local email server, [Dovecot](https://www.dovecot.org). For e
 $ brew install dovecot
 ```
 
-Create a directory to hold the temporary Dovecot mailboxes:
+Create a directory to hold the local email server mailbox:
 
 <pre>
-$ mkdir <span class="placeholder" markdown="1">\<migration-directory></span>
+$ mkdir <span class="placeholder" markdown="1">\<mailbox></span>
 </pre>
 
 <aside markdown="1">
@@ -77,7 +77,7 @@ passdb {
 
 mail_uid = <span class="placeholder" markdown="1">\<user></span>
 mail_gid = <span class="placeholder" markdown="1">\<group></span>
-mail_location = maildir:<span class="placeholder" markdown="1">\<migration-directory></span>
+mail_location = maildir:<span class="placeholder" markdown="1">\<mailbox></span>
 
 namespace inbox {
   inbox = yes
@@ -104,7 +104,7 @@ verbose_ssl = yes
 
 - <span class="placeholder" markdown="1">\<password></span>: An arbitrary password.
 
-- <span class="placeholder" markdown="1">\<migration-directory></span>: The directory for the temporary Dovecot mailboxes created above.
+- <span class="placeholder" markdown="1">\<mailbox></span>: The local email server mailbox created above.
 
 Migrate
 =======
@@ -115,25 +115,25 @@ Start the local email server:
 `ulimit -n`: Dovecot needs to open more than the default limit of 256 files.  
 `sudo`: Dovecot needs to bind to a network port below 1024. Specifically, port 143, for IMAP.  
 `/usr/local/sbin/dovecot`: Path to the `dovecot(1)` executable installed via Homebrew. Another common path is `/usr/sbin/dovecot`.  
-`-F`: Run Dovecot on the foreground, instead of as a daemon. Stop it with `Ctrl + C`.
+`-F`: Run Dovecot in the foreground, instead of as a daemon. Stop it with `Ctrl + C`.
 </aside>
 
 ```
 $ ulimit -n 1024 && sudo /usr/local/sbin/dovecot -F
 ```
 
-Confirm that the email server is running by inspecting the startup log messages and the contents of the <span class="placeholder" markdown="1">\<migration-directory></span>. Dovecot must have created its administration files and directories, otherwise review the steps thus far.
+Confirm that the local email server is running by inspecting the startup log messages and the contents of the <span class="placeholder" markdown="1">\<mailbox></span>. Dovecot must have created its administration files and directories, otherwise review the steps thus far.
 
 * * *
 
 Connect the email clients (for example, Thunderbird and Apple Mail) to the local email server using the following settings:
 
 <aside markdown="1">
-An email client may insist on configuring a server to send emails (SMTP). Let this part of the configuration fail or reuse the settings from another account.
+An email client may insist having a server to send emails (SMTP). Let this part of the configuration fail or reuse the settings from another account.
 </aside>
 
 <aside markdown="1">
-Ignore warnings about insecure connections. We setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available for the local machine.
+Ignore warnings about insecure connections. We have setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available to the local machine.
 </aside>
 
 <aside markdown="1">
@@ -151,22 +151,22 @@ $ sudo doveadm reload
 | User | <span class="placeholder" markdown="1">\<user></span> |
 | Password | <span class="placeholder" markdown="1">\<password></span> |
 
-On the old email client, move emails from the local folders to the local email server. Then, on the new email client, move emails from the local email server to the local folders. Finally, close the email clients for them to commit pending transactions and check the <span class="placeholder" markdown="1">\<migration-directory></span>, which should contain only empty directories and Dovecot’s administration files.
+On the old email client, move emails from the local folders to the local email server. Then, on the new email client, move emails from the local email server to the local folders. Finally, close the email clients for them to commit pending transactions and check the <span class="placeholder" markdown="1">\<mailbox></span>, which should only contain empty directories and Dovecot’s administration files.
 
 Teardown
 ========
 
-After the migration is complete, remove in the email clients the connection configuration for the local email server. Then, stop the server by killing the process with `Ctrl + C` or by running the following command on a separate terminal:
+After the migration is complete, remove the connection configuration for the local email server in the email clients. Then, stop the server by killing the process with `Ctrl + C` or by running the following command on a separate terminal:
 
 ```
 $ sudo doveadm stop
 ```
 
-Remove Dovecot’s configuration and <span class="placeholder" markdown="1">\<migration-directory></span>, and uninstall it:
+Remove Dovecot’s configuration and <span class="placeholder" markdown="1">\<mailbox></span>, and uninstall it:
 
 <pre>
 $ rm /usr/local/etc/dovecot/dovecot.conf
-$ rm -rf <span class="placeholder" markdown="1">\<migration-directory></span>
+$ rm -rf <span class="placeholder" markdown="1">\<mailbox></span>
 $ brew uninstall dovecot
 </pre>
 
@@ -205,14 +205,14 @@ When Dovecot has identified the user, it needs to find the corresponding mailbox
 <pre>
 mail_uid = <span class="placeholder" markdown="1">\<user></span>
 mail_gid = <span class="placeholder" markdown="1">\<group></span>
-mail_location = maildir:<span class="placeholder" markdown="1">\<migration-directory></span>
+mail_location = maildir:<span class="placeholder" markdown="1">\<mailbox></span>
 
 namespace inbox {
   inbox = yes
 }
 </pre>
 
-Finally, we enable the most verbose level of logging and change the log path to `/dev/stderr` so we see log entries on the console when Dovecot runs on the foreground:
+Finally, we enable the most verbose level of logging and change the log path to `/dev/stderr` so we see log entries on the console when Dovecot runs in the foreground:
 
 ```
 log_path = /dev/stderr
