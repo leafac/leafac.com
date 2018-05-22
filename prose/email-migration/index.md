@@ -8,16 +8,16 @@ date: 2018-05-21
 **Pre-requisites**: Familiarity with the command-line.
 </aside>
 
-We switch email clients from time to time, and when we do, we need to migrate the local email history from one application to the other. This may seem easy, because email clients generally include migration assistants and store emails in standard formats, for example, `.eml` and `.mbox`. But recently I was migrating from [Thunderbird](https://www.mozilla.org/en-US/thunderbird/) to [Apple Mail](https://support.apple.com/mail) and these tools failed: they lost emails, concatenated all emails together, or created a new mailbox for each email.
+We switch email clients from time to time, and when we do, we need to migrate the local email history from one application to the other. This may seem easy, because email clients generally include migration assistants and store emails in standard formats, for example, `.eml` and `.mbox`. But recently I was migrating from [Thunderbird](https://www.mozilla.org/en-US/thunderbird/) to [Apple Mail](https://support.apple.com/mail) and these tools failed: they either lost emails, or concatenated all emails together, or created a new mailbox for each email.
 
-Email migration is a ridiculous problem, and we introduce the ultimate solution: setting up a local email server. An email server is the common denominator between otherwise incompatible email clients, but common email servers (for example, [iCloud](https://www.icloud.com) and [Gmail](https://www.google.com/gmail/)) are impractical for email migration. While simpler to use, these email servers would require us to upload our whole local email history only to re-download it in a new email client. With a local email server we accelerate an email migration that could take days to a few hours.
+Email migration should be easy, yet I suffered from all these ridiculous problems, so I developed the ultimate solution: setting up a local email server. An email server is the common denominator between otherwise incompatible email clients, but common email servers (for example, [iCloud](https://www.icloud.com) and [Gmail](https://www.google.com/gmail/)) are impractical for email migration. While simpler to use, these email servers would require uploading the whole local email history only to re-download it in a new email client. With a local email server we accelerate an email migration that could take days to a few hours.
 
 <figure markdown="1">
 {% include_relative migration.svg %}
 <figcaption markdown="1">
 **Left**: Migrating the local email history using the migration assistant fails.  
 **Center**: Migrating using common email servers (for example, iCloud and Gmail) succeeds, but is impractical.  
-**Right**: Our solution, migrating using a local email server (Dovecot), works best.
+**Right**: Our solution, using a local email server (Dovecot), works best.
 </figcaption>
 </figure>
 
@@ -27,7 +27,7 @@ Our technique on a high level:
 2. Connect both the old and the new email clients to the local email server.
 3. Transfer the local email history from the old email client to the local email server.
 4. Transfer the local email history from the local email server to the new email client.
-5. Stop and uninstall the email server.
+5. Stop and uninstall the local email server.
 
 Setup
 =====
@@ -133,7 +133,7 @@ An email client may insist on configuring a server to send emails (SMTP). Let th
 </aside>
 
 <aside markdown="1">
-Ignore warnings about insecure connections. We setup Dovecot insecurely on purpose because it is simpler and sufficient—the email migration is local.
+Ignore warnings about insecure connections. We setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available for the local machine.
 </aside>
 
 <aside markdown="1">
@@ -151,38 +151,39 @@ $ sudo doveadm reload
 | User | <span class="placeholder" markdown="1">\<user></span> |
 | Password | <span class="placeholder" markdown="1">\<password></span> |
 
-On the source email client, move emails from the local folders to the temporary server. Wait for completion and then, on the target email client, move emails from the temporary server to local folders. Wait for completion again. To guarantee that the process succeeded, close the email clients so that they commit pending transactions to the server and check the ◊path{<span class="placeholder" markdown="1">\<migration-directory></span>}, it should contain only empty directories and Dovecot’s administration files.
+On the old email client, move emails from the local folders to the local email server. Then, on the new email client, move emails from the local email server to the local folders. Finally, close the email clients for them to commit pending transactions and check the <span class="placeholder" markdown="1">\<migration-directory></span>, which should contain only empty directories and Dovecot’s administration files.
 
-◊section['teardown]{Teardown}
+Teardown
+========
 
-After the migration is complete, remove the configurations connecting the email clients to the temporary email server. Then, stop the server by killing the process or running the following command on a separate terminal:
+After the migration is complete, remove in the email clients the connection configuration for the local email server. Then, stop the server by killing the process with `Ctrl + C` or by running the following command on a separate terminal:
 
-◊code/block{
+```
 $ sudo doveadm stop
-}
+```
 
-Finally, remove Dovecot’s configuration and ◊path{<span class="placeholder" markdown="1">\<migration-directory></span>}, and uninstall it:
+Remove Dovecot’s configuration and <span class="placeholder" markdown="1">\<migration-directory></span>, and uninstall it:
 
-◊margin-note{Again, the location of ◊path{dovecot.conf} varies, be consistent with the choice made at ◊reference["#configuration"]{configuration}.}
-
-◊code/block{
+<pre>
 $ rm /usr/local/etc/dovecot/dovecot.conf
 $ rm -rf <span class="placeholder" markdown="1">\<migration-directory></span>
 $ brew uninstall dovecot
-}
+</pre>
 
 Appendix: Dovecot Configuration
 ===============================
 
-◊margin-note{Refer to Dovecot’s manual for more details on each individual configuration option.}
+<aside markdown="1">
+Refer to [Dovecot’s documentation](https://www.dovecot.org/documentation.html) for more details.
+</aside>
 
-Dovecot supports many kinds of services, for example, the IMAP and POP3 email server protocols, and authentication for other applications. In our temporary email server, we only want the IMAP service:
+Dovecot supports many kinds of services, for example, the IMAP and POP3 email server protocols, and authentication for other applications. In our local email server, we only want the IMAP service:
 
-◊code/block{
+```
 protocols = imap
-}
+```
 
-Usually email servers support multiple users and have to manage a database with their credentials. This database management might need to collaborate with other applications, for example, a web-client which allows users to change their passwords. We do not want this complexity, so we hard-code in the configuration file the credentials for a single user, ourselves:
+Dovecot supports multiple users and has a database with their credentials. The database manager might need to collaborate with other applications, for example, a web-client which allows users to change their passwords. We do not want this complexity, so we hard-code in the configuration file the credentials for a single user, ourselves:
 
 ◊margin-note{Dovecot is not a single process, but a collection of processes. They perform specific tasks and drop to only the necessary privileges, which enhances security and stability. Here we configure some of these processes to run as our user, which prevents permission problems with the files and directories Dovecot generates in the ◊path{<span class="placeholder" markdown="1">\<migration-directory></span>}.}
 
