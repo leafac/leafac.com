@@ -6,7 +6,7 @@ table-of-contents: table-of-contents.html
 ---
 
 <aside markdown="1">
-**Pre-requisites**: Functional programming; immutable data structures; pattern matching; Racket.
+**Pre-requisites**: Functional programming; pattern matching; Racket.
 </aside>
 
 I enjoy repurposing tools for tasks clearly beyond their intended design: I learn how the tools work and where they break. Besides, it is fun. It is also a way to avoid intimidating theory that might be associated with these tools, a common problem for more technical tools, particularly those designed by researchers for other researchers. While I play, I discover the beautiful, simple ideas that may have been obscured by the Greek letters and the jargon. It is an exercise in technical virtuosity, but more importantly, in aesthetics and creativity.

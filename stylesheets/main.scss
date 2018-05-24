@@ -116,17 +116,27 @@ $animation--duration: 0.3s;
 // ---------------------------------------------------------------------------------------------------
 // MIXINS
 
-@mixin inline-block-enumeration {
-  line-height: $line-height--large;
-  display: inline-block;
-  margin-right: $space--medium;
-}
-
 @mixin insertion {
   display: block;
   box-sizing: border-box;
   width: 100%;
   margin: $space--small $space--none;
+}
+
+@mixin box {
+  border: $border-width--thin solid $palette--secondary-content;
+  border-radius: $border-radius;
+  padding: $text-indent;
+  padding-left: calc($text-indent - $border-width--thin);
+}
+
+@mixin navigation-links {
+  a {
+    text-decoration: none;
+    &.active {
+      text-decoration: underline;
+    }
+  }
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -228,17 +238,12 @@ body > header {
   h1 {
     margin-top: $space--none;
   }
-  nav a {
-    @include inline-block-enumeration;
-    font-size: $font-size--small;
-    text-transform: uppercase;
-    letter-spacing: $letter-spacing;
-    text-decoration: none;
-    &.active {
-      border-bottom-left-radius: $border-radius--none;
-      border-bottom-right-radius: $border-radius--none;
-      border-bottom: $border-width--thin solid $palette--secondary-content;
-      margin-bottom: -$border-width--thin;
+  nav {
+    @include navigation-links;
+     a {
+      line-height: $line-height--large;
+      display: inline-block;
+      margin-right: $space--medium;
     }
   }
   padding-bottom: $space--small;
@@ -255,25 +260,11 @@ main > header {
 
 .table-of-contents {
   @include insertion;
-  border: $border-width--thin solid $palette--secondary-content;
-  border-radius: $border-radius;
+  @include box;
+  @include navigation-links;
   columns: 2;
-  padding: $text-indent;
   ol {
-    margin: 0;
-  }
-  a {
-    @include inline-block-enumeration;
-    font-size: $font-size--small;
-    text-transform: uppercase;
-    letter-spacing: $letter-spacing;
-    text-decoration: none;
-    &.active {
-      border-bottom-left-radius: $border-radius--none;
-      border-bottom-right-radius: $border-radius--none;
-      border-bottom: $border-width--thin solid $palette--secondary-content;
-      margin-bottom: -$border-width--thin;
-    }
+    margin: $space--none;
   }
 }
 
@@ -405,12 +396,9 @@ pre, code {
 }
 
 pre {
+  @include box;
   background-color: $palette--background;
   overflow: auto;
-  padding: $text-indent;
-  padding-left: calc($text-indent - $border-width--thin);
-  border: $border-width--thin solid $palette--secondary-content;
-  border-radius: $border-radius;
   .code-block & {
     margin: $space--none;
   }
