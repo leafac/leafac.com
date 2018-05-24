@@ -2,6 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 date: 2018-05-24
+table-of-contents: table-of-contents.html
 ---
 
 <aside markdown="1">
@@ -17,20 +18,3 @@ But at its core PLT Redex is just a functional programming language with sophist
 * * *
 
 We start with [Peg Solitaire’s rules](#game-rules), and we model it in PLT Redex: the [data structures](#data-structures) become a language and the [moves](#moves) become a non-deterministic relation. We then use PLT Redex visualization tools to [play the game](#play). Next, we reach the limits of the tools capabilities and try to use our model to find a way to [win](#win) the game. We look at [other limitations](#other-limitations) and [conclude](#conclusion).
-
-Acknowledgments
-===============
-
-Thanks to the following people for providing feedback on this article: [P.C. Shyamshankar](https://cs.jhu.edu/~shyam/), [Scott Moore](http://www.thinkmoore.net/), [Allan Vital](http://www.allanvital.com/) and [Rafael da Silva Almeida](http://rafaelalmeida.net/).
-
-Appendix: Listing
-=================
-
-<div class="full-width" markdown="1">
-<div class="code-block" markdown="1">
-[peg-solitaire.rkt](peg-solitaire.rkt)
-```racket
-{% include_relative peg-solitaire.rkt %}
-```
-</div>
-</div>

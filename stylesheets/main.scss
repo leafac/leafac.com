@@ -253,6 +253,30 @@ main > header {
   margin-bottom: $space--medium;
 }
 
+.table-of-contents {
+  @include insertion;
+  border: $border-width--thin solid $palette--secondary-content;
+  border-radius: $border-radius;
+  columns: 2;
+  padding: $text-indent;
+  ol {
+    margin: 0;
+  }
+  a {
+    @include inline-block-enumeration;
+    font-size: $font-size--small;
+    text-transform: uppercase;
+    letter-spacing: $letter-spacing;
+    text-decoration: none;
+    &.active {
+      border-bottom-left-radius: $border-radius--none;
+      border-bottom-right-radius: $border-radius--none;
+      border-bottom: $border-width--thin solid $palette--secondary-content;
+      margin-bottom: -$border-width--thin;
+    }
+  }
+}
+
 time {
   font-weight: 400;
   font-size: $font-size--small;

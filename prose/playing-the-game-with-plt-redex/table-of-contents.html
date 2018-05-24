@@ -1,0 +1,13 @@
+<nav class="table-of-contents">
+  <ol>
+    <li><a href="index"{% unless page.url contains ".html" %} class="active"{% endunless %}>Introduction Game Rules Game Rules </a></li>
+    <li><a href="game-rules"{% if page.url contains "game-rules.html" %} class="active"{% endif %}>Game Rules</a></li>
+    <li><a href="data-structures"{% if page.url contains "data-structures.html" %} class="active"{% endif %}>Data Structures</a></li>
+    <li><a href="moves"{% if page.url contains "moves.html" %} class="active"{% endif %}>Moves</a></li>
+    <li><a href="play"{% if page.url contains "play.html" %} class="active"{% endif %}>Play</a></li>
+    <li><a href="win"{% if page.url contains "win.html" %} class="active"{% endif %}>Win</a></li>
+    <li><a href="other-limitations"{% if page.url contains "other-limitations.html" %} class="active"{% endif %}>Other Limitations</a></li>
+    <li><a href="conclusion"{% if page.url contains "conclusion.html" %} class="active"{% endif %}>Conclusion</a></li>
+    <li><a href="peg-solitaire.rkt">Appendix: Listing</a></li>
+  </ol>
+</nav>

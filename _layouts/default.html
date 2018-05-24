@@ -30,9 +30,17 @@
           {% if page.date %}
             <time>{{ page.date }}</time>
           {% endif %}
+          {% if page.table-of-contents %}
+            {% include_relative {{ page.table-of-contents }} %}
+          {% endif %}
         </header>
       {% endif %}
       {{ content }}
+      {% if page.table-of-contents %}
+        <footer>
+          {% include_relative {{ page.table-of-contents }} %}
+        </footer>
+      {% endif %}
     </main>
   </body>
 </html>
