@@ -135,6 +135,7 @@ $animation--duration: 0.3s;
     text-decoration: none;
     &.active {
       text-decoration: underline;
+      color: $palette--emphasized-content;
     }
   }
 }
