@@ -359,6 +359,7 @@ p {
 aside {
   @include smaller-screens {
     @include insertion;
+    font-size: $font-size--medium;
     border-left: $border-width--thick solid $palette--secondary-content;
     border-radius: $border-radius;
     padding: $text-indent;

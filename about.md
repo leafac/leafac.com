@@ -49,7 +49,7 @@ Work Experience
 [Raise Sistemas](http://raisesistemas.com.br/)
 ----------------------------------------------
 
-<aside markdown="span">I had to leave Raise Sistemas after six months because I got accepted into a Ph.D. program.</aside>*Software developer*. 2014-02 – 2014-08.
+*Software developer*. 2014-02 – 2014-08.<label class="margin-note"><input type="checkbox"><span markdown="1">I had to leave Raise Sistemas after six months because I got accepted into a Ph.D. program.</span></label>
 
 - [Raise Sistemas](http://raisesistemas.com.br/) is a product start-up.
 - I developed new features and maintained an existing medium-sized Ruby on Rails application.
