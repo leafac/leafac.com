@@ -53,6 +53,7 @@ $space--extra-large:       2rem;
 
 $font-family--main:            "Charter", "Iowan Old Style", "Georgia", serif;
 $font-family--monospace:       "Fira Mono", "Menlo", "Monaco", "Courier New", monospace;
+$font-size--extra-extra-small: rem(9px);
 $font-size--extra-small:       rem(12px);
 $font-size--small:             rem(13px);
 $font-size--medium:            rem(16px);
@@ -138,6 +139,12 @@ $animation--duration: 0.3s;
       color: $palette--emphasized-content;
     }
   }
+}
+
+@mixin superscript {
+  vertical-align: super;
+  font-size: $font-size--extra-extra-small;
+  font-weight: 700;
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -363,6 +370,37 @@ aside {
   @include bigger-screens {
     font-size: $font-size--small;
     margin-bottom: $space--large;
+  }
+}
+
+body {
+  counter-reset: margin-note;
+}
+
+.margin-note {
+  &::before {
+    @include superscript;
+    counter-increment: margin-note;
+    content: counter(margin-note);
+  }
+  & > input[type="checkbox"] {
+    display: none;
+    @include smaller-screens {
+      &:checked + span {
+        display: block;
+      }
+    }
+  }
+  & > span {
+    @extend aside;
+    &::before {
+      @include superscript;
+      content: counter(margin-note);
+      margin-right: $space--small;
+    }
+    @include smaller-screens {
+      display: none;
+    }
   }
 }
 
