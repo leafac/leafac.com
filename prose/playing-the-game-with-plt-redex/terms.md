@@ -100,7 +100,7 @@ In summary:
 
 | | `define` | Racket | terms | `unquote` | `,peg` |
 | | `define-term` | terms | Racket | `term` | `(term hole)` |
-| **Names defined with** | **_____________ are naturally available in** | **_____ but can be accessed in** | **_____ with** | **_____, for example,** | **___________** |
+| **Names defined with** | **______________ are available in** | **_______ but can be accessed in** | **_______ with** | **________, for example,** | **_____________** |
 
 </div>
 
