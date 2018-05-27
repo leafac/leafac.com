@@ -26,7 +26,7 @@ At each move, a peg can jump over its immediate neighbor on the North, East, Sou
     ● ● ●             ● ● ●
     ● <span class="active">●</span> ●             ● ○ ●
 ● ● ● <span class="jumped-over">●</span> ● ● ●     ● ● ● <span class="jumped-over">○</span> ● ● ●
-● ● ● ○ ● ● ●  →  ● ● ● <span class="active">●</span> ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <span class="active">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -34,7 +34,7 @@ At each move, a peg can jump over its immediate neighbor on the North, East, Sou
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <span class="jumped-over">●</span> <span class="active">●</span> ●  →  ● ● ● <span class="active">●</span> <span class="jumped-over">○</span> ○ ●
+● ● ● ○ <span class="jumped-over">●</span> <span class="active">●</span> ●  ➡  ● ● ● <span class="active">●</span> <span class="jumped-over">○</span> ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -42,7 +42,7 @@ At each move, a peg can jump over its immediate neighbor on the North, East, Sou
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  →  ● ● ● <span class="active">●</span> ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <span class="active">●</span> ● ● ●
 ● ● ● <span class="jumped-over">●</span> ● ● ●     ● ● ● <span class="jumped-over">○</span> ● ● ●
     ● <span class="active">●</span> ●             ● ○ ●
     ● ● ●             ● ● ●
@@ -50,7 +50,7 @@ At each move, a peg can jump over its immediate neighbor on the North, East, Sou
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <span class="active">●</span> <span class="jumped-over">●</span> ○ ● ● ●  →  ● ○ <span class="jumped-over">○</span> <span class="active">●</span> ● ● ●
+● <span class="active">●</span> <span class="jumped-over">●</span> ○ ● ● ●  ➡  ● ○ <span class="jumped-over">○</span> <span class="active">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -61,13 +61,25 @@ At each move, a peg can jump over its immediate neighbor on the North, East, Sou
 
 The following are examples of *disallowed moves*:
 
+- A peg cannot jump diagonally:
+
+  <pre>
+      ○ ○ ○             ○ ○ ○
+      ○ ○ ○             ○ ○ ○
+  ○ <span class="active">●</span> ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
+  ○ ○ <span class="jumped-over">●</span> ○ ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="jumped-over">○</span> ○ ○ ○ ○
+  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <span class="active">●</span> ○ ○ ○
+      ○ ○ ○             ○ ○ ○
+      ○ ○ ○             ○ ○ ○
+  </pre>
+
 - A peg cannot jump beyond its neighbor:
 
   <pre>
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="active">●</span> <span class="jumped-over">●</span> ○ ○ ○ ○  →  ○ ○ <span class="jumped-over">○</span> ○ <span class="active">●</span> ○ ○
+  ○ <span class="active">●</span> <span class="jumped-over">●</span> ○ ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="jumped-over">○</span> ○ <span class="active">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
@@ -79,7 +91,7 @@ The following are examples of *disallowed moves*:
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="active">●</span> <span class="jumped-over">●</span> <span class="jumped-over">●</span> ○ ○ ○  →  ○ ○ <span class="jumped-over">○</span> <span class="jumped-over">○</span> <span class="active">●</span> ○ ○
+  ○ <span class="active">●</span> <span class="jumped-over">●</span> <span class="jumped-over">●</span> ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="jumped-over">○</span> <span class="jumped-over">○</span> <span class="active">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
