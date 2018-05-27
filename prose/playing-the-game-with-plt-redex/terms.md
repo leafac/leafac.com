@@ -58,14 +58,14 @@ The `define-term` form *is not* a shorthand for `(define ___ (term ___))` bec
 hole: illegal use of syntax in: hole
 ```
 
-The converse also holds: names defined with `define` are only available directly in Racket, not in terms. So trying to access the name `peg` defined with `define` in a term is not a syntax error, but does not produce the result you might expect:
+The converse also holds: names defined with `define` are only available directly in Racket, not in terms. Trying to access the name `peg` defined with `define` in a term is not a syntax error, but does not produce the result you might expect:
 
 ```racket
 > (term peg)
 'peg
 ```
 
-In the interaction above, `peg` in `term` is interpreted as a symbol, not as a reference to the Racket variable `peg`. This is a common pitfall, so pay attention to the two different contexts when working in PLT Redex and do not mix Racket names with terms.
+In the interaction above, `peg` in `term` is interpreted as a symbol, not as a reference to the Racket variable `peg`. This is a common pitfall, so pay attention to the different contexts and do not mix Racket names with terms.
 
 We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`),<label class="margin-note"><input type="checkbox"><span markdown="1">The `term` form is similar to the [quasiquote](https://docs.racket-lang.org/guide/qq.html), but it is aware of names defined with `define-term` and the other forms we will see in the next sections, for example, metafunctions and relations.</span></label> for example:
 
@@ -100,7 +100,7 @@ In summary:
 Boards
 ======
 
-We represent Peg Solitaire boards as terms. A board is a list of rows, and a row is a list of positions. A position might be either a *peg* (`●`) or a *hole* (`○`). We also need to pad the spaces around the board, so we introduce a third kind of position, a *space* (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label> For example, the following is the initial board:
+We represent Peg Solitaire boards as terms. A board is a list of rows, and a row is a list of positions. A position might be either a peg (`●`) or a hole (`○`). We also need to pad the spaces around the board, so we introduce a third kind of position, a space (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label> For example, the following is the initial board:
 
 ```racket
 (define-term initial-board
