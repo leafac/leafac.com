@@ -20,7 +20,7 @@ Peg Solitaire is a single-player board game that starts with the following board
 ●  Peg
 ```
 
-At each move, a peg can jump over its immediate neighbors on the North, East, South and West and land on an empty hole. The neighbor peg that was jumped over is removed from the board. For example, the following are the four possible starting moves:
+At each move, a peg can jump over its immediate neighbor on the North, East, South or West, and land on a hole. The neighbor peg that was jumped over is removed from the board. For example, the following are the four possible starting moves:
 
 <pre>
     ● ● ●             ● ● ●
@@ -61,7 +61,7 @@ At each move, a peg can jump over its immediate neighbors on the North, East, So
 
 The following are examples of *disallowed moves*:
 
-- Peg cannot jump beyond neighbor:
+- A peg cannot jump beyond its neighbor:
 
   <pre>
       ○ ○ ○             ○ ○ ○
@@ -73,7 +73,7 @@ The following are examples of *disallowed moves*:
       ○ ○ ○             ○ ○ ○
   </pre>
 
-- Peg cannot jump over multiple neighbors:
+- A peg cannot jump over multiple neighbors:
 
   <pre>
       ○ ○ ○             ○ ○ ○
@@ -85,7 +85,7 @@ The following are examples of *disallowed moves*:
       ○ ○ ○             ○ ○ ○
   </pre>
 
-The goal of Peg Solitaire is to leave a single peg left on the board, for example:
+The goal of Peg Solitaire is to leave a single peg on the board, for example:
 
 ```
     ○ ○ ○
