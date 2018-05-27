@@ -96,13 +96,19 @@ We can use the `term` form from within `unquote`:
 
 In summary:
 
-- Names defined with `define` are naturally available in Racket, but can be accessed in terms with `unquote`, for example, `,peg`.
-- Names defined with `define-term` are naturally available in terms, but can be accessed in Racket with `term`, for example, `(term hole)`.
+<div class="full-width" markdown="1">
+
+| Names defined with ___ | are naturally available in ___ | but can be accessed in ___ | with ___, | for example, ___ |
+|-:|-:|-:|-:|-:|
+| `define` | Racket | terms | `unquote` | `,peg` |
+| `define-term` | terms | Racket | `term` | `(term hole)` |
+
+</div>
 
 Boards
 ======
 
-A Peg Solitaire board is a list of rows. A row is a list of positions. A position might be either a peg (`●`) or a hole (`○`). We must pad the spaces around the board, so we introduce a third kind of position that does not influence game play, a space (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label>
+We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visually compelling, but it is not the only one. For example, we could represent pegs as 1s and holes as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a hole (`○`) or a padding space that does not influence game play (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label>
 
 The following are examples of boards:
 
