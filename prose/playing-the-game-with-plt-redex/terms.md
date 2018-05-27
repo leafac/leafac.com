@@ -8,7 +8,7 @@ table-of-contents: table-of-contents.html
 Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 </aside>
 
-Terms represent elements in the game, for example, the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, terms are program fragments, types, machine states, and so forth.</span></label> In general, terms can be various Racket values, including numbers, strings and symbols:
+At its core, PLT Redex is a tool for manipulating and visualizing terms. In our game of Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> In general, terms can be various Racket values, including numbers, strings and symbols:
 
 ```racket
 > (term 0)
@@ -19,7 +19,7 @@ Terms represent elements in the game, for example, the pegs and the board.<label
 'a
 ```
 
-We can represent pegs with `●` and holes with `○` because Racket supports Unicode:
+We represent pegs with `●` and holes with `○`:<label class="margin-note"><input type="checkbox"><span markdown="1">Racket supports Unicode.</span></label>
 
 ```racket
 > (term ●)
@@ -65,7 +65,7 @@ The converse also holds: names defined with `define` are only available directly
 'peg
 ```
 
-In the interaction above, `peg` in `term` is interpreted as a symbol, not as a reference to the Racket variable `peg`. This is a common pitfall, so pay attention to the different contexts and do not mix Racket names with terms.
+In the interaction above, the `peg` in `term` is interpreted as a symbol, not as a reference to the Racket variable `peg`. This is a common pitfall, so *pay attention to the different contexts and do not mix Racket with terms*.
 
 We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`),<label class="margin-note"><input type="checkbox"><span markdown="1">The `term` form is similar to the [quasiquote](https://docs.racket-lang.org/guide/qq.html), but it is aware of names defined with `define-term` and the other forms we will see in the next sections, for example, metafunctions and relations.</span></label> for example:
 
@@ -79,6 +79,8 @@ In the interaction above, the `,(+ 1 2)` form means “*escape* from the term ba
 With `unquote` we can access names defined with `define` from within terms and mix them with names defined with `define-term`, for example:
 
 ```racket
+> (define peg (term ●))
+> (define-term hole ○)
 > (term (● ,peg hole))
 '(● ● ○)
 ```
@@ -100,15 +102,37 @@ In summary:
 Boards
 ======
 
-We represent Peg Solitaire boards as terms. A board is a list of rows, and a row is a list of positions. A position might be either a peg (`●`) or a hole (`○`). We also need to pad the spaces around the board, so we introduce a third kind of position, a space (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label> For example, the following is the initial board:
+A Peg Solitaire board is a list of rows. A row is a list of positions. A position might be either a peg (`●`) or a hole (`○`). We must pad the spaces around the board, so we introduce a third kind of position that does not influence game play, a space (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label>
+
+The following are examples of boards:
+
+```racket
+(term ([· · ● ● ● · ·]
+       [· · ● ● ○ · ·]
+       [● ○ ● ○ ● ● ●]
+       [● ● ● ○ ○ ○ ●]
+       [● ○ ● ● ● ● ●]
+       [· · ● ○ ● · ·]
+       [· · ● ● ● · ·]))
+
+(term ([· · ● ○ ● · ·]
+       [· · ● ● ○ · ·]
+       [● ○ ● ○ ● ● ●]
+       [● ● ● ○ ○ ○ ●]
+       [● ○ ● ● ○ ● ●]
+       [· · ● ○ ● · ·]
+       [· · ○ ● ● · ·]))
+```
+
+The following is the initial board:
 
 ```racket
 (define-term initial-board
-  ([· · ● ● ● · ·]
-   [· · ● ● ● · ·]
-   [● ● ● ● ● ● ●]
-   [● ● ● ○ ● ● ●]
-   [● ● ● ● ● ● ●]
-   [· · ● ● ● · ·]
-   [· · ● ● ● · ·]))
+ ([· · ● ● ● · ·]
+  [· · ● ● ● · ·]
+  [● ● ● ● ● ● ●]
+  [● ● ● ○ ● ● ●]
+  [● ● ● ● ● ● ●]
+  [· · ● ● ● · ·]
+  [· · ● ● ● · ·]))
 ```
