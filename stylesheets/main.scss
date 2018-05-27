@@ -466,6 +466,9 @@ th, td {
   &:last-child {
     padding-right: $space--none;
   }
+  .no-padding-table & {
+    padding: $space--none;
+  }
 }
 
 th {

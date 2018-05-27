@@ -96,12 +96,11 @@ We can use the `term` form from within `unquote`:
 
 In summary:
 
-<div class="full-width" markdown="1">
+<div class="full-width no-padding-table" markdown="1">
 
-| Names defined with ___ | are naturally available in ___ | but can be accessed in ___ | with ___, | for example, ___ |
-|-:|-:|-:|-:|-:|
-| `define` | Racket | terms | `unquote` | `,peg` |
-| `define-term` | terms | Racket | `term` | `(term hole)` |
+| | `define` | Racket | terms | `unquote` | `,peg` |
+| | `define-term` | terms | Racket | `term` | `(term hole)` |
+| **Names defined with** | **_____________ are naturally available in** | **_____ but can be accessed in** | **_____ with** | **_____, for example,** | **___________** |
 
 </div>
 
