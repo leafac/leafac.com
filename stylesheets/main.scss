@@ -394,6 +394,7 @@ body {
   }
   & > span {
     @extend aside;
+    text-indent: $space--none;
     &::before {
       @include superscript;
       content: counter(margin-note);
