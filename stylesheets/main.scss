@@ -512,3 +512,14 @@ summary {
   @extend code;
   color: $palette--blue;
 }
+
+// ---------------------------------------------------------------------------------------------------
+// PLAYING THE GAME WITH PLT REDEX
+
+.active {
+  color: $palette--green;
+}
+
+.jumped-over {
+  color: $palette--red;
+}

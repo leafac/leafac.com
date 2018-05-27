@@ -11,4 +11,4 @@ table-of-contents: table-of-contents.html
 - [*PLT Redex FAQ*](https://prl.ccs.neu.edu/blog/2017/09/25/plt-redex-faq/) by Ben Greenman and Sam Caldwell.
 - [*An Introduction to Redex with Abstracting Abstract Machines*](https://dvanhorn.github.io/redex-aam-tutorial/) by David Van Horn.
 - PLT Redex Summer Schools: [2015](https://www.cs.utah.edu/~mflatt/plt-redex/), [2017](https://summer-school.racket-lang.org/2017/) [[notes](https://summer-school.racket-lang.org/2017/notes/)].
-- Example research using PLT Redex: [LambdaS5](https://github.com/brownplt/LambdaS5) and [Abstracting Abstract Control](https://github.com/dvanhorn/aac).
+- Example research using PLT Redex: [`λ`<sub>JS</sub>](https://github.com/brownplt/LambdaS5) and [Abstracting Abstract Control](https://github.com/dvanhorn/aac).
