@@ -1,25 +1,57 @@
 #lang racket
 (require redex)
+(provide (all-defined-out))
 
-(term 0)
-(term "a")
-(term a)
-(term ●)
-(term ○)
-(term (● ● ○))
+(test-equal (term 0)
+            0)
+(test-equal (term "a")
+            "a")
+(test-equal (term a)
+            'a)
+(test-equal (term ●)
+            '●)
+(test-equal (term ○)
+            '○)
+(test-equal (term (● ● ○))
+            '(● ● ○))
 
 (define peg (term ●))
-peg
+(test-equal peg
+            '●)
 
 (define-term hole ○)
-(term hole)
+(test-equal (term hole)
+            '○)
 
-#;hole ; syntax error
-(term peg) ; not a syntax error
+; > hole
+; hole: illegal use of syntax in: hole
+(test-equal (term peg)
+            'peg)
 
-(term (1 2 ,(+ 1 2)))
-(term (● ,peg hole))
-(term (● ,peg ,(term hole)))
+(test-equal (term (1 2 ,(+ 1 2)))
+            '(1 2 3))
+(test-equal (term (● ,peg hole))
+            '(● ● ○))
+(test-equal (term (● ,peg ,(term hole)))
+            '(● ● ○))
+
+(define-term example-board-1
+  ([· · ● ● ● · ·]
+   [· · ● ● ○ · ·]
+   [● ○ ● ○ ● ● ●]
+   [● ● ● ○ ○ ○ ●]
+   [● ○ ● ● ● ● ●]
+   [· · ● ○ ● · ·]
+   [· · ● ● ● · ·]))
+
+(define-term example-board-2
+  ([· · ● ○ ● · ·]
+   [· · ● ● ○ · ·]
+   [● ○ ● ○ ● ● ●]
+   [● ● ● ○ ○ ○ ●]
+   [● ○ ● ● ○ ● ●]
+   [· · ● ○ ● · ·]
+   [· · ○ ● ● · ·]))
 
 (define-term initial-board
   ([· · ● ● ● · ·]
@@ -29,20 +61,3 @@ peg
    [● ● ● ● ● ● ●]
    [· · ● ● ● · ·]
    [· · ● ● ● · ·]))
-(term initial-board)
-
-(term ([· · ● ● ● · ·]
-       [· · ● ● ○ · ·]
-       [● ○ ● ○ ● ● ●]
-       [● ● ● ○ ○ ○ ●]
-       [● ○ ● ● ● ● ●]
-       [· · ● ○ ● · ·]
-       [· · ● ● ● · ·]))
-
-(term ([· · ● ○ ● · ·]
-       [· · ● ● ○ · ·]
-       [● ○ ● ○ ● ● ●]
-       [● ● ● ○ ○ ○ ●]
-       [● ○ ● ● ○ ● ●]
-       [· · ● ○ ● · ·]
-       [· · ○ ● ● · ·]))

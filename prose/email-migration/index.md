@@ -55,7 +55,7 @@ See the [appendix](#appendix-dovecot-configuration) for more details on `dovecot
 Configure Dovecot by replacing the <span class="placeholder" markdown="1">\<placeholders></span> on the following template:
 
 <div class="code-block" markdown="1">
-/usr/local/etc/dovecot/dovecot.conf<label class="margin-note"><input type="checkbox"><span markdown="1">The path to `dovecot.conf` depends on the installation. For macOS and Homebrew, the appropriate path is `/usr/local/etc/dovecot/dovecot.conf`. Another path appropriate for many installations is `/etc/dovecot/dovecot.conf`.</span></label>
+`/usr/local/etc/dovecot/dovecot.conf`<label class="margin-note"><input type="checkbox"><span markdown="1">The path to `dovecot.conf` depends on the installation. For macOS and Homebrew, the appropriate path is `/usr/local/etc/dovecot/dovecot.conf`. Another path appropriate for many installations is `/etc/dovecot/dovecot.conf`.</span></label>
 <pre>
 protocols = imap
 
