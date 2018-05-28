@@ -1,6 +1,6 @@
 #lang racket
 (require redex)
-(provide (all-defined-out))
+(provide example-board-1 example-board-2 initial-board)
 
 (test-equal (term 0)
             0)

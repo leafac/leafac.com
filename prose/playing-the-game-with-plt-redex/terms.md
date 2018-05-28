@@ -19,7 +19,6 @@ PLT Redex includes a testing framework with the `(test-equal e_1 e_2)` form, w
 ```racket
 #lang racket
 (require redex)
-(provide (all-defined-out))
 
 (test-equal (term 0)
             0)
