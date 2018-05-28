@@ -22,9 +22,16 @@
 (test-equal (redex-match? peg-solitaire (_ _ _)
                           (term         (● ● ○)))
             #t)
+(test-equal (redex-match? peg-solitaire _
+                          (term         (● ● ○)))
+            #t)
+
 (test-equal (redex-match? peg-solitaire (any ● ○)
                           (term         (●   ● ○)))
             #t)
+; > (redex-match peg-solitaire (_ ● ○)
+;                (term         (● ● ○)))
+; (list (match '()))
 ; > (redex-match peg-solitaire (any ● ○)
 ;                (term         (●   ● ○)))
 ; (list (match (list (bind 'any '●))))
