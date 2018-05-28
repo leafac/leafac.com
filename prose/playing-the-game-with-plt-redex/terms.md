@@ -153,3 +153,9 @@ The following is the initial board:
   [· · ● ● ● · ·]
   [· · ● ● ● · ·]))
 ```
+
+We will use these boards in the following sections:
+
+```racket
+(provide example-board-1 example-board-2 initial-board)
+```
