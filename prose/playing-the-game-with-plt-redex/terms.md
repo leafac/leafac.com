@@ -29,7 +29,7 @@ PLT Redex includes a testing framework with the `(test-equal e_1 e_2)` form, w
 ```
 </div>
 
-We represent pegs with `●` and holes with `○`:<label class="margin-note"><input type="checkbox"><span markdown="1">Racket supports Unicode.</span></label>
+We represent pegs with `●` and spaces with `○`:<label class="margin-note"><input type="checkbox"><span markdown="1">Racket supports Unicode.</span></label>
 
 ```racket
 (test-equal (term ●)
@@ -38,7 +38,7 @@ We represent pegs with `●` and holes with `○`:<label class="margin-note"><in
             '○)
 ```
 
-We can group pegs and holes together in lists:
+We can group pegs and spaces together in lists:
 
 ```racket
 (test-equal (term (● ● ○))
@@ -56,16 +56,16 @@ We can assign terms to Racket names and refer to them later:
 Alternatively, we can assign terms to PLT Redex names and refer to them later:
 
 ```racket
-(define-term hole ○)
-(test-equal (term hole)
+(define-term space ○)
+(test-equal (term space)
             '○)
 ```
 
-The `define-term` form *is not* a shorthand for `(define ___ (term ___))` because names defined with `define-term` are only available in other terms, not directly in Racket. In the listing above, we must write `(term hole)` to access the name `hole` defined with `define-term`. If we try to access the name `hole` directly in Racket, the result is a syntax error:
+The `define-term` form *is not* a shorthand for `(define ___ (term ___))` because names defined with `define-term` are only available in other terms, not directly in Racket. In the listing above, we must write `(term space)` to access the name `space` defined with `define-term`. If we try to access the name `space` directly in Racket, the result is a syntax error:
 
 ```racket
-> hole
-hole: illegal use of syntax in: hole
+> space
+space: illegal use of syntax in: space
 ```
 
 The converse also holds: names defined with `define` are only available directly in Racket, not in terms. Trying to access the name `peg` defined with `define` in a term is not a syntax error, but does not produce the result you might expect:
@@ -90,15 +90,15 @@ With `unquote` we can access names defined with `define` from within terms and m
 
 ```racket
 (define peg (term ●))
-(define-term hole ○)
-(test-equal (term (● ,peg hole))
+(define-term space ○)
+(test-equal (term (● ,peg space))
             '(● ● ○))
 ```
 
 We can use the `term` form from within `unquote`:
 
 ```racket
-(test-equal (term (● ,peg ,(term hole)))
+(test-equal (term (● ,peg ,(term space)))
             '(● ● ○))
 ```
 
@@ -109,7 +109,7 @@ In summary:
 <div class="full-width no-padding-table" markdown="1">
 
 | | `define` | Racket | terms | `unquote` | `,peg` |
-| | `define-term` | terms | Racket | `term` | `(term hole)` |
+| | `define-term` | terms | Racket | `term` | `(term space)` |
 | **Names defined with** | **______________ are available in** | **_______ but can be accessed in** | **_______ with** | **________, for example,** | **_____________** |
 
 </div>
@@ -117,9 +117,13 @@ In summary:
 Boards
 ======
 
-We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visually compelling, but it is not the only one. For example, we could represent pegs as 1s and holes as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a hole (`○`) or a padding space that does not influence game play (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A space is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label>
+We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visually compelling, but it is not the only one. For example, we could represent pegs as 1s and spaces as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a space (`○`) or a padding that does not influence game play (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A padding is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label>
 
 The following are examples of boards:
+
+<aside markdown="1">
+In Racket, `[square brackets]` are delimiters equivalent to `(parentheses)`. We use square brackets to delimit rows for readability.
+</aside>
 
 ```racket
 (define-term example-board-1
