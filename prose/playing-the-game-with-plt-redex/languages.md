@@ -6,7 +6,13 @@ table-of-contents: table-of-contents.html
 
 A language defines names for the patterns we explored in [previous section](pattern-matching), specifying the shape of the terms we use to represent Peg Solitaire elements including pegs, boards, and so forth. Our terms do not represent constructs in programming languages, so we can think of them as regular data structures. We revisit the language `peg-solitaire` we defined in the previous section with the `define-language` form to add names for patterns:<label class="margin-note"><input type="checkbox"><span markdown="1">The `define-language` form specifies a grammar in [BNF](http://matt.might.net/articles/grammars-bnf-ebnf/).</span></label>
 
+<div class="code-block" markdown="1">
+`languages.rkt`
 ```racket
+#lang racket
+(require redex "terms.rkt")
+(provide peg-solitaire)
+
 (define-language peg-solitaire
   [board    ::= (row ...)]
   [row      ::= [position ...]]
@@ -15,6 +21,7 @@ A language defines names for the patterns we explored in [previous section](patt
   [space    ::= ○]
   [padding  ::= ·])
 ```
+</div>
 
 Each line `[<name> ::= <pattern> ...]` is assigning the `<name>` to `<pattern>`, and occurrences of other `<name>`s in `<pattern>` are interpreted accordingly,<label class="margin-note"><input type="checkbox"><span markdown="1">Patterns in the `define-language` form are the only ones in which multiple occurrences of a name can match different terms. For example, if a language includes the line `[pair ::= (position position)]` then `pair` would match the term `(● ○)`. To insist on the same term, suffix the names, for example, `[pair ::= (position_1 position_1)]`.</span></label> for example, the pattern for `board` includes `row`. The following is each line of the definition above in more detail:
 
