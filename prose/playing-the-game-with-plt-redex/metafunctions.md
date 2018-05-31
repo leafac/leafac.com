@@ -6,7 +6,6 @@ table-of-contents: table-of-contents.html
 
 A metafunction is a function in the level of terms.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, metafunctions are the small utilities, for example, `δ`, which evaluates primitive operators.</span></label> We define a metafunction with the `define-metafunction` form:<label class="margin-note"><input type="checkbox"><span markdown="1">A metafunction is similar to `define/match` in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to `case` and `cond`.</span></label>
 
-
 ```racket
 (define-metafunction <language>
   <contract>
