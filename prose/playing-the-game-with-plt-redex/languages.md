@@ -76,6 +76,8 @@ We can use the `peg-solitaire` language to match the board examples:
             #t)
 (test-equal (redex-match? peg-solitaire board (term initial-board))
             #t)
+(test-equal (redex-match? peg-solitaire board (term example-winning-board))
+            #t)
 ```
 
 * * *

@@ -39,6 +39,8 @@
             #t)
 (test-equal (redex-match? peg-solitaire board (term initial-board))
             #t)
+(test-equal (redex-match? peg-solitaire board (term example-winning-board))
+            #t)
 
 (test-equal (redex-match? peg-solitaire board (term ([● ○]
                                                      [●])))

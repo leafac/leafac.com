@@ -158,8 +158,21 @@ The following is the initial board:
   [· · ● ● ● · ·]))
 ```
 
+The following is an example of a winning board:
+
+```racket
+(define-term example-winning-board
+  ([· · ○ ○ ○ · ·]
+   [· · ○ ○ ○ · ·]
+   [○ ○ ○ ○ ○ ○ ○]
+   [○ ○ ○ ● ○ ○ ○]
+   [○ ○ ○ ○ ○ ○ ○]
+   [· · ○ ○ ○ · ·]
+   [· · ○ ○ ○ · ·]))
+```
+
 We will use these boards in the following sections:
 
 ```racket
-(provide example-board-1 example-board-2 initial-board)
+(provide example-board-1 example-board-2 initial-board example-winning-board)
 ```

@@ -15,9 +15,9 @@ A metafunction is a function in the level of terms.<label class="margin-note"><i
 
 - `<language>`: A language as defined in the [previous section](languages).
 - `<contract>`: A contract with patterns for the inputs and outputs of the metafunction. The contract is verified and an error may be raised when the metafunction is called.
-- `<metafunction>`: The metafunction name.
 - `[(<metafunction> <pattern> ...) <template>]`: A metafunction clause.
-- `<pattern>`: A pattern against which the metafunction input is compared. Patterns are compared in the order they are defined, and the first clause that matches is executed.
+- `<metafunction>`: The metafunction name.
+- `<pattern>`: Patterns against which the metafunction inputs are compared. Patterns are compared in the order they are defined, and the first clause that matches is executed.
 - `<template>`: A term that is the output of the metafunction. Names from `<pattern>` are available in the `<template>`.
 
 We define a metafunction over `position`s that inverts the board:<label class="margin-note"><input type="checkbox"><span markdown="1">This metafunction is for demonstration only—we will not use it for playing Peg Solitaire.</span></label>
