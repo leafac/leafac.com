@@ -5,6 +5,7 @@
 (define-judgment-form peg-solitaire
   #:mode (→ I O)
   #:contract (→ board board)
+
   [(→ (row_1
        ...
        [position_1 ... ● ● ○ position_2 ...]
@@ -16,6 +17,7 @@
        row_2
        ...))
    "→"]
+
   [(→ (row_1
        ...
        [position_1 ... ○ ● ● position_2 ...]
@@ -27,6 +29,7 @@
        row_2
        ...))
    "←"]
+
   [(→ (row_1
        ...
        [position_1 ..._n ● position_2 ...]
@@ -42,6 +45,7 @@
        row_2
        ...))
    "↓"]
+
   [(→ (row_1
        ...
        [position_1 ..._n ○ position_2 ...]
@@ -166,6 +170,7 @@
 (define-judgment-form peg-solitaire
   #:mode (→* I O)
   #:contract (→* board board)
+
   [---------------- "Reflexivity"
    (→* board board)]
 
