@@ -37,12 +37,77 @@ There are two ways to read a judgment form clause:
 
 The first reading is more mathematically correct, while the second is more intuitive<label class="margin-note"><input type="checkbox"><span markdown="1">To me, at least.</span></label> and useful when working in PLT Redex.
 
+A Judgment Form for a Single Move
+=================================
+
+We define a `→` judgment form that represents a move in Peg Solitaire. The input is the current board, and the output is a board after the move:
+
 <div class="code-block" markdown="1">
 `judgment-forms.rkt`
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
 
+(define-judgment-form peg-solitaire
+  #:mode (→ I O)
+  #:contract (→ board board)
+
+  ___)
+```
+</div>
+
+We define the judgment form with four clauses, one for each kind of possible move. For example, the following is the clause for when a peg jumps over its East neighbor:
+
+```racket
+[(→ (row_1
+     ...
+     [position_1 ... ● ● ○ position_2 ...]
+     row_2
+     ...)
+    (row_1
+     ...
+     [position_1 ... ○ ○ ● position_2 ...]
+     row_2
+     ...))
+ "→"]
+```
+
+In detail:
+
+- `→`: The name of the judgment form.
+- `(row_1 ... [position_1 ... ● ● ○ position_2 ...] row_2 ...)`: The pattern to match against the current input board. The pattern matches if the board includes a sequence `● ● ○` surrounded by anything else. We name the surroundings `row_<n> ...` and `position_<n> ...` to reconstruct it in the template.
+- `(row_1 ... [position_1 ... ○ ○ ● position_2 ...] row_2 ...)`: The template to build the board after the move. It changes the sequence `● ● ○` into `○ ○ ●`, and reconstructs the surroundings with the names `row_<n> ...` and `position_<n> ...`.
+- `"→"`: The name of the clause.
+
+In this clause, there are no `<condition>s` or dashes—we will see them in a [later section](#a-judgment-form-for-an-arbitrary-number-of-moves). The clause for when a peg jumps over its West neighbor is similar.
+
+The clauses for when a peg jumps over its North or South neighbors follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings, which involves multiple rows. The named ellipses guarantee the same number of `position`s to the left of the sequence in which we are interested, aligning the column. For example, the following is the rule for when a peg jumps over its South neighbor:
+
+```racket
+[(→ (row_1
+     ...
+     [position_1 ..._n ● position_2 ...]
+     [position_3 ..._n ● position_4 ...]
+     [position_5 ..._n ○ position_6 ...]
+     row_2
+     ...)
+    (row_1
+     ...
+     [position_1 ... ○ position_2 ...]
+     [position_3 ... ○ position_4 ...]
+     [position_5 ... ● position_6 ...]
+     row_2
+     ...))
+ "↓"]
+```
+
+The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and `position_5` of the same length, so the sequence `● ● ○` must appear in the same column. The clause for when a peg jumps over its North neighbor is similar.
+
+* * *
+
+The following is the complete definition of `→`:
+
+```racket
 (define-judgment-form peg-solitaire
   #:mode (→ I O)
   #:contract (→ board board)
@@ -102,7 +167,14 @@ The first reading is more mathematically correct, while the second is more intui
        row_2
        ...))
    "↑"])
+```
 
+Querying the Judgment Form
+==========================
+
+We use the `→` judgment form to query whether a board can turn into another after a single move:
+
+```racket
 (test-equal
  (judgment-holds (→ ([· · ● ● ● · ·]
                      [· · ● ● ● · ·]
@@ -174,7 +246,11 @@ The first reading is more mathematically correct, while the second is more intui
                      [· · ● ○ ● · ·]
                      [· · ● ● ● · ·])))
  #t)
+```
 
+We also use the `→` judgment form to query all the possible ways we can move in a given board:
+
+```racket
 (test-equal (judgment-holds (→ initial-board board) board)
             '(([· · ● ● ● · ·]
                [· · ● ○ ● · ·]
@@ -207,7 +283,16 @@ The first reading is more mathematically correct, while the second is more intui
                [● ● ● ○ ● ● ●]
                [· · ● ○ ● · ·]
                [· · ● ● ● · ·])))
+```
 
+In the list above, we use the `judgment-holds` form to query the `→` with the `initial-board` and match the output with the `board` pattern. Then we query what are all the possible `board`s. PLT Redex tries to match the `initial-board` not only with the first clause in the `→` relation, but with all of them. In this case, they all match, so the output is not a single board, but four. This is an example of nondeteministic computation.<label class="margin-note"><input type="checkbox"><span markdown="1">We could define a judgment form that looks deterministic by designing clauses that are mutually exclusive. Many judgment forms in programming-language theory papers are designed this way.</span></label>
+
+A Judgment Form for an Arbitrary Number of Moves
+================================================
+
+We use the `→` judgment form to define the `→*` judgment form that represents an arbitrary number of moves (zero or more).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematicians call this the *reflexive, transitive closure* of the `→` relation.</span></label> The input is the current board, and the outputs are all the possible boards we could reach by performing an arbitrary number of moves.
+
+```racket
 (define-judgment-form peg-solitaire
   #:mode (→* I O)
   #:contract (→* board board)
@@ -219,7 +304,9 @@ The first reading is more mathematically correct, while the second is more intui
    (→* board_2 board_3)
    -------------------- "Transitivity"
    (→* board_1 board_3)])
+```
 
+```racket
 (test-equal
  (judgment-holds (→* ([● ● ● ○ ● ● ●])
                      ([● ● ● ○ ● ● ●])))
@@ -234,11 +321,31 @@ The first reading is more mathematically correct, while the second is more intui
  (judgment-holds (→* ([● ● ● ○ ● ● ●])
                      ([● ○ ● ○ ○ ● ●])))
  #t)
+```
+
+```racket
+(test-equal
+ (judgment-holds (→* ([● ● ● ○ ● ● ●]) board) board)
+ '(((○ ○ ● ○ ● ○ ●))
+
+   ((● ○ ○ ● ● ● ●))
+
+   ((● ○ ● ○ ○ ● ●))
+
+   ((● ○ ● ○ ● ○ ○))
+
+   ((● ● ○ ○ ● ○ ●))
+
+   ((● ● ● ○ ● ● ●))
+
+   ((● ● ● ● ○ ○ ●))))
+```
+
+```racket
 #;
 (show-derivations (build-derivations (→* ([● ● ● ○ ● ● ●])
                                          ([● ○ ● ○ ○ ● ●]))))
 ```
-</div>
 
 ```racket
 (provide → →*)
