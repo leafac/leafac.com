@@ -327,10 +327,10 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
 - **Operational**:
 
   ```racket
-  [⁴(⁵→  ⁶board_1 ⁷board_2)
+  [⁴(⁵→   ⁶board_1  ⁷board_2)
    ⁸(⁹→* ¹⁰board_2 ¹¹board_3)
    -------------------------- "Transitivity"
-   ¹(²→* ³board_1 ¹²board_3)])
+   ¹(²→*  ³board_1 ¹²board_3)])
   ```
 
   1.  Start with the judgment form we are defining.
@@ -346,7 +346,7 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
   11. The output of the second judgment form we are querying in this clause.
   12. The output of this clause.
 
-  DrRacket helps you read the clauses when you hover over a name by drawing arrows that represent data flow:
+  DrRacket helps us read the clauses when we hover over a name by drawing arrows that represent data flow:
 
   <figure markdown="1">
     ![](transitivity.png){:width="274px"}
@@ -391,7 +391,6 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
 ```
 
 ```racket
-#;
 (show-derivations (build-derivations (→* ([● ● ● ○ ● ● ●])
                                          ([● ○ ● ○ ○ ● ●]))))
 ```
