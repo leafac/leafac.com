@@ -23,7 +23,7 @@ We define a judgment form with `define-judgment-form`:
 ```
 
 - `<language>`: A language as defined [previously](languages).
-- `#:mode`: A judgment form may have multiple inputs and outputs.<label class="margin-note"><input type="checkbox"><span markdown="1">A [predicate relation](predicate-relations) is a judgment form in which all arguments are inputs and the only output is a boolean.</span></label> Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label>
+- `#:mode`: A judgment form may have multiple inputs and outputs. Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label> Besides the declared outputs, every judgment form also has an implicit boolean output: whether the judgment holds or not.<label class="margin-note"><input type="checkbox"><span markdown="1">A [predicate relation](predicate-relations) is a judgment form in which all arguments are inputs and the only output is this implicit boolean.</span></label>
 - `#:contract`: A contract with patterns for the arguments of the judgment form. The contract is verified and an error may be raised when the judgment form is queried.
 - `[<condition> ... --- (<judgment-form> <pattern/template> ...)]`: A judgment form clause.<label class="margin-note"><input type="checkbox"><span markdown="1">This notation with a bar separating conditions—sometimes called *antecedents*—and conclusion is common in papers and has a long tradition in formal logic.</span></label>
 - `<condition>`: A condition under which the clause holds. For example, a condition may query another judgment form or [predicate relation](predicate-relations).
@@ -290,7 +290,12 @@ In the list above, we use the `judgment-holds` form to query the `→` with the 
 A Judgment Form for an Arbitrary Number of Moves
 ================================================
 
-We use the `→` judgment form to define the `→*` judgment form that represents an arbitrary number of moves (zero or more).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematicians call this the *reflexive, transitive closure* of the `→` relation.</span></label> The input is the current board, and the outputs are all the possible boards we could reach by performing an arbitrary number of moves.
+We use the `→` judgment form to define the `→*` judgment form that represents an arbitrary number of moves (zero or more).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematicians call this the *reflexive, transitive closure* of the `→` relation.</span></label> The input is the current board, and the outputs are all the possible boards we could reach by performing an arbitrary number of moves. There are two clauses in the `→*` judgment form:
+
+- **Reflexivity**: A board can reach itself in zero moves.
+- **Transitivity**: A board can reach another board by one move (`→`) plus an arbitrary number of moves (`→*`).
+
+We use the more complete version of `define-jugment-form` with `<condition>`s to define these clauses:
 
 ```racket
 (define-judgment-form peg-solitaire
@@ -305,6 +310,50 @@ We use the `→` judgment form to define the `→*` judgment form that represent
    -------------------- "Transitivity"
    (→* board_1 board_3)])
 ```
+
+The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has two, one querying the `→` judgment form to produce `board_2`, and the other querying the `→*` judgment form itself to produce the final output `board_3`. We can read the **Transitive** clause using the techniques described above:
+
+- **Logical**:
+
+  ```racket
+  [¹(→  board_1 board_2)
+   ²(→* board_2 board_3)
+   --------------------- "Transitivity"
+   ³(→* board_1 board_3)])
+  ```
+
+  “If **1** and **2**, then **3**.”
+
+- **Operational**:
+
+  ```racket
+  [⁴(⁵→  ⁶board_1 ⁷board_2)
+   ⁸(⁹→* ¹⁰board_2 ¹¹board_3)
+   -------------------------- "Transitivity"
+   ¹(²→* ³board_1 ¹²board_3)])
+  ```
+
+  1.  Start with the judgment form we are defining.
+  2.  The judgment form’s name.
+  3.  The judgment form’s input.
+  4.  The first `<condition>` for the clause to hold.
+  5.  The first judgment form we are querying in this clause.
+  6.  The input to the first judgment form we are querying in this clause.
+  7.  The output of the first judgment form we are querying in this clause.
+  8.  The second `<condition>` for the clause to hold.
+  9.  The second judgment form we are querying in this clause.
+  10. The input to the second judgment form we are querying in this clause. The output of the query on the first `<condition>`, `board_2`, is the input to the second query.
+  11. The output of the second judgment form we are querying in this clause.
+  12. The output of this clause.
+
+  DrRacket helps you read the clauses when you hover over a name: it draws arrows that represent data flow:
+
+  <figure markdown="1">
+    ![](transitivity.png){:width="274px"}
+    <figcaption markdown="1">
+    DrRacket shows the output of the first `<condition>`, `board_2`, as the input of the second `<condition>` in the **Transitivity** clause.
+    </figcaption>
+  </figure>
 
 ```racket
 (test-equal

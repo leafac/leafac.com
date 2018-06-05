@@ -6,7 +6,7 @@ date: 2018-05-19
 
 <aside markdown="1">
 <figure markdown="1">
-![](avatar.png)
+![](avatar.png){:width="200px"}
 </figure>
 </aside>
 

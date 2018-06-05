@@ -4,7 +4,7 @@ layout: default
 
 <aside markdown="1">
 <figure markdown="1">
-![](avatar.png)
+![](avatar.png){:width="200px"}
 </figure>
 </aside>
 
