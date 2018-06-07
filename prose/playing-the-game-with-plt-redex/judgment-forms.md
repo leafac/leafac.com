@@ -10,6 +10,17 @@ For example, consider both a metafunction and a judgment form that have the same
 
 We define a judgment form with `define-judgment-form`:
 
+<aside markdown="1">
+The notation for judgment forms with a line separating conditions and conclusion is similar to the notation used for arithmetic in grade school:
+
+```
+  12
++ 30
+----
+  42
+```
+</aside>
+
 ```racket
 (define-judgment-form <language>
   #:mode (<judgment-form> <I/O> ...)
@@ -355,6 +366,8 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
     </figcaption>
   </figure>
 
+We test the `→*` judgment form with boards after 0, 1 and 2 moves:<label class="margin-note"><input type="checkbox"><span markdown="1">To keep the tests simple, we use only the center row instead of the whole board.</span></label>
+
 ```racket
 (test-equal
  (judgment-holds (→* ([● ● ● ○ ● ● ●])
@@ -371,6 +384,8 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
                      ([● ○ ● ○ ○ ● ●])))
  #t)
 ```
+
+Also, we can query the `→*` judgment form for all the possible boards after an arbitrary number of moves:<label class="margin-note"><input type="checkbox"><span markdown="1">The rows in the output are separated by new lines to highlight that they are different answers to the query, not part of a board.</span></label>
 
 ```racket
 (test-equal
@@ -390,10 +405,25 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
    ((● ● ● ● ○ ○ ●))))
 ```
 
+We can ask PLT Redex to justify why the judgment form holds for certain inputs, by rendering the derivations, for example:
+
 ```racket
 (show-derivations (build-derivations (→* ([● ● ● ○ ● ● ●])
                                          ([● ○ ● ○ ○ ● ●]))))
 ```
+
+<div class="full-width" markdown="1">
+<figure markdown="1">
+![](judgment-form-derivations.png){:width="757px"}
+<figcaption markdown="1">
+PLT Redex justifies why `→*` holds between boards `([● ● ● ○ ● ● ●])` and `([● ○ ● ○ ○ ● ●])` by using a combination of rules.
+</figcaption>
+</figure>
+</div>
+
+* * *
+
+We will use the judgment forms in later sections:
 
 ```racket
 (provide → →*)
