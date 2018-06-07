@@ -41,9 +41,9 @@
          ...)
         (row_1
          ...
-         [position_1 ... ○ position_2 ...]
-         [position_3 ... ○ position_4 ...]
-         [position_5 ... ● position_6 ...]
+         [position_1 ...   ○ position_2 ...]
+         [position_3 ...   ○ position_4 ...]
+         [position_5 ...   ● position_6 ...]
          row_2
          ...)
         "↓")
@@ -57,9 +57,9 @@
          ...)
         (row_1
          ...
-         [position_1 ... ● position_2 ...]
-         [position_3 ... ○ position_4 ...]
-         [position_5 ... ○ position_6 ...]
+         [position_1 ...   ● position_2 ...]
+         [position_3 ...   ○ position_4 ...]
+         [position_5 ...   ○ position_6 ...]
          row_2
          ...)
         "↑")))

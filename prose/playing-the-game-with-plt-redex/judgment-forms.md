@@ -121,7 +121,7 @@ In detail:
 
 In this clause, there are no `<condition>s` or dashes—we will see them in a [later section](#a-judgment-form-for-an-arbitrary-number-of-moves). The clause for when a peg jumps over its West neighbor is similar.
 
-The clauses for when a peg jumps over its North or South neighbors follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings, which involves multiple rows. The named ellipses guarantee the same number of `position`s to the left of the sequence in which we are interested, aligning the column. For example, the following is the rule for when a peg jumps over its South neighbor:
+The clauses for when a peg jumps over its North or South neighbors follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings, which involves multiple rows. The named ellipses guarantee the same number of `position`s to the left of the sequence in which we are interested, aligning the column. For example, the following is the rule for when a peg jumps over its South neighbor:<label class="margin-note"><input type="checkbox"><span markdown="1">The `<suffix>` is only necessary in the input pattern, not in the output template.</span></label>
 
 ```racket
 [(→ (row_1
@@ -133,9 +133,9 @@ The clauses for when a peg jumps over its North or South neighbors follow the sa
      ...)
     (row_1
      ...
-     [position_1 ... ○ position_2 ...]
-     [position_3 ... ○ position_4 ...]
-     [position_5 ... ● position_6 ...]
+     [position_1 ...   ○ position_2 ...]
+     [position_3 ...   ○ position_4 ...]
+     [position_5 ...   ● position_6 ...]
      row_2
      ...))
  "↓"]
@@ -185,9 +185,9 @@ The following is the complete definition of `→`:
        ...)
       (row_1
        ...
-       [position_1 ... ○ position_2 ...]
-       [position_3 ... ○ position_4 ...]
-       [position_5 ... ● position_6 ...]
+       [position_1 ...   ○ position_2 ...]
+       [position_3 ...   ○ position_4 ...]
+       [position_5 ...   ● position_6 ...]
        row_2
        ...))
    "↓"]
@@ -201,9 +201,9 @@ The following is the complete definition of `→`:
        ...)
       (row_1
        ...
-       [position_1 ... ● position_2 ...]
-       [position_3 ... ○ position_4 ...]
-       [position_5 ... ○ position_6 ...]
+       [position_1 ...   ● position_2 ...]
+       [position_3 ...   ○ position_4 ...]
+       [position_5 ...   ○ position_6 ...]
        row_2
        ...))
    "↑"])
