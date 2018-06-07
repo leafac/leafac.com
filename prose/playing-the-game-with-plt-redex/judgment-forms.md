@@ -34,7 +34,7 @@ The notation for judgment forms with a line separating conditions and conclusion
 ```
 
 - `<language>`: A language as defined [previously](languages).
-- `#:mode`: A judgment form may have multiple inputs and outputs. Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label> Besides the declared outputs, every judgment form also has an implicit boolean output: whether the judgment holds or not.<label class="margin-note"><input type="checkbox"><span markdown="1">A [predicate relation](predicate-relations) is a judgment form in which all arguments are inputs and the only output is this implicit boolean.</span></label>
+- `#:mode`: A judgment form may have multiple inputs and outputs. Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label> Besides the declared outputs, every judgment form also has an implicit boolean output: whether the judgment holds or not.
 - `#:contract`: A contract with patterns for the arguments of the judgment form. The contract is verified and an error may be raised when the judgment form is queried.
 - `[<condition> ... --- (<judgment-form> <pattern/template> ...)]`: A judgment form clause.<label class="margin-note"><input type="checkbox"><span markdown="1">This notation with a bar separating conditions—sometimes called *antecedents*—and conclusion is common in papers and has a long tradition in formal logic.</span></label>
 - `<condition>`: A condition under which the clause holds. For example, a condition may query another judgment form or [predicate relation](predicate-relations).
@@ -47,6 +47,35 @@ There are two ways to read a judgment form clause:
 - **Operational**: Start at the bottom of dashes, on `(<judgment-form> <pattern/template> ...)`, and match the judgment form inputs to the `<pattern>`s. If they match, then try to satisfy each `<condition>` over the dashes. Finally, output the `<template>`s.
 
 The first reading is more mathematically correct, while the second is more intuitive<label class="margin-note"><input type="checkbox"><span markdown="1">To me, at least.</span></label> and useful when working in PLT Redex.
+
+A Judgment Form for a Predicate Relation
+========================================
+
+In its simplest shape, a judgment form only has inputs and the implicit boolean output indicating whether the judgment holds or not. It is equivalent to a [predicate relation](predicate-relations), and we can rewrite `winning-board?` as a judgment form:
+
+```racket
+(define-judgment-form peg-solitaire
+  #:mode (winning-board?/judgment-form I)
+  #:contract (winning-board?/judgment-form board)
+  [(winning-board?/judgment-form ([· ... ○ ... · ...]
+                                  ...
+                                  [· ... ○ ... ● ○ ... · ...]
+                                  [· ... ○ ... · ...]
+                                  ...))])
+```
+
+The pattern that matches the input `board` in `winning-board?/judgment-form` is the same as in `winning-board?`. We query the judgment form with the `judgment-holds` form:
+
+```racket
+(test-equal (judgment-holds (winning-board?/judgment-form example-board-1))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form example-board-2))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form initial-board))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form example-winning-board))
+            #t)
+```
 
 A Judgment Form for a Single Move
 =================================
