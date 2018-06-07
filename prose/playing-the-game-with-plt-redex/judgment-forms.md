@@ -53,7 +53,12 @@ A Judgment Form for a Predicate Relation
 
 In its simplest shape, a judgment form only has inputs and the implicit boolean output indicating whether the judgment holds or not. It is equivalent to a [predicate relation](predicate-relations), and we can rewrite `winning-board?` as a judgment form:
 
+<div class="code-block" markdown="1">
+`judgment-forms.rkt`
 ```racket
+#lang racket
+(require redex "terms.rkt" "languages.rkt")
+
 (define-judgment-form peg-solitaire
   #:mode (winning-board?/judgment-form I)
   #:contract (winning-board?/judgment-form board)
@@ -63,6 +68,7 @@ In its simplest shape, a judgment form only has inputs and the implicit boolean 
                                   [· ... ○ ... · ...]
                                   ...))])
 ```
+</div>
 
 The pattern that matches the input `board` in `winning-board?/judgment-form` is the same as in `winning-board?`. We query the judgment form with the `judgment-holds` form:
 
@@ -82,19 +88,13 @@ A Judgment Form for a Single Move
 
 We define a `→` judgment form that represents a move in Peg Solitaire. The input is the current board, and the output is a board after the move:
 
-<div class="code-block" markdown="1">
-`judgment-forms.rkt`
 ```racket
-#lang racket
-(require redex "terms.rkt" "languages.rkt")
-
 (define-judgment-form peg-solitaire
   #:mode (→ I O)
   #:contract (→ board board)
 
   ___)
 ```
-</div>
 
 We define the judgment form with four clauses, one for each kind of possible move. For example, the following is the clause for when a peg jumps over its East neighbor:
 
