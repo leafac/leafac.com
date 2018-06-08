@@ -389,7 +389,7 @@ The **Reflexivity** clause has no `<condition>`s, but the **Transitivity** has t
   DrRacket helps us read the clauses when we hover over a name by drawing arrows that represent data flow:
 
   <figure markdown="1">
-    ![](transitivity.png){:width="274px"}
+    ![](transitivity.png){:width="274"}
     <figcaption markdown="1">
     DrRacket shows the output of the first `<condition>`, `board_2`, as the input of the second `<condition>` in the **Transitivity** clause.
     </figcaption>
@@ -443,7 +443,7 @@ We can ask PLT Redex to justify why the judgment form holds for certain inputs, 
 
 <div class="full-width" markdown="1">
 <figure markdown="1">
-![](judgment-form-derivations.png){:width="757px"}
+![](judgment-form-derivations.png){:width="757"}
 <figcaption markdown="1">
 PLT Redex justifies why `→*` holds between boards `([● ● ● ○ ● ● ●])` and `([● ○ ● ○ ○ ● ●])` by using a combination of rules.
 </figcaption>
