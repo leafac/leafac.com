@@ -99,7 +99,7 @@ We can go further than just playing Peg Solitaire interactively with the `traces
 (traces → (term initial-board))
 ```
 
-DrRacket opens the window below:
+DrRacket opens the window below:<label class="margin-note"><input type="checkbox"><span markdown="1">The graph rendered by `traces` is the fully expanded version of the graph at the bottom of the `stepper` window.</span></label>
 
 <figure markdown="1">
 ![](traces-1.png){:width="600"}
