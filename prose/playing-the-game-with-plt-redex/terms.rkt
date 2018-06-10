@@ -15,26 +15,6 @@
 (test-equal (term (● ● ○))
             '(● ● ○))
 
-(define peg (term ●))
-(test-equal peg
-            '●)
-
-(define-term space ○)
-(test-equal (term space)
-            '○)
-
-; > space
-; space: illegal use of syntax in: space
-(test-equal (term peg)
-            'peg)
-
-(test-equal (term (1 2 ,(+ 1 2)))
-            '(1 2 3))
-(test-equal (term (● ,peg space))
-            '(● ● ○))
-(test-equal (term (● ,peg ,(term space)))
-            '(● ● ○))
-
 (define-term example-board-1
   ([· · ● ● ● · ·]
    [· · ● ● ○ · ·]

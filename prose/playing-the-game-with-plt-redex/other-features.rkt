@@ -4,6 +4,26 @@
 
 ;; ---------------------------------------------------------------------------------------------------
 
+(define-term a-peg ●)
+(test-equal (term a-peg)
+            '●)
+
+(define a-space (term ○))
+(test-equal a-space
+            '○)
+
+; > a-peg
+; space: illegal use of syntax in: space
+(test-equal (term a-space)
+            'a-space)
+
+(test-equal (term (1 2 ,(+ 1 2)))
+            '(1 2 3))
+(test-equal (term (● a-peg ,a-space))
+            '(● ● ○))
+(test-equal (term (● ,(term a-peg) ,a-space))
+            '(● ● ○))
+
 (define-metafunction peg-solitaire
   count-● : board -> integer
   [(count-● ([position ...] ...))
