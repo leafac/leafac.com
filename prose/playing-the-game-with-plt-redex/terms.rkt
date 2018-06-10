@@ -15,9 +15,9 @@
 (test-equal (term (● ● ○))
             '(● ● ○))
 
-(define-term a-space ○)
-(test-equal (term a-space)
-            '○)
+(define-term a-peg ●)
+(test-equal (term a-peg)
+            '●)
 
 (define-term example-board-1
   ([· · ● ● ● · ·]

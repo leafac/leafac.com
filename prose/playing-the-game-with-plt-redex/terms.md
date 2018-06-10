@@ -48,9 +48,9 @@ We can group pegs and spaces together in lists:
 We can assign terms to PLT Redex names with the `define-term` form and refer to them in `term`s:
 
 ```racket
-(define-term a-space ○)
-(test-equal (term a-space)
-            '○)
+(define-term a-peg ●)
+(test-equal (term a-peg)
+            '●)
 ```
 
 Boards
