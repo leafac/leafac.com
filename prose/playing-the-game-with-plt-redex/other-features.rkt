@@ -40,6 +40,20 @@
 (define-extended-language Peg-Solitaire peg-solitaire
   [Board ::= (row ... hole row ...)])
 
+(test-equal (redex-match? Peg-Solitaire (in-hole Board row)
+                          (term ([●]
+                                 [○]
+                                 [●])))
+            #t)
+; > (redex-match Peg-Solitaire (in-hole Board row)
+;                (term ([●]
+;                       [○]
+;                       [●])))
+; (list
+;  (match (list (bind 'Board '((●) (○) hole)) (bind 'row '(●))))
+;  (match (list (bind 'Board '((●) hole (●))) (bind 'row '(○))))
+;  (match (list (bind 'Board '(hole (○) (●))) (bind 'row '(●)))))
+
 (define
   ⇨/hole
   (extend-reduction-relation
