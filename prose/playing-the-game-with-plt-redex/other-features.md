@@ -173,7 +173,7 @@ With `Peg-Solitaire` and `Board`s with `hole`s, we can shorten the definition of
         "→")))
 ```
 
-The `(in-hole Board [position_1 ... ● ● ○ position_2 ...])` in the input pattern matches a row including the `● ● ○` sequence. This saves us from having to repeat the surroundings by writing `(row_1 ... ___ row_2 ...)`. The `(in-hole Board [position_1 ... ○ ○ ● position_2 ...])` in the template does the opposite, *plugging* the term `[position_1 ... ○ ○ ● position_2 ...]` in the `hole` we had left in `Board`.
+The `(in-hole Board [position_1 ... ● ● ○ position_2 ...])` in the input pattern matches a row including the `● ● ○` sequence. This saves us from having to repeat the surroundings by writing `(row_1 ... ___ row_2 ...)`.<label class="margin-note"><input type="checkbox"><span markdown="1">We cannot shorten the definition further by removing the `position_<n> ...` parts because a `hole` cannot match a sequence of `position`s, for example, `● ● ○`.</span></label> The `(in-hole Board [position_1 ... ○ ○ ● position_2 ...])` in the template does the opposite, *plugging* the term `[position_1 ... ○ ○ ● position_2 ...]` in the `hole` we had left in `Board`.
 
 The `⇨/hole` extended reduction relation works the same as the `⇨` original reduction relation:
 
@@ -212,18 +212,57 @@ The `⇨/hole` extended reduction relation works the same as the `⇨` original 
                [· · ● ● ● · ·])))
 ```
 
-TODO
-====
+* * *
+
+PLT Redex provides other more sophisticated forms for extending languages and reduction relations, for example, `define-union-language` creates a language by joining together the names for patterns from various languages, and `context-closure` defines a reduction relation based on another in a way that saves us from typing `(in-hole ___)` repeatedly, as we did in `⇨/hole`.
+
+Testing
+=======
+
+All tests we have written thus far depend on examples we have written by hand, for example, boards such as `initial-board`, `example-board-1` and `example-board-2`. While these tests increase our confidence in our model, they do not suffice to check more sophisticated properties. For example, we may conjecture that boards have less pegs after every move, because we remove the peg that was jumped over. We may want to prove this proposition holds for all boards, but developing a formal proof can be time-consuming, so before we start we want to use our model to test the proposition on a variety of boards, particularly on boards we did not think of ourselves.
+
+PLT Redex includes a tool the generate terms and check propositions. For example, the following listing checks the proposition above:
 
 ```racket
-redex-check: /Users/leafac/Code/www.leafac.com/prose/playing-the-game-with-plt-redex/other-features.rkt:26
+(redex-check
+ peg-solitaire board
+ (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
+   (> (term (count-● board)) (term (count-● ,board′)))))
+```
+
+The `redex-check` form is working over the `peg-solitaire` language and generating terms that follow the definition of `board`. For each term it generates, it runs the predicate `(for/and ___)`, which asserts that the `board` includes more pegs than the `board′`s after one move. By default, PLT Redex will try this a 1000 times:
+
+```racket
+redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:26
 no counterexamples in 1000 attempts
 ```
 
+If we check for an invalid property, for example, the *opposite* of the one above (using `<` instead of `>`), then `redex-check` outputs a counterexample:
+
 ```racket
-redex-check: /Users/leafac/Code/www.leafac.com/prose/playing-the-game-with-plt-redex/other-features.rkt:31
+(redex-check
+ peg-solitaire board
+ (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
+   (< (term (count-● board)) (term (count-● ,board′)))))
+redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:31
 counterexample found after 125 attempts:
 ((○) (●) (●))
 ```
 
+Typesetting
+===========
+
+We can typeset the forms we defined thus far for including them in papers. This streamlines the writing process and prevents errors when translating our model to LaTeX. For example, the following is the typeset definition of `→*`:
+
+```racket
+(render-judgment-form →*)
+```
+
+<figure markdown="1">
 {% include_relative judgment-form.svg %}
+<figcaption markdown="1">
+The `→*` judgment form as automatically typeset by PLT Redex.
+</figcaption>
+</figure>
+
+This default typesetting may be unsatisfactory, for example, we may wish that `→*` is infix instead of prefix. PLT Redex offers forms to customize the typesetting.
