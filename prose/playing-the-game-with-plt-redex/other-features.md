@@ -240,10 +240,11 @@ no counterexamples in 1000 attempts
 If we check for an invalid property, for example, the *opposite* of the one above (using `<` instead of `>`), then `redex-check` outputs a counterexample:
 
 ```racket
-(redex-check
- peg-solitaire board
- (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
-   (< (term (count-● board)) (term (count-● ,board′)))))
+> (redex-check
+   peg-solitaire board
+   (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
+     (< (term (count-● board)) (term (count-● ,board′)))))
+
 redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:31
 counterexample found after 125 attempts:
 ((○) (●) (●))
