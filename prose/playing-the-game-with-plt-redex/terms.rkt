@@ -15,6 +15,10 @@
 (test-equal (term (● ● ○))
             '(● ● ○))
 
+(define-term a-space ○)
+(test-equal (term a-space)
+            '○)
+
 (define-term example-board-1
   ([· · ● ● ● · ·]
    [· · ● ● ○ · ·]
