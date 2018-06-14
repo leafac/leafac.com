@@ -119,6 +119,11 @@ All operations we have covered rely on terms *matching* patterns, but it is ofte
 
 Similarly, PLT Redex does not include patterns for data structures other than S-expressions, for example, hashes and sets. One workaround is the same as before, to `unquote`, but models that `unquote` too often quickly become unreadable. The best solution is to approximate these data structures using S-expressions, for example, hashes become association lists<label class="margin-note"><input type="checkbox"><span markdown="1">Lists of pairs.</span></label> and sets become lists. The downside of this approach is that the model must provide utilities for manipulating these data structures (adding elements, looking up, and so forth) while guaranteeing the invariants, for example, that set elements are distinct.
 
+Advanced Relations
+==================
+
+It is common for papers to include a series of definitions which rely on a parameter that remains the same. For example, this parameter may indicate which policy to follow when performing a task, say, how to allocate an address. When the context is evident, papers often omit the parameter to improve readability, but PLT Redex has no support for this: we must pass the parameter around in every definition explicitly, cluttering them. Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
+
 Customized Typesetting
 ======================
 
