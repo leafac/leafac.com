@@ -47,3 +47,16 @@
 
 #;
 (winning-boards (term initial-board))
+
+;; ---------------------------------------------------------------------------------------------------
+
+(define-relation peg-solitaire
+  not-peg? ⊆ position
+  [(not-peg? position) ,(not (redex-match? peg-solitaire peg (term position)))])
+
+(test-equal (term (not-peg? ●))
+            #f)
+(test-equal (term (not-peg? ○))
+            #t)
+(test-equal (term (not-peg? ·))
+            #t)
