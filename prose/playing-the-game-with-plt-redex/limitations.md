@@ -73,7 +73,7 @@ The first two lines of output are the intermediary `board_2` in the two applicat
 Performance
 ===========
 
-An executable model is not an implementation. PLT Redex is good for visualizing and understanding a model on relatively small inputs. It can scale to moderately sized inputs if we design patterns and relations carefully, but it can never replace a performance-tuned implementation.
+An executable model is not an implementation. PLT Redex is good for visualizing and understanding a model on relatively small inputs. It can scale to moderately sized inputs if we design patterns and relations carefully, but it can never replace a performance-tuned implementation, for it has to check contracts, perform nondeterministic computations, and so forth—tasks that are computationally expensive.
 
 As an example of a declarative definition that does not scale for being too naïve, consider the following function to find winning boards:
 
@@ -119,10 +119,25 @@ All operations we have covered rely on terms *matching* patterns, but it is ofte
 
 Similarly, PLT Redex does not include patterns for data structures other than S-expressions, for example, hashes and sets. One workaround is the same as before, to `unquote`, but models that `unquote` too often quickly become unreadable. The best solution is to approximate these data structures using S-expressions, for example, hashes become association lists<label class="margin-note"><input type="checkbox"><span markdown="1">Lists of pairs.</span></label> and sets become lists. The downside of this approach is that the model must provide utilities for manipulating these data structures (adding elements, looking up, and so forth) while guaranteeing the invariants, for example, that set elements are distinct.
 
-Advanced Relations
+Metaparameters
+==============
+
+It is common for papers to include a series of definitions which rely on a parameter that remains the same. For example, this parameter may indicate which policy to follow when performing a task, say, how to allocate an address. When the context is evident, papers often omit the parameter to improve readability—because this is a parameter in the guest language, we call them *metaparameters*. But PLT Redex has no support for metaparameters: we must pass the parameter around in every definition explicitly, which adds clutter.<label class="margin-note"><input type="checkbox"><span markdown="1">There are a few [other alternatives](https://groups.google.com/forum/#!topic/racket-users/cGRMPIoEZas) but they all have their downsides.</span></label> Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
+
+Parallel Reduction
 ==================
 
-It is common for papers to include a series of definitions which rely on a parameter that remains the same. For example, this parameter may indicate which policy to follow when performing a task, say, how to allocate an address. When the context is evident, papers often omit the parameter to improve readability, but PLT Redex has no support for this: we must pass the parameter around in every definition explicitly, cluttering them.<label class="margin-note"><input type="checkbox"><span markdown="1">There are a few [other alternatives](https://groups.google.com/forum/#!topic/racket-users/cGRMPIoEZas) but they all have their downsides.</span></label> Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
+PLT Redex is unable to reduce on multiple [`hole`s](other-features#extensions-and-holes) in a single step. We would have run into this limitation if we had chosen a different game, for example, Conway’s Game of Life, instead of Peg Solitaire. In each step of Conway’s Game of Life all cells on the board change state (alive or dead) in parallel, but we could not model it with multiple `hole`s, we would have to opt for a less straightforward representation and serialize the step in a series of sub-steps.
+
+Higher-Order Metafunctions
+==========================
+
+Metafunctions in PLT Redex are first-order: they cannot be passed as arguments, they cannot be a return value, they cannot be store in data structures, and so forth. If higher-order functions are necessary, then we must `unquote` and use regular Racket functions.
+
+Definition Extension Limitations
+================================
+
+Let `L` be a language, `m` a metafunction, `r` a reduction relation that uses `m`, and `L′`, `m′` and `r′` their respective extensions. The parts of `r′` that use `m` are not reinterpreted to use `m′` and range over `L′`. The only possible workarounds are to copy `r` into the definition fo `r′` and modify uses of `m` to `m′` or be careful in the definitions so that the issue does not occur.<label class="margin-note"><input type="checkbox"><span markdown="1">This is the approach taken in a paper that discusses this limitation, [*An Introduction to Redex with Abstracting Abstract Machines*](https://dvanhorn.github.io/redex-aam-tutorial/#%28part._.A_brief_aside_on_the_caveats_of_language_extensions%29).</span></label>
 
 Customized Typesetting
 ======================
