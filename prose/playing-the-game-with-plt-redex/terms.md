@@ -8,10 +8,10 @@ table-of-contents: table-of-contents.html
 Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 </aside>
 
-At its core, PLT Redex is a tool for manipulating and visualizing terms. In our game of Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> In general, terms can be various Racket values, including numbers, strings and symbols:
+PLT Redex is a tool for manipulating and visualizing terms. In Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">In programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> We use the `term` form to construct terms with Racket values including numbers, strings, symbols, and so forth, for example:
 
 <aside markdown="1">
-PLT Redex includes a testing framework with the `(test-equal e_1 e_2)` form, which we use to indicate that `e_1` evaluates to `e_2`.
+PLT Redex includes a testing framework with the `(test-equal e₁ e₂)` form, which we use to indicate that `e₁` evaluates to `e₂`.
 </aside>
 
 <div class="code-block" markdown="1">
@@ -45,7 +45,7 @@ We can group pegs and spaces together in lists:
             '(● ● ○))
 ```
 
-We can assign terms to PLT Redex names with the `define-term` form and refer to them in `term`s:
+We can assign terms to names in PLT Redex with the `define-term` form. We can then refer to these names in other terms:
 
 ```racket
 (define-term a-peg ●)
@@ -53,12 +53,9 @@ We can assign terms to PLT Redex names with the `define-term` form and refer to
             '●)
 ```
 
-Boards
-======
+* * *
 
-We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visually compelling, but it is not the only one. For example, we could represent pegs as 1s and spaces as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a space (`○`) or a padding that does not influence game play (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A padding is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label>
-
-The following are examples of boards:
+We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visual, but it is not the only one. For example, we could represent pegs as 1s and spaces as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a space (`○`) or a padding that does not influence game play (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A padding is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label> The following are examples of boards:
 
 <aside markdown="1">
 In Racket, `[square brackets]` are delimiters equivalent to `(parentheses)`. We use square brackets to delimit rows for readability.
@@ -113,5 +110,6 @@ The following is an example of a winning board:
 We will use these boards in the following sections:
 
 ```racket
-(provide example-board-1 example-board-2 initial-board example-winning-board)
+(provide example-board-1 example-board-2
+         initial-board example-winning-board)
 ```
