@@ -4,7 +4,7 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-Pattern matching is the essence of how PLT Redex works, and all the forms we will explore in the following sections rely on it. But before we can experiment with pattern matching, we have to define a language, and to define a language we must understand pattern matching. To solve this conundrum, we define a dummy empty language for this section and revisit the definition [later](languages):
+Pattern matching is the foundation of all the PLT Redex forms we will explore in the later sections. To experiment with pattern matching, we must first define a language, but to define a language we must first understand pattern matching. We solve this conundrum by defining a dummy empty language for this section, which we will revisit in the [next section](languages):
 
 <div class="code-block" markdown="1">
 `pattern-matching.rkt`
@@ -16,7 +16,7 @@ Pattern matching is the essence of how PLT Redex works, and all the forms we wi
 ```
 </div>
 
-The most basic thing we can do with pattern matching is to verify whether a term matches a pattern with the `redex-match?` form:
+The primary purpose of pattern matching is to verify whether a term matches a pattern. We can ask this question with the `redex-match?` form:
 
 ```racket
 (redex-match? <language> <pattern> <term>)
@@ -33,7 +33,7 @@ The simplest kind of pattern is the literal term, for example:
             #t)
 ```
 
-The underscore pattern (`_`) means “anything,”<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to the dot (`.`) in regular expressions and the star (`*`) in Unix path patterns.</span></label> for example:
+The underscore pattern (`_`) means “anything,”<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to the dot (`.`) in regular expressions and to the star (`*`) in Unix path patterns.</span></label> for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire _
@@ -61,9 +61,9 @@ In the listing above, the underscore pattern (`_`) can match elements in the lis
             #t)
 ```
 
-But the underscore pattern (`_`) and the `any` pattern are not equivalent. In many of the forms that we will explore in the next sections, patterns not only recognize terms, but also introduce names to the fragments that were matched, which we can use to build other terms. These names are similar to the ones we defined with `define-term` in the [previous section](terms), except that they will be available only within the forms containing the pattern.
+But the underscore pattern (`_`) and the `any` pattern are not equivalent: only the latter introduces names. In the next sections we will explore forms in which patterns not only recognize terms, but also names the fragments that were matched, so we can use them to build other terms. These names are similar to the ones we defined with `define-term` in the [previous section](terms), but they are available only within the forms containing the pattern.
 
-We can observe the names a pattern introduces with the `redex-match` form which is similar to the `redex-match?` form but returns the names instead of just whether the pattern matched or not:
+We can observe the names a pattern introduces with the `redex-match` form, which is similar to the `redex-match?` form but returns the names instead of just whether the pattern matched or not:
 
 ```racket
 > (redex-match peg-solitaire (_ ● ○)
@@ -75,14 +75,14 @@ We can observe the names a pattern introduces with the `redex-match` form which 
 (list (match (list (bind 'any '●))))
 ```
 
-In the first interaction, no names are introduced, as indicated by the empty list `'()`, and in the second interaction the name `any` is bound to the term `●`. This is the output in more detail:
+In the first interaction, no names are introduced, as indicated by the empty list `'()`, and in the second interaction the name `any` is associated with the term `●` that was matched. This is the output in more detail:
 
 ```racket
 (list⁶ (match⁵ (list⁴ (bind³ 'any¹ '●²))))
 ```
 
 1. `any`: The name in the pattern.
-2. `●`: The term.
+2. `●`: The term that was matched by `any`.
 3. `bind`: The binding data structure representing the association between the name and the term.
 4. `list`: There might be multiple bindings in a pattern.
 5. `match`: The matching data structure representing one way to match the term with the pattern.
@@ -94,13 +94,15 @@ The `any` form may appear more than once in a pattern to represent parts of a te
 (test-equal (redex-match? peg-solitaire (any any ○)
                           (term         (●   ●   ○)))
             #t)
-(test-equal (redex-match? peg-solitaire (any any any)
+(test-equal (redex-match? peg-solitaire (any ●   any)
                           ;                      ≠
                           (term         (●   ●   ○)))
             #f)
 ```
 
 The second pattern in the listing above does not match<label class="margin-note"><input type="checkbox"><span markdown="1">Note the `#f`.</span></label> because the `any` name cannot be associated with `●` and `○` at the same time.
+
+# TODO: Continue here
 
 A pattern may include multiple `any`s that associate with different terms by adding a suffix of the form `any_<suffix>`, for example:
 

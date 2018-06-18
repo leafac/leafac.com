@@ -39,7 +39,7 @@
 (test-equal (redex-match? peg-solitaire (any any ○)
                           (term         (●   ●   ○)))
             #t)
-(test-equal (redex-match? peg-solitaire (any any any)
+(test-equal (redex-match? peg-solitaire (any ●   any)
                           ;                      ≠
                           (term         (●   ●   ○)))
             #f)
