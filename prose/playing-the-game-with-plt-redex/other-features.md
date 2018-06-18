@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
@@ -131,7 +131,7 @@ The `Peg-Solitaire` language includes all names in `peg-solitaire` as well as th
   [Board    ::= (row ... hole row ...)])
 ```
 
-The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special built-in pattern in PLT Redex—similar to how `any` is a special built-in pattern. A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
+The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special built-in pattern in PLT Redex—similar to how `any` is a special built-in pattern. A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
 
 ```racket
 (test-equal (redex-match? Peg-Solitaire (in-hole Board row)
@@ -214,14 +214,14 @@ The `⇨/hole` extended reduction relation works the same as the `⇨` original 
 
 * * *
 
-PLT Redex provides other more sophisticated forms for extending languages and reduction relations, for example, `define-union-language` creates a language by joining together the names for patterns from various languages, and `context-closure` defines a reduction relation based on another in a way that saves us from typing `(in-hole ___)` repeatedly, as we did in `⇨/hole`.
+PLT Redex provides other more sophisticated forms for extending languages and reduction relations, for example, `define-union-language` creates a language by joining together the names for patterns from various languages, and `context-closure` defines a reduction relation based on another in a way that saves us from typing `(in-hole ___)` repeatedly, as we did in `⇨/hole`.
 
 Testing
 =======
 
 All tests we have written thus far depend on examples we have written by hand, for example, boards such as `initial-board`, `example-board-1` and `example-board-2`. While these tests increase our confidence in our model, they do not suffice to check more sophisticated properties. For example, we may conjecture that boards have less pegs after every move, because we remove the peg that was jumped over. We may want to prove this proposition holds for all boards, but developing a formal proof can be time-consuming, so before we start we want to use our model to test the proposition on a variety of boards, particularly on boards we did not think of ourselves.
 
-PLT Redex includes a tool the generate terms and check propositions. For example, the following listing checks the proposition above:
+PLT Redex includes a tool the generate terms and check propositions. For example, the following listing checks the proposition above:
 
 ```racket
 (redex-check
@@ -230,7 +230,7 @@ PLT Redex includes a tool the generate terms and check propositions. For example
    (> (term (count-● board)) (term (count-● ,board′)))))
 ```
 
-The `redex-check` form is working over the `peg-solitaire` language and generating terms that follow the definition of `board`. For each term it generates, it runs the predicate `(for/and ___)`, which asserts that the `board` includes more pegs than the `board′`s after one move. By default, PLT Redex will try this a 1000 times:
+The `redex-check` form is working over the `peg-solitaire` language and generating terms that follow the definition of `board`. For each term it generates, it runs the predicate `(for/and ___)`, which asserts that the `board` includes more pegs than the `board′`s after one move. By default, PLT Redex will try this a 1000 times:
 
 ```racket
 redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:26
@@ -262,8 +262,8 @@ We can typeset the forms we defined thus far for including them in papers. This 
 <figure markdown="1">
 {% include_relative judgment-form.svg %}
 <figcaption markdown="1">
-The `→*` judgment form as automatically typeset by PLT Redex.
+The `→*` judgment form as automatically typeset by PLT Redex.
 </figcaption>
 </figure>
 
-This default typesetting may be unsatisfactory, for example, we may wish that `→*` is infix instead of prefix. PLT Redex offers forms to customize the typesetting.
+This default typesetting may be unsatisfactory, for example, we may wish that `→*` is infix instead of prefix. PLT Redex offers forms to customize the typesetting.

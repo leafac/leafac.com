@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
@@ -8,10 +8,10 @@ table-of-contents: table-of-contents.html
 Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 </aside>
 
-At its core, PLT Redex is a tool for manipulating and visualizing terms. In our game of Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> In general, terms can be various Racket values, including numbers, strings and symbols:
+At its core, PLT Redex is a tool for manipulating and visualizing terms. In our game of Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> In general, terms can be various Racket values, including numbers, strings and symbols:
 
 <aside markdown="1">
-PLT Redex includes a testing framework with the `(test-equal e_1 e_2)` form, which we use to indicate that `e_1` evaluates to `e_2`.
+PLT Redex includes a testing framework with the `(test-equal e_1 e_2)` form, which we use to indicate that `e_1` evaluates to `e_2`.
 </aside>
 
 <div class="code-block" markdown="1">
@@ -45,7 +45,7 @@ We can group pegs and spaces together in lists:
             '(● ● ○))
 ```
 
-We can assign terms to PLT Redex names with the `define-term` form and refer to them in `term`s:
+We can assign terms to PLT Redex names with the `define-term` form and refer to them in `term`s:
 
 ```racket
 (define-term a-peg ●)

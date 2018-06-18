@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `→` [judgment form](judgment-forms)<label class="margin-note"><input type="checkbox"><span markdown="1">The `stepper` form only works on judgment forms with mode `I O` (like `→`) or `O I`, and this feature is [new to Racket 7](https://github.com/racket/redex/issues/155).</span></label> on the `initial-board`:
+We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `→` [judgment form](judgment-forms)<label class="margin-note"><input type="checkbox"><span markdown="1">The `stepper` form only works on judgment forms with mode `I O` (like `→`) or `O I`, and this feature is [new to Racket 7](https://github.com/racket/redex/issues/155).</span></label> on the `initial-board`:
 
 <div class="code-block" markdown="1">
 `visualization.rkt`
@@ -85,7 +85,7 @@ The next move in the alternate path. The graph at the bottom includes one node f
 
 * * *
 
-We accomplished our goal of playing Peg Solitaire by (ab)using PLT Redex.
+We accomplished our goal of playing Peg Solitaire by (ab)using PLT Redex.
 
 Traces
 ======

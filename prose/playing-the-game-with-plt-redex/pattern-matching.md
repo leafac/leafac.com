@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-Pattern matching is the essence of how PLT Redex works, and all the forms we will explore in the following sections rely on it. But before we can experiment with pattern matching, we have to define a language, and to define a language we must understand pattern matching. To solve this conundrum, we define a dummy empty language for this section and revisit the definition [later](languages):
+Pattern matching is the essence of how PLT Redex works, and all the forms we will explore in the following sections rely on it. But before we can experiment with pattern matching, we have to define a language, and to define a language we must understand pattern matching. To solve this conundrum, we define a dummy empty language for this section and revisit the definition [later](languages):
 
 <div class="code-block" markdown="1">
 `pattern-matching.rkt`

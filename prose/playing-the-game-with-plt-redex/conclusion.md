@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-We covered the basics of PLT Redex without going into programming-language theory. Instead, we used it to model a game of [Peg Solitaire](peg-solitaire-rules). We used [terms](terms) to represent elements in the game: boards, pegs, spaces and paddings. We use [patterns to match](pattern-matching) those terms as the basis of several definitions:
+We covered the basics of PLT Redex without going into programming-language theory. Instead, we used it to model a game of [Peg Solitaire](peg-solitaire-rules). We used [terms](terms) to represent elements in the game: boards, pegs, spaces and paddings. We use [patterns to match](pattern-matching) those terms as the basis of several definitions:
 
 - **[Languages](languages)**: Name patterns and specify which terms represent elements in Peg Solitaire and which do not.
 - **[Metafunctions](metafunctions)**: Functions in the language of Peg Solitaire elements. They are deterministic: when faced with multiple choices (multiple clauses that match), a metafunction chooses *only one* path.
@@ -12,7 +12,7 @@ We covered the basics of PLT Redex without going into programming-language theor
 - **[Judgment Forms](judgment-forms)**: Similar to a metafunction, but works nondeterministically: when faced with multiple choices (multiple clauses that match), a judgment form chooses *all* paths. Can also be interpreted as a metafunction that returns a set of results.
 - **[Reduction Relation](reduction-relations)**: A special kind of judgment form with mode of operation `I O`.
 
-With this definitions in place, we used PLT Redex [visualization](visualization) tools to play Peg Solitaire. We then explored [other features](other-features), including unquoting, holes, testing and typesetting. We also discussed some [limitations](limitations), including debugging, performance, more advanced pattern matching, the lack of metaparameters, parallel reduction and higher-order metafunctions, how definition extensions do not reinterpret dependent definitions, how it can be difficult to customize typeset figures, and how PLT Redex is not appropriate for mechanized formal proofs.
+With this definitions in place, we used PLT Redex [visualization](visualization) tools to play Peg Solitaire. We then explored [other features](other-features), including unquoting, holes, testing and typesetting. We also discussed some [limitations](limitations), including debugging, performance, more advanced pattern matching, the lack of metaparameters, parallel reduction and higher-order metafunctions, how definition extensions do not reinterpret dependent definitions, how it can be difficult to customize typeset figures, and how PLT Redex is not appropriate for mechanized formal proofs.
 
 * * *
 
@@ -20,7 +20,7 @@ When working with programming languages, terms represent programs and program fr
 
 * * *
 
-You now know enough to read the more advanced material on PLT Redex, and understanding the tool will help you read papers in programming-language theory.
+You now know enough to read the more advanced material on PLT Redex, and understanding the tool will help you read papers in programming-language theory.
 
 Acknowledgments
 ===============

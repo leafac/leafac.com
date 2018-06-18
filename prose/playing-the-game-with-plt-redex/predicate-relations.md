@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
@@ -73,7 +73,7 @@ The following is the `winning-board?/metafunction` metafunction written as a pre
                     ...))])
 ```
 
-The contract `winning-board? ⊆ board` says that `winning-board?` predicate relation is only defined over `board`s<label class="margin-note"><input type="checkbox"><span markdown="1">Only *some* boards are winning boards.</span></label> and PLT Redex will verify the input before a query. We query the predicate relation by applying it, similar to the metafunction:
+The contract `winning-board? ⊆ board` says that `winning-board?` predicate relation is only defined over `board`s<label class="margin-note"><input type="checkbox"><span markdown="1">Only *some* boards are winning boards.</span></label> and PLT Redex will verify the input before a query. We query the predicate relation by applying it, similar to the metafunction:
 
 ```racket
 (test-equal (term (winning-board? example-board-1))

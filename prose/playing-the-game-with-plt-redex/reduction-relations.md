@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-The `→` [judgment form](judgment forms) from the previous section had one input and one output. We say the judgment form was *reducing* the `board` because after each move there are *fewer* possible moves going forward. This specific kind of relation is also know as a *reduction relation*.<label class="margin-note"><input type="checkbox"><span markdown="1">Like judgment forms, reduction relations compute nondeterministically.</span></label> PLT Redex supports reduction relations with the `reduction-relation` form:<label class="margin-note"><input type="checkbox"><span markdown="1">The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-metafunction`, `define-relation` and `define-judgment-form`.</span></label>
+The `→` [judgment form](judgment forms) from the previous section had one input and one output. We say the judgment form was *reducing* the `board` because after each move there are *fewer* possible moves going forward. This specific kind of relation is also know as a *reduction relation*.<label class="margin-note"><input type="checkbox"><span markdown="1">Like judgment forms, reduction relations compute nondeterministically.</span></label> PLT Redex supports reduction relations with the `reduction-relation` form:<label class="margin-note"><input type="checkbox"><span markdown="1">The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-metafunction`, `define-relation` and `define-judgment-form`.</span></label>
 
 ```racket
 (reduction-relation

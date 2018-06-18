@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
@@ -20,7 +20,7 @@ Peg Solitaire is a single-player board game that starts with the following board
 ○  Space
 ```
 
-At each move, a peg can jump over its immediate neighbor on the North, East, South or West, and land on a space. The neighbor peg that was jumped over is removed from the board. For example, the following are the four possible starting moves:
+With each move, a peg can jump over its immediate neighbor on the North, East, South or West, and land on a space. The neighbor peg that was jumped over is removed from the board. For example, the following are the four possible starting moves:
 
 <pre>
     ● ● ●             ● ● ●
