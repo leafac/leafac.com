@@ -4,7 +4,7 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-A metafunction is a function in the level of terms.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, metafunctions are the small utilities, for example, `δ`, which evaluates primitive operators.</span></label> We define a metafunction with the `define-metafunction` form:<label class="margin-note"><input type="checkbox"><span markdown="1">A metafunction is similar to `define/match` in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to `case` and `cond`.</span></label>
+The metafunction is the most familiar of all PLT Redex forms: it is a function on terms.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, metafunctions are the small utilities, for example, many papers use a metafunction to evaluate primitive operators—they generally name that metafunction `δ`.</span></label> We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-metafunction#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form:<label class="margin-note"><input type="checkbox"><span markdown="1">A metafunction is similar to [`define/match`](https://docs.racket-lang.org/reference/match.html?q=define%2Fmatch#%28form._%28%28lib._racket%2Fmatch..rkt%29._define%2Fmatch%29%29) in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to `case` and `cond`.</span></label>
 
 ```racket
 (define-metafunction <language>
