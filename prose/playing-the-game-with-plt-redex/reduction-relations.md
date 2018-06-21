@@ -16,7 +16,7 @@ The `→` [judgment form](judgment forms) from the previous section had one inpu
 ```
 
 - `<language>`: A language as defined [previously](languages).
-- `#:domain`: A contract pattern for the inputs and outputs of the reduction relation. The contract is verified and an error may be raised when the reduction relation is applied.
+- `#:domain`: A contract pattern for the inputs and outputs of the reduction relation. The contract is verified and an error may be raised if the reduction relation is applied with an invalid input or produces an invalid output.
 - `(--> <pattern> <template> <name>)`: A reduction relation clause.
 - `<pattern>`: A pattern for the input.
 - `<template>`: A template for the output.

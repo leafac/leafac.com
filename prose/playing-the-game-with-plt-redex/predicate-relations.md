@@ -56,7 +56,7 @@ A predicate relation is a specialization of the kind of metafunction above, one 
 ```
 
 - `<language>`: A language as defined [previously](languages).
-- `<contract>`: A contract with a pattern for the inputs of the predicate relation. The contract is verified and an error may be raised when the predicate relation is queried.
+- `<contract>`: A contract with a pattern for the inputs of the predicate relation. The contract is verified and an error may be raised if the predicate relation is queried with invalid inputs.
 - `[(<relation> <pattern> ...)]`: A predicate relation clause.
 - `<relation>`: The predicate relation name.
 - `<pattern>`: Pattern against which the predicate relation inputs are compared. If the patterns match, then the predicate relation holds.
