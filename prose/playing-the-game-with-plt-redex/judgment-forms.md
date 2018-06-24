@@ -4,11 +4,11 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-A judgment form is different from a [metafunction](metafunctions) in two ways: (1) it may have multiple outputs,<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to a regular Racket function that returns `values`.</span></label> and (2) it is nondeterministic. A metafunction tries to match its inputs with each of the patterns in the definition clauses in order, and the first match *determines* the metafunction output. We say a metafunction is *deterministic*. A judgment form, on the other hand, tries to match its inputs with *all* the patterns in the definition clauses and outputs all cases that match. A judgment form is *nondeterministic*. Another way of interpreting this is that a judgment form is a metafunction that returns a set of outputs.
+A judgment form is different from a [metafunction](metafunctions) in two ways: (1) it may have multiple outputs,<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to a regular Racket function that returns `values`.</span></label> and (2) it is nondeterministic. A metafunction tries to match its inputs with each of the patterns in the definition clauses in order, and the first match *determines* the metafunction output. We say a metafunction is *deterministic*. A judgment form, on the other hand, tries to match its inputs with *all* the patterns in the definition clauses and may output multiple values if there are multiple matches. A judgment form is *nondeterministic*. Another way of interpreting this is that a judgment form is a metafunction that returns a set of outputs.<label class="margin-note"><input type="checkbox"><span markdown="1">A mathematician would say that a metafunction is a mathematical *function*, while a judgment form is a mathematical *relation*. A relation is more general than a function, as a function is just a relation in which clauses are mutually exclusive.</span></label>
 
-For example, consider both a metafunction and a judgment form that have the same patterns in their clauses: `(any ...)` and `any`. When the input is `(1 2 3)`, the metafunction matches the first clause and returns the output determined by it, and the judgment form matches *both* patterns and returns both outputs.
+For example, consider both a metafunction and a judgment form that include clauses with the patterns `(any ...)` and `any`. Given the input `(1 2 3)`, the metafunction matches only the first clause, while the judgment form matches *both* clauses.
 
-We define a judgment form with `define-judgment-form`:
+We define a judgment form with [`define-judgment-form`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-judgment-form%29%29):
 
 <aside markdown="1">
 The notation for judgment forms with a line separating conditions and conclusion is similar to the notation used for arithmetic in grade school:
@@ -34,24 +34,24 @@ The notation for judgment forms with a line separating conditions and conclusion
 ```
 
 - `<language>`: A language as defined [previously](languages).
-- `#:mode`: A judgment form may have multiple inputs and outputs. Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label> Besides the declared outputs, every judgment form also has an implicit boolean output: whether the judgment holds or not.
+- `#:mode`: A judgment form may have multiple inputs and outputs. Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label> Besides the declared outputs, every judgment form also has an implicit boolean output: whether the judgment holds or not.<label class="margin-note"><input type="checkbox"><span markdown="1">In the [previous section](predicate-relations) we defined predicate relations as metafunctions that return a boolean. We can also interpret predicate relations as [judgment forms whose single output is this implicit boolean](#a-judgment-form-for-a-predicate-relation).</span></label>
 - `#:contract`: A contract with patterns for the arguments of the judgment form. The contract is verified and an error may be raised if the judgment form is queried with invalid inputs or produces invalid outputs.
-- `[<condition> ... --- (<judgment-form> <pattern/template> ...)]`: A judgment form clause.<label class="margin-note"><input type="checkbox"><span markdown="1">This notation with a bar separating conditions—sometimes called *antecedents*—and conclusion is common in papers and has a long tradition in formal logic.</span></label>
+- `[<condition> ... --- (<judgment-form> <pattern/template> ...)]`: A judgment form clause.<label class="margin-note"><input type="checkbox"><span markdown="1">This notation with a bar (`---`) separating conditions and conclusion is common in papers and has a long tradition in formal logic.</span></label>
 - `<condition>`: A condition under which the clause holds. For example, a condition may query another judgment form or [predicate relation](predicate-relations).
 - `<judgment-form>`: The judgment form name.
-- `<pattern/template>`: A pattern for an input argument or a template for an output pattern.
+- `<pattern/template>`: A pattern for an input argument or a template for an output.
 
 There are two ways to read a judgment form clause:
 
 - **Logical**: “If `<condition>`s hold, then `(<judgment-form> <pattern/template> ...)` holds.”
 - **Operational**: Start at the bottom of dashes, on `(<judgment-form> <pattern/template> ...)`, and match the judgment form inputs to the `<pattern>`s. If they match, then try to satisfy each `<condition>` over the dashes. Finally, output the `<template>`s.
 
-The first reading is more mathematically correct, while the second is more intuitive<label class="margin-note"><input type="checkbox"><span markdown="1">To me, at least.</span></label> and useful when working in PLT Redex.
+The first reading is more mathematically accurate, while the second is more intuitive<label class="margin-note"><input type="checkbox"><span markdown="1">To me, at least.</span></label> and useful when working in PLT Redex.
 
 A Judgment Form for a Predicate Relation
 ========================================
 
-In its simplest shape, a judgment form only has inputs and the implicit boolean output indicating whether the judgment holds or not. It is equivalent to a [predicate relation](predicate-relations), and we can rewrite `winning-board?` as a judgment form:
+In its simplest shape, a judgment form only has input arguments and one implicit output indicating whether the judgment holds or not. In this shape, a judgment form is equivalent to a [predicate relation](predicate-relations). We can rewrite `winning-board?` as a judgment form:
 
 <div class="code-block" markdown="1">
 `judgment-forms.rkt`
