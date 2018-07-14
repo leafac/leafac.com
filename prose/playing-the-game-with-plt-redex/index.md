@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Playing the Game with PLT Redex
-date: 2018-06-18
+date: 2018-07-14
 table-of-contents: table-of-contents.html
 ---
 
@@ -9,11 +9,9 @@ table-of-contents: table-of-contents.html
 **Pre-requisites**: [Racket](https://docs.racket-lang.org/quick/index.html).
 </aside>
 
-[PLT Redex](https://redex.racket-lang.org/) is a tool for designing and debugging programming languages, operational semantics, type systems, program analyses, and so forth.  When I was first learning it, I was new both to the tool and to programming-language theory, so I struggled with [the documentation and the educational material](related-work). PLT Redex is designed after the notation found in research papers, which I found hard to grasp. I only started making progress when I identified the familiar ideas behind the tool, for example, functional programming and pattern matching, and this created a virtuous cycle: the more papers I read, the better I was at PLT Redex, but more importantly, the more I understood PLT Redex, the more equipped I was to read papers.
+[PLT Redex](https://redex.racket-lang.org/) is a tool for modeling programming languages, operational semantics, type systems, program analyses, and so forth. When I was first learning PLT Redex, I was new both to the tool and to programming-language theory, so I struggled with the [educational material](related-work). The main reason for the struggle was that PLT Redex is designed after the notation found in research papers, which I found hard to grasp. I started to make progress when I identified the underlying familiar ideas, for example, functional programming and pattern matching. This formed a virtuous cycle: reading papers helped me to understand PLT Redex, but perhaps more importantly, understanding PLT Redex helped me to read papers.
 
-
-
-This article is targeted at people in a similar place. We introduce PLT Redex for the reader new to programming-language theory, avoiding Greek letters and jargon. We (ab)use the tool to play a game of [Peg Solitaire](https://en.wikipedia.org/wiki/Peg_solitaire) and explore the features for functional programming, pattern matching, contract verification, nondeterministic computation, visualization, typesetting, test generation, and so forth. It is a fun exercise of repurposing a tool for tasks beyond its intended design, and a first step for reading technical papers.
+This article is for people in a similar place, people with a background in programming that are breaking into programming-language theory. To smooth the path, we introduce PLT Redex avoiding Greek letters and jargon. We (ab)use the tool to play a game of [Peg Solitaire](https://en.wikipedia.org/wiki/Peg_solitaire), exploring features for functional programming, pattern matching, contract verification, nondeterministic computation, visualization, typesetting, test generation, and so forth. It is a fun exercise of repurposing a tool for tasks beyond its intended design, and a first step towards being able to read research papers.
 
 * * *
 
