@@ -323,7 +323,8 @@ hr {
   &::before {
     display: block;
     text-align: center;
-    content: "• • •";
+    content: "* * *";
+    color: $palette--secondary-content;
   }
 }
 
