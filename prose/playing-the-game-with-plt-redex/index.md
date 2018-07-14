@@ -6,10 +6,12 @@ table-of-contents: table-of-contents.html
 ---
 
 <aside markdown="1">
-**Pre-requisites**: Racket.
+**Pre-requisites**: [Racket](https://docs.racket-lang.org/quick/index.html).
 </aside>
 
-[PLT Redex](https://redex.racket-lang.org/) is a tool for the researcher working with programming languages, operational semantics, type systems, program analyses, and so forth. It is a domain-specific language<label class="margin-note"><input type="checkbox"><span markdown="1">**Domain-Specific Language**: A language designed for a specific purpose, for example, querying data from a database (SQL) and matching strings (Regular Expressions), as opposed to *general-purpose programming languages*, for example, Racket, Ruby and Java.</span></label> in Racket designed after the notation found in research papers. You can find [great documentation and educational materials about PLT Redex](related-work), but they tend to assume that you are already familiar with programming-language theory. When I was learning about PLT Redex, I was new to both the tool and to programming-language theory, so sometimes I struggled to follow along. What I found, however, is that it can be a two-way street: learning PLT Redex has helped me understand papers and programming-language theory.
+[PLT Redex](https://redex.racket-lang.org/) is a tool for designing and debugging programming languages, operational semantics, type systems, program analyses, and so forth.  When I was first learning it, I was new both to the tool and to programming-language theory, so I struggled with [the documentation and the educational material](related-work). PLT Redex is designed after the notation found in research papers, which I found hard to grasp. I only started making progress when I identified the familiar ideas behind the tool, for example, functional programming and pattern matching, and this created a virtuous cycle: the more papers I read, the better I was at PLT Redex, but more importantly, the more I understood PLT Redex, the more equipped I was to read papers.
+
+
 
 This article is targeted at people in a similar place. We introduce PLT Redex for the reader new to programming-language theory, avoiding Greek letters and jargon. We (ab)use the tool to play a game of [Peg Solitaire](https://en.wikipedia.org/wiki/Peg_solitaire) and explore the features for functional programming, pattern matching, contract verification, nondeterministic computation, visualization, typesetting, test generation, and so forth. It is a fun exercise of repurposing a tool for tasks beyond its intended design, and a first step for reading technical papers.
 
