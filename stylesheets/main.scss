@@ -319,8 +319,12 @@ h2 {
 
 hr {
   border: none;
-  margin: $space--none;
-  height: $space--large;
+  margin: $space--extra-large;
+  &::before {
+    display: block;
+    text-align: center;
+    content: "• • •";
+  }
 }
 
 // ---------------------------------------------------------------------------------------------------
