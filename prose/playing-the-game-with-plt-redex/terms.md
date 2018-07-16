@@ -4,10 +4,6 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-<aside markdown="1">
-Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
-</aside>
-
 PLT Redex is a tool for manipulating and visualizing terms. In Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">In programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms with Racket values including numbers, strings, symbols, and so forth, for example:
 
 <aside markdown="1">

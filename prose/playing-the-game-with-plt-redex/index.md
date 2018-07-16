@@ -6,7 +6,8 @@ table-of-contents: table-of-contents.html
 ---
 
 <aside markdown="1">
-**Pre-requisites**: [Racket](https://docs.racket-lang.org/quick/index.html).
+**Pre-requisites**: [Racket](https://docs.racket-lang.org/quick/index.html).  
+Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 </aside>
 
 [PLT Redex](https://redex.racket-lang.org/) is a tool for modeling programming languages, operational semantics, type systems, program analyses, and so forth. When I was first learning PLT Redex, I was new both to the tool and to programming-language theory, so I struggled with the [educational material](related-work). The main reason for the struggle was that PLT Redex is designed after the notation found in research papers, which I found hard to grasp. I started to make progress when I identified the underlying familiar ideas, for example, functional programming and pattern matching. This formed a virtuous cycle: reading papers helped me to understand PLT Redex, but perhaps more importantly, understanding PLT Redex helped me to read papers.
