@@ -1,6 +1,5 @@
 #lang racket
 (require redex "terms.rkt")
-(provide peg-solitaire)
 
 (define-language peg-solitaire
   [board    ::= (row ...)]
@@ -45,3 +44,5 @@
 (test-equal (redex-match? peg-solitaire board (term ([● ○]
                                                      [●])))
             #t)
+
+(provide peg-solitaire)

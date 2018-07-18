@@ -6,7 +6,7 @@ title: Prose
 Racket
 ======
 
-## [Playing the Game with PLT Redex](/prose/playing-the-game-with-plt-redex/)
+## [Playing the Game with PLT Redex](/prose/playing-the-game-with-plt-redex/)
 
 Programming-Language Theory for the Working Programmer
 ======================================================

@@ -1,6 +1,5 @@
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
-(provide → →*)
 
 (define-judgment-form peg-solitaire
   #:mode (winning-board?/judgment-form I)
@@ -230,3 +229,5 @@
 #;
 (show-derivations (build-derivations (→* ([● ● ● ○ ● ● ●])
                                          ([● ○ ● ○ ○ ● ●]))))
+
+(provide → →*)

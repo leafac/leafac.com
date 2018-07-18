@@ -1,7 +1,5 @@
 #lang racket
 (require redex)
-(provide example-board-1 example-board-2
-         initial-board example-winning-board)
 
 (test-equal (term 0)
             0)
@@ -9,10 +7,12 @@
             "a")
 (test-equal (term a)
             'a)
+
 (test-equal (term ●)
             '●)
 (test-equal (term ○)
             '○)
+
 (test-equal (term (● ● ○))
             '(● ● ○))
 
@@ -55,3 +55,6 @@
    [○ ○ ○ ○ ○ ○ ○]
    [· · ○ ○ ○ · ·]
    [· · ○ ○ ○ · ·]))
+
+(provide example-board-1 example-board-2
+         initial-board example-winning-board)

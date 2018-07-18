@@ -1,6 +1,5 @@
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
-(provide ⇨)
 
 (define
   ⇨
@@ -114,3 +113,5 @@
             '(((○ ○ ● ○ ● ○ ●))
 
               ((● ○ ● ○ ● ○ ○))))
+
+(provide ⇨)

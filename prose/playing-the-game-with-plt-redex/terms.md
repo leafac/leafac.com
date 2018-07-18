@@ -4,7 +4,7 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-PLT Redex is a tool for manipulating and visualizing terms. In Peg Solitaire, terms represent the pegs and the board.<label class="margin-note"><input type="checkbox"><span markdown="1">In programming languages, terms represent program fragments, types, machine states, and so forth.</span></label> We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms with Racket values including numbers, strings, symbols, and so forth, for example:
+At its simplest, PLT Redex is a tool for manipulating and visualizing terms. Terms are data in S-expression form.<label class="margin-note"><input type="checkbox"><span markdown="1">Identifiers, numbers, strings, lists, and so forth.</span></label> In programming languages, terms can represent programs and program fragments, types, machine states, and so forth. In Peg Solitaire, terms can represent pegs, boards, and so forth. We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms from Racket values, for example:
 
 <aside markdown="1">
 PLT Redex includes a testing framework with the [`(test-equal e₁ e₂)`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-equal%29%29) form, which we use to indicate that `e₁` evaluates to `e₂`.
@@ -51,10 +51,11 @@ We can assign terms to names in PLT Redex with the [`define-term`](https://docs
 
 * * *
 
-We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visual, but it is not the only one. For example, we could represent pegs as 1s and spaces as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a space (`○`) or a padding that does not influence game play (`·`).<label class="margin-note"><input type="checkbox"><span markdown="1">A padding is represented by a middle dot (`·`), not to be confused with a dot (`.`).</span></label> The following are examples of boards:
+We represent<label class="margin-note"><input type="checkbox"><span markdown="1">We choose this representation because it is visually appealing, but it is not the only possibility. For example, we could represent pegs as 1s and spaces as 0s, in which case the whole board would be a just a (binary) number.</span></label> a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a space (`○`) or a padding (`·`). The following are examples of boards:
 
 <aside markdown="1">
-In Racket, `[square brackets]` are delimiters equivalent to `(parentheses)`. We use square brackets to delimit rows for readability.
+1. The delimiters `()` and `[]` are equivalent in Racket. We improve readability by delimiting board rows with `[]` and the whole board with `()`.
+2. A padding is represented by a middle dot (`·`), not by a regular dot (`.`).
 </aside>
 
 ```racket
@@ -81,16 +82,16 @@ The following is the initial board:
 
 ```racket
 (define-term initial-board
- ([· · ● ● ● · ·]
-  [· · ● ● ● · ·]
-  [● ● ● ● ● ● ●]
-  [● ● ● ○ ● ● ●]
-  [● ● ● ● ● ● ●]
-  [· · ● ● ● · ·]
-  [· · ● ● ● · ·]))
+  ([· · ● ● ● · ·]
+   [· · ● ● ● · ·]
+   [● ● ● ● ● ● ●]
+   [● ● ● ○ ● ● ●]
+   [● ● ● ● ● ● ●]
+   [· · ● ● ● · ·]
+   [· · ● ● ● · ·]))
 ```
 
-The following is an example of a winning board:
+And the following is an example of a winning board:
 
 ```racket
 (define-term example-winning-board
@@ -103,7 +104,7 @@ The following is an example of a winning board:
    [· · ○ ○ ○ · ·]))
 ```
 
-We will use these boards in the following sections:
+We will use these boards for testing in the later sections, so we [`provide`](https://docs.racket-lang.org/guide/module-provide.html?q=provide) them here:
 
 ```racket
 (provide example-board-1 example-board-2

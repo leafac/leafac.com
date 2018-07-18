@@ -1,6 +1,5 @@
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
-(provide winning-board?)
 
 (define-metafunction peg-solitaire
   winning-board?/metafunction : board -> boolean
@@ -37,3 +36,5 @@
             #f)
 (test-equal (term (winning-board? example-winning-board))
             #t)
+
+(provide winning-board?)

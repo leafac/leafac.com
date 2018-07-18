@@ -4,7 +4,7 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-Pattern matching is the foundation of all the PLT Redex forms we will explore in the later sections. To experiment with pattern matching, we must first define a language, but to define a language we must first understand pattern matching. We solve this conundrum by defining a dummy empty language for this section, which we will revisit in the [next section](languages):
+Pattern matching is the foundation of all the PLT Redex forms we will explore in the later sections. To experiment with pattern matching, we must first define a language, but to define a language we must first understand pattern matching. We solve this conundrum by defining a dummy empty language,<label class="margin-note"><input type="checkbox"><span markdown="1">The same we did in the [Overview](overview)</span></label> which we will revisit in the [next section](languages):
 
 <div class="code-block" markdown="1">
 `pattern-matching.rkt`
@@ -22,7 +22,7 @@ The primary purpose of pattern matching is to verify whether a term matches a pa
 (redex-match? <language> <pattern> <term>)
 ```
 
-The simplest kind of pattern is the literal term, for example:
+The simplest kind of pattern is a literal term, for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire ●
@@ -33,7 +33,11 @@ The simplest kind of pattern is the literal term, for example:
             #t)
 ```
 
-The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28tech.__%29) (`_`) means “anything,”<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to the dot (`.`) in regular expressions and to the star (`*`) in Unix path patterns.</span></label> for example:
+For example, the listing above shows that the pattern `●` matches the term `(term ●)`.
+
+* * *
+
+The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28tech.__%29) (`_`) means “anything,” similar to the dot (`.`) in regular expressions. For example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire _
@@ -53,7 +57,7 @@ The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.
             #t)
 ```
 
-In the listing above, the underscore pattern (`_`) can match elements in the list, or the whole list (last example). Another pattern that matches anything is the [`any`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28tech._any%29) pattern, for example:
+In the listing above, the underscore pattern (`_`) can match either elements in the list, or the whole list, as in the last example. Another pattern that matches anything is the [`any`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28tech._any%29) pattern, for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any ● ○)
@@ -61,9 +65,9 @@ In the listing above, the underscore pattern (`_`) can match elements in the lis
             #t)
 ```
 
-But the underscore pattern (`_`) and the `any` pattern are not equivalent: only the latter introduces names. In the next sections we will explore forms in which patterns not only recognize terms, but also names the fragments that were matched, so we can use them to build other terms. These names are similar to the ones we defined with `define-term` in the [previous section](terms), but they are available only within the forms containing the pattern.
+But the underscore pattern (`_`) and the `any` pattern are not equivalent: only the latter introduces names. In the next sections we will explore forms in which patterns not only recognize terms, but also name the fragments that were matched, so we can use them to build other terms. These names are similar to the ones we defined with `define-term` in the [previous section](terms), but they are available only within the forms containing the pattern.
 
-We can observe the names a pattern introduces with the [`redex-match`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex-match#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match%29%29) form, which is similar to the `redex-match?` form but returns the names instead of just whether the pattern matched or not:
+We can observe the names a pattern introduces with the [`redex-match`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex-match#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match%29%29) form, which is similar to the `redex-match?` form but returns the introduced names instead of just whether the pattern matched or not:
 
 ```racket
 > (redex-match peg-solitaire (_ ● ○)
@@ -117,7 +121,7 @@ A pattern may include multiple `any`s that associate with different terms by add
 
 Each `any_<suffix>` was associated with a different term.
 
-We can insist that the first and second list elements are the same, but allow the third to differ by using `any_1` twice, for example:
+We can require that the first and second list elements are the same, but allow the third to differ by using `any_1` twice, for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any_1 any_1 any_2)
@@ -130,7 +134,7 @@ We can insist that the first and second list elements are the same, but allow th
 (list (match (list (bind 'any_1 '●) (bind 'any_2 '○))))
 ```
 
-Using different suffixes allows patterns to match different terms, but does not insist on them being different, for example:
+Using different suffixes allows patterns to match different terms, but does not require them to be different, for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any_1 any_1 any_2)
@@ -154,7 +158,7 @@ The pattern does not match if the two occurrences of `any_1` are different, for 
 
 * * *
 
-We can match a sequence of terms using [ellipsis](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=bind#%28tech._pattern._sequence%29) (`...`), which means “zero or more of the previous pattern,” for example:
+We can match a sequence of terms using [ellipsis](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=bind#%28tech._pattern._sequence%29) (`...`), which means “zero or more of the previous pattern,” similar to the Kleene star (`*`) in regular expressions. For example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any ...)
@@ -205,7 +209,7 @@ Similar to how we suffixed `any`, we can suffix ellipses, `..._<suffix>`, constr
             #f)
 ```
 
-In the listing above, the first pattern matches because it can divide the term into two parts of the same length and satisfy the `..._n` constraint. But the second pattern does not match, because there is no way to divide a 3-element list into two sequences of the same length. Ellipses with different suffixes may match sequences of different lengths, for example:
+In the listing above, the first pattern matches because it can divide the term into two parts of the same length, thus satisfying the `..._n` constraint. But the second pattern does not match, because there is no way to divide a 3-element list into two sequences of the same length. Ellipses with different suffixes may match sequences of different lengths, for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any_1 ..._n any_2 ..._m)
@@ -225,4 +229,4 @@ Finally, we can nest ellipses, and they still mean “zero or more of the previo
             #t)
 ```
 
-The part that reads `[· ... ● ... ○ ... ● ... · ...]` means “a sequence of zero or more paddings (`·`), followed by a sequence of zero or more pegs (`●`), followed by a sequence of zero or more spaces (`○`), followed by a sequence of zero or more pegs (`●`), followed by a sequence of zero or more paddings (`·`).” This matches a single row of our initial board, regardless of whether it is the first row, which includes paddings but no spaces, or the fourth row, which includes a space but no paddings. The part that reads `([___] ...)` means “zero or more rows”.
+The part that reads `[· ... ● ... ○ ... ● ... · ...]` means “a sequence of zero or more paddings (`·`), followed by a sequence of zero or more pegs (`●`), followed by a sequence of zero or more spaces (`○`), followed by a sequence of zero or more pegs (`●`), followed by a sequence of zero or more paddings (`·`).” This matches a single row of our initial board, regardless of whether it is the first row, `[· · ● ● ● · ·]`, which includes paddings but no spaces, or the fourth row, `[● ● ● ○ ● ● ●]`, which includes a space but no paddings. The part that reads `([___] ...)` means “zero or more rows.”
