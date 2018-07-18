@@ -317,7 +317,7 @@ PLT Redex features visualization tools, including a [`stepper`](https://docs.ra
 <figure markdown="1">
 ![](stepper-5.png){:width="600"}
 <figcaption markdown="1">
-Playing Peg Solitaire with PLT Redex’s `stepper`. The main pane shows the board over time, with pegs that changed on the last move highlighted. The bottom pane shows in purple the path we have taken, and white nodes are alternative paths with different moves, for example, jumping left instead of right.
+Playing Peg Solitaire with PLT Redex’s `stepper`. The main pane shows the board over time, with pegs that changed on the last move highlighted. The bottom pane shows in purple the path we have taken, and white nodes are alternative paths with different moves, for example, jumping right instead of left.
 </figcaption>
 </figure>
 
