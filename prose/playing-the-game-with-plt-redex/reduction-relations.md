@@ -6,7 +6,7 @@ table-of-contents: table-of-contents.html
 
 A reduction relation is similar to a function, except for the following:
 
-<aside markdown="1">
+<!-- <aside markdown="1">
 <figure markdown="1">
 TODO:
 ```
@@ -21,13 +21,13 @@ TODO:
 -------------------------------------
 ```
 </figure>
-</aside>
+</aside> -->
 
 - As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket, the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the board size remains the same, but the number of pegs reduces with each move.
 
 - A reduction relation in PLT Redex must be defined in terms of [pattern matching](pattern-matching). The input board is matched against a pattern and we provide a template with which to compute output.
 
-- When the execution of a function has multiple paths it can follow—for example, when it reaches [`match`](TODO), [`cond`](TODO), [`case`](TODO), and so forth—it chooses only one option (generally the first successful clause). A reduction relation, on the hand, chooses *all* the options. We say a function is *deterministic*, while a reduction relation is *nondeterministic*.
+- When the execution of a function has multiple paths it can follow—for example, when it reaches [`match`](https://docs.racket-lang.org/reference/match.html?q=match#%28form._%28%28lib._racket%2Fmatch..rkt%29._match%29%29), [`cond`](https://docs.racket-lang.org/reference/if.html?q=cond#%28form._%28%28lib._racket%2Fprivate%2Fletstx-scheme..rkt%29._cond%29%29), [`case`](https://docs.racket-lang.org/reference/case.html?q=case#%28form._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._case%29%29), and so forth—it chooses only one option (generally the first successful clause). A reduction relation, on the hand, chooses *all* the options. We say a function is *deterministic*, while a reduction relation is *nondeterministic*.
 
 More precisely, a function is a special case of relation that can only follow one execution path. Alternatively, a relation is a function that returns a set of results. The former interpretation is more mathematically accurate, while the latter is more useful for reasoning about certain PLT Redex features.<label class="margin-note"><input type="checkbox"><span markdown="1">For example, [`apply-reduction-relation`](TODO), which we introduce in a [later section](reduction-relations).</span></label>
 
