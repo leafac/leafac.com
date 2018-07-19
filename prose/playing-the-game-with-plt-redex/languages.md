@@ -4,14 +4,15 @@ title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
 ---
 
-A language defines names for the patterns we explored in the [previous section](pattern-matching), specifying the shape of the terms we use to represent Peg Solitaire elements including pegs, boards, and so forth.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, `define-language` is useful not only to define the subject language, but also the extra machinery, for example, type environment, stores and machine states.</span></label> If terms are instances of data structures, then a language is the data structure definition. We revisit the language `peg-solitaire` we defined in the previous section with the [`define-language`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-language#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-language%29%29) form to add names for patterns:<label class="margin-note"><input type="checkbox"><span markdown="1">The `define-language` form specifies a grammar in [BNF](http://matt.might.net/articles/grammars-bnf-ebnf/).</span></label>
+A language defines patterns for terms and give them names. In programming languages, a language determines which terms are programs and which are not. A language might also include extra machinery that is invisible to programmers, but used by, for example, an interpreter or a type checker; this includes binding and type environments, stores, machine states, and so forth. In general, if terms are data, then languages are the definitions of data structures. They provide names for the patterns we explored in the [previous section](pattern-matching).
+
+A language for Peg Solitaire must specify the patterns for terms that represent elements including pegs, boards, and so forth. In the previous section, we defined a placeholder language called `peg-solitaire`, using the [`define-language`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-language#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-language%29%29) form. The specification was empty, because we just wanted enough to allow us to explore pattern matching, so we revisit that language definition now to add names for patterns:<label class="margin-note"><input type="checkbox"><span markdown="1">The `define-language` form specifies a grammar in [BNF](http://matt.might.net/articles/grammars-bnf-ebnf/).</span></label>
 
 <div class="code-block" markdown="1">
 `languages.rkt`
 ```racket
 #lang racket
 (require redex "terms.rkt")
-(provide peg-solitaire)
 
 (define-language peg-solitaire
   [board    ::= (row ...)]
@@ -23,12 +24,12 @@ A language defines names for the patterns we explored in the [previous section](
 ```
 </div>
 
-Each line `[<name> ::= <pattern> ...]` is assigning the `<name>` to `<pattern>`, and occurrences of other `<name>`s in `<pattern>` are interpreted accordingly,<label class="margin-note"><input type="checkbox"><span markdown="1">Patterns in the `define-language` form are the only ones in which multiple occurrences of a name can match different terms. For example, if a language includes the line `[pair ::= (position position)]` then `pair` would match the term `(● ○)`. To insist on the same term, suffix the names, for example, `[pair ::= (position_1 position_1)]`.</span></label> for example, the pattern for `board` includes `row`. The following is each line of the definition above in more detail:
+Each line `[<name> ::= <pattern> ...]` assigns a `<name>` to a `<pattern>`, and occurrences of other `<name>`s in `<pattern>` are interpreted accordingly,<label class="margin-note"><input type="checkbox"><span markdown="1">Patterns in the `define-language` form are the only ones in which multiple occurrences of a name can match different terms. For example, if a language includes the line `[pair ::= (position position)]` then `pair` would match the term `(● ○)`. To insist on the same term, suffix the names, for example, `[pair ::= (position_1 position_1)]`.</span></label> for example, the name `row` appears in the pattern for `board`. The following is each line of the definition above in more detail:
 
-| `[board    ::= (row ...)]` | A `board` is a list of zero or more `row`s. |
-| `[row      ::= [position ...]]` | A `row` is a list of zero or more `position`s. |
-| `[position ::= peg space padding]` | A `position` is either a `peg`, or a `space`, or a `padding`. |
-| `[peg      ::= ●]` | A `peg` is literally the term `●`. Similarly for `space` and `padding`. |
+- `[board    ::= (row ...)]`: A `board` is a list of zero or more `row`s.
+- `[row      ::= [position ...]]`: A `row` is a list of zero or more `position`s.
+- `[position ::= peg space padding]`: A `position` is either a `peg`, or a `space`, or a `padding`.
+- `[peg      ::= ●]`: A `peg` is literally the term `●`. Similarly for `space` and `padding`.
 
 We can use the pattern names<label class="margin-note"><input type="checkbox"><span markdown="1">*Pattern names* are known as *non-terminals*.</span></label> when matching terms, for example:
 
@@ -67,7 +68,7 @@ We can suffix the names to allow them to match to different terms:
             #t)
 ```
 
-We can use the `peg-solitaire` language to match the board examples:
+We can use the `peg-solitaire` language to match the [board examples](terms):
 
 ```racket
 (test-equal (redex-match? peg-solitaire board (term example-board-1))
@@ -90,4 +91,12 @@ Our language is too permissive, allowing `board` to match terms we consider ill-
             #t)
 ```
 
-The term above does not represent a Peg Solitaire board: it is too small and the rows have different sizes. Yet, the `board` in the `peg-solitaire` language matches it. We could refine the language definition so that it would match *exactly* the terms that represent Peg Solitaire elements, but that would be more complicated and would fail to communicate our intent to the readers. The named patterns we introduced in `peg-solitaire` will serve well for the definitions in the following sections, so this simpler language specification suffices. We will proceed assuming all boards are well-formed,<label class="margin-note"><input type="checkbox"><span markdown="1">If more rigor was necessary, we could have defined a [predicate relation](predicate-relations) that only holds for well-formed boards.</span></label> and in a few instances we will even use ill-formed boards on purpose to simplify tests.
+The term above does not represent a Peg Solitaire board: it is too small and the rows have different sizes. Yet, the `board` pattern in the `peg-solitaire` language matches it. We could refine the language definition so that it would match *exactly* the terms that represent Peg Solitaire elements, but that would be more complicated and would fail to communicate our intent to our readers. The named patterns we introduced in `peg-solitaire` will serve well for the definitions in the following sections, so this simpler language specification suffices. We will proceed assuming all boards are well-formed,<label class="margin-note"><input type="checkbox"><span markdown="1">If more rigor was necessary, we could define a [predicate relation](predicate-relations) that only holds for well-formed boards, and test inputs before using the forms we will define in later sections.</span></label> and in a few instances we will even use ill-formed boards on purpose to simplify tests.
+
+* * *
+
+We will use the `peg-solitaire` language in later sections, so we `provide` it here:
+
+```racket
+(provide peg-solitaire)
+```

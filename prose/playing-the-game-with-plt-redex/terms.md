@@ -104,7 +104,9 @@ And the following is an example of a winning board:
    [· · ○ ○ ○ · ·]))
 ```
 
-We will use these boards for testing in the later sections, so we [`provide`](https://docs.racket-lang.org/guide/module-provide.html?q=provide) them here:
+* * *
+
+We will use these boards for testing in later sections, so we [`provide`](https://docs.racket-lang.org/guide/module-provide.html?q=provide) them here:
 
 ```racket
 (provide example-board-1 example-board-2

@@ -24,10 +24,12 @@
 (test-equal (redex-match? peg-solitaire (position position ○)
                           (term         (●        ●        ○)))
             #t)
+
 (test-equal (redex-match? peg-solitaire (position position position)
                           ;                                ≠
                           (term         (●        ●        ○)))
             #f)
+
 (test-equal (redex-match? peg-solitaire (position_1 position_2 position_3)
                           (term         (●          ●          ○)))
             #t)
