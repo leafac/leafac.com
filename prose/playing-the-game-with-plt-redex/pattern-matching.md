@@ -2,6 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
+draft: true
 ---
 
 Pattern matching is the foundation of all the PLT Redex forms we will explore in the later sections. To experiment with pattern matching, we must first define a language, but to define a language we must first understand pattern matching. We solve this conundrum by defining a dummy empty language,<label class="margin-note"><input type="checkbox"><span markdown="1">The same we did in the [Overview](overview)</span></label> which we will revisit in the [next section](languages):

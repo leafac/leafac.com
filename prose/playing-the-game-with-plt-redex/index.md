@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Playing the Game with PLT Redex
-date: 2018-07-27
 table-of-contents: table-of-contents.html
+draft: true
 ---
 
 <aside markdown="1">

@@ -2,6 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
+draft: true
 ---
 
 A predicate relation is a special kind of metafunction that returns a boolean.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, predicate relations typically check whether a program is well formed, whether a type is a subtype of another type, and so forth.</span></label> As illustration, we start by defining a metafunction that returns true if and only if a given board is a winning board:<label class="margin-note"><input type="checkbox"><span markdown="1">A board is a winning board if [it contains a single peg](peg-solitaire-rules).</span></label>

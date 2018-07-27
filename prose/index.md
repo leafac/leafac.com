@@ -2,7 +2,8 @@
 layout: default
 title: Prose
 ---
-<!-- 
+
+<!--
 Racket
 ======
 

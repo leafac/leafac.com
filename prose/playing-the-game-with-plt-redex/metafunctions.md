@@ -2,6 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
+draft: true
 ---
 
 The metafunction is the most familiar of all PLT Redex forms: it is a function on terms. While [pattern matching](pattern-matching) is analog to a regular expression that recognizes a term, a metafunction is analog to search-and-replace with regular expressions and capture groups. In programming languages, metafunctions are the small utilities, for example, substituting variables for their values (a metafunction generally notated as `program-fragment[variable\value]`), and evaluating primitive operators (a metafunction generally named `δ`). We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-metafunction#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form:<label class="margin-note"><input type="checkbox"><span markdown="1">A metafunction is similar to [`define/match`](https://docs.racket-lang.org/reference/match.html?q=define%2Fmatch#%28form._%28%28lib._racket%2Fmatch..rkt%29._define%2Fmatch%29%29) in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to forms for multi-way conditionals, for example, `case` and `cond`.</span></label>

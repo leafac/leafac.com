@@ -2,6 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
+draft: true
 ---
 
 We covered the basics of PLT Redex without going into programming-language theory. Instead, we used it to model a game of [Peg Solitaire](peg-solitaire-rules). We used [terms](terms) to represent elements in the game: boards, pegs, spaces and paddings. We use [patterns to match](pattern-matching) those terms as the basis of several definitions:

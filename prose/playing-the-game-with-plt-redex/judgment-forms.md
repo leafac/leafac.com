@@ -2,6 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
+draft: true
 ---
 
 A judgment form is different from a [metafunction](metafunctions) in two ways: (1) it may have multiple outputs,<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to a regular Racket function that returns `values`.</span></label> and (2) it is nondeterministic. A metafunction tries to match its inputs with each of the patterns in the definition clauses in order, and the first match *determines* the metafunction output. We say a metafunction is *deterministic*. A judgment form, on the other hand, tries to match its inputs with *all* the patterns in the definition clauses and may output multiple values if there are multiple matches. A judgment form is *nondeterministic*. Another way of interpreting this is that a judgment form is a metafunction that returns a set of outputs.<label class="margin-note"><input type="checkbox"><span markdown="1">A mathematician would say that a metafunction is a mathematical *function*, while a judgment form is a mathematical *relation*. A relation is more general than a function, as a function is just a relation in which clauses are mutually exclusive.</span></label>
