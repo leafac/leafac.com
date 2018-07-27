@@ -38,6 +38,8 @@ Most programming languages only support functions,<label class="margin-note"><in
 
 In PLT Redex, however, we do not need to resort to an encoding, because the tool includes forms to specify relations of any kind, including those that are not functions and may return multiple outputs. The simplest of these forms is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
+<aside markdown="1">The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`.</aside>
+
 ```racket
 (reduction-relation
   <language>
@@ -305,15 +307,11 @@ We can also query just the *final* boards, from which we cannot move further, by
 
 * * *
 
-As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket, the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the board size remains the same, but the number of pegs reduces with each move.
+As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the notion of reduction is not related to board size, which remains the same throughout the game, but to the number of pegs, which reduces with each move.
 
 * * *
 
-The `→` [judgment form](judgment forms) from the previous section had one input and one output. We say the judgment form was *reducing* the `board` because after each move there are *fewer* possible moves going forward. This specific kind of relation is also know as a *reduction relation*.<label class="margin-note"><input type="checkbox"><span markdown="1">Like judgment forms, reduction relations compute nondeterministically.</span></label> PLT Redex supports reduction relations with the `reduction-relation` form:<label class="margin-note"><input type="checkbox"><span markdown="1">The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-metafunction`, `define-relation` and `define-judgment-form`.</span></label>
-
-* * *
-
-We will use the reduction relation in later sections:
+The `⇨` is enough to play Peg Solitaire using [PLT Redex visualization tools](visualization), but we explore a few other forms before we return to it. We will use this reduction relation in later sections:
 
 ```racket
 (provide ⇨)
