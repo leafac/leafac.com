@@ -202,7 +202,7 @@ $border-radius:       $space--extra-small;
 
 body {
   margin: $space--none auto;
-  padding: $space--none $grid--padding $space--medium $grid--padding;
+  padding: $space--medium $grid--padding;
   max-width: $grid--main;
 }
 
@@ -210,11 +210,9 @@ body {
   body {
     max-width: $grid--body;
   }
-
   main {
     width: $grid--main;
   }
-
   aside {
     width: $grid--margin-note;
     float: right;
@@ -226,10 +224,7 @@ body {
 .full-width {
   @include insertion;
   clear: both;
-}
-
-@include bigger-screens {
-  .full-width {
+  @include bigger-screens {
     width: $grid--body;
   }
 }
@@ -238,7 +233,6 @@ body {
 // HEADERS
 
 body > header {
-  line-height: $line-height--extra-large;
   text-align: right;
   a {
     display: inline-block;
@@ -246,7 +240,7 @@ body > header {
   h1 {
     margin: $space--none;
     margin-right: $space--medium;
-    line-height: $line-height--extra-large;
+    line-height: $line-height--medium;
     float: left;
   }
   nav {
@@ -258,6 +252,7 @@ body > header {
       }
     }
   }
+  padding-bottom: $space--medium;
   border-bottom: $border-width solid $palette--secondary-content;
   margin-bottom: $space--extra-large;
 }
@@ -444,7 +439,6 @@ pre, code {
 
 pre {
   @include box;
-  background-color: $palette--background;
   overflow: auto;
   .code-block & {
     margin: $space--none;
@@ -513,16 +507,5 @@ summary {
 }
 
 .error {
-  color: $palette--red;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// PLAYING THE GAME WITH PLT REDEX
-
-.peg--active {
-  color: $palette--green;
-}
-
-.peg--jumped-over {
   color: $palette--red;
 }

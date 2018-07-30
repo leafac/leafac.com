@@ -33,9 +33,9 @@ With each move, a peg can jump over its immediate neighbor on the left, right, t
 Examples of Valid Moves (Starting Moves)
 <pre>
     ● ● ●             ● ● ●
-    ● <span class="peg--active">●</span> ●             ● ○ ●
-● ● ● <span class="peg--jumped-over">●</span> ● ● ●     ● ● ● <span class="peg--jumped-over">○</span> ● ● ●
-● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="peg--active">●</span> ● ● ●
+    ● <span class="success">●</span> ●             ● ○ ●
+● ● ● <span class="error">●</span> ● ● ●     ● ● ● <span class="error">○</span> ● ● ●
+● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -43,7 +43,7 @@ Examples of Valid Moves (Starting Moves)
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <span class="peg--jumped-over">●</span> <span class="peg--active">●</span> ●  <span class="success">➡</span>  ● ● ● <span class="peg--active">●</span> <span class="peg--jumped-over">○</span> ○ ●
+● ● ● ○ <span class="error">●</span> <span class="success">●</span> ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> <span class="error">○</span> ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -51,21 +51,21 @@ Examples of Valid Moves (Starting Moves)
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="peg--active">●</span> ● ● ●
-● ● ● <span class="peg--jumped-over">●</span> ● ● ●     ● ● ● <span class="peg--jumped-over">○</span> ● ● ●
-    ● <span class="peg--active">●</span> ●             ● ○ ●
+● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> ● ● ●
+● ● ● <span class="error">●</span> ● ● ●     ● ● ● <span class="error">○</span> ● ● ●
+    ● <span class="success">●</span> ●             ● ○ ●
     ● ● ●             ● ● ●
 
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <span class="peg--active">●</span> <span class="peg--jumped-over">●</span> ○ ● ● ●  <span class="success">➡</span>  ● ○ <span class="peg--jumped-over">○</span> <span class="peg--active">●</span> ● ● ●
+● <span class="success">●</span> <span class="error">●</span> ○ ● ● ●  <span class="success">➡</span>  ● ○ <span class="error">○</span> <span class="success">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 
 
-<span class="peg--active">●</span> jumps over <span class="peg--jumped-over">●</span>
+<span class="success">●</span> jumps over <span class="error">●</span>
 </pre>
 </div>
 
@@ -76,9 +76,9 @@ The following are examples of *invalid moves*:
   <pre>
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ <span class="peg--active">●</span> ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
-  ○ ○ <span class="peg--jumped-over">●</span> ○ ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="peg--jumped-over">○</span> ○ ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <span class="peg--active">●</span> ○ ○ ○
+  ○ <span class="success">●</span> ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
+  ○ ○ <span class="error">●</span> ○ ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="error">○</span> ○ ○ ○ ○
+  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <span class="success">●</span> ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   </pre>
@@ -89,7 +89,7 @@ The following are examples of *invalid moves*:
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="peg--active">●</span> <span class="peg--jumped-over">●</span> ○ ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="peg--jumped-over">○</span> ○ <span class="peg--active">●</span> ○ ○
+  ○ <span class="success">●</span> <span class="error">●</span> ○ ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="error">○</span> ○ <span class="success">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
@@ -101,7 +101,7 @@ The following are examples of *invalid moves*:
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="peg--active">●</span> <span class="peg--jumped-over">●</span> <span class="peg--jumped-over">●</span> ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="peg--jumped-over">○</span> <span class="peg--jumped-over">○</span> <span class="peg--active">●</span> ○ ○
+  ○ <span class="success">●</span> <span class="error">●</span> <span class="error">●</span> ○ ○ ○  <span class="error">➡</span>  ○ ○ <span class="error">○</span> <span class="error">○</span> <span class="success">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
