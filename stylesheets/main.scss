@@ -251,6 +251,7 @@ body > header {
   }
   h1 {
     margin: $space--none;
+    margin-right: $space--medium;
     line-height: $line-height--extra-large;
     float: left;
   }
@@ -261,25 +262,6 @@ body > header {
       &:last-child {
         margin-right: $space--none;
       }
-    }
-  }
-  #main-navigation--label {
-    cursor: pointer;
-  }
-  #main-navigation--checkbox {
-    display: none;
-  }
-  @include smaller-screens {
-    nav {
-      text-align: left;
-    }
-    #main-navigation--checkbox:not(:checked) + nav {
-      display: none;
-    }
-  }
-  @include bigger-screens {
-    #main-navigation--label {
-      display: none;
     }
   }
   border-bottom: $border-width--thin solid $palette--secondary-content;
