@@ -105,15 +105,9 @@ $palette--green:                $solarized--green;
 // ---------------------------------------------------------------------------------------------------
 // BORDERS
 
-$border-width--thin:  1px;
-$border-width--thick: 3px;
+$border-width:        1px;
 $border-radius--none: $space--none;
 $border-radius:       $space--extra-small;
-
-// ---------------------------------------------------------------------------------------------------
-// ANIMATIONS
-
-$animation--duration: 0.3s;
 
 // ---------------------------------------------------------------------------------------------------
 // MIXINS
@@ -126,10 +120,10 @@ $animation--duration: 0.3s;
 }
 
 @mixin box {
-  border: $border-width--thin solid $palette--secondary-content;
+  border: $border-width solid $palette--secondary-content;
   border-radius: $border-radius;
   padding: $text-indent;
-  padding-left: calc($text-indent - $border-width--thin);
+  padding-left: calc($text-indent - $border-width);
 }
 
 @mixin navigation-links {
@@ -264,7 +258,7 @@ body > header {
       }
     }
   }
-  border-bottom: $border-width--thin solid $palette--secondary-content;
+  border-bottom: $border-width solid $palette--secondary-content;
   margin-bottom: $space--extra-large;
 }
 
