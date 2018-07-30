@@ -245,19 +245,41 @@ body {
 
 body > header {
   line-height: $line-height--extra-large;
+  text-align: right;
   a {
     display: inline-block;
   }
   h1 {
     margin: $space--none;
-    float: left;
     line-height: $line-height--extra-large;
+    float: left;
   }
   nav {
-    text-align: right;
     @include navigation-links;
-     a {
-      margin-left: $space--medium;
+    a {
+      margin-right: $space--medium;
+      &:last-child {
+        margin-right: $space--none;
+      }
+    }
+  }
+  #main-navigation--label {
+    cursor: pointer;
+  }
+  #main-navigation--checkbox {
+    display: none;
+  }
+  @include smaller-screens {
+    nav {
+      text-align: left;
+    }
+    #main-navigation--checkbox:not(:checked) + nav {
+      display: none;
+    }
+  }
+  @include bigger-screens {
+    #main-navigation--label {
+      display: none;
     }
   }
   border-bottom: $border-width--thin solid $palette--secondary-content;
@@ -271,6 +293,12 @@ main > header {
   margin-bottom: $space--medium;
 }
 
+time {
+  font-weight: 400;
+  font-size: $font-size--small;
+  color: $palette--secondary-content;
+}
+
 .table-of-contents {
   @include insertion;
   @include box;
@@ -279,12 +307,6 @@ main > header {
   ol {
     margin: $space--none;
   }
-}
-
-time {
-  font-weight: 400;
-  font-size: $font-size--small;
-  color: $palette--secondary-content;
 }
 
 // ---------------------------------------------------------------------------------------------------
