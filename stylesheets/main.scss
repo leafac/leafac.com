@@ -377,13 +377,7 @@ p {
 aside {
   @include smaller-screens {
     @include insertion;
-    font-size: $font-size--medium;
-    border-left: $border-width--thick solid $palette--secondary-content;
-    border-radius: $border-radius;
-    padding: $text-indent;
-    padding-left: calc($text-indent - $border-width--thick);
-    background-color: $palette--background-highlight;
-    color: $palette--emphasized-content;
+    @include box;
   }
 
   @include bigger-screens {
