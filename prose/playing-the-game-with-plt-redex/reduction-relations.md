@@ -38,7 +38,9 @@ Most programming languages only support functions,<label class="margin-note"><in
 
 In PLT Redex, however, we do not need to resort to an encoding, because the tool includes forms to specify relations of any kind, including those that are not functions and may return multiple outputs. The simplest of these forms is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
-<aside markdown="1">The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`.</aside>
+<aside markdown="1">
+The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`.
+</aside>
 
 ```racket
 (reduction-relation
