@@ -480,7 +480,7 @@ Ph.D. Candidate in Computer Science · Programming Languages
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](/about#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
-- <aside markdown="span">I also took a course in music theory.</aside>I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing and databases.
+- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills.<label class="margin-note"><input type="checkbox"><span markdown="1">I also took a course in music theory.</span></label>
 - I have been assisting on courses on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, held office hours and advised groups of students on semester-long projects.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I am system administrator for the laboratory.
