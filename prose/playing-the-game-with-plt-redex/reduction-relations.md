@@ -5,41 +5,114 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
-Relations
-=========
+In functions, including [metafunctions](metafunctions), each input relates to one output. When we enumerate a function, each input appears only once on the left column, for example:
 
-<aside markdown="1">
-<pre>
-<strong>  Function           Relation
+<pre markdown="1">
+<strong>position     (invert/position position)</strong>
 
-x   (add1 x)      x       (parent x)</strong>
-
-0       1      "John"      "Anna"
-1       2      "John"      "Jack"
-2       3      "Anna"      "Lindsay"
-3       4      "Anna"      "Robert"
-    ⋮                  ⋮
+    ●                     ○
+    ○                     ●
+    ·                     ·
 </pre>
 
-Each input (left column) appears only once in functions, but may appear multiple times in relations.
-</aside>
+A function<label class="margin-note"><input type="checkbox"><span markdown="1">Or, equivalently, a method, a procedure, a routine, and so forth.</span></label> is not a natural way to model moves in Peg Solitaire, because there might be multiple moves available in a given board. If functions were all we had, then we could encode our intent with a `⇨/function` that returned a *set* of output boards, for example:
 
-Functions, including [metafunctions](metafunctions), are a particular kind of *relation*, and *reduction relations* will be our first encounter with this more general form. A function determines exactly one output for each input, but a relation may determine multiple outputs. While all functions are relations, not all relations are functions. For example, [`add1`](https://docs.racket-lang.org/reference/generic-numbers.html?q=add1#%28def._%28%28quote._~23~25kernel%29._add1%29%29) is relation that is also a function, because it determines a single output for each input, whereas `parent` would be a relation that is not a function, because a person has multiple (two) parents.
+<pre markdown="1">
+<strong>        board                  (⇨/function board)</strong>
 
-Most programming languages only support functions,<label class="margin-note"><input type="checkbox"><span markdown="1">Or, equivalently, methods, procedures, and so forth.</span></label> so if we were to use them to define a relation that is not a function, we would need to encode it as a function that returns a set, for example:
+(term                         (set
+ ([· · ● ● ● · ·]              (term
+  [· · ● ● ● · ·]               ([· · ● ● ● · ·]
+  [● ● ● ● ● ● ●]                [· · ● ● ● · ·]
+  [● ● ● ○ ● ● ●]                [● ● ● ● ● ● ●]
+  [● ● ● ● ● ● ●]                [● ○ ○ ● ● ● ●]
+  [· · ● ● ● · ·]                [● ● ● ● ● ● ●]
+  [· · ● ● ● · ·]))              [· · ● ● ● · ·]
+                                 [· · ● ● ● · ·]))
 
-<pre>
-<strong>   x        (parent/function x)</strong>
+                               (term
+                                ([· · ● ● ● · ·]
+                                 [· · ● ● ● · ·]
+                                 [● ● ● ● ● ● ●]
+                                 [● ● ● ● ○ ○ ●]
+                                 [● ● ● ● ● ● ●]
+                                 [· · ● ● ● · ·]
+                                 [· · ● ● ● · ·]))
 
-"John"      (set "Anna" "Jack" ⋯)
-"Anna"      (set "Lindsay" "Robert" ⋯)
-        ⋮
+                               (term
+                                ([· · ● ● ● · ·]
+                                 [· · ● ○ ● · ·]
+                                 [● ● ● ○ ● ● ●]
+                                 [● ● ● ● ● ● ●]
+                                 [● ● ● ● ● ● ●]
+                                 [· · ● ● ● · ·]
+                                 [· · ● ● ● · ·]))
+
+                               (term
+                                ([· · ● ● ● · ·]
+                                 [· · ● ● ● · ·]
+                                 [● ● ● ● ● ● ●]
+                                 [● ● ● ● ● ● ●]
+                                 [● ● ● ○ ● ● ●]
+                                 [· · ● ○ ● · ·]
+                                 [· · ● ● ● · ·])))
+
+                       ⋮
 </pre>
 
-In PLT Redex, however, we do not need to resort to an encoding, because the tool includes forms to specify relations of any kind, including those that are not functions and may return multiple outputs. The simplest of these forms is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
+But functions are just a special case of *relation*. While all functions are relations, not all relations are functions. When we enumerate a relation that is not a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to represent moves in Peg Solitaire:
+
+<pre markdown="1">
+<strong>        board                       (⇨ board)</strong>
+
+(term                          (term
+ ([· · ● ● ● · ·]               ([· · ● ● ● · ·]
+  [· · ● ● ● · ·]                [· · ● ● ● · ·]
+  [● ● ● ● ● ● ●]                [● ● ● ● ● ● ●]
+  [● ● ● ○ ● ● ●]                [● ○ ○ ● ● ● ●]
+  [● ● ● ● ● ● ●]                [● ● ● ● ● ● ●]
+  [· · ● ● ● · ·]                [· · ● ● ● · ·]
+  [· · ● ● ● · ·]))              [· · ● ● ● · ·]))
+
+(term                          (term
+ ([· · ● ● ● · ·]               ([· · ● ● ● · ·]
+  [· · ● ● ● · ·]                [· · ● ● ● · ·]
+  [● ● ● ● ● ● ●]                [● ● ● ● ● ● ●]
+  [● ● ● ○ ● ● ●]                [● ● ● ● ○ ○ ●]
+  [● ● ● ● ● ● ●]                [● ● ● ● ● ● ●]
+  [· · ● ● ● · ·]                [· · ● ● ● · ·]
+  [· · ● ● ● · ·]))              [· · ● ● ● · ·]))
+
+(term                          (term
+ ([· · ● ● ● · ·]               ([· · ● ● ● · ·]
+  [· · ● ● ● · ·]                [· · ● ○ ● · ·]
+  [● ● ● ● ● ● ●]                [● ● ● ○ ● ● ●]
+  [● ● ● ○ ● ● ●]                [● ● ● ● ● ● ●]
+  [● ● ● ● ● ● ●]                [● ● ● ● ● ● ●]
+  [· · ● ● ● · ·]                [· · ● ● ● · ·]
+  [· · ● ● ● · ·]))              [· · ● ● ● · ·]))
+
+(term                          (term
+ ([· · ● ● ● · ·]               ([· · ● ● ● · ·]
+  [· · ● ● ● · ·]                [· · ● ● ● · ·]
+  [● ● ● ● ● ● ●]                [● ● ● ● ● ● ●]
+  [● ● ● ○ ● ● ●]                [● ● ● ● ● ● ●]
+  [● ● ● ● ● ● ●]                [● ● ● ○ ● ● ●]
+  [· · ● ● ● · ·]                [· · ● ○ ● · ·]
+  [· · ● ● ● · ·]))              [· · ● ● ● · ·]))
+
+                       ⋮
+</pre>
+
+The `⇨` relation represents moves in Peg Solitaire more straightforwardly than the `⇨/function` function, as indicated by how its enumeration in the listing above is similar to how we wrote our [examples in the game description](/overview#pegsolitaire-rules). Most programming languages only support functions, so we would have to resort to the `⇨/function` encoding, but PLT Redex includes forms to specify relations of any kind, including those that are not functions, so we can define the `⇨` relation directly. The first form of relation we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
 <aside markdown="1">
-The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`.
+The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
+
+```racket
+(define <name>
+  (reduction-relation ___))
+```
 </aside>
 
 ```racket
