@@ -15,7 +15,7 @@ In functions, including [metafunctions](metafunctions), each input relates to on
     ·                     ·
 </pre>
 
-A function<label class="margin-note"><input type="checkbox"><span markdown="1">Or, equivalently, a method, a procedure, a routine, and so forth.</span></label> is not a natural way to model moves in Peg Solitaire, because there might be multiple moves available in a given board. If functions were all we had, then we could encode our intent with a `⇨/function` that returned a *set* of output boards, for example:
+A function<label class="margin-note"><input type="checkbox"><span markdown="1">Or, equivalently, a method, a procedure, a routine, and so forth.</span></label> is not a natural way to model moves in Peg Solitaire, because there might be multiple moves available for a given board. If functions were all we had, then we could encode our intent with a `⇨/function` that returned a *set* of output boards, for example:
 
 <pre markdown="1">
 <strong>        board                  (⇨/function board)</strong>
@@ -60,7 +60,7 @@ A function<label class="margin-note"><input type="checkbox"><span markdown="1">O
                        ⋮
 </pre>
 
-But functions are just a special case of *relation*. While all functions are relations, not all relations are functions. When we enumerate a relation that is not a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to represent moves in Peg Solitaire:
+But functions are just a special case of *relation*, which may relate one input to multiple outputs. While all functions are relations, not all relations are functions. When we enumerate a relation that is not a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to model moves in Peg Solitaire:
 
 <pre markdown="1">
 <strong>        board                       (⇨ board)</strong>
@@ -104,7 +104,46 @@ But functions are just a special case of *relation*. While all functions are rel
                        ⋮
 </pre>
 
-The `⇨` relation represents moves in Peg Solitaire more straightforwardly than the `⇨/function` function, as indicated by how its enumeration in the listing above is similar to how we wrote our [examples in the game description](/overview#pegsolitaire-rules). Most programming languages only support functions, so we would have to resort to the `⇨/function` encoding, but PLT Redex includes forms to specify relations of any kind, including those that are not functions, so we can define the `⇨` relation directly. The first form of relation we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
+The `⇨` relation models moves in Peg Solitaire more straightforwardly than the `⇨/function` function. The listing above is similar to how we wrote our [examples in the game description](/overview#pegsolitaire-rules):
+
+<pre>
+    ● ● ●             ● ● ●
+    ● <span class="success">●</span> ●             ● ○ ●
+● ● ● <span class="error">●</span> ● ● ●     ● ● ● <span class="error">○</span> ● ● ●
+● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● ● ● ○ <span class="error">●</span> <span class="success">●</span> ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> <span class="error">○</span> ○ ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> ● ● ●
+● ● ● <span class="error">●</span> ● ● ●     ● ● ● <span class="error">○</span> ● ● ●
+    ● <span class="success">●</span> ●             ● ○ ●
+    ● ● ●             ● ● ●
+
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+● <span class="success">●</span> <span class="error">●</span> ○ ● ● ●  <span class="success">➡</span>  ● ○ <span class="error">○</span> <span class="success">●</span> ● ● ●
+● ● ● ● ● ● ●     ● ● ● ● ● ● ●
+    ● ● ●             ● ● ●
+    ● ● ●             ● ● ●
+
+
+<span class="success">●</span> jumps over <span class="error">●</span>
+</pre>
+
+Most programming languages only support functions, so we would have to resort to `⇨/function`, but PLT Redex supports relations of any kind, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
 <aside markdown="1">
 The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
@@ -131,64 +170,9 @@ The `reduction-relation` form returns the reduction relation as a value, unlike 
 - `<template>`: A template for the output.
 - `<name>`: A name for the clause.
 
-The `reduction-relation` form computes *nondeterministically*: if multiple clauses match the input, than multiple results are output. This is different from [metafunctions](metafunctions), in which clauses were tested in order and the first match *determined* the output. The following listing is an example of `reduction-relation` that defines the `parent` relation:
+The shape of the `reduction-relation` form is similar to that of `define-metafunction`: it is a series of clauses with patterns for the inputs and templates for the outputs. The difference between the two is in how they proceed when multiple clauses match the input: while a metafunction follows the definition order and chooses *the first* clause that matches, a relation chooses *all* clauses. We say metafunctions compute *deterministically*, because an input *determines* exactly one output, while relations may compute *nondeterministically*.
 
-<aside markdown="1">
-We must provide a language for the `reduction-relation` form, so we use the one we already defined, `peg-solitaire`, though this example is unrelated to the game.
-</aside>
-
-<div class="code-block" markdown="1">
-`reduction-relations.rkt`
-```racket
-#lang racket
-(require redex "terms.rkt" "languages.rkt")
-
-(define
-  parent
-  (reduction-relation
-   peg-solitaire
-   #:domain string
-
-   (--> "John" "Anna")
-   (--> "John" "Jack")
-   (--> "Anna" "Lindsay")
-   (--> "Anna" "Robert")
-   ; ⋮
-   ))
-```
-</div>
-
-We can query this reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. Using this form, the reduction relation behaves similar to the function encoding we mentioned above: it returns a set of outputs. Because PLT Redex works over S-expressions, the set is encoded in terms of a list, so when testing our relation, we use [`list->set`](https://docs.racket-lang.org/reference/sets.html?q=list-%3Eset#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29):
-
-```racket
-(test-equal (list->set (apply-reduction-relation parent "John"))
-            (set "Anna" "Jack"))
-```
-
-We can also apply this relation repeatedly and gather all the ancestors with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form:
-
-```racket
-(test-equal (list->set (apply-reduction-relation* #:all? #t parent "John"))
-            (set "Anna" "Jack" "Lindsay" "Robert"))
-```
-
-In programming-language theory, the most common kind of reduction relation is the interpreter. Most interpreters are deterministic, so a designer must specify mutually-exclusive clauses, in which only one `<pattern>` may match the input program fragment. Even if an interpreter is deterministic, it is more appropriate to define it as a reduction relation than as a metafunction, which could rely solely on the order of the clauses solve ambiguity.
-
-Moves
-=====
-
-We must model moves in Peg Solitaire as a relation, as opposed to a metafunction, because there might be multiple moves available for a single board. We define a `⇨` reduction relation over `board`s:
-
-```racket
-(define
-  ⇨
-  (reduction-relation
-   peg-solitaire
-   #:domain board
-
-   ___))
-```
-
+* * *
 
 The reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:<label class="margin-note"><input type="checkbox"><span markdown="1">In the [Overview](overview), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had not defined a [language](languages).</span></label>
 
@@ -300,6 +284,22 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
 
 * * *
 
+We can query this reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. Using this form, the reduction relation behaves similar to the function encoding we mentioned above: it returns a set of outputs. Because PLT Redex works over S-expressions, the set is encoded in terms of a list, so when testing our relation, we use [`list->set`](https://docs.racket-lang.org/reference/sets.html?q=list-%3Eset#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29):
+
+```racket
+(test-equal (list->set (apply-reduction-relation parent "John"))
+            (set "Anna" "Jack"))
+```
+
+We can also apply this relation repeatedly and gather all the ancestors with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form:
+
+```racket
+(test-equal (list->set (apply-reduction-relation* #:all? #t parent "John"))
+            (set "Anna" "Jack" "Lindsay" "Robert"))
+```
+
+* * *
+
 We can test `⇨` with the `apply-reduction-relation` form. It nondeterministically computes all the possible boards after one move:
 
 ```racket
@@ -381,6 +381,8 @@ We can also query just the *final* boards, from which we cannot move further, by
 ```
 
 * * *
+
+If we define relation clauses to be mutually exclusive, then a relation may be deterministic, as each input will only match one clause. This is unsurprising, since functions are a special case of relation. Generally in programming-language theory interpreters, type systems and so forth are defined as deterministic relations, as opposed to metafunctions, because they are more mathematically accurate, not depending on the subtle consequences of clause order to resolve ambiguities.
 
 As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the notion of reduction is not related to board size, which remains the same throughout the game, but to the number of pegs, which reduces with each move.
 
