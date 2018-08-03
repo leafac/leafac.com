@@ -139,7 +139,7 @@
                [· · ● ● ● · ·]))))
 
 ; > (apply-reduction-relation* ⇨ (term initial-board))
-; ∞
+; Runs for too long
 
 (test-equal
  (list->set

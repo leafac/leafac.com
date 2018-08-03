@@ -367,25 +367,14 @@ We can also query the `⇨` reduction relation with the [`apply-reduction-relati
                [· · ● ● ● · ·]))))
 ```
 
-* * *
-
-We can also apply this relation repeatedly and gather all the ancestors with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form:
-
-```racket
-(test-equal (list->set (apply-reduction-relation* #:all? #t parent "John"))
-            (set "Anna" "Jack" "Lindsay" "Robert"))
-```
-
-* * *
-
-We can also try to compute all boards with the `apply-reduction-relation*` form, which applies `⇨` repeatedly:
+If we use `apply-reduction-relation` repeatedly, feeding the output of one application as the input to the next, then we can use `⇨` relation to compute all possible Peg Solitaire boards. We do not have to do this by hand, because PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
 
 ```racket
 > (apply-reduction-relation* ⇨ (term initial-board))
-∞
+; Runs for too long
 ```
 
-Unfortunately, there are too many possible boards, so the computation above does not terminate in reasonable time. But we can test `apply-reduction-relation*` in a fragment of the board with a single row:<label class="margin-note"><input type="checkbox"><span markdown="1">The `apply-reduction-relation*` form applies the *transitive closure* of the `⇨` relation.</span></label>
+But we can test `apply-reduction-relation*` on a fragment of the board with a single row, for which the outputs are tractable:
 
 ```racket
 (test-equal
@@ -418,14 +407,10 @@ We can also query just the *final* boards, from which we cannot move further, by
 
 * * *
 
-If we define relation clauses to be mutually exclusive, then a relation may be deterministic, as each input will only match one clause. This is unsurprising, since functions are a special case of relation. Generally in programming-language theory interpreters, type systems and so forth are defined as deterministic relations, as opposed to metafunctions, because they are more mathematically accurate, not depending on the subtle consequences of clause order to resolve ambiguities.
-
-As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the notion of reduction is not related to board size, which remains the same throughout the game, but to the number of pegs, which reduces with each move.
-
-* * *
-
-The `⇨` is enough to play Peg Solitaire using [PLT Redex visualization tools](visualization), but we explore a few other forms before we return to it. We will use this reduction relation in later sections:
+The `⇨` relation is enough to play Peg Solitaire using [PLT Redex visualization tools](visualization), and we will need it in later sections:
 
 ```racket
 (provide ⇨)
 ```
+
+But before we return to this and play Peg Solitaire, we explore in the following sections a few other PLT Redex forms for relations that are not functions.

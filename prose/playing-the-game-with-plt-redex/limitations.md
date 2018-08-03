@@ -94,8 +94,8 @@ The `winning-boards` function works by applying the [`⇨` reduction relation](r
 But it does not scale to the [`initial-board`](terms):
 
 ```racket
-(winning-boards (term initial-board))
-;; ∞ ...
+> (winning-boards (term initial-board))
+; Runs for too long
 ```
 
 Advanced Pattern Matching

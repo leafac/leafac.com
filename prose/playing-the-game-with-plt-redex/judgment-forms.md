@@ -7,6 +7,16 @@ draft: true
 
 <!-- ‘test-judgment-form’ -->
 
+<!-- A process called *transitive closure* of a relation. -->
+
+<!--
+A last fine point about reduction relations in programming-language theory.
+
+If we define relation clauses to be mutually exclusive, then a relation may be deterministic, as each input will only match one clause. This is unsurprising, since functions are a special case of relation. Generally in programming-language theory interpreters, type systems and so forth are defined as deterministic relations, as opposed to metafunctions, because they are more mathematically accurate, not depending on the subtle consequences of clause order to resolve ambiguities.
+
+As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the notion of reduction is not related to board size, which remains the same throughout the game, but to the number of pegs, which reduces with each move.
+-->
+
 A judgment form is different from a [metafunction](metafunctions) in two ways: (1) it may have multiple outputs,<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to a regular Racket function that returns `values`.</span></label> and (2) it is nondeterministic. A metafunction tries to match its inputs with each of the patterns in the definition clauses in order, and the first match *determines* the metafunction output. We say a metafunction is *deterministic*. A judgment form, on the other hand, tries to match its inputs with *all* the patterns in the definition clauses and may output multiple values if there are multiple matches. A judgment form is *nondeterministic*. Another way of interpreting this is that a judgment form is a metafunction that returns a set of outputs.<label class="margin-note"><input type="checkbox"><span markdown="1">A mathematician would say that a metafunction is a mathematical *function*, while a judgment form is a mathematical *relation*. A relation is more general than a function, as a function is just a relation in which clauses are mutually exclusive.</span></label>
 
 For example, consider both a metafunction and a judgment form that include clauses with the patterns `(any ...)` and `any`. Given the input `(1 2 3)`, the metafunction matches only the first clause, while the judgment form matches *both* clauses.
