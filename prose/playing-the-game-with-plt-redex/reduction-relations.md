@@ -143,7 +143,7 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
 <span class="success">●</span> jumps over <span class="error">●</span>
 </pre>
 
-Most programming languages only support functions, so we would have to resort to `⇨/function`, but PLT Redex supports relations of any kind, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
+Most programming languages only support functions, and when we use them we have to resort to `⇨/function`, but PLT Redex supports relations of any kind, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
 <aside markdown="1">
 The `reduction-relation` form returns the reduction relation as a value, unlike the forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
@@ -174,7 +174,7 @@ The shape of the `reduction-relation` form is similar to that of `define-metafun
 
 * * *
 
-The reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:<label class="margin-note"><input type="checkbox"><span markdown="1">In the [Overview](overview), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had not defined a [language](languages).</span></label>
+The `⇨` reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:<label class="margin-note"><input type="checkbox"><span markdown="1">In the [Overview](overview), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had only defined a dummy empty [language](languages).</span></label>
 
 ```racket
 (--> (row_1
@@ -196,7 +196,7 @@ In detail:
 - `(row_1 ... [position_1 ... ○ ○ ● position_2 ...] row_2 ...)`: The template to build the board after the move. It changes the sequence `● ● ○` into `○ ○ ●`, and reconstructs the surroundings with the names `position_<n> ...` and  `row_<n> ...`.
 - `"→"`: The name of the clause.
 
-The clause for when a peg jumps over its neighbor on the left is similar, and the clauses for when a peg jumps over its neighbors on the top or bottom follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings involving multiple rows. The named ellipses guarantee the same number of `position`s to the left of the sequence in which we are interested, aligning the column. For example, the following is the rule for when a peg jumps over its neighbor on the bottom:<label class="margin-note"><input type="checkbox"><span markdown="1">The ellipses `<suffix>`es (for example, `_n`) must only appear in the input pattern, not in the output template.</span></label>
+The clause for when a peg jumps over its neighbor on the left is similar. The clauses for when a peg jumps over its neighbors on the top or bottom follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings involving multiple rows. The named ellipses align the sequence of interest (for example, `● ● ○`) in the same column, because it guarantees the sequence is preceded by the same number of `position`s in each `row`. For example, the following is the rule for when a peg jumps over its neighbor on the bottom:<label class="margin-note"><input type="checkbox"><span markdown="1">The ellipses `<suffix>`es (for example, `_n`) must only appear in the input pattern, not in the output template.</span></label>
 
 ```racket
 (--> (row_1
@@ -216,7 +216,7 @@ The clause for when a peg jumps over its neighbor on the left is similar, and th
      "↓")
 ```
 
-The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and `position_5` of the same length, so the sequence `● ● ○` must appear in the same column. The clause for when a peg jumps over its neighbor on the top is similar, so we can conclude the definition of `⇨`:
+The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and `position_5` of the same length, so the sequence `● ● ○` must appear in the same column. The clause for when a peg jumps over its neighbor on the top is similar, and with it we conclude the definition of `⇨`:
 
 ```racket
 (define
@@ -284,12 +284,90 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
 
 * * *
 
-We can query this reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. Using this form, the reduction relation behaves similar to the function encoding we mentioned above: it returns a set of outputs. Because PLT Redex works over S-expressions, the set is encoded in terms of a list, so when testing our relation, we use [`list->set`](https://docs.racket-lang.org/reference/sets.html?q=list-%3Eset#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29):
+We can test the `⇨` reduction relation with the [`test-->`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test--~3e%29%29) form:
 
 ```racket
-(test-equal (list->set (apply-reduction-relation parent "John"))
-            (set "Anna" "Jack"))
+(test--> ⇨ (term initial-board)
+         (term
+          ([· · ● ● ● · ·]
+           [· · ● ● ● · ·]
+           [● ● ● ● ● ● ●]
+           [● ○ ○ ● ● ● ●]
+           [● ● ● ● ● ● ●]
+           [· · ● ● ● · ·]
+           [· · ● ● ● · ·]))
+
+         (term
+          ([· · ● ● ● · ·]
+           [· · ● ● ● · ·]
+           [● ● ● ● ● ● ●]
+           [● ● ● ● ○ ○ ●]
+           [● ● ● ● ● ● ●]
+           [· · ● ● ● · ·]
+           [· · ● ● ● · ·]))
+
+         (term
+          ([· · ● ● ● · ·]
+           [· · ● ○ ● · ·]
+           [● ● ● ○ ● ● ●]
+           [● ● ● ● ● ● ●]
+           [● ● ● ● ● ● ●]
+           [· · ● ● ● · ·]
+           [· · ● ● ● · ·]))
+
+         (term
+          ([· · ● ● ● · ·]
+           [· · ● ● ● · ·]
+           [● ● ● ● ● ● ●]
+           [● ● ● ● ● ● ●]
+           [● ● ● ○ ● ● ●]
+           [· · ● ○ ● · ·]
+           [· · ● ● ● · ·])))
 ```
+
+We can also query the `⇨` reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. The `apply-reduction-relation` form returns a set of outputs, similar to the `⇨/function` encoding we mentioned above. This is a compromise because PLT Redex is embedded in Racket, a language that does not support relations that are not functions. Also, PLT Redex works over S-expressions, which do not include Racket’s [`set`s](https://docs.racket-lang.org/reference/sets.html), so the multiple outputs are returned in a list. We can turn the returned list into a set with [`list->set`](https://docs.racket-lang.org/reference/sets.html?q=list-%3Eset#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29), so the following test is equivalent to the previous one:
+
+```racket
+(test-equal (list->set (apply-reduction-relation ⇨ (term initial-board)))
+            (set
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ● ● · ·]
+               [● ● ● ● ● ● ●]
+               [● ○ ○ ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [· · ● ● ● · ·]
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ● ● · ·]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ○ ○ ●]
+               [● ● ● ● ● ● ●]
+               [· · ● ● ● · ·]
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ○ ● · ·]
+               [● ● ● ○ ● ● ●]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [· · ● ● ● · ·]
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ● ● · ·]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [● ● ● ○ ● ● ●]
+               [· · ● ○ ● · ·]
+               [· · ● ● ● · ·]))))
+```
+
+* * *
 
 We can also apply this relation repeatedly and gather all the ancestors with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form:
 
@@ -299,48 +377,6 @@ We can also apply this relation repeatedly and gather all the ancestors with the
 ```
 
 * * *
-
-We can test `⇨` with the `apply-reduction-relation` form. It nondeterministically computes all the possible boards after one move:
-
-```racket
-(test-equal (list->set (apply-reduction-relation ⇨ (term initial-board)))
-            (set
-             (term
-              ((· · ● ● ● · ·)
-               (· · ● ● ● · ·)
-               (● ● ● ● ● ● ●)
-               (● ● ● ● ● ● ●)
-               (● ● ● ○ ● ● ●)
-               (· · ● ○ ● · ·)
-               (· · ● ● ● · ·)))
-
-             (term
-              ((· · ● ● ● · ·)
-               (· · ● ○ ● · ·)
-               (● ● ● ○ ● ● ●)
-               (● ● ● ● ● ● ●)
-               (● ● ● ● ● ● ●)
-               (· · ● ● ● · ·)
-               (· · ● ● ● · ·)))
-
-             (term
-              ((· · ● ● ● · ·)
-               (· · ● ● ● · ·)
-               (● ● ● ● ● ● ●)
-               (● ● ● ● ○ ○ ●)
-               (● ● ● ● ● ● ●)
-               (· · ● ● ● · ·)
-               (· · ● ● ● · ·)))
-
-             (term
-              ((· · ● ● ● · ·)
-               (· · ● ● ● · ·)
-               (● ● ● ● ● ● ●)
-               (● ○ ○ ● ● ● ●)
-               (● ● ● ● ● ● ●)
-               (· · ● ● ● · ·)
-               (· · ● ● ● · ·)))))
-```
 
 We can also try to compute all boards with the `apply-reduction-relation*` form, which applies `⇨` repeatedly:
 
