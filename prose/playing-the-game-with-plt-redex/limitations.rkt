@@ -22,20 +22,22 @@
  #f)
 
 (define-judgment-form peg-solitaire
-  #:mode (→*′ I O)
-  #:contract (→*′ board board)
+  #:mode (⇨*′ I O)
+  #:contract (⇨*′ board board)
 
-  [---------------- "Reflexivity"
-   (→*′ board board)]
+  [(⇨/judgment-form board_1 board_2)
+   --------------------------------- "Base"
+   (⇨*′ board_1 board_2)]
 
-  [(→            board_1 board_2)
+  [(⇨/judgment-form            board_1 board_2)
    (side-condition ,(displayln (term board_2)))
-   (→*′ board_2 board_3)
+   (⇨*′ board_2 board_3)
    -------------------------------------------- "Transitivity"
-   (→*′ board_1 board_3)])
+   (⇨*′ board_1 board_3)])
 
-(judgment-holds (→*′ ([● ● ○ ●]) ([○ ● ○ ○])))
-
+; > (judgment-holds (⇨*′ ([● ● ○ ●]) ([○ ● ○ ○])))
+; ((○ ○ ● ●))
+; ((○ ● ○ ○))
 ;; ---------------------------------------------------------------------------------------------------
 
 (define (winning-boards start-board)

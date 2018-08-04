@@ -211,4 +211,4 @@
 (show-derivations (build-derivations (⇨* ([● ● ● ○ ● ● ●])
                                          ([● ○ ● ○ ○ ● ●]))))
 
-(provide ⇨/judgment-form ⇨*)
+(provide ⇨/judgment-form)
