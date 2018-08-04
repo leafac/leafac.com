@@ -218,7 +218,12 @@ The clause for when a peg jumps over its neighbor on the left is similar. The cl
 
 The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and `position_5` of the same length, so the sequence `● ● ○` must appear in the same column. The clause for when a peg jumps over its neighbor on the top is similar, and with it we conclude the definition of `⇨`:
 
+<div class="code-block" markdown="1">
+`reduction-relations.rkt`
 ```racket
+#lang racket
+(require redex "terms.rkt" "languages.rkt")
+
 (define
   ⇨
   (reduction-relation
@@ -281,6 +286,7 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
          ...)
         "↑")))
 ```
+</div>
 
 * * *
 
