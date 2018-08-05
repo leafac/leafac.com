@@ -12,6 +12,15 @@ Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [Dr
 
 [PLT Redex](https://redex.racket-lang.org/) is a tool for modeling programming languages, operational semantics, type systems, program analyses, and so forth. It is designed after the notation established by research papers, and the existing [educational material](related-work) for PLT Redex targets experienced programming-language researchers. But when I started learning PLT Redex, I was new to the field, so I struggled with *both* the research papers *and* the education material. Through the struggle, I noticed that this was a two-way street: reading papers helped me to understand PLT Redex, but perhaps more importantly, understanding PLT Redex helped me to read papers. I became more fluent in the notation, and could implement the theory in the papers more easily. PLT Redex was lowering the cost of experimenting, and supporting the most effective kind of reading: *active* reading.
 
+<aside markdown="1">
+<figure>
+{% include_relative virtuous-cycle.svg %}
+<figcaption markdown="1">
+The virtuous cycle between knowing PLT Redex and reading papers.
+</figcaption>
+</figure>
+</aside>
+
 With time, I realized that there is no *magic* in PLT Redex—it is just functional programming with pattern matching. I wish someone had told me that without bringing up Greek letters and jargon, and this is what I want to do to fellow programmers trying to break into programming-language theory. I write this article from the other side of the bump hoping to smooth the path for those that follow.
 
 We will (ab)use PLT Redex to play a game of [Peg Solitaire](https://en.wikipedia.org/wiki/Peg_solitaire). Through this simple board game we explore functional programming, pattern matching, contract verification, nondeterministic computation, visualization, typesetting, test generation, and so forth. This is a fun exercise of repurposing a tool for a task beyond its intended design, and it is a first step toward the virtuous cycle between knowing PLT Redex and reading papers.
