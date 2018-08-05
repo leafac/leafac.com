@@ -6,11 +6,11 @@ draft: true
 ---
 
 <aside markdown="1">
-**Pre-requisites**: Functional programming with pattern matching and [Racket](https://docs.racket-lang.org/quick/index.html) basics.  
+**Pre-requisites**: Functional programming with pattern matching, and the basics of [Racket](https://docs.racket-lang.org/quick/index.html).  
 Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 </aside>
 
-[PLT Redex](https://redex.racket-lang.org/) is a tool for working with programming-language theory by modeling programming languages, operational semantics, type systems, program analyses, and so forth. It is designed after the notation established by research papers, appealing to the familiarity among experienced programming-language researchers, and the existing [educational material](related-work) about PLT Redex is targeted at that public. But when I started learning PLT Redex, I was new to the field, so I struggled with *both* the research papers *and* the education material. Through the struggle, I noticed that this was a two-way street: reading papers helped me to understand PLT Redex, but perhaps more importantly, understanding PLT Redex helped me to read papers. I became more fluent in the notation, and could implement and experiment more easily.
+[PLT Redex](https://redex.racket-lang.org/) is a tool for modeling programming languages, operational semantics, type systems, program analyses, and so forth. It is designed after the notation established by research papers, and the existing [educational material](related-work) for PLT Redex is targeted at experienced programming-language researchers. But when I started learning PLT Redex, I was new to the field, so I struggled with *both* the research papers *and* the education material. Through the struggle, I noticed that this was a two-way street: reading papers helped me to understand PLT Redex, but perhaps more importantly, understanding PLT Redex helped me to read papers. I became more fluent in the notation, and could implement the theory in the papers more easily. The most effective kind of reading is *active* reading, and PLT Redex lowered the cost of experimentation.
 
 With time, I realized that there is nothing *magical* about PLT Redex—it is just functional programming with pattern matching. I wished someone had told me that without bringing up Greek letters and jargon, and this is what I want to do for fellow programmers trying to break into programming-language theory. I write this article from the other side of the bump hoping to smooth the path for those coming after me.
 
