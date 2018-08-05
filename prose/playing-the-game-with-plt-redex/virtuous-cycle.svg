@@ -10,8 +10,8 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="124.09155"
-   height="123.86018"
-   viewBox="0 0 124.09155 123.86019"
+   height="117.54382"
+   viewBox="0 0 124.09154 117.54381"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
@@ -56,9 +56,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="71.745709"
-     inkscape:cy="72.780223"
+     inkscape:zoom="2.559387"
+     inkscape:cx="120.5"
+     inkscape:cy="35.499987"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -76,7 +76,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -84,7 +84,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-283.75429,-391.93969)">
+     transform="translate(-283.75429,-378.79788)">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.20000005;font-family:Charter;-inkscape-font-specification:Charter;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#657b83;fill-opacity:1;stroke:none"
@@ -107,16 +107,16 @@
          sodipodi:role="line">Papers</tspan></text>
     <path
        style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#657b83;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker2351);paint-order:normal"
-       d="m 317.66797,458.14648 c 5.42912,13.61363 18.60349,22.54689 33.25976,22.55274 14.64986,-0.013 27.81545,-8.94506 33.24219,-22.55274"
+       d="m 382.84403,458.14648 c -5.42912,13.61363 -18.60349,22.54689 -33.25976,22.55274 -14.64986,-0.013 -27.81545,-8.94506 -33.24219,-22.55274"
        id="path2328"
        inkscape:connector-curvature="0" />
     <text
        id="text2379"
-       y="401.50769"
+       y="493.50769"
        x="350.80429"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.20000005;font-family:Charter;-inkscape-font-specification:Charter;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#657b83;fill-opacity:1;stroke:none"
        xml:space="preserve"><tspan
-         y="401.50769"
+         y="493.50769"
          x="350.80429"
          sodipodi:role="line"
          id="tspan2389">Inspire design</tspan></text>
@@ -124,19 +124,19 @@
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.20000005;font-family:Charter;-inkscape-font-specification:Charter;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#657b83;fill-opacity:1;stroke:none"
        x="350.80429"
-       y="497.36588"
+       y="388.36588"
        id="text2407"><tspan
          id="tspan2405"
          sodipodi:role="line"
          x="350.80429"
-         y="497.36588">Aid understanding</tspan><tspan
+         y="388.36588">Aid understanding</tspan><tspan
          sodipodi:role="line"
          x="350.80429"
-         y="512.96588"
+         y="403.96588"
          id="tspan2409">(and development)</tspan></text>
     <path
        id="path2516"
-       d="m 385.21094,434.5957 c -4.53829,-15.14702 -18.47093,-25.52685 -34.28321,-25.54101 -15.81878,0.006 -29.76062,10.38777 -34.30078,25.54101"
+       d="m 315.30106,434.5957 c 4.53829,-15.14702 18.47093,-25.52685 34.28321,-25.54101 15.81878,0.006 29.76062,10.38777 34.30078,25.54101"
        style="opacity:1;vector-effect:none;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#657b83;stroke-width:2;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#marker2520);paint-order:normal"
        inkscape:connector-curvature="0" />
   </g>
