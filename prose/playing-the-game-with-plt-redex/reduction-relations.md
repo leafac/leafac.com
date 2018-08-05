@@ -104,7 +104,7 @@ But functions are just a special case of *relation*, which may relate one input 
                        ⋮
 </pre>
 
-The `⇨` relation models moves in Peg Solitaire more straightforwardly than the `⇨/function` function. The listing above is similar to how we wrote our [examples in the game description](/overview#pegsolitaire-rules):
+The `⇨` relation models moves in Peg Solitaire more straightforwardly than the `⇨/function` function. The listing above is similar to how we wrote our [examples in the game description](/introduction#pegsolitaire-rules):
 
 <pre>
     ● ● ●             ● ● ●
@@ -174,7 +174,7 @@ The shape of the `reduction-relation` form is similar to that of `define-metafun
 
 * * *
 
-The `⇨` reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:<label class="margin-note"><input type="checkbox"><span markdown="1">In the [Overview](overview), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had only defined a dummy empty [language](languages).</span></label>
+The `⇨` reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:<label class="margin-note"><input type="checkbox"><span markdown="1">In the [Introduction](introduction), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had only defined a dummy empty [language](languages).</span></label>
 
 ```racket
 (--> (row_1

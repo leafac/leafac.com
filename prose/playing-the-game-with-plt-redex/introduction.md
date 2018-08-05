@@ -148,7 +148,7 @@ Setup
 We start by requiring PLT Redex:
 
 <div class="code-block" markdown="1">
-`overview.rkt`
+`introduction.rkt`
 ```racket
 #lang racket
 (require redex)
