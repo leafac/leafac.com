@@ -21,7 +21,7 @@ The virtuous cycle between knowing PLT Redex and reading papers.
 </figure>
 </aside>
 
-With time, I realized that there is no *magic* in PLT Redex—it is just functional programming with pattern matching. I wish someone had told me that without bringing up Greek letters and jargon, and this is what I want to do to fellow programmers trying to break into programming-language theory. I write this article from the other side of the bump hoping to smooth the path for those that follow.
+With time, I realized that there is no *magic* in PLT Redex—it is just functional programming with pattern matching. I wish someone had told me that without bringing up Greek letters and jargon, and this is what I want to do to fellow programmers who are trying to break into programming-language theory. I write this article from the other side of the bump hoping to smooth the path for those that follow.
 
 We will (ab)use PLT Redex to play a game of [Peg Solitaire](https://en.wikipedia.org/wiki/Peg_solitaire). Through this simple board game we explore functional programming, pattern matching, contract verification, nondeterministic computation, visualization, typesetting, test generation, and so forth. This is a fun exercise of repurposing a tool for a task beyond its intended design, and it is a first step toward the virtuous cycle between knowing PLT Redex and reading papers.
 
