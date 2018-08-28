@@ -120,20 +120,11 @@ $border-radius:       $space--extra-small;
 }
 
 @mixin box {
+  @include insertion;
   border: $border-width solid $palette--secondary-content;
   border-radius: $border-radius;
   padding: $text-indent;
   padding-left: calc($text-indent - $border-width);
-}
-
-@mixin navigation-links {
-  a {
-    text-decoration: none;
-    &.active {
-      text-decoration: underline;
-      color: $palette--emphasized-content;
-    }
-  }
 }
 
 @mixin superscript {
@@ -233,24 +224,8 @@ body {
 // HEADERS
 
 body > header {
-  text-align: right;
-  a {
-    display: inline-block;
-  }
   h1 {
     margin: $space--none;
-    margin-right: $space--medium;
-    line-height: $line-height--medium;
-    float: left;
-  }
-  nav {
-    @include navigation-links;
-    a {
-      margin-right: $space--medium;
-      &:last-child {
-        margin-right: $space--none;
-      }
-    }
   }
   padding-bottom: $space--medium;
   border-bottom: $border-width solid $palette--secondary-content;
@@ -271,12 +246,17 @@ time {
 }
 
 .table-of-contents {
-  @include insertion;
   @include box;
-  @include navigation-links;
   columns: 2;
   ol {
     margin: $space--none;
+  }
+  a {
+    text-decoration: none;
+    &.active {
+      text-decoration: underline;
+      color: $palette--emphasized-content;
+    }
   }
 }
 
@@ -365,7 +345,6 @@ p {
 
 aside {
   @include smaller-screens {
-    @include insertion;
     @include box;
   }
 
