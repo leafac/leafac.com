@@ -10,15 +10,11 @@
     <title>{% if page.title %}{{ page.title }} · {% endif %}Leandro Facchinetti</title>
   </head>
   <body>
-    <header>
-      <h1><a href="/">Leandro Facchinetti</a></h1>
-    </header>
+    <header><h1><a href="/">Leandro Facchinetti</a></h1></header>
     <main>
       {% if page.title %}
         <header>
-          {% if page.draft %}
-          <p><strong>Unpublished draft. Work in progress.</strong><p>
-          {% endif %}
+          {% if page.draft %}<p><strong>Unpublished draft. Work in progress.</strong><p>{% endif %}
           <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
           {% if page.date %}
             <time>{{ page.date }}</time>
