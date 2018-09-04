@@ -5,7 +5,7 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
-At its simplest, PLT Redex is a tool for manipulating and visualizing terms. Terms are data in S-expression form.<label class="margin-note"><input type="checkbox"><span markdown="1">Identifiers, numbers, strings, lists, and so forth.</span></label> In programming languages, terms can represent programs and program fragments, types, machine states, and so forth. In Peg Solitaire, terms can represent pegs, boards, and so forth. We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms from Racket values, for example:
+At a high level, PLT Redex is a tool for manipulating and visualizing S-expressions (identifiers, numbers, strings, lists, and so forth), which PLT Redex calls *terms*. In programming languages, terms represent programs and program fragments, types, machine states, and so forth. In Peg Solitaire, terms represent pegs, boards, and so forth. We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms from Racket values, for example:
 
 <aside markdown="1">
 PLT Redex includes a testing framework with the [`(test-equal e₁ e₂)`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-equal%29%29) form, which we use to indicate that `e₁` evaluates to `e₂`.
@@ -26,7 +26,7 @@ PLT Redex includes a testing framework with the [`(test-equal e₁ e₂)`](ht
 ```
 </div>
 
-We represent pegs with `●` and spaces with `○`:<label class="margin-note"><input type="checkbox"><span markdown="1">Racket supports Unicode.</span></label>
+We represent pegs with `●` and spaces with `○`:
 
 ```racket
 (test-equal (term ●)
