@@ -5,7 +5,7 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
-The metafunction is the most familiar of all PLT Redex forms: it is a function on terms. While [pattern matching](pattern-matching) is analog to a regular expression that recognizes a term, a metafunction is analog to search-and-replace with regular expressions and capture groups. In programming languages, metafunctions are the small utilities, for example, substituting variables for their values (a metafunction generally notated as `program-fragment[variable\value]`), and evaluating primitive operators (a metafunction generally named `δ`). We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-metafunction#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form:<label class="margin-note"><input type="checkbox"><span markdown="1">A metafunction is similar to [`define/match`](https://docs.racket-lang.org/reference/match.html?q=define%2Fmatch#%28form._%28%28lib._racket%2Fmatch..rkt%29._define%2Fmatch%29%29) in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to forms for multi-way conditionals, for example, `case` and `cond`.</span></label>
+From all the PLT Redex forms for manipulating with terms, we begin with the metafunction because it is the most familiar—it is just a function on terms. We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-metafunction#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form including [patterns](pattern-matching) that match the input terms, and templates to compute the output terms:
 
 ```racket
 (define-metafunction <language>
@@ -19,7 +19,15 @@ The metafunction is the most familiar of all PLT Redex forms: it is a function 
 - `[(<metafunction> <pattern> ...) <template>]`: A metafunction clause.
 - `<metafunction>`: The metafunction name.
 - `<pattern>`: Patterns against which the metafunction inputs are matched. Patterns are tried clause by clause in the order they are defined, and the first clause that matches is executed.
-- `<template>`: A term that is the output of the metafunction. Names from `<pattern>` are available in the `<template>`.
+- `<template>`: A term that is the output of the metafunction. Names from the `<pattern>` are available in the `<template>`.
+
+A metafunction is similar to [`define/match`](https://docs.racket-lang.org/reference/match.html?q=define%2Fmatch#%28form._%28%28lib._racket%2Fmatch..rkt%29._define%2Fmatch%29%29) in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to forms for multi-way conditionals, for example, `case` and `cond`.
+
+When we introduced patterns, we noted that they are to terms as regular expressions are to strings, and we used the `redex-match?` form to recognize terms the same way we can use regular expressions to match strings. Continuing that analogy, a metafunction is similar to a search-and-replace with regular expressions including capture groups.
+
+In programming languages, metafunctions are the small utilities, for example, substituting variables for their values (a metafunction generally notated as `program-fragment[variable\value]`), and evaluating primitive operators (a metafunction generally named `δ`).
+
+* * *
 
 We define a metafunction to invert a `position`:<label class="margin-note"><input type="checkbox"><span markdown="1">This metafunction is only for demonstration—we will not use it for playing Peg Solitaire.</span></label>
 
@@ -50,7 +58,7 @@ We use a metafunction by applying it on terms:<label class="margin-note"><input 
             (term ·))
 ```
 
-We can call a metafunction from any place in which a term might appear, including the definition of another metafunction. To illustrate this, consider the following metafunction that inverts a whole board by calling `invert/position` on each position:
+We can call a metafunction from any place in which a term might appear, including the definition of another metafunction. To illustrate this, consider the following metafunction that inverts a whole board by calling `invert/position` on each `position`:
 
 ```racket
 (define-metafunction peg-solitaire
