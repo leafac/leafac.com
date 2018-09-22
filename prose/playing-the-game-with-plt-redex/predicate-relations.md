@@ -45,7 +45,7 @@ The pattern in the predicate relation clause in more detail:
 - `[· ... ○ ... ● ○ ... · ...]`: A row with a single peg.
 - `[· ... ○ ... · ...] ...`: More rows without a peg.
 
-We query the predicate relation by applying it, similar to a metafunction:
+We query the predicate relation by applying it, similar to a [metafunction](metafunctions):
 
 ```racket
 (test-equal (term (winning-board? example-board-1))
