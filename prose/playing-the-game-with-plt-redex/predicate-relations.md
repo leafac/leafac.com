@@ -5,50 +5,7 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
-A predicate relation is a special kind of metafunction that returns a boolean.<label class="margin-note"><input type="checkbox"><span markdown="1">When working with programming languages, predicate relations typically check whether a program is well formed, whether a type is a subtype of another type, and so forth.</span></label> As illustration, we start by defining a metafunction that returns true if and only if a given board is a winning board:<label class="margin-note"><input type="checkbox"><span markdown="1">A board is a winning board if [it contains a single peg](peg-solitaire-rules).</span></label>
-
-<div class="code-block" markdown="1">
-`predicate-relations.rkt`
-```racket
-#lang racket
-(require redex "terms.rkt" "languages.rkt")
-
-(define-metafunction peg-solitaire
-  winning-board?/metafunction : board -> boolean
-  [(winning-board?/metafunction ([· ... ○ ... · ...]
-                                 ...
-                                 [· ... ○ ... ● ○ ... · ...]
-                                 [· ... ○ ... · ...]
-                                 ...))
-   #t]
-  [(winning-board?/metafunction _) #f])
-```
-</div>
-
-The pattern in the metafunction in more detail:
-
-| `[· ... ○ ... · ...] ...` | Any number of rows without a peg. |
-| `[· ... ○ ... ● ○ ... · ...]` | A row with a single peg. |
-| `[· ... ○ ... · ...] ...` | More rows without a peg. |
-
-Testing the metafunction:
-
-```racket
-(test-equal (term (winning-board?/metafunction example-board-1))
-            #f)
-(test-equal (term (winning-board?/metafunction example-board-2))
-            #f)
-(test-equal (term (winning-board?/metafunction initial-board))
-            #f)
-(test-equal (term (winning-board?/metafunction example-winning-board))
-            #t)
-```
-
-The metafunction `winning-board?/metafunction` only returns true for the `example-winning-board`.
-
-* * *
-
-Metafunctions that return booleans are common, so they deserve a special name: predicate relations. We define a predicate relation using the [`define-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-relation%29%29) form to specify under which conditions the predicate relation *holds* (when a metafunction would have returned true):
+When we looked at [reduction relations](reduction-relations), we were interested in transforming terms. We defined clauses with patterns to match against inputs, and templates to produce outputs. But in some cases we are only interested in whether the inputs satisfy certain conditions, for example, whether a board is a winning board.<label class="margin-note"><input type="checkbox"><span markdown="1">A board is a winning board if [it contains a single peg](peg-solitaire-rules).</span></label> If we were to define that as a reduction relation, then the output templates would be booleans. For this special case, PLT Redex provides the [`define-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-relation%29%29) form to define *predicate relations*:
 
 ```racket
 (define-relation <language>
@@ -62,9 +19,14 @@ Metafunctions that return booleans are common, so they deserve a special name: p
 - `<relation>`: The predicate relation name.
 - `<pattern>`: Pattern against which the predicate relation inputs are compared. If the patterns match, then the predicate relation holds.
 
-The following is the `winning-board?/metafunction` metafunction written as a predicate relation:
+Predicate relations typically check whether a program is well formed, whether a type is a subtype of another type, and so forth. We define a predicate relation to check whether a board is a winning board:
 
+<div class="code-block" markdown="1">
+`predicate-relations.rkt`
 ```racket
+#lang racket
+(require redex "terms.rkt" "languages.rkt")
+
 (define-relation peg-solitaire
   winning-board? ⊆ board
   [(winning-board? ([· ... ○ ... · ...]
@@ -73,8 +35,17 @@ The following is the `winning-board?/metafunction` metafunction written as a pre
                     [· ... ○ ... · ...]
                     ...))])
 ```
+</div>
 
-The contract `winning-board? ⊆ board` says the `winning-board?` predicate relation is only defined over `board`s<label class="margin-note"><input type="checkbox"><span markdown="1">We use the symbol for subsetting (`⊆`) because only *some* boards are winning boards.</span></label> and PLT Redex will verify the input before a query. We query the predicate relation by applying it, similar to a metafunction:
+The contract `winning-board? ⊆ board` says that the `winning-board?` predicate relation is only defined over boards—it would not make sense to ask this question about terms that are not boards. We use the symbol for subsetting (`⊆`) because only *some* boards are winning boards.
+
+The pattern in the predicate relation clause in more detail:
+
+- `[· ... ○ ... · ...] ...`: Any number of rows without a peg.
+- `[· ... ○ ... ● ○ ... · ...]`: A row with a single peg.
+- `[· ... ○ ... · ...] ...`: More rows without a peg.
+
+We query the predicate relation by applying it, similar to a metafunction:
 
 ```racket
 (test-equal (term (winning-board? example-board-1))
@@ -87,7 +58,7 @@ The contract `winning-board? ⊆ board` says the `winning-board?` predicate re
             #t)
 ```
 
-The predicate relation `winning-board?` only holds for the `example-winning-board`.
+The predicate relation only holds for the `example-winning-board`.
 
 * * *
 
@@ -96,3 +67,5 @@ We will use the predicate relation `winning-board?` in a [later section](limitat
 ```racket
 (provide winning-board?)
 ```
+
+Next, we cover the most general form of relations that may not be functions: [judgment forms](judgment-forms).

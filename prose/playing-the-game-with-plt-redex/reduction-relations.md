@@ -60,7 +60,7 @@ A function<label class="margin-note"><input type="checkbox"><span markdown="1">O
                        ⋮
 </pre>
 
-But a function is just a special case of *relation*, which may relate one input to multiple outputs. While all functions are relations, not all relations are functions. When we enumerate a relation that is not a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to model moves in Peg Solitaire:
+But a function is just a special case of *relation*, which may relate one input to multiple outputs. While all functions are relations, not all relations are functions. When we enumerate a relation that may not be a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to model moves in Peg Solitaire:
 
 <aside markdown="1">
 <figure>
@@ -152,7 +152,7 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
 <span class="success">●</span> jumps over <span class="error">●</span>
 </pre>
 
-Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that are not functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
+Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that may not be functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
 <aside markdown="1">
 The `reduction-relation` form returns the reduction relation as a value, unlike the other forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
@@ -428,4 +428,4 @@ The `⇨` relation is enough to play Peg Solitaire using [PLT Redex visualizat
 (provide ⇨)
 ```
 
-But before we return to this and play Peg Solitaire, we explore in the following sections a few other PLT Redex forms for relations that are not functions, starting with [judgment forms](judgment-forms).
+But before we return to this and play Peg Solitaire, we explore in the following sections a few other PLT Redex forms for relations that may not be functions, starting with [predicate relations](predicate-relations).

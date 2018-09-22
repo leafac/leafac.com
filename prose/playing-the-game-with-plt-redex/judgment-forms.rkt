@@ -2,6 +2,24 @@
 (require redex "terms.rkt" "languages.rkt")
 
 (define-judgment-form peg-solitaire
+  #:mode (winning-board?/judgment-form I)
+  #:contract (winning-board?/judgment-form board)
+  [(winning-board?/judgment-form ([· ... ○ ... · ...]
+                                  ...
+                                  [· ... ○ ... ● ○ ... · ...]
+                                  [· ... ○ ... · ...]
+                                  ...))])
+
+(test-equal (judgment-holds (winning-board?/judgment-form example-board-1))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form example-board-2))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form initial-board))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form example-winning-board))
+            #t)
+
+(define-judgment-form peg-solitaire
   #:mode (⇨/judgment-form I O)
   #:contract (⇨/judgment-form board board)
 
