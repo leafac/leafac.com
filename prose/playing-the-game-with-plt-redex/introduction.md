@@ -324,4 +324,4 @@ Playing Peg Solitaire with PLT Redex’s stepper. The main pane shows the boar
 
 * * *
 
-On the following sections we revisit each step of modeling Peg Solitaire in PLT Redex in more detail.
+On the following sections we revisit each step of modeling Peg Solitaire in PLT Redex in more detail, starting with [terms](terms).

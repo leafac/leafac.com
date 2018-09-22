@@ -113,3 +113,5 @@ We will use these boards for testing in later sections, so we [`provide`](https:
 (provide example-board-1 example-board-2
          initial-board example-winning-board)
 ```
+
+Next, we explore the most common operation on terms, [pattern matching](pattern-matching).

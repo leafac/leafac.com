@@ -235,3 +235,7 @@ Finally, we can nest ellipses, and they still mean “zero or more of the previo
 ```
 
 The pattern fragment `[· ... ● ... ○ ... ● ... · ...]` means “a sequence of zero or more paddings (`·`), followed by a sequence of zero or more pegs (`●`), followed by a sequence of zero or more spaces (`○`), followed by a sequence of zero or more pegs (`●`), followed by a sequence of zero or more paddings (`·`).” This matches a single row of the initial board, regardless of whether it is the first row, `[· · ● ● ● · ·]` (which includes paddings but no spaces), or the fourth row, `[● ● ● ○ ● ● ●]` (which includes a space but no paddings). The pattern fragment `([___] ...)` means “zero or more rows.”
+
+* * *
+
+Next, we use pattern matching to define the shape of terms that represent Peg Solitaire elements with a [language](languages).

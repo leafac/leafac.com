@@ -428,4 +428,4 @@ The `⇨` relation is enough to play Peg Solitaire using [PLT Redex visualizat
 (provide ⇨)
 ```
 
-But before we return to this and play Peg Solitaire, we explore in the following sections a few other PLT Redex forms for relations that are not functions.
+But before we return to this and play Peg Solitaire, we explore in the following sections a few other PLT Redex forms for relations that are not functions, starting with [judgment forms](judgment-forms).

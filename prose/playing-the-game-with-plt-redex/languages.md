@@ -101,3 +101,5 @@ We will use the `peg-solitaire` language in later sections, so we `provide` it h
 ```racket
 (provide peg-solitaire)
 ```
+
+Now that we have a language, we can operate on terms. On the next section, we cover the most familiar operation, the [metafunction](metafunctions).

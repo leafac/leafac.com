@@ -79,3 +79,7 @@ The `invert/board` metafunction matches its input to the pattern `([position ..
                    (· · ○ ○ ○ · ·)
                    (· · ○ ○ ○ · ·))))
 ```
+
+* * *
+
+We defined two metafunctions in this section only for illustration—we do not use them to play the game. But the digression is over, because in the next section we cover [reduction relations](reduction-relations), which we use to model Peg Solitaire moves.
