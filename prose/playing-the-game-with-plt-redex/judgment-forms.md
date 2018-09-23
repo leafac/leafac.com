@@ -25,35 +25,9 @@ Both [reduction relations](reduction-relations) and [predicate relations](predic
 
 * * *
 
-```racket
-(define-judgment-form <language>
-  #:mode (<judgment-form> <I/O> ...)
-  #:contract (<judgment-form> <pattern> ...)
+The following are alternative 
 
-  [<condition>
-   ...
-   ----------------------------------------
-   (<judgment-form> <pattern/template> ...)]
-  ...)
-```
-
-- `<language>`: A language as defined [previously](languages).
-- `#:mode`: A judgment form may have multiple inputs and outputs. Syntactically, they all appear as *arguments* to the form. The `#:mode` annotation specifies which *arguments* are inputs (`I`) and which are outputs (`O`).<label class="margin-note"><input type="checkbox"><span markdown="1">Mathematically, a judgment form does not have inputs and outputs, because it is a *relation*, not a *function*. But by defining which arguments are inputs and outputs, we are specifying a *mode of operation*, which allows PLT Redex to run our definition.</span></label> Besides the declared outputs, every judgment form also has an implicit boolean output: whether the judgment holds or not.<label class="margin-note"><input type="checkbox"><span markdown="1">In the [previous section](predicate-relations) we defined predicate relations as metafunctions that return a boolean. We can also interpret predicate relations as [judgment forms whose single output is this implicit boolean](#a-judgment-form-for-a-predicate-relation).</span></label>
-- `#:contract`: A contract with patterns for the arguments of the judgment form. The contract is verified and an error may be raised if the judgment form is queried with invalid inputs or produces invalid outputs.
-- `[<condition> ... --- (<judgment-form> <pattern/template> ...)]`: A judgment form clause.<label class="margin-note"><input type="checkbox"><span markdown="1">This notation with a bar (`---`) separating conditions and conclusion is common in papers and has a long tradition in formal logic.</span></label>
-- `<condition>`: A condition under which the clause holds. For example, a condition may query another judgment form or [predicate relation](predicate-relations).
-- `<judgment-form>`: The judgment form name.
-- `<pattern/template>`: A pattern for an input argument or a template for an output.
-
-There are two ways to read a judgment form clause:
-
-- **Logical**: “If `<condition>`s hold, then `(<judgment-form> <pattern/template> ...)` holds.”
-- **Operational**: Start at the bottom of dashes, on `(<judgment-form> <pattern/template> ...)`, and match the judgment form inputs to the `<pattern>`s. If they match, then try to satisfy each `<condition>` over the dashes. Finally, output the `<template>`s.
-
-The first reading is more mathematically accurate, while the second is more intuitive<label class="margin-note"><input type="checkbox"><span markdown="1">To me, at least.</span></label> and useful when working in PLT Redex.
-
-A Judgment Form for a Predicate Relation
-========================================
+* * *
 
 In its simplest shape, a judgment form only has input arguments and one implicit output indicating whether the judgment holds or not. In this shape, a judgment form is equivalent to a [predicate relation](predicate-relations). We can rewrite `winning-board?` as a judgment form:
 

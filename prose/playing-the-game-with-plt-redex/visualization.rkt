@@ -11,3 +11,7 @@
 (traces ⇨ (term initial-board))
 #;
 (traces → (term initial-board))
+
+#;
+(show-derivations (build-derivations (⇨* ([● ● ● ○ ● ● ●])
+                                         ([● ○ ● ○ ○ ● ●]))))

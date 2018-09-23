@@ -2,24 +2,6 @@
 (require redex "terms.rkt" "languages.rkt")
 
 (define-judgment-form peg-solitaire
-  #:mode (winning-board?/judgment-form I)
-  #:contract (winning-board?/judgment-form board)
-  [(winning-board?/judgment-form ([· ... ○ ... · ...]
-                                  ...
-                                  [· ... ○ ... ● ○ ... · ...]
-                                  [· ... ○ ... · ...]
-                                  ...))])
-
-(test-equal (judgment-holds (winning-board?/judgment-form example-board-1))
-            #f)
-(test-equal (judgment-holds (winning-board?/judgment-form example-board-2))
-            #f)
-(test-equal (judgment-holds (winning-board?/judgment-form initial-board))
-            #f)
-(test-equal (judgment-holds (winning-board?/judgment-form example-winning-board))
-            #t)
-
-(define-judgment-form peg-solitaire
   #:mode (⇨/judgment-form I O)
   #:contract (⇨/judgment-form board board)
 
@@ -78,6 +60,15 @@
                      row_2
                      ...))
    "↑"])
+
+(define-judgment-form peg-solitaire
+  #:mode (winning-board?/judgment-form I)
+  #:contract (winning-board?/judgment-form board)
+  [(winning-board?/judgment-form ([· ... ○ ... · ...]
+                                  ...
+                                  [· ... ○ ... ● ○ ... · ...]
+                                  [· ... ○ ... · ...]
+                                  ...))])
 
 (test-judgment-holds
  (⇨/judgment-form initial-board ([· · ● ● ● · ·]
@@ -193,40 +184,13 @@
     [· · ● ○ ● · ·]
     [· · ● ● ● · ·]))))
 
-(define-judgment-form peg-solitaire
-  #:mode (⇨* I O)
-  #:contract (⇨* board board)
-
-  [(⇨/judgment-form board_1 board_2)
-   --------------------------------- "Base"
-   (⇨* board_1 board_2)]
-
-  [(⇨/judgment-form  board_1 board_2)
-   (⇨* board_2 board_3)
-   ---------------------------------- "Transitivity"
-   (⇨* board_1 board_3)])
-
-(test-judgment-holds (⇨* ([● ● ● ○ ● ● ●]) ([● ○ ○ ● ● ● ●])))
-
-(test-judgment-holds (⇨* ([● ● ● ○ ● ● ●]) ([● ○ ● ○ ○ ● ●])))
-
-(test-equal
- (list->set (judgment-holds (⇨* ([● ● ● ○ ● ● ●]) board) board))
- (set
-  (term ([● ● ● ● ○ ○ ●]))
-
-  (term ([● ● ○ ○ ● ○ ●]))
-
-  (term ([○ ○ ● ○ ● ○ ●]))
-
-  (term ([● ○ ○ ● ● ● ●]))
-
-  (term ([● ○ ● ○ ○ ● ●]))
-
-  (term ([● ○ ● ○ ● ○ ○]))))
-
-#;
-(show-derivations (build-derivations (⇨* ([● ● ● ○ ● ● ●])
-                                         ([● ○ ● ○ ○ ● ●]))))
+(test-equal (judgment-holds (winning-board?/judgment-form example-board-1))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form example-board-2))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form initial-board))
+            #f)
+(test-equal (judgment-holds (winning-board?/judgment-form example-winning-board))
+            #t)
 
 (provide ⇨/judgment-form)
