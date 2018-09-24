@@ -107,6 +107,63 @@
                                  [· · ● ● ● · ·])))
 
 (test-equal
+ (judgment-holds
+  (⇨/judgment-form initial-board ([· · ● ● ● · ·]
+                                  [· · ● ● ● · ·]
+                                  [● ● ● ● ● ● ●]
+                                  [● ○ ○ ● ● ● ●]
+                                  [● ● ● ● ● ● ●]
+                                  [· · ● ● ● · ·]
+                                  [· · ● ● ● · ·])))
+ #t)
+
+(test-equal
+ (judgment-holds
+  (⇨/judgment-form initial-board ([· · ● ● ● · ·]
+                                  [· · ● ● ● · ·]
+                                  [● ● ● ● ● ● ●]
+                                  [● ● ● ● ○ ○ ●]
+                                  [● ● ● ● ● ● ●]
+                                  [· · ● ● ● · ·]
+                                  [· · ● ● ● · ·])))
+ #t)
+
+(test-equal
+ (judgment-holds
+  (⇨/judgment-form initial-board ([· · ● ● ● · ·]
+                                  [· · ● ○ ● · ·]
+                                  [● ● ● ○ ● ● ●]
+                                  [● ● ● ● ● ● ●]
+                                  [● ● ● ● ● ● ●]
+                                  [· · ● ● ● · ·]
+                                  [· · ● ● ● · ·])))
+ #t)
+
+(test-equal
+ (judgment-holds
+  (⇨/judgment-form initial-board ([· · ● ● ● · ·]
+                                  [· · ● ● ● · ·]
+                                  [● ● ● ● ● ● ●]
+                                  [● ● ● ● ● ● ●]
+                                  [● ● ● ○ ● ● ●]
+                                  [· · ● ○ ● · ·]
+                                  [· · ● ● ● · ·])))
+ #t)
+
+(test-equal
+ (judgment-holds (winning-board?/judgment-form example-board-1))
+ #f)
+(test-equal
+ (judgment-holds (winning-board?/judgment-form example-board-2))
+ #f)
+(test-equal
+ (judgment-holds (winning-board?/judgment-form initial-board))
+ #f)
+(test-equal
+ (judgment-holds (winning-board?/judgment-form example-winning-board))
+ #t)
+
+(test-equal
  (list->set (judgment-holds (⇨/judgment-form initial-board board) board))
  (set
   (term
@@ -184,13 +241,10 @@
     [· · ● ○ ● · ·]
     [· · ● ● ● · ·]))))
 
-(test-equal (judgment-holds (winning-board?/judgment-form example-board-1))
-            #f)
-(test-equal (judgment-holds (winning-board?/judgment-form example-board-2))
-            #f)
-(test-equal (judgment-holds (winning-board?/judgment-form initial-board))
-            #f)
-(test-equal (judgment-holds (winning-board?/judgment-form example-winning-board))
-            #t)
+(test-equal
+ (list->set
+  (apply-reduction-relation* ⇨/judgment-form (term ([● ● ● ○ ● ● ●]))))
+ (set
+  (term ((○ ○ ● ○ ● ○ ●)))
 
-(provide ⇨/judgment-form)
+  (term ((● ○ ● ○ ● ○ ○)))))

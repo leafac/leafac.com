@@ -382,7 +382,7 @@ We can also query the `⇨` reduction relation with the [`apply-reduction-relati
                [· · ● ● ● · ·]))))
 ```
 
-If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next, then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
+If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next,<label class="margin-note"><input type="checkbox"><span markdown="1">Something called the *transitive closure* of the reduction relation.</span></label> then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
 
 ```racket
 > (apply-reduction-relation* ⇨ (term initial-board))
