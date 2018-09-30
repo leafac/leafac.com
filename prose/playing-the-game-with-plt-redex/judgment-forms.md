@@ -302,15 +302,24 @@ Because `⇨/judgment-form` has mode `I O`, it behaves like a reduction relatio
 When to Use the Different Forms
 ===============================
 
-<!-- When to use each form -->
+At this point, we covered four different ways to operate on terms in PLT Redex: [metafunctions](metafunctions), [reduction relations](reduction-relations), [predicate relations](predicate-relations) and [judgment forms](judgment-forms). We could solve some of the same problems with more than one of these forms, so we need criteria to choose. It is particularly difficult to choose between a metafunction and a reduction relation when the reduction relation is deterministic. We could leverage the clause order and define a metafunction that is terser than its reduction relation counterpart, for example:
 
-<!--
-A last fine point about reduction relations in programming-language theory.
+```racket
+(define-metafunction L
+  [(m <some-kind-of-term>) ___]
+  [(m _) ___])
 
-If we define relation clauses to be mutually exclusive, then a relation may be deterministic, as each input will only match one clause. This is unsurprising, since functions are a special case of relation. Generally in programming-language theory interpreters, type systems and so forth are defined as deterministic relations, as opposed to metafunctions, because they are more mathematically accurate, not depending on the subtle consequences of clause order to resolve ambiguities.
+(define r
+  (reduction-relation
+   (--> <some-kind-of-term> ___)
+   (--> <any-other-term> ___)))
+```
 
-As the word *reduction* implies, a reduction relation is expected to *reduce* the input. The notion of what constitutes a *reduced* term depends on the language, and PLT Redex does not enforce this expectation, but we should be careful in our definitions so that it holds. Generally, in programming languages, reducing a term reduces its size, for example, in Racket the term `(+ 1 2)` reduces to `3`. In Peg Solitaire, the notion of reduction is not related to board size, which remains the same throughout the game, but to the number of pegs, which reduces with each move.
--->
+In the listing above, we can rely on the clause order and use the underscore pattern (`_`) in the second clause of the metafunction `m` to only match terms that are not `<some-kind-of-term>`. When defining `r` as a reduction relation version of `m`, we have to write mutually exclusive clauses and be explicit about what constitutes `<any-other-term>` that is not `<some-kind-of-term>`. If we had used `_` instead of `<any-other-term>`, then the second clause in `r` would always match, even for `<some-kind-of-term>`.
+
+This case arrises often when defining the semantics of a deterministic language, and we could be tempted by the terser definition to prefer a metafunction, resorting to reduction relations only when we need nondeterminism (for example, in `⇨` in Peg Solitaire). But it is a better practice to use reduction relations when defining semantics. First, because it follows the semantic framework on which PLT Redex is built,<label class="margin-note"><input type="checkbox"><span markdown="1">Reduction semantics.</span></label> and programming-language researchers expect semantics in this form. Second, because the clause order may hide ambiguities and leave semantic considerations implicit. Third, because it leaves the foundation ready for when it is necessary to introduce nondeterminism in the semantics.
+
+In general, metafunctions are usually auxiliary utilities, for example, substituting variables for values, calculating the result of primitive operations, and so forth. Reduction relations are better suited for defining semantics. They should *reduce* the terms in the language. The notion of a *reduced* term depends on the language and does not always correspond to a smaller term; in Peg Solitaire, for example, a reduced term is not a smaller board, but one with less pegs. It is also common to use the more general `define-judgment-form` instead of `reduction-relation` when the only difference is the notation.
 
 * * *
 
