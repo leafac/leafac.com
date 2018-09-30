@@ -5,19 +5,17 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
-We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `→` [judgment form](judgment-forms)<label class="margin-note"><input type="checkbox"><span markdown="1">The `stepper` form only works on judgment forms with mode `I O` (like `→`) or `O I`, and this feature is [new to Racket 7](https://github.com/racket/redex/issues/155).</span></label> on the `initial-board`:
+We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `⇨/judgment-form` [judgment form](judgment-forms)<label class="margin-note"><input type="checkbox"><span markdown="1">The `stepper` form only works on judgment forms with mode `I O` (for example, `⇨/judgment-form`) or `O I`.</span></label> on the `initial-board`:
 
 <div class="code-block" markdown="1">
 `visualization.rkt`
 ```racket
 #lang racket
-(require redex "terms.rkt" "languages.rkt"
-         "judgment-forms.rkt" "reduction-relations.rkt")
+(require redex "terms.rkt" "reduction-relations.rkt" "judgment-forms.rkt")
 
-;; Either
-(stepper ⇨ (term initial-board))
-;; or
-(stepper → (term initial-board))
+
+> (stepper ⇨ (term initial-board))
+> (stepper ⇨/judgment-form (term initial-board))
 ```
 </div>
 
@@ -39,7 +37,7 @@ The stepper shows the four possible initial moves on the main pane and on the gr
 </figcaption>
 </figure>
 
-We select the second board by clicking on the `↕` button:
+We select the second board by clicking on the `↕` button next to it:
 
 <figure markdown="1">
 ![](stepper-3.png){:width="600"}
@@ -57,7 +55,7 @@ The stepper shows the three available moves.
 </figcaption>
 </figure>
 
-We select the board on the bottom by clicking on the `↕` button:
+We select the board on the bottom by clicking on the `↕` button next to it:
 
 <figure markdown="1">
 ![](stepper-5.png){:width="600"}
@@ -91,13 +89,11 @@ We accomplished our goal of playing Peg Solitaire by (ab)using PLT Redex.
 Traces
 ======
 
-We can go further than just playing Peg Solitaire interactively with the `traces` form, which accepts the same inputs as `stepper` and explores *all* possible moves:
+We can explore Peg Solitaire further with the `traces` form, which accepts the same inputs as `stepper` and explores *all* possible moves:
 
 ```racket
-;; Either
-(traces ⇨ (term initial-board))
-;; or
-(traces → (term initial-board))
+> (traces ⇨ (term initial-board))
+> (traces ⇨/judgment-form (term initial-board))
 ```
 
 DrRacket opens the window below:<label class="margin-note"><input type="checkbox"><span markdown="1">The graph rendered by `traces` is the fully expanded version of the graph at the bottom of the `stepper` window.</span></label>
@@ -115,3 +111,7 @@ The tracer explores all possible moves up to a certain number of boards. Click o
 When we click on a board, the tracer highlights the moves leading to it and those coming from it. The edges are labeled with the clause associated with the move.
 </figcaption>
 </figure>
+
+* * *
+
+We only explored a small fraction of PLT Redex, in the next section we cover [other features](other-features).
