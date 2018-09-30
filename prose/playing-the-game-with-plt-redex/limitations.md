@@ -5,6 +5,8 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
+In this section we explore several ways in which PLT Redex falls short.
+
 Debugging
 =========
 
@@ -17,7 +19,8 @@ The following listing exemplifies a typical debugging session investigating why 
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
-         "predicate-relations.rkt" "reduction-relations.rkt")
+         "reduction-relations.rkt" "predicate-relations.rkt"
+         "judgment-forms.rkt")
 
 (test-equal
  (redex-match? peg-solitaire board (term ([· ● ● ● ·]
@@ -41,40 +44,10 @@ The following listing exemplifies a typical debugging session investigating why 
 
 The term is not a `board` because `*` is not a `position`.
 
-* * *
-
-To investigate a metafunction, predicate relation, judgment form or reduction relation we can use `side-condition` to display intermediary terms and trace execution, for example, the following is a variation of the `→*` judgment form instrumented to trace the intermediary board in the **Transitivity** clause:
-
-```racket
-(define-judgment-form peg-solitaire
-  #:mode (→*′ I O)
-  #:contract (→*′ board board)
-
-  [---------------- "Reflexivity"
-   (→*′ board board)]
-
-  [(→            board_1 board_2)
-   (side-condition ,(displayln (term board_2)))
-   (→*′ board_2 board_3)
-   -------------------------------------------- "Transitivity"
-   (→*′ board_1 board_3)])
-```
-
-We can see the trace when we query the judgment form, for example:
-
-```racket
-> (judgment-holds (→*′ ([● ● ○ ●]) ([○ ● ○ ○])))
-((○ ○ ● ●))
-((○ ● ○ ○))
-#t
-```
-
-The first two lines of output are the intermediary `board_2` in the two applications of the **Transitivity** rule. The last line is the query output, true, meaning the judgment form holds.
-
 Performance
 ===========
 
-An executable model is not an implementation. PLT Redex is good for visualizing and understanding a model on relatively small inputs. It can scale to moderately sized inputs if we design patterns and relations carefully, but it can never replace a performance-tuned implementation, for it has to check contracts, perform nondeterministic computations, and so forth—tasks that are computationally expensive.
+An executable model is not an implementation. PLT Redex is good for visualizing and understanding a model on relatively small inputs. It can scale to moderately sized inputs if we design patterns and relations carefully, but it can never replace a performance-tuned implementation. It has to check contracts, perform nondeterministic computations, and so forth—tasks that are computationally expensive.
 
 As an example of a declarative definition that does not scale for being too naïve, consider the following function to find winning boards:
 
@@ -101,12 +74,13 @@ But it does not scale to the [`initial-board`](terms):
 Advanced Pattern Matching
 =========================
 
-All operations we have covered rely on terms *matching* patterns, but it is often useful to query whether a term *does not match* a pattern, and PLT Redex does not support it. One workaround is to [unquote](other-features), escape back to Racket and use the `redex-match?` form. For example, the following listing defines the `not-peg?` predicate relation, which holds for `position`s other than a `peg`:
+All operations we have covered rely on terms *matching* patterns, but it is often useful to query whether a term *does not match* a pattern, and PLT Redex does not support it. One workaround is to [unquote](other-features#unquoting), escape back to Racket and use the `redex-match?` form. For example, the following listing defines the `not-peg?` predicate relation, which holds for `position`s other than a `peg`:
 
 ```racket
 (define-relation peg-solitaire
   not-peg? ⊆ position
-  [(not-peg? position) ,(not (redex-match? peg-solitaire peg (term position)))])
+  [(not-peg? position)
+   ,(not (redex-match? peg-solitaire peg (term position)))])
 
 (test-equal (term (not-peg? ●))
             #f)
@@ -123,17 +97,17 @@ Similarly, PLT Redex does not include patterns for data structures other than S
 Metaparameters
 ==============
 
-It is common for papers to include a series of definitions which rely on a parameter that remains the same. For example, this parameter may indicate which policy to follow when performing a task, say, how to allocate an address. When the context is evident, papers often omit the parameter to improve readability—because this is a parameter in the guest language, we call them *metaparameters*. But PLT Redex has no support for metaparameters: we must pass the parameter around in every definition explicitly, which adds clutter.<label class="margin-note"><input type="checkbox"><span markdown="1">There are a few [other alternatives](https://groups.google.com/forum/#!topic/racket-users/cGRMPIoEZas) but they all have their downsides.</span></label> Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
+It is common for papers to include a series of definitions which rely on a parameter that remains the same, for example, a parameter that indicates how to allocate addresses. When the context is evident, papers often omit these parameters to improve readability. Because they are parameters in the guest language, we call them *metaparameters*. PLT Redex has no support for metaparameters: we must clutter the definitions by passing them around explicitly.<label class="margin-note"><input type="checkbox"><span markdown="1">There are a few [other alternatives](https://groups.google.com/forum/#!topic/racket-users/cGRMPIoEZas) but they all have their downsides.</span></label> Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
 
 Parallel Reduction
 ==================
 
-PLT Redex is unable to reduce on multiple [`hole`s](other-features#extensions-and-holes) in a single step. We would have run into this limitation if we had chosen a different game, for example, Conway’s Game of Life, instead of Peg Solitaire. In each step of Conway’s Game of Life all cells on the board change state (alive or dead) in parallel, but we could not model it with multiple `hole`s, we would have to opt for a less straightforward representation and serialize the step in a series of sub-steps.
+PLT Redex is unable to reduce on multiple [`hole`s](other-features#extensions-and-holes) in a single step. We would have run into this limitation if we had chosen, for example, Conway’s Game of Life instead of Peg Solitaire. In each step of Conway’s Game of Life, all cells on the board change state (alive or dead) in parallel, but we could not model it with multiple `hole`s, we would have to opt for a less straightforward representation and serialize the step in a series of sub-steps.
 
 Higher-Order Metafunctions
 ==========================
 
-Metafunctions in PLT Redex are first-order: they cannot be passed as arguments, they cannot be a return value, they cannot be store in data structures, and so forth. If higher-order functions are necessary, then we must `unquote` and use regular Racket functions.
+Metafunctions in PLT Redex are first-order: they cannot be passed as arguments, they cannot be a return value, they cannot be store in data structures, and so forth. This issue arises, for example, when trying to model a [*Continuation-Passing Style converter*](http://matt.might.net/articles/cps-conversion/). If higher-order functions are necessary, then we must `unquote` and use regular Racket functions.
 
 Definition Extension Limitations
 ================================
@@ -148,4 +122,8 @@ PLT Redex includes many features to customize typesetting, but they can be hard
 Formal Proofs
 =============
 
-PLT Redex is a lightweight modeling tool, not a theorem prover or model checker. It can [check](other-features#testing) propositions to increase your confidence in them with little effort, but if you need mechanized formal proofs, use tools like [Coq](https://coq.inria.fr).
+PLT Redex is a lightweight modeling tool, not a theorem prover or a model checker. It can [check](other-features#checking) propositions to increase your confidence in them with little effort, but if you need mechanized formal proofs, use tools like [Coq](https://coq.inria.fr).
+
+* * *
+
+At this point in our journey, we know enough to follow more advanced material on PLT Redex. In the next section, we list this [related work](related-work).
