@@ -1,7 +1,7 @@
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
-         "predicate-relations.rkt" "judgment-forms.rkt"
-         "reduction-relations.rkt")
+         "reduction-relations.rkt" "predicate-relations.rkt"
+         "judgment-forms.rkt")
 
 (test-equal
  (redex-match? peg-solitaire board (term ([· ● ● ● ·]

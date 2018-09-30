@@ -5,12 +5,44 @@ table-of-contents: table-of-contents.html
 draft: true
 ---
 
-<!-- Condition clauses (particularly on judgment forms, because of their notation) -->
+In this section we give a high level view of a miscellanea of other PLT Redex features.
+
+Conditions
+==========
+
+The forms for manipulating terms can do more than just pattern matching on the input terms to determine whether a clause contributes to the output. They can apply [metafunctions](metafunctions) and [reduction relations](reduction-relations), they can query [predicate relations](predicate-relations) and [judgment forms](judgment-forms), and they can perform arbitrary computations with the `side-condition` form. For example, the following predicate relation uses a `side-condition` form to check that the `board` has rows of matching length:<label class="margin-note"><input type="checkbox"><span markdown="1">Ellipses with suffixes (`..._<suffix>`) would be a more straightforward way of achieving the same goal.</span></label>
+
+<div class="code-block" markdown="1">
+`other-features.rkt`
+```racket
+#lang racket
+(require redex "terms.rkt" "languages.rkt"
+         "reduction-relations.rkt" "judgment-forms.rkt")
+
+
+(define-relation peg-solitaire
+  equal-length-rows? ⊆ board
+  [(equal-length-rows? board)
+   (side-condition
+    (andmap (λ (row) (equal? (length row)
+                             (length (first (term board)))))
+            (term board)))])
+
+(test-equal (term (equal-length-rows? initial-board))
+            #t)
+(test-equal (term (equal-length-rows? ([●]
+                                       [●])))
+            #t)
+(test-equal (term (equal-length-rows? ([●]
+                                       [● ●])))
+            #f)
+```
+</div>
 
 Unquoting
 =========
 
-We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`),<label class="margin-note"><input type="checkbox"><span markdown="1">The `term` form is similar to the [quasiquote](https://docs.racket-lang.org/guide/qq.html), but it is aware of names defined with `define-term` as well as metafunctions, reduction relations and so forth.</span></label> for example:
+We can use arbitrary computations to define extra [conditions](#conditions) under which a clause contributes to the output, and we can also use arbitrary computations to define that output. We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`),<label class="margin-note"><input type="checkbox"><span markdown="1">The `term` form is similar to the [quasiquote](https://docs.racket-lang.org/guide/qq.html), but it is aware of names defined with `define-term` as well as metafunctions, reduction relations and so forth.</span></label> for example:
 
 ```racket
 (test-equal (term (1 2 ,(+ 1 2)))
@@ -87,7 +119,7 @@ We can use the `term` form from within `unquote`:
 
 * * *
 
-We can unquote to escape back to Racket in the definitions of all the forms we covered thus far, including metafunctions, judgment forms, reduction relations and so forth. For example, we can define a `count-●` metafunction to count how many pegs there are in a board by unquoting and relying on Racket’s functions for manipulating lists:
+In the following example, we define a `count-●` metafunction to count how many pegs there are in a board by unquoting and relying on Racket’s functions for manipulating lists:
 
 ```racket
 (define-metafunction peg-solitaire
@@ -95,19 +127,21 @@ We can unquote to escape back to Racket in the definitions of all the forms we c
   [(count-● ([position ...] ...))
    ,(count (λ (position) (equal? position (term ●)))
            (term (position ... ...)))])
+
+(test-equal (term (count-● initial-board)) 32)
 ```
 
-The listing above matches the input board with the pattern `([position ...] ...)`, so the name `position` in the template refers to a list of lists of `position`s. We use the template `(position ... ...)` to *flatten* this list of lists. We then unquote and use Racket’s `count` to count how many `position`s are `equal?` to pegs (`●`).
+The listing above matches the input board with the pattern `([position ...] ...)`, so the name `position` in the template refers to a list of lists of `position`s. We use the template `(position ... ...)` to *flatten* this list of lists. We then unquote and use Racket’s `count` to count how many `position`s are `equal?` to pegs (`●`).
 
 * * *
 
 In summary:
 
-<div class="full-width no-padding-table" markdown="1">
+<div class="full-width" markdown="1">
 
 | | `define` | Racket | terms | `unquote` | `,peg` |
 | | `define-term` | terms | Racket | `term` | `(term space)` |
-| **Names defined with** | **______________ are available in** | **_______ but can be accessed in** | **_______ with** | **________, for example,** | **_____________** |
+| **Names defined with** | **______ are available in** | **_______ but can be accessed in** | **_______ with** | **________, for example,** | **_______** |
 
 </div>
 
@@ -134,7 +168,7 @@ The `Peg-Solitaire` language includes all names in `peg-solitaire` as well as th
   [Board    ::= (row ... hole row ...)])
 ```
 
-The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special built-in pattern in PLT Redex—similar to how `any` is a special built-in pattern. A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
+The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special pattern built into PLT Redex.<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to how `any` is a special pattern built into PLT Redex.</span></label> A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
 
 ```racket
 (test-equal (redex-match? Peg-Solitaire (in-hole Board row)
@@ -181,50 +215,56 @@ The `(in-hole Board [position_1 ... ● ● ○ position_2 ...])` in the
 The `⇨/hole` extended reduction relation works the same as the `⇨` original reduction relation:
 
 ```racket
-(test-equal (apply-reduction-relation ⇨/hole (term initial-board))
-            '(([· · ● ● ● · ·]
+(test-equal (list->set (apply-reduction-relation ⇨/hole
+                                                 (term initial-board)))
+            (set
+             (term
+              ([· · ● ● ● · ·]
                [· · ● ● ● · ·]
                [● ● ● ● ● ● ●]
                [● ○ ○ ● ● ● ●]
                [● ● ● ● ● ● ●]
                [· · ● ● ● · ·]
-               [· · ● ● ● · ·])
+               [· · ● ● ● · ·]))
 
-              ([· · ● ● ● · ·]
-               [· · ● ● ● · ·]
-               [● ● ● ● ● ● ●]
-               [● ● ● ● ● ● ●]
-               [● ● ● ○ ● ● ●]
-               [· · ● ○ ● · ·]
-               [· · ● ● ● · ·])
-
-              ([· · ● ● ● · ·]
-               [· · ● ○ ● · ·]
-               [● ● ● ○ ● ● ●]
-               [● ● ● ● ● ● ●]
-               [● ● ● ● ● ● ●]
-               [· · ● ● ● · ·]
-               [· · ● ● ● · ·])
-
+             (term
               ([· · ● ● ● · ·]
                [· · ● ● ● · ·]
                [● ● ● ● ● ● ●]
                [● ● ● ● ○ ○ ●]
                [● ● ● ● ● ● ●]
                [· · ● ● ● · ·]
-               [· · ● ● ● · ·])))
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ○ ● · ·]
+               [● ● ● ○ ● ● ●]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [· · ● ● ● · ·]
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ● ● · ·]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [● ● ● ○ ● ● ●]
+               [· · ● ○ ● · ·]
+               [· · ● ● ● · ·]))))
 ```
 
 * * *
 
 PLT Redex provides other more sophisticated forms for extending languages and reduction relations, for example, `define-union-language` creates a language by joining together the names for patterns from various languages, and `context-closure` defines a reduction relation based on another in a way that saves us from typing `(in-hole ___)` repeatedly, as we did in `⇨/hole`.
 
-Testing
-=======
+Checking
+========
 
-All tests we have written thus far depend on examples we have written by hand, for example, boards such as `initial-board`, `example-board-1` and `example-board-2`. While these tests increase our confidence in our model, they do not suffice to check more sophisticated properties. For example, we may conjecture that boards have less pegs after every move, because we remove the peg that was jumped over. We may want to prove this proposition holds for all boards, but developing a formal proof can be time-consuming, so before we start we want to use our model to test the proposition on a variety of boards, particularly on boards we did not think of ourselves.
+All tests we have written thus far depend on examples we have written by hand, for example, `initial-board`, `example-board-1` and `example-board-2`. While these tests increase our confidence in our model, they do not suffice to check more sophisticated properties. For example, we may conjecture that boards have less pegs after every move, because we remove the peg that was jumped over. We may want to prove this proposition holds for all boards, but developing a formal proof can be time-consuming, so before we start we want to use our model to test the proposition on a variety of boards, particularly on boards we did not think of ourselves.
 
-PLT Redex includes a tool the generate terms and check propositions. For example, the following listing checks the proposition above:
+PLT Redex includes a tool to generate terms and check propositions. For example, the following listing checks the proposition above:
 
 ```racket
 (redex-check
@@ -236,7 +276,7 @@ PLT Redex includes a tool the generate terms and check propositions. For exampl
 The `redex-check` form is working over the `peg-solitaire` language and generating terms that follow the definition of `board`. For each term it generates, it runs the predicate `(for/and ___)`, which asserts that the `board` includes more pegs than the `board′`s after one move. By default, PLT Redex will try this a 1000 times:
 
 ```racket
-redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:26
+redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:131
 no counterexamples in 1000 attempts
 ```
 
@@ -248,7 +288,7 @@ If we check for an invalid property, for example, the *opposite* of the one abov
    (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
      (< (term (count-● board)) (term (count-● ,board′)))))
 
-redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:31
+redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:131
 counterexample found after 125 attempts:
 ((○) (●) (●))
 ```
@@ -256,17 +296,21 @@ counterexample found after 125 attempts:
 Typesetting
 ===========
 
-We can typeset the forms we defined thus far for including them in papers. This streamlines the writing process and prevents errors when translating our model to LaTeX. For example, the following is the typeset definition of `→*`:
+We can typeset the forms we defined thus far for including them in papers. This streamlines the writing process and prevents errors when translating our model to LaTeX. For example, the following is the typeset definition of `⇨/judgment-form`:
 
 ```racket
-(render-judgment-form →*)
+(render-judgment-form ⇨/judgment-form)
 ```
 
 <figure markdown="1">
 {% include_relative judgment-form.svg %}
 <figcaption markdown="1">
-The `→*` judgment form as automatically typeset by PLT Redex.
+The `⇨/judgment-form` judgment form as automatically typeset by PLT Redex.
 </figcaption>
 </figure>
 
-This default typesetting may be unsatisfactory, for example, we may wish that `→*` is infix instead of prefix. PLT Redex offers forms to customize the typesetting.
+This default typesetting may be unsatisfactory, for example, we may wish that `⇨/judgment-form` is infix instead of prefix. PLT Redex offers forms to customize the typesetting.
+
+* * *
+
+Next, we cover the [limitations](limitations) in PLT Redex.

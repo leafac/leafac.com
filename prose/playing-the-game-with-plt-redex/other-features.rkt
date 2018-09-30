@@ -1,8 +1,29 @@
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
-         "judgment-forms.rkt" "reduction-relations.rkt")
+         "reduction-relations.rkt" "judgment-forms.rkt")
 
 ;; ---------------------------------------------------------------------------------------------------
+;; CONDITIONS
+
+(define-relation peg-solitaire
+  equal-length-rows? ⊆ board
+  [(equal-length-rows? board)
+   (side-condition
+    (andmap (λ (row) (equal? (length row)
+                             (length (first (term board)))))
+            (term board)))])
+
+(test-equal (term (equal-length-rows? initial-board))
+            #t)
+(test-equal (term (equal-length-rows? ([●]
+                                       [●])))
+            #t)
+(test-equal (term (equal-length-rows? ([●]
+                                       [● ●])))
+            #f)
+
+;; ---------------------------------------------------------------------------------------------------
+;; UNQUOTING
 
 (test-equal (term (1 2 ,(+ 1 2)))
             '(1 2 3))
@@ -36,6 +57,7 @@
 (test-equal (term (count-● initial-board)) 32)
 
 ;; ---------------------------------------------------------------------------------------------------
+;; EXTENSIONS AND HOLES
 
 (define-extended-language Peg-Solitaire peg-solitaire
   [Board ::= (row ... hole row ...)])
@@ -65,40 +87,47 @@
         (in-hole Board [position_1 ... ○ ○ ● position_2 ...])
         "→")))
 
-(test-equal (apply-reduction-relation ⇨/hole (term initial-board))
-            '(([· · ● ● ● · ·]
+(test-equal (list->set (apply-reduction-relation ⇨/hole
+                                                 (term initial-board)))
+            (set
+             (term
+              ([· · ● ● ● · ·]
                [· · ● ● ● · ·]
                [● ● ● ● ● ● ●]
                [● ○ ○ ● ● ● ●]
                [● ● ● ● ● ● ●]
                [· · ● ● ● · ·]
-               [· · ● ● ● · ·])
+               [· · ● ● ● · ·]))
 
-              ([· · ● ● ● · ·]
-               [· · ● ● ● · ·]
-               [● ● ● ● ● ● ●]
-               [● ● ● ● ● ● ●]
-               [● ● ● ○ ● ● ●]
-               [· · ● ○ ● · ·]
-               [· · ● ● ● · ·])
-
-              ([· · ● ● ● · ·]
-               [· · ● ○ ● · ·]
-               [● ● ● ○ ● ● ●]
-               [● ● ● ● ● ● ●]
-               [● ● ● ● ● ● ●]
-               [· · ● ● ● · ·]
-               [· · ● ● ● · ·])
-
+             (term
               ([· · ● ● ● · ·]
                [· · ● ● ● · ·]
                [● ● ● ● ● ● ●]
                [● ● ● ● ○ ○ ●]
                [● ● ● ● ● ● ●]
                [· · ● ● ● · ·]
-               [· · ● ● ● · ·])))
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ○ ● · ·]
+               [● ● ● ○ ● ● ●]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [· · ● ● ● · ·]
+               [· · ● ● ● · ·]))
+
+             (term
+              ([· · ● ● ● · ·]
+               [· · ● ● ● · ·]
+               [● ● ● ● ● ● ●]
+               [● ● ● ● ● ● ●]
+               [● ● ● ○ ● ● ●]
+               [· · ● ○ ● · ·]
+               [· · ● ● ● · ·]))))
 
 ;; ---------------------------------------------------------------------------------------------------
+;; CHECKING
 
 (redex-check
  peg-solitaire board
@@ -113,9 +142,9 @@
 
 ;; ---------------------------------------------------------------------------------------------------
 
-(render-judgment-form →*)
+(render-judgment-form ⇨/judgment-form)
 
 ;; Prepare image for article:
-;; (render-judgment-form →* "judgment-form.pdf")
+;; (render-judgment-form ⇨/judgment-form "judgment-form.pdf")
 ;; $ pdfcrop judgment-form.pdf judgment-form--cropped.pdf
 ;; $ pdf2svg judgment-form--cropped.pdf judgment-form.svg
