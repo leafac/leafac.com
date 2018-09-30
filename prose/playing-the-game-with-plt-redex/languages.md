@@ -2,7 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
-draft: true
+date: 2018-09-30
 ---
 
 A language defines patterns for terms and gives them names. In programming languages, a language determines which terms are programs and which are not. A language might also include extra machinery, for example, binding and type environments, stores, machine states, and so forth. This extra machinery is invisible to programmers, but is used by an interpreter or a type checker, for example. In general, if terms are data, then languages are the definitions of data structures. They provide names for the patterns we explored in the [previous section](pattern-matching).

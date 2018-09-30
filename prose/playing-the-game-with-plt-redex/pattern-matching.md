@@ -2,7 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
-draft: true
+date: 2018-09-30
 ---
 
 Pattern matching is the foundation of all the PLT Redex forms we will explore in the later sections. Pattern matching has two purposes: to verify whether a term matches a pattern, and to assign names to the parts that were matched. To experiment with pattern matching, we must first define a language, but to define a language we must first understand pattern matching. We solve this conundrum by defining a dummy empty language,<label class="margin-note"><input type="checkbox"><span markdown="1">The same we did in the [Introduction](introduction).</span></label> which we will revisit in the [next section](languages):

@@ -2,7 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
-draft: true
+date: 2018-09-30
 ---
 
 In this section we give a high level view of a miscellanea of other PLT Redex features.

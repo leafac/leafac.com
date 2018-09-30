@@ -434,6 +434,7 @@ I write [prose](/#prose), [software](/#software) and [music](/#music). I am a Ph
 Prose
 =====
 
+- [**Playing the Game with PLT Redex**](/prose/playing-the-game-with-plt-redex/)
 - [**Email Migration: The Ultimate Solution to a Ridiculous Problem**](/prose/email-migration/)
 
 Software

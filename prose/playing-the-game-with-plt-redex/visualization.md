@@ -2,7 +2,7 @@
 layout: default
 title: Playing the Game with PLT Redex
 table-of-contents: table-of-contents.html
-draft: true
+date: 2018-09-30
 ---
 
 We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `⇨/judgment-form` [judgment form](judgment-forms)<label class="margin-note"><input type="checkbox"><span markdown="1">The `stepper` form only works on judgment forms with mode `I O` (for example, `⇨/judgment-form`) or `O I`.</span></label> on the `initial-board`:
