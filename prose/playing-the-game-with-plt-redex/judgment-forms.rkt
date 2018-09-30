@@ -248,3 +248,5 @@
   (term ((○ ○ ● ○ ● ○ ●)))
 
   (term ((● ○ ● ○ ● ○ ○)))))
+
+(provide ⇨/judgment-form winning-board?/judgment-form)

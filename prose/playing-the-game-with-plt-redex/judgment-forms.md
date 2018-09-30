@@ -323,4 +323,8 @@ Usually, metafunctions are the auxiliary utilities, for example, to substitute v
 
 * * *
 
-Next, we are ready to play Peg Solitaire using PLT Redex [visualization tools](visualization).
+Next, we provide the judgment forms defined in this section and we are ready to play Peg Solitaire using PLT Redex [visualization tools](visualization).
+
+```racket
+(provide ⇨/judgment-form winning-board?/judgment-form)
+```

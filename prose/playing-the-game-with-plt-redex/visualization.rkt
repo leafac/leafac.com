@@ -1,17 +1,8 @@
 #lang racket
-(require redex "terms.rkt" "judgment-forms.rkt" "reduction-relations.rkt")
+(require redex "terms.rkt" "reduction-relations.rkt" "judgment-forms.rkt")
 
-#;
-(stepper ⇨ (term initial-board))
-;; Racket 7 or newer
-;; See: https://github.com/racket/redex/issues/155
-#;
-(stepper → (term initial-board))
-#;
-(traces ⇨ (term initial-board))
-#;
-(traces → (term initial-board))
+;; > (stepper ⇨ (term initial-board))
+;; > (stepper ⇨/judgment-form (term initial-board))
 
-#;
-(show-derivations (build-derivations (⇨* ([● ● ● ○ ● ● ●])
-                                         ([● ○ ● ○ ○ ● ●]))))
+;; > (traces ⇨ (term initial-board))
+;; > (traces ⇨/judgment-form (term initial-board))
