@@ -918,6 +918,7 @@ Events
 - **[24th Static Analysis Symposium](http://staticanalysis.org/sas2017/sas2017.html)**. Zachary Palmer presented a paper that I co-authored, *Relative Store Fragments for Singleton Abstraction*. 2017-08-30 – 2017-09-01.
 - **[The Racket School of Semantics and Languages 2017](https://summer-school.racket-lang.org/2017/)**. 2017-07-10 – 2017-07-14.
 - **[The 17th Symposium on Trends in Functional Programming (TFP 2016)](http://tfp2016.org/)**. Alexander Rozenshteyn presented a paper that I co-authored, *What is Your Function? Static Pattern Matching on Function Behavior*. 2016-06-08, 2016-06-10.
+- **JHU ACM Meeting**. I talked about Git and Racket. 2016.
 - **[IBM Programming Languages Day 2015](http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432)**. 2015-11-23.
 - **The Developer’s Conference Florianópolis 2014**. I talked about HTTP/2 and the future of web technologies. 2014-05.
 - **iMasters InterCon 2013**. 2013-11.
@@ -995,7 +996,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Colophon
 ========
 
-| Page layout | Inspired by the works of [Matthew Butterick](http://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/) |
+| Page layout | Inspired by the works of [Matthew Butterick](http://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/) |
 | Serif font | [Charter](http://practicaltypography.com/charter.html) |
 | Monospaced font | [Fira Mono](https://mozilla.github.io/Fira/) |
 | Color palette | [Solarized](http://ethanschoonover.com/solarized) |
