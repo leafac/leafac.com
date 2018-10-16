@@ -850,7 +850,7 @@ Ph.D. Candidate in Computer Science · Programming Languages
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](/#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills.<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
-- I have been assisting on courses on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, held office hours and advised groups of students on semester-long projects.
+- I have been [assisting on courses](#course-assistantteaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I am system administrator for the laboratory.
 - For most of my Ph.D. program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
@@ -868,6 +868,17 @@ B.S. in Computer Science
 *[Universidade de São Paulo](http://www5.usp.br/)*. 2008-02 – 2012-09.
 
 - <aside markdown="span">While I was an undergraduate student, I played the drums in a group similar to a [*Escola de Samba*](https://en.wikipedia.org/wiki/Samba_school).</aside>I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
+
+Teaching Experience
+===================
+
+Course Assistant / Teaching Assistant
+-------------------------------------
+
+*[Johns Hopkins University](https://jhu.edu)*. 2015-09 – 2019-09 (estimated).
+
+- On the Spring I assist on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Fall I assist on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
+- My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
 
 Work Experience
 ===============
