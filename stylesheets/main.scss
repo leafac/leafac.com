@@ -386,8 +386,13 @@ figcaption {
   font-size: $font-size--small;
 }
 
-img, svg, video {
+img, svg {
   max-width: 100%;
+  height: auto;
+}
+
+video, audio {
+  width: 100%;
   height: auto;
 }
 
