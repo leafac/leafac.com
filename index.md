@@ -849,7 +849,7 @@ Ph.D. Candidate in Computer Science · Programming Languages
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](/#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
-- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills.<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
+- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills (watch [my presentation for a general audience](https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4) and [my final presentation](https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4)—the recording quality is poor).<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
 - I have been [assisting on courses](#course-assistantteaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I am system administrator for the laboratory.
@@ -946,7 +946,7 @@ Events
 - **iMasters InterCon + Android 2013**. 2013-09.
 - **RubyConf Brazil 2013**. 2013-08.
 - **Coding Dojo at FAI**. Co-hosted a day of activities for undergraduate Computer Science students, including a lecture about Git and a Coding Dojo. 2013-08.
-- **7Masters**. I [talked](https://www.youtube.com/watch?v=FUzAxEV29kA) about modern Java development techniques and tools. 2013-01.
+- **7Masters**. I [talked](https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4) about modern Java development techniques and tools. 2013-01.
 - **Dev in Sampa 2012**. 2012-05.
 - **RubyConf Brazil 2012**. 2012-08.
 - **Coding Dojo@SP**. I promoted, hosted and participated in several Coding Dojos for the local developer community. 2012 – 2013.
