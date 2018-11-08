@@ -1035,7 +1035,7 @@ Events
 - **7Masters**. I talked about modern Java development techniques and tools. 2013-01.
 
   <details markdown="1">
-  <summary><strong>Watch my presentation</strong></summary>
+  <summary><strong>Watch my talk</strong></summary>
   <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="metadata"></video>
   </details>
 
