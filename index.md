@@ -849,7 +849,22 @@ Ph.D. Candidate in Computer Science · Programming Languages
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](/#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
-- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills (watch [my presentation for a general audience](https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4) and [my final presentation](https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4)—the recording quality is poor).<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
+- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills.<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
+
+  <details markdown="1">
+  <summary><strong>Watch my presentations on the Presentation Skills course</strong></summary>
+
+  The recording quality is bad because I was not in control of it.  
+  **Presentation for a General Audience**
+
+  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4" controls preload="metadata"></video>
+
+  **Final Presentation**
+
+  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4" controls preload="metadata"></video>
+
+  </details>
+
 - I have been [assisting on courses](#course-assistantteaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I am system administrator for the laboratory.
@@ -877,7 +892,78 @@ Course Assistant / Teaching Assistant
 
 *[Johns Hopkins University](https://jhu.edu)*. 2015-09 – 2019-09 (estimated).
 
-- On the Fall of 2018, I was the [Teaching Assistant for the Object Oriented Software Engineering course](/teaching/2018-fall--object-oriented-software-engineering). I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and [I lectured and recorded video lectures on Git, JavaScript and application deployment](/teaching/2018-fall--object-oriented-software-engineering).
+- On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course. I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
+
+	<details markdown="1">
+	<summary><strong>Watch my lectures</strong></summary>
+
+	The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.  
+	**Git**  
+	*Classroom Lecture*
+
+	<video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="metadata"></video>
+
+	*Video Lectures*
+
+	<video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--3--repository.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--4--commit.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4	" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4	" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--9--rebasing.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/git-video-series/git--10--conclusion.mp4" controls preload="metadata"></video>
+
+	**JavaScript**  
+	*Classroom Lecture*
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="metadata"></video>
+
+	*Video Lectures*
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4	" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4	" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="metadata"></video>
+
+	<video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="metadata"></video>
+
+	**Deployment**
+
+	<video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="metadata"></video>
+
+	</details>
+
 - On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
 - My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
 
@@ -946,7 +1032,13 @@ Events
 - **iMasters InterCon + Android 2013**. 2013-09.
 - **RubyConf Brazil 2013**. 2013-08.
 - **Coding Dojo at FAI**. Co-hosted a day of activities for undergraduate Computer Science students, including a lecture about Git and a Coding Dojo. 2013-08.
-- **7Masters**. I [talked](https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4) about modern Java development techniques and tools. 2013-01.
+- **7Masters**. I talked about modern Java development techniques and tools. 2013-01.
+
+  <details markdown="1">
+  <summary><strong>Watch my presentation</strong></summary>
+  <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="metadata"></video>
+  </details>
+
 - **Dev in Sampa 2012**. 2012-05.
 - **RubyConf Brazil 2012**. 2012-08.
 - **Coding Dojo@SP**. I promoted, hosted and participated in several Coding Dojos for the local developer community. 2012 – 2013.
