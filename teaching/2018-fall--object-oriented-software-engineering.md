@@ -1,12 +1,12 @@
 ---
 layout: default
-title: "2018 Fall · Object Oriented Software Engineering"
+title: "2018 Fall · Object Oriented Software Engineering · Johns Hopkins University"
 ---
 
 Main Responsibilities
 =====================
 
-I was the Teaching Assistant. I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum.
+I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course at the [Johns Hopkins University](https://jhu.edu). I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum.
 
 Applications
 ============
