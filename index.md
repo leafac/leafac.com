@@ -482,16 +482,12 @@ Music
 My First Robot
 --------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/my-first-robot/my-first-robot.m4a" controls preload="metadata"></audio>
-
-[M4A](https://f001.backblazeb2.com/file/files-leafac-com/music/my-first-robot/my-first-robot.m4a) · [Source](https://f001.backblazeb2.com/file/files-leafac-com/music/my-first-robot/my-first-robot.zip)
+<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/my-first-robot.m4a" controls preload="metadata"></audio>
 
 Agora Há Algo a Temer
 ---------------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.mp3" controls preload="metadata"></audio>
-
-[MP3](https://f001.backblazeb2.com/file/files-leafac-com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.mp3) · [Source](https://f001.backblazeb2.com/file/files-leafac-com/music/agora-ha-algo-a-temer/agora-ha-algo-a-temer.zip)
+<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/agora-ha-algo-a-temer.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Lyrics</summary>
@@ -570,9 +566,7 @@ Agora há algo a Temer
 O Fim da Tempestade
 -------------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade/o-fim-da-tempestade.mp3" controls preload="metadata"></audio>
-
-[MP3](https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade/o-fim-da-tempestade.mp3) · [Source](https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade/o-fim-da-tempestade.zip)
+<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Samples</summary>
@@ -583,9 +577,7 @@ O Fim da Tempestade
 Criatividade
 ------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/criatividade/criatividade.mp3" controls preload="metadata"></audio>
-
-[MP3](https://f001.backblazeb2.com/file/files-leafac-com/music/criatividade/criatividade.mp3) · [Source](https://f001.backblazeb2.com/file/files-leafac-com/music/criatividade/criatividade.zip)
+<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/criatividade.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Lyrics</summary>
@@ -695,9 +687,7 @@ Aumenta a criativadade
 United
 ------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/united/united.mp3" controls preload="metadata"></audio>
-
-[MP3](https://f001.backblazeb2.com/file/files-leafac-com/music/united/united.mp3) · [Source](https://f001.backblazeb2.com/file/files-leafac-com/music/united/united.zip)
+<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/united.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Lyrics</summary>
