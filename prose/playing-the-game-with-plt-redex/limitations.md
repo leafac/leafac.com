@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Playing the Game with PLT Redex
-table-of-contents: table-of-contents.html
 date: 2018-09-30
+table-of-contents: true
 ---
 
 In this section we explore several ways in which PLT Redex falls short.

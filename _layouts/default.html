@@ -14,32 +14,20 @@
   <body>
     <header><h1><a href="/">Leandro Facchinetti</a></h1></header>
     <main>
-      {% if page.title %}
+      {% if page.table-of-contents %}
+        {% capture table_of_contents_markdown %}{% include_relative table-of-contents.md %}{% endcapture %}
+        {% capture table_of_contents %}<nav class="table-of-contents">{{ table_of_contents_markdown | markdownify }}</nav>{% endcapture %}
+      {% endif %}
+      {% if page.draft or page.title or page.date or page.table-of-contents %}
         <header>
           {% if page.draft %}<p><strong>Unpublished draft. Work in progress.</strong><p>{% endif %}
-          <h1><a href="{{ page.url }}">{{ page.title }}</a></h1>
-          {% if page.date %}
-            <time>{{ page.date }}</time>
-          {% endif %}
-          {% if page.table-of-contents %}
-            <nav class="table-of-contents">
-              <ol>
-                {% include_relative {{ page.table-of-contents }} %}
-              </ol>
-            </nav>
-          {% endif %}
+          {% if page.title %}<h1><a href="{{ page.url }}">{{ page.title }}</a></h1>{% endif %}
+          {% if page.date %}<time>{{ page.date }}</time>{% endif %}
+          {% if page.table-of-contents %}{{ table_of_contents }}{% endif %}
         </header>
       {% endif %}
       {{ content }}
-      {% if page.table-of-contents %}
-        <footer>
-          <nav class="table-of-contents">
-            <ol>
-              {% include_relative {{ page.table-of-contents }} %}
-            </ol>
-          </nav>
-        </footer>
-      {% endif %}
+      {% if page.table-of-contents %}<footer>{{ table_of_contents }}</footer>{% endif %}
     </main>
   </body>
 </html>

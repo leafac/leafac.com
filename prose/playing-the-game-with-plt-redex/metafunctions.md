@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Playing the Game with PLT Redex
-table-of-contents: table-of-contents.html
 date: 2018-09-30
+table-of-contents: true
 ---
 
 From all the PLT Redex forms for manipulating with terms, we begin with the metafunction because it is the most familiar—it is just a function on terms. We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-metafunction#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form including [patterns](pattern-matching) that match the input terms, and templates to compute the output terms:

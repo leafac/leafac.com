@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Playing the Game with PLT Redex
-table-of-contents: table-of-contents.html
 date: 2018-09-30
+table-of-contents: true
 ---
 
 In functions, including [metafunctions](metafunctions), each input relates to one output. When we enumerate a function, each input appears only once on the left column, for example:
