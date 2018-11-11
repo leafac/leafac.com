@@ -5,4 +5,5 @@ draft: true
 table-of-contents: true
 ---
 
+- Only booleans are *true-ish*.
 - Doesn’t include strings & symbols.
