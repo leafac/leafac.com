@@ -5,7 +5,7 @@ draft: true
 table-of-contents: true
 ---
 
-- Only booleans are *true-ish*.
+- Only booleans are *truthy*.
 - Doesn’t include strings & symbols.
 - Left-to-right evaluation
 - Call-by-value
