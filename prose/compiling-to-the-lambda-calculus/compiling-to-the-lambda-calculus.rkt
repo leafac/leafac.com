@@ -73,7 +73,7 @@
     [(? (λ (n) (and (integer? n) (not (negative? n)))) n)
      (compile `(λ (f) (λ (x) ,(for/fold ([eᵇ `x]) ([i (in-range n)]) `(f ,eᵇ)))))]
     [`add1 (compile `(λ (n) (λ (f) (λ (x) (f ((n f) x))))))]
-    [`sub1 (compile `(λ (n) (λ (f) (λ (x) (((n (λ (g) (λ (h) (h (g f))))) (λ (u) x)) (λ (u) u))))))]
+    [`sub1 (compile `(λ (n) (car ((n (λ (x) (let ([p (cdr x)]) (cons p (add1 p))))) (cons 0 0)))))]
     [`+ (compile `(λ (m n) ((n add1) m)))]
     [`(+) (compile `0)]
     [`(+ ,e₁) (compile e₁)]
@@ -213,14 +213,20 @@
       (λ (factorial)
         (λ (n)
           (((((λ (n) ((n (λ (x) (λ (a) (λ (b) b)))) (λ (a) (λ (b) a)))) n)
-             (λ (,g349006) (λ (f) (λ (x) (f x)))))
-            (λ (,g349007)
+             (λ (,g230941) (λ (f) (λ (x) (f x)))))
+            (λ (,g230942)
               (((λ (m) (λ (n) (λ (f) (m (n f))))) n)
                (factorial
                 ((λ (n)
-                   (λ (f)
-                     (λ (x)
-                       (((n (λ (g) (λ (h) (h (g f))))) (λ (u) x)) (λ (u) u)))))
+                   ((λ (p) (p (λ (a) (λ (b) a))))
+                    ((n
+                      (λ (p)
+                        ((λ (a)
+                           (((λ (a) (λ (b) (λ (s) ((s a) b)))) a)
+                            ((λ (n) (λ (f) (λ (x) (f ((n f) x))))) a)))
+                         ((λ (p) (p (λ (a) (λ (b) b)))) p))))
+                     (((λ (a) (λ (b) (λ (s) ((s a) b)))) (λ (f) (λ (x) x)))
+                      (λ (f) (λ (x) x))))))
                  n)))))
            (λ (s) (λ (x) x))))))))
 
@@ -251,7 +257,7 @@
   (check-equal? (inspect/number (evaluate '0)) '0)
   (check-equal? (inspect/number (evaluate '5)) '5)
   (check-equal? (inspect/number (evaluate '(add1 1))) '2)
-  (check-equal? (inspect/number (evaluate '(sub1 1))) '0)
+  (check-equal? (inspect/number (evaluate '(sub1 5))) '4)
   (check-equal? (inspect/number (evaluate '(+))) '0)
   (check-equal? (inspect/number (evaluate '(+ 0))) '0)
   (check-equal? (inspect/number (evaluate '(+ 0 1))) '1)

@@ -15,9 +15,9 @@ Numbers in the surface language are encoded in the core language using functions
 |:-:|-|:-:|
 | `0` | `(λ (f) (λ (x)                x))`      | 0 |
 | `1` | `(λ (f) (λ (x)             (f x)))`     | 1 |
-| `2` | `(λ (f) (λ (x)          (f (f x)))))))` | 2 |
-| `3` | `(λ (f) (λ (x)       (f (f (f x)))))))` | 3 |
-| `4` | `(λ (f) (λ (x)    (f (f (f (f x)))))))` | 4 |
+| `2` | `(λ (f) (λ (x)          (f (f x))))`    | 2 |
+| `3` | `(λ (f) (λ (x)       (f (f (f x)))))`   | 3 |
+| `4` | `(λ (f) (λ (x)    (f (f (f (f x))))))`  | 4 |
 | `5` | `(λ (f) (λ (x) (f (f (f (f (f x)))))))` | 5 |
 | ⋮ | ⋮ | ⋮ |
 
@@ -75,5 +75,32 @@ We can test our encoding:
 (check-equal? (inspect/number (evaluate '(add1 1))) '2)
 ```
 
+Predecessor
+===========
+
+<aside markdown="1">
+<figure markdown="1">
+{% include_relative numbers--sub1.svg %}
+<figcaption markdown="1">
+Tracing the execution of the predecessor function `sub1`  where `n` is `5`. The initial argument `x` (in blue) is a pair containing zeroes. The function `f` (in green) is applied `n` times (there are 5 green arrows in the figure), and it moves a sliding window on the number line one step to the right. Finally, the answer is left element of the pair.
+</figcaption>
+</figure>
+</aside>
+
+The predecessor function `sub1` is only defined for positive numbers, because the predecessor of `0` would be `-1` and our core language does not support negative numbers. The predecessor function receives as argument a number `n` that applies a function a function `f` to `x` for *n* times, and it returns a number `n - 1` that applies `f` one time less than `n`. But there is no way to *undo* a function call, so we need to find a way to find the predecessor by *counting up*.
+
+Our strategy for finding the predecessor of a number by counting up to it is to keep track of the previous number we counted. The figure shows an example of our strategy in action. We keep track of the previous number by [pairing](pairs) it with the current number, and in the end we project the answer out of the pair. The following is the `compile` clause for encoding `sub1`:
+
+```racket
+[`sub1 (compile `(λ (n) (car ((n (λ (x) (let ([p (cdr x)]) (cons p (add1 p))))) (cons 0 0)))))]
+```
+
+The encoding is a function that receives an argument `n`: `(λ (n) ___)`. It calls this number `n` with an initial argument `x` that is a pair of zeroes: `(cons 0 0)`. The iteration function `f` slides the window on the number line. It starts by capturing the right element in the pair to be the next predecessor `p`: `(let ([p (cdr x)]) ___)`. Then it builds the next pair with the predecessor `p` and its [successor](#successor): `(cons p (add1 p))`. When `f` finished counting up to `n` and sliding the window, we project the left element of the pair to be our final answer: `(car ___)`.
+
+We can test our predecessor function:
+
+```racket
+(check-equal? (inspect/number (evaluate '(sub1 5))) '4)
+```
 
 - More interesting kinds of numbers: negatives, reals (fixed-point), complex.
