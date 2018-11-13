@@ -11,10 +11,9 @@
 ;;
 ;;     NUMBERS
 ;;     | <non-negative-integers>
-;;     | add1 | sub1 | + | (+ e ...) | - | (- e ...{2,})
+;;     | add1 | sub1 | + | (+ e ...) | - | (- e ...{2,}) | * | (* e ...) | quotient | expt
 ;;     | zero?
 ;;     | <= | (<= e ...+) | >= | (>= e ...+) | = | (= e ...+) | < | (< e ...+) | > | (> e ...+)
-;;     | * | (* e ...) | quotient | expt
 ;;
 ;;     PAIRS
 ;;     | null | cons
@@ -83,6 +82,14 @@
     [`- (compile `(λ (m n) ((n sub1) m)))]
     [`(- ,e₁ ,e₂) (compile `(,(compile `-) ,(compile e₁) ,(compile e₂)))]
     [`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) (compile `(- (- ,@e₁) ,e₂))]
+    [`* (compile `(λ (m n) (λ (f) (m (n f)))))]
+    [`(*) (compile `1)]
+    [`(* ,e₁) (compile e₁)]
+    [`(* ,e₁ ,e₂) (compile `(,(compile `*) ,(compile e₁) ,(compile e₂)))]
+    [`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
+    [`quotient
+     (compile `(letrec ([quot (λ (m n) (if (<= m n) 0 (add1 (quot (- m n) n))))]) quot))]
+    [`expt (compile `(λ (m n) (n m)))]
     [`zero? (compile `(λ (n) ((n (λ (x) #f)) #t)))]
     [`<= (compile `(λ (m n) (zero? (- m n))))]
     [`(<= ,e₁) (compile `(begin ,e₁ #t))]
@@ -124,14 +131,6 @@
      (let ([x₁ (map (λ (x) (gensym)) e₁)])
        (compile `(let* (,@[map list x₁ e₁])
                    (and ,@(map (λ (x₂ x₃) `(> ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
-    [`* (compile `(λ (m n) (λ (f) (m (n f)))))]
-    [`(*) (compile `1)]
-    [`(* ,e₁) (compile e₁)]
-    [`(* ,e₁ ,e₂) (compile `(,(compile `*) ,(compile e₁) ,(compile e₂)))]
-    [`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
-    [`quotient
-     (compile `(letrec ([quot (λ (m n) (if (<= m n) 0 (add1 (quot (- m n) n))))]) quot))]
-    [`expt (compile `(λ (m n) (n m)))]
 
     ;; PAIRS
     [`null (compile `(λ (s) (λ (x) x)))]
@@ -259,6 +258,12 @@
   (check-equal? (inspect/number (evaluate '(+ 0 1 2))) '3)
   (check-equal? (inspect/number (evaluate '(- 3 2))) '1)
   (check-equal? (inspect/number (evaluate '(- 3 2 1))) '0)
+  (check-equal? (inspect/number (evaluate '(*))) '1)
+  (check-equal? (inspect/number (evaluate '(* 3))) '3)
+  (check-equal? (inspect/number (evaluate '(* 3 2))) '6)
+  (check-equal? (inspect/number (evaluate '(* 3 2 1))) '6)
+  (check-equal? (inspect/number (evaluate '(quotient 5 2))) '2)
+  (check-equal? (inspect/number (evaluate '(expt 5 2))) '25)
   (check-equal? (inspect/boolean (evaluate '(zero? 0))) '#t)
   (check-equal? (inspect/boolean (evaluate '(zero? 5))) '#f)
   (check-equal? (inspect/boolean (evaluate '(<= 3))) '#t)
@@ -281,12 +286,6 @@
   (check-equal? (inspect/boolean (evaluate '(> 3 2))) '#t)
   (check-equal? (inspect/boolean (evaluate '(> 2 3))) '#f)
   (check-equal? (inspect/boolean (evaluate '(> 3 2 1))) '#t)
-  (check-equal? (inspect/number (evaluate '(*))) '1)
-  (check-equal? (inspect/number (evaluate '(* 3))) '3)
-  (check-equal? (inspect/number (evaluate '(* 3 2))) '6)
-  (check-equal? (inspect/number (evaluate '(* 3 2 1))) '6)
-  (check-equal? (inspect/number (evaluate '(quotient 5 2))) '2)
-  (check-equal? (inspect/number (evaluate '(expt 5 2))) '25)
 
   ;; PAIRS
   (check-equal? ((inspect/pair inspect/boolean inspect/number) (evaluate 'null)) '())
