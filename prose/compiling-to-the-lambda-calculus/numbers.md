@@ -82,7 +82,7 @@ Predecessor
 <figure markdown="1">
 {% include_relative numbers--sub1.svg %}
 <figcaption markdown="1">
-Tracing the execution of the predecessor function `sub1`  where `n` is `5`. The initial argument `x` (in blue) is a pair containing zeroes. The function `f` (in green) is applied `n` times (there are five green arrows in the figure), and it moves a sliding window on the number line one step to the right. Finally, the answer is left element of the pair.
+Tracing the execution of the predecessor function `sub1`  where `n` is `5`. The initial argument `x` (in blue) is a pair containing zeroes. The function `f` (in green) is applied `n` times (there are five green arrows in the figure), and it moves a sliding window on the number line one step to the right. Finally, the answer is the left element of the pair (in magenta).
 </figcaption>
 </figure>
 </aside>
