@@ -82,7 +82,7 @@ We start with the simplest scenario, in which the `and` and `or` operators are c
 [`(or) (compile `#f)]
 ```
 
-The *zero* of `and` is `#t` because `(and #t e)` is equivalent to `e`—similar to the role that zero plays for addition (`(+ 0 e)` is equivalent to `e`). The same holds for `or` and `#f`. The test for this is trivial:
+The *zero* of `and` is `#t` because `(and #t e)` is equivalent to `e`—similar to the role that zero plays for [addition](numbers#addition) (`(+ 0 e)` is equivalent to `e`). The same holds for `or` and `#f`. The test for this is trivial:
 
 ```racket
 (check-equal? (inspect/boolean (evaluate '(and))) '#t)
