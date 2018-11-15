@@ -82,14 +82,14 @@
     [`- (compile `(λ (m n) ((n sub1) m)))]
     [`(- ,e₁ ,e₂) (compile `(,(compile `-) ,(compile e₁) ,(compile e₂)))]
     [`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) (compile `(- (- ,@e₁) ,e₂))]
-    [`* (compile `(λ (m n) (λ (f) (m (n f)))))]
+    [`* (compile `(λ (m n) ((n (λ (a) (+ a m))) (+))))]
     [`(*) (compile `1)]
     [`(* ,e₁) (compile e₁)]
     [`(* ,e₁ ,e₂) (compile `(,(compile `*) ,(compile e₁) ,(compile e₂)))]
     [`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
     [`quotient
-     (compile `(letrec ([quot (λ (m n) (if (<= m n) 0 (add1 (quot (- m n) n))))]) quot))]
-    [`expt (compile `(λ (m n) (n m)))]
+     (compile `(letrec ([quot (λ (m n) (if (< m n) 0 (add1 (quot (- m n) n))))]) quot))]
+    [`expt (compile `(λ (m n) ((n (λ (a) (* a m))) (*))))]
     [`zero? (compile `(λ (n) ((n (λ (x) #f)) #t)))]
     [`<= (compile `(λ (m n) (zero? (- m n))))]
     [`(<= ,e₁) (compile `(begin ,e₁ #t))]
@@ -209,26 +209,35 @@
     '(letrec ([factorial (λ (n) (if (zero? n) 1 (* n (factorial (sub1 n)))))])
        (factorial 5)))
    `((λ (factorial) (factorial (λ (f) (λ (x) (f (f (f (f (f x)))))))))
-    ((λ (f) ((λ (x) (f (λ (v) ((x x) v)))) (λ (x) (f (λ (v) ((x x) v))))))
-     (λ (factorial)
-       (λ (n)
-         (((((λ (n) ((n (λ (x) (λ (a) (λ (b) b)))) (λ (a) (λ (b) a)))) n)
-            (λ (,g235003) (λ (f) (λ (x) (f x)))))
-           (λ (,g235004)
-             (((λ (m) (λ (n) (λ (f) (m (n f))))) n)
-              (factorial
-               ((λ (n)
-                  ((λ (p) (p (λ (a) (λ (b) a))))
-                   ((n
-                     (λ (x)
-                       ((λ (p)
-                          (((λ (a) (λ (b) (λ (s) ((s a) b)))) p)
-                           ((λ (n) (λ (f) (λ (x) (f ((n f) x))))) p)))
-                        ((λ (p) (p (λ (a) (λ (b) b)))) x))))
-                    (((λ (a) (λ (b) (λ (s) ((s a) b)))) (λ (f) (λ (x) x)))
-                     (λ (f) (λ (x) x))))))
-                n)))))
-          (λ (s) (λ (x) x))))))))
+     ((λ (f) ((λ (x) (f (λ (v) ((x x) v)))) (λ (x) (f (λ (v) ((x x) v))))))
+      (λ (factorial)
+        (λ (n)
+          (((((λ (n) ((n (λ (x) (λ (a) (λ (b) b)))) (λ (a) (λ (b) a)))) n)
+             (λ (,g252320) (λ (f) (λ (x) (f x)))))
+            (λ (,g252321)
+              (((λ (m)
+                  (λ (n)
+                    ((n
+                      (λ (a)
+                        (((λ (m)
+                            (λ (n) ((n (λ (n) (λ (f) (λ (x) (f ((n f) x)))))) m)))
+                          a)
+                         m)))
+                     (λ (f) (λ (x) x)))))
+                n)
+               (factorial
+                ((λ (n)
+                   ((λ (p) (p (λ (a) (λ (b) a))))
+                    ((n
+                      (λ (x)
+                        ((λ (p)
+                           (((λ (a) (λ (b) (λ (s) ((s a) b)))) p)
+                            ((λ (n) (λ (f) (λ (x) (f ((n f) x))))) p)))
+                         ((λ (p) (p (λ (a) (λ (b) b)))) x))))
+                     (((λ (a) (λ (b) (λ (s) ((s a) b)))) (λ (f) (λ (x) x)))
+                      (λ (f) (λ (x) x))))))
+                 n)))))
+           (λ (s) (λ (x) x))))))))
 
   ;; BOOLEANS
   (check-equal? (inspect/boolean (evaluate '#t)) '#t)
@@ -269,6 +278,7 @@
   (check-equal? (inspect/number (evaluate '(* 3 2))) '6)
   (check-equal? (inspect/number (evaluate '(* 3 2 1))) '6)
   (check-equal? (inspect/number (evaluate '(quotient 5 2))) '2)
+  (check-equal? (inspect/number (evaluate '(quotient 5 5))) '1)
   (check-equal? (inspect/number (evaluate '(expt 5 2))) '25)
   (check-equal? (inspect/boolean (evaluate '(zero? 0))) '#t)
   (check-equal? (inspect/boolean (evaluate '(zero? 5))) '#f)

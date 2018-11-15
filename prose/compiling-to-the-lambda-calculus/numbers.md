@@ -154,7 +154,11 @@ Subtraction
 
 Subtraction is similar to [addition](#addition) in many ways. First, its interpretation is similar: while `(+ m n)` meant to apply [`add1`](#successor) to `m` for `n` times, `(- m n)` means to apply [`sub1`](#predecessor) to `m` for `n` times. Second, subtraction accepts a variable number of arguments.
 
-But subtraction is also different from addition in a few important ways. First, it is undefined for zero or one arguments—it is only defined for two or more arguments. Subtraction with zero arguments is undefined because our surface language is a subset of Racket, and subtraction with zero arguments is [undefined in Racket](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._-%29%29). Subtraction with a single argument is undefined because it would generate either zero or a negative number: zero is uninteresting and negative numbers are undefined in our core language. Second, subtraction is different from addition because it is not associative: `(- 3 2 1)` means `(- (- 3 2) 1)`(left associative), which results in `0`, not `(- 3 (- 2 1))` (right associative), which results in `2`. When defining addition, we already choose left associativity so that it would align with subtraction. We can define subtraction by adapting the clauses for addition:
+But subtraction is also different from addition in a few important ways. First, it is undefined for zero or one arguments—it is only defined for two or more arguments. Subtraction with zero arguments is undefined because our surface language is a subset of Racket, and subtraction with zero arguments is [undefined in Racket](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._-%29%29). Subtraction with a single argument is undefined because it would generate either zero or a negative number: zero is uninteresting and negative numbers are undefined in our core language. Second, subtraction is different from addition because it is not associative: `(- 3 2 1)` means `(- (- 3 2) 1)`(left associative), which results in `0`, not `(- 3 (- 2 1))` (right associative), which results in `2`. When defining addition, we already choose left associativity so that it would align with subtraction.
+
+There is also a problem when subtraction would result in a negative number. Our encoding for numbers only supports non-negative numbers, so we allow this case to be imprecise and return `0`. We expect programs to never perform subtractions that would trigger this imprecision as a compromise for simplicity.
+
+ We can define subtraction by adapting the clauses for addition:
 
 ```racket
 [`- (compile `(λ (m n) ((n sub1) m)))]
@@ -162,13 +166,82 @@ But subtraction is also different from addition in a few important ways. First, 
 [`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) (compile `(- (- ,@e₁) ,e₂))]
 ```
 
-There are differences between these clauses and the clauses for addition. First, we use `sub1` instead of `add1`. Second, subtraction with zero and one argument are undefined. Third, we check whether `e₁` is nonempty in the third clause using `#:when (not (empty? e₁))`. If we had not done that, this clause would also match subtraction with one argument `e₂` and an empty list for `e₁`. This was not a concern in addition because it was defined for one argument, so we could rely on the clause for addition with argument to be matched before we tried the clause for addition with more than two arguments.
+There are three differences between these clauses and the clauses for addition. First, we use `sub1` instead of `add1`. Second, subtraction with zero and one argument are undefined. Third, we check whether `e₁` is nonempty in the third clause using `#:when (not (empty? e₁))`. If we had not done that, this clause would also match subtraction with one argument `e₂` and an empty list for `e₁`. This was not a concern in addition because it was defined for one argument, so we could rely on the clause for addition with argument to be matched before we tried the clause for addition with more than two arguments.
 
 We can test all the forms of subtraction:
 
 ```racket
 (check-equal? (inspect/number (evaluate '(- 3 2))) '1)
 (check-equal? (inspect/number (evaluate '(- 3 2 1))) '0)
+```
+
+Multiplication
+==============
+
+Our strategy for multiplication is based on iterated addition. To calculate `(* m n)`, we start an accumulator `a` with the *zero* of addition (which is actually `0`) and add `m` to it for `n` times. This is similar to what we did for [addition](#addition) and [subtraction](#subtraction). The following is the `compile` clause for the multiplication operator:
+
+```racket
+[`* (compile `(λ (m n) ((n (λ (a) (+ a m))) (+))))]
+```
+
+We use `n` to apply the function `(λ (a) (+ a m))` for `n` times, starting with `0` (which we write `(+)` to bring out the parallel with [exponentiation](#exponentiation)). The function receives as argument the accumulator `a` and adds `m` to it.
+
+Similar to addition, multiplication also accepts a variable number of arguments. The only difference is the *zero* of the operation, which is `1` instead of `0`, because `(* 1 e)` is equivalent to `e`:
+
+```racket
+[`(*) (compile `1)]
+[`(* ,e₁) (compile e₁)]
+[`(* ,e₁ ,e₂) (compile `(,(compile `*) ,(compile e₁) ,(compile e₂)))]
+[`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
+```
+
+We can test all forms of multiplication:
+
+```racket
+(check-equal? (inspect/number (evaluate '(*))) '1)
+(check-equal? (inspect/number (evaluate '(* 3))) '3)
+(check-equal? (inspect/number (evaluate '(* 3 2))) '6)
+(check-equal? (inspect/number (evaluate '(* 3 2 1))) '6)
+```
+
+Division
+========
+
+We only implement integer division, `quotient`, not the more general division operator `/`. The difference between them is that `(quotient 5 2)`, for example, is `2`, while `(/ 5 2)` is `2 ¹/₂`. The integer division `quotient` makes more sense in our language, since it only supports non-negative integers.
+
+We also have to handle the case of division by zero `(quotient e 0)`, which is an undefined operation. In Racket, this causes an error, but our core language has no error handling mechanism. We could do something similar to what we did in the case of [subtraction](#subtraction): there we accepted an imprecise result when the subtraction would have yielded a negative number, so here we could return any value as the result of division by zero. But we are going to do something much more interesting instead and let the computation enter an infinite loop. This never returns any value, which is an appropriate answer to division by zero.
+
+Our strategy for implementing `(quotient m n)` is the inverse of our strategy for [multiplication](#multiplication). For multiplication, we added `m` iteratively for `n` times, and for division we count how many times we can subtract `n` from `m`: `(- m n)`. Our base case occurs when `m` is less than `n`, because `(- m n)` would result in a negative number, which we do not support, so the result is `0`. If that is not the case, then we call `quotient` recursively with `(- m n)` and `n`, and `add1` to the result. We define `quotient` using [`letrec`](bindings#recursive-bindings), since it is a recursive function:
+
+```racket
+[`quotient
+ (compile `(letrec ([quot (λ (m n) (if (< m n) 0 (add1 (quot (- m n) n))))]) quot))]
+```
+
+We use `letrec` to define the auxiliary function `quot`, which we then return from the `letrec` form to be the definition of `quotient`. We have to use a name different from `quotient` for the auxiliary function or our `compile` function would try to expand it again.
+
+We can test integer division:
+
+```racket
+(check-equal? (inspect/number (evaluate '(quotient 5 2))) '2)
+(check-equal? (inspect/number (evaluate '(quotient 5 5))) '1)
+```
+
+Exponentiation
+==============
+
+The strategy for exponentiation (`expt`) is the same as the strategy for [multiplication](#multiplication), except that we perform iterated *multiplication* instead of iterated *addition*:
+
+```racket
+[`expt (compile `(λ (m n) ((n (λ (a) (* a m))) (*))))]
+```
+
+We start the accumulator `a` with the *zero* of multiplication (`1`, written as `(*)`), and then we multiply `m` to it for `n` times.
+
+We can test `expt`:
+
+```racket
+(check-equal? (inspect/number (evaluate '(expt 5 2))) '25)
 ```
 
 - More interesting kinds of numbers: negatives, reals (fixed-point), complex.
