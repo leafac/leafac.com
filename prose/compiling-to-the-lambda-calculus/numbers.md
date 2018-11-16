@@ -23,11 +23,11 @@ Numbers in the surface language are encoded in the core language using functions
 
 </div>
 
-In general, the core language encoding has the form `(λ (f) (λ (x) eᵇ))`, in which `eᵇ` is `(f (f (... x)))` where `f` appears *number* times. We can use Racket’s [`for/fold`](https://docs.racket-lang.org/reference/for.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._for%2Ffold%29%29) form to generate the program fragment `eᵇ`. We start with `eᵇ` being `x`, and count up to the number `n` given in the surface language, wrapping the fragment with another call to `f` in each step. The following is the complete `compile` clause:
+In general, the core language encoding has the form `(λ (f) (λ (x) eᵇ))`, in which `eᵇ` is `(f (f (... x)))` where `f` appears *number* times. We can use Racket’s [`for/fold`](https://docs.racket-lang.org/reference/for.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._for%2Ffold%29%29) form to generate the program fragment `eᵇ`. We start with `eᵇ` being `x`, and count up to the number `n` given in the surface language, wrapping the fragment with another call to `f` in each step. The following is the complete `expand` clause:
 
 ```racket
 [(? (λ (n) (and (integer? n) (not (negative? n)))) n)
-    (compile `(λ (f) (λ (x) ,(for/fold ([eᵇ `x]) ([i (in-range n)]) `(f ,eᵇ)))))]
+ `(λ (f) (λ (x) ,(for/fold ([eᵇ `x]) ([i (in-range n)]) `(f ,eᵇ))))]
 ```
 
 We can check that the above clause works as intended:
@@ -64,7 +64,7 @@ Successor
 The successor function `add1` receives a number `n` as argument and returns `n + 1`. In our encoding, this means `add1` returns a number that applies `f` to `x` one time more than `n`:
 
 ```racket
-[`add1 (compile `(λ (n) (λ (f) (λ (x) (f ((n f) x))))))]
+[`add1 `(λ (n) (λ (f) (λ (x) (f ((n f) x)))))]
 ```
 
 In the encoding above, `(λ (f) (λ (x) (f ((n f) x))))` is the result of the `add1` function applied to `n`. It is a number following the form `(λ (f) (λ (x) ___))` that first applies `f` to `x` for `n` times by calling `n` with `f` and `x`: `((n f) x)`. Then it applies `f` once more to the result, to a total of `n + 1`: `(f ((n f) x))`.
@@ -89,10 +89,10 @@ Tracing the execution of the predecessor function `sub1`  where `n` is `5`. The 
 
 The predecessor function `sub1` is only defined for positive numbers, because the predecessor of `0` would be `-1` and our core language does not support negative numbers. The predecessor function receives as argument a number `n` that applies a function a function `f` to `x` for *n* times, and it returns a number `n - 1` that applies `f` one time less than `n`. But there is no way to *undo* a function call, so we need to find a way to find the predecessor by *counting up*.
 
-Our strategy for finding the predecessor of a number by counting up to it is to keep track of the previous number we counted. The figure shows an example of our strategy in action. We keep track of the previous number by [pairing](pairs) it with the current number, and in the end we project the answer out of the pair. The following is the `compile` clause for encoding `sub1`:
+Our strategy for finding the predecessor of a number by counting up to it is to keep track of the previous number we counted. The figure shows an example of our strategy in action. We keep track of the previous number by [pairing](pairs) it with the current number, and in the end we project the answer out of the pair. The following is the `expand` clause for encoding `sub1`:
 
 ```racket
-[`sub1 (compile `(λ (n) (car ((n (λ (x) (let ([p (cdr x)]) (cons p (add1 p))))) (cons 0 0)))))]
+[`sub1 `(λ (n) (car ((n (λ (x) (let ([p (cdr x)]) (cons p (add1 p))))) (cons 0 0))))]
 ```
 
 The encoding is a function that receives an argument `n`: `(λ (n) ___)`. It calls this number `n` with an initial argument `x` that is a pair of zeroes: `(cons 0 0)`. The iteration function `f` slides the window on the number line. It starts by capturing the right element in the pair to be the next predecessor `p`: `(let ([p (cdr x)]) ___)`. Then it builds the next pair with the predecessor `p` and its [successor](#successor): `(cons p (add1 p))`. When `f` finished counting up to `n` and sliding the window, we project the left element of the pair to be our final answer: `(car ___)`.
@@ -109,36 +109,36 @@ Addition
 We can implement addition (`+`) in terms of [successor](#successor) by noting that `m + n` amounts to applying `add1` to `m` for `n` times. Our encoding of numbers using functions captures this notion of applying a function for a number of times, so we just have to call `n` with `add1` as the function `f` to apply and pass `m` as the initial value `x`:
 
 ```racket
-[`+ (compile `(λ (m n) ((n add1) m)))]
+[`+ `(λ (m n) ((n add1) m))]
 ```
 
 But addition in our surface language works over any number of arguments, not just two (`m` and `n`). So we need to add clauses for the cases in which `+` is applied to zero, one, two or more arguments. We start with the case in which it is applied to one argument, and we let it return `0`, because zero is a neutral number with respect to addition (`(+ 0 e)` is equivalent to `e`):
 
 ```racket
-[`(+) (compile `0)]
+[`(+) `0]
 ```
 
 When `+` is applied to a single argument, it does not alter the argument, so we just return it:
 
 ```racket
-[`(+ ,e₁) (compile e₁)]
+[`(+ ,e₁) e₁]
 ```
 
 When `+` is applied to two arguments, we can use the encoding of `+` we defined above:
 
 ```racket
-[`(+ ,e₁ ,e₂) (compile `(,(compile `+) ,e₁ ,e₂))]
+[`(+ ,e₁ ,e₂) `(,(expand `+) ,e₁ ,e₂)]
 ```
 
-In the encoding above, the inner call to `(compile +)` will produce the addition function we defined in the beginning of this section.
+In the encoding above, the inner call to `(expand +)` will produce the addition function we defined in the beginning of this section.
 
 When `+` is applied to more than two arguments, we need to convert it into a sequence of calls to `+` with two arguments. There are multiple ways to do this, for example, `(+ 0 1 2)` is equivalent to both `(+ (+ 0 1) 2)` (left associative) and `(+ 0 (+ 1 2))` (right associative). The results of these two alternatives are the same, because addition is an associative operation. But, as we will see on the [next section](#subtraction), subtraction is similar to addition in many ways, except that it is *not* associative. So, to align addition and subtraction better, we will choose the first option (left associative):
 
 ```racket
-[`(+ ,e₁ ... ,e₂) (compile `(+ (+ ,@e₁) ,e₂))]
+[`(+ ,e₁ ... ,e₂) `(+ (+ ,@e₁) ,e₂)]
 ```
 
-The encoding above works by capturing as `e₁` a list of all operands except for the last, which is captured as `e₂`. Then, it reconstructs the addition as one top-level addition that is guaranteed to be binary: the right operand is `e₂`, and the left operand is the rest of the calculation. If the addition has more than three operands, than this clause will match again on the recursive call to `compile` with the inner addition `(+ ,@e₁)`. In the end, the n-ary addition will be reduced to a series of binary additions.
+The encoding above works by capturing as `e₁` a list of all operands except for the last, which is captured as `e₂`. Then, it reconstructs the addition as one top-level addition that is guaranteed to be binary: the right operand is `e₂`, and the left operand is the rest of the calculation. If the addition has more than three operands, than this clause will match again on the recursive call to `expand` with the inner addition `(+ ,@e₁)`. In the end, the n-ary addition will be reduced to a series of binary additions.
 
 We can test all the forms of addition:
 
@@ -161,9 +161,9 @@ There is also a problem when subtraction would result in a negative number. Our 
  We can define subtraction by adapting the clauses for addition:
 
 ```racket
-[`- (compile `(λ (m n) ((n sub1) m)))]
-[`(- ,e₁ ,e₂) (compile `(,(compile `-) ,e₁ ,e₂))]
-[`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) (compile `(- (- ,@e₁) ,e₂))]
+[`- `(λ (m n) ((n sub1) m))]
+[`(- ,e₁ ,e₂) `(,(expand `-) ,e₁ ,e₂)]
+[`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) `(- (- ,@e₁) ,e₂)]
 ```
 
 There are three differences between these clauses and the clauses for addition. First, we use `sub1` instead of `add1`. Second, subtraction with zero and one argument are undefined. Third, we check whether `e₁` is nonempty in the third clause using `#:when (not (empty? e₁))`. If we had not done that, this clause would also match subtraction with one argument `e₂` and an empty list for `e₁`. This was not a concern in addition because it was defined for one argument, so we could rely on the clause for addition with argument to be matched before we tried the clause for addition with more than two arguments.
@@ -178,10 +178,10 @@ We can test all the forms of subtraction:
 Multiplication
 ==============
 
-Our strategy for multiplication is based on iterated addition. To calculate `(* m n)`, we start an accumulator `a` with the *zero* of addition (which is actually `0`) and add `m` to it for `n` times. This is similar to what we did for [addition](#addition) and [subtraction](#subtraction). The following is the `compile` clause for the multiplication operator:
+Our strategy for multiplication is based on iterated addition. To calculate `(* m n)`, we start an accumulator `a` with the *zero* of addition (which is actually `0`) and add `m` to it for `n` times. This is similar to what we did for [addition](#addition) and [subtraction](#subtraction). The following is the `expand` clause for the multiplication operator:
 
 ```racket
-[`* (compile `(λ (m n) ((n (λ (a) (+ a m))) (+))))]
+[`* `(λ (m n) ((n (λ (a) (+ a m))) (+)))]
 ```
 
 We use `n` to apply the function `(λ (a) (+ a m))` for `n` times, starting with `0` (which we write `(+)` to bring out the parallel with [exponentiation](#exponentiation)). The function receives as argument the accumulator `a` and adds `m` to it.
@@ -189,10 +189,10 @@ We use `n` to apply the function `(λ (a) (+ a m))` for `n` times, starting 
 Similar to addition, multiplication also accepts a variable number of arguments. The only difference is the *zero* of the operation, which is `1` instead of `0`, because `(* 1 e)` is equivalent to `e`:
 
 ```racket
-[`(*) (compile `1)]
-[`(* ,e₁) (compile e₁)]
-[`(* ,e₁ ,e₂) (compile `(,(compile `*) ,e₁ ,e₂))]
-[`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
+[`(*) `1]
+[`(* ,e₁) e₁]
+[`(* ,e₁ ,e₂) `(,(expand `*) ,e₁ ,e₂)]
+[`(* ,e₁ ... ,e₂) `(* (* ,@e₁) ,e₂)]
 ```
 
 We can test all forms of multiplication:
@@ -214,11 +214,10 @@ We also have to handle the case of division by zero `(quotient e 0)`, which is
 Our strategy for implementing `(quotient m n)` is the inverse of our strategy for [multiplication](#multiplication). For multiplication, we added `m` iteratively for `n` times, and for division we count how many times we can subtract `n` from `m`: `(- m n)`. Our base case occurs when `m` is less than `n`, because `(- m n)` would result in a negative number, which we do not support, so the result is `0`. If that is not the case, then we call `quotient` recursively with `(- m n)` and `n`, and `add1` to the result. We define `quotient` using [`letrec`](bindings#recursive-bindings), since it is a recursive function:
 
 ```racket
-[`quotient
- (compile `(letrec ([quot (λ (m n) (if (< m n) 0 (add1 (quot (- m n) n))))]) quot))]
+[`quotient `(letrec ([quot (λ (m n) (if (< m n) 0 (add1 (quot (- m n) n))))]) quot)]
 ```
 
-We use `letrec` to define the auxiliary function `quot`, which we then return from the `letrec` form to be the definition of `quotient`. We have to use a name different from `quotient` for the auxiliary function or our `compile` function would try to expand it again.
+We use `letrec` to define the auxiliary function `quot`, which we then return from the `letrec` form to be the definition of `quotient`. We have to use a name different from `quotient` for the auxiliary function or our `expand` function would try to expand it again.
 
 We can test integer division:
 
@@ -233,7 +232,7 @@ Exponentiation
 The strategy for exponentiation (`expt`) is the same as the strategy for [multiplication](#multiplication), except that we perform iterated *multiplication* instead of iterated *addition*:
 
 ```racket
-[`expt (compile `(λ (m n) ((n (λ (a) (* a m))) (*))))]
+[`expt `(λ (m n) ((n (λ (a) (* a m))) (*)))]
 ```
 
 We start the accumulator `a` with the *zero* of multiplication (`1`, written as `(*)`), and then we multiply `m` to it for `n` times.
@@ -250,7 +249,7 @@ Zero Predicate
 The [`zero?`](https://docs.racket-lang.org/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._zero~3f%29%29) predicate returns a [boolean](boolean) indicating whether or not the argument is `0`. In our encoding, numbers are functions that receive two arguments, a function `f` and an initial argument `x`, and apply `f` to `x` for *number* times. We can detect if a number is zero by letting the initial argument `x` be `#t` and `f` be a function that always returns `#f`. If the number is `0`, then `f` is never called and we return the initial argument `#t`, but any number other than `0` will apply `f` and return `#f`:
 
 ```racket
-[`zero? (compile `(λ (n) ((n (λ (x) #f)) #t)))]
+[`zero? `(λ (n) ((n (λ (x) #f)) #t))]
 ```
 
 In the encoding above, `x` is the second argument to the number `n`: `#t`. And `f` is the function `(λ (x) #f)`, which ignores its argument and returns `#f`.
@@ -270,26 +269,26 @@ In this section we implement the remaining numeric operators: [`<=`](https://doc
 We start with `<=`. We can exploit the [imprecision in subtraction](#subtraction) to implement `<=`. Our encoding of numbers as functions only supports non-negative numbers, so `(- m n)` returns `0` for `(<= m n)`. We use the [`zero?`](#zero-predicate) predicate to check whether this happened:
 
 ```racket
-[`<= (compile `(λ (m n) (zero? (- m n))))]
+[`<= `(λ (m n) (zero? (- m n)))]
 ```
 
 The `>=` comparison is similar, we just need to invert `m` and `n`:
 
 ```racket
-[`>= (compile `(λ (m n) (zero? (- n m))))]
+[`>= `(λ (m n) (zero? (- n m)))]
 ```
 
 For `=`, we can check whether `(<= m n)` *and* `(>= m n)`. If two numbers are greater than or equal *and* less than or equal to each other, then it must be because they are *equal* to each other:
 
 ```racket
-[`= (compile `(λ (m n) (and (<= m n) (>= m n))))]
+[`= `(λ (m n) (and (<= m n) (>= m n)))]
 ```
 
 For `<`, we check whether `(<= m n)` but not `(= m n)`. Similarly for `>`:
 
 ```racket
-[`< (compile `(λ (m n) (and (<= m n) (not (= m n)))))]
-[`> (compile `(λ (m n) (and (>= m n) (not (= m n)))))]
+[`< `(λ (m n) (and (<= m n) (not (= m n))))]
+[`> `(λ (m n) (and (>= m n) (not (= m n))))]
 ```
 
 * * *
@@ -297,31 +296,31 @@ For `<`, we check whether `(<= m n)` but not `(= m n)`. Similarly for `>`:
 The definitions above cover the case of comparing two numbers, but these operators work one or more arguments (but not zero arguments, as was the case with [addition](#addition) and [multiplication](#multiplication)). We start with the case of one argument, in which the operators return `#t`. A first attempt would be:
 
 ```racket
-[`(<= ,e₁) (compile `#t)] ;; INCORRECT
-[`(>= ,e₁) (compile `#t)] ;; INCORRECT
-[`(=  ,e₁) (compile `#t)] ;; INCORRECT
-[`(<  ,e₁) (compile `#t)] ;; INCORRECT
-[`(>  ,e₁) (compile `#t)] ;; INCORRECT
+[`(<= ,e₁) `#t] ;; INCORRECT
+[`(>= ,e₁) `#t] ;; INCORRECT
+[`(=  ,e₁) `#t] ;; INCORRECT
+[`(<  ,e₁) `#t] ;; INCORRECT
+[`(>  ,e₁) `#t] ;; INCORRECT
 ```
 
 The encoding above returns the correct answer `#t`, but it does not evaluate `e₁`. If `e₁` is an expression that does not terminate, then `(<= e₁)` should not terminate, and in our encoding above it would. Beyond non-termination, in the future we could extend our surface language to include other forms of side-effects, for example, printing to the console ([`display`](https://docs.racket-lang.org/reference/Writing.html#%28def._%28%28quote._~23~25kernel%29._display%29%29)) and mutable state ([`set!`](https://docs.racket-lang.org/reference/set_.html#%28form._%28%28quote._~23~25kernel%29._set%21%29%29)), and we would like to perform any side-effects in `e₁`. To address this, we use the [`begin`](bindings#sequencing) form to evaluate `e₁`, discard its result, and return `#t`:
 
 ```racket
-[`(<= ,e₁) (compile `(begin ,e₁ #t))]
-[`(>= ,e₁) (compile `(begin ,e₁ #t))]
-[`(=  ,e₁) (compile `(begin ,e₁ #t))]
-[`(<  ,e₁) (compile `(begin ,e₁ #t))]
-[`(>  ,e₁) (compile `(begin ,e₁ #t))]
+[`(<= ,e₁) `(begin ,e₁ #t)]
+[`(>= ,e₁) `(begin ,e₁ #t)]
+[`(=  ,e₁) `(begin ,e₁ #t)]
+[`(<  ,e₁) `(begin ,e₁ #t)]
+[`(>  ,e₁) `(begin ,e₁ #t)]
 ```
 
-For the case in which there are two arguments, we can use the same strategy we used in all other binary operators to this point: we call `compile` recursively and let it expand the operator:
+For the case in which there are two arguments, we can use the same strategy we used in all other binary operators to this point: we call `expand` recursively and let it expand the operator:
 
 ```racket
-[`(<= ,e₁ ,e₂) (compile `(,(compile `<=) ,e₁ ,e₂))]
-[`(>= ,e₁ ,e₂) (compile `(,(compile `>=) ,e₁ ,e₂))]
-[`(=  ,e₁ ,e₂) (compile `(,(compile  `=) ,e₁ ,e₂))]
-[`(<  ,e₁ ,e₂) (compile `(,(compile  `<) ,e₁ ,e₂))]
-[`(>  ,e₁ ,e₂) (compile `(,(compile  `>) ,e₁ ,e₂))]
+[`(<= ,e₁ ,e₂) `(,(expand `<=) ,e₁ ,e₂)]
+[`(>= ,e₁ ,e₂) `(,(expand `>=) ,e₁ ,e₂)]
+[`(=  ,e₁ ,e₂) `(,(expand  `=) ,e₁ ,e₂)]
+[`(<  ,e₁ ,e₂) `(,(expand  `<) ,e₁ ,e₂)]
+[`(>  ,e₁ ,e₂) `(,(expand  `>) ,e₁ ,e₂)]
 ```
 
 For the case in which there are three or more arguments, we have to devise a new strategy. When solving this issue for other operations, we nested operands, for example, when we considered addition of three or more arguments, we nested multiple additions in a way that all the operations were binary: `(+ 0 1 2)` became `(+ (+ 0 1) 2)`. But this does not work for number comparison operators, because they return booleans, not numbers: `(<= 3 2 1)` means `(and (<= 3 2) (<= 2 1))`, not `(<= (<= 3 2) 1)`—this would try to compare `(<= #f 1)` which is not even defined.
@@ -334,28 +333,28 @@ To solve all these issues, we translate the comparison operators with three or m
 [`(<= ,e₁ ...)
  #:when (not (empty? e₁))
  (let ([x₁ (map (λ (x) (gensym)) e₁)])
-   (compile `(let* (,@[map list x₁ e₁])
-               (and ,@(map (λ (x₂ x₃) `(<= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+   `(let* (,@[map list x₁ e₁])
+      (and ,@(map (λ (x₂ x₃) `(<= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1)))))]
 [`(>= ,e₁ ...)
  #:when (not (empty? e₁))
  (let ([x₁ (map (λ (x) (gensym)) e₁)])
-   (compile `(let* (,@[map list x₁ e₁])
-               (and ,@(map (λ (x₂ x₃) `(>= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+   `(let* (,@[map list x₁ e₁])
+      (and ,@(map (λ (x₂ x₃) `(>= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1)))))]
 [`(= ,e₁ ...)
  #:when (not (empty? e₁))
  (let ([x₁ (map (λ (x) (gensym)) e₁)])
-   (compile `(let* (,@[map list x₁ e₁])
-               (and ,@(map (λ (x₂ x₃) `(= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+   `(let* (,@[map list x₁ e₁])
+      (and ,@(map (λ (x₂ x₃) `(= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1)))))]
 [`(< ,e₁ ...)
  #:when (not (empty? e₁))
  (let ([x₁ (map (λ (x) (gensym)) e₁)])
-   (compile `(let* (,@[map list x₁ e₁])
-               (and ,@(map (λ (x₂ x₃) `(< ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+   `(let* (,@[map list x₁ e₁])
+      (and ,@(map (λ (x₂ x₃) `(< ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1)))))]
 [`(> ,e₁ ...)
  #:when (not (empty? e₁))
  (let ([x₁ (map (λ (x) (gensym)) e₁)])
-   (compile `(let* (,@[map list x₁ e₁])
-               (and ,@(map (λ (x₂ x₃) `(> ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+   `(let* (,@[map list x₁ e₁])
+      (and ,@(map (λ (x₂ x₃) `(> ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1)))))]
 ```
 
 First, we check that the sequence of operands `e₁` is not empty with the guard `#:when (not (empty? e₁))`. This prevents the clauses from matching the case in which no operands were provided, which is undefined. Then, we use [`gensym`](https://docs.racket-lang.org/reference/symbols.html#%28def._%28%28quote._~23~25kernel%29._gensym%29%29) to generate a series of `x₁` fresh identifiers. Finally, we build an expression an expression with the following form:
@@ -366,6 +365,31 @@ First, we check that the sequence of operands `e₁` is not empty with the guard
 ```
 
 The `let*` form binds the results of operands to the fresh identifiers we generated, and the `and` form performs the comparison.
+
+We can test all number comparison operators:
+
+```racket
+(check-equal? (inspect/boolean (evaluate '(<= 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(<= 3 2))) '#f)
+(check-equal? (inspect/boolean (evaluate '(<= 2 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(<= 3 2 1))) '#f)
+(check-equal? (inspect/boolean (evaluate '(>= 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(>= 3 2))) '#t)
+(check-equal? (inspect/boolean (evaluate '(>= 2 3))) '#f)
+(check-equal? (inspect/boolean (evaluate '(>= 3 2 1))) '#t)
+(check-equal? (inspect/boolean (evaluate '(= 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(= 3 2))) '#f)
+(check-equal? (inspect/boolean (evaluate '(= 3 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(= 3 2 1))) '#f)
+(check-equal? (inspect/boolean (evaluate '(< 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(< 3 2))) '#f)
+(check-equal? (inspect/boolean (evaluate '(< 2 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(< 3 2 1))) '#f)
+(check-equal? (inspect/boolean (evaluate '(> 3))) '#t)
+(check-equal? (inspect/boolean (evaluate '(> 3 2))) '#t)
+(check-equal? (inspect/boolean (evaluate '(> 2 3))) '#f)
+(check-equal? (inspect/boolean (evaluate '(> 3 2 1))) '#t)
+```
 
 Other Number Types
 ==================

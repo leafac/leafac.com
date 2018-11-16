@@ -15,6 +15,7 @@ table-of-contents: true
 - Currying and partial definitions with `define`.
 - Variable number of arguments: only the ones we define, not available for the programmer to define.
 - `gensym` for fresh identifiers
+- `match`: `?`, guards (`#:when`), ellipses (`...`)
 
 Inspectors
 ==========
