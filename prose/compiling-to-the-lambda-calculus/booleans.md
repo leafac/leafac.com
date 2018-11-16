@@ -40,7 +40,7 @@ Conditionals
 The main operation we perform on booleans is to use them as the condition upon which to select what code to run in the `if` form. We encoded [boolean values](#values) as functions that select its first (`#t`) or second (`#f`) argument. Our first attempt at encoding the `if` form is to use the condition as a function that selects either the then (`ᵗ`) or the else (`ᵉ`) branches:
 
 ```racket
-[`(if ,eᶜ ,eᵗ ,eᵉ) (compile `(,eᶜ ,eᵗ ,eᵉ))]
+[`(if ,eᶜ ,eᵗ ,eᵉ) (compile `(,eᶜ ,eᵗ ,eᵉ))] ;; INCORRECT
 ```
 
 This captures the intent of the conditional and works for simple cases in which both branches evaluate to a value:

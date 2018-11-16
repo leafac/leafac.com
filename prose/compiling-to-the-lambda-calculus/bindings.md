@@ -7,3 +7,8 @@ table-of-contents: true
 
 Recursive Bindings
 ==================
+
+Sequencing
+==========
+
+- `begin`

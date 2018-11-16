@@ -5,10 +5,10 @@ date: 2018-09-30
 table-of-contents: true
 ---
 
-At a high level, PLT Redex is a tool for manipulating and visualizing S-expressions (identifiers, numbers, strings, lists, and so forth), which PLT Redex calls *terms*. In programming languages, terms represent programs and program fragments, types, machine states, and so forth. In Peg Solitaire, terms represent pegs, boards, and so forth. We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms from Racket values, for example:
+At a high level, PLT Redex is a tool for manipulating and visualizing S-expressions (identifiers, numbers, strings, lists, and so forth), which PLT Redex calls *terms*. In programming languages, terms represent programs and program fragments, types, machine states, and so forth. In Peg Solitaire, terms represent pegs, boards, and so forth. We use the [`term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._term%29%29) form to construct terms from Racket values, for example:
 
 <aside markdown="1">
-PLT Redex includes a testing framework with the [`(test-equal e₁ e₂)`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-equal%29%29) form, which we use to indicate that `e₁` evaluates to `e₂`.
+PLT Redex includes a testing framework with the [`(test-equal e₁ e₂)`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-equal%29%29) form, which we use to indicate that `e₁` evaluates to `e₂`.
 </aside>
 
 <div class="code-block" markdown="1">
@@ -42,7 +42,7 @@ We can group pegs and spaces together in lists:
             '(● ● ○))
 ```
 
-We can assign terms to names in PLT Redex with the [`define-term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-term#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-term%29%29) form. We can then refer to these names in other terms:
+We can assign terms to names in PLT Redex with the [`define-term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-term%29%29) form. We can then refer to these names in other terms:
 
 ```racket
 (define-term a-peg ●)
@@ -107,7 +107,7 @@ And the following is an example of a winning board:
 
 * * *
 
-We will use these boards for testing in later sections, so we [`provide`](https://docs.racket-lang.org/guide/module-provide.html?q=provide) them here:
+We will use these boards for testing in later sections, so we [`provide`](https://docs.racket-lang.org/guide/module-provide.html) them here:
 
 ```racket
 (provide example-board-1 example-board-2

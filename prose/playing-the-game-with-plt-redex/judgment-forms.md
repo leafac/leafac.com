@@ -5,7 +5,7 @@ date: 2018-09-30
 table-of-contents: true
 ---
 
-Both [reduction relations](reduction-relations) and [predicate relations](predicate-relations) are special forms of *relations*. A reduction relation has one input term and one output term, and a predicate relation only has inputs terms, but in general a relation may have any number of input terms and output terms.<label class="margin-note"><input type="checkbox"><span markdown="1">It would be more mathematically accurate to not think of terms in a relation as inputs or outputs, but we make this compromise to make it easier to *compute* with out definitions.</span></label> We can define relations in PLT Redex with [`define-judgment-form`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-judgment-form%29%29):
+Both [reduction relations](reduction-relations) and [predicate relations](predicate-relations) are special forms of *relations*. A reduction relation has one input term and one output term, and a predicate relation only has inputs terms, but in general a relation may have any number of input terms and output terms.<label class="margin-note"><input type="checkbox"><span markdown="1">It would be more mathematically accurate to not think of terms in a relation as inputs or outputs, but we make this compromise to make it easier to *compute* with out definitions.</span></label> We can define relations in PLT Redex with [`define-judgment-form`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-judgment-form%29%29):
 
 ```racket
 (define-judgment-form <language>
@@ -104,7 +104,7 @@ We can recreate the `⇨` [reduction relation](reduction-relations) and the `win
 ```
 </div>
 
-We can test whether a judgment holds with the [`test-judgment-holds`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-judgment-holds#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-judgment-holds%29%29) form:
+We can test whether a judgment holds with the [`test-judgment-holds`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-judgment-holds%29%29) form:
 
 ```racket
 (test-judgment-holds
@@ -144,7 +144,7 @@ We can test whether a judgment holds with the [`test-judgment-holds`](https://do
                                  [· · ● ● ● · ·])))
 ```
 
-We can also query a judgment form with the [`judgment-holds`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=judgment-holds#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._judgment-holds%29%29) form. The following listing includes tests for both `⇨/judgment-form` and `winning-board?/judgment-form`:
+We can also query a judgment form with the [`judgment-holds`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._judgment-holds%29%29) form. The following listing includes tests for both `⇨/judgment-form` and `winning-board?/judgment-form`:
 
 ```racket
 (test-equal

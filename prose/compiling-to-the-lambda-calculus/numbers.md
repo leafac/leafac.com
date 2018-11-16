@@ -41,7 +41,7 @@ We can check that the above clause works as intended:
 
 * * *
 
-To inspect numbers encoded in the core language, we have to convert them back to Racket numbers. We can do that by letting the arbitrary argument `x` be `0` and the function `f` be [`add1`](https://docs.racket-lang.org/reference/generic-numbers.html?q=add1#%28def._%28%28quote._~23~25kernel%29._add1%29%29):
+To inspect numbers encoded in the core language, we have to convert them back to Racket numbers. We can do that by letting the arbitrary argument `x` be `0` and the function `f` be [`add1`](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._add1%29%29):
 
 ```racket
 (define (inspect/number e) ((e add1) 0))
@@ -127,7 +127,7 @@ When `+` is applied to a single argument, it does not alter the argument, so we 
 When `+` is applied to two arguments, we can use the encoding of `+` we defined above:
 
 ```racket
-[`(+ ,e₁ ,e₂) (compile `(,(compile `+) ,(compile e₁) ,(compile e₂)))]
+[`(+ ,e₁ ,e₂) (compile `(,(compile `+) ,e₁ ,e₂))]
 ```
 
 In the encoding above, the inner call to `(compile +)` will produce the addition function we defined in the beginning of this section.
@@ -162,7 +162,7 @@ There is also a problem when subtraction would result in a negative number. Our 
 
 ```racket
 [`- (compile `(λ (m n) ((n sub1) m)))]
-[`(- ,e₁ ,e₂) (compile `(,(compile `-) ,(compile e₁) ,(compile e₂)))]
+[`(- ,e₁ ,e₂) (compile `(,(compile `-) ,e₁ ,e₂))]
 [`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) (compile `(- (- ,@e₁) ,e₂))]
 ```
 
@@ -191,7 +191,7 @@ Similar to addition, multiplication also accepts a variable number of arguments.
 ```racket
 [`(*) (compile `1)]
 [`(* ,e₁) (compile e₁)]
-[`(* ,e₁ ,e₂) (compile `(,(compile `*) ,(compile e₁) ,(compile e₂)))]
+[`(* ,e₁ ,e₂) (compile `(,(compile `*) ,e₁ ,e₂))]
 [`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
 ```
 
@@ -244,4 +244,136 @@ We can test `expt`:
 (check-equal? (inspect/number (evaluate '(expt 5 2))) '25)
 ```
 
-- More interesting kinds of numbers: negatives, reals (fixed-point), complex.
+Zero Predicate
+==============
+
+The [`zero?`](https://docs.racket-lang.org/reference/number-types.html#%28def._%28%28quote._~23~25kernel%29._zero~3f%29%29) predicate returns a [boolean](boolean) indicating whether or not the argument is `0`. In our encoding, numbers are functions that receive two arguments, a function `f` and an initial argument `x`, and apply `f` to `x` for *number* times. We can detect if a number is zero by letting the initial argument `x` be `#t` and `f` be a function that always returns `#f`. If the number is `0`, then `f` is never called and we return the initial argument `#t`, but any number other than `0` will apply `f` and return `#f`:
+
+```racket
+[`zero? (compile `(λ (n) ((n (λ (x) #f)) #t)))]
+```
+
+In the encoding above, `x` is the second argument to the number `n`: `#t`. And `f` is the function `(λ (x) #f)`, which ignores its argument and returns `#f`.
+
+We can test the `zero?` predicate:
+
+```racket
+(check-equal? (inspect/boolean (evaluate '(zero? 0))) '#t)
+(check-equal? (inspect/boolean (evaluate '(zero? 5))) '#f)
+```
+
+Number Comparison
+=================
+
+In this section we implement the remaining numeric operators: [`<=`](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._~3c~3d%29%29), [`>=`](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._~3e~3d%29%29), [`=`](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._~3d%29%29), [`<`](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._~3c%29%29), and [`>`](https://docs.racket-lang.org/reference/generic-numbers.html#%28def._%28%28quote._~23~25kernel%29._~3e%29%29). We implement them together because they are similar.
+
+We start with `<=`. We can exploit the [imprecision in subtraction](#subtraction) to implement `<=`. Our encoding of numbers as functions only supports non-negative numbers, so `(- m n)` returns `0` for `(<= m n)`. We use the [`zero?`](#zero-predicate) predicate to check whether this happened:
+
+```racket
+[`<= (compile `(λ (m n) (zero? (- m n))))]
+```
+
+The `>=` comparison is similar, we just need to invert `m` and `n`:
+
+```racket
+[`>= (compile `(λ (m n) (zero? (- n m))))]
+```
+
+For `=`, we can check whether `(<= m n)` *and* `(>= m n)`. If two numbers are greater than or equal *and* less than or equal to each other, then it must be because they are *equal* to each other:
+
+```racket
+[`= (compile `(λ (m n) (and (<= m n) (>= m n))))]
+```
+
+For `<`, we check whether `(<= m n)` but not `(= m n)`. Similarly for `>`:
+
+```racket
+[`< (compile `(λ (m n) (and (<= m n) (not (= m n)))))]
+[`> (compile `(λ (m n) (and (>= m n) (not (= m n)))))]
+```
+
+* * *
+
+The definitions above cover the case of comparing two numbers, but these operators work one or more arguments (but not zero arguments, as was the case with [addition](#addition) and [multiplication](#multiplication)). We start with the case of one argument, in which the operators return `#t`. A first attempt would be:
+
+```racket
+[`(<= ,e₁) (compile `#t)] ;; INCORRECT
+[`(>= ,e₁) (compile `#t)] ;; INCORRECT
+[`(=  ,e₁) (compile `#t)] ;; INCORRECT
+[`(<  ,e₁) (compile `#t)] ;; INCORRECT
+[`(>  ,e₁) (compile `#t)] ;; INCORRECT
+```
+
+The encoding above returns the correct answer `#t`, but it does not evaluate `e₁`. If `e₁` is an expression that does not terminate, then `(<= e₁)` should not terminate, and in our encoding above it would. Beyond non-termination, in the future we could extend our surface language to include other forms of side-effects, for example, printing to the console ([`display`](https://docs.racket-lang.org/reference/Writing.html#%28def._%28%28quote._~23~25kernel%29._display%29%29)) and mutable state ([`set!`](https://docs.racket-lang.org/reference/set_.html#%28form._%28%28quote._~23~25kernel%29._set%21%29%29)), and we would like to perform any side-effects in `e₁`. To address this, we use the [`begin`](bindings#sequencing) form to evaluate `e₁`, discard its result, and return `#t`:
+
+```racket
+[`(<= ,e₁) (compile `(begin ,e₁ #t))]
+[`(>= ,e₁) (compile `(begin ,e₁ #t))]
+[`(=  ,e₁) (compile `(begin ,e₁ #t))]
+[`(<  ,e₁) (compile `(begin ,e₁ #t))]
+[`(>  ,e₁) (compile `(begin ,e₁ #t))]
+```
+
+For the case in which there are two arguments, we can use the same strategy we used in all other binary operators to this point: we call `compile` recursively and let it expand the operator:
+
+```racket
+[`(<= ,e₁ ,e₂) (compile `(,(compile `<=) ,e₁ ,e₂))]
+[`(>= ,e₁ ,e₂) (compile `(,(compile `>=) ,e₁ ,e₂))]
+[`(=  ,e₁ ,e₂) (compile `(,(compile  `=) ,e₁ ,e₂))]
+[`(<  ,e₁ ,e₂) (compile `(,(compile  `<) ,e₁ ,e₂))]
+[`(>  ,e₁ ,e₂) (compile `(,(compile  `>) ,e₁ ,e₂))]
+```
+
+For the case in which there are three or more arguments, we have to devise a new strategy. When solving this issue for other operations, we nested operands, for example, when we considered addition of three or more arguments, we nested multiple additions in a way that all the operations were binary: `(+ 0 1 2)` became `(+ (+ 0 1) 2)`. But this does not work for number comparison operators, because they return booleans, not numbers: `(<= 3 2 1)` means `(and (<= 3 2) (<= 2 1))`, not `(<= (<= 3 2) 1)`—this would try to compare `(<= #f 1)` which is not even defined.
+
+There is also the problem of evaluating the underlying expressions exactly once. If we encode `(<= e₁ e₂ e₃)` as `(and (<= e₁ e₂) (<= e₂ e₃))` then we risk evaluating `e₂` and `e₃` an incorrect number of times. If `(<= e₁ e₂)` holds, than the [`and` short-circuits](booleans) and we do not try to evaluate `(<= e₂ e₃)`, which means we never evaluate `e₃`. On the other hand, if `(<= e₁ e₂)` does not hold, then we evaluate `(<= e₂ e₃)`, which causes `e₂` to be evaluated twice.
+
+To solve all these issues, we translate the comparison operators with three or more arguments by first evaluating all the operands `e₁ ... eₙ`, binding the results to variables `x₁ ... xₙ`, and then constructing an expression of the form `(and (<= x₁ x₂) ... (<= xₙ₋₁ xₙ))`:
+
+```racket
+[`(<= ,e₁ ...)
+ #:when (not (empty? e₁))
+ (let ([x₁ (map (λ (x) (gensym)) e₁)])
+   (compile `(let* (,@[map list x₁ e₁])
+               (and ,@(map (λ (x₂ x₃) `(<= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+[`(>= ,e₁ ...)
+ #:when (not (empty? e₁))
+ (let ([x₁ (map (λ (x) (gensym)) e₁)])
+   (compile `(let* (,@[map list x₁ e₁])
+               (and ,@(map (λ (x₂ x₃) `(>= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+[`(= ,e₁ ...)
+ #:when (not (empty? e₁))
+ (let ([x₁ (map (λ (x) (gensym)) e₁)])
+   (compile `(let* (,@[map list x₁ e₁])
+               (and ,@(map (λ (x₂ x₃) `(= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+[`(< ,e₁ ...)
+ #:when (not (empty? e₁))
+ (let ([x₁ (map (λ (x) (gensym)) e₁)])
+   (compile `(let* (,@[map list x₁ e₁])
+               (and ,@(map (λ (x₂ x₃) `(< ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+[`(> ,e₁ ...)
+ #:when (not (empty? e₁))
+ (let ([x₁ (map (λ (x) (gensym)) e₁)])
+   (compile `(let* (,@[map list x₁ e₁])
+               (and ,@(map (λ (x₂ x₃) `(> ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
+```
+
+First, we check that the sequence of operands `e₁` is not empty with the guard `#:when (not (empty? e₁))`. This prevents the clauses from matching the case in which no operands were provided, which is undefined. Then, we use [`gensym`](https://docs.racket-lang.org/reference/symbols.html#%28def._%28%28quote._~23~25kernel%29._gensym%29%29) to generate a series of `x₁` fresh identifiers. Finally, we build an expression an expression with the following form:
+
+```racket
+(let* ([x₁ e₁] ... [xₙ eₙ])
+  (and (<= x₁ x₂) ... (<= xₙ₋₁ xₙ)))
+```
+
+The `let*` form binds the results of operands to the fresh identifiers we generated, and the `and` form performs the comparison.
+
+Other Number Types
+==================
+
+We can build on the results of this section to extend the surface language to support other kinds of numbers:
+
+- **Signed Integers**. [Pair](pairs) a non-negative number with a [boolean](booleans) for the sign, for example, `#f` means negative and `#t` means positive.
+- **Rationals**. Pair two signed integers, one is the numerator and the other the denominator. As a special case, if the denominator is a power of `10`, then this also works as a representation of decimal numbers with a fixed point.
+- **Complex Numbers**. Pair two rationals, one is the real part and the other the imaginary part.
+
+All these encodings rely on pairs, which are the subject of the [next section](pairs).

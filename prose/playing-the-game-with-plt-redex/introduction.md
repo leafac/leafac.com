@@ -209,7 +209,7 @@ PLT Redex does not check that the `initial-board` is in the `peg-solitaire` lan
 Moves
 -----
 
-To model how a player moves pegs on the board, we use a PLT Redex form called [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29) to define the `⇨` [reduction relation](reduction-relations). A reduction relation is similar to a function, except that it is *nondeterministic*, possibly returning multiple outputs. We choose to define `⇨` as a reduction relation instead of a regular function because there might be multiple moves for a given input board. We start to define `⇨` as a reduction relation that operates on the `peg-solitaire` language:
+To model how a player moves pegs on the board, we use a PLT Redex form called [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29) to define the `⇨` [reduction relation](reduction-relations). A reduction relation is similar to a function, except that it is *nondeterministic*, possibly returning multiple outputs. We choose to define `⇨` as a reduction relation instead of a regular function because there might be multiple moves for a given input board. We start to define `⇨` as a reduction relation that operates on the `peg-solitaire` language:
 
 <aside markdown="1">
 Throughout this article, `___` is a placeholder that stands for code we are yet to write.
@@ -309,7 +309,7 @@ We define the other kinds of moves similarly. The following is the complete defi
 Playing
 =======
 
-PLT Redex features [visualization](visualization) tools, including a [`stepper`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=stepper#%28def._%28%28lib._redex%2Fgui..rkt%29._stepper%29%29), which we use to play Peg Solitaire:
+PLT Redex features [visualization](visualization) tools, including a [`stepper`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Fgui..rkt%29._stepper%29%29), which we use to play Peg Solitaire:
 
 ```racket
 (stepper ⇨ (term initial-board))

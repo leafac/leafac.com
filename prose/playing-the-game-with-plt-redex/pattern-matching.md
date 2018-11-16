@@ -17,7 +17,7 @@ Pattern matching is the foundation of all the PLT Redex forms we will explore i
 ```
 </div>
 
-We verify whether a term matches a pattern with the [`redex-match?`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex-match%3F#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match~3f%29%29) form:
+We verify whether a term matches a pattern with the [`redex-match?`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match~3f%29%29) form:
 
 ```racket
 (redex-match? <language> <pattern> <term>)
@@ -38,7 +38,7 @@ For example, the listing above shows that the pattern `●` matches the term `(t
 
 * * *
 
-The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28tech.__%29) (`_`) means “anything” (similar to the dot (`.`) in regular expressions). For example:
+The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28tech.__%29) (`_`) means “anything” (similar to the dot (`.`) in regular expressions). For example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire _
@@ -58,7 +58,7 @@ The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.
             #t)
 ```
 
-In the listing above, the underscore pattern (`_`) can match either the elements in the list, or the whole list (last example). Another pattern that matches anything is the [`any`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test-equal#%28tech._any%29) pattern, for example:
+In the listing above, the underscore pattern (`_`) can match either the elements in the list, or the whole list (last example). Another pattern that matches anything is the [`any`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28tech._any%29) pattern, for example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any ● ○)
@@ -68,10 +68,10 @@ In the listing above, the underscore pattern (`_`) can match either the elements
 
 But the underscore pattern (`_`) and the `any` pattern are not equivalent, because only the latter introduces names. In the next sections we will explore forms in which patterns not only recognize terms, but also name the fragments that were matched, so we can use them to build other terms. These names are similar to the ones we defined with `define-term` in the [previous section](terms), but they are available only within the forms containing the pattern.
 
-We can observe the names a pattern introduces with the [`redex-match`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=redex-match#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match%29%29) form, which is similar to the `redex-match?` form but returns the introduced names instead of just whether the pattern matched or not:
+We can observe the names a pattern introduces with the [`redex-match`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match%29%29) form, which is similar to the `redex-match?` form but returns the introduced names instead of just whether the pattern matched or not:
 
 <aside markdown="1">
-The `>` before a form denotes an interaction with the [REPL](https://docs.racket-lang.org/guide/intro.html?q=repl#%28tech._repl%29), as opposed to a definition.
+The `>` before a form denotes an interaction with the [REPL](https://docs.racket-lang.org/guide/intro.html#%28tech._repl%29), as opposed to a definition.
 </aside>
 
 ```racket
@@ -92,9 +92,9 @@ In the first interaction, no names are introduced, as indicated by the empty lis
 
 1. `any`: The name in the pattern.
 2. `●`: The term that was matched by `any`.
-3. `bind`: The [binding data structure](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=bind#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._bind%29%29) representing the association between the name and the term.
+3. `bind`: The [binding data structure](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._bind%29%29) representing the association between the name and the term.
 4. `list`: There might be multiple bindings in a pattern.
-5. `match`: The [matching data structure](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=bind#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._match~3f%29%29) representing one way to match the term with the pattern.
+5. `match`: The [matching data structure](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._match~3f%29%29) representing one way to match the term with the pattern.
 6. `list`: There might be multiple ways to match a term with a pattern.
 
 Both the underscore (`_`) and the `any` patterns may appear multiple times in a pattern. When introducing the underscore pattern above, we saw that multiple uses of the underscore in the same pattern may match different fragments, for example, the pattern `(_ _ _)` matches the term `(● ● ○)`, so `_` corresponds to `●` *and* `○`. But the `any` pattern assigns a name to the fragment it matches, so if it appears multiple times in a pattern, it must match the same fragment every time, for example:
@@ -163,7 +163,7 @@ The pattern does not match if the two occurrences of `any_1` are different, for 
 
 * * *
 
-We can match a sequence of terms using [ellipsis](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=bind#%28tech._pattern._sequence%29) (`...`), which means “zero or more of the previous pattern” (similar to the Kleene star (`*`) in regular expressions). For example:
+We can match a sequence of terms using [ellipsis](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28tech._pattern._sequence%29) (`...`), which means “zero or more of the previous pattern” (similar to the Kleene star (`*`) in regular expressions). For example:
 
 ```racket
 (test-equal (redex-match? peg-solitaire (any ...)

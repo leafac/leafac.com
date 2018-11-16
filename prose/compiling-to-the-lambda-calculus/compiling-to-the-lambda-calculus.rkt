@@ -77,15 +77,15 @@
     [`+ (compile `(λ (m n) ((n add1) m)))]
     [`(+) (compile `0)]
     [`(+ ,e₁) (compile e₁)]
-    [`(+ ,e₁ ,e₂) (compile `(,(compile `+) ,(compile e₁) ,(compile e₂)))]
+    [`(+ ,e₁ ,e₂) (compile `(,(compile `+) ,e₁ ,e₂))]
     [`(+ ,e₁ ... ,e₂) (compile `(+ (+ ,@e₁) ,e₂))]
     [`- (compile `(λ (m n) ((n sub1) m)))]
-    [`(- ,e₁ ,e₂) (compile `(,(compile `-) ,(compile e₁) ,(compile e₂)))]
+    [`(- ,e₁ ,e₂) (compile `(,(compile `-) ,e₁ ,e₂))]
     [`(- ,e₁ ... ,e₂) #:when (not (empty? e₁)) (compile `(- (- ,@e₁) ,e₂))]
     [`* (compile `(λ (m n) ((n (λ (a) (+ a m))) (+))))]
     [`(*) (compile `1)]
     [`(* ,e₁) (compile e₁)]
-    [`(* ,e₁ ,e₂) (compile `(,(compile `*) ,(compile e₁) ,(compile e₂)))]
+    [`(* ,e₁ ,e₂) (compile `(,(compile `*) ,e₁ ,e₂))]
     [`(* ,e₁ ... ,e₂) (compile `(* (* ,@e₁) ,e₂))]
     [`quotient
      (compile `(letrec ([quot (λ (m n) (if (< m n) 0 (add1 (quot (- m n) n))))]) quot))]
@@ -93,7 +93,7 @@
     [`zero? (compile `(λ (n) ((n (λ (x) #f)) #t)))]
     [`<= (compile `(λ (m n) (zero? (- m n))))]
     [`(<= ,e₁) (compile `(begin ,e₁ #t))]
-    [`(<= ,e₁ ,e₂) (compile `(,(compile `<=) ,(compile e₁) ,(compile e₂)))]
+    [`(<= ,e₁ ,e₂) (compile `(,(compile `<=) ,e₁ ,e₂))]
     [`(<= ,e₁ ...)
      #:when (not (empty? e₁))
      (let ([x₁ (map (λ (x) (gensym)) e₁)])
@@ -101,7 +101,7 @@
                    (and ,@(map (λ (x₂ x₃) `(<= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
     [`>= (compile `(λ (m n) (zero? (- n m))))]
     [`(>= ,e₁) (compile `(begin ,e₁ #t))]
-    [`(>= ,e₁ ,e₂) (compile `(,(compile `>=) ,(compile e₁) ,(compile e₂)))]
+    [`(>= ,e₁ ,e₂) (compile `(,(compile `>=) ,e₁ ,e₂))]
     [`(>= ,e₁ ...)
      #:when (not (empty? e₁))
      (let ([x₁ (map (λ (x) (gensym)) e₁)])
@@ -109,7 +109,7 @@
                    (and ,@(map (λ (x₂ x₃) `(>= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
     [`= (compile `(λ (m n) (and (<= m n) (>= m n))))]
     [`(= ,e₁) (compile `(begin ,e₁ #t))]
-    [`(= ,e₁ ,e₂) (compile `(,(compile `=) ,(compile e₁) ,(compile e₂)))]
+    [`(= ,e₁ ,e₂) (compile `(,(compile `=) ,e₁ ,e₂))]
     [`(= ,e₁ ...)
      #:when (not (empty? e₁))
      (let ([x₁ (map (λ (x) (gensym)) e₁)])
@@ -117,7 +117,7 @@
                    (and ,@(map (λ (x₂ x₃) `(= ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
     [`< (compile `(λ (m n) (and (<= m n) (not (= m n)))))]
     [`(< ,e₁) (compile `(begin ,e₁ #t))]
-    [`(< ,e₁ ,e₂) (compile `(,(compile `<) ,(compile e₁) ,(compile e₂)))]
+    [`(< ,e₁ ,e₂) (compile `(,(compile `<) ,e₁ ,e₂))]
     [`(< ,e₁ ...)
      #:when (not (empty? e₁))
      (let ([x₁ (map (λ (x) (gensym)) e₁)])
@@ -125,7 +125,7 @@
                    (and ,@(map (λ (x₂ x₃) `(< ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1))))))]
     [`> (compile `(λ (m n) (and (>= m n) (not (= m n)))))]
     [`(> ,e₁) (compile `(begin ,e₁ #t))]
-    [`(> ,e₁ ,e₂) (compile `(,(compile `>) ,(compile e₁) ,(compile e₂)))]
+    [`(> ,e₁ ,e₂) (compile `(,(compile `>) ,e₁ ,e₂))]
     [`(> ,e₁ ...)
      #:when (not (empty? e₁))
      (let ([x₁ (map (λ (x) (gensym)) e₁)])

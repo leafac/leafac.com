@@ -152,7 +152,7 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
 <span class="success">●</span> jumps over <span class="error">●</span>
 </pre>
 
-Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that may not be functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=reduction-relation#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
+Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that may not be functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
 <aside markdown="1">
 The `reduction-relation` form returns the reduction relation as a value, unlike the other forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
@@ -299,7 +299,7 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
 
 * * *
 
-We can test the `⇨` reduction relation with the [`test-->`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=test#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test--~3e%29%29) form:
+We can test the `⇨` reduction relation with the [`test-->`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test--~3e%29%29) form:
 
 ```racket
 (test--> ⇨ (term initial-board)
@@ -340,7 +340,7 @@ We can test the `⇨` reduction relation with the [`test-->`](https://docs.racke
            [· · ● ● ● · ·])))
 ```
 
-We can also query the `⇨` reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. The `apply-reduction-relation` form returns a list representing a set of outputs, similar to the `⇨/function` encoding we mentioned above. This is a compromise because PLT Redex has to output an S-expression, which does not include forms for nondeterministic values or sets. We can turn the returned list into a Racket [`set`](https://docs.racket-lang.org/reference/sets.html) with [`list->set`](https://docs.racket-lang.org/reference/sets.html?q=list-%3Eset#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29), so the following test is equivalent to the previous one:
+We can also query the `⇨` reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. The `apply-reduction-relation` form returns a list representing a set of outputs, similar to the `⇨/function` encoding we mentioned above. This is a compromise because PLT Redex has to output an S-expression, which does not include forms for nondeterministic values or sets. We can turn the returned list into a Racket [`set`](https://docs.racket-lang.org/reference/sets.html) with [`list->set`](https://docs.racket-lang.org/reference/sets.html#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29), so the following test is equivalent to the previous one:
 
 ```racket
 (test-equal (list->set (apply-reduction-relation ⇨ (term initial-board)))
@@ -382,7 +382,7 @@ We can also query the `⇨` reduction relation with the [`apply-reduction-relati
                [· · ● ● ● · ·]))))
 ```
 
-If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next,<label class="margin-note"><input type="checkbox"><span markdown="1">Something called the *transitive closure* of the reduction relation.</span></label> then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=apply-reduction-relation#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
+If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next,<label class="margin-note"><input type="checkbox"><span markdown="1">Something called the *transitive closure* of the reduction relation.</span></label> then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
 
 ```racket
 > (apply-reduction-relation* ⇨ (term initial-board))

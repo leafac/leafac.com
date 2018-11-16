@@ -5,6 +5,7 @@ draft: true
 table-of-contents: true
 ---
 
+- Fixed point of `expand` to build `compile`
 - Syntax-directed: Simplest thing, but may be repetitive.
 - Recursive (make progress).
 - Testing.
@@ -12,6 +13,8 @@ table-of-contents: true
 - Quasiquoting & unquoting & unquote splicing.
 - Pattern matching
 - Currying and partial definitions with `define`.
+- Variable number of arguments: only the ones we define, not available for the programmer to define.
+- `gensym` for fresh identifiers
 
 Inspectors
 ==========

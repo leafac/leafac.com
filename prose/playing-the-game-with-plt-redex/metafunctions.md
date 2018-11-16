@@ -5,7 +5,7 @@ date: 2018-09-30
 table-of-contents: true
 ---
 
-From all the PLT Redex forms for manipulating with terms, we begin with the metafunction because it is the most familiar—it is just a function on terms. We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html?q=define-metafunction#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form including [patterns](pattern-matching) that match the input terms, and templates to compute the output terms:
+From all the PLT Redex forms for manipulating with terms, we begin with the metafunction because it is the most familiar—it is just a function on terms. We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form including [patterns](pattern-matching) that match the input terms, and templates to compute the output terms:
 
 ```racket
 (define-metafunction <language>
@@ -21,7 +21,7 @@ From all the PLT Redex forms for manipulating with terms, we begin with the met
 - `<pattern>`: Patterns against which the metafunction inputs are matched. Patterns are tried clause by clause in the order they are defined, and the first clause that matches is executed.
 - `<template>`: A term that is the output of the metafunction. Names from the `<pattern>` are available in the `<template>`.
 
-A metafunction is similar to [`define/match`](https://docs.racket-lang.org/reference/match.html?q=define%2Fmatch#%28form._%28%28lib._racket%2Fmatch..rkt%29._define%2Fmatch%29%29) in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to forms for multi-way conditionals, for example, `case` and `cond`.
+A metafunction is similar to [`define/match`](https://docs.racket-lang.org/reference/match.html#%28form._%28%28lib._racket%2Fmatch..rkt%29._define%2Fmatch%29%29) in that it compares the inputs to patterns and executes the first clause that matches. More generally, it is similar to forms for multi-way conditionals, for example, `case` and `cond`.
 
 When we introduced patterns, we noted that they are to terms as regular expressions are to strings, and we used the `redex-match?` form to recognize terms the same way we can use regular expressions to match strings. Continuing that analogy, a metafunction is similar to a search-and-replace with regular expressions including capture groups.
 
