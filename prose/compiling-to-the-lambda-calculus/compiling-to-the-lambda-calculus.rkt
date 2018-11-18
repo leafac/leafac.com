@@ -137,14 +137,14 @@
           (and ,@(map (λ (x₂ x₃) `(> ,x₂ ,x₃)) (drop-right x₁ 1) (drop x₁ 1)))))]
 
     ;; PAIRS
-    [`null `(λ (s) (λ (x) x))]
     [`cons `(λ (a b) (λ (s) (s a b)))]
-    [`null? `(λ (p) ((p (λ (a b) (λ (x) #f))) #t))]
     [`car `(λ (p) (p (λ (a b) a)))]
     [`cdr `(λ (p) (p (λ (a b) b)))]
 
     ;; LISTS
+    [`null `(λ (s) (λ (x) x))]
     [`empty `null]
+    [`null? `(λ (p) ((p (λ (a b) (λ (x) #f))) #t))]
     [`(list) `empty]
     [`(list ,eʰ ,eᵗ ...) `(cons ,eʰ (list ,@eᵗ))]
     [`first `car]
@@ -192,14 +192,14 @@
 
 ;; PAIRS
 (define ((inspect/pair inspector/left inspector/right) e)
-  (if (inspect/boolean ((evaluate 'null?) e))
-      null
-      (cons (inspector/left ((evaluate 'car) e))
-            (inspector/right ((evaluate 'cdr) e)))))
+  (cons (inspector/left ((evaluate 'car) e))
+        (inspector/right ((evaluate 'cdr) e))))
 
 ;; LISTS
 (define ((inspect/list inspector/element) e)
-  ((inspect/pair inspector/element (inspect/list inspector/element)) e))
+  (if (inspect/boolean ((evaluate 'null?) e))
+      null
+      ((inspect/pair inspector/element (inspect/list inspector/element)) e)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TESTS
@@ -307,15 +307,15 @@
   (check-equal? (inspect/boolean (evaluate '(> 3 2 1))) '#t)
 
   ;; PAIRS
-  (check-equal? ((inspect/pair inspect/boolean inspect/number) (evaluate 'null)) '())
   (check-equal? ((inspect/pair inspect/boolean inspect/number) (evaluate '(cons #t 5))) '(#t . 5))
-  (check-equal? (inspect/boolean (evaluate '(null? null))) '#t)
-  (check-equal? (inspect/boolean (evaluate '(null? (cons #t 5)))) '#f)
   (check-equal? (inspect/boolean (evaluate '(car (cons #t 5)))) '#t)
   (check-equal? (inspect/number (evaluate '(cdr (cons #t 5)))) '5)
 
   ;; LISTS
+  (check-equal? ((inspect/list inspect/number) (evaluate 'null)) '())
   (check-equal? ((inspect/list inspect/number) (evaluate 'empty)) '())
+  (check-equal? (inspect/boolean (evaluate '(null? null))) '#t)
+  (check-equal? (inspect/boolean (evaluate '(null? (cons #t 5)))) '#f)
   (check-equal? ((inspect/list inspect/number) (evaluate '(list))) '())
   (check-equal? ((inspect/list inspect/number) (evaluate '(list 1))) '(1))
   (check-equal? ((inspect/list inspect/number) (evaluate '(list 1 2))) '(1 2))

@@ -7,6 +7,9 @@ table-of-contents: true
 
 We encoded booleans in the [previous section](booleans) with functions that represented what booleans *do*, as opposed to what they *are*. What booleans *do* is to select between two different options, so our encodings were functions that selected one of two arguments. For numbers, we will follow a similar strategy and use functions that do what numbers do: to count. And we will count with the only kind of operation that our core language supports: function application. 
 
+Values
+======
+
 Numbers in the surface language are encoded in the core language using functions that receive one function `f` and one arbitrary argument `x`, and apply `f` to `x` *number* times:
 
 <div class="full-width" markdown="1">
