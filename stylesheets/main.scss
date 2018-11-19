@@ -5,7 +5,6 @@
 // AUXILIARY
 
 @import "normalize.css";
-@import "syntax-highlighting.css";
 
 @function rem($px) {
   @return #{round($px/16px * 100) / 100}rem;
@@ -62,40 +61,6 @@ $line-height--medium:          1.5;
 $text-indent:                  1.5rem;
 
 // ---------------------------------------------------------------------------------------------------
-// PALETTE
-
-$solarized--base03:  #002b36;
-$solarized--base02:  #073642;
-$solarized--base01:  #586e75;
-$solarized--base00:  #657b83;
-$solarized--base0:   #839496;
-$solarized--base1:   #93a1a1;
-$solarized--base2:   #eee8d5;
-$solarized--base3:   #fdf6e3;
-$solarized--yellow:  #b58900;
-$solarized--orange:  #cb4b16;
-$solarized--red:     #dc322f;
-$solarized--magenta: #d33682;
-$solarized--violet:  #6c71c4;
-$solarized--blue:    #268bd2;
-$solarized--cyan:    #2aa198;
-$solarized--green:   #859900;
-
-$palette--background:           $solarized--base3;
-$palette--background-highlight: $solarized--base2;
-$palette--secondary-content:    $solarized--base1;
-$palette--primary-content:      $solarized--base00;
-$palette--emphasized-content:   $solarized--base01;
-$palette--yellow:               $solarized--yellow;
-$palette--orange:               $solarized--orange;
-$palette--red:                  $solarized--red;
-$palette--magenta:              $solarized--magenta;
-$palette--violet:               $solarized--violet;
-$palette--blue:                 $solarized--blue;
-$palette--cyan:                 $solarized--cyan;
-$palette--green:                $solarized--green;
-
-// ---------------------------------------------------------------------------------------------------
 // BORDERS
 
 $border-width:  1px;
@@ -113,7 +78,7 @@ $border-radius: $space--extra-small;
 
 @mixin box {
   @include insertion;
-  border: $border-width solid $palette--secondary-content;
+  border: $border-width solid;
   border-radius: $border-radius;
   padding: $text-indent;
   padding-left: calc($text-indent - $border-width);
@@ -219,7 +184,7 @@ body {
 body > header h1 {
   margin-top: $space--none;
   padding-bottom: $space--medium;
-  border-bottom: $border-width solid $palette--secondary-content;
+  border-bottom: $border-width solid;
   margin-bottom: $space--extra-large;
 }
 
@@ -233,7 +198,6 @@ main > header {
 time {
   font-weight: 400;
   font-size: $font-size--small;
-  color: $palette--secondary-content;
 }
 
 .table-of-contents {
@@ -246,7 +210,6 @@ time {
     text-decoration: none;
     &.active {
       text-decoration: underline;
-      color: $palette--emphasized-content;
     }
   }
 }
@@ -255,14 +218,12 @@ time {
 // HEADINGS
 
 h1, h2  {
-  color: $palette--emphasized-content;
   margin-top: $space--extra-large;
   margin-bottom: $space--small;
   line-height: $line-height--small;
   font-weight: 400;
   a {
     text-decoration: none;
-    color: $palette--emphasized-content;
   }
   & + & {
     margin-top: $space--medium;
@@ -294,7 +255,6 @@ hr {
     display: block;
     text-align: center;
     content: "* * *";
-    color: $palette--secondary-content;
   }
 }
 
@@ -307,8 +267,6 @@ body {
   text-rendering: optimizeLegibility;
   font-family: $font-family--main;
   font-size: $font-size--medium;
-  background-color: $palette--background;
-  color: $palette--primary-content;
   line-height: $line-height--medium;
 }
 
@@ -448,7 +406,7 @@ th {
 // REFERENCES
 
 a {
-  color: $palette--primary-content;
+  color: black;
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -465,15 +423,10 @@ summary {
 // ---------------------------------------------------------------------------------------------------
 // INLINE
 
-.placeholder {
-  @extend code;
-  color: $palette--blue;
-}
-
 .success {
-  color: $palette--green;
+  color: green;
 }
 
 .error {
-  color: $palette--red;
+  color: red;
 }
