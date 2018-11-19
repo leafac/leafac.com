@@ -92,7 +92,7 @@ Tracing the execution of the predecessor function `sub1`  where `n` is `5`. The 
 
 The predecessor function `sub1` is only defined for positive numbers, because the predecessor of `0` would be `-1` and our core language does not support negative numbers. The predecessor function receives as argument a number `n` that applies a function a function `f` to `x` for *n* times, and it returns a number `n - 1` that applies `f` one time less than `n`. But there is no way to *undo* a function call, so we need to find a way to find the predecessor by *counting up*.
 
-Our strategy for finding the predecessor of a number by counting up to it is to keep track of the previous number we counted. The figure shows an example of our strategy in action. We keep track of the previous number by [pairing](pairs) it with the current number, and in the end we project the answer out of the pair. The following is the `expand` clause for encoding `sub1`:
+Our strategy for finding the predecessor of a number by counting up to it is to keep track of the previous number we counted. The figure shows an example of our strategy in action. We keep track of the previous number by [pairing](pairs)<label class="margin-note"><input type="checkbox"><span markdown="1">If you are following along and recreating the compiler from scratch, the tests from this section and all the other tests that depend on `sub1` will only pass when you define [pairs](pairs).</span></label> it with the current number, and in the end we project the answer out of the pair. The following is the `expand` clause for encoding `sub1`:
 
 ```racket
 [`sub1 `(λ (n) (car ((n (λ (x) (let ([p (cdr x)]) (cons p (add1 p))))) (cons 0 0))))]
