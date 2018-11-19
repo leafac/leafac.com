@@ -42,20 +42,16 @@ First, install the local email server, [Dovecot](https://www.dovecot.org). For e
 $ brew install dovecot
 ```
 
-Create a directory to hold the local email server mailbox:
+Create a directory to hold the local email server mailbox:<label class="margin-note"><input type="checkbox"><span markdown="1">See the [appendix](#appendix-dovecot-configuration) for more details on `dovecot.conf`.</span></label>
 
 ```console
 $ mkdir <mailbox>
 ```
 
-<aside markdown="1">
-See the [appendix](#appendix-dovecot-configuration) for more details on `dovecot.conf`.
-</aside>
-
 Configure Dovecot by replacing the `<placeholders>` on the following template:
 
 <div class="code-block" markdown="1">
-`/usr/local/etc/dovecot/dovecot.conf`<label class="margin-note"><input type="checkbox"><span markdown="1">The path to `dovecot.conf` depends on the installation. For macOS and Homebrew, the appropriate path is `/usr/local/etc/dovecot/dovecot.conf`. Another path appropriate for many installations is `/etc/dovecot/dovecot.conf`.`</label>
+`/usr/local/etc/dovecot/dovecot.conf`<label class="margin-note"><input type="checkbox"><span markdown="1">The path to `dovecot.conf` depends on the installation. For macOS and Homebrew, the appropriate path is `/usr/local/etc/dovecot/dovecot.conf`. Another path appropriate for many installations is `/etc/dovecot/dovecot.conf`.</span></label>
 
 ```configuation
 protocols = imap
@@ -110,10 +106,10 @@ Migrate
 Start the local email server:
 
 <aside markdown="1">
-`ulimit -n`: Dovecot needs to open more than the default limit of 256 files.  
-`sudo`: Dovecot needs to bind to a network port below 1024. Specifically, port 143, for IMAP.  
-`/usr/local/sbin/dovecot`: Path to the `dovecot(1)` executable installed via Homebrew. Another common path is `/usr/sbin/dovecot`.  
-`-F`: Run Dovecot in the foreground, instead of as a daemon. Stop it with `Ctrl + C`.
+- `ulimit -n`: Dovecot needs to open more than the default limit of 256 files.  
+- `sudo`: Dovecot needs to bind to a network port below 1024. Specifically, port 143, for IMAP.  
+- `/usr/local/sbin/dovecot`: Path to the `dovecot(1)` executable installed via Homebrew. Another common path is `/usr/sbin/dovecot`.  
+- `-F`: Run Dovecot in the foreground, instead of as a daemon. Stop it with `Ctrl + C`.
 </aside>
 
 ```console
@@ -124,15 +120,7 @@ Confirm that the local email server is running by inspecting the startup log mes
 
 * * *
 
-Connect the email clients (for example, Thunderbird and Apple Mail) to the local email server using the following settings:
-
-<aside markdown="1">
-An email client may insist having a server to send emails (SMTP). Let this part of the configuration fail or reuse the settings from another account.
-</aside>
-
-<aside markdown="1">
-Ignore warnings about insecure connections. We have setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available to the local machine.
-</aside>
+Connect the email clients (for example, Thunderbird and Apple Mail) to the local email server using the following settings:<label class="margin-note"><input type="checkbox"><span markdown="1">An email client may insist having a server to send emails (SMTP). Let this part of the configuration fail or reuse the settings from another account. Also, ignore warnings about insecure connections. We have setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available to the local machine.</span></label>
 
 <aside markdown="1">
 If you change Dovecot’s configuration (`dovecot.conf`), restart it or run the following command on a separate terminal:
