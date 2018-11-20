@@ -229,6 +229,8 @@ We can test integer division:
 (check-equal? (inspect/number (evaluate '(quotient 5 5))) '1)
 ```
 
+- [ ] TODO: Test division by zero (it should timeout).
+
 Exponentiation
 ==============
 

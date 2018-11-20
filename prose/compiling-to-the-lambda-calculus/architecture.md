@@ -16,6 +16,7 @@ table-of-contents: true
 - Variable number of arguments: only the ones we define, not available for the programmer to define.
 - `gensym` for fresh identifiers
 - `match`: `?`, guards (`#:when`), ellipses (`...`)
+- There are multiple ways to encode.
 
 Inspectors
 ==========
