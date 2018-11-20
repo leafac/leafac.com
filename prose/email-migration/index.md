@@ -152,7 +152,7 @@ Remove Dovecot’s configuration and `<mailbox>`, and uninstall it:
 
 ```console
 $ rm /usr/local/etc/dovecot/dovecot.conf
-$ rm -rf `<mailbox>`
+$ rm -rf <mailbox>
 $ brew uninstall dovecot
 ```
 
