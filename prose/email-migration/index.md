@@ -13,7 +13,7 @@ We switch email clients from time to time, and when we do, we need to migrate th
 Email migration should be easy, yet I suffered from all these ridiculous problems, so I developed the ultimate solution: setting up a local email server. An email server is the common denominator between otherwise incompatible email clients, but common email servers (for example, [iCloud](https://www.icloud.com) and [Gmail](https://www.google.com/gmail/)) are impractical for email migration. While simpler to use, these email servers would require uploading the whole local email history only to re-download it in a new email client. With a local email server we accelerate an email migration that could take days to a few hours.
 
 <figure markdown="1">
-![](migration.png)
+![](migration.png){:width="600" height="197"}
 <figcaption markdown="1">
 **Left**: Migrating the local email history using the migration assistant fails.  
 **Center**: Migrating using common email servers (for example, iCloud and Gmail) succeeds, but is impractical.  
