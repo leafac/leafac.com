@@ -142,9 +142,9 @@
     [`cdr `(λ (p) (p (λ (a b) b)))]
 
     ;; LISTS
-    [`null `(λ (s) (λ (x) x))]
+    [`null `(λ (s) #t)]
     [`empty `null]
-    [`null? `(λ (p) ((p (λ (a b) (λ (x) #f))) #t))]
+    [`null? `(λ (l) (l (λ (a b) #f)))]
     [`(list) `empty]
     [`(list ,eʰ ,eᵗ ...) `(cons ,eʰ (list ,@eᵗ))]
     [`first `car]
@@ -155,7 +155,8 @@
     [`(let ([,x ,eˣ] ...) ,eᵇ ...) `((λ (,@(reverse x)) ,@eᵇ) ,@(reverse eˣ))]
     [`(let* () ,eᵇ ...) `(let () ,@eᵇ)]
     [`(let* ([,x₁ ,eˣ₁]) ,eᵇ ...) `(let ([,x₁ ,eˣ₁]) ,@eᵇ)]
-    [`(let* ([,x₁ ,eˣ₁] [,x₂ ,eˣ₂] ...) ,eᵇ ...) `(let ([,x₁ ,eˣ₁]) (let* (,@[map list x₂ eˣ₂]) ,@eᵇ))]
+    [`(let* ([,x₁ ,eˣ₁] [,x₂ ,eˣ₂] ...) ,eᵇ ...)
+     `(let ([,x₁ ,eˣ₁]) (let* (,@[map list x₂ eˣ₂]) ,@eᵇ))]
     [`(letrec ([,x ,eˣ]) ,eᵇ ...)
      `(let ([,x ((λ (f) ((λ (x) (f (λ (v) ((x x) v)))) (λ (x) (f (λ (v) ((x x) v))))))
                  (λ (,x) ,eˣ))])
@@ -191,15 +192,15 @@
 (define (inspect/number e) ((e add1) 0))
 
 ;; PAIRS
-(define ((inspect/pair inspector/left inspector/right) e)
-  (cons (inspector/left ((evaluate 'car) e))
-        (inspector/right ((evaluate 'cdr) e))))
+(define ((inspect/pair inspect/left inspect/right) e)
+  (cons (inspect/left ((evaluate 'car) e))
+        (inspect/right ((evaluate 'cdr) e))))
 
 ;; LISTS
-(define ((inspect/list inspector/element) e)
+(define ((inspect/list inspect/element) e)
   (if (inspect/boolean ((evaluate 'null?) e))
       null
-      ((inspect/pair inspector/element (inspect/list inspector/element)) e)))
+      ((inspect/pair inspect/element (inspect/list inspect/element)) e)))
 
 ;; ---------------------------------------------------------------------------------------------------
 ;; TESTS
@@ -216,8 +217,8 @@
       (λ (factorial)
         (λ (n)
           (((((λ (n) ((n (λ (x) (λ (a) (λ (b) b)))) (λ (a) (λ (b) a)))) n)
-             (λ (,g252320) (λ (f) (λ (x) (f x)))))
-            (λ (,g252321)
+             (λ (,g2269) (λ (f) (λ (x) (f x)))))
+            (λ (,g2270)
               (((λ (m)
                   (λ (n)
                     ((n
@@ -240,7 +241,7 @@
                      (((λ (a) (λ (b) (λ (s) ((s a) b)))) (λ (f) (λ (x) x)))
                       (λ (f) (λ (x) x))))))
                  n)))))
-           (λ (s) (λ (x) x))))))))
+           (λ (s) (λ (a) (λ (b) a)))))))))
 
   ;; BOOLEANS
   (check-equal? (inspect/boolean (evaluate '#t)) '#t)

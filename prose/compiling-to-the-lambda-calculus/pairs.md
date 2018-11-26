@@ -22,14 +22,14 @@ To project the elements out of a pair, we define two functions: [`car`](https://
 [`cdr `(λ (p) (p (λ (a b) b)))]
 ```
 
-To inspect a pair, we define a `inspect/pair` function that receives as argument a pair-encoded-as-a-function `e` and returns a Racket pair. It also needs to receive as arguments two other inspector functions to use on the left and right elements of the pair: `inspector/left` and `inspector/right`. We let these two inspectors come first in the list of arguments and let `inspect/pair` be partially applied with them, because it makes it easier to compose inspectors. For example, when inspecting a pair in which the left element is a pair of numbers and the right element is a boolean, we can write `(inspect/pair (inspect/pair inspect/number inspect/number) inspect/boolean)`, instead of `(inspect/pair (λ (e) (inspect/pair inspect/number inspect/number e)) inspect/boolean)`.
+To inspect a pair, we define a `inspect/pair` function that receives as argument a pair-encoded-as-a-function `e` and returns a Racket pair. It also needs to receive as arguments two other inspector functions to use on the left and right elements of the pair: `inspect/left` and `inspect/right`. We let these two inspectors come first in the list of arguments and let `inspect/pair` be partially applied with them, because it makes it easier to compose inspectors. For example, when inspecting a pair in which the left element is a pair of numbers and the right element is a boolean, we can write `(inspect/pair (inspect/pair inspect/number inspect/number) inspect/boolean)`, instead of `(inspect/pair (λ (e) (inspect/pair inspect/number inspect/number e)) inspect/boolean)`.
 
 Our `inspect/pair` inspector projects the elements from the pair using the encoding of `car` and `cdr` we defined above by calling them with `evaluate` and applying the result to the given pair-encoded-as-a-function `e`:
 
 ```racket
-(define ((inspect/pair inspector/left inspector/right) e)
-  (cons (inspector/left ((evaluate 'car) e))
-        (inspector/right ((evaluate 'cdr) e))))
+(define ((inspect/pair inspect/left inspect/right) e)
+  (cons (inspect/left ((evaluate 'car) e))
+        (inspect/right ((evaluate 'cdr) e))))
 ```
 
 We can test pairs:<label class="margin-note"><input type="checkbox"><span markdown="1">If you are following along and recreating the compiler from scratch, the tests for the [predecessor function](numbers#predecessor) and all other functions that depend on it should start to pass now.</span></label>
