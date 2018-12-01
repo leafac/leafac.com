@@ -24,7 +24,7 @@ The pair returned from `cons` is a function of the form `(λ (s) (s a b))`, 
 [`(list) `empty]
 ```
 
-We can define `null?` as a function that receives a list as an argument: `(λ (l) ___)`. The list `l` may either be empty (`null`) or a pair resulting from `cons`. In any case `l` is a function that can be called with a selector `s`: if the list is empty, then the selector is ignored by our encoding for `null`, and if the list is non-empty, then our encoding for pairs calls `s` with arguments `a` and `b`. So we let `s` be a function that ignores its arguments `a` and `b` and returns `#f`: `(λ (a b) #f)`. This completes our encoding for `null?`:
+We can define `null?` as a function that receives a list as an argument: `(λ (l) ___)`. The list `l` may either be empty (`null`) or a pair resulting from `cons`. In any case `l` is a function that can be called with a selector `s`: if the list is empty, then the selector is ignored by our encoding for `null`, and if the list is non-empty, then our encoding for pairs calls `s` with arguments `a` and `b`. So we let `s` be a function that ignores its arguments `a` and `b` and returns `#f`: `(λ (a b) #f)`. This completes our encoding for `null?`:<label class="margin-note"><input type="checkbox"><span markdown="1">The encoding for `null?` is similar to the encoding for [`zero?`](numbers#zero-predicate). They both rely on calling the encoded data with a function that always returns `#f`, which is only called by the encoding of non-zero numbers and non-empty lists. The relationship between the encodings for lists and numbers goes deeper than that: the encoding for numbers can be interpreted as the skeleton of a list that holds no elements.</span></label>
 
 ```racket
 [`null? `(λ (l) (l (λ (a b) #f)))]
@@ -100,12 +100,8 @@ We can test `map`:
 Other Data Structures
 =====================
 
-- Association lists & Objects
+The same way we built lists out of [pairs](pairs), we can use lists to build other data structures. For example, we can use them to build *strings* by interpreting them as lists of *characters*, which we can represent with [numbers](numbers) according to some encoding, for example, ASCII or UTF-8.
 
-- [ ] Note the similarity between numbers and pairs!
-  ;;       • 0 ≈ null
-  ;;       • number’s f ≈ pair’s s
-  ;;       • number’s x ≈ pair’s a, b
-  ;;       • The major difference is the order (f x), (a b s)
-  ;;       • zero? ≠ null? because of this difference in order
-  ;;       • Numbers are lists that don’t hold any values
+We can also use lists to build a data structure that associates keys with values, which is similar to *Racket’s [dictionaries](https://docs.racket-lang.org/reference/dicts.html)*, *JavaScript objects*, *Ruby’s hashes*, *Java’s maps*, and so forth. The most straightforward way of doing that is using [association lists](https://docs.racket-lang.org/reference/dicts.html#%28tech._association._list%29), which are lists of key-value pairs.
+
+If we combine associative data structures like association lists with self-reference (which we will [cover later](bindings#recursive-bindings)), then we can build *objects*. And out of objects we can build a whole object system including classes, inheritance, and so forth. The details of such encodings are beyond the scope of this article, but are covered in the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/book/book.pdf) book written by my advisor, Dr. Scott Smith, and others.

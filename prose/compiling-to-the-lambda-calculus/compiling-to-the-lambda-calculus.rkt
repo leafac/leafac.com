@@ -53,8 +53,8 @@
 
 ;; compile : eˢ → eᶜ
 (define (compile e)
-  (define e′ (expand e))
-  (if (equal? e e′) e (compile e′)))
+  (define e/expanded (expand e))
+  (if (equal? e e/expanded) e (compile e/expanded)))
 
 ;; expand : eˢ → eˢ⁺ᶜ
 (define (expand e)
