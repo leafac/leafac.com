@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Understanding the Type of `call/cc`"
-draft: true
+date: 2018-12-06
 ---
 
 <aside markdown="1">
