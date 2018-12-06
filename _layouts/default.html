@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
     <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <title>{% if page.title %}{{ page.title }} · {% endif %}Leandro Facchinetti</title>
+    <title>{% if page.title %}{{ page.title | markdownify | strip_html }} · {% endif %}Leandro Facchinetti</title>
   </head>
   <body>
     <header><h1><a href="/">Leandro Facchinetti</a></h1></header>
@@ -21,7 +21,7 @@
       {% if page.draft or page.title or page.date or page.table-of-contents %}
         <header>
           {% if page.draft %}<p><strong>Unpublished draft. Work in progress.</strong><p>{% endif %}
-          {% if page.title %}<h1><a href="{{ page.url }}">{{ page.title }}</a></h1>{% endif %}
+          {% if page.title %}<h1><a href="{{ page.url }}">{{ page.title | markdownify }}</a></h1>{% endif %}
           {% if page.date %}<time>{{ page.date }}</time>{% endif %}
           {% if page.table-of-contents %}{{ table_of_contents }}{% endif %}
         </header>
