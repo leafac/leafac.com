@@ -835,7 +835,7 @@ Education
 Ph.D. Candidate in Computer Science · Programming Languages
 -----------------------------------------------------------
 
-*[Johns Hopkins University](https://jhu.edu)*. 2014-09 – 2019-09 (estimated).
+*[Johns Hopkins University](https://jhu.edu)*. 2014-09 – 2019-12 (estimated).
 
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
@@ -878,7 +878,7 @@ B.S. in Computer Science
 Teaching Experience
 ===================
 
-Course Assistant / Teaching Assistant
+Teaching Assistant & Course Assistant
 -------------------------------------
 
 *[Johns Hopkins University](https://jhu.edu)*. 2015-09 – 2019-09 (estimated).
