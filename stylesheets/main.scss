@@ -358,6 +358,7 @@ video, audio {
 
 pre, code {
   font-family: $font-family--monospace;
+  font-variant-ligatures: none;
 }
 
 pre, .code-block {
