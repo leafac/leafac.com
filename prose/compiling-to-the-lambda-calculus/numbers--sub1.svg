@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="156.14005"
-   height="368.52704"
-   viewBox="0 0 156.14005 368.52705"
+   width="153.09282"
+   height="369.45004"
+   viewBox="0 0 153.09282 369.45005"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
@@ -103,9 +103,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="6.9680851"
-     inkscape:cx="98.5"
-     inkscape:cy="27"
+     inkscape:zoom="2.4635901"
+     inkscape:cx="22.8728"
+     inkscape:cy="118.62194"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -124,7 +124,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -132,7 +132,7 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-233.29662,-218.21356)">
+     transform="translate(-233.50299,-217.29056)">
     <g
        id="g1416"
        inkscape:tile-cx="311.7118"
@@ -323,7 +323,7 @@
        height="100%" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13px;line-height:1.25;font-family:Iosevka;-inkscape-font-specification:'Iosevka Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        x="311.70926"
        y="229.22456"
        id="text5336"><tspan
@@ -331,7 +331,7 @@
          id="tspan5334"
          x="311.70926"
          y="229.22456"
-         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono Medium'">(sub1 5)</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Iosevka;-inkscape-font-specification:'Iosevka Bold'">(sub1 5)</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path5390"
@@ -371,7 +371,7 @@
        height="100%" />
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#268bd2;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.25;font-family:Iosevka;-inkscape-font-specification:Iosevka;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#268bd2;fill-opacity:1;stroke:none"
        x="254.19073"
        y="252.17986"
        id="text5544"><tspan
@@ -381,7 +381,7 @@
          y="252.17986">x</tspan></text>
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.25;font-family:'Fira Mono';-inkscape-font-specification:'Fira Mono';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#859900;fill-opacity:1;stroke:none"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:13px;line-height:1.25;font-family:Iosevka;-inkscape-font-specification:Iosevka;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#859900;fill-opacity:1;stroke:none"
        x="276.44708"
        y="307.47794"
        id="text5548"><tspan

@@ -48,17 +48,16 @@ $space--extra-large:       2rem;
 // ---------------------------------------------------------------------------------------------------
 // TEXT
 
-$font-family--main:            "Charter", "Iowan Old Style", "Georgia", serif;
-$font-family--monospace:       "Fira Mono", "Menlo", "Monaco", "Courier New", monospace;
-$font-size--extra-extra-small: rem(9px);
-$font-size--extra-small:       rem(12px);
-$font-size--small:             rem(13px);
-$font-size--medium:            rem(16px);
-$font-size--large:             rem(20px);
-$font-size--extra-large:       rem(22px);
-$line-height--small:           1.3;
-$line-height--medium:          1.5;
-$text-indent:                  1.5rem;
+$font-family--main:      "Charter", "Iowan Old Style", "Georgia", serif;
+$font-family--monospace: "Iosevka", "Menlo", "Monaco", "Courier New", monospace;
+$font-size--extra-small: rem(9px);
+$font-size--small:       rem(13px);
+$font-size--medium:      rem(16px);
+$font-size--large:       rem(20px);
+$font-size--extra-large: rem(22px);
+$line-height--small:     1.3;
+$line-height--medium:    1.5;
+$text-indent:            1.5rem;
 
 // ---------------------------------------------------------------------------------------------------
 // BORDERS
@@ -86,7 +85,7 @@ $border-radius: $space--extra-small;
 
 @mixin superscript {
   vertical-align: super;
-  font-size: $font-size--extra-extra-small;
+  font-size: $font-size--extra-small;
   font-weight: 700;
 }
 
@@ -126,19 +125,19 @@ $border-radius: $space--extra-small;
 }
 
 @font-face {
-  font-family: "Fira Mono";
+  font-family: "Iosevka";
   font-style: normal;
   font-weight: 400;
   font-stretch: normal;
-  src: url("/fonts/FiraMono-Regular.woff") format("woff");
+  src: url("/fonts/iosevka-regular.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Fira Mono";
+  font-family: "Iosevka";
   font-style: normal;
-  font-weight: 500;
+  font-weight: 700;
   font-stretch: normal;
-  src: url("/fonts/FiraMono-Medium.woff") format("woff");
+  src: url("/fonts/iosevka-bold.woff") format("woff");
 }
 
 // ---------------------------------------------------------------------------------------------------
@@ -363,7 +362,7 @@ pre, code {
 
 pre, .code-block {
   @include insertion;
-  font-size: $font-size--extra-small;
+  font-size: $font-size--small;
 }
 
 pre {
