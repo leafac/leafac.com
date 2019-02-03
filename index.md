@@ -440,6 +440,7 @@ Contact
 Prose
 =====
 
+- [**A Minimal LaTeX Dissertation Template (for Johns Hopkins University)**](/prose/a-minimal-latex-dissertation-template-for-johns-hopkins-university/)
 - [**Understanding the Type of `call/cc`**](/prose/understanding-the-type-of-call-cc/)
 - [**Playing the Game with PLT Redex**](/prose/playing-the-game-with-plt-redex/)
 - [**Email Migration: The Ultimate Solution to a Ridiculous Problem**](/prose/email-migration/)
