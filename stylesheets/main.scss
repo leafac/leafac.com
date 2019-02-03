@@ -134,10 +134,26 @@ $border-radius: $space--extra-small;
 
 @font-face {
   font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 400;
+  font-stretch: normal;
+  src: url("/fonts/iosevka-italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Iosevka";
   font-style: normal;
   font-weight: 700;
   font-stretch: normal;
   src: url("/fonts/iosevka-bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Iosevka";
+  font-style: italic;
+  font-weight: 700;
+  font-stretch: normal;
+  src: url("/fonts/iosevka-bolditalic.woff") format("woff");
 }
 
 // ---------------------------------------------------------------------------------------------------
