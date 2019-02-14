@@ -429,7 +429,7 @@ attachments:
 </figure>
 </aside>
 
-I write [prose](/#prose), [software](/#software) and [music](/#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](/#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
+I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
 
 Contact
 =======
@@ -440,10 +440,10 @@ Contact
 Prose
 =====
 
-- [**A Minimal LaTeX Dissertation Template (for Johns Hopkins University)**](/prose/a-minimal-latex-dissertation-template-for-johns-hopkins-university/)
-- [**Understanding the Type of `call/cc`**](/prose/understanding-the-type-of-call-cc/)
-- [**Playing the Game with PLT Redex**](/prose/playing-the-game-with-plt-redex/)
-- [**Email Migration: The Ultimate Solution to a Ridiculous Problem**](/prose/email-migration/)
+- [**A Minimal LaTeX Dissertation Template (for Johns Hopkins University)**](/a-minimal-latex-dissertation-template-for-johns-hopkins-university/)
+- [**Understanding the Type of `call/cc`**](/understanding-the-type-of-call-cc/)
+- [**Playing the Game with PLT Redex**](/playing-the-game-with-plt-redex/)
+- [**Email Migration: The Ultimate Solution to a Ridiculous Problem**](/email-migration/)
 
 Software
 ========
@@ -840,7 +840,7 @@ Ph.D. Candidate in Computer Science · Programming Languages
 
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
-- We [research](/#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
+- We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills.<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
 
   <details markdown="1">
