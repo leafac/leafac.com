@@ -425,7 +425,7 @@ attachments:
 
 <aside markdown="1">
 <figure markdown="1">
-![](avatar.png){:width="200"}
+![](avatar.png){:width="200" height="200"}
 </figure>
 </aside>
 
