@@ -8,3 +8,9 @@ Cheat Sheet
 ===========
 
 [![](version-control-with-git.png){:width="600" height="510"}](version-control-with-git.pdf)
+
+Bibliography
+============
+
+- [Pro Git](https://git-scm.com/book).
+- [Reference](https://git-scm.com/docs).
