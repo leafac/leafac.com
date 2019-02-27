@@ -5,7 +5,7 @@ date: 2019-02-03
 ---
 
 <aside markdown="1">
-**Pre-requisites**: [LaTeX](https://www.latex-project.org).  
+**Pre-requisites:** [LaTeX](https://www.latex-project.org).  
 [Download the LaTeX source](dissertation.tex). [See the generated PDF](dissertation.pdf).
 </aside>
 
@@ -231,7 +231,7 @@ The first page in the dissertation is the Title Page:
 \clearpage
 ```
 
-We use the `center` environment to centralize the text and the `singlespace` environment to disable the [double spacing](#line-spacing) for the Title Page.<label class="margin-note"><input type="checkbox"><span markdown="1">**Fun fact**: The Formatting Guidelines specify that certain parts of the Title Page should be single spaced but provide an example in which these parts are double spaced!</span></label>
+We use the `center` environment to centralize the text and the `singlespace` environment to disable the [double spacing](#line-spacing) for the Title Page.<label class="margin-note"><input type="checkbox"><span markdown="1">**Fun fact:** The Formatting Guidelines specify that certain parts of the Title Page should be single spaced but provide an example in which these parts are double spaced!</span></label>
 
 We use `\vspace*`<label class="margin-note"><input type="checkbox"><span markdown="1">Regular `\vspace`s would not work in some places because LaTeX could choose to discard them, for example, at the top of the page.</span></label> to add the vertical spaces specified in the Formatting Guidelines. The first `\vspace*` is special because it combines with the [top margin](#margins): the 0.5\" space plus the 1\" top margin add to a total of 1.5\", as specified in the Formatting Guidelines.
 

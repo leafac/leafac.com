@@ -24,7 +24,7 @@ DrRacket opens the window below:
 <figure markdown="1">
 ![](stepper-1.png){:width="600"}
 <figcaption markdown="1">
-DrRacket showing the stepper. **Left**: The `initial-board`. **Right**: The button to make a move. **Bottom**: A graph showing the path we took while playing the game with only one node that represents the `initial-board`.
+DrRacket showing the stepper. **Left:** The `initial-board`. **Right:** The button to make a move. **Bottom:** A graph showing the path we took while playing the game with only one node that represents the `initial-board`.
 </figcaption>
 </figure>
 

@@ -5,7 +5,7 @@ date: 2018-05-22
 ---
 
 <aside markdown="1">
-**Pre-requisites**: Familiarity with the command-line.
+**Pre-requisites:** Familiarity with the command-line.
 </aside>
 
 We switch email clients from time to time, and when we do, we need to migrate the local email history from one application to the other. This may seem easy, because email clients generally include migration assistants and store emails in standard formats, for example, `.eml` and `.mbox`. But recently I was migrating from [Thunderbird](https://www.mozilla.org/en-US/thunderbird/) to [Apple Mail](https://support.apple.com/mail) and these tools failed: they either lost emails, or concatenated all emails together, or created a new mailbox for each email.
@@ -15,9 +15,9 @@ Email migration should be easy, yet I suffered from all these ridiculous problem
 <figure markdown="1">
 ![](migration.png){:width="600" height="197"}
 <figcaption markdown="1">
-**Left**: Migrating the local email history using the migration assistant fails.  
-**Center**: Migrating using common email servers (for example, iCloud and Gmail) succeeds, but is impractical.  
-**Right**: Our solution, using a local email server (Dovecot), works best.
+**Left:** Migrating the local email history using the migration assistant fails.  
+**Center:** Migrating using common email servers (for example, iCloud and Gmail) succeeds, but is impractical.  
+**Right:** Our solution, using a local email server (Dovecot), works best.
 </figcaption>
 </figure>
 

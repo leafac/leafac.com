@@ -470,10 +470,10 @@ Racket Packages
 Contributions
 -------------
 
-- **Racket**: [Racket](https://github.com/racket/racket/commits?author=leafac), [PLT Redex](https://github.com/racket/redex/commits?author=leafac), [DrRacket](https://github.com/racket/drracket/commits?author=leafac), [Profile](https://github.com/racket/profile/commits?author=leafac), [Pollen](https://github.com/mbutterick/pollen/commits?author=leafac), [Nanopass](https://github.com/nanopass/nanopass-framework-racket/commits?author=leafac).
-- **Papers and articles**: [An Introduction to Redex with Abstracting Abstract Machines](https://github.com/dvanhorn/redex-aam-tutorial/commits?author=leafac), [NUPRL’s Website](https://github.com/nuprl/website/commits?author=leafac), [Abstracting Definitional Interpreters](https://github.com/plum-umd/abstracting-definitional-interpreters/commits?author=leafac), [Optimizing Abstract Abstract Machines](https://github.com/dvanhorn/oaam/commits?author=leafac).
-- **Web Frameworks**: [Ruby on Rails](https://github.com/rails/rails/commits?author=leafac), [Javalin](https://github.com/tipsy/javalin/commits?author=leafac).
-- **Homebrew**: [Homebrew Core](https://github.com/Homebrew/homebrew-core/commits?author=leafac), [Homebrew Casks](https://github.com/Homebrew/homebrew-cask/commits?author=leafac), [Homebrew Fonts](https://github.com/Homebrew/homebrew-cask-fonts/commits?author=leafac).
+- **Racket:** [Racket](https://github.com/racket/racket/commits?author=leafac), [PLT Redex](https://github.com/racket/redex/commits?author=leafac), [DrRacket](https://github.com/racket/drracket/commits?author=leafac), [Profile](https://github.com/racket/profile/commits?author=leafac), [Pollen](https://github.com/mbutterick/pollen/commits?author=leafac), [Nanopass](https://github.com/nanopass/nanopass-framework-racket/commits?author=leafac).
+- **Papers and articles:** [An Introduction to Redex with Abstracting Abstract Machines](https://github.com/dvanhorn/redex-aam-tutorial/commits?author=leafac), [NUPRL’s Website](https://github.com/nuprl/website/commits?author=leafac), [Abstracting Definitional Interpreters](https://github.com/plum-umd/abstracting-definitional-interpreters/commits?author=leafac), [Optimizing Abstract Abstract Machines](https://github.com/dvanhorn/oaam/commits?author=leafac).
+- **Web Frameworks:** [Ruby on Rails](https://github.com/rails/rails/commits?author=leafac), [Javalin](https://github.com/tipsy/javalin/commits?author=leafac).
+- **Homebrew:** [Homebrew Core](https://github.com/Homebrew/homebrew-core/commits?author=leafac), [Homebrew Casks](https://github.com/Homebrew/homebrew-cask/commits?author=leafac), [Homebrew Fonts](https://github.com/Homebrew/homebrew-cask-fonts/commits?author=leafac).
 
 Archived
 --------

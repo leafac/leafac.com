@@ -6,7 +6,7 @@ table-of-contents: true
 ---
 
 <aside markdown="1">
-**Pre-requisites**: Functional programming with pattern matching, and the basics of [Racket](https://docs.racket-lang.org/quick/index.html).  
+**Pre-requisites:** Functional programming with pattern matching, and the basics of [Racket](https://docs.racket-lang.org/quick/index.html).  
 Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 </aside>
 
