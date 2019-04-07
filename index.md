@@ -487,6 +487,11 @@ Archived
 Music
 =====
 
+Bushwhacking
+------------
+
+<video src="https://archive.org/download/bushwhacking/bushwhacking.mp4" controls preload="metadata"></video>
+
 My First Robot
 --------------
 
