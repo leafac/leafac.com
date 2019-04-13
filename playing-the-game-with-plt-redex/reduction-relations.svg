@@ -10,9 +10,9 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="300.30692"
-   height="115.99413"
-   viewBox="0 0 300.30692 115.99413"
+   width="317.56265"
+   height="118.22313"
+   viewBox="0 0 317.56266 118.22313"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.2 5c3e80d, 2017-08-06"
@@ -76,7 +76,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="2.0109589"
      inkscape:cx="168.89603"
-     inkscape:cy="58.670776"
+     inkscape:cy="58.670773"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -95,7 +95,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -103,25 +103,25 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-3.6039748,-85.196293)">
+     transform="translate(-3.6039748,-82.967293)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13px;line-height:1.25;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
-       x="61.089596"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+       x="65.0896"
        y="94.855293"
        id="text12"><tspan
          sodipodi:role="line"
          id="tspan10"
-         x="61.089596"
+         x="65.0896"
          y="94.855293">Metafunction</tspan></text>
     <text
        id="text16"
        y="94.855293"
-       x="246.24113"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:13px;line-height:1.25;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
+       x="250.24113"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Charter;-inkscape-font-specification:'Charter Bold';text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none"
        xml:space="preserve"><tspan
          y="94.855293"
-         x="246.24113"
+         x="250.24113"
          id="tspan14"
          sodipodi:role="line">Reduction Relation</tspan></text>
     <g

@@ -12,8 +12,6 @@ Values
 
 Numbers in the surface language are encoded in the core language using functions that receive one function `f` and one arbitrary argument `x`, and apply `f` to `x` *number* times:
 
-<div class="full-width" markdown="1">
-
 | Surface Language Number | Core Language Encoding | `f` is applied to `x` *number* times |
 |:-:|-|:-:|
 | `0` | `(λ (f) (λ (x)                x))`      | 0 |
@@ -23,8 +21,6 @@ Numbers in the surface language are encoded in the core language using functions
 | `4` | `(λ (f) (λ (x)    (f (f (f (f x))))))`  | 4 |
 | `5` | `(λ (f) (λ (x) (f (f (f (f (f x)))))))` | 5 |
 | ⋮ | ⋮ | ⋮ |
-
-</div>
 
 In general, the core language encoding has the form `(λ (f) (λ (x) eᵇ))`, in which `eᵇ` is `(f (f (... x)))` where `f` appears *number* times. We can use Racket’s [`for/fold`](https://docs.racket-lang.org/reference/for.html#%28form._%28%28lib._racket%2Fprivate%2Fbase..rkt%29._for%2Ffold%29%29) form to generate the program fragment `eᵇ`. We start with `eᵇ` being `x`, and count up to the number `n` given in the surface language, wrapping the fragment with another call to `f` in each step. The following is the complete `expand` clause:
 

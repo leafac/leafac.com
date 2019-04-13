@@ -10,10 +10,12 @@ In this section we give a high level view of a miscellanea of other PLT Redex f
 Conditions
 ==========
 
-The forms for manipulating terms can do more than just pattern matching on the input terms to determine whether a clause contributes to the output. They can apply [metafunctions](metafunctions) and [reduction relations](reduction-relations), they can query [predicate relations](predicate-relations) and [judgment forms](judgment-forms), and they can perform arbitrary computations with the `side-condition` form. For example, the following predicate relation uses a `side-condition` form to check that the `board` has rows of matching length:<label class="margin-note"><input type="checkbox"><span markdown="1">Ellipses with suffixes (`..._<suffix>`) would be a more straightforward way of achieving the same goal.</span></label>
+The forms for manipulating terms can do more than just pattern matching on the input terms to determine whether a clause contributes to the output. They can apply [metafunctions](metafunctions) and [reduction relations](reduction-relations), they can query [predicate relations](predicate-relations) and [judgment forms](judgment-forms), and they can perform arbitrary computations with the `side-condition` form. For example, the following predicate relation uses a `side-condition` form to check that the `board` has rows of matching length (ellipses with suffixes (`..._<suffix>`) would be a more straightforward way of achieving this same goal):
 
-<div class="code-block" markdown="1">
+<figure markdown="1">
+<figcaption markdown="1">
 `other-features.rkt`
+</figcaption>
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
@@ -37,21 +39,24 @@ The forms for manipulating terms can do more than just pattern matching on the i
                                        [● ●])))
             #f)
 ```
-</div>
+</figure>
 
 Unquoting
 =========
 
-We can use arbitrary computations to define extra [conditions](#conditions) under which a clause contributes to the output, and we can also use arbitrary computations to define that output. We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`),<label class="margin-note"><input type="checkbox"><span markdown="1">The `term` form is similar to the [quasiquote](https://docs.racket-lang.org/guide/qq.html), but it is aware of names defined with `define-term` as well as metafunctions, reduction relations and so forth.</span></label> for example:
+We can use arbitrary computations to define extra [conditions](#conditions) under which a clause contributes to the output, and we can also use arbitrary computations to define that output. We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`), for example:
 
+<figure markdown="1">
 ```racket
 (test-equal (term (1 2 ,(+ 1 2)))
             '(1 2 3))
 ```
+<figcaption markdown="1">
+The `term` form is similar to the [quasiquote](https://docs.racket-lang.org/guide/qq.html), but it is aware of names defined with `define-term` as well as metafunctions, reduction relations and so forth.
+</figcaption>
+</figure>
 
 In the listing above, the `,(+ 1 2)` form means “*escape* from the term back to Racket, compute `(+ 1 2)` and place the result here.”
-
-* * *
 
 [Previously](terms), we used `define-term` to name terms, for example:
 
@@ -81,8 +86,6 @@ In terms, we unquote to escape back to Racket and access the name, for example:
             '○)
 ```
 
-* * *
-
 The `define-term` form *is not* a shorthand for `(define ___ (term ___))` because names defined with `define-term` are only available in other terms, not directly in Racket. If we try to access in Racket a name defined with `define-term`, for example, `a-peg`, the result is a syntax error:
 
 ```racket
@@ -98,8 +101,6 @@ The converse also holds: names defined with `define` are only available directly
 ```
 
 In the listing above, the `a-space` in `term` is interpreted as a symbol, not as a reference to the Racket variable `a-space`. This is a common pitfall, so *pay attention to the different contexts and do not mix Racket with terms*.
-
-* * *
 
 With `unquote` we can access names defined with `define` from within terms and mix them with names defined with `define-term`, for example:
 
@@ -117,8 +118,6 @@ We can use the `term` form from within `unquote`:
             '(● ● ○))
 ```
 
-* * *
-
 In the following example, we define a `count-●` metafunction to count how many pegs there are in a board by unquoting and relying on Racket’s functions for manipulating lists:
 
 ```racket
@@ -133,17 +132,10 @@ In the following example, we define a `count-●` metafunction to count how many
 
 The listing above matches the input board with the pattern `([position ...] ...)`, so the name `position` in the template refers to a list of lists of `position`s. We use the template `(position ... ...)` to *flatten* this list of lists. We then unquote and use Racket’s `count` to count how many `position`s are `equal?` to pegs (`●`).
 
-* * *
-
 In summary:
 
-<div class="full-width" markdown="1">
-
-| | `define` | Racket | terms | `unquote` | `,peg` |
-| | `define-term` | terms | Racket | `term` | `(term space)` |
-| **Names defined with** | **______ are available in** | **_______ but can be accessed in** | **_______ with** | **________, for example,** | **_______** |
-
-</div>
+- Names defined with **`define`** are available in **Racket** but can be accessed in **terms** with **`unquote`**, for example, **`,peg`**.
+- Names defined with **`define-term`** are available in **terms** but can be accessed in **Racket** with **`term`**, for example, **`(term space)`**.
 
 Extensions and Holes
 ====================
@@ -168,7 +160,7 @@ The `Peg-Solitaire` language includes all names in `peg-solitaire` as well as th
   [Board    ::= (row ... hole row ...)])
 ```
 
-The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special pattern built into PLT Redex.<label class="margin-note"><input type="checkbox"><span markdown="1">Similar to how `any` is a special pattern built into PLT Redex.</span></label> A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
+The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special pattern built into PLT Redex, similar to how `any` is a special pattern built into PLT Redex. A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
 
 ```racket
 (test-equal (redex-match? Peg-Solitaire (in-hole Board row)
@@ -193,10 +185,9 @@ The pattern `(in-hole Board row)` means “the `Board` is a `board` with a `row`
 
 The first match, for example, means the missing `row` in the `Board` is the last one.
 
-* * *
+With `Peg-Solitaire` and `Board`s with `hole`s, we can shorten the definition of the [`⇨` reduction relation](reduction-relations). We define the `⇨/hole` reduction relation that extends `⇨` and replaces the `→` clause with a simpler definition using `in-hole`:
 
-With `Peg-Solitaire` and `Board`s with `hole`s, we can shorten the definition of the [`⇨` reduction relation](reduction-relations). We define the `⇨/hole` reduction relation that extends `⇨` and replaces the `→` clause with a simpler definition using `in-hole`:<label class="margin-note"><input type="checkbox"><span markdown="1">The `→` clause is *replaced* because we use the same name as the clause in the original `⇨` reduction relation. If we had used a different name, the new clause would be *added* to the extended reduction relation.</span></label>
-
+<figure markdown="1">
 ```racket
 (define
   ⇨/hole
@@ -209,8 +200,12 @@ With `Peg-Solitaire` and `Board`s with `hole`s, we can shorten the definition of
         (in-hole Board [position_1 ... ○ ○ ● position_2 ...])
         "→")))
 ```
+<figcaption markdown="1">
+The `→` clause is *replaced* because we use the same name as the clause in the original `⇨` reduction relation. If we had used a different name, the new clause would be *added* to the extended reduction relation.
+</figcaption>
+</figure>
 
-The `(in-hole Board [position_1 ... ● ● ○ position_2 ...])` in the input pattern matches a row including the `● ● ○` sequence. This saves us from having to repeat the surroundings by writing `(row_1 ... ___ row_2 ...)`.<label class="margin-note"><input type="checkbox"><span markdown="1">We cannot shorten the definition further by removing the `position_<n> ...` parts because a `hole` cannot match a sequence of `position`s, for example, `● ● ○`.</span></label> The `(in-hole Board [position_1 ... ○ ○ ● position_2 ...])` in the template does the opposite, *plugging* the term `[position_1 ... ○ ○ ● position_2 ...]` in the `hole` we had left in `Board`.
+The `(in-hole Board [position_1 ... ● ● ○ position_2 ...])` in the input pattern matches a row including the `● ● ○` sequence. This saves us from having to repeat the surroundings by writing `(row_1 ... ___ row_2 ...)`. We cannot shorten the definition further by removing the `position_<n> ...` parts because a `hole` cannot match a sequence of `position`s, for example, `● ● ○`. The `(in-hole Board [position_1 ... ○ ○ ● position_2 ...])` in the template does the opposite, *plugging* the term `[position_1 ... ○ ○ ● position_2 ...]` in the `hole` we had left in `Board`.
 
 The `⇨/hole` extended reduction relation works the same as the `⇨` original reduction relation:
 
@@ -254,8 +249,6 @@ The `⇨/hole` extended reduction relation works the same as the `⇨` original 
                [· · ● ○ ● · ·]
                [· · ● ● ● · ·]))))
 ```
-
-* * *
 
 PLT Redex provides other more sophisticated forms for extending languages and reduction relations, for example, `define-union-language` creates a language by joining together the names for patterns from various languages, and `context-closure` defines a reduction relation based on another in a way that saves us from typing `(in-hole ___)` repeatedly, as we did in `⇨/hole`.
 
@@ -310,7 +303,5 @@ The `⇨/judgment-form` judgment form as automatically typeset by PLT Redex.
 </figure>
 
 This default typesetting may be unsatisfactory, for example, we may wish that `⇨/judgment-form` is infix instead of prefix. PLT Redex offers forms to customize the typesetting.
-
-* * *
 
 Next, we cover the [limitations](limitations) in PLT Redex.

@@ -15,8 +15,6 @@ We covered the basics of PLT Redex without going into programming-language theo
 
 With these definitions in place, we used PLT Redex [visualization](visualization) tools to play Peg Solitaire. We then explored [other features](other-features), including extra conditions for a clause to contribute to the output, unquoting, holes, testing and typesetting. We also discussed some [limitations](limitations), including debugging, performance, and more advanced pattern matching; the lack of metaparameters, parallel reduction and higher-order metafunctions; how definition extensions do not reinterpret dependent definitions; how it can be difficult to customize typeset figures; and how PLT Redex is not appropriate for mechanized formal proofs.
 
-* * *
-
 You now know enough to read the more advanced material on PLT Redex, and understanding the tool will help you read papers in programming-language theory.
 
 Acknowledgments

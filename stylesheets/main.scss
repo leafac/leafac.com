@@ -1,226 +1,119 @@
 ---
 ---
 
-// ---------------------------------------------------------------------------------------------------
-// AUXILIARY
-
 @import "normalize.css";
-
-@function rem($px) {
-  @return #{round($px/16px * 100) / 100}rem;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// GRID
-
-// |                bigger-screens                   |
-// |                     1024                        |
-// |         |           body              |         |
-// |         |           1000              |         |
-// | padding | main | gutter | margin-note | padding |
-// |   12    | 600  |   75   |     325     |   12    |
-//                  |   margin-note--pull  |
-//                  |         400          |
-
-// |     smaller-screens      |
-// |           624            |
-// | padding | main | padding |
-// |   12    | 600  |   12    |
-
-$grid--body:              rem(1000px);
-$grid--padding:           rem(12px);
-$grid--main:              rem(600px);
-$grid--margin-note:       rem(325px);
-$grid--margin-note--pull: rem(400px);
-@mixin bigger-screens  { @media (min-width: rem(1024px)) { @content; } }
-@mixin smaller-screens { @media (max-width: rem(1023px)) { @content; } }
-
-// ---------------------------------------------------------------------------------------------------
-// SPACES
-
-$space--none:              0;
-$space--extra-small:       0.2rem;
-$space--small:             0.5rem;
-$space--medium:            1rem;
-$space--large:             1.5rem;
-$space--extra-large:       2rem;
-
-// ---------------------------------------------------------------------------------------------------
-// TEXT
-
-$font-family--main:      "Charter", "Iowan Old Style", "Georgia", serif;
-$font-family--monospace: "Iosevka", "Menlo", "Monaco", "Courier New", monospace;
-$font-size--extra-small: rem(9px);
-$font-size--small:       rem(13px);
-$font-size--medium:      rem(16px);
-$font-size--large:       rem(20px);
-$font-size--extra-large: rem(22px);
-$line-height--small:     1.3;
-$line-height--medium:    1.5;
-$text-indent:            1.5rem;
-
-// ---------------------------------------------------------------------------------------------------
-// BORDERS
-
-$border-width:  1px;
-$border-radius: $space--extra-small;
-
-// ---------------------------------------------------------------------------------------------------
-// MIXINS
-
-@mixin insertion {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-  margin: $space--small $space--none;
-}
-
-@mixin box {
-  @include insertion;
-  border: $border-width solid;
-  border-radius: $border-radius;
-  padding: $text-indent;
-  padding-left: calc($text-indent - $border-width);
-}
-
-@mixin superscript {
-  vertical-align: super;
-  font-size: $font-size--extra-small;
-  font-weight: 700;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// FONTS
 
 @font-face {
   font-family: "Charter";
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  font-stretch: normal;
   src: url("/fonts/charter_regular-webfont.woff") format("woff");
 }
 
 @font-face {
   font-family: "Charter";
+  font-weight: normal;
   font-style: italic;
-  font-weight: 400;
-  font-stretch: normal;
   src: url("/fonts/charter_italic-webfont.woff") format("woff");
 }
 
 @font-face {
   font-family: "Charter";
+  font-weight: bold;
   font-style: normal;
-  font-weight: 700;
-  font-stretch: normal;
   src: url("/fonts/charter_bold-webfont.woff") format("woff");
 }
 
 @font-face {
   font-family: "Charter";
+  font-weight: bold;
   font-style: italic;
-  font-weight: 700;
-  font-stretch: normal;
   src: url("/fonts/charter_bold_italic-webfont.woff") format("woff");
 }
 
 @font-face {
   font-family: "Iosevka";
+  font-weight: normal;
   font-style: normal;
-  font-weight: 400;
-  font-stretch: normal;
   src: url("/fonts/iosevka-regular.woff") format("woff");
 }
 
 @font-face {
   font-family: "Iosevka";
+  font-weight: normal;
   font-style: italic;
-  font-weight: 400;
-  font-stretch: normal;
   src: url("/fonts/iosevka-italic.woff") format("woff");
 }
 
 @font-face {
   font-family: "Iosevka";
+  font-weight: bold;
   font-style: normal;
-  font-weight: 700;
-  font-stretch: normal;
   src: url("/fonts/iosevka-bold.woff") format("woff");
 }
 
 @font-face {
   font-family: "Iosevka";
+  font-weight: bold;
   font-style: italic;
-  font-weight: 700;
-  font-stretch: normal;
   src: url("/fonts/iosevka-bolditalic.woff") format("woff");
 }
 
-// ---------------------------------------------------------------------------------------------------
-// GRID
-
-*, *::before, *::after {
-  outline: none;
-}
-
 body {
-  margin: $space--none auto;
-  padding: $space--medium $grid--padding;
-  max-width: $grid--main;
+  font-family: "Charter", "Georgia", serif;
+  line-height: 1.5;
+  max-width: 600px;
+  padding: 10px;
+  margin: 0 auto;
 }
 
-@include bigger-screens {
-  body {
-    max-width: $grid--body;
-  }
-  main {
-    width: $grid--main;
-  }
-  aside {
-    width: $grid--margin-note;
-    float: right;
-    clear: right;
-    margin-right: -$grid--margin-note--pull;
-    margin-bottom: $space--large;
-  }
+a {
+  color: black;
 }
 
-.full-width {
-  @include insertion;
-  clear: both;
-  @include bigger-screens {
-    width: $grid--body;
-  }
+mark {
+  background-color: rgb(200, 200, 200);
 }
 
-// ---------------------------------------------------------------------------------------------------
-// HEADERS
-
-body > header h1 {
-  margin-top: $space--none;
-  padding-bottom: $space--medium;
-  border-bottom: $border-width solid;
-  margin-bottom: $space--extra-large;
+ins, del {
+  text-decoration: none;
 }
 
-main > header {
-  h1 {
-    margin-bottom: $space--extra-small;
-  }
-  margin-bottom: $space--medium;
+ins {
+  background-color: rgb(221, 230, 199);
+}
+
+del {
+  background-color: rgb(238, 186, 187);
+}
+
+h1, h2 {
+  line-height: 1.25;
+  margin-top: 2rem;
+  a { text-decoration: none; }
+  & + & { margin-top: 1rem; }
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+  font-weight: normal;
+  font-style: italic;
 }
 
 time {
-  font-weight: 400;
-  font-size: $font-size--small;
+  font-size: 0.75rem;
+  display: block;
+  margin-top: -1rem;
 }
 
-.table-of-contents {
-  @include box;
+nav {
   columns: 2;
-  ol {
-    margin: $space--none;
-  }
+  margin: 2rem 0;
+  ol { margin: 0; }
   a {
     text-decoration: none;
     &.active {
@@ -229,224 +122,37 @@ time {
   }
 }
 
-// ---------------------------------------------------------------------------------------------------
-// HEADINGS
-
-h1, h2  {
-  margin-top: $space--extra-large;
-  margin-bottom: $space--small;
-  line-height: $line-height--small;
-  font-weight: 400;
-  a {
-    text-decoration: none;
-  }
-  & + & {
-    margin-top: $space--medium;
-  }
-}
-
-body > header h1 {
-  font-size: $font-size--medium;
-}
-
-main > header h1 {
-  font-size: $font-size--extra-large;
-}
-
-h1 {
-  font-size: $font-size--large;
-  font-style: italic;
-}
-
-h2 {
-  font-size: $font-size--medium;
-  font-weight: 700;
-}
-
-hr {
-  border: none;
-  margin: $space--extra-large;
-  &::before {
-    display: block;
-    text-align: center;
-    content: "* * *";
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// BODY
-
-body {
-  font-synthesis: none;
-  font-kerning: normal;
-  text-rendering: optimizeLegibility;
-  font-family: $font-family--main;
-  font-size: $font-size--medium;
-  line-height: $line-height--medium;
-}
-
-p {
-  margin: $space--none;
-  p + & {
-    text-indent: $text-indent;
-  }
-  @include bigger-screens {
-    p                                 + aside + &,
-    p                         + aside + aside + &,
-    p                 + aside + aside + aside + &,
-    p         + aside + aside + aside + aside + &,
-    p + aside + aside + aside + aside + aside + & {
-      text-indent: $text-indent;
-    }
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// MARGIN NOTES
-
-aside {
-  @include smaller-screens {
-    @include box;
-  }
-
-  @include bigger-screens {
-    font-size: $font-size--small;
-  }
-}
-
-body {
-  counter-reset: margin-note;
-}
-
-.margin-note {
-  &::before {
-    @include superscript;
-    counter-increment: margin-note;
-    content: counter(margin-note);
-  }
-  & > input[type="checkbox"] {
-    display: none;
-    @include smaller-screens {
-      &:checked + span {
-        display: block;
-      }
-    }
-  }
-  & > span {
-    @extend aside;
-    text-indent: $space--none;
-    &::before {
-      @include superscript;
-      content: counter(margin-note);
-      margin-right: $space--small;
-    }
-    @include smaller-screens {
-      display: none;
-    }
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// FIGURES
-
 figure {
-  @include insertion;
-  text-align: center;
-}
-
-figcaption {
   font-style: italic;
-  font-size: $font-size--small;
+  text-align: center;
+  margin: 2rem 0;
 }
 
-img, svg {
+img, svg, video {
   max-width: 100%;
   height: auto;
+  border-radius: 3px;
 }
 
-video, audio {
+audio {
   width: 100%;
-  height: auto;
 }
-
-// ---------------------------------------------------------------------------------------------------
-// CODE
 
 pre, code {
-  font-family: $font-family--monospace;
+  font-family: "Iosevka", "Courier New", monospace;
   font-variant-ligatures: none;
 }
 
-pre, .code-block {
-  @include insertion;
-  font-size: $font-size--small;
-}
-
 pre {
-  @include box;
-  overflow: auto;
-  .code-block & {
-    margin: $space--none;
-  }
-}
-
-// ---------------------------------------------------------------------------------------------------
-// LISTS
-
-ul, ol {
-  @include insertion;
-  padding-left: $text-indent;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// TABLES
-
-table {
-  @include insertion;
-}
-
-th, td {
-  padding: $space--none;
-  padding-right: $space--medium;
-  &:last-child {
-    padding-right: $space--none;
-  }
-}
-
-th {
-  font-weight: 700;
+  font-size: 0.75rem;
+  font-style: normal;
   text-align: left;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// REFERENCES
-
-a {
-  color: black;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// DETAILS
-
-details {
-  @include insertion;
+  overflow: auto;
+  padding: 1rem;
+  border: 1px solid black;
+  border-radius: 3px;
 }
 
 summary {
   cursor: pointer;
-}
-
-// ---------------------------------------------------------------------------------------------------
-// INLINE
-
-mark {
-  background-color: #ddd;
-}
-
-.success {
-  color: green;
-}
-
-.error {
-  color: red;
 }

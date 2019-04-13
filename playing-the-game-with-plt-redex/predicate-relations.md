@@ -5,7 +5,7 @@ date: 2018-09-30
 table-of-contents: true
 ---
 
-When we looked at [reduction relations](reduction-relations), we were interested in transforming terms. We defined clauses with patterns to match against inputs, and templates to produce outputs. But in some cases we are only interested in whether the inputs satisfy certain conditions, for example, whether a board is a winning board.<label class="margin-note"><input type="checkbox"><span markdown="1">A board is a winning board if [it contains a single peg](peg-solitaire-rules).</span></label> If we were to define that as a reduction relation, then the output templates would be booleans. For this special case, PLT Redex provides the [`define-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-relation%29%29) form to define *predicate relations*:
+When we looked at [reduction relations](reduction-relations), we were interested in transforming terms. We defined clauses with patterns to match against inputs, and templates to produce outputs. But in some cases we are only interested in whether the inputs satisfy certain conditions, for example, whether a board is a winning board—that is, whether [it contains a single peg](peg-solitaire-rules). If we were to define that as a reduction relation, then the output templates would be booleans. For this special case, PLT Redex provides the [`define-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-relation%29%29) form to define *predicate relations*:
 
 ```racket
 (define-relation <language>
@@ -21,8 +21,10 @@ When we looked at [reduction relations](reduction-relations), we were interested
 
 Predicate relations typically check whether a program is well formed, whether a type is a subtype of another type, and so forth. We define a predicate relation to check whether a board is a winning board:
 
-<div class="code-block" markdown="1">
+<figure markdown="1">
+<figcaption markdown="1">
 `predicate-relations.rkt`
+</figcaption>
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
@@ -35,7 +37,7 @@ Predicate relations typically check whether a program is well formed, whether a 
                     [· ... ○ ... · ...]
                     ...))])
 ```
-</div>
+</figure>
 
 The contract `winning-board? ⊆ board` says that the `winning-board?` predicate relation is only defined over boards—it would not make sense to ask this question about terms that are not boards. We use the symbol for subsetting (`⊆`) because only *some* boards are winning boards.
 
@@ -59,8 +61,6 @@ We query the predicate relation by applying it, similar to a [metafunction](meta
 ```
 
 The predicate relation only holds for the `example-winning-board`.
-
-* * *
 
 We will use the predicate relation `winning-board?` in a [later section](limitations) when trying to use our model to win Peg Solitaire:
 

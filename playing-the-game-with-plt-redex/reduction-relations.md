@@ -5,6 +5,9 @@ date: 2018-09-30
 table-of-contents: true
 ---
 
+Relations and Nondeterministic Computations
+===========================================
+
 In functions, including [metafunctions](metafunctions), each input relates to one output. When we enumerate a function, each input appears only once on the left column, for example:
 
 <pre markdown="1">
@@ -15,7 +18,7 @@ In functions, including [metafunctions](metafunctions), each input relates to on
     ·                     ·
 </pre>
 
-A function<label class="margin-note"><input type="checkbox"><span markdown="1">Or, equivalently, a method, a procedure, a routine, and so forth.</span></label> is not a natural way to model moves in Peg Solitaire, because there might be multiple moves available for a given board. If functions were all we had, then we could encode our intent with a `⇨/function` that returned a *set* of output boards, for example:
+A function (or a method, a procedure, a routine, and so forth) is not a natural way to model moves in Peg Solitaire, because there might be multiple moves available for a given board. If functions were all we had, then we could encode our intent with a `⇨/function` that returned a *set* of output boards, for example:
 
 <pre markdown="1">
 <strong>        board                  (⇨/function board)</strong>
@@ -60,16 +63,14 @@ A function<label class="margin-note"><input type="checkbox"><span markdown="1">O
                        ⋮
 </pre>
 
-But a function is just a special case of *relation*, which may relate one input to multiple outputs. While all functions are relations, not all relations are functions. When we enumerate a relation that may not be a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to model moves in Peg Solitaire:
-
-<aside markdown="1">
 <figure>
 {% include_relative reduction-relations.svg%}
 <figcaption markdown="1">
 On a fork on the road, when multiple clauses include patterns that match the input, a metafunction chooses the first path, while a reduction relation follows them all.
 </figcaption>
 </figure>
-</aside>
+
+But a function is just a special case of *relation*, which may relate one input to multiple outputs. While all functions are relations, not all relations are functions. When we enumerate a relation that may not be a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to model moves in Peg Solitaire:
 
 <pre markdown="1">
 <strong>        board                       (⇨ board)</strong>
@@ -117,9 +118,9 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
 
 <pre>
     ● ● ●             ● ● ●
-    ● <span class="success">●</span> ●             ● ○ ●
-● ● ● <span class="error">●</span> ● ● ●     ● ● ● <span class="error">○</span> ● ● ●
-● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> ● ● ●
+    ● <ins>●</ins> ●             ● ○ ●
+● ● ● <del>●</del> ● ● ●     ● ● ● <del>○</del> ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <ins>●</ins> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -127,7 +128,7 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <span class="error">●</span> <span class="success">●</span> ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> <span class="error">○</span> ○ ●
+● ● ● ○ <del>●</del> <ins>●</ins> ●  ➡  ● ● ● <ins>●</ins> <del>○</del> ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -135,33 +136,24 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  <span class="success">➡</span>  ● ● ● <span class="success">●</span> ● ● ●
-● ● ● <span class="error">●</span> ● ● ●     ● ● ● <span class="error">○</span> ● ● ●
-    ● <span class="success">●</span> ●             ● ○ ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <ins>●</ins> ● ● ●
+● ● ● <del>●</del> ● ● ●     ● ● ● <del>○</del> ● ● ●
+    ● <ins>●</ins> ●             ● ○ ●
     ● ● ●             ● ● ●
 
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <span class="success">●</span> <span class="error">●</span> ○ ● ● ●  <span class="success">➡</span>  ● ○ <span class="error">○</span> <span class="success">●</span> ● ● ●
+● <ins>●</ins> <del>●</del> ○ ● ● ●  ➡  ● ○ <del>○</del> <ins>●</ins> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 
 
-<span class="success">●</span> jumps over <span class="error">●</span>
+<ins>●</ins> jumps over <del>●</del>
 </pre>
 
 Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that may not be functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
-
-<aside markdown="1">
-The `reduction-relation` form returns the reduction relation as a value, unlike the other forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
-
-```racket
-(define <name>
-  (reduction-relation ___))
-```
-</aside>
 
 ```racket
 (reduction-relation
@@ -179,12 +171,21 @@ The `reduction-relation` form returns the reduction relation as a value, unlike 
 - `<template>`: A template for the output.
 - `<name>`: A name for the clause.
 
+The `reduction-relation` form returns the reduction relation as a value, unlike the other forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
+
+```racket
+(define <name>
+  (reduction-relation ___))
+```
+
 The shape of the `reduction-relation` form is similar to that of `define-metafunction`: it is a series of clauses with patterns for the inputs and templates for the outputs. The difference between the two is in how they proceed when multiple clauses match the input: while a metafunction follows the definition order and chooses *the first* clause that matches, a relation chooses *all* clauses. We say metafunctions compute *deterministically*, because an input *determines* exactly one output, while relations may compute *nondeterministically*.
 
-* * *
+The `⇨` Reduction Relation
+==========================
 
-The `⇨` reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:<label class="margin-note"><input type="checkbox"><span markdown="1">In the [Introduction](introduction), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had only defined a dummy empty [language](languages).</span></label>
+The `⇨` reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:
 
+<figure markdown="1">
 ```racket
 (--> (row_1
       ...
@@ -198,6 +199,10 @@ The `⇨` reduction relation has four clauses, one for each kind of move. The fo
       ...)
      "→")
 ```
+<figcaption markdown="1">
+In the [Introduction](introduction), we wrote this clause using `any` patterns, instead of `row` and `position`, because we had only defined a dummy empty [language](languages).
+</figcaption>
+</figure>
 
 In detail:
 
@@ -205,8 +210,9 @@ In detail:
 - `(row_1 ... [position_1 ... ○ ○ ● position_2 ...] row_2 ...)`: The template to build the board after the move. It changes the sequence `● ● ○` into `○ ○ ●`, and reconstructs the surroundings with the names `position_<n>` and  `row_<n>`.
 - `"→"`: The name of the clause.
 
-The clause for when a peg jumps over its neighbor on the left is similar. The clauses for when a peg jumps over its neighbors on the top or bottom follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings involving multiple rows. The named ellipses align the sequence of interest (for example, `● ● ○`) in the same column, because it guarantees that the sequence is preceded by the same number of `position`s in each `row`. For example, the following is the rule for when a peg jumps over its neighbor on the bottom:<label class="margin-note"><input type="checkbox"><span markdown="1">The ellipses `<suffix>`es (for example, `_n`) must only appear in the input pattern, not in the output template.</span></label>
+The clause for when a peg jumps over its neighbor on the left is similar. The clauses for when a peg jumps over its neighbors on the top or bottom follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings involving multiple rows. The named ellipses align the sequence of interest (for example, `● ● ○`) in the same column, because it guarantees that the sequence is preceded by the same number of `position`s in each `row`. For example, the following is the rule for when a peg jumps over its neighbor on the bottom:
 
+<figure markdown="1">
 ```racket
 (--> (row_1
       ...
@@ -224,11 +230,17 @@ The clause for when a peg jumps over its neighbor on the left is similar. The cl
       ...)
      "↓")
 ```
+<figcaption markdown="1">
+The ellipses `<suffix>`es (for example, `_n`) must only appear in the input pattern, not in the output template.
+</figcaption>
+</figure>
 
 The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and `position_5` of the same length, so the sequence `● ● ○` must appear in the same column. The clause for when a peg jumps over its neighbor on the top is similar, and with it we conclude the definition of `⇨`:
 
-<div class="code-block" markdown="1">
+<figure markdown="1">
+<figcaption markdown="1">
 `reduction-relations.rkt`
+</figcaption>
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
@@ -295,9 +307,7 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
          ...)
         "↑")))
 ```
-</div>
-
-* * *
+</figure>
 
 We can test the `⇨` reduction relation with the [`test-->`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test--~3e%29%29) form:
 
@@ -382,7 +392,7 @@ We can also query the `⇨` reduction relation with the [`apply-reduction-relati
                [· · ● ● ● · ·]))))
 ```
 
-If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next,<label class="margin-note"><input type="checkbox"><span markdown="1">Something called the *transitive closure* of the reduction relation.</span></label> then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
+If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next—something called the *transitive closure* of the reduction relation—then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
 
 ```racket
 > (apply-reduction-relation* ⇨ (term initial-board))
@@ -419,8 +429,6 @@ We can also query just the *final* boards, from which we cannot move further, by
 
   (term ((● ○ ● ○ ● ○ ○)))))
 ```
-
-* * *
 
 The `⇨` relation is enough to play Peg Solitaire using [PLT Redex visualization tools](visualization), and we will need it in later sections:
 

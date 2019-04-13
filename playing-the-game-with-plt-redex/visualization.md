@@ -5,10 +5,12 @@ date: 2018-09-30
 table-of-contents: true
 ---
 
-We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `⇨/judgment-form` [judgment form](judgment-forms)<label class="margin-note"><input type="checkbox"><span markdown="1">The `stepper` form only works on judgment forms with mode `I O` (for example, `⇨/judgment-form`) or `O I`.</span></label> on the `initial-board`:
+We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form runs either the `⇨` [reduction relation](reduction-relations) or the `⇨/judgment-form` [judgment form](judgment-forms) on the `initial-board`:
 
-<div class="code-block" markdown="1">
+<figure markdown="1">
+<figcaption markdown="1">
 `visualization.rkt`
+</figcaption>
 ```racket
 #lang racket
 (require redex "terms.rkt" "reduction-relations.rkt" "judgment-forms.rkt")
@@ -17,7 +19,10 @@ We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form 
 > (stepper ⇨ (term initial-board))
 > (stepper ⇨/judgment-form (term initial-board))
 ```
-</div>
+<figcaption markdown="1">
+The `stepper` form only works on judgment forms with mode `I O` (for example, `⇨/judgment-form`) or `O I`.
+</figcaption>
+</figure>
 
 DrRacket opens the window below:
 
@@ -82,8 +87,6 @@ The next move in the alternate path. The graph at the bottom includes one node f
 </figcaption>
 </figure>
 
-* * *
-
 We accomplished our goal of playing Peg Solitaire by (ab)using PLT Redex.
 
 Traces
@@ -96,12 +99,12 @@ We can explore Peg Solitaire further with the `traces` form, which accepts the s
 > (traces ⇨/judgment-form (term initial-board))
 ```
 
-DrRacket opens the window below:<label class="margin-note"><input type="checkbox"><span markdown="1">The graph rendered by `traces` is the fully expanded version of the graph at the bottom of the `stepper` window.</span></label>
+DrRacket opens the window below:
 
 <figure markdown="1">
 ![](traces-1.png){:width="600"}
 <figcaption markdown="1">
-The tracer explores all possible moves up to a certain number of boards. Click on **Reduce** to explore further.
+The tracer explores all possible moves up to a certain number of boards. This graph is the fully expanded version of the graph at the bottom of the `stepper` window. Click on **Reduce** to explore further.
 </figcaption>
 </figure>
 
@@ -111,7 +114,5 @@ The tracer explores all possible moves up to a certain number of boards. Click o
 When we click on a board, the tracer highlights the moves leading to it and those coming from it. The edges are labeled with the clause associated with the move.
 </figcaption>
 </figure>
-
-* * *
 
 We only explored a small fraction of PLT Redex, in the next section we cover [other features](other-features).

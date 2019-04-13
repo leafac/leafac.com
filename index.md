@@ -481,11 +481,9 @@ attachments:
     PDF: "Facchinetti et al. - Higher-Order Demand-Driven Program Analysis.pdf"
 ---
 
-<aside markdown="1">
 <figure markdown="1">
 ![](avatar.png){:width="200" height="200"}
 </figure>
-</aside>
 
 I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
 
@@ -498,7 +496,7 @@ Contact
 Prose
 =====
 
-- [**A Minimal LaTeX Dissertation Template (for Johns Hopkins University)**](/a-minimal-latex-dissertation-template-for-johns-hopkins-university/)
+- [**A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)**](/a-minimal-latex-dissertation-template-for-the-johns-hopkins-university/)
 - [**Understanding the Type of `call/cc`**](/understanding-the-type-of-call-cc/)
 - [**Playing the Game with PLT Redex**](/playing-the-game-with-plt-redex/)
 - [**Email Migration: The Ultimate Solution to a Ridiculous Problem**](/email-migration/)
@@ -904,7 +902,7 @@ Ph.D. Candidate in Computer Science · Programming Languages
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
-- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills.<label class="margin-note"><input type="checkbox"><span markdown="1">I also took courses in music theory and meditation.</span></label>
+- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
 
   <details markdown="1">
   <summary><strong>Watch my presentations on the Presentation Skills course</strong></summary>
@@ -937,7 +935,8 @@ B.S. in Computer Science
 
 *[Universidade de São Paulo](http://www5.usp.br/).* 2008-02 – 2012-09.
 
-- <aside markdown="span">While I was an undergraduate student, I played the drums in a group similar to a [*Escola de Samba*](https://en.wikipedia.org/wiki/Samba_school).</aside>I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
+- I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
+- I played the drums in a group similar to a [*Escola de Samba*](https://en.wikipedia.org/wiki/Samba_school).
 
 Teaching Experience
 ===================
@@ -1007,13 +1006,14 @@ Work Experience
 [Raise Sistemas](http://raisesistemas.com.br/)
 ----------------------------------------------
 
-*Software developer.* 2014-02 – 2014-08.<label class="margin-note"><input type="checkbox"><span markdown="1">I had to leave Raise Sistemas after six months because I got accepted into a Ph.D. program.</span></label>
+*Software developer.* 2014-02 – 2014-08.
 
 - [Raise Sistemas](http://raisesistemas.com.br/) is a product start-up.
 - I developed new features and maintained an existing medium-sized Ruby on Rails application.
 - I improved the performance of a subsystem for importing users by a factor of 30x.
 - I was part of an agile team that did regular code-reviews, continuous integration and continuous delivery.
 - I worked remotely, while traveling.
+- I had to leave Raise Sistemas after six months because I got accepted into a Ph.D. program.
 
 Das Dad
 -------

@@ -14,8 +14,10 @@ When things go wrong while you are developing your model, PLT Redex generally h
 
 The following listing exemplifies a typical debugging session investigating why a term is not a `board` by reducing terms and patterns:
 
-<div class="code-block" markdown="1">
+<figure markdown="1">
+<figcaption markdown="1">
 `limitations.rkt`
+</figcaption>
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
@@ -40,7 +42,7 @@ The following listing exemplifies a typical debugging session investigating why 
  (redex-match? peg-solitaire position (term *))
  #f)
 ```
-</div>
+</figure>
 
 The term is not a `board` because `*` is not a `position`.
 
@@ -90,14 +92,12 @@ All operations we have covered rely on terms *matching* patterns, but it is ofte
             #t)
 ```
 
-* * *
-
-Similarly, PLT Redex does not include patterns for data structures other than S-expressions, for example, hashes and sets. One workaround is the same as before, to `unquote`, but models that `unquote` too often quickly become unreadable. The best solution is to approximate these data structures using S-expressions, for example, hashes become association lists<label class="margin-note"><input type="checkbox"><span markdown="1">Lists of pairs.</span></label> and sets become lists. The downside of this approach is that the model must provide utilities for manipulating these data structures (adding elements, looking up, and so forth) while guaranteeing the invariants, for example, that set elements are distinct.
+Similarly, PLT Redex does not include patterns for data structures other than S-expressions, for example, hashes and sets. One workaround is the same as before, to `unquote`, but models that `unquote` too often quickly become unreadable. The best solution is to approximate these data structures using S-expressions, for example, hashes become association lists (lists of pairs) and sets become lists. The downside of this approach is that the model must provide utilities for manipulating these data structures (adding elements, looking up, and so forth) while guaranteeing the invariants, for example, that set elements are distinct.
 
 Metaparameters
 ==============
 
-It is common for papers to include a series of definitions which rely on a parameter that remains the same, for example, a parameter that indicates how to allocate addresses. When the context is evident, papers often omit these parameters to improve readability. Because they are parameters in the guest language, we call them *metaparameters*. PLT Redex has no support for metaparameters: we must clutter the definitions by passing them around explicitly.<label class="margin-note"><input type="checkbox"><span markdown="1">There are a few [other alternatives](https://groups.google.com/forum/#!topic/racket-users/cGRMPIoEZas) but they all have their downsides.</span></label> Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
+It is common for papers to include a series of definitions which rely on a parameter that remains the same, for example, a parameter that indicates how to allocate addresses. When the context is evident, papers often omit these parameters to improve readability. Because they are parameters in the guest language, we call them *metaparameters*. PLT Redex has no support for metaparameters: we must clutter the definitions by passing them around explicitly or resort to one of a few [other workarounds](https://groups.google.com/forum/#!topic/racket-users/cGRMPIoEZas), but they all have their downsides. Racket includes a feature to solve the issue, [parameters](https://docs.racket-lang.org/guide/parameterize.html), and we can use them with `unquote`, but then our definitions are no longer *pure*, they may output different results when given the same (explicit) inputs, so we must [turn off PLT Redex’s cache](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._caching-enabled~3f%29%29), aggravating the [performance issue](#performance).
 
 Parallel Reduction
 ==================
@@ -112,7 +112,7 @@ Metafunctions in PLT Redex are first-order: they cannot be passed as arguments,
 Definition Extension Limitations
 ================================
 
-Let `L` be a language, `m` a metafunction, `r` a reduction relation that uses `m`, and `L′`, `m′` and `r′` their respective extensions. The parts of `r′` that use `m` are not reinterpreted to use `m′` and range over `L′`. The only possible workarounds are to copy `r` into the definition fo `r′` and modify uses of `m` to `m′` or be careful in the definitions so that the issue does not occur.<label class="margin-note"><input type="checkbox"><span markdown="1">This is the approach taken in a paper that discusses this limitation, [*An Introduction to Redex with Abstracting Abstract Machines*](https://dvanhorn.github.io/redex-aam-tutorial/#%28part._.A_brief_aside_on_the_caveats_of_language_extensions%29).</span></label>
+Let `L` be a language, `m` a metafunction, `r` a reduction relation that uses `m`, and `L′`, `m′` and `r′` their respective extensions. The parts of `r′` that use `m` are not reinterpreted to use `m′` and range over `L′`. The only possible workarounds are to copy `r` into the definition fo `r′` and modify uses of `m` to `m′` or be careful in the definitions so that the issue does not occur. This is the approach taken in a paper that discusses this limitation, [*An Introduction to Redex with Abstracting Abstract Machines*](https://dvanhorn.github.io/redex-aam-tutorial/#%28part._.A_brief_aside_on_the_caveats_of_language_extensions%29).
 
 Customized Typesetting
 ======================
@@ -123,7 +123,5 @@ Formal Proofs
 =============
 
 PLT Redex is a lightweight modeling tool, not a theorem prover or a model checker. It can [check](other-features#checking) propositions to increase your confidence in them with little effort, but if you need mechanized formal proofs, use tools like [Coq](https://coq.inria.fr).
-
-* * *
 
 At this point in our journey, we know enough to follow more advanced material on PLT Redex. In the next section, we list this [related work](related-work).

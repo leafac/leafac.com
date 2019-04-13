@@ -27,12 +27,12 @@ When we introduced patterns, we noted that they are to terms as regular expressi
 
 In programming languages, metafunctions are the small utilities, for example, substituting variables for their values (a metafunction generally notated as `program-fragment[variable\value]`), and evaluating primitive operators (a metafunction generally named `δ`).
 
-* * *
+We define a metafunction to invert a `position`:
 
-We define a metafunction to invert a `position`:<label class="margin-note"><input type="checkbox"><span markdown="1">This metafunction is only for demonstration—we will not use it for playing Peg Solitaire.</span></label>
-
-<div class="code-block" markdown="1">
+<figure markdown="1">
+<figcaption markdown="1">
 `metafunctions.rkt`
+</figcaption>
 ```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
@@ -43,12 +43,16 @@ We define a metafunction to invert a `position`:<label class="margin-note"><inpu
   [(invert/position space) ●]
   [(invert/position padding) padding])
 ```
-</div>
+<figcaption markdown="1">
+This metafunction is only for demonstration—we will not use it for playing Peg Solitaire.
+</figcaption>
+</figure>
 
 In the listing above, we define the `invert/position` metafunction for the `peg-solitaire` language. Its input and output are `position`s. The `invert/position` metafuction compares the input to each of the patterns in turn: `peg`, `space`, and `padding`. The first pattern that matches determines the metafunction output: `○`, `●`, and `·`, respectively. The last clause exemplifies how a name in the pattern (`padding`) is available in the template.
 
-We use a metafunction by applying it on terms:<label class="margin-note"><input type="checkbox"><span markdown="1">We write `(term (invert/position ●))`, *not* `(invert/position (term ●))`.</span></label>
+We use a metafunction by applying it on terms:
 
+<figure markdown="1">
 ```racket
 (test-equal (term (invert/position ●))
             (term ○))
@@ -57,6 +61,10 @@ We use a metafunction by applying it on terms:<label class="margin-note"><input 
 (test-equal (term (invert/position ·))
             (term ·))
 ```
+<figcaption markdown="1">
+We write `(term (invert/position ●))`, *not* `(invert/position (term ●))`.
+</figcaption>
+</figure>
 
 We can call a metafunction from any place in which a term might appear, including the definition of another metafunction. To illustrate this, consider the following metafunction that inverts a whole board by calling `invert/position` on each `position`:
 
@@ -79,7 +87,5 @@ The `invert/board` metafunction matches its input to the pattern `([position ..
                    (· · ○ ○ ○ · ·)
                    (· · ○ ○ ○ · ·))))
 ```
-
-* * *
 
 We defined two metafunctions in this section only for illustration—we do not use them to play the game. But the digression is over, because in the next section we cover [reduction relations](reduction-relations), which we use to model Peg Solitaire moves.

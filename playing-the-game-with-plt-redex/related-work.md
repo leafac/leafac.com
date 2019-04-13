@@ -7,7 +7,7 @@ table-of-contents: true
 
 - [PLT Redex website](https://redex.racket-lang.org).
 - [Reference manual](https://docs.racket-lang.org/redex/index.html).
-- [*Semantics Engineering with PLT Redex*](https://mitpress.mit.edu/books/semantics-engineering-plt-redex), by Matthias Felleisen, Robert Bruce Findler, and Matthew Flatt. The book is outdated in parts, and does not cover all features.<label class="margin-note"><input type="checkbox"><span markdown="1">They were developed after the book was published.</span></label> But the first part of the book covers semantics and programming-language theory—which never grows old—and is one of the most comprehensive and accessible materials on those subjects.
+- [*Semantics Engineering with PLT Redex*](https://mitpress.mit.edu/books/semantics-engineering-plt-redex), by Matthias Felleisen, Robert Bruce Findler, and Matthew Flatt. The book is outdated in parts, and does not cover all features, but the first part covers semantics and programming-language theory—which never grows old—and is one of the most comprehensive and accessible materials on those subjects.
 - [*Run Your Research: On the Effectiveness of Lightweight Mechanization*](https://eecs.northwestern.edu/~robby/lightweight-metatheory/popl2012-kcdeffmrtf.pdf), by Casey Klein *et al*. A paper about PLT Redex development.
 - [*PLT Redex FAQ*](https://prl.ccs.neu.edu/blog/2017/09/25/plt-redex-faq/), by Ben Greenman and Sam Caldwell.
 - [*An Introduction to Redex with Abstracting Abstract Machines*](https://dvanhorn.github.io/redex-aam-tutorial/), by David Van Horn.

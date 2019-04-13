@@ -4,9 +4,7 @@ title: "Email Migration: The Ultimate Solution to a Ridiculous Problem"
 date: 2018-05-22
 ---
 
-<aside markdown="1">
 **Pre-requisites:** Familiarity with the command-line.
-</aside>
 
 We switch email clients from time to time, and when we do, we need to migrate the local email history from one application to the other. This may seem easy, because email clients generally include migration assistants and store emails in standard formats, for example, `.eml` and `.mbox`. But recently I was migrating from [Thunderbird](https://www.mozilla.org/en-US/thunderbird/) to [Apple Mail](https://support.apple.com/mail) and these tools failed: they either lost emails, or concatenated all emails together, or created a new mailbox for each email.
 
@@ -34,15 +32,13 @@ Setup
 
 **Backup your local email history. You might lose emails if the migration fails.**
 
-* * *
-
 First, install the local email server, [Dovecot](https://www.dovecot.org). For example, in [macOS](https://www.apple.com/macos/), Dovecot is available via [Homebrew](https://brew.sh):
 
 ```console
 $ brew install dovecot
 ```
 
-Create a directory to hold the local email server mailbox:<label class="margin-note"><input type="checkbox"><span markdown="1">See the [appendix](#appendix-dovecot-configuration) for more details on `dovecot.conf`.</span></label>
+Create a directory to hold the local email server mailbox:
 
 ```console
 $ mkdir <mailbox>
@@ -50,9 +46,10 @@ $ mkdir <mailbox>
 
 Configure Dovecot by replacing the `<placeholders>` on the following template:
 
-<div class="code-block" markdown="1">
-`/usr/local/etc/dovecot/dovecot.conf`<label class="margin-note"><input type="checkbox"><span markdown="1">The path to `dovecot.conf` depends on the installation. For macOS and Homebrew, the appropriate path is `/usr/local/etc/dovecot/dovecot.conf`. Another path appropriate for many installations is `/etc/dovecot/dovecot.conf`.</span></label>
-
+<figure markdown="1">
+<figcaption markdown="1">
+`/usr/local/etc/dovecot/dovecot.conf`
+</figcaption>
 ```configuation
 protocols = imap
 
@@ -85,7 +82,10 @@ auth_debug_passwords = yes
 mail_debug = yes
 verbose_ssl = yes
 ```
-</div>
+<figcaption markdown="1">
+The path to `dovecot.conf` depends on the installation. For macOS and Homebrew, the appropriate path is `/usr/local/etc/dovecot/dovecot.conf`. Another path appropriate for many installations is `/etc/dovecot/dovecot.conf`. See the [appendix](#appendix-dovecot-configuration) for more details on `dovecot.conf`.
+</figcaption>
+</figure>
 
 - `<user>` and `<group>`: Refer to `id(1)`. For example, on my machine
 
@@ -105,37 +105,33 @@ Migrate
 
 Start the local email server:
 
-<aside markdown="1">
-- `ulimit -n`: Dovecot needs to open more than the default limit of 256 files.  
-- `sudo`: Dovecot needs to bind to a network port below 1024. Specifically, port 143, for IMAP.  
-- `/usr/local/sbin/dovecot`: Path to the `dovecot(1)` executable installed via Homebrew. Another common path is `/usr/sbin/dovecot`.  
-- `-F`: Run Dovecot in the foreground, instead of as a daemon. Stop it with `Ctrl + C`.
-</aside>
-
 ```console
 $ ulimit -n 1024 && sudo /usr/local/sbin/dovecot -F
 ```
 
+- `ulimit -n`: Dovecot needs to open more than the default limit of 256 files.  
+- `sudo`: Dovecot needs to bind to a network port below 1024. Specifically, port 143, for IMAP.  
+- `/usr/local/sbin/dovecot`: Path to the `dovecot(1)` executable installed via Homebrew. Another common path is `/usr/sbin/dovecot`.  
+- `-F`: Run Dovecot in the foreground, instead of as a daemon. Stop it with `Ctrl + C`.
+
 Confirm that the local email server is running by inspecting the startup log messages and the contents of the `<mailbox>`. Dovecot must have created its administration files and directories, otherwise review the steps thus far.
 
-* * *
+Connect the email clients (for example, Thunderbird and Apple Mail) to the local email server using the following settings:
 
-Connect the email clients (for example, Thunderbird and Apple Mail) to the local email server using the following settings:<label class="margin-note"><input type="checkbox"><span markdown="1">An email client may insist having a server to send emails (SMTP). Let this part of the configuration fail or reuse the settings from another account. Also, ignore warnings about insecure connections. We have setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available to the local machine.</span></label>
+| **Email Address** | `<user>@localhost` |
+| **Server** | `localhost` |
+| **Protocol** | IMAP |
+| **Port** | 143 |
+| **User** | `<user>` |
+| **Password** | `<password>` |
 
-<aside markdown="1">
-If you change Dovecot’s configuration (`dovecot.conf`), restart it or run the following command on a separate terminal:
+An email client may insist on having a server to send emails (SMTP). Let this part of the configuration fail or reuse the settings from another account. Also, ignore warnings about insecure connections. We have setup Dovecot insecurely on purpose because it is simpler and sufficient—the email server should only be available to the local machine.
+
+If you need to change Dovecot’s configuration (`dovecot.conf`), restart it or run the following command on a separate terminal:
 
 ```console
 $ sudo doveadm reload
 ```
-</aside>
-
-| Email Address | `<user>@localhost` |
-| Server | `localhost` |
-| Protocol | IMAP |
-| Port | 143 |
-| User | `<user>` |
-| Password | `<password>` |
 
 On the old email client, move emails from the local folders to the local email server. Then, on the new email client, move emails from the local email server to the local folders. Finally, close the email clients for them to commit pending transactions and check the `<mailbox>`, which should only contain empty directories and Dovecot’s administration files.
 
@@ -159,9 +155,7 @@ $ brew uninstall dovecot
 Appendix: Dovecot Configuration
 ===============================
 
-<aside markdown="1">
 Refer to [Dovecot’s documentation](https://www.dovecot.org/documentation.html) for more details.
-</aside>
 
 Dovecot supports many kinds of services, for example, the IMAP and POP3 email server protocols. In our local email server, we only want the IMAP service:
 
