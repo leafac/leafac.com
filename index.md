@@ -1,15 +1,24 @@
 ---
 layout: default
+
 # ADDING A PUBLICATION
 #
-# 1. Export from Zotero with format “BibTeX” and and “Export Files” enabled.
-# 2. Export from Zotero with format “CSL JSON”.
-# 3. Cleanup the generated BibTeX entry (for example, remove the ‘file’ entry).
-# 4. Cleanup the tabs in the generated JSON (replace them with two spaces).
-# 5. Upload PDF to server.
-# 6. Copy JSON here.
-# 7. Copy BibTeX entry here.
-# 8. Copy PDF file name here.
+# - Add publication to Zotero.
+#   - Authors: Use ‘Literal’.
+#   - Abstract: Don’t use paragraphs. If multilingual, use a soft line break (two spaces followed by newline).
+# - Export from Zotero.
+#   - Format ‘BibTeX’ and ‘Export Files’ enabled.
+#   - Format ‘CSL JSON’.
+# - Format generated BibTeX.
+#   - Remove the ‘file’ entry.
+#   - Use four spaces for indentation.
+# - Upload PDF to server.
+# - Copy data here.
+#   - JSON.
+#   - BibTeX.
+#   - PDF file name.
+# - Replace tabs with two spaces.
+
 publications:
   [
     {
@@ -17,7 +26,7 @@ publications:
       "type": "speech",
       "title": "What is Your Function? Static Pattern Matching on Function Behavior",
       "event": "The 17th Symposium on Trends in Functional Programming (TFP 2016)",
-      "abstract": "We define a new notion of *function pattern*, which supports run-time pattern matching on functions based on their behavior. The ability to run-time dispatch on function type information enables new programmer expressiveness, including support of overloading on higher-order functions as well as other useful patterns.  \nWe formally present a type inference system for function patterns. The system answers questions of function pattern matching by recursively invoking the type inference algorithm. The recursive invocation contains some delicate issues of self-referentiality that we address.",
+      "abstract": "We define a new notion of *function pattern*, which supports run-time pattern matching on functions based on their behavior. The ability to run-time dispatch on function type information enables new programmer expressiveness, including support of overloading on higher-order functions as well as other useful patterns. We formally present a type inference system for function patterns. The system answers questions of function pattern matching by recursively invoking the type inference algorithm. The recursive invocation contains some delicate issues of self-referentiality that we address.",
       "URL": "http://tfp2016.org/",
       "author": [
         {
@@ -316,19 +325,17 @@ publications:
       "title": "Higher-Order Demand-Driven Program Analysis",
       "container-title": "ACM Transactions on Programming Languages and Systems (TOPLAS)",
       "source": "Zotero",
-      "abstract": "Developing accurate and efficient program analyses for languages with higher-order functions is known to be difficult. Here we define a new higher-order program analysis, Demand-Driven Program Analysis (DDPA), which extends well-known *demand-driven* lookup techniques found in first-order program analyses to higher-order programs.\n\nThis task presents several unique challenges to obtain good accuracy, including the need for a new method for demand-driven lookup of non-local variable values. DDPA is flow- and context-sensitive and provably polynomial-time. To efficiently implement DDPA we develop a novel pushdown automaton metaprogramming framework, the Pushdown Reachability automaton (PDR). The analysis is formalized and proved sound, and an implementation is described.",
+      "abstract": "Developing accurate and efficient program analyses for languages with higher-order functions is known to be difficult. Here we define a new higher-order program analysis, Demand-Driven Program Analysis (DDPA), which extends well-known *demand-driven* lookup techniques found in first-order program analyses to higher-order programs. This task presents several unique challenges to obtain good accuracy, including the need for a new method for demand-driven lookup of non-local variable values. DDPA is flow- and context-sensitive and provably polynomial-time. To efficiently implement DDPA we develop a novel pushdown automaton metaprogramming framework, the Pushdown Reachability automaton (PDR). The analysis is formalized and proved sound, and an implementation is described.",
+      "note": "Accepted for publication",
       "author": [
         {
-          "family": "Facchinetti",
-          "given": "Leandro"
+          "literal": "Leandro Facchinetti"
         },
         {
-          "family": "Palmer",
-          "given": "Zachary"
+          "literal": "Zachary Palmer"
         },
         {
-          "family": "Smith",
-          "given": "Scott"
+          "literal": "Scott Smith"
         }
       ],
       "issued": {
@@ -336,11 +343,11 @@ publications:
           [
             "2019"
           ]
-        ],
-        "season": "Accepted for publication"
+        ]
       }
     }
   ]
+
 bibtex:
   "http://zotero.org/users/4828827/items/GJMBE3DC": |-
     @techreport{leandro_facchinetti_sdl:_2017,
@@ -396,8 +403,7 @@ bibtex:
     @misc{leandro_facchinetti_what_2016,
         title = {What is {Your} {Function}? {Static} {Pattern} {Matching} on {Function} {Behavior}},
         url = {http://tfp2016.org/},
-        abstract = {We define a new notion of *function pattern*, which supports run-time pattern matching on functions based on their behavior. The ability to run-time dispatch on function type information enables new programmer expressiveness, including support of overloading on higher-order functions as well as other useful patterns.  
-      We formally present a type inference system for function patterns. The system answers questions of function pattern matching by recursively invoking the type inference algorithm. The recursive invocation contains some delicate issues of self-referentiality that we address.},
+        abstract = {We define a new notion of *function pattern*, which supports run-time pattern matching on functions based on their behavior. The ability to run-time dispatch on function type information enables new programmer expressiveness, including support of overloading on higher-order functions as well as other useful patterns. We formally present a type inference system for function patterns. The system answers questions of function pattern matching by recursively invoking the type inference algorithm. The recursive invocation contains some delicate issues of self-referentiality that we address.},
         author = {{Leandro Facchinetti} and {Pottayil Harisanker Menon} and {Zachary Palmer} and {Alexander Rozenshteyn} and {Scott F. Smith}},
         month = jun,
         year = {2016},
@@ -407,7 +413,7 @@ bibtex:
         title = {Pesquisa e {Desenvolvimento} de {Robôs} {Táticos} para {Ambientes} {Internos}},
         shorttitle = {Research and {Development} of {Tactical} {Robots} for {Indoor} {Environments}},
         abstract = {*Este artigo apresenta os trabalhos de pesquisa e desenvolvimento realizados junto ao INCT-SEC voltados para aplicações de monitoramento e segurança de ambientes internos (indoor) com o uso de robôs móveis. Os trabalhos desenvolvidos visam prover os robôs móveis de uma arquitetura de software que implemente um sistema de controle inteligente. O robô móvel deve poder ser controlado em modo tele-operado (operação remota semi-autônoma) ou em modo completamente autônomo. Este sistema deve ser capaz de detectar intrusos e situações anômalas, navegar no ambiente desviando dos obstáculos, garantindo assim a integridade do robô e dos elementos presentes no ambiente.*  
-      This paper describes the INCT-SEC research and development efforts in order to create a mobile robotic platform applied to inspect and to protect indoor environments. We proposed a robotic control architecture and implemented some computational software modules which are used to provide “intelligent behaviors” to the mobile robots. The robot can be remotely controlled based on a semi-autonomous approach, and also it can perform the surveillance tasks in a completely autonomous mode. The system is able to detect intruders and anomalous situations, and also, perform the patrolling task avoiding obstacles and also preserving the integrity of the robot and other environment elements (e.g. people, objects).},
+        This paper describes the INCT-SEC research and development efforts in order to create a mobile robotic platform applied to inspect and to protect indoor environments. We proposed a robotic control architecture and implemented some computational software modules which are used to provide “intelligent behaviors” to the mobile robots. The robot can be remotely controlled based on a semi-autonomous approach, and also it can perform the surveillance tasks in a completely autonomous mode. The system is able to detect intruders and anomalous situations, and also, perform the patrolling task avoiding obstacles and also preserving the integrity of the robot and other environment elements (e.g. people, objects).},
         booktitle = {Internal {Workshop} of {INCT}-{SEC}},
         author = {{Fernando Osório} and {Denis Wolf} and {Kalinka Castelo Branco} and {Jó Ueyama} and {Gustavo Pessin} and {Leandro Fernandes} and {Maurício Dias} and {Leandro Couto} and {Daniel Sales} and {Diogo Correa} and {Matheus Nin} and {Leandro Lourenço Silva} and {Leonardo Bonetti} and {Leandro Facchinetti} and {Fabiano Hessel}},
         month = dec,
@@ -441,15 +447,15 @@ bibtex:
         year = {2010},
     }
   "http://zotero.org/users/4828827/items/2WHK3X28": |-
-    @article{facchinetti_higher-order_2019,
-      title = {Higher-{Order} {Demand}-{Driven} {Program} {Analysis}},
-      abstract = {Developing accurate and efficient program analyses for languages with higher-order functions is known to be difficult. Here we define a new higher-order program analysis, Demand-Driven Program Analysis (DDPA), which extends well-known *demand-driven* lookup techniques found in first-order program analyses to higher-order programs.
-
-    This task presents several unique challenges to obtain good accuracy, including the need for a new method for demand-driven lookup of non-local variable values. DDPA is flow- and context-sensitive and provably polynomial-time. To efficiently implement DDPA we develop a novel pushdown automaton metaprogramming framework, the Pushdown Reachability automaton (PDR). The analysis is formalized and proved sound, and an implementation is described.},
-      journal = {ACM Transactions on Programming Languages and Systems (TOPLAS)},
-      author = {Facchinetti, Leandro and Palmer, Zachary and Smith, Scott},
-      year = {2019},
+    @article{leandro_facchinetti_higher-order_2019,
+        title = {Higher-{Order} {Demand}-{Driven} {Program} {Analysis}},
+        abstract = {Developing accurate and efficient program analyses for languages with higher-order functions is known to be difficult. Here we define a new higher-order program analysis, Demand-Driven Program Analysis (DDPA), which extends well-known *demand-driven* lookup techniques found in first-order program analyses to higher-order programs. This task presents several unique challenges to obtain good accuracy, including the need for a new method for demand-driven lookup of non-local variable values. DDPA is flow- and context-sensitive and provably polynomial-time. To efficiently implement DDPA we develop a novel pushdown automaton metaprogramming framework, the Pushdown Reachability automaton (PDR). The analysis is formalized and proved sound, and an implementation is described.},
+        journal = {ACM Transactions on Programming Languages and Systems (TOPLAS)},
+        author = {{Leandro Facchinetti} and {Zachary Palmer} and {Scott Smith}},
+        year = {2019},
+        note = {Accepted for publication},
     }
+
 attachments:
   "http://zotero.org/users/4828827/items/GJMBE3DC":
     PDF: "Facchinetti - SDL A DSL for Cryptographic Schemes.pdf"
