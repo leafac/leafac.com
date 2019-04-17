@@ -987,6 +987,11 @@ Das Dad
 - I developed a web service in Java EE for a telecom platform and a PHP web administration tool for a video conference system.
 - I taught a course about version control in Git.
 
+Awards
+======
+
+- Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award. 2019-05-06.
+
 Certifications
 ==============
 
