@@ -32,7 +32,7 @@ Transcript
 
 Hi, I’m Leandro Facchinetti and this is *A System for Working on Creative Projects*.
 
-Anyone can start a creative project; the hard part is completing it. You may be writing, recording music, drawing, developing software... whatever your project may be, you’ll face similar challenges when it comes to reaching that finish line.
+Anyone can start a creative project; the hard part is completing it. You may be writing, recording music, drawing, developing software… whatever your project may be, you’ll face similar challenges when it comes to reaching that finish line.
 
 In this video I propose a *system* to help you get there. A system which helps you build confidence and feel successful. A system which reduces friction, so you work on your project a little bit every day. And a system which helps you decide when you’re done with the project.
 
@@ -149,7 +149,7 @@ And speaking of good feelings:
 Point 4: Reward
 ---------------
 
-If you follow your schedule every day until the deadline, you’re successful, and you must reward yourself for it. The reward maybe a night out, a desert, a new dress... The point is to celebrate and be grateful for the effort you put into your project.
+If you follow your schedule every day until the deadline, you’re successful, and you must reward yourself for it. The reward maybe a night out, a desert, a new dress… The point is to celebrate and be grateful for the effort you put into your project.
 
 Rewards make you feel good, build your confidence, and give you energy to move on to the next project. But before you go there:
 
@@ -160,7 +160,7 @@ Besides the small breaks between working sessions, schedule a longer break betwe
 
 * * *
 
-Everything we talked about thus far is about the *process*, let’s end with three points about the *content*.
+Everything we talked about thus far is about the *process*. Let’s end with three points about the *content*.
 
 Point 6: Product
 ----------------
