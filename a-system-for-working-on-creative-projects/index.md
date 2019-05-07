@@ -27,8 +27,8 @@ Creative people talking about their processes and giving advice:
 - *On Writing Well: The Classic Guide to Writing Nonfiction*, by William Zinsser.
 - *The No Plot? No Problem! Novel-Writing Kit*, by Chris Baty.
 
-Script
-======
+Transcript
+==========
 
 Hi, I’m Leandro Facchinetti and this is *A System for Working on Creative Projects*.
 

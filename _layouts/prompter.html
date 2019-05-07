@@ -7,12 +7,16 @@
       body {
         color: white;
         background-color: black;
-        font: 30px/1.5 -apple-system;
         transform: rotateY(180deg);
+      }
+      body, h1, h2 {
+        font-family: -apple-system;
+        font-size: 30px;
+        line-height: 1.5;
       }
     </style>
     <script>
-      let enabled = true;
+      let enabled = false;
       window.addEventListener("keydown", event => { if (event.keyCode === 13) enabled = !enabled; });
       window.setInterval(() => { if (enabled) window.scrollBy(0, 1); }, 50);
     </script>
