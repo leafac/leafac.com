@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Playing the Game with PLT Redex
+title: "Playing the Game with PLT Redex"
 table-of-contents: true
 ---
 
