@@ -1,5 +1,5 @@
 ---
-# ADDING A PUBLICATION
+# HOW TO ADD A PUBLICATION
 #
 # - Add publication to Zotero.
 #   - Authors: Use ‘Literal’.
