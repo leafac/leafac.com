@@ -6,6 +6,16 @@ title: "A Minimal LaTeX Dissertation Template (for the Johns Hopkins Universi
 **Pre-requisites:** [LaTeX](https://www.latex-project.org).  
 [Download the LaTeX source](dissertation.tex). [See the generated PDF](dissertation.pdf).
 
+
+Table of Contents
+=================
+
+* TOC
+{:toc}
+
+Abstract
+========
+
 You want to write your dissertation in [LaTeX](https://www.latex-project.org)—that may not be the best idea (see [§ Appendix: My Approach to LaTeX](#appendix-my-approach-to-latex)), but you may have a good reason to do it anyway—and you must follow the formatting guidelines of your university. In this article I provide a LaTeX template to get you started and a tutorial explaining the decisions and the implementation details.
 
 I study at the Johns Hopkins University, so this article is based on the [Johns Hopkins University Library Formatting Guidelines for Electronic Theses & Dissertations (ETD)](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-guidelines-checklist/). If you’re at the Johns Hopkins University, you’ll be glad to know that I showed the template in this article to the Library and they extra-officially approved it. But you may continue reading even if you’re somewhere else, because formatting guidelines tend to be similar in every place so this template may serve as the starting point for your own, and also because you may learn some LaTeX along the way.
@@ -131,7 +141,7 @@ We use the `a-1b` option when requiring the `pdfx` package to indicate which kin
 
 The last two lines in the snippet above are optional, but they are good practice.
 
-The line starting with `\hypersetup` configures the [`hyperref` package](https://ctan.org/pkg/hyperref) that was included by `pdfx`. The `hyperref` package has several responsibilities. First, it makes some parts of the dissertation clickable, for example, entries in the [table of contents](#table-of-contents), references and [citations](#bibliography). Second, it maps PDF pages to dissertation pages, for example, PDF page 1 maps to dissertation page i. Third, it adds bookmarks corresponding to the table of contents that you can see on the left-column in most PDF viewers.
+The line starting with `\hypersetup` configures the [`hyperref` package](https://ctan.org/pkg/hyperref) that was included by `pdfx`. The `hyperref` package has several responsibilities. First, it makes some parts of the dissertation clickable, for example, entries in the [table of contents](#table-of-contents-1), references and [citations](#bibliography). Second, it maps PDF pages to dissertation pages, for example, PDF page 1 maps to dissertation page i. Third, it adds bookmarks corresponding to the table of contents that you can see on the left-column in most PDF viewers.
 
 <figure markdown="1">
 ![](bookmarks.png){:width="315" height="357"}
