@@ -101,8 +101,6 @@ This reduces your confidence, and because you aren’t in control of your brain,
 
 So start early, before you have a chance to doubt yourself. For a big, ambitious project, like a novel, one week of preparation should be more than enough before you set out to write.
 
-* * *
-
 OK, so these principles are great, but how do you turn them into action?
 
 That’s where the system comes in. It’s composed of eight points, and you must not spend more than a few minutes in each point—a few hours at most. Remember that *Too Much Preparation Kills the Muse*.
@@ -158,8 +156,6 @@ Point 5: Break
 
 Besides the small breaks between working sessions, schedule a longer break between your current project and the next one. How long will your downtime be after the deadline? How will you enjoy this period?
 
-* * *
-
 Everything we talked about thus far is about the *process*. Let’s end with three points about the *content*.
 
 Point 6: Product
@@ -190,8 +186,6 @@ Point 8: Working Title
 It must be the first title that comes your mind. It may be silly, but you can change it later, so don’t worry about it too much. A working title makes your project feel real, and it helps you talk about it with other people.
 
 Descriptive names are better at this point, for example, the working title for this video is "A System for Working on Creative Project." Nothing creative about this title!
-
-* * *
 
 And that’s it. This is a simple and effective system for working on creative projects and reaching the finish line.
 

@@ -14,6 +14,12 @@
         font-size: 30px;
         line-height: 1.5;
       }
+      p, h1, h2 {
+        display: inline;
+      }
+      p::before, h1::before, h2::before {
+        content: " ¶ ";
+      }
     </style>
     <script>
       let enabled = false;
