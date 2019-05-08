@@ -1,6 +1,4 @@
 ---
-layout: default
-
 # ADDING A PUBLICATION
 #
 # - Add publication to Zotero.

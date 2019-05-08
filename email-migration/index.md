@@ -1,7 +1,5 @@
----
-layout: default
-title: "Email Migration: The Ultimate Solution to a Ridiculous Problem"
----
+Email Migration: The Ultimate Solution to a Ridiculous Problem
+==============================================================
 
 **Pre-requisites:** Familiarity with the command-line.
 

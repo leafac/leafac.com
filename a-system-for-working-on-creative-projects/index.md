@@ -1,7 +1,9 @@
 ---
 layout: prompter
-title: "A System for Working on Creative Projects"
 ---
+
+A System for Working on Creative Projects
+=========================================
 
 Checklist
 =========

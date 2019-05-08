@@ -1,15 +1,15 @@
----
-layout: default
-title: "Playing the Game with PLT Redex"
----
+Playing the Game with PLT Redex
+===============================
+{:.no_toc}
 
 **Pre-requisites:** Functional programming with pattern matching, and the basics of [Racket](https://docs.racket-lang.org/quick/index.html).  
 Download the [code](playing-the-game-with-plt-redex.zip) and follow along in [DrRacket](https://racket-lang.org).
 
 Table of Contents
 =================
+{:.no_toc}
 
-* TOC
+1. TOC
 {:toc}
 
 Abstract

@@ -1,16 +1,15 @@
----
-layout: default
-title: "A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)"
----
+A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)
+========================================================================
+{:.no_toc}
 
 **Pre-requisites:** [LaTeX](https://www.latex-project.org).  
 [Download the LaTeX source](dissertation.tex). [See the generated PDF](dissertation.pdf).
 
-
 Table of Contents
 =================
+{:.no_toc}
 
-* TOC
+1. TOC
 {:toc}
 
 Abstract
