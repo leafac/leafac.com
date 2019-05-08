@@ -14,18 +14,8 @@
   <body>
     <header><h1><a href="/">Leandro Facchinetti</a></h1></header>
     <main>
-      {% if page.table-of-contents %}
-        {% capture table_of_contents_markdown %}{% include_relative table-of-contents.md %}{% endcapture %}
-        {% capture table_of_contents %}<nav>{{ table_of_contents_markdown | markdownify }}</nav>{% endcapture %}
-      {% endif %}
-      {% if page.title or page.table-of-contents %}
-        <header>
-          {% if page.title %}<h1><a href="{{ page.url }}">{{ page.title | markdownify }}</a></h1>{% endif %}
-          {% if page.table-of-contents %}{{ table_of_contents }}{% endif %}
-        </header>
-      {% endif %}
+      {% if page.title %}<header><h1><a href="{{ page.url }}">{{ page.title | markdownify }}</a></h1></header>{% endif %}
       {{ content }}
-      {% if page.table-of-contents %}<footer>{{ table_of_contents }}</footer>{% endif %}
     </main>
   </body>
 </html>

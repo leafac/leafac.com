@@ -104,18 +104,6 @@ h2 {
   font-style: italic;
 }
 
-nav {
-  columns: 2;
-  margin: 2rem 0;
-  ol { margin: 0; }
-  a {
-    text-decoration: none;
-    &.active {
-      text-decoration: underline;
-    }
-  }
-}
-
 figure {
   font-style: italic;
   text-align: center;
