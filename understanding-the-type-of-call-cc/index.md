@@ -51,7 +51,7 @@ Since `k` has no output, it can appear in any context, and its return type can b
 
 Both expressions above have valid types, so both of the following hold: <code>call/cc : ((Number → <mark>String</mark>) → Number) → Number</code>, *and* <code>call/cc : ((Number → <mark>List</mark>) → Number) → Number</code>. In general, <code>call/cc : ((Number → <mark>β</mark>) → Number) → Number</code>, where `β` is a type variable that can be instantiated with any type. This is similar to how [`raise`](https://docs.racket-lang.org/reference/exns.html#%28def._%28%28quote._~23~25kernel%29._raise%29%29) can appear in any context, because execution will skip that context up to the closest *catch*, so its return type can be anything: `raise : α → β`.
 
-**Alternative argument:** The continuation `k` is `(zero? •)`, where `•` represents the hole that we plug with a value to continue the computation. We can reify `k` as a function `(λ (x) (zero? x)) : Number → Boolean`, and we can replace `Boolean` with `β` without loss of generality. This `k` is not a regular function, however, because execution discards the context under which it is called.
+**Alternative Argument:** The continuation `k` is `(zero? •)`, where `•` represents the hole that we plug with a value to continue the computation. We can reify `k` as a function `(λ (x) (zero? x)) : Number → Boolean`, and we can replace `Boolean` with `β` without loss of generality. This `k` is not a regular function, however, because execution discards the context under which it is called.
 
 The use of numbers in our examples was incidental. We could replace them with strings, for example:
 
