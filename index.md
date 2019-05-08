@@ -897,7 +897,7 @@ Education
 Ph.D. Candidate in Computer Science · Programming Languages
 -----------------------------------------------------------
 
-*[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2019-12 (estimated).
+*[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2020-03 (estimated).
 
 - I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
@@ -944,9 +944,13 @@ Teaching Experience
 Teaching Assistant & Course Assistant
 -------------------------------------
 
-*[Johns Hopkins University](https://jhu.edu).* 2015-09 – 2019-09 (estimated).
+*[Johns Hopkins University](https://jhu.edu).* 2015-09 – 2019-09.
 
-- On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course. I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
+- On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
+
+  I received an **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award** for my performance as a Teaching Assitant on this course.
+
+  I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
 
   <details markdown="1">
   <summary><strong>Watch my lectures</strong></summary>
