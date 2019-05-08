@@ -1,7 +1,6 @@
 ---
 layout: default
 title: "Understanding the Type of `call/cc`"
-date: 2018-12-06
 ---
 
 **Pre-requisites:** First-class continuations and `call/cc` (this article does not cover what they are, how they work, or why they are useful, only their type); and reading [Racket](https://www.racket-lang.org) code.

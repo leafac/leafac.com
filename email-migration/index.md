@@ -1,7 +1,6 @@
 ---
 layout: default
 title: "Email Migration: The Ultimate Solution to a Ridiculous Problem"
-date: 2018-05-22
 ---
 
 **Pre-requisites:** Familiarity with the command-line.

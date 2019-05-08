@@ -1,7 +1,6 @@
 ---
 layout: prompter
 title: "A System for Working on Creative Projects"
-date: DRAFT
 ---
 
 Checklist

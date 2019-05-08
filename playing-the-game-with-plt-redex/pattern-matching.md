@@ -1,7 +1,6 @@
 ---
 layout: default
 title: Playing the Game with PLT Redex
-date: 2018-09-30
 table-of-contents: true
 ---
 

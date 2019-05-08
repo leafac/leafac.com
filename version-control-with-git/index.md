@@ -1,7 +1,6 @@
 ---
 layout: default
 title: "Version Control with Git"
-date: 2019-02-21
 ---
 
 <video src="https://archive.org/download/version-control-with-git/version-control-with-git.mp4" controls preload="metadata"></video>

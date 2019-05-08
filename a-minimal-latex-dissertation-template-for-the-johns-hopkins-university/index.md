@@ -1,7 +1,6 @@
 ---
 layout: default
 title: "A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)"
-date: 2019-02-03
 ---
 
 **Pre-requisites:** [LaTeX](https://www.latex-project.org).  
