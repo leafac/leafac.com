@@ -65,7 +65,7 @@ The use of numbers in our examples was incidental. We could replace them with st
 The only constraint is that these three types must agree: the return type of `call/cc`, the return type of the function passed as argument to `call/cc`, and the type of `k`’s argument ([see the appendix](#appendix-callccs-type-in-typedracket) for the full story). Finally, we can conclude that <code>call/cc : ((<mark>α</mark> → β) → <mark>α</mark>) → <mark>α</mark></code>.
 
 Appendix: `call/cc`’s type in Typed Racket
-------------------------------------------
+==========================================
 
 We had to compromise on the type for `call/cc` in the classical Hindley–Milner type system (`call/cc : ((α₁ → β) → α₂) → α`): we had to constrain the type `α₁` of the argument passed to the continuation `k` to be the same as the return type `α₂` of the function passed to `call/cc`. This constraint is artificial and is not present in Racket, as shown by the following expressions in which these types disagree (`α₁ = String` and `α₂ = Number`):
 
@@ -83,6 +83,6 @@ To type check expressions like the last example, Typed Racket’s type system h
 Union types are useful beyond esoteric language features like `call/cc`. For example, they allow type checking conditionals in which the branches produce different types, for example, `(if ___ 0 "hi")`, which are common in Racket but must also be disallowed by languages featuring classical Hindley–Milner type systems.
 
 Acknowledgements
-----------------
+================
 
 I thank the following people for their comments and suggestions: Scott Smith, Sorawee Porncharoenwase, Dario Hamidi and A. B. McLin.
