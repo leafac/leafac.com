@@ -1152,7 +1152,7 @@ Colophon
 
 | Page layout | Inspired by the works of [Matthew Butterick](http://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/) |
 | Serif font | [Charter](http://practicaltypography.com/charter.html) |
-| Monospaced font | [Iosevka](https://typeof.net/Iosevka/) |
+| Monospaced font | [`Iosevka Term Slab`](https://typeof.net/Iosevka/) |
 | Static website generator | [Jekyll](https://jekyllrb.com) |
 | Host | [GitHub Pages](https://pages.github.com) |
 | Text editor | [Visual Studio Code](https://code.visualstudio.com) |

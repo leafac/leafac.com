@@ -439,7 +439,7 @@ When we select a different TeX engine we also have to be explicit about BibTeX b
 </figcaption>
 </figure>
 
-With the LuaTeX engine you can use the [`fontspec`](https://ctan.org/pkg/fontspec) and [`unicode-math`](https://ctan.org/pkg/unicode-math) packages to select different fonts. For example, select a combination of [Charter](https://practicaltypography.com/charter.html) (serif), [`Iosevka`](http://typeof.net/Iosevka/) (monospaced) and [Asana Math](https://ctan.org/pkg/asana-math) (mathematics) by adding the following snippet to the LaTeX source preamble:
+With the LuaTeX engine you can use the [`fontspec`](https://ctan.org/pkg/fontspec) and [`unicode-math`](https://ctan.org/pkg/unicode-math) packages to select different fonts. For example, select a combination of [Charter](https://practicaltypography.com/charter.html) (serif), [`Iosevka Term Slab`](http://typeof.net/Iosevka/) (monospaced) and [Asana Math](https://ctan.org/pkg/asana-math) (mathematics) by adding the following snippet to the LaTeX source preamble:
 
 <figure markdown="1">
 ```latex
@@ -451,18 +451,18 @@ With the LuaTeX engine you can use the [`fontspec`](https://ctan.org/pkg/fontspe
   BoldFont       = charter-bold.ttf,
   BoldItalicFont = charter-bolditalic.ttf
 ]
-\setmonofont{Iosevka}[
+\setmonofont{Iosevka Term Slab}[
   Path           = fonts/,
-  UprightFont    = iosevka-regular.ttf,
-  ItalicFont     = iosevka-italic.ttf,
-  BoldFont       = iosevka-bold.ttf,
-  BoldItalicFont = iosevka-bolditalic.ttf
+  UprightFont    = iosevka-term-slab-regular.ttf,
+  ItalicFont     = iosevka-term-slab-italic.ttf,
+  BoldFont       = iosevka-term-slab-bold.ttf,
+  BoldItalicFont = iosevka-term-slab-bolditalic.ttf
 ]
 \setmathfont{Asana-Math.otf}
 ```
 <figcaption markdown="1">
-This snippet expects the fonts Charter and `Iosevka` to be available in a folder called `fonts/` along with the LaTeX source. Asana Math comes with the TeX distribution.
+This snippet expects the fonts Charter and `Iosevka Term Slab` to be available in a folder called `fonts/` along with the LaTeX source. Asana Math comes with the TeX distribution.
 </figcaption>
 </figure>
 
-Charter is a good font choice that I borrowed from the [Racket documentation](https://docs.racket-lang.org), which was designed by a typographer, [Matthew Butterick](https://practicaltypography.com/about-matthew-butterick.html). `Iosevka` is a good font choice because it’s the only one that satisfies the following criteria: it’s monospaced; it’s aesthetically pleasing; it’s free; and it supports a wide variety of Unicode code points, which is necessary to typeset most of the code that I write. (You are reading a combination of Charter and `Iosevka` right now.) And Asana Math is the best match for Charter among the fonts supported by the `unicode-math` package.
+Charter is a good font choice that I borrowed from the [Racket documentation](https://docs.racket-lang.org), which was designed by a typographer, [Matthew Butterick](https://practicaltypography.com/about-matthew-butterick.html). `Iosevka Term Slab` is a good font choice because it’s the only one that satisfies the following criteria: it’s monospaced; it’s aesthetically pleasing; it’s free; and it supports a wide variety of Unicode code points, which is necessary to typeset most of the code that I write. (You are reading a combination of Charter and `Iosevka Term Slab` right now.) And Asana Math is the best match for Charter among the fonts supported by the `unicode-math` package.

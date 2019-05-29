@@ -32,31 +32,31 @@
 }
 
 @font-face {
-  font-family: "Iosevka";
+  font-family: "Iosevka Term Slab";
   font-weight: normal;
   font-style: normal;
-  src: url("/fonts/iosevka-regular.woff") format("woff");
+  src: url("/fonts/iosevka-term-slab-regular.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Iosevka";
+  font-family: "Iosevka Term Slab";
   font-weight: normal;
   font-style: italic;
-  src: url("/fonts/iosevka-italic.woff") format("woff");
+  src: url("/fonts/iosevka-term-slab-italic.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Iosevka";
+  font-family: "Iosevka Term Slab";
   font-weight: bold;
   font-style: normal;
-  src: url("/fonts/iosevka-bold.woff") format("woff");
+  src: url("/fonts/iosevka-term-slab-bold.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Iosevka";
+  font-family: "Iosevka Term Slab";
   font-weight: bold;
   font-style: italic;
-  src: url("/fonts/iosevka-bolditalic.woff") format("woff");
+  src: url("/fonts/iosevka-term-slab-bolditalic.woff") format("woff");
 }
 
 body {
@@ -121,8 +121,7 @@ audio {
 }
 
 pre, code {
-  font-family: "Iosevka", "Courier New", monospace;
-  font-variant-ligatures: none;
+  font-family: "Iosevka Term Slab", "Courier New", monospace;
 }
 
 pre {
