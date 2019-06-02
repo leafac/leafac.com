@@ -1,11 +1,12 @@
-<!-- ---
+---
 layout: prompter
---- -->
+---
 
+<!--
 A System for Working on Creative Projects
 =========================================
 
-<!-- TODO: Video -->
+TODO: Video
 
 Creative Project Worksheet
 ==========================
@@ -32,10 +33,11 @@ Creative people talking about their processes and giving advice:
 
 Transcript
 ==========
+-->
 
 Hi, I’m Leandro Facchinetti and this is *A System for Working on Creative Projects*.
 
-Anyone can *start* a creative project—the hard part is *completing* it. You may be writing, or recording music, or drawing, or developing software—whatever your project may be, you’ll face similar challenges when it comes to reaching that finish line.
+Anyone can *start* a creative project—the hard part is *finishing* it. You may be writing, or recording music, or drawing, or developing software—whatever your project may be, you’ll face similar challenges when it comes to reaching that finish line.
 
 In this video, I propose a *system* to help you get there. A system which helps you build confidence and feel successful. A system which reduces friction, so you get to work on your project a little bit every day. And a system which helps you decide when you’re done with the project.
 
