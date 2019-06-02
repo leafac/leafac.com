@@ -15,42 +15,47 @@ References
 
 References on how the brain works, which are the biological and philosophical foundations for this system:
 
-- *Thinking, Fast and Slow*, by Daniel Kahneman.
-- *The Power of Habit*, by Charles Duhigg.
-- *The Art of Explanation: Making your Ideas, Products, and Services Easier to Understand*, by Lee LeFever.
-- *Wherever You Go, There You Are: Mindfulness Meditation in Everyday Life*, by Jon Kabat-Zinn.
+- *Thinking, Fast and Slow*, by Daniel Kahneman. This book supports the idea that we aren’t in control of our minds as much as we’d like to believe. In particular, the *fast thinking* is mostly following habits.
+- *The Power of Habit*, by Charles Duhigg. Another book along the same lines.
+- *The Art of Explanation: Making your Ideas, Products, and Services Easier to Understand*, by Lee LeFever. The key point of this book is that we must strive to build confidence and feel successful. They talk about it in terms of explanation—an explanation must build confidence in the audience and make them feel successful—but I think it can also be directed at ourselves, as the explainers (or creative workers in general).
+- *Wherever You Go, There You Are: Mindfulness Meditation in Everyday Life*, by Jon Kabat-Zinn. This is a book on meditation and mindfulness, which are practical things you can do to train your brain and develop good habits.
 
 Creative people talking about their processes and giving advice:
 
-- *Steal Like an Artist: 10 Things Nobody Told You About Being Creative*, by Austin Kleon.
-- *Talking as Fast as I Can: From Gilmore Girls to Gilmore Girls (and Everything in Between)*, by Lauren Graham. I read this book because I like Gilmore Girls, but it surprised me by including the kind of advice for writers I needed at the moment. Check § Kitchen Timer, which introduces a technique that’s working well for me. It’s an adaptation of the more famous *Pomodoro Technique* that is much simpler to follow and much more effective (at least, it has been for me).
-- *On Writing: A Memoir Of The Craft*, by Stephen King.
-- *On Writing Well: The Classic Guide to Writing Nonfiction*, by William Zinsser.
-- *The No Plot? No Problem! Novel-Writing Kit*, by Chris Baty.
+- *Steal Like an Artist: 10 Things Nobody Told You About Being Creative*, by Austin Kleon. A candid and inspiring memoir on the life of a creative person in the form of advice.
+- *Talking as Fast as I Can: From Gilmore Girls to Gilmore Girls (and Everything in Between)*, by Lauren Graham. I read this book because I like Gilmore Girls, but it surprised me by including the kind of writing advice that I needed at that moment. Check § Kitchen Timer, which introduces a variation of the more famous *Pomodoro Technique* that I found to be much simpler to follow and much more effective.
+- *On Writing: A Memoir Of The Craft*, by Stephen King. At first glance, this is a book about writing fiction. But a closer look reveals insights about the creative process that are applicable in all media, for example, the idea of creating with the door closed, but editing with the door open, or the idea of creating with an ideal person in mind.
+- *On Writing Well: The Classic Guide to Writing Nonfiction*, by William Zinsser. This is mostly a book about form in nonfiction writing, but the most interesting aspects for me are the ethical implications of writing: writing untruthfully isn’t only ineffective, it’s unethical. Again, some of the insights in this book are applicable to any form of creative endeavor.
+- *The No Plot? No Problem! Novel-Writing Kit*, by Chris Baty. This is a book about the first phase of the creative process. It focuses mostly on getting rid of excuses not to create, lowering the barriers we build for ourselves, and getting to a first draft as quickly as possible—perhaps *too* quickly to be sustainable.
 
 Transcript
 ==========
 
 Hi, I’m Leandro Facchinetti and this is *A System for Working on Creative Projects*.
 
-Anyone can start a creative project; the hard part is completing it. You may be writing, recording music, drawing, developing software… whatever your project may be, you’ll face similar challenges when it comes to reaching that finish line.
+Anyone can start a creative project—the hard part is completing it. You may be writing, or recording music, or drawing, or developing software… whatever your project may be, you’ll face similar challenges when it comes to reaching that finish line.
 
-In this video I propose a *system* to help you get there. A system which helps you build confidence and feel successful. A system which reduces friction, so you work on your project a little bit every day. And a system which helps you decide when you’re done with the project.
+In this video, I propose a *system* to help you get there. A system which helps you build confidence and feel successful. A system which reduces friction, so you get to really work on your project a little bit every day. And a system which helps you decide when you’re done with the project.
+
+The Principles
+--------------
 
 This system is based on five principles and is composed of eight points. Let’s start with the principles.
 
 Principle 1: You don’t Control Your Brain
 -----------------------------------------
 
-You’d like to think that you’re in charge, but you aren’t. Not really. A lot of what you do is purely out of habit.
+You’d *like* to think that you can decide what to do, but you can’t. Not really. A lot of what you do is purely out of habit.
 
-You may *wish* to work on your project, but then you feel uninspired, intimidated, tired, afraid, and you end up not working on it. Then you feel frustrated, a frustration that takes you even further away from the project.
+I’m sure you’re familiar with this situation: you *want* to work on your creative project, but then you feel uninspired, or intimidated, or tired, or afraid, and you end up not working on it, which makes you feel frustrated and creates a vicious cycle of procrastination.
 
-The problem is that you can’t always decide what to do. Your brain already decided for you.
+I’ve been in there.
 
-So instead of fighting nature, you must follow a system which sort of tricks your brain into working on your project. Doing it must become the comfortable, natural thing that you do without thinking; in other words: a habit.
+Many times.
 
-But what should you take in account when developing such a system?
+And I believe the solution is, instead of fighting nature, to create a system that sort of tricks your brain into working on your project, which must become the comfortable, natural thing you do without thinking. In other words: a habit.
+
+But how do you build a habit? Well…
 
 Principle 2: Confidence is Everything
 -------------------------------------
@@ -59,22 +64,26 @@ If you feel confident that you can do something, you’ll do it more often, more
 
 Everything in a system for working on creative projects must be in service of building your confidence.
 
-A big part of building confidence is feeling successful. And to feel successful, all you have to do is to set a goal, and reach the goal.
+And big part of building confidence is feeling successful, which is a surprisingly easy thing to do: just set a goal, and reach the goal.
 
-Some people set goals based on content, for instance, writing a thousand words every day. Some people set goals based on behavior, for instance, writing for an hour every day.
+The real trick here is that *you* get to set the goal, not anybody else. So be smart about how you do it.
 
-I believe goals based on behavior are better than goals based on content. You may struggle to write a thousand words, but an hour will always pass. With goals based on behavior, you’ll succeed more often, become more confident, and return to your project more frequently, which brings us to:
+Some goals are based on content, like “writing a thousand words.” Some goals based on behavior, like “writing for an hour.”
+
+I believe that goals based on behavior are much better than goals based on content. Sometimes it’s hard to write a thousand words, but an hour will always pass.
+
+With goals based on behavior, you succeed more often, you become more confident, and you return to your project more frequently, which brings us to:
 
 Principle 3: Consistency is Better than Bursts of Creativity
 ------------------------------------------------------------
 
-Confidence decays fast. To keep it alive, you must work on your creative project often. Every day, even if it’s just for a couple of minutes. You can always carve five or ten minutes, even out of busy schedule.
+Confidence decays fast. You must work on your creative project every day to keep it alive. Even if it’s just for a couple of minutes.
 
-In fact, I think working only a little may be better than working too much. Productivity can’t keep up for long and you risk getting tired, which would reduce your confidence.
+In fact, I think that maybe working just a little may be better than working too much. Productivity can’t keep up for long, and you don’t want to get tired, which would reduce your confidence.
 
 Remember that working on creative projects is a life-long journey, not a sprint.
 
-Hmmm, but if you work on your project only a little every day, how can you get anything done?
+Now, you may be thinking: “If I’m only going to work on my project for a little bit, how can I get anything done?”
 
 Well, just think of time as another constraint:
 
@@ -83,43 +92,42 @@ Principle 4: Constraints Spark Creativity
 
 Abundance is intimidating.
 
-So avoid having too much time, or too many tools, or too big a budget, because they demand too much from you.
+Avoid having too much time, or too many tools, or too big a budget, because these things demand too much from you. Nothing you can create will be up to the expectations set by abundance—not the first time around, anyway.
 
-You may even think of artificial constraints: what can you do with only one brush, or only thirty minutes?
+You may even think of artificial constraints: What can you do with only one brush, or only thirty minutes?
 
-In particular, I invite you to constrain the time you spend *preparing*, because of:
+In particular, probably the most important constraint is in the time you spend *preparing*, because of:
 
 Principle 5: Too Much Preparation Kills the Muse
 ------------------------------------------------
 
-Preparation is important, but too much preparation is worse than too little.
+Preparation is important, but too much of it is worse than too little.
 
-The more you prepare, the more you idealize the final product. When you start working, you find that you can’t meet your expectations.
+You don’t want to have the time to start idealizing the final production too much. First because it would be hard to meet these expectations, and also because it’s kind of boring to just follow a plan. It leaves little space for *creativity* in what was supposed to be a *creative* project—it starts to feel too much like *work*.
 
-Also, it’s kind of boring to just follow a plan. It leaves little space for *creativity* in what was supposed to be a *creative* project—it starts to feel like *work*.
+So start early. For a big, ambitious project, like a novel, one week of preparation should be more than enough before you start to write.
 
-This reduces your confidence, and because you aren’t in control of your brain, you stop working on your project.
+Okay. These principles are great, but how do you turn them into action?
 
-So start early, before you have a chance to doubt yourself. For a big, ambitious project, like a novel, one week of preparation should be more than enough before you set out to write.
+The Points
+----------
 
-OK, so these principles are great, but how do you turn them into action?
-
-That’s where the system comes in. It’s composed of eight points, and you must not spend more than a few minutes in each point—a few hours at most. Remember that *Too Much Preparation Kills the Muse*.
-
-And write down your answers. They will help you later if try to sabotage the project.
+That’s where the eight points of the system comes in. Write down your answers to these points—which will become useful in case you try to sabotage yourself later down the line—but don’t spend more than a few minutes in each of them. Remember that *Too Much Preparation Kills the Muse*.
 
 Point 1: Deadline
 -----------------
 
 A deadline is *the* ingredient that separates the projects that ship from those that go in the drawer.
 
-A good deadline is short: one week; two at most. If your project is too big for this time frame, break it apart in smaller pieces.
+A good deadline is short: one week, or two at most. If your project is too big for this time frame, just break it apart in smaller pieces.
 
 After you set a deadline, you may not change it. But there’s a trick: you may change the expected output. If a deadline is approaching and you’re far from where you expected to be, all you have to do is to adjust the expectations and you’ll succeed no matter what.
 
-This may seem self-indulgent, but the idea behind a deadline is not to get you stressed or to punish you; it is to make you feel successful and build your confidence.
+This may seem self-indulgent, but the idea behind a deadline is not to get you stressed out or to punish you. The idea is to make you feel like you accomplished something, to make you feel successful, and build your confidence.
 
-Practice self-compassion, adapt expectations if necessary, and keep moving forward.
+So if necessary, practice self-compassion, adapt expectations, and keep moving forward.
+
+* * *
 
 Point 2: Accountability Person
 ------------------------------

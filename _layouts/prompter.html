@@ -21,11 +21,6 @@
         content: " ¶ ";
       }
     </style>
-    <script>
-      let enabled = false;
-      window.addEventListener("keydown", event => { if (event.keyCode === 13) enabled = !enabled; });
-      window.setInterval(() => { if (enabled) window.scrollBy(0, 1); }, 50);
-    </script>
   </head>
   <body>
     {{ content }}
