@@ -5,6 +5,8 @@ layout: prompter
 A System for Working on Creative Projects
 =========================================
 
+<!-- TODO: Video -->
+
 Creative Project Worksheet
 ==========================
 
@@ -37,8 +39,8 @@ Anyone can start a creative project—the hard part is completing it. You may be
 
 In this video, I propose a *system* to help you get there. A system which helps you build confidence and feel successful. A system which reduces friction, so you get to really work on your project a little bit every day. And a system which helps you decide when you’re done with the project.
 
-The Principles
---------------
+Principles
+----------
 
 This system is based on five principles and is composed of eight points. Let’s start with the principles.
 
@@ -109,8 +111,8 @@ So start early. For a big, ambitious project, like a novel, one week of preparat
 
 Okay. These principles are great, but how do you turn them into action?
 
-The Points
-----------
+Points
+------
 
 That’s where the eight points of the system comes in. Write down your answers to these points—which will become useful in case you try to sabotage yourself later down the line—but don’t spend more than a few minutes in each of them. Remember that *Too Much Preparation Kills the Muse*.
 
@@ -160,8 +162,8 @@ If you follow your schedule every day until the deadline, you’re successful, a
 
 Rewards make you feel good, build your confidence, and give you energy to move on to the next project. But before you go there:
 
-Point 5: Break between Projects
--------------------------------
+Point 5: Break until Next Project
+---------------------------------
 
 Besides the small breaks between working sessions, it’s also important to take longer breaks between projects, so think about it right now: How long will it be? How will you enjoy it?
 
@@ -179,32 +181,32 @@ You must have a clear product in mind, so you’ll know when you’re done.
 
 Write down one or two sentences that you may use to describe your project to someone else. And about that someone else:
 
-* * *
-
 Point 7: Target Person
 ----------------------
 
-Find one person you know who represents your target audience. While you work on your project, keep that person in mind.
+Find one person who represents your target audience and keep that person in mind while you work on your project.
 
-This is one person, not a group of people.
+That’s one person, not a group of people.
 
 If your target person can also be your accountability person, all the better: two for the price of one.
 
-If you don’t know a person who could represent your target audience, make one up. Give the character a name and a brief description: What does she know? What does she like? Why will she take interest in your project?
+If you don’t know a person who could represent your target audience, make one up. Come up with name and a brief description: What does she know? What does she like? Why will she be interest in your project?
 
-A target person serves two purposes. First, she helps you focus; you don’t shift perspectives and lose track of what you’re doing. Second, she reminds you that someone cares about your project.
+A target person serves two purposes. First, she helps you focus: you don’t shift perspectives and lose track of what you’re doing. Second, she reminds you that someone cares about your project.
+
+And finally:
 
 Point 8: Working Title
 ----------------------
 
-It must be the first title that comes your mind. It may be silly, but you can change it later, so don’t worry about it too much. A working title makes your project feel real, and it helps you talk about it with other people.
+It must be the first title that comes your mind. It may be silly, but you can change it later, so don’t worry too much about it. A working title makes your project feel real, and it helps you talk about it with other people.
 
-Descriptive names are better at this point, for example, the working title for this video is "A System for Working on Creative Project." Nothing creative about this title!
+Descriptive names are better at this point, for example, “A System for Working on Creative Projects.” There’s nothing creative about this title, right?
 
-And that’s it. This is a simple and effective system for working on creative projects and reaching the finish line.
+And that’s it. That’s our whole system for working on creative projects. It’s simple and effective, and it helps you reach that finish line.
 
-Make sure you check the description below. A lot of I talked about in this video is based on books I read and techniques I tried, and give you a list of my favorites in the description.
+Make sure you check the description below. A lot of I talked about in this video is based on books that I read and techniques that I tried, and give you a list of my favorites in the description.
 
-Also, I include a checklist to help you remember the five principles and the eight points of the system. Every time you’re starting a creative project, take a few minutes to fill one of these sheets out. You’ll be glad you did.
+Also, the description includes a worksheet to help you remember the five principles and the eight points of the system. Every time you’re starting a creative project, take a few minutes to fill out one of these sheets. You’ll be glad you did.
 
-Thanks for watching and now go create something amazing.
+Now go create something amazing. Thanks for watching.
