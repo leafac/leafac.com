@@ -49,7 +49,7 @@ This system is based on five principles and is composed of eight points. Let’s
 Principle 1: You don’t Control Your Brain
 -----------------------------------------
 
-You’d *like* to think that you decide what you do, but you don’t decide. Not really. A lot of what you do is purely out of habit.
+You’d like to *think* that you’re in control, but you aren’t. Not really. A lot of what you do is purely out of habit.
 
 I’m sure you’re familiar with this situation: you *want* to work on your creative project, but then you feel uninspired, or intimidated, or tired, or afraid, or overwhelmed, and you end up not working on the project, which makes you feel frustrated and creates a vicious cycle of procrastination.
 
@@ -72,7 +72,7 @@ And a big part of building confidence is feeling successful, which is a surprisi
 
 The real trick here is that *you* get to set your goal, not anybody else. So be smart about how you set your goals to make sure that you can always reach them.
 
-Some goals are based on content, for example, “writing a thousand words.” Some goals based on behavior, for example, “writing for an hour.”
+Some goals are based on content, for example, to write a thousand words. While other goals based on behavior, for example, to write for an hour.
 
 I believe that goals based on behavior are much better than goals based on content. Sometimes it’s hard to write a thousand words, but an hour will always pass.
 
@@ -116,7 +116,7 @@ Okay. These principles are great, but how do you turn them into action?
 Points
 ------
 
-That’s where the eight points of the system comes in. Write down your answers to these points—which may become useful further down the line in case you try to sabotage yourself—but don’t spend more than a few minutes in each point. Remember that *Too Much Preparation Kills the Muse*.
+That’s where the eight points of the system come in. Write down your answers to these points, because they may become useful further down the line in case you try to sabotage yourself. But don’t spend more than a few minutes in each point. Remember that *Too Much Preparation Kills the Muse*.
 
 Point 1: Deadline
 -----------------
@@ -136,7 +136,7 @@ Point 2: Accountability Person
 
 Find a person, share with her your answers to the eight points we’re talking about here, and ask her to check in with you every day.
 
-Your accountability person isn’t there to give you feedback on your project, or to push you into working more. She’s only there to check whether you’re behaving as promised; if you’re following the schedule.
+Your accountability person isn’t there to give you feedback on your project, or to push you into working more. She’s only there to check whether you’re behaving as promised; if you’re following your schedule.
 
 Speaking of which:
 
@@ -153,7 +153,7 @@ You can’t make up for lost time—life doesn’t work that way. Instead, focus
 
 The main point of the schedule isn’t even to tell for how long you should *work* on the project, but for how long *not* to. Once you’re done with the time you scheduled, you may silence that inner voice nagging you to work more. After all, guilt and confidence don’t go well together.
 
-If you plan on working for longer than one hour, break that time into shorter working sessions. Breaks clean the ear. You may wish to take a break when things aren’t going well, but resist that temptation if the working session isn’t over yet. Against all intuition, I think that breaks are more effective when you’re being *productive*, because you it leaves you *wanting* to go back and finish whatever you are doing: Is there a better feeling?
+If you plan on working for longer than one hour, break that time into shorter sessions. Breaks clean the ear. You may wish to take a break when things aren’t going well, but resist that temptation if the session isn’t over yet. Against all intuition, I think that breaks are more effective when you’re being *productive*, because you it leaves you *wanting* to go back and finish whatever you are doing: Is there a better feeling?
 
 And speaking of good feelings:
 
@@ -167,7 +167,7 @@ Rewards make you feel good, build your confidence, and give you the energy you n
 Point 5: Break until Next Project
 ---------------------------------
 
-Besides the small breaks between working sessions, it’s also important to take longer breaks between projects, so think about it right now: How long will the break be? How will you enjoy it?
+Besides the small breaks between working sessions, it’s also important to take longer breaks between projects, so think about it right now: How long is the break going to be? How are you going to enjoy it?
 
 Content
 -------
@@ -207,7 +207,7 @@ A working title makes your project feel real, and it helps you talk about it wit
 
 And that’s it. That’s our whole system for working on creative projects. It’s simple and effective, and it helps you reach that finish line.
 
-Make sure you check the description below. A lot of I talked about in this video is based on books that I read and techniques that I tried, and give you a list of my favorites in the description.
+Make sure you check the description below. A lot of I talked about in this video is based on books that I read and techniques that I tried, and I give you a list of my favorites in the description.
 
 Also, the description includes a worksheet to help you remember the five principles and the eight points of the system. Every time you start working on a new creative project, take a few minutes to fill out one of these sheets. You’ll be glad you did.
 
