@@ -5,10 +5,10 @@ layout: prompter
 A System for Working on Creative Projects
 =========================================
 
-Checklist
-=========
+Creative Project Worksheet
+==========================
 
-[![](a-system-for-working-on-creative-projects.png){:width="600" height="286"}](a-system-for-working-on-creative-projects.pdf)
+[![](creative-project-worksheet.png){:width="TO" height="DO"}](creative-project-worksheet.pdf)
 
 References
 ==========
@@ -127,45 +127,48 @@ This may seem self-indulgent, but the idea behind a deadline is not to get you s
 
 So if necessary, practice self-compassion, adapt expectations, and keep moving forward.
 
-* * *
-
 Point 2: Accountability Person
 ------------------------------
 
-Find a person, share with her your answers to these eight points we’re talking about here, and ask her to check in with you every day.
+Find a person, share with her your answers to the eight points we’re talking about here, and ask her to check in with you every day.
 
-Your accountability person doesn’t have to give you feedback on your project, or push you into working more. She only needs to ask if you’re behaving like you promised; if you’re following the schedule.
+Your accountability person isn’t there to give you feedback on your project, or to push you into working more. She’s only there to check whether you’re behaving as promised; if you’re following the schedule.
 
 Speaking of which:
 
 Point 3: Schedule
 -----------------
 
-Each day, you say how much time you’re dedicating to the project the next day. One to three hours is a good target, but even ten minutes is fine.
+Never mind long-term schedules, they usually don’t work and just create anxiety. Instead, each day, plan the hours for the next day.
 
-If you fail to follow that plan in one day, schedule *less* time for the next day, not more.
+One hour of work on your project is a good amount. Four hours is probably the maximum. But as I mentioned before, even ten minutes is fine.
 
-You can’t make up for lost time; life doesn’t work that way. Instead, you must make it easy to satisfy your goals abd build your confidence.
+If one day you fail to put in the hours, schedule *less* time for the next day, not more.
+
+You can’t make up for lost time—life doesn’t work that way. Just try and make it easy to satisfy your goals and build your confidence.
 
 The main point of the schedule isn’t even to tell for how long you should *work* on the project, but for how long *not* to. Once you’re done with the time you scheduled, you may silence that inner voice nagging you to work more. Guilt and confidence don’t go well together.
 
-And remember to add plenty of breaks between working sessions, which shouldn’t last more than one hour each. Breaks clean the ear. In particular, take breaks if things are going well and you’re being productive. You’ll end up feeling you *need* to go back and finish what you were doing: is there a better feeling?
+If you plan on working for longer than one hour, break that time into shorter working sessions. Breaks clean the ear. You may wish to take a break when things aren’t going well, but resist that temptation if the working session isn’t over yet. Against all intuition, I think that breaks are more effective when you’re being *productive*, because you it leaves you *wanting* to go back and finish what you are doing: Is there a better feeling?
 
 And speaking of good feelings:
 
 Point 4: Reward
 ---------------
 
-If you follow your schedule every day until the deadline, you’re successful, and you must reward yourself for it. The reward maybe a night out, a desert, a new dress… The point is to celebrate and be grateful for the effort you put into your project.
+If you follow your schedule every day until the deadline, you’re successful, and you must reward yourself for it. The reward may be a night out, a desert, a new dress… The point is to celebrate and be grateful for the effort that you put into your project.
 
 Rewards make you feel good, build your confidence, and give you energy to move on to the next project. But before you go there:
 
-Point 5: Break
---------------
+Point 5: Break between Projects
+-------------------------------
 
-Besides the small breaks between working sessions, schedule a longer break between your current project and the next one. How long will your downtime be after the deadline? How will you enjoy this period?
+Besides the small breaks between working sessions, it’s also important to take longer breaks between projects, so think about it right now: How long will it be? How will you enjoy it?
 
-Everything we talked about thus far is about the *process*. Let’s end with three points about the *content*.
+Content
+-------
+
+Everything I talked about up to this point is about the *process*, because I believe that you should focus more on the *process* than on the *content*. But content is important too, so let’s end with some considerations about it.
 
 Point 6: Product
 ----------------
@@ -174,7 +177,9 @@ Are you going to work on a video, a podcast, a book?
 
 You must have a clear product in mind, so you’ll know when you’re done.
 
-Write down one or two sentences you may use to describe your project to someone else. And about that someone else:
+Write down one or two sentences that you may use to describe your project to someone else. And about that someone else:
+
+* * *
 
 Point 7: Target Person
 ----------------------
