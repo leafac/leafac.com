@@ -480,7 +480,7 @@ attachments:
 ---
 
 <figure markdown="1">
-![](avatar.png){:width="300" height="300"}
+![Avatar](avatar.png){:width="300" height="300"}
 </figure>
 
 I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
@@ -507,7 +507,7 @@ Services
 
 - [**Kill the Newsletter!**](https://www.kill-the-newsletter.com)  
   Convert email newsletters into Atom feeds.  
-  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [many](https://bloggingsimply.net/?p=58) [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
+  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
 
 Racket Packages
 ---------------
@@ -916,7 +916,7 @@ Ph.D. Candidate in Computer Science · Programming Languages
 
   </details>
 
-- I have been [assisting on courses](#course-assistantteaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
+- I have been [assisting on courses](#teaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I am system administrator for the laboratory.
 - For most of my Ph.D. program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
@@ -939,8 +939,8 @@ B.S. in Computer Science
 Teaching Experience
 ===================
 
-Teaching Assistant & Course Assistant
--------------------------------------
+Teaching Assistant
+------------------
 
 *[Johns Hopkins University](https://jhu.edu).* 2015-09 – 2019-09.
 

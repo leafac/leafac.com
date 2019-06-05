@@ -28,7 +28,7 @@ With time, I realized that there is no *magic* in PLT Redex—it is just functi
 
 We will (ab)use PLT Redex to play a game of [Peg Solitaire](https://en.wikipedia.org/wiki/Peg_solitaire). Through this simple board game we will explore functional programming, pattern matching, contract verification, nondeterministic computation, visualization, typesetting, test generation, and so forth. This is a fun exercise of repurposing a tool for a task beyond its intended design, and it is a first step toward the virtuous cycle between knowing PLT Redex and reading papers.
 
-We begin with [the minimum to go from nothing to playing the game as quickly as possible](#introduction). We then start over and redo everything, going into more detail. We model Peg Solitaire elements (for example, pegs and boards) as [terms](#terms) and [match them against patterns](#pattern-matching). We formalize the notion of which terms represent Peg Solitaire elements with a [language](#languages) and define [metafunctions](#metafunctions) on this language. We model moves and the winning condition in Peg Solitaire with forms capable of nondeterministic computation: [reduction relations](#redution-relations), [predicate relations](#predicate-relations), and [judgment forms](#judgment-forms). We play the game with the [visualization tools](#visualization). We glance at [other features](#other-features), including test generation and typesetting. Finally, we discuss [limitations](#limitations) and [related work](#related-work), and [conclude](#conclusion).
+We begin with [the minimum to go from nothing to playing the game as quickly as possible](#introduction). We then start over and redo everything, going into more detail. We model Peg Solitaire elements (for example, pegs and boards) as [terms](#terms) and [match them against patterns](#pattern-matching). We formalize the notion of which terms represent Peg Solitaire elements with a [language](#languages) and define [metafunctions](#metafunctions) on this language. We model moves and the winning condition in Peg Solitaire with forms capable of nondeterministic computation: [reduction relations](#reduction-relations), [predicate relations](#predicate-relations), and [judgment forms](#judgment-forms). We play the game with the [visualization tools](#visualization). We glance at [other features](#other-features), including test generation and typesetting. Finally, we discuss [limitations](#limitations) and [related work](#related-work), and [conclude](#conclusion).
 
 
 Introduction
@@ -349,7 +349,7 @@ PLT Redex features [visualization](#visualization) tools, including a [`stepper
 ```
 
 <figure markdown="1">
-![](stepper-5.png){:width="600"}
+![Stepper 5](stepper-5.png){:width="600"}
 <figcaption markdown="1">
 Playing Peg Solitaire with PLT Redex’s stepper. The main pane shows the board over time, with pegs that changed on the last move highlighted. The bottom pane shows in purple the path we have taken, and white nodes are alternative paths with different moves, for example, jumping right instead of left.
 </figcaption>
@@ -1760,7 +1760,7 @@ The `stepper` form only works on judgment forms with mode `I O` (for example, `
 DrRacket opens the window below:
 
 <figure markdown="1">
-![](stepper-1.png){:width="600"}
+![Stepper 1](stepper-1.png){:width="600"}
 <figcaption markdown="1">
 DrRacket showing the stepper. **Left:** The `initial-board`. **Right:** The button to make a move. **Bottom:** A graph showing the path we took while playing the game with only one node that represents the `initial-board`.
 </figcaption>
@@ -1769,7 +1769,7 @@ DrRacket showing the stepper. **Left:** The `initial-board`. **Right:** The butt
 We click on the `→` button to make the first move:
 
 <figure markdown="1">
-![](stepper-2.png){:width="600"}
+![Stepper 2](stepper-2.png){:width="600"}
 <figcaption markdown="1">
 The stepper shows the four possible initial moves on the main pane and on the graph at the bottom.
 </figcaption>
@@ -1778,7 +1778,7 @@ The stepper shows the four possible initial moves on the main pane and on the gr
 We select the second board by clicking on the `↕` button next to it:
 
 <figure markdown="1">
-![](stepper-3.png){:width="600"}
+![Stepper 3](stepper-3.png){:width="600"}
 <figcaption markdown="1">
 The stepper highlights the differences between the `initial-board` and the board we chose. The graph at the bottom shows the path. On the bottom right, the stepper shows the clause we chose, `↑`.
 </figcaption>
@@ -1787,7 +1787,7 @@ The stepper highlights the differences between the `initial-board` and the board
 We click on the `→` button to make the second move:
 
 <figure markdown="1">
-![](stepper-4.png){:width="600"}
+![Stepper 4](stepper-4.png){:width="600"}
 <figcaption markdown="1">
 The stepper shows the three available moves.
 </figcaption>
@@ -1796,7 +1796,7 @@ The stepper shows the three available moves.
 We select the board on the bottom by clicking on the `↕` button next to it:
 
 <figure markdown="1">
-![](stepper-5.png){:width="600"}
+![Stepper 5](stepper-5.png){:width="600"}
 <figcaption markdown="1">
 The game proceeds.
 </figcaption>
@@ -1805,7 +1805,7 @@ The game proceeds.
 We can undo moves and try different paths by click on the nodes on the graph at the bottom:
 
 <figure markdown="1">
-![](stepper-6.png){:width="600"}
+![Stepper 6](stepper-6.png){:width="600"}
 <figcaption markdown="1">
 We return to the beginning of the game and chose a different move by clicking on a node in the graph at the bottom. The stepper highlights the differences between the `initial-board` and our new current board.
 </figcaption>
@@ -1814,7 +1814,7 @@ We return to the beginning of the game and chose a different move by clicking on
 We proceed with the game in this alternate path by clicking on `→`:
 
 <figure markdown="1">
-![](stepper-7.png){:width="600"}
+![Stepper 7](stepper-7.png){:width="600"}
 <figcaption markdown="1">
 The next move in the alternate path. The graph at the bottom includes one node for every board we explored.
 </figcaption>
@@ -1835,14 +1835,14 @@ We can explore Peg Solitaire further with the `traces` form, which accepts the s
 DrRacket opens the window below:
 
 <figure markdown="1">
-![](traces-1.png){:width="600"}
+![Traces 1](traces-1.png){:width="600"}
 <figcaption markdown="1">
 The tracer explores all possible moves up to a certain number of boards. This graph is the fully expanded version of the graph at the bottom of the `stepper` window. Click on **Reduce** to explore further.
 </figcaption>
 </figure>
 
 <figure markdown="1">
-![](traces-2.png){:width="600"}
+![Traces 2](traces-2.png){:width="600"}
 <figcaption markdown="1">
 When we click on a board, the tracer highlights the moves leading to it and those coming from it. The edges are labeled with the clause associated with the move.
 </figcaption>
