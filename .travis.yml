@@ -1,0 +1,5 @@
+language: ruby
+install: gem install github-pages html-proofer
+script:
+  - jekyll build
+  - htmlproofer ./_site
