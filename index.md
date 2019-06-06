@@ -1037,12 +1037,12 @@ Das Dad
 - I used Java EE to build and maintain web products with millions of users.
 - I improved the front-end development process by introducing new technologies and building internal tools.
 
-[Daitan Group](https://www.daitangroup.com/)
---------------------------------------------
+[Daitan Group](http://www.daitangroup.com/)
+-------------------------------------------
 
 *Intern in Software Development.* 2011-07 – 2012-02.
 
-- [Daitan Group](https://www.daitangroup.com/) is an outsourcing company for Telecom applications.
+- [Daitan Group](http://www.daitangroup.com/) is an outsourcing company for Telecom applications.
 - I worked directly with customers from the Silicon Valley.
 - I developed a web service in Java EE for a telecom platform and a PHP web administration tool for a video conference system.
 - I taught a course about version control in Git.
