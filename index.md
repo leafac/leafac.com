@@ -483,7 +483,7 @@ attachments:
 ![Avatar](avatar.png){:width="300" height="300"}
 </figure>
 
-I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
+I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
 
 Contact
 =======
@@ -507,7 +507,7 @@ Services
 
 - [**Kill the Newsletter!**](https://www.kill-the-newsletter.com)  
   Convert email newsletters into Atom feeds.  
-  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
+  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](https://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
 
 Racket Packages
 ---------------
@@ -897,9 +897,9 @@ Ph.D. Candidate in Computer Science · Programming Languages
 
 *[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2020-03 (estimated).
 
-- I am part of the [Programming Languages Laboratory](http://pl.cs.jhu.edu/).
+- I am part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
-- We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](http://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
+- We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
 
   <details markdown="1">
@@ -931,7 +931,7 @@ M.S. in Computer Science · Programming Languages
 B.S. in Computer Science
 ------------------------
 
-*[Universidade de São Paulo](http://www5.usp.br/).* 2008-02 – 2012-09.
+*[Universidade de São Paulo](https://www5.usp.br).* 2008-02 – 2012-09.
 
 - I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
 - I played the drums in a group similar to a [*Escola de Samba*](https://en.wikipedia.org/wiki/Samba_school).
@@ -1005,12 +1005,12 @@ Teaching Assistant
 Work Experience
 ===============
 
-[Raise Sistemas](http://raisesistemas.com.br/)
+[Raise Sistemas](https://raisesistemas.com.br)
 ----------------------------------------------
 
 *Software developer.* 2014-02 – 2014-08.
 
-- [Raise Sistemas](http://raisesistemas.com.br/) is a product start-up.
+- [Raise Sistemas](https://raisesistemas.com.br) is a product start-up.
 - I developed new features and maintained an existing medium-sized Ruby on Rails application.
 - I improved the performance of a subsystem for importing users by a factor of 30x.
 - I was part of an agile team that did regular code-reviews, continuous integration and continuous delivery.
@@ -1028,21 +1028,21 @@ Das Dad
 - I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
 - I helped to manage outreach activities for the local programming community including coding dojos and hackathons.
 
-[Universo Online (UOL)](http://www.uol.com.br/)
------------------------------------------------
+[Universo Online (UOL)](https://www.uol.com.br/)
+------------------------------------------------
 
 *Junior System Analyst.* 2012-03 – 2013-02.
 
-- [UOL](http://www.uol.com.br/) is a major Internet publishing company in Brazil.
+- [UOL](https://www.uol.com.br/) is a major Internet publishing company in Brazil.
 - I used Java EE to build and maintain web products with millions of users.
 - I improved the front-end development process by introducing new technologies and building internal tools.
 
-[Daitan Group](http://www.daitangroup.com/)
--------------------------------------------
+[Daitan Group](https://www.daitangroup.com/)
+--------------------------------------------
 
 *Intern in Software Development.* 2011-07 – 2012-02.
 
-- [Daitan Group](http://www.daitangroup.com/) is an outsourcing company for Telecom applications.
+- [Daitan Group](https://www.daitangroup.com/) is an outsourcing company for Telecom applications.
 - I worked directly with customers from the Silicon Valley.
 - I developed a web service in Java EE for a telecom platform and a PHP web administration tool for a video conference system.
 - I taught a course about version control in Git.
@@ -1063,11 +1063,11 @@ Events
 ======
 
 - **[The Racket School 2018: Create your own language](https://summer-school.racket-lang.org/2018/).** 2018-07-09 – 2018-07-13.
-- **[24th Static Analysis Symposium](http://staticanalysis.org/sas2017/sas2017.html).** Zachary Palmer presented a paper that I co-authored, *Relative Store Fragments for Singleton Abstraction*. 2017-08-30 – 2017-09-01.
+- **[24th Static Analysis Symposium](https://staticanalysis.org/sas2017/sas2017.html).** Zachary Palmer presented a paper that I co-authored, *Relative Store Fragments for Singleton Abstraction*. 2017-08-30 – 2017-09-01.
 - **[The Racket School of Semantics and Languages 2017](https://summer-school.racket-lang.org/2017/).** 2017-07-10 – 2017-07-14.
 - **[The 17th Symposium on Trends in Functional Programming (TFP 2016)](http://tfp2016.org/).** Alexander Rozenshteyn presented a paper that I co-authored, *What is Your Function? Static Pattern Matching on Function Behavior*. 2016-06-08, 2016-06-10.
 - **JHU ACM Meeting.** I talked about Git and Racket. 2016.
-- **[IBM Programming Languages Day 2015](http://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432).** 2015-11-23.
+- **[IBM Programming Languages Day 2015](https://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432).** 2015-11-23.
 - **The Developer’s Conference Florianópolis 2014.** I talked about HTTP/2 and the future of web technologies. 2014-05.
 - **iMasters InterCon 2013.** 2013-11.
 - **iMasters InterCon + Android 2013.** 2013-09.
@@ -1150,8 +1150,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Colophon
 ========
 
-| Page layout | Inspired by the works of [Matthew Butterick](http://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/) |
-| Serif font | [Charter](http://practicaltypography.com/charter.html) |
+| Page layout | Inspired by the works of [Matthew Butterick](https://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/) |
+| Serif font | [Charter](https://practicaltypography.com/charter.html) |
 | Monospaced font | [`Iosevka Term Slab`](https://typeof.net/Iosevka/) |
 | Static website generator | [Jekyll](https://jekyllrb.com) |
 | Host | [GitHub Pages](https://pages.github.com) |

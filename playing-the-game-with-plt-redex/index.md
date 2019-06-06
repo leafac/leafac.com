@@ -2308,4 +2308,4 @@ You now know enough to read the more advanced material on PLT Redex, and unders
 Acknowledgments
 ===============
 
-Thanks to the following people for providing feedback on a preliminary version of this article: [P.C. Shyamshankar](https://cs.jhu.edu/~shyam/), [Scott Moore](http://www.thinkmoore.net/), [Allan Vital](http://www.allanvital.com/) and [Rafael da Silva Almeida](http://rafaelalmeida.net/).
+Thanks to the following people for providing feedback on a preliminary version of this article: [P.C. Shyamshankar](https://cs.jhu.edu/~shyam/), [Scott Moore](https://www.thinkmoore.net/), [Allan Vital](https://www.allanvital.com/) and [Rafael da Silva Almeida](http://rafaelalmeida.net/).

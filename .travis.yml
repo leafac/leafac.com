@@ -1,5 +1,7 @@
 language: ruby
-install: gem install github-pages html-proofer
+install:
+  - sudo apt update && sudo apt install --assume-yes libcurl4-openssl-dev
+  - gem install github-pages html-proofer
 script:
   - jekyll build
   - htmlproofer ./_site

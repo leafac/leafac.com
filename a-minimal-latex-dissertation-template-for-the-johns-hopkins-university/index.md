@@ -439,7 +439,7 @@ When we select a different TeX engine we also have to be explicit about BibTeX b
 </figcaption>
 </figure>
 
-With the LuaTeX engine you can use the [`fontspec`](https://ctan.org/pkg/fontspec) and [`unicode-math`](https://ctan.org/pkg/unicode-math) packages to select different fonts. For example, select a combination of [Charter](https://practicaltypography.com/charter.html) (serif), [`Iosevka Term Slab`](http://typeof.net/Iosevka/) (monospaced) and [Asana Math](https://ctan.org/pkg/asana-math) (mathematics) by adding the following snippet to the LaTeX source preamble:
+With the LuaTeX engine you can use the [`fontspec`](https://ctan.org/pkg/fontspec) and [`unicode-math`](https://ctan.org/pkg/unicode-math) packages to select different fonts. For example, select a combination of [Charter](https://practicaltypography.com/charter.html) (serif), [`Iosevka Term Slab`](https://typeof.net/Iosevka/) (monospaced) and [Asana Math](https://ctan.org/pkg/asana-math) (mathematics) by adding the following snippet to the LaTeX source preamble:
 
 <figure markdown="1">
 ```latex
