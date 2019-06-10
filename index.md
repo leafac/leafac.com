@@ -549,12 +549,12 @@ Bushwhacking
 My First Robot
 --------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/my-first-robot.mp3" controls preload="metadata"></audio>
+<audio src="https://archive.org/download/leafac-music/my-first-robot.mp3" controls preload="metadata"></audio>
 
 Agora Há Algo a Temer
 ---------------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/agora-ha-algo-a-temer.mp3" controls preload="metadata"></audio>
+<audio src="https://archive.org/download/leafac-music/agora-ha-algo-a-temer.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Lyrics</summary>
@@ -633,7 +633,7 @@ Agora há algo a Temer
 O Fim da Tempestade
 -------------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/o-fim-da-tempestade.mp3" controls preload="metadata"></audio>
+<audio src="https://archive.org/download/leafac-music/o-fim-da-tempestade.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Samples</summary>
@@ -644,7 +644,7 @@ O Fim da Tempestade
 Criatividade
 ------------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/criatividade.mp3" controls preload="metadata"></audio>
+<audio src="https://archive.org/download/leafac-music/criatividade.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Lyrics</summary>
@@ -754,7 +754,7 @@ Aumenta a criativadade
 United
 ------
 
-<audio src="https://f001.backblazeb2.com/file/files-leafac-com/music/united.mp3" controls preload="metadata"></audio>
+<audio src="https://archive.org/download/leafac-music/united.mp3" controls preload="metadata"></audio>
 
 <details markdown="1">
 <summary>Lyrics</summary>
