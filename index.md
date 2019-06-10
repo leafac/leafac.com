@@ -456,27 +456,27 @@ bibtex:
 
 attachments:
   "http://zotero.org/users/4828827/items/GJMBE3DC":
-    PDF: "Facchinetti - SDL A DSL for Cryptographic Schemes.pdf"
+    PDF: "/publications/Facchinetti - SDL A DSL for Cryptographic Schemes.pdf"
   "http://zotero.org/users/4828827/items/TJW5USER":
-    PDF: "Facchinetti et al. - 2017 - Relative Store Fragments for Singleton Abstraction.pdf"
+    PDF: "/publications/Facchinetti et al. - 2017 - Relative Store Fragments for Singleton Abstraction.pdf"
   "http://zotero.org/users/4828827/items/NPG5Y85P":
-    PDF: "Facchinetti - Towards Practical Higher-Order Demand-Driven Progr.pdf"
-    Slides: "towards-practical-higher-order-demand-driven-program-analysis.key"
+    PDF: "/publications/Facchinetti - Towards Practical Higher-Order Demand-Driven Progr.pdf"
+    Slides: "/publications/towards-practical-higher-order-demand-driven-program-analysis.key"
   "http://zotero.org/users/4828827/items/V865FGTI":
-    PDF: "Facchinetti - Practical Demand-Driven Program Analysis with Recu.pdf"
+    PDF: "/publications/Facchinetti - Practical Demand-Driven Program Analysis with Recu.pdf"
   "http://zotero.org/users/4828827/items/AEVV98PS":
-    PDF: "Leandro Facchinetti et al. - 2016 - Higher-Order Demand-Driven Program Analysis (Artif.pdf"
-    Code: "DARTS-2-1-9-artifact-88e98fe9019cb2bb1e758be0ca6325f9.tgz"
+    PDF: "/publications/Leandro Facchinetti et al. - 2016 - Higher-Order Demand-Driven Program Analysis (Artif.pdf"
+    Code: "/publications/DARTS-2-1-9-artifact-88e98fe9019cb2bb1e758be0ca6325f9.tgz"
   "http://zotero.org/users/4828827/items/RKXIFGKR":
-    PDF: "Facchinetti et al. - What is Your Function Static Pattern Matching on .pdf"
+    PDF: "/publications/Facchinetti et al. - What is Your Function Static Pattern Matching on .pdf"
   "http://zotero.org/users/4828827/items/IZSR5PBU":
-    PDF: "Osório et al. - Pesquisa e Desenvolvimento de Robôs Táticos para A.pdf"
+    PDF: "/publications/Osório et al. - Pesquisa e Desenvolvimento de Robôs Táticos para A.pdf"
   "http://zotero.org/users/4828827/items/VUC75E8B":
-    PDF: "Facchinetti and Osório - Sistema de Navegação Visual baseado em Correlação .pdf"
+    PDF: "/publications/Facchinetti and Osório - Sistema de Navegação Visual baseado em Correlação .pdf"
   "http://zotero.org/users/4828827/items/25ZBP9BS":
-    PDF: "Facchinetti and Osório - 2010 - Navegação Visual de Robôs Móveis Autônomos Baseada.pdf"
+    PDF: "/publications/Facchinetti and Osório - 2010 - Navegação Visual de Robôs Móveis Autônomos Baseada.pdf"
   "http://zotero.org/users/4828827/items/2WHK3X28":
-    PDF: "Facchinetti et al. - Higher-Order Demand-Driven Program Analysis.pdf"
+    PDF: "/publications/Facchinetti et al. - Higher-Order Demand-Driven Program Analysis.pdf"
 ---
 
 <figure markdown="1">
@@ -864,7 +864,7 @@ Publications
 
 {% assign publications = page.publications | sort: "issued.date-parts" | reverse %}
 {% for publication in publications %}
-- **{% if publication.shortTitle %}*{{ publication.title }}* ({{ publication.shortTitle }}){% else %}{{ publication.title }}{% endif %}.** {{ publication.author | map: "literal" | array_to_sentence_string }}. {% if publication.event %}{% if publication.URL %}[{{ publication.event }}]({{ publication.URL }}){% else %}{{ publication.event }}{% endif %}.{% endif %} {% if publication.container-title %}{% if publication.URL %}[{{ publication.container-title }}]({{ publication.URL }}){% else %}{{ publication.container-title }}{% endif %}.{% endif %} {% if publication.collection-title %}{% if publication.URL %}[{{ publication.collection-title }}]({{ publication.URL }}){% else %}{{ publication.collection-title }}{% endif %}.{% endif %} {% if publication.genre %}{{ publication.genre }}.{% endif %} {% if publication.publisher %}{{ publication.publisher }}.{% endif %} {% if publication.event-place %}{{ publication.event-place }}.{% endif %} {% if publication.note %}{{ publication.note }}.{% endif %} {{ publication.issued.date-parts[0][0] }}. {% for attachment in page.attachments[publication.id] %}[[{{ attachment[0] }}](https://f001.backblazeb2.com/file/files-leafac-com/publications/{{ attachment[1] | url_encode }})]{% endfor %}{% if publication.archive %}[[Publisher]({{ publication.archive }})]{% endif %}
+- **{% if publication.shortTitle %}*{{ publication.title }}* ({{ publication.shortTitle }}){% else %}{{ publication.title }}{% endif %}.** {{ publication.author | map: "literal" | array_to_sentence_string }}. {% if publication.event %}{% if publication.URL %}[{{ publication.event }}]({{ publication.URL }}){% else %}{{ publication.event }}{% endif %}.{% endif %} {% if publication.container-title %}{% if publication.URL %}[{{ publication.container-title }}]({{ publication.URL }}){% else %}{{ publication.container-title }}{% endif %}.{% endif %} {% if publication.collection-title %}{% if publication.URL %}[{{ publication.collection-title }}]({{ publication.URL }}){% else %}{{ publication.collection-title }}{% endif %}.{% endif %} {% if publication.genre %}{{ publication.genre }}.{% endif %} {% if publication.publisher %}{{ publication.publisher }}.{% endif %} {% if publication.event-place %}{{ publication.event-place }}.{% endif %} {% if publication.note %}{{ publication.note }}.{% endif %} {{ publication.issued.date-parts[0][0] }}. {% for attachment in page.attachments[publication.id] %}[[{{ attachment[0] }}]({{ attachment[1] }})]{% endfor %}{% if publication.archive %}[[Publisher]({{ publication.archive }})]{% endif %}
 
   {% if publication.abstract %}
   <details markdown="1">
