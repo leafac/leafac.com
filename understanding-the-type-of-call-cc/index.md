@@ -7,7 +7,7 @@ In classical Hindley–Milner type systems (for example, the core of the type sy
 
 We start with a simple expression:
 
-```racket
+```racket-no-highlight
 > (zero? 0)
 #t
 ```
