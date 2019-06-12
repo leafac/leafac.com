@@ -252,7 +252,7 @@ The first page in the dissertation is the Title Page:
 
     Baltimore, Maryland
     
-    !!Month!!, !!Year!!
+    !!Month!! !!Year!!
   \end{singlespace}
 \end{center}
 
