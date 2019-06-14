@@ -1114,9 +1114,11 @@ Courses
 License
 =======
 
-| Source | <https://github.com/leafac/www.leafac.com> |
-| Prose | [GNU FDL](https://www.gnu.org/licenses/fdl.html) |
-| Code | [GNU GPL](https://www.gnu.org/licenses/gpl.html) |
+**Source:** <https://github.com/leafac/www.leafac.com>
+
+**Prose:** [GNU FDL](https://www.gnu.org/licenses/fdl.html)
+
+**Code:** [GNU GPL](https://www.gnu.org/licenses/gpl.html)
 
 ```
 Copyright (C) {{ site.time | date: "%Y" }} Leandro Facchinetti
@@ -1150,10 +1152,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Colophon
 ========
 
-| Page layout | Inspired by the works of [Matthew Butterick](https://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/) |
-| Serif font | [Charter](https://practicaltypography.com/charter.html) |
-| Monospaced font | [`Iosevka Term Slab`](https://typeof.net/Iosevka/) |
-| Static website generator | [Jekyll](https://jekyllrb.com) |
-| Host | [GitHub Pages](https://pages.github.com) |
-| Text editor | [Visual Studio Code](https://code.visualstudio.com) |
-| Vector graphics | [Inkscape](https://inkscape.org/) |
+**Page Layout:**  Inspired by the works of [Matthew Butterick](https://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/).
+
+**Serif Font:** [Charter](https://practicaltypography.com/charter.html).
+
+**Monospaced Font:** [`Iosevka Term Slab`](https://typeof.net/Iosevka).
+
+**Static website generator:** [Jekyll](https://jekyllrb.com).
+
+**Host:** [GitHub Pages](https://pages.github.com).
+
+**Text Editor:** [Visual Studio Code](https://code.visualstudio.com).
+
+**Drawings:** [Procreate](https://procreate.art).
+
+**Vector Graphics:** [Inkscape](https://inkscape.org).
