@@ -488,6 +488,8 @@ I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D.
 Newsletter
 ==========
 
+Interested in my work? Subscribe to my newsletter!
+
 <form method="POST" action="https://www-leafac-com-backend.herokuapp.com/newsletter">
   <p>
     <input type="hidden" name="return" value="https://www.leafac.com/">
