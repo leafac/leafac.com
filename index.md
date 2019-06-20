@@ -498,6 +498,8 @@ Interested in my work? Subscribe to my newsletter!
   </p>
 </form>
 
+Prefer an Atom feed instead? Use **[Kill the Newsletter!](https://www.kill-the-newsletter.com)**
+
 Contact
 =======
 
