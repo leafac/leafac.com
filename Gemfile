@@ -10,6 +10,7 @@ gem "dotenv"
 gem "rerun", group: :development
 
 gem "github-pages"
+gem "html-proofer", group: :test
 group :jekyll_plugins do
   gem "jekyll-optional-front-matter"
   gem "jekyll-default-layout"

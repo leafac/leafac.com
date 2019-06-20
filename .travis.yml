@@ -1,7 +1,2 @@
 language: ruby
-install:
-  - sudo apt update && sudo apt install --assume-yes libcurl4-openssl-dev
-  - gem install github-pages html-proofer
-script:
-  - jekyll build
-  - htmlproofer ./_site
+before_install: sudo apt update && sudo apt install --assume-yes libcurl4-openssl-dev

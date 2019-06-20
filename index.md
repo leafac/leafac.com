@@ -490,7 +490,7 @@ Newsletter
 
 Interested in my work? Subscribe to my newsletter!
 
-<form method="POST" action="https://www-leafac-com-backend.herokuapp.com/newsletter">
+<form method="POST" action="https://www-leafac-com.herokuapp.com/newsletter">
   <p>
     <input type="hidden" name="return" value="https://www.leafac.com/#newsletter">
     <input type="email" name="email" placeholder="Email" maxlength="500" size="30" required>
