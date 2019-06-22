@@ -495,7 +495,7 @@ Interested in my work? Subscribe to my newsletter!
     <input type="hidden" name="return" value="https://www.leafac.com/#newsletter">
     <input type="email" name="email" placeholder="Email" maxlength="500" size="30" required>
     <input type="text" name="name" placeholder="Name (optional)" maxlength="500" size="30"><br>
-    <textarea name="description" placeholder="Tell me a little about yourself: Who are you? How did you find me? What kind of content to want to receive? (optional)" cols="67" rows="5"></textarea><br>
+    <textarea name="description" placeholder="Tell me a little about yourself: Who are you? How did you find me? What kind of content to want to receive? (optional)" cols="70" rows="5"></textarea><br>
     <button>Subscribe</button>
   </p>
 </form>
