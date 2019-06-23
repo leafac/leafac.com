@@ -505,8 +505,9 @@ Prefer an Atom feed instead? Use **[Kill the Newsletter!](https://www.kill-the-n
 Contact
 =======
 
-| **Personal email** | <me@leafac.com> |
-| **Work email** | <leandro@jhu.edu> |
+**Personal Email:** <me@leafac.com>
+
+**Work Email:** <leandro@jhu.edu>
 
 Prose
 =====
