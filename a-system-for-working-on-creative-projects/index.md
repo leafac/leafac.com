@@ -11,7 +11,7 @@ TODO: Video
 Creative Project Worksheet
 ==========================
 
-[![](creative-project-worksheet.png){:width="600" height="292"}](creative-project-worksheet.pdf)
+[![](creative-project-worksheet.png){:width="600"}](creative-project-worksheet.pdf)
 
 References
 ==========
