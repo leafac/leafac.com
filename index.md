@@ -561,7 +561,7 @@ Music
 Bushwhacking
 ------------
 
-<video src="https://archive.org/download/bushwhacking/bushwhacking.mp4" controls preload="none" width="600" height="337"></video>
+<video src="https://archive.org/download/bushwhacking/bushwhacking.mp4" controls preload="none"></video>
 
 My First Robot
 --------------
@@ -925,11 +925,11 @@ Ph.D. Candidate in Computer Science · Programming Languages
   The recording quality is bad because I was not in control of it.  
   **Presentation for a General Audience**
 
-  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4" controls preload="none" width="600" height="337"></video>
+  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4" controls preload="none"></video>
 
   **Final Presentation**
 
-  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4" controls preload="none" width="600" height="337"></video>
+  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4" controls preload="none"></video>
 
   </details>
 
@@ -973,46 +973,46 @@ Teaching Assistant
   The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.  
   **Deployment**
 
-  <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none" width="600" height="337"></video>
+  <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
 
   **JavaScript**  
   *Classroom Lecture*
 
-  <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none" width="600" height="337"></video>
+  <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
 
   *Video Lectures*
 
-  1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none" width="600" height="337"></video>
-  2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none" width="600" height="337"></video>
-  3. **Creating Promises** <video src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4" controls preload="none" width="600" height="337"></video>
-  4. **`var`** <video src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4" controls preload="none" width="600" height="337"></video>
-  5. **DOM · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4" controls preload="none" width="600" height="337"></video>
-  6. **DOM · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4" controls preload="none" width="600" height="337"></video>
-  7. **Web Sockets · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4" controls preload="none" width="600" height="337"></video>
-  8. **Web Sockets · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4" controls preload="none" width="600" height="337"></video>
-  9. **Classes · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4" controls preload="none" width="600" height="337"></video>
-  10. **Classes · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4" controls preload="none" width="600" height="337"></video>
-  11. **Classes · Part 3** <video src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4" controls preload="none" width="600" height="337"></video>
-  12. **Classes · Part 4** <video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="none" width="600" height="337"></video>
-  13. **Modules** <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none" width="600" height="337"></video>
+  1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
+  2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
+  3. **Creating Promises** <video src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4" controls preload="none"></video>
+  4. **`var`** <video src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4" controls preload="none"></video>
+  5. **DOM · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4" controls preload="none"></video>
+  6. **DOM · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4" controls preload="none"></video>
+  7. **Web Sockets · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4" controls preload="none"></video>
+  8. **Web Sockets · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4" controls preload="none"></video>
+  9. **Classes · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4" controls preload="none"></video>
+  10. **Classes · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4" controls preload="none"></video>
+  11. **Classes · Part 3** <video src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4" controls preload="none"></video>
+  12. **Classes · Part 4** <video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="none"></video>
+  13. **Modules** <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none"></video>
 
   **Git**  
   *Classroom Lecture*
 
-  <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none" width="600" height="337"></video>
+  <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
 
   *Video Lectures*
 
-  1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none" width="600" height="337"></video>
-  2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none" width="600" height="337"></video>
-  3. **Repository** <video src="https://archive.org/download/git-video-series/git--3--repository.mp4" controls preload="none" width="600" height="337"></video>
-  4. **Commit** <video src="https://archive.org/download/git-video-series/git--4--commit.mp4" controls preload="none" width="600" height="337"></video>
-  5. **Publishing to GitHub** <video src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4" controls preload="none" width="600" height="337"></video>
-  6. **Cloning from GitHub** <video src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4" controls preload="none" width="600" height="337"></video>
-  7. **Coordinating Collaboration** <video src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4" controls preload="none" width="600" height="337"></video>
-  8. **Branches and Pull Requests** <video src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4" controls preload="none" width="600" height="337"></video>
-  9. **Rebasing** <video src="https://archive.org/download/git-video-series/git--9--rebasing.mp4" controls preload="none" width="600" height="337"></video>
-  10. **Conclusion** <video src="https://archive.org/download/git-video-series/git--10--conclusion.mp4" controls preload="none" width="600" height="337"></video>
+  1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
+  2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
+  3. **Repository** <video src="https://archive.org/download/git-video-series/git--3--repository.mp4" controls preload="none"></video>
+  4. **Commit** <video src="https://archive.org/download/git-video-series/git--4--commit.mp4" controls preload="none"></video>
+  5. **Publishing to GitHub** <video src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4" controls preload="none"></video>
+  6. **Cloning from GitHub** <video src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4" controls preload="none"></video>
+  7. **Coordinating Collaboration** <video src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4" controls preload="none"></video>
+  8. **Branches and Pull Requests** <video src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4" controls preload="none"></video>
+  9. **Rebasing** <video src="https://archive.org/download/git-video-series/git--9--rebasing.mp4" controls preload="none"></video>
+  10. **Conclusion** <video src="https://archive.org/download/git-video-series/git--10--conclusion.mp4" controls preload="none"></video>
 
   </details>
 
@@ -1094,7 +1094,7 @@ Events
 
   <details markdown="1">
   <summary><strong>Watch my talk</strong></summary>
-  <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="none" width="600" height="337"></video>
+  <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="none"></video>
   </details>
 
 - **Dev in Sampa 2012.** 2012-05.
