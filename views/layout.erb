@@ -12,10 +12,10 @@
     <title>Leandro Facchinetti</title>
   </head>
   <body>
-    <header><h1><a href="https://www.leafac.com/">Leandro Facchinetti</a></h1></header>
+    <header><h1><a href="https://www.leafac.com/"><img alt="Leandro Facchinetti" src="https://www.leafac.com/logo.png" width="600"></a></h1></header>
     <main>
       <%= yield %>
-      <% if params["return"] %><p><a href="<%= params["return"] %>" class="button">Return</a></p><% end %>
+      <p><a href="<%= params["return"] %>" class="button">Return</a></p>
     </main>
   </body>
 </html>
