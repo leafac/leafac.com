@@ -492,6 +492,7 @@ Interested in my work? Subscribe to my newsletter!
 
 <form method="POST" action="https://www-leafac-com.herokuapp.com/newsletter">
   <p>
+    <input type="text" name="fax" style="display: none;" tabindex="-1" autocomplete="off">
     <input type="hidden" name="return" value="https://www.leafac.com/#newsletter">
     <input type="email" name="email" placeholder="Email" maxlength="500" size="30" required>
     <input type="text" name="name" placeholder="Name (optional)" maxlength="500" size="30"><br>
