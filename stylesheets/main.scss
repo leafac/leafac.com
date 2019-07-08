@@ -155,6 +155,10 @@ button, button:active, .button {
   text-decoration: none;
 }
 
+[data-conditional] {
+  display: none;
+}
+
 /* rougify style pastie > stylesheets/syntax-highlight.css */
 
 .highlight table td { padding: 5px; }

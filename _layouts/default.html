@@ -14,5 +14,11 @@
   <body>
     <header><h1><a href="/"><img alt="Leandro Facchinetti" src="/logo.png" width="600"></a></h1></header>
     <main>{{ content }}</main>
+    <script>
+      const searchParams = new URLSearchParams(window.location.search);
+      document.querySelectorAll("[data-conditional]").forEach(element => {
+        if (searchParams.has(element.dataset.conditional)) element.style.display = "block";
+      });
+    </script>
   </body>
 </html>

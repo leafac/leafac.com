@@ -488,11 +488,14 @@ I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D.
 Newsletter
 ==========
 
+<div data-conditional="newsletter-subscribed" markdown="1">
+**Thank you for subscribing to my newsletter.**
+</div>
+
 Interested in my work? Subscribe to my newsletter!
 
 <form method="POST" action="https://www-leafac-com.herokuapp.com/newsletter">
   <p>
-    <input type="hidden" name="return" value="https://www.leafac.com/#newsletter">
     <input type="email" name="email" placeholder="Email" maxlength="500" size="30" required>
     <input type="text" name="name" placeholder="Name (optional)" maxlength="500" size="30"><br>
     <textarea name="description" placeholder="Tell me a little about yourself: Who are you? How did you find me? What kind of content to want to receive? (optional)" cols="70" rows="5"></textarea><br>
