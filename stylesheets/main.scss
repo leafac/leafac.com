@@ -132,9 +132,9 @@ button, button:active, .button {
   text-decoration: none;
 }
 
-// $ rougify style pastie --scope ''
+// $ rougify style pastie --scope 'REMOVE-ME' >> stylesheets/main.scss
 
-.c, .cd, .cm, .c1 {
+.c, .ch, .cd, .cm, .cpf, .c1 {
   color: #888888;
 }
 .cp {
@@ -196,11 +196,11 @@ button, button:active, .button {
   color: #888888;
   font-weight: bold;
 }
-.m, .mf, .mh, .mi, .il, .mo, .mb, .mx {
+.m, .mb, .mf, .mh, .mi, .il, .mo, .mx {
   color: #0000dd;
   font-weight: bold;
 }
-.s, .sb, .sc, .sd, .s2, .sh, .s1 {
+.s, .sa, .sb, .sc, .dl, .sd, .s2, .sh, .s1 {
   color: #dd2200;
   background-color: #fff0f0;
 }
@@ -244,7 +244,7 @@ button, button:active, .button {
   color: #bb0066;
   font-weight: bold;
 }
-.nf {
+.nf, .fm {
   color: #0066bb;
   font-weight: bold;
 }
@@ -263,7 +263,7 @@ button, button:active, .button {
   color: #bb0066;
   font-weight: bold;
 }
-.nv, .vc {
+.nv, .vc, .vm {
   color: #336699;
 }
 .vg {
