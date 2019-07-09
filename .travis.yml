@@ -1,5 +1,7 @@
 language: ruby
-before_install: sudo apt update && sudo apt install --assume-yes libcurl4-openssl-dev
+before_install:
+  - sudo apt update
+  - sudo apt install --yes libcurl4-openssl-dev
 script:
   - bundle exec jekyll build
   - bundle exec htmlproofer --assume-extension ./_site
