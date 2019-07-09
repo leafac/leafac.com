@@ -483,7 +483,7 @@ attachments:
 ![Avatar](avatar.png){:width="300"}
 </figure>
 
-I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, and veganism. I live in Baltimore, Maryland, United States.
+I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, running, and veganism. I live in Baltimore, Maryland, United States.
 
 Newsletter
 ==========
@@ -504,9 +504,8 @@ Prefer an Atom feed instead? Use **[Kill the Newsletter!](https://www.kill-the-n
 Contact
 =======
 
-**Personal Email:** <me@leafac.com>
-
-**Work Email:** <leandro@jhu.edu>
+- **Personal Email:** <me@leafac.com>
+- **Work Email:** <leandro@jhu.edu>
 
 Prose
 =====
@@ -1132,11 +1131,9 @@ Courses
 License
 =======
 
-**Source:** <https://github.com/leafac/www.leafac.com>
-
-**Prose:** [GNU FDL](https://www.gnu.org/licenses/fdl.html)
-
-**Code:** [GNU GPL](https://www.gnu.org/licenses/gpl.html)
+- **Source:** <https://github.com/leafac/www.leafac.com>
+- **Prose:** [GNU FDL](https://www.gnu.org/licenses/fdl.html)
+- **Code:** [GNU GPL](https://www.gnu.org/licenses/gpl.html)
 
 ```
 Copyright (C) {{ site.time | date: "%Y" }} Leandro Facchinetti
@@ -1170,18 +1167,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Colophon
 ========
 
-**Page Layout:**  Inspired by the works of [Matthew Butterick](https://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/).
-
-**Serif Font:** [Charter](https://practicaltypography.com/charter.html).
-
-**Monospaced Font:** [`Iosevka Term Slab`](https://typeof.net/Iosevka).
-
-**Static website generator:** [Jekyll](https://jekyllrb.com).
-
-**Host:** [GitHub Pages](https://pages.github.com).
-
-**Text Editor:** [Visual Studio Code](https://code.visualstudio.com).
-
-**Drawings:** [Procreate](https://procreate.art).
-
-**Vector Graphics:** [Inkscape](https://inkscape.org).
+- **Page Layout:**  Inspired by the works of [Matthew Butterick](https://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/)
+- **Serif Font:** [Charter](https://practicaltypography.com/charter.html)
+- **Monospaced Font:** [`Iosevka Term Slab`](https://typeof.net/Iosevka)
+- **Static website generator:** [Jekyll](https://jekyllrb.com)
+- **Host:** [GitHub Pages](https://pages.github.com)
+- **Text Editor:** [Visual Studio Code](https://code.visualstudio.com)
+- **Drawings:** [Procreate](https://procreate.art)
+- **Vector Graphics:** [Inkscape](https://inkscape.org)
