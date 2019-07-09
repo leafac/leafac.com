@@ -65,37 +65,22 @@ body {
   margin: 0 auto;
 }
 
-a {
-  color: black;
-}
-
-mark {
-  background-color: rgb(200, 200, 200);
-}
-
-ins, del {
-  text-decoration: none;
-}
-
-ins {
-  background-color: rgb(221, 230, 199);
-}
-
-del {
-  background-color: rgb(238, 186, 187);
-}
+a        { color: black; }
+mark     { background-color: rgb(200, 200, 200); }
+ins, del { text-decoration: none; }
+ins      { background-color: rgb(221, 230, 199); }
+del      { background-color: rgb(238, 186, 187); }
 
 h1, h2 {
   line-height: 1.25;
   margin-top: 2rem;
   a { text-decoration: none; }
   & + & { margin-top: 1rem; }
-  header & { text-align: center; }
 }
 
-h1 {
-  font-size: 1.5rem;
-}
+header h1 { text-align: center; }
+
+h1 { font-size: 1.5rem; }
 
 h2 {
   font-size: 1.25rem;
@@ -115,13 +100,9 @@ img, svg, video {
   border-radius: 3px;
 }
 
-video, audio {
-  width: 100%;
-}
+video, audio { width: 100%; }
 
-summary {
-  cursor: pointer;
-}
+summary { cursor: pointer; }
 
 pre, code, input, textarea, button, button:active, .button {
   font-family: "Iosevka Term Slab", "Courier New", monospace;
