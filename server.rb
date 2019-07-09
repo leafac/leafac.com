@@ -10,5 +10,5 @@ post "/newsletter" do
          params["description"].nil? || params["description"].strip.empty?
      settings.github.add_comment "leafac/www.leafac.com--data", 1, "#{params["name"]} <#{params["email"]}>\n#{params["description"]}"
   end
-  redirect "https://www.leafac.com/newsletter"
+  redirect "https://www.leafac.com/forms/newsletter"
 end
