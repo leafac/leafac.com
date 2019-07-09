@@ -63,9 +63,9 @@ Examples of Valid Moves (Starting Moves)
 </figcaption>
 <pre>
     ● ● ●             ● ● ●
-    ● <ins>●</ins> ●             ● ○ ●
-● ● ● <del>●</del> ● ● ●     ● ● ● <del>○</del> ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <ins>●</ins> ● ● ●
+    ● <span class="gi">●</span> ●             ● ○ ●
+● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -73,7 +73,7 @@ Examples of Valid Moves (Starting Moves)
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <del>●</del> <ins>●</ins> ●  ➡  ● ● ● <ins>●</ins> <del>○</del> ○ ●
+● ● ● ○ <span class="gd">●</span> <span class="gi">●</span> ●  ➡  ● ● ● <span class="gi">●</span> <span class="gd">○</span> ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -81,21 +81,21 @@ Examples of Valid Moves (Starting Moves)
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <ins>●</ins> ● ● ●
-● ● ● <del>●</del> ● ● ●     ● ● ● <del>○</del> ● ● ●
-    ● <ins>●</ins> ●             ● ○ ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
+● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
+    ● <span class="gi">●</span> ●             ● ○ ●
     ● ● ●             ● ● ●
 
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <ins>●</ins> <del>●</del> ○ ● ● ●  ➡  ● ○ <del>○</del> <ins>●</ins> ● ● ●
+● <span class="gi">●</span> <span class="gd">●</span> ○ ● ● ●  ➡  ● ○ <span class="gd">○</span> <span class="gi">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 
 
-<ins>●</ins> jumps over <del>●</del>
+<span class="gi">●</span> jumps over <span class="gd">●</span>
 </pre>
 </figure>
 
@@ -106,9 +106,9 @@ The following are examples of *invalid moves*:
   <pre>
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ <ins>●</ins> ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
-  ○ ○ <del>●</del> ○ ○ ○ ○  ➡  ○ ○ <del>○</del> ○ ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <ins>●</ins> ○ ○ ○
+  ○ <span class="gi">●</span> ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
+  ○ ○ <span class="gd">●</span> ○ ○ ○ ○  ➡  ○ ○ <span class="gd">○</span> ○ ○ ○ ○
+  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <span class="gi">●</span> ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   </pre>
@@ -119,7 +119,7 @@ The following are examples of *invalid moves*:
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
-  ○ <ins>●</ins> <del>●</del> ○ ○ ○ ○  ➡  ○ ○ <del>○</del> ○ <ins>●</ins> ○ ○
+  ○ <span class="gi">●</span> <span class="gd">●</span> ○ ○ ○ ○  ➡  ○ ○ <span class="gd">○</span> ○ <span class="gi">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
@@ -131,7 +131,7 @@ The following are examples of *invalid moves*:
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
-  ○ <ins>●</ins> <del>●</del> <del>●</del> ○ ○ ○  ➡  ○ ○ <del>○</del> <del>○</del> <ins>●</ins> ○ ○
+  ○ <span class="gi">●</span> <span class="gd">●</span> <span class="gd">●</span> ○ ○ ○  ➡  ○ ○ <span class="gd">○</span> <span class="gd">○</span> <span class="gi">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
@@ -1018,9 +1018,9 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
 
 <pre>
     ● ● ●             ● ● ●
-    ● <ins>●</ins> ●             ● ○ ●
-● ● ● <del>●</del> ● ● ●     ● ● ● <del>○</del> ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <ins>●</ins> ● ● ●
+    ● <span class="gi">●</span> ●             ● ○ ●
+● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -1028,7 +1028,7 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <del>●</del> <ins>●</ins> ●  ➡  ● ● ● <ins>●</ins> <del>○</del> ○ ●
+● ● ● ○ <span class="gd">●</span> <span class="gi">●</span> ●  ➡  ● ● ● <span class="gi">●</span> <span class="gd">○</span> ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -1036,21 +1036,21 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <ins>●</ins> ● ● ●
-● ● ● <del>●</del> ● ● ●     ● ● ● <del>○</del> ● ● ●
-    ● <ins>●</ins> ●             ● ○ ●
+● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
+● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
+    ● <span class="gi">●</span> ●             ● ○ ●
     ● ● ●             ● ● ●
 
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <ins>●</ins> <del>●</del> ○ ● ● ●  ➡  ● ○ <del>○</del> <ins>●</ins> ● ● ●
+● <span class="gi">●</span> <span class="gd">●</span> ○ ● ● ●  ➡  ● ○ <span class="gd">○</span> <span class="gi">●</span> ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 
 
-<ins>●</ins> jumps over <del>●</del>
+<span class="gi">●</span> jumps over <span class="gd">●</span>
 </pre>
 
 Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that may not be functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
