@@ -61,7 +61,7 @@ With each move, a peg can jump over one of its four immediate neighbors and land
 <figcaption markdown="1">
 Examples of Valid Moves (Starting Moves)
 </figcaption>
-<pre>
+<pre class="highlight">
     ● ● ●             ● ● ●
     ● <span class="gi">●</span> ●             ● ○ ●
 ● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
@@ -103,7 +103,7 @@ The following are examples of *invalid moves*:
 
 - A peg cannot jump diagonally:
 
-  <pre>
+  <pre class="highlight">
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ <span class="gi">●</span> ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
@@ -115,7 +115,7 @@ The following are examples of *invalid moves*:
 
 - A peg cannot jump beyond its neighbor:
 
-  <pre>
+  <pre class="highlight">
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
@@ -127,7 +127,7 @@ The following are examples of *invalid moves*:
 
 - A peg cannot jump over multiple neighbors:
 
-  <pre>
+  <pre class="highlight">
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
@@ -1016,7 +1016,7 @@ But a function is just a special case of *relation*, which may relate one input 
 
 The `⇨` relation models moves in Peg Solitaire more straightforwardly than the `⇨/function` function. The listing above is similar to how we wrote our [examples in the game description](#introduction):
 
-<pre>
+<pre class="highlight">
     ● ● ●             ● ● ●
     ● <span class="gi">●</span> ●             ● ○ ●
 ● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●

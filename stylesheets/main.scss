@@ -66,6 +66,7 @@ body {
 }
 
 a { color: black; }
+mark { background-color: #DFDFDF; }
 
 h1, h2 {
   line-height: 1.25;
@@ -132,212 +133,214 @@ button, button:active, .button {
   text-decoration: none;
 }
 
-// $ rougify style github --scope 'REMOVE-ME' >> stylesheets/main.scss
+// $ rougify style github >> stylesheets/main.scss
 
-.cm {
+.highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .cm {
   color: #999988;
   font-style: italic;
 }
-.cp {
+.highlight .cp {
   color: #999999;
   font-weight: bold;
 }
-.c1 {
+.highlight .c1 {
   color: #999988;
   font-style: italic;
 }
-.cs {
+.highlight .cs {
   color: #999999;
   font-weight: bold;
   font-style: italic;
 }
-.c, .ch, .cd, .cpf {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
   color: #999988;
   font-style: italic;
 }
-.err {
+.highlight .err {
   color: #a61717;
   background-color: #e3d2d2;
 }
-.gd {
+.highlight .gd {
   color: #000000;
   background-color: #ffdddd;
 }
-.ge {
+.highlight .ge {
   color: #000000;
   font-style: italic;
 }
-.gr {
+.highlight .gr {
   color: #aa0000;
 }
-.gh {
+.highlight .gh {
   color: #999999;
 }
-.gi {
+.highlight .gi {
   color: #000000;
   background-color: #ddffdd;
 }
-.go {
+.highlight .go {
   color: #888888;
 }
-.gp {
+.highlight .gp {
   color: #555555;
 }
-.gs {
+.highlight .gs {
   font-weight: bold;
 }
-.gu {
+.highlight .gu {
   color: #aaaaaa;
 }
-.gt {
+.highlight .gt {
   color: #aa0000;
 }
-.kc {
+.highlight .kc {
   color: #000000;
   font-weight: bold;
 }
-.kd {
+.highlight .kd {
   color: #000000;
   font-weight: bold;
 }
-.kn {
+.highlight .kn {
   color: #000000;
   font-weight: bold;
 }
-.kp {
+.highlight .kp {
   color: #000000;
   font-weight: bold;
 }
-.kr {
+.highlight .kr {
   color: #000000;
   font-weight: bold;
 }
-.kt {
+.highlight .kt {
   color: #445588;
   font-weight: bold;
 }
-.k, .kv {
+.highlight .k, .highlight .kv {
   color: #000000;
   font-weight: bold;
 }
-.mf {
+.highlight .mf {
   color: #009999;
 }
-.mh {
+.highlight .mh {
   color: #009999;
 }
-.il {
+.highlight .il {
   color: #009999;
 }
-.mi {
+.highlight .mi {
   color: #009999;
 }
-.mo {
+.highlight .mo {
   color: #009999;
 }
-.m, .mb, .mx {
+.highlight .m, .highlight .mb, .highlight .mx {
   color: #009999;
 }
-.sb {
+.highlight .sb {
   color: #d14;
 }
-.sc {
+.highlight .sc {
   color: #d14;
 }
-.sd {
+.highlight .sd {
   color: #d14;
 }
-.s2 {
+.highlight .s2 {
   color: #d14;
 }
-.se {
+.highlight .se {
   color: #d14;
 }
-.sh {
+.highlight .sh {
   color: #d14;
 }
-.si {
+.highlight .si {
   color: #d14;
 }
-.sx {
+.highlight .sx {
   color: #d14;
 }
-.sr {
+.highlight .sr {
   color: #009926;
 }
-.s1 {
+.highlight .s1 {
   color: #d14;
 }
-.ss {
+.highlight .ss {
   color: #990073;
 }
-.s, .sa, .dl {
+.highlight .s, .highlight .sa, .highlight .dl {
   color: #d14;
 }
-.na {
+.highlight .na {
   color: #008080;
 }
-.bp {
+.highlight .bp {
   color: #999999;
 }
-.nb {
+.highlight .nb {
   color: #0086B3;
 }
-.nc {
+.highlight .nc {
   color: #445588;
   font-weight: bold;
 }
-.no {
+.highlight .no {
   color: #008080;
 }
-.nd {
+.highlight .nd {
   color: #3c5d5d;
   font-weight: bold;
 }
-.ni {
+.highlight .ni {
   color: #800080;
 }
-.ne {
+.highlight .ne {
   color: #990000;
   font-weight: bold;
 }
-.nf, .fm {
+.highlight .nf, .highlight .fm {
   color: #990000;
   font-weight: bold;
 }
-.nl {
+.highlight .nl {
   color: #990000;
   font-weight: bold;
 }
-.nn {
+.highlight .nn {
   color: #555555;
 }
-.nt {
+.highlight .nt {
   color: #000080;
 }
-.vc {
+.highlight .vc {
   color: #008080;
 }
-.vg {
+.highlight .vg {
   color: #008080;
 }
-.vi {
+.highlight .vi {
   color: #008080;
 }
-.nv, .vm {
+.highlight .nv, .highlight .vm {
   color: #008080;
 }
-.ow {
+.highlight .ow {
   color: #000000;
   font-weight: bold;
 }
-.o {
+.highlight .o {
   color: #000000;
   font-weight: bold;
 }
-.w {
+.highlight .w {
   color: #bbbbbb;
 }
-.hl {
-  background-color: #DFDFDF;
+.highlight {
+  background-color: #f8f8f8;
 }
