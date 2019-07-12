@@ -106,8 +106,8 @@ The following are examples of *invalid moves*:
   <pre class="highlight">
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ <span class="gi">●</span> ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
-  ○ ○ <span class="gd">●</span> ○ ○ ○ ○  ➡  ○ ○ <span class="gd">○</span> ○ ○ ○ ○
+  ○ <span class="gi">●</span> ○ ○ ○ ○ ○  <span class="gd">✗</span>  ○ ○ ○ ○ ○ ○ ○
+  ○ ○ <span class="gd">●</span> ○ ○ ○ ○  <span class="gd">➡</span>  ○ ○ <span class="gd">○</span> ○ ○ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <span class="gi">●</span> ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
@@ -118,8 +118,8 @@ The following are examples of *invalid moves*:
   <pre class="highlight">
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="gi">●</span> <span class="gd">●</span> ○ ○ ○ ○  ➡  ○ ○ <span class="gd">○</span> ○ <span class="gi">●</span> ○ ○
+  ○ ○ ○ ○ ○ ○ ○  <span class="gd">✗</span>  ○ ○ ○ ○ ○ ○ ○
+  ○ <span class="gi">●</span> <span class="gd">●</span> ○ ○ ○ ○  <span class="gd">➡</span>  ○ ○ <span class="gd">○</span> ○ <span class="gi">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
@@ -130,8 +130,8 @@ The following are examples of *invalid moves*:
   <pre class="highlight">
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="gi">●</span> <span class="gd">●</span> <span class="gd">●</span> ○ ○ ○  ➡  ○ ○ <span class="gd">○</span> <span class="gd">○</span> <span class="gi">●</span> ○ ○
+  ○ ○ ○ ○ ○ ○ ○  <span class="gd">✗</span>  ○ ○ ○ ○ ○ ○ ○
+  ○ <span class="gi">●</span> <span class="gd">●</span> <span class="gd">●</span> ○ ○ ○  <span class="gd">➡</span>  ○ ○ <span class="gd">○</span> <span class="gd">○</span> <span class="gi">●</span> ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
