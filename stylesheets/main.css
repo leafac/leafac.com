@@ -1,6 +1,3 @@
----
----
-
 @font-face {
   font-family: "Charter";
   font-weight: normal;
@@ -71,8 +68,6 @@ mark { background-color: #DFDFDF; }
 h1, h2 {
   line-height: 1.25;
   margin-top: 2rem;
-  a { text-decoration: none; }
-  & + & { margin-top: 1rem; }
 }
 
 header h1 { text-align: center; }
@@ -84,6 +79,8 @@ h2 {
   font-weight: normal;
   font-style: italic;
 }
+
+h1 + h2 { margin-top: 1rem; }
 
 figure {
   font-style: italic;
@@ -133,7 +130,7 @@ button, button:active, .button {
   text-decoration: none;
 }
 
-// $ rougify style github >> stylesheets/main.scss
+/* $ rougify style github >> stylesheets/main.css */
 
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
