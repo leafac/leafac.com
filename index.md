@@ -1130,45 +1130,11 @@ Courses
 - **Tableless I.** Visie. 2006.
 - **Advanced English Course.** CNA. 2004.
 
-License
-=======
-
-- **Source:** <https://github.com/leafac/www.leafac.com>
-- **Prose:** [GNU FDL](https://www.gnu.org/licenses/fdl.html)
-- **Code:** [GNU GPL](https://www.gnu.org/licenses/gpl.html)
-
-```
-Copyright (C) {{ site.time | date: "%Y" }} Leandro Facchinetti
-
-Permission is granted to copy, distribute and/or modify this document
-under the terms of the GNU Free Documentation License, Version 1.3
-or any later version published by the Free Software Foundation;
-with no Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.
-
-A copy of the license is included in the section entitled "GNU
-Free Documentation License".
-```
-
-```
-Copyright (C) {{ site.time | date: "%Y" }} Leandro Facchinetti
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-```
-
 Colophon
 ========
 
+- **Source:** <https://github.com/leafac/www.leafac.com>
+- **License:** [MIT](https://github.com/leafac/www.leafac.com/blob/master/LICENSE)
 - **Page Layout:**  Inspired by the works of [Matthew Butterick](https://typographyforlawyers.com/about.html) and [Edward Rolf Tufte](https://www.edwardtufte.com/)
 - **Serif Font:** [Charter](https://practicaltypography.com/charter.html)
 - **Monospaced Font:** [`Iosevka Term Slab`](https://typeof.net/Iosevka)
