@@ -83,9 +83,16 @@ h2 {
 h1 + h2 { margin-top: 1rem; }
 
 figure {
+  margin: 2rem 0;
+}
+
+figure > * {
+  margin: 0 auto;
+}
+
+figcaption {
   font-style: italic;
   text-align: center;
-  margin: 2rem 0;
 }
 
 img, svg, video {
@@ -109,8 +116,6 @@ pre, input, textarea, button, button:active, .button {
 }
 
 pre {
-  font-style: normal;
-  text-align: left;
   overflow: auto;
   padding: 1rem;
 }
