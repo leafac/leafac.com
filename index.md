@@ -525,7 +525,7 @@ Services
 
 - [**Kill the Newsletter!**](https://www.kill-the-newsletter.com)  
   Convert email newsletters into Atom feeds.  
-  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](https://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
+  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
 
 Contributions
 -------------
