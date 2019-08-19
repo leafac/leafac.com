@@ -86,7 +86,8 @@ figure {
   margin: 2rem 0;
 }
 
-figure > * {
+figure > *, figure img {
+  display: block;
   margin: 0 auto;
 }
 
