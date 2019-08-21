@@ -1,12 +1,10 @@
-name: Test
+name: Main
 on: [push]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      # - name: Install Operating System Packages
-      #   run: sudo apt install libcurl4-openssl-dev
       - name: Install Ruby
         uses: actions/setup-ruby@v1
         with:
