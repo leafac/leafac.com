@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Install Operating System Packages
-        run: apt install libcurl4-openssl-dev
+        run: sudo apt install libcurl4-openssl-dev
       - name: Install Ruby
         uses: actions/setup-ruby@v1
         with:
