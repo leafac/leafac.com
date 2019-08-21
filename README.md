@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/leafac/www.leafac.com.svg?branch=master)](https://travis-ci.com/leafac/www.leafac.com)
+[![Test Status](https://github.com/leafac/www.leafac.com/workflows/Test/badge.svg)](https://github.com/leafac/www.leafac.com/actions)
 
 <img alt="Leandro Facchinetti" src="logo.png" width="600">
 
