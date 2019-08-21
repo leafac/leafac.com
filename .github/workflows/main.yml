@@ -6,8 +6,6 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: 2.6.x
       - name: Install Dependencies
         run: gem install github-pages html-proofer
       - name: Build
