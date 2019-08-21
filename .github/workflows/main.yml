@@ -9,6 +9,6 @@ jobs:
         with:
           ruby-version: 2.6.x
       - run: |
-        gem install github-pages html-proofer
-        jekyll build
-        htmlproofer --assume-extension ./_site
+          gem install github-pages html-proofer
+          jekyll build
+          htmlproofer --assume-extension ./_site
