@@ -1,0 +1,19 @@
+name: Test
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      # - name: Install Operating System Packages
+      #   run: sudo apt install libcurl4-openssl-dev
+      - name: Install Ruby
+        uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 2.6.x
+      - name: Install Gems
+        run: gem install github-pages html-proofer
+      - name: Build
+        run: jekyll build
+      - name: HTMLProofer
+        run: htmlproofer --assume-extension ./_site
