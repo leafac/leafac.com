@@ -62,17 +62,27 @@ body {
   margin: 0 auto;
 }
 
-a { color: black; }
-mark { background-color: #DFDFDF; }
+a {
+  color: black;
+}
 
-h1, h2 {
+mark {
+  background-color: #dfdfdf;
+}
+
+h1,
+h2 {
   line-height: 1.25;
   margin-top: 2rem;
 }
 
-header h1 { text-align: center; }
+header h1 {
+  text-align: center;
+}
 
-h1 { font-size: 1.5rem; }
+h1 {
+  font-size: 1.5rem;
+}
 
 h2 {
   font-size: 1.25rem;
@@ -80,13 +90,16 @@ h2 {
   font-style: italic;
 }
 
-h1 + h2 { margin-top: 1rem; }
+h1 + h2 {
+  margin-top: 1rem;
+}
 
 figure {
   margin: 2rem 0;
 }
 
-figure > *, figure img {
+figure > *,
+figure img {
   display: block;
   margin: 0 auto;
 }
@@ -96,23 +109,50 @@ figcaption {
   text-align: center;
 }
 
-img, svg, video {
+img,
+svg,
+video {
   max-width: 100%;
   height: auto;
   border-radius: 3px;
 }
 
-video, audio { width: 100%; }
+video,
+audio {
+  width: 100%;
+}
 
-summary { cursor: pointer; }
+summary {
+  cursor: pointer;
+}
 
-pre, code, input, textarea, button, button:active, .button {
+pre,
+code,
+input,
+textarea,
+button,
+button:active,
+.button {
   font-family: "Iosevka Term Slab", "Courier New", monospace;
 }
 
-pre, input, textarea, button, button:active, .button {
+pre,
+input,
+textarea,
+button,
+button:active,
+.button {
   font-size: 0.875rem;
-  border: 1px solid #DFDFDF;
+}
+
+pre,
+input,
+textarea,
+button,
+button:active,
+.button,
+fieldset {
+  border: 1px solid #dfdfdf;
   border-radius: 3px;
 }
 
@@ -121,7 +161,16 @@ pre {
   padding: 1rem;
 }
 
-input, textarea, button, button:active, .button {
+legend,
+label {
+  font-weight: bold;
+}
+
+input,
+textarea,
+button,
+button:active,
+.button {
   color: black;
   background-color: transparent;
   line-height: 1.5;
@@ -130,7 +179,9 @@ input, textarea, button, button:active, .button {
   resize: none;
 }
 
-button, button:active, .button {
+button,
+button:active,
+.button {
   cursor: pointer;
   font-weight: bold;
   text-decoration: none;
@@ -138,8 +189,12 @@ button, button:active, .button {
 
 /* $ rougify style github >> stylesheets/main.css */
 
-.highlight table td { padding: 5px; }
-.highlight table pre { margin: 0; }
+.highlight table td {
+  padding: 5px;
+}
+.highlight table pre {
+  margin: 0;
+}
 .highlight .cm {
   color: #999988;
   font-style: italic;
@@ -157,7 +212,10 @@ button, button:active, .button {
   font-weight: bold;
   font-style: italic;
 }
-.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+.highlight .c,
+.highlight .ch,
+.highlight .cd,
+.highlight .cpf {
   color: #999988;
   font-style: italic;
 }
@@ -222,7 +280,8 @@ button, button:active, .button {
   color: #445588;
   font-weight: bold;
 }
-.highlight .k, .highlight .kv {
+.highlight .k,
+.highlight .kv {
   color: #000000;
   font-weight: bold;
 }
@@ -241,7 +300,9 @@ button, button:active, .button {
 .highlight .mo {
   color: #009999;
 }
-.highlight .m, .highlight .mb, .highlight .mx {
+.highlight .m,
+.highlight .mb,
+.highlight .mx {
   color: #009999;
 }
 .highlight .sb {
@@ -277,7 +338,9 @@ button, button:active, .button {
 .highlight .ss {
   color: #990073;
 }
-.highlight .s, .highlight .sa, .highlight .dl {
+.highlight .s,
+.highlight .sa,
+.highlight .dl {
   color: #d14;
 }
 .highlight .na {
@@ -287,7 +350,7 @@ button, button:active, .button {
   color: #999999;
 }
 .highlight .nb {
-  color: #0086B3;
+  color: #0086b3;
 }
 .highlight .nc {
   color: #445588;
@@ -307,7 +370,8 @@ button, button:active, .button {
   color: #990000;
   font-weight: bold;
 }
-.highlight .nf, .highlight .fm {
+.highlight .nf,
+.highlight .fm {
   color: #990000;
   font-weight: bold;
 }
@@ -330,7 +394,8 @@ button, button:active, .button {
 .highlight .vi {
   color: #008080;
 }
-.highlight .nv, .highlight .vm {
+.highlight .nv,
+.highlight .vm {
   color: #008080;
 }
 .highlight .ow {
