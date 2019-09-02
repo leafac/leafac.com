@@ -161,8 +161,7 @@ pre {
   padding: 1rem;
 }
 
-legend,
-label {
+legend {
   font-weight: bold;
 }
 
@@ -177,6 +176,11 @@ button:active,
   max-width: 100%;
   padding: 0.25rem;
   resize: none;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
 }
 
 button,
