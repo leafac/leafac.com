@@ -485,24 +485,6 @@ attachments:
 
 I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, running, and veganism. I live in Baltimore, Maryland, United States.
 
-<!-- 
-Newsletter
-==========
-
-Interested in my work? Subscribe to my newsletter!
-
-<form method="POST" action="https://www-leafac-com.herokuapp.com/newsletter">
-  <p>
-    <input type="text" name="name" placeholder="Name" maxlength="500" size="30" required>
-    <input type="email" name="email" placeholder="Email" maxlength="500" size="30" required><br>
-    <textarea name="description" placeholder="Tell me a little about yourself: Who are you? How did you find me? What kind of content to want to receive?" cols="70" rows="5" required></textarea><br>
-    <button>Subscribe</button>
-  </p>
-</form>
-
-Prefer an Atom feed instead? Use **[Kill the Newsletter!](https://www.kill-the-newsletter.com)**
--->
-
 Contact
 =======
 
