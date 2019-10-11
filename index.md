@@ -2,22 +2,26 @@
 ![Avatar](avatar.png){:width="300"}
 </figure>
 
-I write [prose](#prose), [software](#software) and [music](#music). I am a Ph.D. candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/). We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/). Beyond research, I am interested in education, writing, computer programming, reading, music, typography, lettering, photography, video production, mindfulness, minimalism, running, and veganism. I live in Baltimore, Maryland, United States.
+I’m a PhD candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
+
+I’m interested in writing & reading, music & video production, long-distance running, mindfulness, minimalism, and veganism.
+
+I live in Baltimore, Maryland, United States.
+
+# Articles
+
+[A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](/a-minimal-latex-dissertation-template-for-the-johns-hopkins-university)
+
+[Understanding the Type of `call/cc`](/understanding-the-type-of-call-cc)
+
+[Playing the Game with PLT Redex](/playing-the-game-with-plt-redex)
+
+[Email Migration: The Ultimate Solution to a Ridiculous Problem](/email-migration)
+
+# [Songs](/songs)
 
 # Contact
 
 <me@leafac.com> · <leandro@jhu.edu>
 
 # [Curriculum Vitae](/curriculum-vitae)
-
-# Prose
-
-[A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](/a-minimal-latex-dissertation-template-for-the-johns-hopkins-university/)
-
-[Understanding the Type of `call/cc`](/understanding-the-type-of-call-cc/)
-
-[Playing the Game with PLT Redex](/playing-the-game-with-plt-redex/)
-
-[Email Migration: The Ultimate Solution to a Ridiculous Problem](/email-migration/)
-
-# [Music](/music)

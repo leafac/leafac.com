@@ -554,12 +554,12 @@ Reviewer
 Education
 =========
 
-Ph.D. Candidate in Computer Science · Programming Languages
+PhD Candidate in Computer Science · Programming Languages
 -----------------------------------------------------------
 
 *[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2020-03 (estimated).
 
-- I am part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
+- I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
@@ -580,18 +580,18 @@ Ph.D. Candidate in Computer Science · Programming Languages
 
 - I have been [assisting on courses](#teaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
-- I am system administrator for the laboratory.
-- For most of my Ph.D. program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
+- I’m system administrator for the laboratory.
+- For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
-M.S. in Computer Science · Programming Languages
-------------------------------------------------
+Master’s Degree in Computer Science · Programming Languages
+-----------------------------------------------------------
 
 *[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2016-10.
 
-- The master’s degree is part of the Ph.D. program.
+- The master’s degree is part of the PhD program.
 
-B.S. in Computer Science
-------------------------
+Bachelor’s Degree in Computer Science
+-------------------------------------
 
 *[Universidade de São Paulo](https://www5.usp.br).* 2008-02 – 2012-09.
 
@@ -677,7 +677,7 @@ Work Experience
 - I improved the performance of a subsystem for importing users by a factor of 30x.
 - I was part of an agile team that did regular code-reviews, continuous integration and continuous delivery.
 - I worked remotely, while traveling.
-- I had to leave Raise Sistemas after six months because I got accepted into a Ph.D. program.
+- I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
 
 Das Dad
 -------
