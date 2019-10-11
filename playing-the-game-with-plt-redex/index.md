@@ -61,11 +61,11 @@ With each move, a peg can jump over one of its four immediate neighbors and land
 <figcaption markdown="1">
 Examples of Valid Moves (Starting Moves)
 </figcaption>
-<pre class="highlight">
+```
     ● ● ●             ● ● ●
-    ● <span class="gi">●</span> ●             ● ○ ●
-● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
+    ● ★ ●             ● ○ ●
+● ● ● ☆ ● ● ●     ● ● ● ○ ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● ★ ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -73,7 +73,7 @@ Examples of Valid Moves (Starting Moves)
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <span class="gd">●</span> <span class="gi">●</span> ●  ➡  ● ● ● <span class="gi">●</span> <span class="gd">○</span> ○ ●
+● ● ● ○ ☆ ★ ●  ➡  ● ● ● ★ ○ ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -81,61 +81,61 @@ Examples of Valid Moves (Starting Moves)
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
-● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
-    ● <span class="gi">●</span> ●             ● ○ ●
+● ● ● ○ ● ● ●  ➡  ● ● ● ★ ● ● ●
+● ● ● ☆ ● ● ●     ● ● ● ○ ● ● ●
+    ● ★ ●             ● ○ ●
     ● ● ●             ● ● ●
 
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <span class="gi">●</span> <span class="gd">●</span> ○ ● ● ●  ➡  ● ○ <span class="gd">○</span> <span class="gi">●</span> ● ● ●
+● ★ ☆ ○ ● ● ●  ➡  ● ○ ○ ★ ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 
 
-<span class="gi">●</span> jumps over <span class="gd">●</span>
-</pre>
+Peg ★ jumps over peg ☆, which is removed from the board
+```
 </figure>
 
 The following are examples of *invalid moves*:
 
 - A peg cannot jump diagonally:
 
-  <pre class="highlight">
+  ```
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ <span class="gi">●</span> ○ ○ ○ ○ ○  <span class="gd">✗</span>  ○ ○ ○ ○ ○ ○ ○
-  ○ ○ <span class="gd">●</span> ○ ○ ○ ○  <span class="gd">➡</span>  ○ ○ <span class="gd">○</span> ○ ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ <span class="gi">●</span> ○ ○ ○
+  ○ ★ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
+  ○ ○ ☆ ○ ○ ○ ○  ➡  ○ ○ ○ ○ ○ ○ ○
+  ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ★ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  </pre>
+  ```
 
 - A peg cannot jump beyond its neighbor:
 
-  <pre class="highlight">
+  ```
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○  <span class="gd">✗</span>  ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="gi">●</span> <span class="gd">●</span> ○ ○ ○ ○  <span class="gd">➡</span>  ○ ○ <span class="gd">○</span> ○ <span class="gi">●</span> ○ ○
+  ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
+  ○ ★ ☆ ○ ○ ○ ○  ➡  ○ ○ ○ ○ ★ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  </pre>
+  ```
 
 - A peg cannot jump over multiple neighbors:
 
-  <pre class="highlight">
+  ```
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  ○ ○ ○ ○ ○ ○ ○  <span class="gd">✗</span>  ○ ○ ○ ○ ○ ○ ○
-  ○ <span class="gi">●</span> <span class="gd">●</span> <span class="gd">●</span> ○ ○ ○  <span class="gd">➡</span>  ○ ○ <span class="gd">○</span> <span class="gd">○</span> <span class="gi">●</span> ○ ○
+  ○ ○ ○ ○ ○ ○ ○  ✗  ○ ○ ○ ○ ○ ○ ○
+  ○ ★ ☆ ☆ ○ ○ ○  ➡  ○ ○ ○ ○ ★ ○ ○
   ○ ○ ○ ○ ○ ○ ○     ○ ○ ○ ○ ○ ○ ○
       ○ ○ ○             ○ ○ ○
       ○ ○ ○             ○ ○ ○
-  </pre>
+  ```
 
 The goal of Peg Solitaire is to leave a single peg on the board, for example:
 
@@ -182,7 +182,7 @@ We start by requiring PLT Redex:
 <figcaption markdown="1">
 `introduction.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex)
 ```
@@ -190,7 +190,7 @@ We start by requiring PLT Redex:
 
 Most PLT Redex forms work over [languages](#languages), so we define a language for Peg Solitaire:
 
-```racket-no-highlight
+```racket
 (define-language peg-solitaire)
 ```
 
@@ -200,7 +200,7 @@ The `peg-solitaire` language is analog to a programming language, for example, R
 <figcaption markdown="1">
 Example of Term: Complete Program
 </figcaption>
-```racket-no-highlight
+```racket
 (define favorite-number 5)
 ```
 </figure>
@@ -209,7 +209,7 @@ Example of Term: Complete Program
 <figcaption markdown="1">
 Example of Term: Fragment of Program Above (which also happens to be a complete Racket program)
 </figcaption>
-```racket-no-highlight
+```racket
 5
 ```
 </figure>
@@ -219,7 +219,7 @@ In the `peg-solitaire` language, however, terms are not programs and program fra
 Terms in PLT Redex can be any S-expression, including identifiers (symbols), numbers, strings, lists, and so forth. We represent a Peg Solitaire board with a list of lists of positions, each of which may be symbols representing pegs, spaces, and paddings:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (define-term initial-board
   ([· · ● ● ● · ·]
    [· · ● ● ● · ·]
@@ -244,7 +244,7 @@ PLT Redex does not check that the `initial-board` is in the `peg-solitaire` lan
 To model how a player moves pegs on the board, we use a PLT Redex form called [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29) to define the `⇨` [reduction relation](#reduction-relations). A reduction relation is similar to a function, except that it is *nondeterministic*, possibly returning multiple outputs. We choose to define `⇨` as a reduction relation instead of a regular function because there might be multiple moves for a given input board. We start to define `⇨` as a reduction relation that operates on the `peg-solitaire` language:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (define
   ⇨
   (reduction-relation
@@ -258,7 +258,7 @@ Throughout this article, `___` is a placeholder that stands for code we are yet 
 
 We then provide one clause for each kind of possible move. For example, for a peg to jump over its right neighbor, we must find a sequence `● ● ○` on the board, and that sequence turns into `○ ○ ●` after the move, while the rest of the board remains the same. We write this as a `reduction-relation` as follows:
 
-```racket-no-highlight
+```racket
 (--> (any_1
       ...
       [any_2 ... ● ● ○ any_3 ...]
@@ -276,7 +276,7 @@ In the listing above, the `-->` form represents one kind of possible move. The f
 
 We define the other kinds of moves similarly. The following is the complete definition of `⇨`:
 
-```racket-no-highlight
+```racket
 (define
   ⇨
   (reduction-relation
@@ -344,7 +344,7 @@ Playing
 
 PLT Redex features [visualization](#visualization) tools, including a [`stepper`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Fgui..rkt%29._stepper%29%29), which we use to play Peg Solitaire:
 
-```racket-no-highlight
+```racket
 (stepper ⇨ (term initial-board))
 ```
 
@@ -366,7 +366,7 @@ At a high level, PLT Redex is a tool for manipulating and visualizing S-express
 <figcaption markdown="1">
 `terms.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex)
 
@@ -384,7 +384,7 @@ PLT Redex includes a testing framework with the [`(test-equal e₁ e₂)`](ht
 
 We represent pegs with `●` and spaces with `○`:
 
-```racket-no-highlight
+```racket
 (test-equal (term ●)
             '●)
 (test-equal (term ○)
@@ -393,14 +393,14 @@ We represent pegs with `●` and spaces with `○`:
 
 We can group pegs and spaces together in lists:
 
-```racket-no-highlight
+```racket
 (test-equal (term (● ● ○))
             '(● ● ○))
 ```
 
 We can assign terms to names in PLT Redex with the [`define-term`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-term%29%29) form. We can then refer to these names in other terms:
 
-```racket-no-highlight
+```racket
 (define-term a-peg ●)
 (test-equal (term a-peg)
             '●)
@@ -409,7 +409,7 @@ We can assign terms to names in PLT Redex with the [`define-term`](https://docs
 We represent a Peg Solitaire board as a list of rows; a row as a list of positions; and a position as either a peg (`●`), a space (`○`) or a padding (`·`). We choose this representation because it is visually appealing, but it is not the only possibility. For example, we could represent pegs as 1s and spaces as 0s, in which case the whole board would be a just a (binary) number. The following are examples of boards:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (define-term example-board-1
   ([· · ● ● ● · ·]
    [· · ● ● ○ · ·]
@@ -435,7 +435,7 @@ The delimiters `()` and `[]` are equivalent in Racket, so we delimit rows with `
 
 The following is the initial board:
 
-```racket-no-highlight
+```racket
 (define-term initial-board
   ([· · ● ● ● · ·]
    [· · ● ● ● · ·]
@@ -448,7 +448,7 @@ The following is the initial board:
 
 And the following is an example of a winning board:
 
-```racket-no-highlight
+```racket
 (define-term example-winning-board
   ([· · ○ ○ ○ · ·]
    [· · ○ ○ ○ · ·]
@@ -461,7 +461,7 @@ And the following is an example of a winning board:
 
 We will use these boards for testing in later sections, so we [`provide`](https://docs.racket-lang.org/guide/module-provide.html) them here:
 
-```racket-no-highlight
+```racket
 (provide example-board-1 example-board-2
          initial-board example-winning-board)
 ```
@@ -477,7 +477,7 @@ Pattern matching is the foundation of all the PLT Redex forms we will explore i
 <figcaption markdown="1">
 `pattern-matching.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt")
 
@@ -487,13 +487,13 @@ Pattern matching is the foundation of all the PLT Redex forms we will explore i
 
 We verify whether a term matches a pattern with the [`redex-match?`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match~3f%29%29) form:
 
-```racket-no-highlight
+```racket
 (redex-match? <language> <pattern> <term>)
 ```
 
 The simplest kind of pattern is a literal term, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire ●
                           (term         ●))
             #t)
@@ -509,7 +509,7 @@ The Underscore (`_`) and the `any` Patterns
 
 The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28tech.__%29) (`_`) means “anything” (similar to the dot (`.`) in regular expressions). For example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire _
                           (term         ●))
             #t)
@@ -529,7 +529,7 @@ The [underscore pattern](https://docs.racket-lang.org/redex/The_Redex_Reference.
 
 In the listing above, the underscore pattern (`_`) can match either the elements in the list, or the whole list (last example). Another pattern that matches anything is the [`any`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28tech._any%29) pattern, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any ● ○)
                           (term         (●   ● ○)))
             #t)
@@ -540,7 +540,7 @@ But the underscore pattern (`_`) and the `any` pattern are not equivalent, becau
 We can observe the names a pattern introduces with the [`redex-match`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._redex-match%29%29) form, which is similar to the `redex-match?` form but returns the introduced names instead of just whether the pattern matched or not:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 > (redex-match peg-solitaire (_ ● ○)
                (term         (● ● ○)))
 (list (match '()))
@@ -556,7 +556,7 @@ The `>` before a form denotes an interaction with the [REPL](https://docs.racket
 
 In the first interaction, no names are introduced, as indicated by the empty list `'()`, and in the second interaction the name `any` is associated with the matched fragment `●`. This is the output in more detail:
 
-```racket-no-highlight
+```racket
 (list⁶ (match⁵ (list⁴ (bind³ 'any¹ '●²))))
 ```
 
@@ -569,7 +569,7 @@ In the first interaction, no names are introduced, as indicated by the empty lis
 
 Both the underscore (`_`) and the `any` patterns may appear multiple times in a pattern. When introducing the underscore pattern above, we saw that multiple uses of the underscore in the same pattern may match different fragments, for example, the pattern `(_ _ _)` matches the term `(● ● ○)`, so `_` corresponds to `●` *and* `○`. But the `any` pattern assigns a name to the fragment it matches, so if it appears multiple times in a pattern, it must match the same fragment every time, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any any ○)
                           (term         (●   ●   ○)))
             #t)
@@ -583,7 +583,7 @@ The second pattern in the listing above does not match (note the `#f`) because t
 
 A pattern may include multiple `any`s that associate with different terms by adding a suffix, `any_<suffix>`, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 any_2 any_3)
                           (term         (●     ●     ○)))
             #t)
@@ -598,7 +598,7 @@ Each `any_<suffix>` was associated with a different term.
 
 We can require that the first and second list elements are the same, but allow the third to differ by using `any_1` twice, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 any_1 any_2)
                           (term         (●     ●     ○)))
             #t)
@@ -611,7 +611,7 @@ We can require that the first and second list elements are the same, but allow t
 
 Using different suffixes allows patterns to match different terms, but does not require them to be different, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 any_1 any_2)
                           (term         (●     ●     ●)))
             #t)
@@ -624,7 +624,7 @@ Using different suffixes allows patterns to match different terms, but does not 
 
 The pattern does not match if the two occurrences of `any_1` are different, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 any_1 any_2)
                           ;                    ≠
                           (term         (●     ○     ○)))
@@ -636,7 +636,7 @@ Ellipses
 
 We can match a sequence of terms using [ellipsis](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28tech._pattern._sequence%29) (`...`), which means “zero or more of the previous pattern” (similar to the Kleene star (`*`) in regular expressions). For example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any ...)
                           (term         (● ● ○)))
             #t)
@@ -651,7 +651,7 @@ In the listing above the name `any` was associated with the sequence `● ● 
 
 A pattern may match a term in multiple ways when it includes multiple ellipses, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 ... any_2 ...)
                           (term         (● ● ○)))
             #t)
@@ -668,7 +668,7 @@ A pattern may match a term in multiple ways when it includes multiple ellipses, 
 
 Similar to how we suffixed `any`, we can suffix ellipses, `..._<suffix>`, constraining them to match sequences of the same length, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 ..._n any_2 ..._n)
                           (term         (● ●         ○ ●)))
             #t)
@@ -687,7 +687,7 @@ Similar to how we suffixed `any`, we can suffix ellipses, `..._<suffix>`, constr
 
 In the listing above, the first pattern matches because it can divide the term into two sequences of the same length and satisfy the `..._n` constraint. But the last pattern does not match because there is no way to divide a 3-element list into two sequences of the same length. Ellipses with different suffixes may match sequences of different lengths, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (any_1 ..._n any_2 ..._m)
                           (term         (● ● ○)))
             #t)
@@ -698,7 +698,7 @@ In the listing above ellipses can match sequences of different lengths because t
 Finally, we can nest ellipses, and they still mean “zero or more of the previous pattern,” even if this pattern contains ellipses itself. With this, we can define a pattern that matches the `initial-board` from the [previous section](#terms):
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire
                           ([· ... ● ... ○ ... ● ... · ...]
                            ...)
@@ -725,7 +725,7 @@ A language for Peg Solitaire must specify the patterns for terms that represent
 <figcaption markdown="1">
 `languages.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt")
 
@@ -751,7 +751,7 @@ Each line `[<name> ::= <pattern> ...]` assigns a `<name>` to a `<pattern>`, and 
 
 We can use the pattern names (also know as *non-terminals*) when matching terms, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire peg
                           (term         ●))
             #t)
@@ -771,7 +771,7 @@ We can use the pattern names (also know as *non-terminals*) when matching terms,
 
 Multiple occurrences of a name must match the same term, so the following does not match because `position` cannot be `●` and `○` at the same time:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (position position position)
                           ;                                ≠
                           (term         (●        ●        ○)))
@@ -780,7 +780,7 @@ Multiple occurrences of a name must match the same term, so the following does n
 
 We can suffix the names to allow them to match to different terms:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire (position_1 position_2 position_3)
                           (term         (●          ●          ○)))
             #t)
@@ -788,7 +788,7 @@ We can suffix the names to allow them to match to different terms:
 
 We can use the `peg-solitaire` language to match the [board examples](#terms):
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire board (term example-board-1))
             #t)
 (test-equal (redex-match? peg-solitaire board (term example-board-2))
@@ -801,7 +801,7 @@ We can use the `peg-solitaire` language to match the [board examples](#terms):
 
 Our language is too permissive, allowing `board` to match terms we consider ill-formed boards, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? peg-solitaire board (term ([● ○]
                                                      [●])))
             #t)
@@ -811,7 +811,7 @@ The term above does not represent a Peg Solitaire board: it is too small and the
 
 We will use the `peg-solitaire` language in later sections, so we `provide` it here:
 
-```racket-no-highlight
+```racket
 (provide peg-solitaire)
 ```
 
@@ -822,7 +822,7 @@ Metafunctions
 
 From all the PLT Redex forms for manipulating with terms, we begin with the metafunction because it is the most familiar—it is just a function on terms. We define a metafunction with the [`define-metafunction`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-metafunction%29%29) form including [patterns](#pattern-matching) that match the input terms, and templates to compute the output terms:
 
-```racket-no-highlight
+```racket
 (define-metafunction <language>
   <contract>
   [(<metafunction> <pattern> ...) <template>]
@@ -848,7 +848,7 @@ We define a metafunction to invert a `position`:
 <figcaption markdown="1">
 `metafunctions.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
 
@@ -868,7 +868,7 @@ In the listing above, we define the `invert/position` metafunction for the `peg-
 We use a metafunction by applying it on terms:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (test-equal (term (invert/position ●))
             (term ○))
 (test-equal (term (invert/position ○))
@@ -883,7 +883,7 @@ We write `(term (invert/position ●))`, *not* `(invert/position (term ●))
 
 We can call a metafunction from any place in which a term might appear, including the definition of another metafunction. To illustrate this, consider the following metafunction that inverts a whole board by calling `invert/position` on each `position`:
 
-```racket-no-highlight
+```racket
 (define-metafunction peg-solitaire
   invert/board : board -> board
   [(invert/board ([position ...] ...))
@@ -892,7 +892,7 @@ We can call a metafunction from any place in which a term might appear, includin
 
 The `invert/board` metafunction matches its input to the pattern `([position ...] ...)`, which represents boards. Its output is the result of calling `invert/position` on each `position`: the ellipses (`...`) after the metafunction call mean “map over the `position`s with the metafunction `invert/position`.” The following is an example of calling the `invert/board` metafunction with the [`initial-board`](#terms):
 
-```racket-no-highlight
+```racket
 (test-equal (term (invert/board initial-board))
             (term ((· · ○ ○ ○ · ·)
                    (· · ○ ○ ○ · ·)
@@ -910,18 +910,18 @@ Reduction Relations
 
 In functions, including [metafunctions](#metafunctions), each input relates to one output. When we enumerate a function, each input appears only once on the left column, for example:
 
-<pre markdown="1">
-<strong>position     (invert/position position)</strong>
+```
+position     (invert/position position)
 
     ●                     ○
     ○                     ●
     ·                     ·
-</pre>
+``````
 
 A function (or a method, a procedure, a routine, and so forth) is not a natural way to model moves in Peg Solitaire, because there might be multiple moves available for a given board. If functions were all we had, then we could encode our intent with a `⇨/function` that returned a *set* of output boards, for example:
 
-<pre markdown="1">
-<strong>        board                  (⇨/function board)</strong>
+```
+        board                  (⇨/function board)
 
 (term                         (set
  ([· · ● ● ● · ·]              (term
@@ -961,10 +961,10 @@ A function (or a method, a procedure, a routine, and so forth) is not a natural 
                                  [· · ● ● ● · ·])))
 
                        ⋮
-</pre>
+```
 
 <figure>
-{% include_relative reduction-relations.svg%}
+{% include_relative reduction-relations.svg %}
 <figcaption markdown="1">
 On a fork on the road, when multiple clauses include patterns that match the input, a metafunction chooses the first path, while a reduction relation follows them all.
 </figcaption>
@@ -972,8 +972,8 @@ On a fork on the road, when multiple clauses include patterns that match the inp
 
 But a function is just a special case of *relation*, which may relate one input to multiple outputs. While all functions are relations, not all relations are functions. When we enumerate a relation that may not be a function, each input may appear on the left column multiple times. For example, we can define a relation called `⇨` to model moves in Peg Solitaire:
 
-<pre markdown="1">
-<strong>        board                       (⇨ board)</strong>
+```
+        board                       (⇨ board)
 
 (term                          (term
  ([· · ● ● ● · ·]               ([· · ● ● ● · ·]
@@ -1012,15 +1012,15 @@ But a function is just a special case of *relation*, which may relate one input 
   [· · ● ● ● · ·]))              [· · ● ● ● · ·]))
 
                        ⋮
-</pre>
+```
 
 The `⇨` relation models moves in Peg Solitaire more straightforwardly than the `⇨/function` function. The listing above is similar to how we wrote our [examples in the game description](#introduction):
 
-<pre class="highlight">
+```
     ● ● ●             ● ● ●
-    ● <span class="gi">●</span> ●             ● ○ ●
-● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
+    ● ★ ●             ● ○ ●
+● ● ● ☆ ● ● ●     ● ● ● ○ ● ● ●
+● ● ● ○ ● ● ●  ➡  ● ● ● ★ ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -1028,7 +1028,7 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ <span class="gd">●</span> <span class="gi">●</span> ●  ➡  ● ● ● <span class="gi">●</span> <span class="gd">○</span> ○ ●
+● ● ● ○ ☆ ★ ●  ➡  ● ● ● ★ ○ ○ ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
@@ -1036,26 +1036,26 @@ The `⇨` relation models moves in Peg Solitaire more straightforwardly than th
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● ● ● ○ ● ● ●  ➡  ● ● ● <span class="gi">●</span> ● ● ●
-● ● ● <span class="gd">●</span> ● ● ●     ● ● ● <span class="gd">○</span> ● ● ●
-    ● <span class="gi">●</span> ●             ● ○ ●
+● ● ● ○ ● ● ●  ➡  ● ● ● ★ ● ● ●
+● ● ● ☆ ● ● ●     ● ● ● ○ ● ● ●
+    ● ★ ●             ● ○ ●
     ● ● ●             ● ● ●
 
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
-● <span class="gi">●</span> <span class="gd">●</span> ○ ● ● ●  ➡  ● ○ <span class="gd">○</span> <span class="gi">●</span> ● ● ●
+● ★ ☆ ○ ● ● ●  ➡  ● ○ ○ ★ ● ● ●
 ● ● ● ● ● ● ●     ● ● ● ● ● ● ●
     ● ● ●             ● ● ●
     ● ● ●             ● ● ●
 
 
-<span class="gi">●</span> jumps over <span class="gd">●</span>
-</pre>
+Peg ★ jumps over peg ☆, which is removed from the board
+```
 
 Most programming languages only support functions, and when we use them, we have to resort to an encoding similar to `⇨/function`, but PLT Redex supports relations that may not be functions, so we can define the `⇨` relation directly. Among the different PLT Redex forms for defining relations, the first we encounter is [`reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._reduction-relation%29%29):
 
-```racket-no-highlight
+```racket
 (reduction-relation
   <language>
   #:domain <pattern>
@@ -1073,7 +1073,7 @@ Most programming languages only support functions, and when we use them, we have
 
 The `reduction-relation` form returns the reduction relation as a value, unlike the other forms we discussed so far that assign names, for example, `define-language` and `define-metafunction`. If we want to assign a name to a reduction relation, we need to use `define`:
 
-```racket-no-highlight
+```racket
 (define <name>
   (reduction-relation ___))
 ```
@@ -1086,7 +1086,7 @@ The `⇨` Reduction Relation
 The `⇨` reduction relation has four clauses, one for each kind of move. The following is the clause for when a peg jumps over its neighbor on the right:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (--> (row_1
       ...
       [position_1 ... ● ● ○ position_2 ...]
@@ -1113,7 +1113,7 @@ In detail:
 The clause for when a peg jumps over its neighbor on the left is similar. The clauses for when a peg jumps over its neighbors on the top or bottom follow the same idea, but we must use named ellipses (`..._<suffix>`) to capture the surroundings involving multiple rows. The named ellipses align the sequence of interest (for example, `● ● ○`) in the same column, because it guarantees that the sequence is preceded by the same number of `position`s in each `row`. For example, the following is the rule for when a peg jumps over its neighbor on the bottom:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (--> (row_1
       ...
       [position_1 ..._n ● position_2 ...]
@@ -1141,7 +1141,7 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
 <figcaption markdown="1">
 `reduction-relations.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
 
@@ -1211,7 +1211,7 @@ The named ellipses (`..._n`) only match sequences `position_1`, `position_3` and
 
 We can test the `⇨` reduction relation with the [`test-->`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test--~3e%29%29) form:
 
-```racket-no-highlight
+```racket
 (test--> ⇨ (term initial-board)
          (term
           ([· · ● ● ● · ·]
@@ -1252,7 +1252,7 @@ We can test the `⇨` reduction relation with the [`test-->`](https://docs.racke
 
 We can also query the `⇨` reduction relation with the [`apply-reduction-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%29%29) form. The `apply-reduction-relation` form returns a list representing a set of outputs, similar to the `⇨/function` encoding we mentioned above. This is a compromise because PLT Redex has to output an S-expression, which does not include forms for nondeterministic values or sets. We can turn the returned list into a Racket [`set`](https://docs.racket-lang.org/reference/sets.html) with [`list->set`](https://docs.racket-lang.org/reference/sets.html#%28def._%28%28lib._racket%2Fset..rkt%29._list-~3eset%29%29), so the following test is equivalent to the previous one:
 
-```racket-no-highlight
+```racket
 (test-equal (list->set (apply-reduction-relation ⇨ (term initial-board)))
             (set
              (term
@@ -1294,14 +1294,14 @@ We can also query the `⇨` reduction relation with the [`apply-reduction-relati
 
 If we use `apply-reduction-relation` repeatedly, feeding one output of an application as the input to the next—something called the *transitive closure* of the reduction relation—then we can use `⇨` relation to compute all possible Peg Solitaire boards. PLT Redex comes with the [`apply-reduction-relation*`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28def._%28%28lib._redex%2Freduction-semantics..rkt%29._apply-reduction-relation%2A%29%29) form for this purpose. Unfortunately, there are too many possible boards, so the computation does not terminate in reasonable time:
 
-```racket-no-highlight
+```racket
 > (apply-reduction-relation* ⇨ (term initial-board))
 ; Runs for too long
 ```
 
 But we can test `apply-reduction-relation*` on a fragment of the board with a single row, for which the outputs are tractable:
 
-```racket-no-highlight
+```racket
 (test-equal
  (list->set
   (apply-reduction-relation* #:all? #t ⇨ (term ([● ● ● ○ ● ● ●]))))
@@ -1321,7 +1321,7 @@ But we can test `apply-reduction-relation*` on a fragment of the board with a si
 
 We can also query just the *final* boards, from which we cannot move further, by omitting the `#:all?` argument:
 
-```racket-no-highlight
+```racket
 (test-equal
  (list->set (apply-reduction-relation* ⇨ (term ([● ● ● ○ ● ● ●]))))
  (set
@@ -1332,7 +1332,7 @@ We can also query just the *final* boards, from which we cannot move further, by
 
 The `⇨` relation is enough to play Peg Solitaire using [PLT Redex visualization tools](#visualization), and we will need it in later sections:
 
-```racket-no-highlight
+```racket
 (provide ⇨)
 ```
 
@@ -1343,7 +1343,7 @@ Predicate Relations
 
 When we looked at [reduction relations](#reduction-relations), we were interested in transforming terms. We defined clauses with patterns to match against inputs, and templates to produce outputs. But in some cases we are only interested in whether the inputs satisfy certain conditions, for example, whether a board is a winning board—that is, whether [it contains a single peg](#introduction). If we were to define that as a reduction relation, then the output templates would be booleans. For this special case, PLT Redex provides the [`define-relation`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-relation%29%29) form to define *predicate relations*:
 
-```racket-no-highlight
+```racket
 (define-relation <language>
   <contract>
   [(<relation> <pattern> ...)])
@@ -1361,7 +1361,7 @@ Predicate relations typically check whether a program is well formed, whether a 
 <figcaption markdown="1">
 `predicate-relations.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
 
@@ -1385,7 +1385,7 @@ The pattern in the predicate relation clause in more detail:
 
 We query the predicate relation by applying it, similar to a [metafunction](#metafunctions):
 
-```racket-no-highlight
+```racket
 (test-equal (term (winning-board? example-board-1))
             #f)
 (test-equal (term (winning-board? example-board-2))
@@ -1400,7 +1400,7 @@ The predicate relation only holds for the `example-winning-board`.
 
 We will use the predicate relation `winning-board?` in a [later section](#limitations) when trying to use our model to win Peg Solitaire:
 
-```racket-no-highlight
+```racket
 (provide winning-board?)
 ```
 
@@ -1415,7 +1415,7 @@ It would be more mathematically accurate to not think of terms in a relation as 
 
 We can define relations in PLT Redex with [`define-judgment-form`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._define-judgment-form%29%29):
 
-```racket-no-highlight
+```racket
 (define-judgment-form <language>
   #:mode (<judgment-form> <I/O> ...)
   #:contract (<judgment-form> <pattern> ...)
@@ -1437,7 +1437,7 @@ We can recreate the `⇨` [reduction relation](#reduction-relations) and the `wi
 <figcaption markdown="1">
 `judgment-forms.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt")
 
@@ -1514,7 +1514,7 @@ We can recreate the `⇨` [reduction relation](#reduction-relations) and the `wi
 
 We can test whether a judgment holds with the [`test-judgment-holds`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._test-judgment-holds%29%29) form:
 
-```racket-no-highlight
+```racket
 (test-judgment-holds
  (⇨/judgment-form initial-board ([· · ● ● ● · ·]
                                  [· · ● ● ● · ·]
@@ -1554,7 +1554,7 @@ We can test whether a judgment holds with the [`test-judgment-holds`](https://do
 
 We can also query a judgment form with the [`judgment-holds`](https://docs.racket-lang.org/redex/The_Redex_Reference.html#%28form._%28%28lib._redex%2Freduction-semantics..rkt%29._judgment-holds%29%29) form. The following listing includes tests for both `⇨/judgment-form` and `winning-board?/judgment-form`:
 
-```racket-no-highlight
+```racket
 (test-equal
  (judgment-holds
   (⇨/judgment-form initial-board ([· · ● ● ● · ·]
@@ -1615,7 +1615,7 @@ We can also query a judgment form with the [`judgment-holds`](https://docs.racke
 
 If we provide a pattern in an output position of the judgment form, then `judgment-holds` makes the names available in a template we provide as the second argument. The result becomes not only whether the relation holds, but the templates built from terms for which it hold. We can convert this resulting list into a set similar to how we did when testing [`apply-reduction-relation`](#reduction-relations):
 
-```racket-no-highlight
+```racket
 (test-equal
  (list->set (judgment-holds (⇨/judgment-form initial-board board) board))
  (set
@@ -1658,7 +1658,7 @@ If we provide a pattern in an output position of the judgment form, then `judgme
 
 Because `⇨/judgment-form` has mode `I O`, it behaves like a reduction relation, and we can query it with `apply-reduction-relation` and `apply-reduction-relation*` as well:
 
-```racket-no-highlight
+```racket
 (test-equal
  (list->set (apply-reduction-relation ⇨/judgment-form (term initial-board)))
  (set
@@ -1712,7 +1712,7 @@ When to Use the Different Forms
 
 At this point, we covered four different ways to operate on terms in PLT Redex: [metafunctions](#metafunctions), [reduction relations](#reduction-relations), [predicate relations](#predicate-relations) and [judgment forms](#judgment-forms). We could solve some of the same problems with more than one of these forms, so we need criteria to choose. It is particularly difficult to choose between a metafunction and a reduction relation when the reduction relation is deterministic. We could leverage the clause order and define a metafunction that is terser than its reduction relation counterpart, for example:
 
-```racket-no-highlight
+```racket
 (define-metafunction L
   [(m <some-kind-of-term>) ___]
   [(m _) ___])
@@ -1731,7 +1731,7 @@ Usually, metafunctions are the auxiliary utilities, for example, to substitute v
 
 Next, we provide the judgment forms defined in this section and we are ready to play Peg Solitaire using PLT Redex [visualization tools](#visualization).
 
-```racket-no-highlight
+```racket
 (provide ⇨/judgment-form winning-board?/judgment-form)
 ```
 
@@ -1744,7 +1744,7 @@ We use PLT Redex visualization tools to play Peg Solitaire. The `stepper` form 
 <figcaption markdown="1">
 `visualization.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "reduction-relations.rkt" "judgment-forms.rkt")
 
@@ -1827,7 +1827,7 @@ Traces
 
 We can explore Peg Solitaire further with the `traces` form, which accepts the same inputs as `stepper` and explores *all* possible moves:
 
-```racket-no-highlight
+```racket
 > (traces ⇨ (term initial-board))
 > (traces ⇨/judgment-form (term initial-board))
 ```
@@ -1864,7 +1864,7 @@ The forms for manipulating terms can do more than just pattern matching on the i
 <figcaption markdown="1">
 `other-features.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
          "reduction-relations.rkt" "judgment-forms.rkt")
@@ -1895,7 +1895,7 @@ Unquoting
 We can use arbitrary computations to define extra [conditions](#conditions) under which a clause contributes to the output, and we can also use arbitrary computations to define that output. We can *escape* from terms back to Racket with `unquote`, which is written with a comma (`,`), for example:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (test-equal (term (1 2 ,(+ 1 2)))
             '(1 2 3))
 ```
@@ -1908,7 +1908,7 @@ In the listing above, the `,(+ 1 2)` form means “*escape* from the term back t
 
 [Previously](#terms), we used `define-term` to name terms, for example:
 
-```racket-no-highlight
+```racket
 (define-term a-peg ●)
 (test-equal (term a-peg)
             '●)
@@ -1916,34 +1916,34 @@ In the listing above, the `,(+ 1 2)` form means “*escape* from the term back t
 
 We can also assign terms to regular Racket names with `define`, for example:
 
-```racket-no-highlight
+```racket
 (define a-space (term ○))
 ```
 
 We access this name outside terms as usual:
 
-```racket-no-highlight
+```racket
 (test-equal a-space
             '○)
 ```
 
 In terms, we unquote to escape back to Racket and access the name, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (term ,a-space)
             '○)
 ```
 
 The `define-term` form *is not* a shorthand for `(define ___ (term ___))` because names defined with `define-term` are only available in other terms, not directly in Racket. If we try to access in Racket a name defined with `define-term`, for example, `a-peg`, the result is a syntax error:
 
-```racket-no-highlight
+```racket
 > a-peg
 a-peg: illegal use of syntax in: a-peg
 ```
 
 The converse also holds: names defined with `define` are only available directly in Racket, not in terms. Trying to access the name `a-space` defined with `define` in a term is not a syntax error, but does not produce the result you might expect:
 
-```racket-no-highlight
+```racket
 (test-equal (term a-space)
             'a-space)
 ```
@@ -1952,7 +1952,7 @@ In the listing above, the `a-space` in `term` is interpreted as a symbol, not as
 
 With `unquote` we can access names defined with `define` from within terms and mix them with names defined with `define-term`, for example:
 
-```racket-no-highlight
+```racket
 (define-term a-peg ●)
 (define a-space (term ○))
 (test-equal (term (● a-peg ,a-space))
@@ -1961,14 +1961,14 @@ With `unquote` we can access names defined with `define` from within terms and m
 
 We can use the `term` form from within `unquote`:
 
-```racket-no-highlight
+```racket
 (test-equal (term (● ,(term a-peg) ,a-space))
             '(● ● ○))
 ```
 
 In the following example, we define a `count-●` metafunction to count how many pegs there are in a board by unquoting and relying on Racket’s functions for manipulating lists:
 
-```racket-no-highlight
+```racket
 (define-metafunction peg-solitaire
   count-● : board -> integer
   [(count-● ([position ...] ...))
@@ -1990,14 +1990,14 @@ Extensions and Holes
 
 We can define languages, metafunctions, judgment forms and so forth by extending existing definitions. In the following example, we extend the `peg-solitaire` [language](#languages) into the `Peg-Solitaire` language:
 
-```racket-no-highlight
+```racket
 (define-extended-language Peg-Solitaire peg-solitaire
   [Board ::= (row ... hole row ...)])
 ```
 
 The `Peg-Solitaire` language includes all names in `peg-solitaire` as well as the new name `Board`. It is equivalent to the following:
 
-```racket-no-highlight
+```racket
 (define-language Peg-Solitaire
   [board    ::= (row ...)]
   [row      ::= [position ...]]
@@ -2010,7 +2010,7 @@ The `Peg-Solitaire` language includes all names in `peg-solitaire` as well as th
 
 The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a special pattern built into PLT Redex, similar to how `any` is a special pattern built into PLT Redex. A `Board` is a `board` with a missing `row`, the `hole`. We can match a board with the `in-hole` form, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (redex-match? Peg-Solitaire (in-hole Board row)
                           (term ([●]
                                  [○]
@@ -2020,7 +2020,7 @@ The name `Board` refers to pattern `(row ... hole row ...)`. A `hole` is a s
 
 The pattern `(in-hole Board row)` means “the `Board` is a `board` with a `row` missing.” This pattern matches the simplified input board in three ways:
 
-```racket-no-highlight
+```racket
 > (redex-match Peg-Solitaire (in-hole Board row)
                (term ([●]
                       [○]
@@ -2036,7 +2036,7 @@ The first match, for example, means the missing `row` in the `Board` is the last
 With `Peg-Solitaire` and `Board`s with `hole`s, we can shorten the definition of the [`⇨` reduction relation](#reduction-relations). We define the `⇨/hole` reduction relation that extends `⇨` and replaces the `→` clause with a simpler definition using `in-hole`:
 
 <figure markdown="1">
-```racket-no-highlight
+```racket
 (define
   ⇨/hole
   (extend-reduction-relation
@@ -2057,7 +2057,7 @@ The `(in-hole Board [position_1 ... ● ● ○ position_2 ...])` in the
 
 The `⇨/hole` extended reduction relation works the same as the `⇨` original reduction relation:
 
-```racket-no-highlight
+```racket
 (test-equal (list->set (apply-reduction-relation ⇨/hole
                                                  (term initial-board)))
             (set
@@ -2107,7 +2107,7 @@ All tests we have written thus far depend on examples we have written by hand, f
 
 PLT Redex includes a tool to generate terms and check propositions. For example, the following listing checks the proposition above:
 
-```racket-no-highlight
+```racket
 (redex-check
  peg-solitaire board
  (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
@@ -2116,14 +2116,14 @@ PLT Redex includes a tool to generate terms and check propositions. For example
 
 The `redex-check` form is working over the `peg-solitaire` language and generating terms that follow the definition of `board`. For each term it generates, it runs the predicate `(for/and ___)`, which asserts that the `board` includes more pegs than the `board′`s after one move. By default, PLT Redex will try this a 1000 times:
 
-```racket-no-highlight
+```racket
 redex-check: .../playing-the-game-with-plt-redex/other-features.rkt:131
 no counterexamples in 1000 attempts
 ```
 
 If we check for an invalid property, for example, the *opposite* of the one above (using `<` instead of `>`), then `redex-check` outputs a counterexample:
 
-```racket-no-highlight
+```racket
 > (redex-check
    peg-solitaire board
    (for/and ([board′ (in-list (apply-reduction-relation ⇨ (term board)))])
@@ -2139,7 +2139,7 @@ Typesetting
 
 We can typeset the forms we defined thus far for including them in papers. This streamlines the writing process and prevents errors when translating our model to LaTeX. For example, the following is the typeset definition of `⇨/judgment-form`:
 
-```racket-no-highlight
+```racket
 (render-judgment-form ⇨/judgment-form)
 ```
 
@@ -2170,7 +2170,7 @@ The following listing exemplifies a typical debugging session investigating why 
 <figcaption markdown="1">
 `limitations.rkt`
 </figcaption>
-```racket-no-highlight
+```racket
 #lang racket
 (require redex "terms.rkt" "languages.rkt"
          "reduction-relations.rkt" "predicate-relations.rkt"
@@ -2205,7 +2205,7 @@ An executable model is not an implementation. PLT Redex is good for visualizing
 
 As an example of a declarative definition that does not scale for being too naïve, consider the following function to find winning boards:
 
-```racket-no-highlight
+```racket
 (define (winning-boards start-board)
   (filter (λ (board) (judgment-holds (winning-board? ,board)))
           (apply-reduction-relation* ⇨ start-board)))
@@ -2213,14 +2213,14 @@ As an example of a declarative definition that does not scale for being too naï
 
 The `winning-boards` function works by applying the [`⇨` reduction relation](#reduction-relations) to find all boards reachable by one or more moves starting from `start-board`. It then filters the winning boards among them with the [`winning-board?` predicate relation](#predicate-relations). This strategy is straightforward and works for small boards, for example:
 
-```racket-no-highlight
+```racket
 (test-equal (winning-boards (term ([● ● ○ ●])))
             '(([○ ● ○ ○])))
 ```
 
 But it does not scale to the [`initial-board`](#terms):
 
-```racket-no-highlight
+```racket
 > (winning-boards (term initial-board))
 ; Runs for too long
 ```
@@ -2230,7 +2230,7 @@ Advanced Pattern Matching
 
 All operations we have covered rely on terms *matching* patterns, but it is often useful to query whether a term *does not match* a pattern, and PLT Redex does not support it. One workaround is to [unquote](#unquoting), escape back to Racket and use the `redex-match?` form. For example, the following listing defines the `not-peg?` predicate relation, which holds for `position`s other than a `peg`:
 
-```racket-no-highlight
+```racket
 (define-relation peg-solitaire
   not-peg? ⊆ position
   [(not-peg? position)
