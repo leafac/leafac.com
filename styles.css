@@ -1,61 +1,5 @@
-@font-face {
-  font-family: "Charter";
-  font-weight: normal;
-  font-style: normal;
-  src: url("charter_regular-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Charter";
-  font-weight: normal;
-  font-style: italic;
-  src: url("charter_italic-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Charter";
-  font-weight: bold;
-  font-style: normal;
-  src: url("charter_bold-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Charter";
-  font-weight: bold;
-  font-style: italic;
-  src: url("charter_bold_italic-webfont.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Iosevka Term Slab";
-  font-weight: normal;
-  font-style: normal;
-  src: url("iosevka-term-slab-regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Iosevka Term Slab";
-  font-weight: normal;
-  font-style: italic;
-  src: url("iosevka-term-slab-italic.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Iosevka Term Slab";
-  font-weight: bold;
-  font-style: normal;
-  src: url("iosevka-term-slab-bold.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Iosevka Term Slab";
-  font-weight: bold;
-  font-style: italic;
-  src: url("iosevka-term-slab-bolditalic.woff") format("woff");
-}
-
 body {
-  font-family: "Charter", "Georgia", serif;
+  font-family: Charter, Georgia, serif;
   line-height: 1.5;
   max-width: 600px;
   padding: 2rem;
@@ -66,8 +10,9 @@ a {
   color: black;
 }
 
-mark {
-  background-color: #dfdfdf;
+code {
+  font-family: Menlo, Consolas, monospace;
+  font-size: 0.875em;
 }
 
 h1,
@@ -127,31 +72,9 @@ summary {
 }
 
 pre,
-code,
+fieldset,
 input,
-textarea,
-button,
-button:active,
-.button {
-  font-family: "Iosevka Term Slab", "Courier New", monospace;
-}
-
-pre,
-input,
-textarea,
-button,
-button:active,
-.button {
-  font-size: 0.875rem;
-}
-
-pre,
-input,
-textarea,
-button,
-button:active,
-.button,
-fieldset {
+textarea {
   border: 1px solid #dfdfdf;
   border-radius: 3px;
 }
@@ -161,37 +84,26 @@ pre {
   padding: 1rem;
 }
 
+pre code {
+  font-size: 0.75em;
+}
+
 legend {
   font-weight: bold;
 }
 
 input,
-textarea,
-button,
-button:active,
-.button {
-  color: black;
-  background-color: transparent;
-  line-height: 1.5;
-  max-width: 100%;
+textarea {
   padding: 0.25rem;
-  resize: none;
 }
 
 textarea {
   box-sizing: border-box;
   width: 100%;
+  resize: none;
 }
 
-button,
-button:active,
-.button {
-  cursor: pointer;
-  font-weight: bold;
-  text-decoration: none;
-}
-
-/* $ rougify style github >> stylesheets/main.css */
+/* $ rougify style github >> styles.css */
 
 .highlight table td {
   padding: 5px;
@@ -217,9 +129,7 @@ button:active,
   font-style: italic;
 }
 .highlight .c,
-.highlight .ch,
-.highlight .cd,
-.highlight .cpf {
+.highlight .cd {
   color: #999988;
   font-style: italic;
 }
@@ -342,9 +252,7 @@ button:active,
 .highlight .ss {
   color: #990073;
 }
-.highlight .s,
-.highlight .sa,
-.highlight .dl {
+.highlight .s {
   color: #d14;
 }
 .highlight .na {
@@ -374,8 +282,7 @@ button:active,
   color: #990000;
   font-weight: bold;
 }
-.highlight .nf,
-.highlight .fm {
+.highlight .nf {
   color: #990000;
   font-weight: bold;
 }
@@ -398,8 +305,7 @@ button:active,
 .highlight .vi {
   color: #008080;
 }
-.highlight .nv,
-.highlight .vm {
+.highlight .nv {
   color: #008080;
 }
 .highlight .ow {
@@ -412,4 +318,7 @@ button:active,
 }
 .highlight .w {
   color: #bbbbbb;
+}
+.highlight {
+  background-color: #f8f8f8;
 }
