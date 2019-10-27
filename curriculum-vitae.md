@@ -565,7 +565,7 @@ PhD Candidate in Computer Science · Programming Languages
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
 
   <details markdown="1">
-  <summary><strong>Watch my presentations on the Presentation Skills course</strong></summary>
+  <summary>Watch my Presentations on the Presentation Skills Course</summary>
 
   The recording quality is bad because I was not in control of it.  
   **Presentation for a General Audience**
@@ -613,7 +613,7 @@ Teaching Assistant
   I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
 
   <details markdown="1">
-  <summary><strong>Watch my lectures</strong></summary>
+  <summary>Watch my Lectures</summary>
 
   The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.  
   **Deployment**
@@ -738,7 +738,7 @@ Events
 - **7Masters.** I talked about modern Java development techniques and tools. 2013-01.
 
   <details markdown="1">
-  <summary><strong>Watch my talk</strong></summary>
+  <summary>Watch my Talk</summary>
   <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="none"></video>
   </details>
 

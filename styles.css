@@ -73,6 +73,7 @@ audio {
 
 summary {
   cursor: pointer;
+  font-weight: bold;
 }
 
 pre,
