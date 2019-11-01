@@ -10,7 +10,7 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
-**2019-10-19:** I ran on [Baltimore Running Festival](https://www.thebaltimoremarathon.com). I ran a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon.
+**2019-10-19:** I ran on [Baltimore Running Festival](https://www.thebaltimoremarathon.com). I ran a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. I succeeded in my two goals: to run the entire course without stopping or walking, and to finish under 3 hours 🎉
 
 <details markdown="1">
 <summary>See my Times</summary>
