@@ -10,6 +10,10 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
+**2019-01-25:** I recorded properly [the song that I sang in lecture in Object-Oriented Software Engineering](/songs#now-im-taking-oose).
+
+**2019-12-23:** I finished teaching [Object-Oriented Software Engineering](https://www.jhu-oose.com) at the Johns Hopkins University. [See what students had to say about the course](/curriculum-vitae/oose.pdf).
+
 **2019-10-19:** I ran on [Baltimore Running Festival](https://www.thebaltimoremarathon.com). I ran a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. I succeeded in my two goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
 
 <details markdown="1">

@@ -1,5 +1,86 @@
 # Songs
 
+# Now I’m Taking OOSE
+
+<audio src="https://archive.org/download/leafac-music/now-im-taking-oose.mp3" controls preload="none"></audio>
+
+Some background is necessary to understand this song:
+
+- In the fall of 2019, I taught a course called [Object-Oriented Software Engineering (OOSE)](https://oose-2019.leafac.com).
+- I sang this song to my students in a lecture.
+- It’s difficult to register for computer science courses at the Johns Hopkins University because there are too many students wanting to take them. Students are served on a first-come, first-served basis, and registration opens around 07:00 in a day in November.
+- One staff member was a robot that I built called [Roboose](https://oose-2019.leafac.com/staff/#robot-roboose), who was responsible for collecting assignments, publishing grades, and so forth.
+- OOSE is a project-based course, and students choose their own projects.
+- A lot of the course material was based on an example application called [TODOOSE](https://oose-2019.leafac.com/todoose).
+- Students had to read [directions](https://oose-2019.leafac.com/group-projects) before going to laboratory sessions.
+
+<details markdown="1">
+<summary>Lyrics</summary>
+
+```
+This is a song called “Now I’m Taking OOSE”
+Subtitle: “Procrastinating on Lecture Prep”
+
+Woke up really early
+In that cold November morning
+Registration opened
+And I was trying to get my seat
+In OOSE
+And I had to beat
+What seemed
+Like five thousand other people
+And I did it
+Sucks for them
+And I went back to sleep
+
+Now I’m reconsidering
+Was this a good idea
+’Cause instead of teaching Software Engineering
+The guy is just playing his guitar
+As if I cared
+’Cause I don’t
+I guess I’ll just pretend to laugh
+Ha ha ha
+Ha ha
+
+Now I’m taking OOSE
+My best friend is Roboose
+Working on a project I choose
+That sucks less than TODOOSE
+
+Now I’m taking OOSE
+
+Half of it are labs
+Group mate had garlic for lunch
+I’m sorry buddy
+But I don’t think that we can work under this condition
+Go brush your teeth
+And coming to think of it
+Maybe not even then
+’Cause you know,
+Would it kill you to read the iteration page before to the lab?
+Then we don’t have to explain everything to you…
+Not nice, buddy
+Ohhh, burn
+
+Now I’m taking OOSE
+My best friend is Roboose
+Working on a project I choose
+That sucks less than TODOOSE
+
+Now I’m taking OOSE
+My best friend is Roboose
+Working on a project I choose
+That sucks less than TODOOSE
+
+Now I’m taking OOSE
+Now I’m taking OOSE
+Now I’m taking OOSE
+Now I’m taking OOSE
+```
+
+</details>
+
 # Bushwhacking
 
 <video src="https://archive.org/download/bushwhacking/bushwhacking.mp4" controls preload="none"></video>
