@@ -2,8 +2,8 @@ body {
   font-family: Charter, Georgia, serif;
   line-height: 1.5;
   max-width: 600px;
-  padding: 2rem;
-  margin: 0 auto;
+  padding: 0 2rem;
+  margin: 2rem auto;
 }
 
 a {
@@ -15,32 +15,32 @@ code {
   font-size: 0.875em;
 }
 
-nav {
-  text-align: center;
-}
-
 h1,
 h2 {
   line-height: 1.25;
   margin-top: 2rem;
 }
 
-header h1 {
-  text-align: center;
-}
-
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.5em;
 }
 
 h2 {
-  font-size: 1.25rem;
+  font-size: 1.25em;
   font-weight: normal;
   font-style: italic;
 }
 
 h1 + h2 {
   margin-top: 1rem;
+}
+
+header a {
+  text-decoration: none;
+}
+
+nav {
+  text-align: center;
 }
 
 figure {

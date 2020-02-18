@@ -14,7 +14,7 @@ I live in Baltimore, Maryland, United States.
 
 **2019-12-23:** I finished teaching [Object-Oriented Software Engineering](https://www.jhu-oose.com) at the Johns Hopkins University. [See what students had to say about the course](/curriculum-vitae/oose.pdf).
 
-**2019-10-19:** I ran on [Baltimore Running Festival](https://www.thebaltimoremarathon.com). I ran a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. I succeeded in my two goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
+**2019-10-19:** I ran on the [Baltimore Running Festival](https://www.thebaltimoremarathon.com). I ran a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. I succeeded in my two goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
 
 <details markdown="1">
 <summary>See my Times</summary>
@@ -29,9 +29,9 @@ I live in Baltimore, Maryland, United States.
 
 **2019-09:** I started teaching [Object-Oriented Software Engineering](https://www.jhu-oose.com) at the Johns Hopkins University.
 
-**2019-07:** My paper [_Higher-order Demand-driven Program Analysis_](https://dl.acm.org/citation.cfm?id=3310340) was published on the ACM Transactions on Programming Languages and Systems (TOPLAS).
+**2019-07:** A paper I co-authored, [_Higher-order Demand-driven Program Analysis_](https://dl.acm.org/citation.cfm?id=3310340), was published on the _ACM Transactions on Programming Languages and Systems_ (TOPLAS).
 
-**2019-06:** I made public the repository in which I’m working on my dissertation: [Yocto-CFA](https://github.com/leafac/yocto-cfa).
+**2019-06:** I made public the repository on which I’m working on my dissertation: [Yocto-CFA](https://github.com/leafac/yocto-cfa).
 
 # Articles
 

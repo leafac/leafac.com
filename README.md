@@ -1,4 +1,4 @@
-# <img alt="Leandro Facchinetti" src="logo.png" width="600">
+# [`www.leafac.com`](https://www.leafac.com)
 
 [**Leandro Facchinetti’s personal website**](https://www.leafac.com)
 
