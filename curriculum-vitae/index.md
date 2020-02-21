@@ -6,9 +6,8 @@
 
 # Education
 
-## PhD Candidate in Computer Science · Programming Languages
-
-_[Johns Hopkins University](https://jhu.edu)._ 2014-09 – 2020-03 (estimated).
+## PhD Candidate in Computer Science · [Johns Hopkins University](https://jhu.edu) · 2014-09 – 2020-08 (estimated)
+{:.no_toc}
 
 - I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
@@ -35,12 +34,14 @@ _[Johns Hopkins University](https://jhu.edu)._ 2014-09 – 2020-03 (estimated).
 - For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
 ## Master’s Degree in Computer Science · Programming Languages
+{:.no_toc}
 
 _[Johns Hopkins University](https://jhu.edu)._ 2014-09 – 2016-10.
 
 - The master’s degree is part of the PhD program.
 
 ## Bachelor’s Degree in Computer Science
+{:.no_toc}
 
 _[Universidade de São Paulo](https://www5.usp.br)._ 2008-02 – 2012-09.
 
@@ -50,6 +51,7 @@ _[Universidade de São Paulo](https://www5.usp.br)._ 2008-02 – 2012-09.
 # Teaching Experience
 
 ## Teaching Assistant
+{:.no_toc}
 
 _[Johns Hopkins University](https://jhu.edu)._ 2015-09 – 2019-09.
 
@@ -113,43 +115,39 @@ _[Johns Hopkins University](https://jhu.edu)._ 2015-09 – 2019-09.
 
 # Work Experience
 
-## [Raise Sistemas](https://raisesistemas.com.br)
+## [Raise Sistemas](https://raisesistemas.com.br) · Software Developer · 2014-02 – 2014-08
+{:.no_toc}
 
-_Software developer._ 2014-02 – 2014-08.
-
-- [Raise Sistemas](https://raisesistemas.com.br) is a product start-up.
-- I developed new features and maintained an existing medium-sized Ruby on Rails application.
+- Raise Sistemas is a product start-up.
+- I worked on a medium-sized application in Ruby on Rails used by thousands of customers.
 - I improved the performance of a subsystem for importing users by a factor of 30x.
-- I was part of an agile team that did regular code-reviews, continuous integration and continuous delivery.
-- I worked remotely, while traveling.
-- I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
+- I was part of an agile team that did regular code-reviews, continuous integration, and continuous delivery.
+- I worked remotely while traveling.
+- I had to leave Raise Sistemas after six months because I got accepted into a [PhD program](#phd-candidate-in-computer-science-johns-hopkins-university-2014-09--2020-08-estimated).
 
-## Das Dad
+## DasDad · Software Developer · 2013-02 – 2013-12
+{:.no_toc}
 
-_Software Developer._ 2013-02 – 2013-12.
-
-- Das Dad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
-- I contributed to a Ruby on Rails front-end application, and back-end services in Ruby and Java.
-- The applications used natural language processing and artificial intelligence for recommendation, summarization and sentiment analysis.
+- DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
+- I contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
+- The applications used natural language processing and artificial intelligence for recommendation, summarization, and sentiment analysis.
 - I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
-- I helped to manage outreach activities for the local programming community including coding dojos and hackathons.
+- I helped to manage outreach activities for the local programming community including hackathons and coding dojos.
 
-## [Universo Online (UOL)](https://www.uol.com.br/)
+## [Universo Online (UOL)](https://www.uol.com.br/) · Software Developer · 2012-03 – 2013-02
+{:.no_toc}
 
-_Junior System Analyst._ 2012-03 – 2013-02.
+- UOL is a major internet publishing company in Brazil.
+- I built and maintained web products in Java EE used by millions of people.
+- I improved the frontend development process by introducing new technologies and building internal tools.
 
-- [UOL](https://www.uol.com.br/) is a major Internet publishing company in Brazil.
-- I used Java EE to build and maintain web products with millions of users.
-- I improved the front-end development process by introducing new technologies and building internal tools.
+## [Daitan Group](http://www.daitangroup.com/) · Intern Software Developer · 2011-07 – 2012-02
+{:.no_toc}
 
-## [Daitan Group](http://www.daitangroup.com/)
-
-_Intern in Software Development._ 2011-07 – 2012-02.
-
-- [Daitan Group](http://www.daitangroup.com/) is an outsourcing company for Telecom applications.
+- Daitan Group is an outsourcing company for Telecom applications.
 - I worked directly with customers from the Silicon Valley.
-- I developed a web service in Java EE for a telecom platform and a PHP web administration tool for a video conference system.
-- I taught a course about version control in Git.
+- I developed a web service in Java EE for a telecom platform and a web administration tool in PHP for a video conferencing system.
+- I taught a course about version control with Git.
 
 # Publications
 
