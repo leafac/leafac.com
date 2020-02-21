@@ -6,54 +6,51 @@
 
 # Education
 
-## PhD Candidate in Computer Science · [Johns Hopkins University](https://jhu.edu) · 2014-09 – 2020-08 (estimated)
-{:.no_toc}
+**PhD Candidate** · [Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2020-08 (estimated)
 
 - I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
-- I have been [assisting on courses](#teaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
+- I have been assisting on courses on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I’m system administrator for the laboratory.
 - For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
-## Master’s Degree in Computer Science · [Johns Hopkins University](https://jhu.edu) · 2014-09 – 2016-10
-{:.no_toc}
+**Master’s Degree** · [Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2016-10
 
-- The master’s degree is part of the [PhD program](#phd-candidate-in-computer-science-johns-hopkins-university-2014-09--2020-08-estimated).
+- The master’s degree is part of the PhD program.
 
-## Bachelor’s Degree in Computer Science · [Universidade de São Paulo](https://www5.usp.br) · 2008-02 – 2012-09
-{:.no_toc}
+**Bachelor’s Degree** · [Universidade de São Paulo](https://www5.usp.br) · Computer Science · 2008-02 – 2012-09
 
 - I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
 - I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
 
 # Teaching Experience
 
-## Teaching Assistant · [Johns Hopkins University](https://jhu.edu) · 2015-09 – 2019-09
-{:.no_toc}
+**[Johns Hopkins University](https://jhu.edu)** · Teaching Assistant · 2015-09 – 2020-08
 
+- On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
+- My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
 - On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
-
-  I received an **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award** for my performance as a Teaching Assitant on this course.
-
-  I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
-
+- I received an **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award** for my performance as a Teaching Assitant on this course.
+- I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
   <details markdown="1">
   <summary>Watch my Lectures</summary>
 
-  The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.  
+  The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.
+
   **Deployment**
 
   <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
 
-  **JavaScript**  
-  _Classroom Lecture_
+  **JavaScript**
+
+  Classroom Lecture
 
   <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
 
-  _Video Lectures_
+  Video Lectures
 
   1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
   2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
@@ -69,12 +66,13 @@
   12. **Classes · Part 4** <video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="none"></video>
   13. **Modules** <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none"></video>
 
-  **Git**  
-  _Classroom Lecture_
+  **Git**
+
+  Classroom Lecture
 
   <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
 
-  _Video Lectures_
+  Video Lectures
 
   1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
   2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
@@ -89,23 +87,18 @@
 
   </details>
 
-- On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
-- My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
-
 # Work Experience
 
-## [Raise Sistemas](https://raisesistemas.com.br) · Software Developer · 2014-02 – 2014-08
-{:.no_toc}
+**[Raise Sistemas](https://raisesistemas.com.br)** · Software Developer · 2014-02 – 2014-08
 
 - Raise Sistemas is a product start-up.
 - I worked on a medium-sized application in Ruby on Rails used by thousands of customers.
 - I improved the performance of a subsystem for importing users by a factor of 30x.
 - I was part of an agile team that did regular code-reviews, continuous integration, and continuous delivery.
 - I worked remotely while traveling.
-- I had to leave Raise Sistemas after six months because I got accepted into a [PhD program](#phd-candidate-in-computer-science-johns-hopkins-university-2014-09--2020-08-estimated).
+- I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
 
-## DasDad · Software Developer · 2013-02 – 2013-12
-{:.no_toc}
+**DasDad** · Software Developer · 2013-02 – 2013-12
 
 - DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
 - I contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
@@ -113,15 +106,13 @@
 - I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
 - I helped to manage outreach activities for the local programming community including hackathons and coding dojos.
 
-## [Universo Online (UOL)](https://www.uol.com.br/) · Software Developer · 2012-03 – 2013-02
-{:.no_toc}
+**[Universo Online (UOL)](https://www.uol.com.br/)** · Software Developer · 2012-03 – 2013-02
 
 - UOL is a major internet publishing company in Brazil.
 - I built and maintained web products in Java EE used by millions of people.
 - I improved the frontend development process by introducing new technologies and building internal tools.
 
-## [Daitan Group](http://www.daitangroup.com/) · Intern Software Developer · 2011-07 – 2012-02
-{:.no_toc}
+**[Daitan Group](http://www.daitangroup.com/)** · Software Developer Intern · 2011-07 – 2012-02
 
 - Daitan Group is an outsourcing company for Telecom applications.
 - I worked directly with customers from the Silicon Valley.
