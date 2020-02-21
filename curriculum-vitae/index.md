@@ -2,39 +2,16 @@
 
 # Software
 
-## Services
-
-- [**Kill the Newsletter!**](https://www.kill-the-newsletter.com)  
-  Convert email newsletters into Atom feeds.  
-  Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
-
-## Contributions
-
-- **Racket:** [Racket](https://github.com/racket/racket/commits?author=leafac), [PLT Redex](https://github.com/racket/redex/commits?author=leafac), [DrRacket](https://github.com/racket/drracket/commits?author=leafac), [Profile](https://github.com/racket/profile/commits?author=leafac), [Pollen](https://github.com/mbutterick/pollen/commits?author=leafac), [Nanopass](https://github.com/nanopass/nanopass-framework-racket/commits?author=leafac).
-- **Papers and articles:** [An Introduction to Redex with Abstracting Abstract Machines](https://github.com/dvanhorn/redex-aam-tutorial/commits?author=leafac), [NUPRL’s Website](https://github.com/nuprl/website/commits?author=leafac), [Abstracting Definitional Interpreters](https://github.com/plum-umd/abstracting-definitional-interpreters/commits?author=leafac), [Optimizing Abstract Abstract Machines](https://github.com/dvanhorn/oaam/commits?author=leafac).
-- **Web Frameworks:** [Ruby on Rails](https://github.com/rails/rails/commits?author=leafac), [Javalin](https://github.com/tipsy/javalin/commits?author=leafac).
-- **Homebrew:** [Homebrew Core](https://github.com/Homebrew/homebrew-core/commits?author=leafac), [Homebrew Casks](https://github.com/Homebrew/homebrew-cask/commits?author=leafac), [Homebrew Fonts](https://github.com/Homebrew/homebrew-cask-fonts/commits?author=leafac).
-
-## Archived
-
-**Racket Packages**
-
-- [**Pollen Component**](https://docs.racket-lang.org/pollen-component/)  
-  Component-based development for [Pollen](https://docs.racket-lang.org/pollen/).
-
-- [**CSS-expressions**](https://docs.racket-lang.org/css-expr/)  
-  S-expression-based CSS.
-
-- [**Extensible Functions**](https://docs.racket-lang.org/extensible-functions/)  
-  A solution to the expression problem in Typed Racket.
-
-**Other**
-
-- [**Org Password Manager**](https://github.com/leafac/org-password-manager)  
-  Password manager for [Org Mode](https://orgmode.org/).
-
-- [**Programmable Foot Keyboard**](https://github.com/leafac/programmable-foot-keyboard)  
-  A programmable foot keyboard using [Adafruit’s Trinket](https://learn.adafruit.com/introducing-trinket).
+- **[Kill the Newsletter!](https://www.kill-the-newsletter.com)** Convert email newsletters into Atom feeds. Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
+- **[Pollen Component](https://docs.racket-lang.org/pollen-component/).** Racket package for component-based development in [Pollen](https://docs.racket-lang.org/pollen/).
+- **[CSS-expressions](https://docs.racket-lang.org/css-expr/).** Racket package for S-expression-based CSS.
+- **[Extensible Functions](https://docs.racket-lang.org/extensible-functions/).** Racket package with a solution to the expression problem in Typed Racket.
+- **[Org Password Manager](https://github.com/leafac/org-password-manager).** Password manager for [Org Mode](https://orgmode.org/).
+- **[Programmable Foot Keyboard](https://github.com/leafac/programmable-foot-keyboard).** Programmable foot keyboard using [Adafruit’s Trinket](https://learn.adafruit.com/introducing-trinket).
+- **Contributions to Racket.** [Racket](https://github.com/racket/racket/commits?author=leafac), [PLT Redex](https://github.com/racket/redex/commits?author=leafac), [DrRacket](https://github.com/racket/drracket/commits?author=leafac), [Profile](https://github.com/racket/profile/commits?author=leafac), [Pollen](https://github.com/mbutterick/pollen/commits?author=leafac), [Nanopass](https://github.com/nanopass/nanopass-framework-racket/commits?author=leafac).
+- **Contributions to Papers and Articles.** [An Introduction to Redex with Abstracting Abstract Machines](https://github.com/dvanhorn/redex-aam-tutorial/commits?author=leafac), [NUPRL’s Website](https://github.com/nuprl/website/commits?author=leafac), [Abstracting Definitional Interpreters](https://github.com/plum-umd/abstracting-definitional-interpreters/commits?author=leafac), [Optimizing Abstract Abstract Machines](https://github.com/dvanhorn/oaam/commits?author=leafac).
+- **Contributions to Web Frameworks.** [Ruby on Rails](https://github.com/rails/rails/commits?author=leafac), [Javalin](https://github.com/tipsy/javalin/commits?author=leafac).
+- **Contributions to Homebrew.** [Homebrew Core](https://github.com/Homebrew/homebrew-core/commits?author=leafac), [Homebrew Casks](https://github.com/Homebrew/homebrew-cask/commits?author=leafac), [Homebrew Fonts](https://github.com/Homebrew/homebrew-cask-fonts/commits?author=leafac).
 
 # Publications
 
