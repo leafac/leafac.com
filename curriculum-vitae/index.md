@@ -6,118 +6,145 @@
 
 # Education
 
-**PhD Candidate**    <small>[Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2020-08 (estimated)</small>
+- **PhD Candidate.** [Johns Hopkins University](https://jhu.edu). Computer Science. 2014-09 – 2020-08 (estimated).
+  <details markdown="1">
+  <summary>Details</summary>
 
-- I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
-- My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
-- We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
-- I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
-- I have been assisting on courses on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
-- I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
-- I’m system administrator for the laboratory.
-- For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
+  - I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
+  - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
+  - We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
+  - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
+  - I have been assisting on courses on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
+  - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
+  - I’m system administrator for the laboratory.
+  - For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
-**Master’s Degree**    <small>[Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2016-10</small>
+  </details>
+- **Master’s Degree.** [Johns Hopkins University](https://jhu.edu). Computer Science. 2014-09 – 2016-10.
+  <details markdown="1">
+  <summary>Details</summary>
 
-- The master’s degree is part of the PhD program.
+  - The master’s degree is part of the PhD program.
 
-**Bachelor’s Degree**    <small>[Universidade de São Paulo](https://www5.usp.br) · Computer Science · 2008-02 – 2012-09</small>
+  </details>
+- **Bachelor’s Degree.**  [Universidade de São Paulo](https://www5.usp.br). Computer Science. 2008-02 – 2012-09.
+  <details markdown="1">
+  <summary>Details</summary>
 
-- I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
-- I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
+  - I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
+  - I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
+
+  </details>
 
 # Teaching Experience
 
-**[Johns Hopkins University](https://jhu.edu)**    <small>Teaching Assistant · 2015-09 – 2020-08</small>
-
-- On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
-- My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
-- On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
-- I received an **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award** for my performance as a Teaching Assitant on this course.
-- I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
+- **[Johns Hopkins University](https://jhu.edu).** Teaching Assistant. 2015-09 – 2020-08.
   <details markdown="1">
-  <summary>Watch my Lectures</summary>
+  <summary>Details</summary>
 
-  The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.
+  - On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
+  - My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
+  - On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
+  - I received an **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award** for my performance as a Teaching Assitant on this course.
+  - I managed a team of four homework graders, assisted on managing a team of four group project advisors, and wrote part of the curriculum: I developed an application that served as the guiding example for several lectures and the group projects ([live version](https://leafac-oose-todo.herokuapp.com) · [source code](https://github.com/leafac/todo)), I wrote the first two assignments ([live version](https://leafac-oose-lights-out.herokuapp.com) · [handout](https://github.com/leafac/lights-out)), and I lectured and recorded video lectures on Git, JavaScript and application deployment.
+    <details markdown="1">
+    <summary>Watch my Lectures</summary>
 
-  **Deployment**
+    The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.
 
-  <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
+    **Deployment**
 
-  **JavaScript**
+    <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
 
-  _Classroom Lecture_
+    **JavaScript**
 
-  <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
+    _Classroom Lecture_
 
-  _Video Lectures_
+    <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
 
-  1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
-  2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
-  3. **Creating Promises** <video src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4" controls preload="none"></video>
-  4. **`var`** <video src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4" controls preload="none"></video>
-  5. **DOM · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4" controls preload="none"></video>
-  6. **DOM · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4" controls preload="none"></video>
-  7. **Web Sockets · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4" controls preload="none"></video>
-  8. **Web Sockets · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4" controls preload="none"></video>
-  9. **Classes · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4" controls preload="none"></video>
-  10. **Classes · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4" controls preload="none"></video>
-  11. **Classes · Part 3** <video src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4" controls preload="none"></video>
-  12. **Classes · Part 4** <video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="none"></video>
-  13. **Modules** <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none"></video>
+    _Video Lectures_
 
-  **Git**
+    1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
+    2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
+    3. **Creating Promises** <video src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4" controls preload="none"></video>
+    4. **`var`** <video src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4" controls preload="none"></video>
+    5. **DOM · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4" controls preload="none"></video>
+    6. **DOM · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4" controls preload="none"></video>
+    7. **Web Sockets · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4" controls preload="none"></video>
+    8. **Web Sockets · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4" controls preload="none"></video>
+    9. **Classes · Part 1** <video src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4" controls preload="none"></video>
+    10. **Classes · Part 2** <video src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4" controls preload="none"></video>
+    11. **Classes · Part 3** <video src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4" controls preload="none"></video>
+    12. **Classes · Part 4** <video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="none"></video>
+    13. **Modules** <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none"></video>
 
-  _Classroom Lecture_
+    **Git**
 
-  <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
+    _Classroom Lecture_
 
-  _Video Lectures_
+    <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
 
-  1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
-  2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
-  3. **Repository** <video src="https://archive.org/download/git-video-series/git--3--repository.mp4" controls preload="none"></video>
-  4. **Commit** <video src="https://archive.org/download/git-video-series/git--4--commit.mp4" controls preload="none"></video>
-  5. **Publishing to GitHub** <video src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4" controls preload="none"></video>
-  6. **Cloning from GitHub** <video src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4" controls preload="none"></video>
-  7. **Coordinating Collaboration** <video src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4" controls preload="none"></video>
-  8. **Branches and Pull Requests** <video src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4" controls preload="none"></video>
-  9. **Rebasing** <video src="https://archive.org/download/git-video-series/git--9--rebasing.mp4" controls preload="none"></video>
-  10. **Conclusion** <video src="https://archive.org/download/git-video-series/git--10--conclusion.mp4" controls preload="none"></video>
+    _Video Lectures_
+
+    1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
+    2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
+    3. **Repository** <video src="https://archive.org/download/git-video-series/git--3--repository.mp4" controls preload="none"></video>
+    4. **Commit** <video src="https://archive.org/download/git-video-series/git--4--commit.mp4" controls preload="none"></video>
+    5. **Publishing to GitHub** <video src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4" controls preload="none"></video>
+    6. **Cloning from GitHub** <video src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4" controls preload="none"></video>
+    7. **Coordinating Collaboration** <video src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4" controls preload="none"></video>
+    8. **Branches and Pull Requests** <video src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4" controls preload="none"></video>
+    9. **Rebasing** <video src="https://archive.org/download/git-video-series/git--9--rebasing.mp4" controls preload="none"></video>
+    10. **Conclusion** <video src="https://archive.org/download/git-video-series/git--10--conclusion.mp4" controls preload="none"></video>
+
+    </details>
 
   </details>
 
 # Work Experience
 
-**[Raise Sistemas](https://raisesistemas.com.br)**    <small>Software Developer · 2014-02 – 2014-08</small>
+- **[Raise Sistemas](https://raisesistemas.com.br).** Software Developer. 2014-02 – 2014-08.
+  <details markdown="1">
+  <summary>Details</summary>
 
-- Raise Sistemas is a product start-up.
-- I worked on a medium-sized application in Ruby on Rails used by thousands of customers.
-- I improved the performance of a subsystem for importing users by a factor of 30x.
-- I was part of an agile team that did regular code-reviews, continuous integration, and continuous delivery.
-- I worked remotely while traveling.
-- I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
+  - Raise Sistemas is a product start-up.
+  - I worked on a medium-sized application in Ruby on Rails used by thousands of customers.
+  - I improved the performance of a subsystem for importing users by a factor of 30x.
+  - I was part of an agile team that did regular code-reviews, continuous integration, and continuous delivery.
+  - I worked remotely while traveling.
+  - I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
 
-**DasDad**    <small>Software Developer · 2013-02 – 2013-12</small>
+  </details>
+- **DasDad.** Software Developer. 2013-02 – 2013-12.
+  <details markdown="1">
+  <summary>Details</summary>
 
-- DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
-- I contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
-- The applications used natural language processing and artificial intelligence for recommendation, summarization, and sentiment analysis.
-- I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
-- I helped to manage outreach activities for the local programming community including hackathons and coding dojos.
+  - DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
+  - I contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
+  - The applications used natural language processing and artificial intelligence for recommendation, summarization, and sentiment analysis.
+  - I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
+  - I helped to manage outreach activities for the local programming community including hackathons and coding dojos.
 
-**[Universo Online (UOL)](https://www.uol.com.br/)**    <small>Software Developer · 2012-03 – 2013-02</small>
+  </details>
+- **[Universo Online (UOL)](https://www.uol.com.br/).** Software Developer. 2012-03 – 2013-02.
+  <details markdown="1">
+  <summary>Details</summary>
 
-- UOL is a major internet publishing company in Brazil.
-- I built and maintained web products in Java EE used by millions of people.
-- I improved the frontend development process by introducing new technologies and building internal tools.
+  - UOL is a major internet publishing company in Brazil.
+  - I built and maintained web products in Java EE used by millions of people.
+  - I improved the frontend development process by introducing new technologies and building internal tools.
 
-**[Daitan Group](http://www.daitangroup.com/)**    <small>Software Developer Intern · 2011-07 – 2012-02</small>
+  </details>
+- **[Daitan Group](http://www.daitangroup.com/).** Software Developer Intern. 2011-07 – 2012-02.
+  <details markdown="1">
+  <summary>Details</summary>
 
-- Daitan Group is an outsourcing company for Telecom applications.
-- I worked directly with customers from the Silicon Valley.
-- I developed a web service in Java EE for a telecom platform and a web administration tool in PHP for a video conferencing system.
-- I taught a course about version control with Git.
+  - Daitan Group is an outsourcing company for Telecom applications.
+  - I worked directly with customers from the Silicon Valley.
+  - I developed a web service in Java EE for a telecom platform and a web administration tool in PHP for a video conferencing system.
+  - I taught a course about version control with Git.
+
+  </details>
 
 # Publications
 
@@ -132,6 +159,10 @@
 - **_Sistema de Navegação Visual baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes_ (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles).** Leandro Facchinetti and Fernando Santos Osório. _18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo (SIICUSP) (18th International Scientific Initiation Symposium from Universidade de São Paulo)._ 2010. [[PDF](sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes.pdf)]
 - **_Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens_ (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods).** Leandro Facchinetti and Fernando Santos Osório. _[III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI](http://www.jointconference.fei.edu.br/wci/index.html)._ 2010. [[PDF](navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens.pdf)]
 - **_Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens_ (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation).** Leandro Facchinetti and Fernando Santos Osório. _IV Workshop de Iniciação Científica e Tecnológica de Computação (WICT) (IV Scientific and Technologic Initiation Workshop)._ 2010.
+
+# Awards
+
+- **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award.** 2019-05-06.
 
 # Software
 
@@ -149,10 +180,6 @@
 # Service
 
 - **[ACM Computing Surveys (CSUR)](https://csur.acm.org/).** Reviewer. 2016.
-
-# Awards
-
-- **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award.** 2019-05-06.
 
 # Certifications
 
