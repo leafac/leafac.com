@@ -1,4 +1,8 @@
 # Curriculum Vitae
+{:.no_toc}
+
+* TOC
+{:toc}
 
 # Education
 
