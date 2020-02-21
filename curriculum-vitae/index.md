@@ -13,47 +13,26 @@
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - We [research](#publications) a program analysis technique called [Demand-Driven Program Analysis](https://pl.cs.jhu.edu/projects/demand-driven-program-analysis/).
 - I took courses in programming-language theory, logic, software engineering, cryptography, natural language processing, databases and presentation skills. For fun, I also took courses in music theory and meditation.
-
-  <details markdown="1">
-  <summary>Watch my Presentations on the Presentation Skills Course</summary>
-
-  The recording quality is bad because I was not in control of it.  
-  **Presentation for a General Audience**
-
-  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4" controls preload="none"></video>
-
-  **Final Presentation**
-
-  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4" controls preload="none"></video>
-
-  </details>
-
 - I have been [assisting on courses](#teaching-assistant) on Principles of Programming Languages and Object-Oriented Software Engineering since Fall 2015. I have lectured, helped to prepare exams and homework assignments, helped to grade, advised semester-long group projects, and held office hours.
 - I did a qualifying project in cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - I’m system administrator for the laboratory.
 - For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
-## Master’s Degree in Computer Science · Programming Languages
+## Master’s Degree in Computer Science · [Johns Hopkins University](https://jhu.edu) · 2014-09 – 2016-10
 {:.no_toc}
 
-_[Johns Hopkins University](https://jhu.edu)._ 2014-09 – 2016-10.
+- The master’s degree is part of the [PhD program](#phd-candidate-in-computer-science-johns-hopkins-university-2014-09--2020-08-estimated).
 
-- The master’s degree is part of the PhD program.
-
-## Bachelor’s Degree in Computer Science
+## Bachelor’s Degree in Computer Science · [Universidade de São Paulo](https://www5.usp.br) · 2008-02 – 2012-09
 {:.no_toc}
-
-_[Universidade de São Paulo](https://www5.usp.br)._ 2008-02 – 2012-09.
 
 - I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
 - I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
 
 # Teaching Experience
 
-## Teaching Assistant
+## Teaching Assistant · [Johns Hopkins University](https://jhu.edu) · 2015-09 – 2019-09
 {:.no_toc}
-
-_[Johns Hopkins University](https://jhu.edu)._ 2015-09 – 2019-09.
 
 - On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
 
@@ -223,6 +202,20 @@ _[Johns Hopkins University](https://jhu.edu)._ 2015-09 – 2019-09.
 # Courses
 
 - **Improving Presentation Skills for Scientists and Engineers.** Johns Hopkins University. 2018.
+  <details markdown="1">
+  <summary>Watch my Presentations</summary>
+
+  The recording quality is bad because I was not in control of it.
+
+  **Presentation for a General Audience**
+
+  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4" controls preload="none"></video>
+
+  **Final Presentation**
+
+  <video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4" controls preload="none"></video>
+
+  </details>
 - **Writing in the Sciences.** Stanford University via Coursera. 2018.
 - **Rudiments of Music Theory and Musicianship.** Johns Hopkins University. 2016.
 - **Introduction to Ableton Live.** Berklee College of Music via Coursera. 2016.

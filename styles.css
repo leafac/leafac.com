@@ -31,10 +31,6 @@ h2 {
   font-style: italic;
 }
 
-h1 + h2 {
-  margin-top: 1rem;
-}
-
 header a {
   text-decoration: none;
 }
