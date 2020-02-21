@@ -456,27 +456,27 @@ bibtex:
 
 attachments:
   "http://zotero.org/users/4828827/items/GJMBE3DC":
-    PDF: "Facchinetti - SDL A DSL for Cryptographic Schemes.pdf"
+    PDF: "sdl--a-dsl-for-cryptographic-schemes.pdf"
   "http://zotero.org/users/4828827/items/TJW5USER":
-    PDF: "Facchinetti et al. - 2017 - Relative Store Fragments for Singleton Abstraction.pdf"
+    PDF: "relative-store-fragments-for-singleton-abstraction.pdf"
   "http://zotero.org/users/4828827/items/NPG5Y85P":
-    PDF: "Facchinetti - Towards Practical Higher-Order Demand-Driven Progr.pdf"
+    PDF: "towards-practical-higher-order-demand-driven-program-analysis.pdf"
     Slides: "towards-practical-higher-order-demand-driven-program-analysis.key"
   "http://zotero.org/users/4828827/items/V865FGTI":
-    PDF: "Facchinetti - Practical Demand-Driven Program Analysis with Recu.pdf"
+    PDF: "practical-demand-driven-program-analysis-with-recursion.pdf"
   "http://zotero.org/users/4828827/items/AEVV98PS":
-    PDF: "Leandro Facchinetti et al. - 2016 - Higher-Order Demand-Driven Program Analysis (Artif.pdf"
-    Code: "DARTS-2-1-9-artifact-88e98fe9019cb2bb1e758be0ca6325f9.tgz"
+    PDF: "higher-order-demand-driven-program-analysis--artifact.pdf"
+    Code: "higher-order-demand-driven-program-analysis--artifact.tgz"
   "http://zotero.org/users/4828827/items/RKXIFGKR":
-    PDF: "Facchinetti et al. - What is Your Function Static Pattern Matching on .pdf"
+    PDF: "what-is-your-function--static-pattern-matching-on-function-behavior.pdf"
   "http://zotero.org/users/4828827/items/IZSR5PBU":
-    PDF: "Osório et al. - Pesquisa e Desenvolvimento de Robôs Táticos para A.pdf"
+    PDF: "pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos.pdf"
   "http://zotero.org/users/4828827/items/VUC75E8B":
-    PDF: "Facchinetti and Osório - Sistema de Navegação Visual baseado em Correlação .pdf"
+    PDF: "sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes.pdf"
   "http://zotero.org/users/4828827/items/25ZBP9BS":
-    PDF: "Facchinetti and Osório - 2010 - Navegação Visual de Robôs Móveis Autônomos Baseada.pdf"
+    PDF: "navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens.pdf"
   "http://zotero.org/users/4828827/items/2WHK3X28":
-    PDF: "Facchinetti et al. - Higher-Order Demand-Driven Program Analysis.pdf"
+    PDF: "higher-order-demand-driven-program-analysis.pdf"
 ---
 
 # Curriculum Vitae
