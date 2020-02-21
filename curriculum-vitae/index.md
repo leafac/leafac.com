@@ -1,25 +1,21 @@
 # Curriculum Vitae
 
-Software
-========
+# Software
 
-Services
---------
+## Services
 
 - [**Kill the Newsletter!**](https://www.kill-the-newsletter.com)  
   Convert email newsletters into Atom feeds.  
   Featured in [Lifehacker](https://lifehacker.com/kill-the-newsletter-converts-newsletter-subscriptions-i-1788953342), [Hacker News](https://news.ycombinator.com/item?id=12949154), [Product Hunt](https://www.producthunt.com/posts/kill-the-newsletter), and [blogs](http://sathyasays.com/2018/05/22/convert-newsletters-to-rss-feeds-with-kill-the-newsletter/) [around](https://rsnijders.info/vakblog/2016/11/15/nieuwsbrieven-als-rss-feeds/) [the](https://www.schieb.de/755445/kill-the-newsletter-nachrichten-als-rss-feed) [world](https://www.fastweb.it/web-e-digital/kill-the-newsletter-il-sistema-di-archiviazione-di-newsletter/).
 
-Contributions
--------------
+## Contributions
 
 - **Racket:** [Racket](https://github.com/racket/racket/commits?author=leafac), [PLT Redex](https://github.com/racket/redex/commits?author=leafac), [DrRacket](https://github.com/racket/drracket/commits?author=leafac), [Profile](https://github.com/racket/profile/commits?author=leafac), [Pollen](https://github.com/mbutterick/pollen/commits?author=leafac), [Nanopass](https://github.com/nanopass/nanopass-framework-racket/commits?author=leafac).
 - **Papers and articles:** [An Introduction to Redex with Abstracting Abstract Machines](https://github.com/dvanhorn/redex-aam-tutorial/commits?author=leafac), [NUPRL’s Website](https://github.com/nuprl/website/commits?author=leafac), [Abstracting Definitional Interpreters](https://github.com/plum-umd/abstracting-definitional-interpreters/commits?author=leafac), [Optimizing Abstract Abstract Machines](https://github.com/dvanhorn/oaam/commits?author=leafac).
 - **Web Frameworks:** [Ruby on Rails](https://github.com/rails/rails/commits?author=leafac), [Javalin](https://github.com/tipsy/javalin/commits?author=leafac).
 - **Homebrew:** [Homebrew Core](https://github.com/Homebrew/homebrew-core/commits?author=leafac), [Homebrew Casks](https://github.com/Homebrew/homebrew-cask/commits?author=leafac), [Homebrew Fonts](https://github.com/Homebrew/homebrew-cask-fonts/commits?author=leafac).
 
-Archived
---------
+## Archived
 
 **Racket Packages**
 
@@ -40,8 +36,7 @@ Archived
 - [**Programmable Foot Keyboard**](https://github.com/leafac/programmable-foot-keyboard)  
   A programmable foot keyboard using [Adafruit’s Trinket](https://learn.adafruit.com/introducing-trinket).
 
-Publications
-============
+# Publications
 
 - **Higher-Order Demand-Driven Program Analysis.** Leandro Facchinetti, Zachary Palmer, and Scott Smith. ACM Transactions on Programming Languages and Systems (TOPLAS). Accepted for publication. 2019. [[PDF](higher-order-demand-driven-program-analysis.pdf)]
 
@@ -240,7 +235,7 @@ This paper describes the INCT-SEC research and development efforts in order to c
 @inproceedings{fernando_osorio_pesquisa_2011,
   title = {Pesquisa e {Desenvolvimento} de {Robôs} {Táticos} para {Ambientes} {Internos}},
   shorttitle = {Research and {Development} of {Tactical} {Robots} for {Indoor} {Environments}},
-  abstract = {*Este artigo apresenta os trabalhos de pesquisa e desenvolvimento realizados junto ao INCT-SEC voltados para aplicações de monitoramento e segurança de ambientes internos (indoor) com o uso de robôs móveis. Os trabalhos desenvolvidos visam prover os robôs móveis de uma arquitetura de software que implemente um sistema de controle inteligente. O robô móvel deve poder ser controlado em modo tele-operado (operação remota semi-autônoma) ou em modo completamente autônomo. Este sistema deve ser capaz de detectar intrusos e situações anômalas, navegar no ambiente desviando dos obstáculos, garantindo assim a integridade do robô e dos elementos presentes no ambiente.*  
+  abstract = {*Este artigo apresenta os trabalhos de pesquisa e desenvolvimento realizados junto ao INCT-SEC voltados para aplicações de monitoramento e segurança de ambientes internos (indoor) com o uso de robôs móveis. Os trabalhos desenvolvidos visam prover os robôs móveis de uma arquitetura de software que implemente um sistema de controle inteligente. O robô móvel deve poder ser controlado em modo tele-operado (operação remota semi-autônoma) ou em modo completamente autônomo. Este sistema deve ser capaz de detectar intrusos e situações anômalas, navegar no ambiente desviando dos obstáculos, garantindo assim a integridade do robô e dos elementos presentes no ambiente.*
   This paper describes the INCT-SEC research and development efforts in order to create a mobile robotic platform applied to inspect and to protect indoor environments. We proposed a robotic control architecture and implemented some computational software modules which are used to provide “intelligent behaviors” to the mobile robots. The robot can be remotely controlled based on a semi-autonomous approach, and also it can perform the surveillance tasks in a completely autonomous mode. The system is able to detect intruders and anomalous situations, and also, perform the patrolling task avoiding obstacles and also preserving the integrity of the robot and other environment elements (e.g. people, objects).},
   booktitle = {Internal {Workshop} of {INCT}-{SEC}},
   author = {{Fernando Osório} and {Denis Wolf} and {Kalinka Castelo Branco} and {Jó Ueyama} and {Gustavo Pessin} and {Leandro Fernandes} and {Maurício Dias} and {Leandro Couto} and {Daniel Sales} and {Diogo Correa} and {Matheus Nin} and {Leandro Lourenço Silva} and {Leonardo Bonetti} and {Leandro Facchinetti} and {Fabiano Hessel}},
@@ -312,21 +307,17 @@ _Uma área importante de pesquisas na robótica é a navegação autônoma de ve
 
 </details>
 
-Service
-=======
+# Service
 
-Reviewer
---------
+## Reviewer
 
 - [ACM Computing Surveys (CSUR)](https://csur.acm.org/). 2016.
 
-Education
-=========
+# Education
 
-PhD Candidate in Computer Science · Programming Languages
------------------------------------------------------------
+## PhD Candidate in Computer Science · Programming Languages
 
-*[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2020-03 (estimated).
+_[Johns Hopkins University](https://jhu.edu)._ 2014-09 – 2020-03 (estimated).
 
 - I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
@@ -352,28 +343,24 @@ PhD Candidate in Computer Science · Programming Languages
 - I’m system administrator for the laboratory.
 - For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
-Master’s Degree in Computer Science · Programming Languages
------------------------------------------------------------
+## Master’s Degree in Computer Science · Programming Languages
 
-*[Johns Hopkins University](https://jhu.edu).* 2014-09 – 2016-10.
+_[Johns Hopkins University](https://jhu.edu)._ 2014-09 – 2016-10.
 
 - The master’s degree is part of the PhD program.
 
-Bachelor’s Degree in Computer Science
--------------------------------------
+## Bachelor’s Degree in Computer Science
 
-*[Universidade de São Paulo](https://www5.usp.br).* 2008-02 – 2012-09.
+_[Universidade de São Paulo](https://www5.usp.br)._ 2008-02 – 2012-09.
 
 - I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
-- I played the drums in a group similar to a [*Escola de Samba*](https://en.wikipedia.org/wiki/Samba_school).
+- I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
 
-Teaching Experience
-===================
+# Teaching Experience
 
-Teaching Assistant
-------------------
+## Teaching Assistant
 
-*[Johns Hopkins University](https://jhu.edu).* 2015-09 – 2019-09.
+_[Johns Hopkins University](https://jhu.edu)._ 2015-09 – 2019-09.
 
 - On the Fall of 2018, I was the Teaching Assistant for the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
 
@@ -390,11 +377,11 @@ Teaching Assistant
   <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
 
   **JavaScript**  
-  *Classroom Lecture*
+  _Classroom Lecture_
 
   <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
 
-  *Video Lectures*
+  _Video Lectures_
 
   1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
   2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
@@ -411,11 +398,11 @@ Teaching Assistant
   13. **Modules** <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none"></video>
 
   **Git**  
-  *Classroom Lecture*
+  _Classroom Lecture_
 
   <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
 
-  *Video Lectures*
+  _Video Lectures_
 
   1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
   2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
@@ -433,13 +420,11 @@ Teaching Assistant
 - On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
 - My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
 
-Work Experience
-===============
+# Work Experience
 
-[Raise Sistemas](https://raisesistemas.com.br)
-----------------------------------------------
+## [Raise Sistemas](https://raisesistemas.com.br)
 
-*Software developer.* 2014-02 – 2014-08.
+_Software developer._ 2014-02 – 2014-08.
 
 - [Raise Sistemas](https://raisesistemas.com.br) is a product start-up.
 - I developed new features and maintained an existing medium-sized Ruby on Rails application.
@@ -448,10 +433,9 @@ Work Experience
 - I worked remotely, while traveling.
 - I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
 
-Das Dad
--------
+## Das Dad
 
-*Software Developer.* 2013-02 – 2013-12.
+_Software Developer._ 2013-02 – 2013-12.
 
 - Das Dad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
 - I contributed to a Ruby on Rails front-end application, and back-end services in Ruby and Java.
@@ -459,44 +443,39 @@ Das Dad
 - I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
 - I helped to manage outreach activities for the local programming community including coding dojos and hackathons.
 
-[Universo Online (UOL)](https://www.uol.com.br/)
-------------------------------------------------
+## [Universo Online (UOL)](https://www.uol.com.br/)
 
-*Junior System Analyst.* 2012-03 – 2013-02.
+_Junior System Analyst._ 2012-03 – 2013-02.
 
 - [UOL](https://www.uol.com.br/) is a major Internet publishing company in Brazil.
 - I used Java EE to build and maintain web products with millions of users.
 - I improved the front-end development process by introducing new technologies and building internal tools.
 
-[Daitan Group](http://www.daitangroup.com/)
--------------------------------------------
+## [Daitan Group](http://www.daitangroup.com/)
 
-*Intern in Software Development.* 2011-07 – 2012-02.
+_Intern in Software Development._ 2011-07 – 2012-02.
 
 - [Daitan Group](http://www.daitangroup.com/) is an outsourcing company for Telecom applications.
 - I worked directly with customers from the Silicon Valley.
 - I developed a web service in Java EE for a telecom platform and a PHP web administration tool for a video conference system.
 - I taught a course about version control in Git.
 
-Awards
-======
+# Awards
 
 - **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award.** 2019-05-06.
 
-Certifications
-==============
+# Certifications
 
 - **TOEFL.** Reading: 28/30. Listening: 29/30. Speaking: 24/30. Writing: 27/30. Total: 108/120. 2013-03.
 - **GRE.** Verbal reasoning: 154/170. Quantitative reasoning: 166/170. Analytical writing: 3.5/6. 2013-09.
 - **Oracle Certified Java Programmer.** Score: 90%. 2012-06.
 
-Events
-======
+# Events
 
 - **[The Racket School 2018: Create your own language](https://summer-school.racket-lang.org/2018/).** 2018-07-09 – 2018-07-13.
-- **[24th Static Analysis Symposium](https://staticanalysis.org/sas2017/sas2017.html).** Zachary Palmer presented a paper that I co-authored, *Relative Store Fragments for Singleton Abstraction*. 2017-08-30 – 2017-09-01.
+- **[24th Static Analysis Symposium](https://staticanalysis.org/sas2017/sas2017.html).** Zachary Palmer presented a paper that I co-authored, _Relative Store Fragments for Singleton Abstraction_. 2017-08-30 – 2017-09-01.
 - **[The Racket School of Semantics and Languages 2017](https://summer-school.racket-lang.org/2017/).** 2017-07-10 – 2017-07-14.
-- **[The 17th Symposium on Trends in Functional Programming (TFP 2016)](http://tfp2016.org/).** Alexander Rozenshteyn presented a paper that I co-authored, *What is Your Function? Static Pattern Matching on Function Behavior*. 2016-06-08, 2016-06-10.
+- **[The 17th Symposium on Trends in Functional Programming (TFP 2016)](http://tfp2016.org/).** Alexander Rozenshteyn presented a paper that I co-authored, _What is Your Function? Static Pattern Matching on Function Behavior_. 2016-06-08, 2016-06-10.
 - **JHU ACM Meeting.** I talked about Git and Racket. 2016.
 - **[IBM Programming Languages Day 2015](https://researcher.watson.ibm.com/researcher/view_group_subpage.php?id=6432).** 2015-11-23.
 - **The Developer’s Conference Florianópolis 2014.** I talked about HTTP/2 and the future of web technologies. 2014-05.
@@ -515,16 +494,15 @@ Events
 - **RubyConf Brazil 2012.** 2012-08.
 - **Coding Dojo@SP.** I promoted, hosted and participated in several Coding Dojos for the local developer community. 2012 – 2013.
 - **GURU SP.** 2012 – 2013.
-- ***Profissão Java* (Java Career).** 2012-08.
-- ***Conexão Java* (Java Connection).** 2012-05.
-- ***18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo* (18th International Scientific Initiation Symposium from Universidade de São Paulo).** I presented the paper *Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)*. 2010-11.
-- **[III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI](http://www.jointconference.fei.edu.br/wci/index.html).** I presented the paper *Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)*. 2010-10-24.
-- ***IV Workshop de Iniciação Científica e Tecnológica de Computação* (WICT) (IV Scientific and Technologic Initiation Workshop).** I resented the paper *Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)*. 2010-09-22.
+- **_Profissão Java_ (Java Career).** 2012-08.
+- **_Conexão Java_ (Java Connection).** 2012-05.
+- **_18º Simpósio Internacional de Iniciação Científica da Universidade de São Paulo_ (18th International Scientific Initiation Symposium from Universidade de São Paulo).** I presented the paper _Sistema de Navegação Visual Baseado em Correlação de Imagens Visando a Aplicação em Veículos Autônomos Inteligentes (Visual Navigation System Based on Image Correlation Targeted to Intelligent Autonomous Vehicles)_. 2010-11.
+- **[III Workshop on Computational Intelligence—WCI. Joint Conference 2010—SBIA—SBRN—JRI](http://www.jointconference.fei.edu.br/wci/index.html).** I presented the paper _Navegação Visual de Robôs Móveis Autônomos Baseada em Métodos de Correlação de Imagens (Visual Navigation of Autonomous Mobile Robots Based on Image Correlation Methods)_. 2010-10-24.
+- **_IV Workshop de Iniciação Científica e Tecnológica de Computação_ (WICT) (IV Scientific and Technologic Initiation Workshop).** I resented the paper _Pesquisa e Desenvolvimento de Robôs Móveis Autônomos com Navegação Baseada em Correlação de Imagens (Research and Development of Autonomous Mobile Robots with Image-Correlation-Based Navigation)_. 2010-09-22.
 - **II Computer Science Bachelor’s Workshop from Universidade de São Paulo.** I represented students in discussions with faculty about improving the structure of the Computer Science curriculum. 2009.
 - **PHP Conference Brazil.** 2006.
 
-Courses
-=======
+# Courses
 
 - **Improving Presentation Skills for Scientists and Engineers.** Johns Hopkins University. 2018.
 - **Writing in the Sciences.** Stanford University via Coursera. 2018.
