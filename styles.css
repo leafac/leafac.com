@@ -72,6 +72,7 @@ summary {
   font-weight: bold;
 }
 
+aside,
 pre,
 fieldset,
 input,
@@ -80,9 +81,13 @@ textarea {
   border-radius: 3px;
 }
 
+aside,
+pre {
+  padding: 1rem;
+}
+
 pre {
   overflow: auto;
-  padding: 1rem;
 }
 
 pre code {

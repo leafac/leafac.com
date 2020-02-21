@@ -6,7 +6,7 @@
 
 # Education
 
-**PhD Candidate** · [Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2020-08 (estimated)
+**PhD Candidate**    <small>[Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2020-08 (estimated)</small>
 
 - I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
@@ -17,18 +17,18 @@
 - I’m system administrator for the laboratory.
 - For most of my PhD program, I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
-**Master’s Degree** · [Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2016-10
+**Master’s Degree**    <small>[Johns Hopkins University](https://jhu.edu) · Computer Science · 2014-09 – 2016-10</small>
 
 - The master’s degree is part of the PhD program.
 
-**Bachelor’s Degree** · [Universidade de São Paulo](https://www5.usp.br) · Computer Science · 2008-02 – 2012-09
+**Bachelor’s Degree**    <small>[Universidade de São Paulo](https://www5.usp.br) · Computer Science · 2008-02 – 2012-09</small>
 
 - I researched in the field of robotics, developing an algorithm for visual navigation for autonomous vehicles. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
 - I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
 
 # Teaching Experience
 
-**[Johns Hopkins University](https://jhu.edu)** · Teaching Assistant · 2015-09 – 2020-08
+**[Johns Hopkins University](https://jhu.edu)**    <small>Teaching Assistant · 2015-09 – 2020-08</small>
 
 - On the Springs I assisted on the [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml) course, and on the Falls I assisted on the [Object Oriented Software Engineering](https://pl.cs.jhu.edu/oose/index.shtml) course.
 - My degree of involvement with the courses varied over the years. I lectured, prepared and graded exams and homework assignments, managed a team of four course assistants for assignment grading, advised semester-long group projects, and held office hours.
@@ -89,7 +89,7 @@
 
 # Work Experience
 
-**[Raise Sistemas](https://raisesistemas.com.br)** · Software Developer · 2014-02 – 2014-08
+**[Raise Sistemas](https://raisesistemas.com.br)**    <small>Software Developer · 2014-02 – 2014-08</small>
 
 - Raise Sistemas is a product start-up.
 - I worked on a medium-sized application in Ruby on Rails used by thousands of customers.
@@ -98,7 +98,7 @@
 - I worked remotely while traveling.
 - I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
 
-**DasDad** · Software Developer · 2013-02 – 2013-12
+**DasDad**    <small>Software Developer · 2013-02 – 2013-12</small>
 
 - DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
 - I contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
@@ -106,13 +106,13 @@
 - I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
 - I helped to manage outreach activities for the local programming community including hackathons and coding dojos.
 
-**[Universo Online (UOL)](https://www.uol.com.br/)** · Software Developer · 2012-03 – 2013-02
+**[Universo Online (UOL)](https://www.uol.com.br/)**    <small>Software Developer · 2012-03 – 2013-02</small>
 
 - UOL is a major internet publishing company in Brazil.
 - I built and maintained web products in Java EE used by millions of people.
 - I improved the frontend development process by introducing new technologies and building internal tools.
 
-**[Daitan Group](http://www.daitangroup.com/)** · Software Developer Intern · 2011-07 – 2012-02
+**[Daitan Group](http://www.daitangroup.com/)**    <small>Software Developer Intern · 2011-07 – 2012-02</small>
 
 - Daitan Group is an outsourcing company for Telecom applications.
 - I worked directly with customers from the Silicon Valley.
