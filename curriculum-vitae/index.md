@@ -1,7 +1,7 @@
 # Curriculum Vitae
 {:.no_toc}
 
-* TOC
+- TOC
 {:toc}
 
 # Education
@@ -46,11 +46,11 @@
 
   **JavaScript**
 
-  Classroom Lecture
+  _Classroom Lecture_
 
   <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
 
-  Video Lectures
+  _Video Lectures_
 
   1. **Introduction** <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
   2. **`setTimeout`** <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
@@ -68,11 +68,11 @@
 
   **Git**
 
-  Classroom Lecture
+  _Classroom Lecture_
 
   <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
 
-  Video Lectures
+  _Video Lectures_
 
   1. **Introduction** <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
   2. **Setup** <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
