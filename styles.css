@@ -35,23 +35,19 @@ header a {
   text-decoration: none;
 }
 
-nav {
-  text-align: center;
-}
-
+nav,
 figure {
+  text-align: center;
   margin: 2em 0;
-}
-
-figure > *,
-figure img {
-  display: block;
-  margin: 0 auto;
 }
 
 figcaption {
   font-style: italic;
-  text-align: center;
+}
+
+/* FIXME: ‘pre’s in ‘figure’s */
+pre {
+  text-align: left;
 }
 
 img,
