@@ -278,6 +278,7 @@ _Video Lectures_
 # Courses
 
 **Improving Presentation Skills for Scientists and Engineers.** Johns Hopkins University. 2018.
+
 <details markdown="1">
 <summary>Watch my Presentations</summary>
 
