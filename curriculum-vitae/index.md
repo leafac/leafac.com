@@ -4,6 +4,10 @@
 - TOC
 {:toc}
 
+# Contact
+
+<me@leafac.com> · <leandro@jhu.edu>
+
 # Education
 
 **PhD Candidate.** [Johns Hopkins University](https://jhu.edu). Computer Science. 2014-09 – 2020-08 (estimated).
@@ -43,7 +47,7 @@
 
 # Teaching Experience
 
-**[Johns Hopkins University](https://jhu.edu).** Teaching Assistant. 2015-09 – 2020-08.
+**[Johns Hopkins University](https://jhu.edu).** Teaching Assistant. 2015-09 – 2020-08 (estimated).
 
 <details markdown="1">
 <summary>Details</summary>
@@ -209,6 +213,18 @@ _Video Lectures_
 **Contributions to Web Frameworks.** [Ruby on Rails](https://github.com/rails/rails/commits?author=leafac) and [Javalin](https://github.com/tipsy/javalin/commits?author=leafac).
 
 **Contributions to Homebrew.** [Homebrew Core](https://github.com/Homebrew/homebrew-core/commits?author=leafac), [Homebrew Casks](https://github.com/Homebrew/homebrew-cask/commits?author=leafac), and [Homebrew Fonts](https://github.com/Homebrew/homebrew-cask-fonts/commits?author=leafac).
+
+# Skills
+
+**Programming Language Design.** Design and implementation of *Domain-Specific Languages* (DSLs) and general purpose programming languages. Semantics specification (for example, operational semantics), implementation of parsers, interpreters, analyzers, formatters, and so forth.
+
+**Programming Languages.** JavaScript & TypeScript, Ruby, Java, Racket, and OCaml.
+
+**Web Development.** React, Node.js, Ruby on Rails, Sinatra, and Javalin.
+
+**Writing.** LaTeX, academic writing, and documentation writing.
+
+**Other.** Video production, podcast production, music production, basic drawing and animation, and lettering.
 
 # Service
 
