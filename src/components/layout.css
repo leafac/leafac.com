@@ -44,11 +44,6 @@ figcaption {
   font-style: italic;
 }
 
-/* FIXME: ‘pre’s in ‘figure’s */
-pre {
-  text-align: left;
-}
-
 img,
 svg,
 video {
@@ -73,11 +68,8 @@ input,
 textarea {
   border: 1px solid #dfdfdf;
   border-radius: 3px;
-}
-
-pre {
-  overflow: auto;
-  padding: 1em;
+  --grvsc-border-radius: 3px;
+  --grvsc-line-highlighted-background-color: #eee;
 }
 
 pre code {
