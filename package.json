@@ -10,6 +10,7 @@
     "gatsby-remark-vscode": "^2.0.2",
     "gatsby-source-filesystem": "^2.1.48",
     "latex-workshop": "github:James-Yu/LaTeX-Workshop",
+    "racket": "git+https://bitbucket.org/Dima4ka/vs-code-drracket-colorizer.git",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "typeface-ibm-plex-mono": "0.0.61",
