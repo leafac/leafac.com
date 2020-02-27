@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@ibm/plex": "^4.0.2",
+    "pygments-rouge-css": "^0.1.0"
+  }
+}
