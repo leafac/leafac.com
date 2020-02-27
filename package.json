@@ -9,6 +9,8 @@
     "gatsby-plugin-mdx": "^1.0.74",
     "gatsby-source-filesystem": "^2.1.48",
     "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react-dom": "^16.13.0",
+    "typeface-ibm-plex-mono": "0.0.61",
+    "typeface-ibm-plex-serif": "0.0.75"
   }
 }

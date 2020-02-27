@@ -1,0 +1,100 @@
+body {
+  font-family: "IBM Plex Serif", Charter, Georgia, serif;
+  line-height: 1.6;
+  max-width: 600px;
+  padding: 0 2em;
+  margin: 2em auto;
+}
+
+a {
+  color: black;
+}
+
+code {
+  font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+}
+
+h1,
+h2 {
+  line-height: 1.3;
+  margin-top: 2em;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.25em;
+  font-weight: normal;
+  font-style: italic;
+}
+
+header a {
+  text-decoration: none;
+}
+
+nav,
+figure {
+  text-align: center;
+  margin: 2em 0;
+}
+
+figcaption {
+  font-style: italic;
+}
+
+/* FIXME: ‘pre’s in ‘figure’s */
+pre {
+  text-align: left;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+video,
+audio {
+  width: 100%;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+pre,
+fieldset,
+input,
+textarea {
+  border: 1px solid #dfdfdf;
+  border-radius: 3px;
+}
+
+pre {
+  overflow: auto;
+  padding: 1em;
+}
+
+pre code {
+  font-size: 0.75em;
+}
+
+legend {
+  font-weight: bold;
+}
+
+input,
+textarea {
+  padding: 0.25em;
+}
+
+textarea {
+  box-sizing: border-box;
+  width: 100%;
+  resize: none;
+}

@@ -1,9 +1,15 @@
 import React from "react";
 import "./layout.css";
+import "typeface-ibm-plex-serif";
+import "typeface-ibm-plex-mono";
 
 export default ({ children }) => (
-  <div>
-    <h1>My Layout</h1>
-    <div>{children}</div>
-  </div>
+  <>
+    <header>
+      <h1>
+        <a href="/">Leandro Facchinetti</a>
+      </h1>
+    </header>
+    <main>{children}</main>
+  </>
 );
