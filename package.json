@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "develop": "gatsby develop"
+    "develop": "gatsby develop",
+    "test": "prettier --check 'src/**'"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
@@ -10,6 +11,7 @@
     "gatsby-remark-vscode": "^2.0.2",
     "gatsby-source-filesystem": "^2.1.48",
     "latex-workshop": "github:James-Yu/LaTeX-Workshop",
+    "prettier": "^1.19.1",
     "racket": "git+https://bitbucket.org/Dima4ka/vs-code-drracket-colorizer.git",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
