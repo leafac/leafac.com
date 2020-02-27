@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import ReactMarkdown from "react-markdown";
+import removeMd from "remove-markdown";
 import "./layout.css";
 import "typeface-ibm-plex-serif";
 import "typeface-ibm-plex-mono";
@@ -13,9 +14,8 @@ export default ({
 }) => (
   <>
     <Helmet>
-      {/* TODO: markdownify | strip_html */}
       <title>
-        {title !== undefined ? `${title} · ` : ""}Leandro Facchinetti
+        {title !== undefined ? `${removeMd(title)} · ` : ""}Leandro Facchinetti
       </title>
       <meta name="author" content="Leandro Facchinetti" />
       <meta
@@ -42,7 +42,13 @@ export default ({
       </h1>
     </header>
     <main>
-      {title !== undefined ? <h1><ReactMarkdown>{title}</ReactMarkdown></h1> : ""}
+      {title !== undefined ? (
+        <h1>
+          <ReactMarkdown>{title}</ReactMarkdown>
+        </h1>
+      ) : (
+        ""
+      )}
       {children}
     </main>
   </>
