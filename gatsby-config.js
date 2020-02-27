@@ -17,8 +17,8 @@ module.exports = {
           {
             resolve: `gatsby-remark-vscode`,
             options: {
-              theme: "Light+ (default light)",
-              extensions: []
+              theme: `Light+ (default light)`,
+              extensions: [`latex-workshop`]
             }
           }
         ]
