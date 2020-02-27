@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import ReactMarkdown from "react-markdown";
 import "./layout.css";
 import "typeface-ibm-plex-serif";
 import "typeface-ibm-plex-mono";
@@ -41,8 +42,7 @@ export default ({
       </h1>
     </header>
     <main>
-      {/* TODO: markdownify */}
-      {title !== undefined ? <h1>{title}</h1> : ""}
+      {title !== undefined ? <h1><ReactMarkdown>{title}</ReactMarkdown></h1> : ""}
       {children}
     </main>
   </>
