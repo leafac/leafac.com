@@ -18,9 +18,7 @@ I live in Baltimore, Maryland, United States.
 
 <details>
 <summary>See my Times</summary>
-<img alt="5K" src="news/5k.png" width="576" />
-<img alt="Half-Marathon" src="news/half-marathon.png" width="577" />
-<img alt="Moron" src="news/moron.png" width="577" />
+<img alt="Baltimore Running Festival" src="news/baltimore-running-festival.png" width="600" />
 </details>
 
 **2019-09:** I started teaching [Object-Oriented Software Engineering](https://www.jhu-oose.com) at the Johns Hopkins University.
@@ -31,13 +29,13 @@ I live in Baltimore, Maryland, United States.
 
 # Articles
 
-[A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](/a-minimal-latex-dissertation-template-for-the-johns-hopkins-university)
+<!-- [A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](/a-minimal-latex-dissertation-template-for-the-johns-hopkins-university) -->
 
 [Understanding the Type of `call/cc`](/understanding-the-type-of-call-cc)
 
-[Playing the Game with PLT Redex](/playing-the-game-with-plt-redex)
+<!-- [Playing the Game with PLT Redex](/playing-the-game-with-plt-redex) -->
 
-[Email Migration: The Ultimate Solution to a Ridiculous Problem](/email-migration)
+<!-- [Email Migration: The Ultimate Solution to a Ridiculous Problem](/email-migration) -->
 
 # [Songs](/songs)
 
