@@ -9,12 +9,13 @@ jobs:
         npm ci
         npm run build
       - uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/master'
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
           cname: www.leafac.com
+      - run: npm test
       - uses: actions/setup-ruby@v1
       - run: |
           gem install html-proofer
-          npm test
-          htmlproofer --assume-extension ./_site
+          htmlproofer --assume-extension ./public
