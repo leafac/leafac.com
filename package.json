@@ -1,8 +1,9 @@
 {
   "scripts": {
-    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "test": "prettier --check 'src/**'",
     "build": "gatsby build",
-    "test": "prettier --check 'src/**'"
+    "clean": "gatsby clean"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.5.7",
