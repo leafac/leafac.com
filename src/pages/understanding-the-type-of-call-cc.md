@@ -5,14 +5,14 @@ title: Understanding the Type of `call/cc`
 <fieldset>
 <legend>Pre-Requisites</legend>
 
-- Reading code written in [Racket](https://www.racket-lang.org).
 - First-class continuations & `call/cc`.
+- Reading code written in [Racket](https://www.racket-lang.org).
 
 This article is only about the _type_ of `call/cc`, not about what it is or how it works.
 
 </fieldset>
 
-In classical Hindley–Milner type systems (for example, the core of the type systems in [ML](https://www.smlnj.org) and [Haskell](https://www.haskell.org)), the function [`call/cc`](https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29) (short for [`call-with-current-continuation`](https://docs.racket-lang.org/reference/cont.html#%28def._%28%28quote._~23~25kernel%29._call-with-current-continuation%29%29)) has type `call/cc : ((α → β) → α) → α`, where `α` and `β` are type variables that can be instantiated with any type. This type is interesting, particularly in [how it relates to logic](https://en.wikipedia.org/wiki/Call-with-current-continuation#Relation_to_non-constructive_logic), but like most topics surrounding first-class continuations, it is unintuitive. In this short article, we derive `call/cc`’s type step-by-step by using [Racket](https://www.racket-lang.org) expressions as examples. Racket is dynamically typed, but we can use it to reason about static types as well. In [Typed Racket](https://docs.racket-lang.org/ts-guide/) the type of `call/cc` is a bit more elaborate, [see appendix](#appendix-callccs-type-in-typedracket).
+In classical Hindley–Milner type systems (for example, the core of the type systems in [ML](https://www.smlnj.org) and [Haskell](https://www.haskell.org)), the function [`call/cc`](https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29) (short for [`call-with-current-continuation`](https://docs.racket-lang.org/reference/cont.html#%28def._%28%28quote._~23~25kernel%29._call-with-current-continuation%29%29)) has type `call/cc : ((α → β) → α) → α`, where `α` and `β` are type variables that can be instantiated with any type. This type is interesting, particularly in [how it relates to logic](https://en.wikipedia.org/wiki/Call-with-current-continuation#Relation_to_non-constructive_logic), but like most topics surrounding first-class continuations, it is unintuitive. In this short article, we derive `call/cc`’s type step-by-step by using [Racket](https://www.racket-lang.org) expressions as examples. Racket is dynamically typed, but we can use it to reason about static types as well. In [Typed Racket](https://docs.racket-lang.org/ts-guide/) the type of `call/cc` is a bit more elaborate, [see appendix](#appendix-callccs-type-in-typed-racket).
 
 We start with a simple expression:
 
@@ -60,7 +60,12 @@ Since `k` has no output, it can appear in any context, and its return type can b
 
 Both expressions above have valid types, so both of the following hold: `call/cc : ((Number → String) → Number) → Number`, _and_ `call/cc : ((Number → List) → Number) → Number`. In general, `call/cc : ((Number → β) → Number) → Number`, where `β` is a type variable that can be instantiated with any type. This is similar to how [`raise`](https://docs.racket-lang.org/reference/exns.html#%28def._%28%28quote._~23~25kernel%29._raise%29%29) can appear in any context, because execution will skip that context up to the closest _catch_, so its return type can be anything: `raise : α → β`.
 
-**Alternative Argument:** The continuation `k` is `(zero? •)`, where `•` represents the hole that we plug with a value to continue the computation. We can reify `k` as a function `(λ (x) (zero? x)) : Number → Boolean`, and we can replace `Boolean` with `β` without loss of generality. This `k` is not a regular function, however, because execution discards the context under which it is called.
+<fieldset>
+<legend>Alternative Argument</legend>
+
+The continuation `k` is `(zero? •)`, where `•` represents the hole that we plug with a value to continue the computation. We can reify `k` as a function `(λ (x) (zero? x)) : Number → Boolean`, and we can replace `Boolean` with `β` without loss of generality. This `k` is not a regular function, however, because execution discards the context under which it is called.
+
+</fieldset>
 
 The use of numbers in our examples was incidental. We could replace them with strings, for example:
 

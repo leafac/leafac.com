@@ -79,6 +79,11 @@ input,
 textarea {
   border: 1px solid #dfdfdf;
   border-radius: 3px;
+}
+
+pre {
+  --grvsc-padding-left: 1em;
+  --grvsc-padding-right: 1em;
   --grvsc-border-radius: 3px;
   --grvsc-line-highlighted-background-color: #eee;
 }
