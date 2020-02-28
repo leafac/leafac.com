@@ -8,6 +8,7 @@ import "./layout.css";
 
 export default ({
   children,
+  path,
   pageContext: {
     frontmatter: { title }
   }
@@ -30,9 +31,13 @@ export default ({
     </header>
     <main>
       {title !== undefined ? (
-        <h1>
-          <ReactMarkdown>{title}</ReactMarkdown>
-        </h1>
+        <header>
+          <h1>
+            <a href={path}>
+              <ReactMarkdown>{title}</ReactMarkdown>
+            </a>
+          </h1>
+        </header>
       ) : (
         ""
       )}
