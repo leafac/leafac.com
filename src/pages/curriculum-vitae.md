@@ -176,7 +176,7 @@ _Video Lectures_
 
 **Higher-Order Demand-Driven Program Analysis (Artifact).** Leandro Facchinetti, Zachary Palmer, and Scott Smith. _[ECOOP 2016 Artifacts](https://2016.ecoop.org/track/ecoop-2016-artifacts)._ Also appeared at the _[Dagstuhl Artifacts Series](http://drops.dagstuhl.de/opus/volltexte/2016/6130/)_. 2016. [[PDF](higher-order-demand-driven-program-analysis--artifact.pdf)][[Code](higher-order-demand-driven-program-analysis--artifact.tgz)][[Publisher](http://2016.ecoop.org/event/ecoop-2016-artifacts-higher-order-demand-driven-program-analysis)]
 
-**What is Your Function? Static Pattern Matching on Function Behavior.** Leandro Facchinetti, Pottayil Menon, Zachary Palmer, Alexander Rozenshteyn, and Scott Smith. _[The 17th Symposium on Trends in Functional Programming (TFP 2016)](http://tfp2016.org/)._ 2016. [[PDF](what-is-your-function--static-pattern-matching-on-function-behavior.pdf)]
+**What is Your Function? Static Pattern Matching on Function Behavior.** Leandro Facchinetti, Pottayil Menon, Zachary Palmer, Alexander Rozenshteyn, and Scott Smith. _The 17th Symposium on Trends in Functional Programming (TFP 2016)._ 2016. [[PDF](what-is-your-function--static-pattern-matching-on-function-behavior.pdf)]
 
 **_Pesquisa e Desenvolvimento de Robôs Táticos para Ambientes Internos_ (Research and Development of Tactical Robots for Indoor Environments).** Fernando Osório, Denis Wolf, Kalinka Castelo Branco, Jó Ueyama, Gustavo Pessin, Leandro Fernandes, Maurício Dias, Leandro Couto, Daniel Sales, Diogo Correa, Matheus Nin, Leandro Lourenço Silva, Leonardo Bonetti, Leandro Facchinetti, and Fabiano Hessel. _Internal Workshop of INCT-SEC._ 2011. [[PDF](pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos.pdf)]
 
@@ -244,7 +244,7 @@ _Video Lectures_
 
 **[The Racket School of Semantics and Languages 2017](https://summer-school.racket-lang.org/2017/).** 2017-07-10 – 2017-07-14.
 
-**[The 17th Symposium on Trends in Functional Programming (TFP 2016)](http://tfp2016.org/).** Alexander Rozenshteyn presented a paper that I co-authored, _What is Your Function? Static Pattern Matching on Function Behavior_. 2016-06-08, 2016-06-10.
+**The 17th Symposium on Trends in Functional Programming (TFP 2016).** Alexander Rozenshteyn presented a paper that I co-authored, _What is Your Function? Static Pattern Matching on Function Behavior_. 2016-06-08, 2016-06-10.
 
 **JHU ACM Meeting.** Talked about Git and Racket. 2016.
 

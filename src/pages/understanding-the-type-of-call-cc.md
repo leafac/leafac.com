@@ -45,7 +45,7 @@ This changed the output from `#t` to `#f`, because `(k 42)` takes execution back
 
 1. `k` is being applied, so it is a function: `call/cc : ((___ → ___) → Number) → Number`.
 2. `k` is called with a number: `call/cc : ((Number → ___) → Number) → Number`.  
-   It is not a coincidence that these three types agree (in our example, they are all `Number`): if `k` is called, then `call/cc` returns the argument to `k`, and if `k` is not called, then `call/cc` returns the same as the function that was passed to it ([see the appendix](#appendix-callccs-type-in-typedracket) for the full story).
+   It is not a coincidence that these three types agree (in our example, they are all `Number`): if `k` is called, then `call/cc` returns the argument to `k`, and if `k` is not called, then `call/cc` returns the same as the function that was passed to it ([see the appendix](#appendix-callccs-type-in-typed-racket) for the full story).
 
 The final blank is `k`’s return type, and to fill it we have to explore how `k`’s output may be used. But `k` is not a regular function, it is a first-class continuation produced by `call/cc`. _A first-class continuation does not return; it has no output_. When we call `k`, execution resumes on the surrounding of the call to `call/cc` and never returns. For example, when we call `k` in the previous expression, execution resumes on the outer addition and never returns to the rest of the function that was passed as `call/cc`’s argument (the `0`).
 
@@ -74,7 +74,7 @@ The use of numbers in our examples was incidental. We could replace them with st
 2
 ```
 
-The only constraint is that these three types must agree: the return type of `call/cc`, the return type of the function passed as argument to `call/cc`, and the type of `k`’s argument ([see the appendix](#appendix-callccs-type-in-typedracket) for the full story). Finally, we can conclude that `call/cc : ((α → β) → α) → α`.
+The only constraint is that these three types must agree: the return type of `call/cc`, the return type of the function passed as argument to `call/cc`, and the type of `k`’s argument ([see the appendix](#appendix-callccs-type-in-typed-racket) for the full story). Finally, we can conclude that `call/cc : ((α → β) → α) → α`.
 
 # Appendix: `call/cc`’s type in Typed Racket
 
