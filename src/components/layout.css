@@ -32,7 +32,7 @@ h2 {
 
 .anchor {
   position: absolute;
-  margin-left: -20px;
+  left: -20px;
   transition: opacity 0.2s ease-in-out;
   opacity: 0;
 }
@@ -82,8 +82,8 @@ textarea {
 }
 
 pre {
-  --grvsc-padding-left: 1em;
   --grvsc-padding-right: 1em;
+  --grvsc-padding-left: 1em;
   --grvsc-border-radius: 3px;
   --grvsc-line-highlighted-background-color: #eee;
 }
