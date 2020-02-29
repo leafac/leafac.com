@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "gatsby develop",
-    "test": "prettier --check 'src/**'",
+    "test": "prettier --check 'src/**' && htmlproofer ./public",
     "build": "gatsby build",
     "clean": "gatsby clean"
   },
