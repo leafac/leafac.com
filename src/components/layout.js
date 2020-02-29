@@ -5,6 +5,7 @@ import removeMd from "remove-markdown";
 import "typeface-ibm-plex-serif";
 import "typeface-ibm-plex-mono";
 import "./layout.css";
+import "katex/dist/katex.min.css";
 
 export default ({
   children,

@@ -22,7 +22,9 @@ module.exports = {
               extensions: [`latex-workshop`, `racket`]
             }
           }
-        ]
+        ],
+        remarkPlugins: [require(`remark-math`)],
+        rehypePlugins: [require(`rehype-katex`)]
       }
     },
     `gatsby-plugin-react-helmet`,
