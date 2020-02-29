@@ -10,9 +10,9 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
-**2019-01-25:** I recorded properly [the song that I sang in lecture in Object-Oriented Software Engineering](/songs#now-im-taking-oose).
+**2019-01-25:** I recorded properly [the song that I sang in lecture in Object-Oriented Software Engineering](songs#now-im-taking-oose).
 
-**2019-12-23:** I finished teaching [Object-Oriented Software Engineering](https://www.jhu-oose.com) at the Johns Hopkins University. [See what students had to say about the course](/curriculum-vitae/oose.pdf).
+**2019-12-23:** I finished teaching [Object-Oriented Software Engineering](https://www.jhu-oose.com) at the Johns Hopkins University. [See what students had to say about the course](curriculum-vitae/oose.pdf).
 
 **2019-10-19:** I ran on the [Baltimore Running Festival](https://www.thebaltimoremarathon.com). I ran a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. I succeeded in my two goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
 
@@ -29,18 +29,18 @@ I live in Baltimore, Maryland, United States.
 
 # Articles
 
-<!-- [A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](/a-minimal-latex-dissertation-template-for-the-johns-hopkins-university) -->
+<!-- [A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](a-minimal-latex-dissertation-template-for-the-johns-hopkins-university) -->
 
-[Understanding the Type of `call/cc`](/understanding-the-type-of-call-cc)
+[Understanding the Type of `call/cc`](understanding-the-type-of-call-cc)
 
-<!-- [Playing the Game with PLT Redex](/playing-the-game-with-plt-redex) -->
+<!-- [Playing the Game with PLT Redex](playing-the-game-with-plt-redex) -->
 
-<!-- [Email Migration: The Ultimate Solution to a Ridiculous Problem](/email-migration) -->
+<!-- [Email Migration: The Ultimate Solution to a Ridiculous Problem](email-migration) -->
 
-# [Songs](/songs)
+# [Songs](songs)
 
 # Contact
 
 <me@leafac.com> · <leandro@jhu.edu>
 
-# [Curriculum Vitae](/curriculum-vitae)
+# [Curriculum Vitae](curriculum-vitae)
