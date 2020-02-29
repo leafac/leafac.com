@@ -112,7 +112,7 @@ This expression reveals two more facts about `call/cc`’s type:
    \texttt{call/cc} : ((\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
    $$
 
-* * *
+---
 
 The final $\boxed{?}$ is `k`’s return type, and to fill it we have to explore how `k`’s output may be used. But `k` is not a regular function, it is a first-class continuation produced by `call/cc`. _A first-class continuation does not return; it has no output_. When we call `k`, execution resumes on the surrounding of the call to `call/cc` and never returns. For example, when we call `k` in the previous expression, execution resumes on the outer addition and never returns to the rest of the function that was passed as `call/cc`’s argument (the `0`).
 
