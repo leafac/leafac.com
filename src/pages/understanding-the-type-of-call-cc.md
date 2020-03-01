@@ -20,7 +20,14 @@ $$
 
 Where $\alpha$ and $\beta$ are type variables that may be instantiated with any type such as `Number` or `String`.
 
-This type is interesting, particularly in [its connection to logic](https://en.wikipedia.org/wiki/Call-with-current-continuation#Relation_to_non-constructive_logic), but like most ideas related to first-class continuations, it is unintuitive. In this article we derive `call/cc`’s type step-by-step using examples written in [Racket](https://www.racket-lang.org). Racket is dynamically typed, but we may use it to reason about static types. In fact, there’s a version of Racket that is statically typed, [Typed Racket](https://docs.racket-lang.org/ts-guide/), but the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system, so the type of `call/cc` in Typed Racket is a more sophisticated as well ([see appendix](#appendix-callccs-type-in-typed-racket)).
+This type is interesting, particularly in [its connection to logic](https://en.wikipedia.org/wiki/Call-with-current-continuation#Relation_to_non-constructive_logic), but like most ideas related to first-class continuations, it is unintuitive. In this article we derive `call/cc`’s type step-by-step using examples written in [Racket](https://www.racket-lang.org). Racket is dynamically typed, but we may use it to reason about static types.
+
+<fieldset>
+<legend>Note</legend>
+
+There’s a version of Racket that is statically typed, [Typed Racket](https://docs.racket-lang.org/ts-guide/), but the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system, so the type of `call/cc` in Typed Racket is a more sophisticated as well ([see appendix](#appendix-callccs-type-in-typed-racket)).
+
+</fieldset>
 
 We start by knowing nothing about `call/cc`’s type:
 
@@ -84,7 +91,7 @@ To proceed, we want to know more about the type of `k`, so we modify the functio
 #f
 ```
 
-This modification changed the output from `#t` to `#f`, because the `(k 42)` takes execution back to the outer `zero?` and skips over the remainder of the function passed to `call/cc`, which in this case is just the `0`.
+This modification changed the output from `#t` to `#f`, because the `(k 42)` takes execution back to the outer `zero?`, skipping over the remainder of the function passed to `call/cc`, which in this case is just the `0`.
 
 This expression reveals two more facts about `call/cc`’s type:
 
@@ -100,7 +107,7 @@ This expression reveals two more facts about `call/cc`’s type:
    \texttt{call/cc} : (\textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
    $$
 
-2. `k`’s argument is a `42`, a `Number`:
+2. `k`’s argument is `42`, a `Number`:
 
    $$
    \texttt{(λ (k) (k 42) 0)} : (\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}
