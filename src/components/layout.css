@@ -82,8 +82,7 @@ textarea {
 }
 
 pre {
-  --grvsc-padding-right: 1em;
-  --grvsc-padding-left: 1em;
+  --grvsc-padding-h: 1em;
   --grvsc-border-radius: 3px;
   --grvsc-line-highlighted-background-color: #eee;
 }
