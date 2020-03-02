@@ -23,7 +23,7 @@ module.exports = {
             }
           }
         ],
-        remarkPlugins: [require(`remark-math`)],
+        remarkPlugins: [require(`remark-math`), require(`remark-toc`)],
         rehypePlugins: [require(`rehype-katex`)]
       }
     },

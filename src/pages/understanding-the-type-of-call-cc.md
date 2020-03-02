@@ -203,7 +203,7 @@ So we conclude that `call/cc` outputs a value of type $\alpha \cup \gamma$, whic
 <fieldset>
 <legend>Technical Terms</legend>
 
-A type such as $\alpha \cup \gamma$ is something called a [_union type_](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29).
+A type such as $\alpha \cup \gamma$ is something called an [_union type_](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29).
 
 </fieldset>
 

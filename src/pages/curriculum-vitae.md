@@ -2,6 +2,8 @@
 title: Curriculum Vitae
 ---
 
+# Table of Contents
+
 # Contact
 
 <me@leafac.com> · <leandro@jhu.edu>
