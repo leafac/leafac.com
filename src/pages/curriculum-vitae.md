@@ -18,7 +18,7 @@ title: Curriculum Vitae
 - Part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - Advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 - Doing research in the field of program analysis, developing new techniques for control-flow analysis of higher-order functions.
-- Goal as a researcher: communicate technical ideas clearly to software developers in industry, avoiding jargon, obscure notation, and unnecessary complexity.
+- Goal as a researcher: to communicate technical ideas clearly to software developers in industry, avoiding jargon, obscure notation, and unnecessary complexity.
 - [See publications](#publications).
 - [See work-in-progress dissertation](https://github.com/leafac/yocto-cfa).
 - Completing the 5-year PhD program in 6 years because of time spent [teaching](#teaching-experience) (the average completion time in the department is 6 years).
@@ -43,7 +43,7 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- Did research in the field of robotics and autonomous vehicles, developing an algorithm for visual navigation. Funded by a scholarship by the Brazilian Government (INCT-SEC) as part of a Scientific Initiation program.
+- Did research in the field of robotics and autonomous vehicles, developing an algorithm for visual navigation. Funded by a scholarship of the Brazilian Government (INCT-SEC) as part of a Scientific Initiation program.
 - Graduated ahead of time, completing a 5-year course in 4 1/2 years.
 - As extra-curricular activity, played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
 
@@ -58,12 +58,12 @@ title: Curriculum Vitae
 
 - Updated the curriculum and developed new material.
 - Recorded [a series of video lectures](https://oose-2019.leafac.com/todoose).
-- Goal as an educator: build students’ confidence.
+- Goal as an educator: to build students’ confidence.
 - One of the biggest courses in the department, with 85 students.
 - Project-based course, involving lectures, assignments, a quiz, laboratory sessions, and project presentations.
 - Managed a team of 15 course assistants.
 - Developed a [robot](https://github.com/leafac/oose-2019-roboose) to assist on administrative processes, including grading, collecting course feedback, and so forth.
-- [See course reviews](oose.pdf). On average students rated the course around the department average, and some said it was the best course they took.
+- [See course reviews](oose.pdf). Students rated the course around the department average, and some said it was the best course they took.
 - Students did several things for [extra credit](https://oose-2019.leafac.com/fun-stuff-students-did/), from contributing to open-source projects to singing songs.
 
 </details>
@@ -76,7 +76,7 @@ title: Curriculum Vitae
 - Received the _Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award_.
 - Prepared course material, lectured, prepared and graded exams and assignments, managed teams of course assistants, advised semester-long group projects, and held office hours.
 - Example of course material: A to-do application that was used in several lectures: [source code](https://github.com/leafac/todo) and [live version](https://leafac-oose-todo.herokuapp.com).
-- Example of assignment: [handout](https://github.com/leafac/lights-out) and [live version](https://leafac-oose-lights-out.herokuapp.com).
+- Example of assignment: [Handout](https://github.com/leafac/lights-out) and [live version](https://leafac-oose-lights-out.herokuapp.com).
 - Examples of lectures: (Unfortunately the audio quality in some of these videos is less than optimal.)
   - **Deployment**
     <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
@@ -158,7 +158,7 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
+- DasDad was a product start-up. Unfortunately the angel investor behind it folded and the product was never released.
 - Contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
 - The applications used natural language processing and artificial intelligence for recommendation, summarization, and sentiment analysis.
 - Worked on infrastructure, implementing systems for continuous integration and continuous delivery.
@@ -184,7 +184,7 @@ title: Curriculum Vitae
 
 - Daitan Group is an outsourcing company for telecom applications.
 - Worked directly with customers from the Silicon Valley.
-- Developed a web service in Java EE for a telecom platform and a web administration tool in PHP for a video conferencing system.
+- Developed a web service in Java EE for a telecom platform, and a web administration tool in PHP for a video conferencing system.
 - Taught a course about version control with Git.
 
 </details>
@@ -193,13 +193,13 @@ title: Curriculum Vitae
 
 **Higher-Order Demand-Driven Program Analysis.** Leandro Facchinetti, Zachary Palmer, and Scott Smith. _ACM Transactions on Programming Languages and Systems (TOPLAS)._ 2019. [[PDF](higher-order-demand-driven-program-analysis.pdf)][[Publisher](https://dl.acm.org/doi/10.1145/3310340)]
 
-**SDL: A DSL for Cryptographic Schemes.** Leandro Facchinetti. Research project report to fulfill a qualifying requirement of the Ph.D. program. Johns Hopkins University. 2017. [[PDF](sdl--a-dsl-for-cryptographic-schemes.pdf)]
+**SDL: A DSL for Cryptographic Schemes.** Leandro Facchinetti. Research project report to fulfill a qualifying requirement of the Ph.D. program. _Johns Hopkins University._ 2017. [[PDF](sdl--a-dsl-for-cryptographic-schemes.pdf)]
 
 **Relative Store Fragments for Singleton Abstraction.** Leandro Facchinetti, Zachary Palmer, and Scott Smith. _[24th Static Analysis Symposium](http://staticanalysis.org/sas2017/sas2017.html)._ 2017. [[PDF](relative-store-fragments-for-singleton-abstraction.pdf)][[Publisher](https://link.springer.com/chapter/10.1007%2F978-3-319-66706-5_6)]
 
-**Towards Practical Higher-Order Demand-Driven Program Analysis.** Leandro Facchinetti. Preliminary research proposal for Graduate Board Oral (GBO) examination, a qualifying requirement for the Ph.D. program. Johns Hopkins University. 2017. [[PDF](towards-practical-higher-order-demand-driven-program-analysis.pdf)][[Slides](towards-practical-higher-order-demand-driven-program-analysis.key)]
+**Towards Practical Higher-Order Demand-Driven Program Analysis.** Leandro Facchinetti. Preliminary research proposal for Graduate Board Oral (GBO) examination, a qualifying requirement for the Ph.D. program. _Johns Hopkins University._ 2017. [[PDF](towards-practical-higher-order-demand-driven-program-analysis.pdf)][[Slides](towards-practical-higher-order-demand-driven-program-analysis.key)]
 
-**Practical Demand-Driven Program Analysis with Recursion.** Leandro Facchinetti. Research project report to fulfill a qualifying requirement of the Ph.D. program. Johns Hopkins University. 2016. [[PDF](practical-demand-driven-program-analysis-with-recursion.pdf)]
+**Practical Demand-Driven Program Analysis with Recursion.** Leandro Facchinetti. Research project report to fulfill a qualifying requirement of the Ph.D. program. _Johns Hopkins University._ 2016. [[PDF](practical-demand-driven-program-analysis-with-recursion.pdf)]
 
 **Higher-Order Demand-Driven Program Analysis (Artifact).** Leandro Facchinetti, Zachary Palmer, and Scott Smith. _[ECOOP 2016 Artifacts](https://2016.ecoop.org/track/ecoop-2016-artifacts)._ Also appeared at the _[Dagstuhl Artifacts Series](http://drops.dagstuhl.de/opus/volltexte/2016/6130/)_. 2016. [[PDF](higher-order-demand-driven-program-analysis--artifact.pdf)][[Code](higher-order-demand-driven-program-analysis--artifact.tgz)][[Publisher](http://2016.ecoop.org/event/ecoop-2016-artifacts-higher-order-demand-driven-program-analysis)]
 
@@ -241,11 +241,13 @@ title: Curriculum Vitae
 
 # Skills
 
-**Programming Language Design.** Design and implementation of _Domain-Specific Languages_ (DSLs) and general purpose programming languages. Semantics specification (for example, operational semantics), implementation of parsers, interpreters, analyzers, formatters, and so forth.
+**Programming Language Design.** Design and implementation of _Domain-Specific Languages_ (DSLs) and general purpose programming languages. Semantics specification (for example, operational semantics), implementation of parsers, interpreters, analyzers, type systems, formatters, and so forth.
 
 **Programming Languages.** JavaScript & TypeScript, Ruby, Java, Racket, and OCaml.
 
 **Web Development.** React, Node.js, and Ruby on Rails.
+
+**System Administration.** Linux, Docker, virtualization, cloud computing (AWS, DigitalOcean), and automated provisioning.
 
 **Writing.** LaTeX, academic writing, and documentation writing.
 
@@ -325,7 +327,7 @@ title: Curriculum Vitae
 <details>
 <summary>Watch Presentations</summary>
 
-(Unfortunately, the quality of the recordings are bad.)
+(Unfortunately the quality of the recordings are bad.)
 
 **Presentation for a General Audience**
 
