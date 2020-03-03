@@ -15,17 +15,17 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- I’m part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
-- My advisor is [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
-- I’m doing research in the field of program analysis. In particular, I’m developing new techniques for control-flow analysis of higher-order functions.
-- My goal as a researcher is to make complex technical ideas easier to understand for software developers in industry.
-- [See my publications](#publications).
-- [I’m working on my dissertation publicly](https://github.com/leafac/yocto-cfa).
-- The PhD is a 5-year program but I’m completing it in 6 years because I spent some time [teaching](#teaching-experience).
-- I did a qualifying project in the field of cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
-- I was the system administrator for the laboratory for 5 years.
-- I took courses on programming-language theory, logic, software engineering, cryptography, natural language processing, databases, and presentation skills. For fun, I also took courses in music theory and meditation.
-- For 4 years I was supported by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
+- Part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
+- Advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
+- Doing research in the field of program analysis, developing new techniques for control-flow analysis of higher-order functions.
+- Goal as a researcher: communicate technical ideas clearly to software developers in industry, avoiding jargon, obscure notation, and unnecessary complexity.
+- [See publications](#publications).
+- [See work-in-progress dissertation](https://github.com/leafac/yocto-cfa).
+- Completing the 5-year PhD program in 6 years because of time spent [teaching](#teaching-experience) (the average completion time in the department is 6 years).
+- Did a qualifying project in the field of cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
+- Was the system administrator for the laboratory for 5 years.
+- Took courses on programming-language theory, logic, software engineering, cryptography, natural language processing, databases, and presentation skills. As extra-curricular activity, also took courses on music theory and meditation.
+- Was supported during the first 4 years by a fellowship from the Brazilian Government (CAPES). Process number: 13477/13-7.
 
 </details>
 
@@ -34,7 +34,7 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- The master’s degree is part of the PhD program.
+- Part of the PhD program.
 
 </details>
 
@@ -43,9 +43,9 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- I did research in the field of robotics and autonomous vehicles, developing an algorithm for visual navigation. My work was funded by a scholarship provided by the Brazilian Government (INCT-SEC) under a Scientific Initiation program.
-- I graduated ahead of time, completing a 5-year course in 4 1/2 years.
-- I played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
+- Did research in the field of robotics and autonomous vehicles, developing an algorithm for visual navigation. Funded by a scholarship by the Brazilian Government (INCT-SEC) as part of a Scientific Initiation program.
+- Graduated ahead of time, completing a 5-year course in 4 1/2 years.
+- As extra-curricular activity, played the drums in a group similar to a [_Escola de Samba_](https://en.wikipedia.org/wiki/Samba_school).
 
 </details>
 
@@ -56,13 +56,14 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- I developed new material and updated the curriculum.
-- I recorded [a series of video lectures](https://oose-2019.leafac.com/todoose).
-- My goal as an educator is to build confidence in students.
-- This is one of the biggest courses in the department, with 85 students.
-- This is a project-based course, so I had to coordinate lectures, assignments, laboratory sessions, project presentations, and grading.
-- I managed a team of 15 course assistants.
-- **[Course Reviews](oose.pdf).** Students rated my teaching around the department average.
+- Updated the curriculum and developed new material.
+- Recorded [a series of video lectures](https://oose-2019.leafac.com/todoose).
+- Goal as an educator: build students’ confidence.
+- One of the biggest courses in the department, with 85 students.
+- Project-based course, involving lectures, assignments, a quiz, laboratory sessions, and project presentations.
+- Managed a team of 15 course assistants.
+- Developed a [robot](https://github.com/leafac/oose-2019-roboose) to assist on administrative processes, including grading, collecting course feedback, and so forth.
+- [See course reviews](oose.pdf). On average students rated the course around the department average, and some said it was the best course they took.
 - Students did several things for [extra credit](https://oose-2019.leafac.com/fun-stuff-students-did/), from contributing to open-source projects to singing songs.
 
 </details>
@@ -72,11 +73,11 @@ title: Curriculum Vitae
 <details>
 <summary>Details</summary>
 
-- I received the **Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award** for my performance as a Teaching Assistant.
-- I prepared course material, lectured, prepared and graded exams and homework assignments, managed teams of course assistants, advised semester-long group projects, and held office hours.
-- **Example of Course Material:** A to-do application that was used in several lectures: [Source Code](https://github.com/leafac/todo) and [Live Version](https://leafac-oose-todo.herokuapp.com).
-- **Example of Assignment:** [Handout](https://github.com/leafac/lights-out) and [Live Version](https://leafac-oose-lights-out.herokuapp.com).
-- **Examples of Lectures:** (The audio quality in some of these videos is bad because I was learning and experimenting with recording techniques and equipment.)
+- Received the _Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award_.
+- Prepared course material, lectured, prepared and graded exams and assignments, managed teams of course assistants, advised semester-long group projects, and held office hours.
+- Example of course material: A to-do application that was used in several lectures: [source code](https://github.com/leafac/todo) and [live version](https://leafac-oose-todo.herokuapp.com).
+- Example of assignment: [handout](https://github.com/leafac/lights-out) and [live version](https://leafac-oose-lights-out.herokuapp.com).
+- Examples of lectures: (Unfortunately the audio quality in some of these videos is less than optimal.)
   - **Deployment**
     <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
   - **JavaScript**
@@ -144,11 +145,11 @@ title: Curriculum Vitae
 <summary>Details</summary>
 
 - Raise Sistemas is a product start-up.
-- I worked on a medium-sized application in Ruby on Rails used by thousands of customers.
-- I improved the performance of a subsystem for importing users by a factor of 30x.
-- I was part of an agile team that did regular code-reviews, continuous integration, and continuous delivery.
-- I worked remotely while traveling.
-- I had to leave Raise Sistemas after six months because I got accepted into a PhD program.
+- Worked on a medium-sized application in Ruby on Rails used by thousands of customers.
+- Improved the performance of a subsystem for importing users by a factor of 30x.
+- Was part of an agile team that did regular code-reviews, continuous integration, and continuous delivery.
+- Worked remotely while traveling.
+- Had to leave Raise Sistemas after only six months due to start of PhD program.
 
 </details>
 
@@ -158,10 +159,10 @@ title: Curriculum Vitae
 <summary>Details</summary>
 
 - DasDad was a product start-up. Unfortunately, the angel investor behind it folded and the product was never completed.
-- I contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
+- Contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
 - The applications used natural language processing and artificial intelligence for recommendation, summarization, and sentiment analysis.
-- I worked on infrastructure, implementing systems for continuous integration and continuous delivery.
-- I helped to manage outreach activities for the local programming community including hackathons and coding dojos.
+- Worked on infrastructure, implementing systems for continuous integration and continuous delivery.
+- Helped to manage outreach activities for the local programming community including hackathons and coding dojos.
 
 </details>
 
@@ -171,8 +172,8 @@ title: Curriculum Vitae
 <summary>Details</summary>
 
 - UOL is the biggest internet publishing company in Brazil.
-- I built and maintained web products in Java EE used by millions of people.
-- I improved the frontend development process by introducing new technologies and building internal tools.
+- Developed and maintained web products in Java EE used by millions of people.
+- Improved the frontend development process by introducing new technologies and building internal tools.
 
 </details>
 
@@ -182,9 +183,9 @@ title: Curriculum Vitae
 <summary>Details</summary>
 
 - Daitan Group is an outsourcing company for telecom applications.
-- I worked with customers from the Silicon Valley.
-- I developed a web service in Java EE for a telecom platform and a web administration tool in PHP for a video conferencing system.
-- I taught a course about version control with Git.
+- Worked directly with customers from the Silicon Valley.
+- Developed a web service in Java EE for a telecom platform and a web administration tool in PHP for a video conferencing system.
+- Taught a course about version control with Git.
 
 </details>
 
@@ -264,15 +265,15 @@ title: Curriculum Vitae
 
 # Events
 
-**[Advanced Topics in Programming Languages](https://pl.cs.jhu.edu/seminars/spring-2020/).** I presented several seminars about papers. 2014-09 – 2020-08 (estimated).
+**[Advanced Topics in Programming Languages](https://pl.cs.jhu.edu/seminars/spring-2020/).** Presented several seminars about papers. 2014-09 – 2020-08 (estimated).
 
 **[The Racket School 2018: Create your own language](https://summer-school.racket-lang.org/2018/).** 2018-07-09 – 2018-07-13.
 
-**[24th Static Analysis Symposium](https://staticanalysis.org/sas2017/sas2017.html).** Zachary Palmer presented a paper that I co-authored, _Relative Store Fragments for Singleton Abstraction_. 2017-08-30 – 2017-09-01.
+**[24th Static Analysis Symposium](https://staticanalysis.org/sas2017/sas2017.html).** Co-author Zachary Palmer presented the paper _Relative Store Fragments for Singleton Abstraction_. 2017-08-30 – 2017-09-01.
 
 **[The Racket School of Semantics and Languages 2017](https://summer-school.racket-lang.org/2017/).** 2017-07-10 – 2017-07-14.
 
-**The 17th Symposium on Trends in Functional Programming (TFP 2016).** Alexander Rozenshteyn presented a paper that I co-authored, _What is Your Function? Static Pattern Matching on Function Behavior_. 2016-06-08, 2016-06-10.
+**The 17th Symposium on Trends in Functional Programming (TFP 2016).** Co-author Alexander Rozenshteyn presented the paper _What is Your Function? Static Pattern Matching on Function Behavior_. 2016-06-08, 2016-06-10.
 
 **JHU ACM Meetings.** Talked about Git and Racket. 2016.
 
@@ -291,7 +292,7 @@ title: Curriculum Vitae
 **7Masters.** Talked about modern Java development techniques and tools. 2013-01.
 
 <details>
-<summary>Watch my Talk</summary>
+<summary>Watch Talk</summary>
 <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="none"></video>
 </details>
 
@@ -322,9 +323,9 @@ title: Curriculum Vitae
 **Improving Presentation Skills for Scientists and Engineers.** Johns Hopkins University. 2018.
 
 <details>
-<summary>Watch my Presentations</summary>
+<summary>Watch Presentations</summary>
 
-The recording quality is bad because I was not in control of it.
+(Unfortunately, the quality of the recordings are bad.)
 
 **Presentation for a General Audience**
 
