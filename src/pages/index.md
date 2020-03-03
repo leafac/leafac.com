@@ -27,6 +27,10 @@ I live in Baltimore, Maryland, United States.
 
 **2019-06:** I made public the repository on which I’m working on my dissertation: [Yocto-CFA](https://github.com/leafac/yocto-cfa).
 
+# Videos
+
+[Using Keynote to Draw Figures for LaTeX Documents](using-keynote-to-draw-figures-for-latex-documents)
+
 # Articles
 
 <!-- [A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](a-minimal-latex-dissertation-template-for-the-johns-hopkins-university) -->
