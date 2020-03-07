@@ -22,11 +22,12 @@
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-helmet": "^5.2.1",
-    "react-markdown": "^4.3.1",
     "rehype-katex": "^2.0.0",
+    "remark": "^11.0.2",
     "remark-math": "^2.0.0",
+    "remark-react": "^6.0.0",
     "remark-toc": "^7.0.0",
-    "remove-markdown": "^0.3.0",
+    "strip-markdown": "^3.1.1",
     "typeface-ibm-plex-mono": "0.0.61",
     "typeface-ibm-plex-serif": "0.0.75"
   }

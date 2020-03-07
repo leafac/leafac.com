@@ -1,7 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import ReactMarkdown from "react-markdown";
-import removeMd from "remove-markdown";
+import remark from "remark";
+import remarkReact from "remark-react";
+import remarkStripMarkdown from "strip-markdown";
 import "typeface-ibm-plex-serif";
 import "typeface-ibm-plex-mono";
 import "./layout.css";
@@ -16,7 +17,12 @@ export default ({
   <>
     <Helmet>
       <title>
-        {title !== undefined ? `${removeMd(title)} · ` : ""}Leandro Facchinetti
+        {title !== undefined
+          ? `${remark()
+              .use(remarkStripMarkdown)
+              .processSync(title)} · `
+          : ""}
+        Leandro Facchinetti
       </title>
       <meta name="author" content="Leandro Facchinetti" />
       <meta
@@ -32,7 +38,11 @@ export default ({
     <main>
       {title !== undefined ? (
         <h1>
-          <ReactMarkdown>{title}</ReactMarkdown>
+          {
+            remark()
+              .use(remarkReact)
+              .processSync(title).contents
+          }
         </h1>
       ) : (
         ""
