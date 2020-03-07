@@ -30,17 +30,6 @@ h2 {
   font-style: italic;
 }
 
-.anchor {
-  position: absolute;
-  left: -20px;
-  transition: opacity 0.2s ease-in-out;
-  opacity: 0;
-}
-
-:hover > .anchor {
-  opacity: 1;
-}
-
 header a {
   text-decoration: none;
 }

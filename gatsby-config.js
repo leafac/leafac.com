@@ -14,7 +14,6 @@ module.exports = {
           default: require.resolve(`./src/components/layout.js`)
         },
         gatsbyRemarkPlugins: [
-          `gatsby-remark-autolink-headers`,
           {
             resolve: `gatsby-remark-vscode`,
             options: {
@@ -23,7 +22,11 @@ module.exports = {
             }
           }
         ],
-        remarkPlugins: [require(`remark-math`), require(`remark-toc`)],
+        remarkPlugins: [
+          require(`remark-slug`),
+          require(`remark-toc`),
+          require(`remark-math`)
+        ],
         rehypePlugins: [require(`rehype-katex`)]
       }
     },
