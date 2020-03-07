@@ -1,0 +1,122 @@
+% https://www.leafac.com/a-minimal-latex-dissertation-template-for-johns-hopkins-university/
+%
+% You may compile this file with the help of your LaTeX editor, or on the command-line with the usual LaTeX routine:
+%
+%     $ pdflatex dissertation.tex
+%     $ bibtex dissertation
+%     $ pdflatex dissertation.tex
+%     $ pdflatex dissertation.tex
+%
+% The multiple passes correct the citations and the (forward) cross-references.
+
+\documentclass[12pt, oneside]{book}
+
+\usepackage{filecontents}
+
+\begin{filecontents*}{\jobname.xmpdata}
+\Title{!!Title!!}
+\Author{!!Author!!}
+\Language{en-US}
+\Keywords{!!Keyword 1!!\sep !!Keyword 2!!\sep !!Keyword 3!!\sep ...}
+\Subject{!!Abstract!!}
+\end{filecontents*}
+\usepackage[a-1b]{pdfx}
+\hypersetup{hidelinks, bookmarksnumbered}
+\usepackage{tocbibind}
+
+\usepackage[top = 1in, right = 1in, bottom = 1in, left = 1.5in]{geometry}
+\usepackage[doublespacing]{setspace}
+
+\pagestyle{plain}
+
+\usepackage{lipsum} % REMOVE ME / FOR DEMONSTRATION
+
+\begin{document}
+
+\frontmatter
+
+\begin{center}
+  \begin{singlespace}
+    \vspace*{0.5in}
+
+    \textbf{\uppercase{!!Title!!}}
+
+    \vspace*{1in}
+
+    by
+    
+    !!Author!!
+
+    \vspace*{1.5in}
+
+    A dissertation submitted to Johns Hopkins University\\in conformity with the requirements for the degree of Doctor of Philosophy
+
+    \vspace*{0.5in}
+
+    Baltimore, Maryland
+    
+    !!Month!! !!Year!!
+  \end{singlespace}
+\end{center}
+
+\thispagestyle{empty}
+\clearpage
+
+\chapter{Abstract}
+
+\begin{itemize}
+  \item A statement of the problem or theory.
+  \item Procedure or methods.
+  \item Results.
+  \item Conclusions.
+  \item Not more than 350 words.
+\end{itemize}
+
+\paragraph{Readers:}
+
+!!Name 1!! (advisor); !!Name 2!!; !!Name 3!!.
+
+\chapter{Acknowledgements}
+
+\lipsum[1] % REMOVE ME / FOR DEMONSTRATION
+
+\tableofcontents
+\listoftables
+\listoffigures
+
+\mainmatter
+
+\chapter{Introduction}
+
+Example of citation: \cite{REMOVE-ME} % REMOVE ME / FOR DEMONSTRATION
+
+\lipsum % REMOVE ME / FOR DEMONSTRATION
+
+\chapter{!!Sample Chapter!!}
+
+\lipsum % REMOVE ME / FOR DEMONSTRATION
+
+\appendix
+
+\chapter{!!Sample Appendix!!}
+
+\lipsum % REMOVE ME / FOR DEMONSTRATION
+
+\backmatter
+
+\begin{filecontents*}{\jobname.bib}
+@inproceedings{REMOVE-ME,
+  title = {!!Sample Citation!!},
+} 
+\end{filecontents*}
+\bibliographystyle{plain}
+\bibliography{\jobname}
+
+\chapter{Biography}
+
+\begin{itemize}
+  \item Date and location of birth.
+  \item Salient facts of academic training and experience in teaching and research.
+\end{itemize}
+
+\end{document}
