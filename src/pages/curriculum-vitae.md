@@ -223,6 +223,8 @@ title: Curriculum Vitae
 
 **[Collections Deep Equal](https://www.npmjs.com/package/collections-deep-equal).** JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
 
+**[Shiki LaTeX](https://www.npmjs.com/package/shiki-latex).** JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
+
 **[Pollen Component](https://docs.racket-lang.org/pollen-component/).** Racket package for component-based development in [Pollen](https://docs.racket-lang.org/pollen/).
 
 **[CSS-expressions](https://docs.racket-lang.org/css-expr/).** Racket package for S-expression-based CSS.

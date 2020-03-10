@@ -10,6 +10,8 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
+**2020-03-10:** Published [_Shiki LaTeX_](https://www.npmjs.com/package/shiki-latex), JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
+
 **2020-03-04:** Published [_Collections Deep Equal_](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
 
 **2020-03-02:** Updated [_Curriculum Vitae_](curriculum-vitae) and [_Understanding the Type of `call/cc`_](understanding-the-type-of-call-cc).
