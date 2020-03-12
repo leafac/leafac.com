@@ -27,8 +27,6 @@
     "remark-react": "^6.0.0",
     "remark-slug": "^5.1.2",
     "remark-toc": "^7.0.0",
-    "strip-markdown": "^3.1.1",
-    "typeface-ibm-plex-mono": "0.0.61",
-    "typeface-ibm-plex-serif": "0.0.75"
+    "strip-markdown": "^3.1.1"
   }
 }

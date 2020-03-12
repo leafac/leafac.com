@@ -1,6 +1,6 @@
 body {
-  font-family: "IBM Plex Serif", Charter, Georgia, serif;
-  line-height: 1.6;
+  font-family: Charter, Georgia, serif;
+  line-height: 1.5;
   max-width: 600px;
   padding: 0 2em;
   margin: 2em auto;
@@ -11,7 +11,8 @@ a {
 }
 
 code {
-  font-family: "IBM Plex Mono", Menlo, Consolas, monospace;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 0.875em
 }
 
 h1,
