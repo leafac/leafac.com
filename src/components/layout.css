@@ -76,6 +76,13 @@ pre {
   --grvsc-line-highlighted-background-color: #eee;
 }
 
+legend + pre {
+  --grvsc-padding-v: 0;
+  --grvsc-padding-h: 0;
+  border: none;
+  margin: 0;
+}
+
 pre code {
   font-size: 0.75em;
 }
