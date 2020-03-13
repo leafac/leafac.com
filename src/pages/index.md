@@ -41,8 +41,6 @@ I live in Baltimore, Maryland, United States.
 
 # Articles
 
-[A LaTeX Dissertation for the Johns Hopkins University](a-latex-dissertation-template-for-the-johns-hopkins-university)
-
 [Understanding the Type of `call/cc`](understanding-the-type-of-call-cc)
 
 <!-- [Playing the Game with PLT Redex](playing-the-game-with-plt-redex) -->
