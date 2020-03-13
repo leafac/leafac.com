@@ -15,7 +15,6 @@
     "gatsby-remark-vscode": "^2.0.3",
     "gatsby-source-filesystem": "^2.1.48",
     "katex": "^0.11.1",
-    "latex-workshop": "github:James-Yu/LaTeX-Workshop",
     "prettier": "^1.19.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
