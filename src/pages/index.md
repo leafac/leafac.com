@@ -41,7 +41,7 @@ I live in Baltimore, Maryland, United States.
 
 # Articles
 
-<!-- [A Minimal LaTeX Dissertation Template (for the Johns Hopkins University)](a-minimal-latex-dissertation-template-for-the-johns-hopkins-university) -->
+[A LaTeX Dissertation for the Johns Hopkins University](a-latex-dissertation-template-for-the-johns-hopkins-university)
 
 [Understanding the Type of `call/cc`](understanding-the-type-of-call-cc)
 
