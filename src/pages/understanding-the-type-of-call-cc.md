@@ -43,14 +43,14 @@ $$
 
 Then we consider the following expression:
 
-```racket
+```clojure
 > (zero? 0)
 #t
 ```
 
 We may surround the `0` in this expression with an use of `call/cc` while preserving its output:
 
-```racket
+```clojure
 > (zero? (call/cc (λ (k) 0)))
 #t
 ```
@@ -98,7 +98,7 @@ This example reveals three facts about the type of `call/cc`:
 
 To proceed, we want to know more about the type of `k`, so we modify the example expression such that the function passed to `call/cc` uses `k`:
 
-```racket
+```clojure
 > (zero? (call/cc (λ (k) (k 29) 0)))
 #f
 ```
@@ -133,7 +133,7 @@ This expression reveals two facts about the type of `call/cc`:
 
 The last $\boxed{?}$ is the return type of `k`, so next we consider how the result of the call to `k` may be used, for example:
 
-```racket
+```clojure
 > (zero? (call/cc (λ (k) (string-length (k 29)) 0)))
 #f
 ```
@@ -156,7 +156,7 @@ This expression reveals one fact about the type of `call/cc`:
 
 Finally, we observe that there’s nothing _special_ about the use of `Number`s and `String`s in the expressions we considered so far. We may, for example, swap them:
 
-```racket
+```clojure
 > (string-length (call/cc (λ (k) (zero? (k "Leandro")) "Facchinetti")))
 7
 ```
@@ -211,7 +211,7 @@ When deriving the type of `call/cc` in this article, we had to constrain $\alpha
 
 This more general form is useful to type programs like the following:
 
-```racket
+```clojure
 > (write (call/cc (λ (k) (k "Leandro") 0)))
 "Leandro"
 ```
@@ -223,13 +223,13 @@ In this program $\alpha$ is `String` and $\gamma$ is `Number`, so `call/cc` retu
 
 This kind of limitation in classical Hindley–Milner type systems occurs in many situations beyond `call/cc`. For example, in classical Hindley–Milner type systems the types of the _then_ and _else_ branches of a conditional must agree:
 
-```racket
+```clojure
 (if <condition> 0 29)
 ```
 
 But in Typed Racket their types may be different, for example:
 
-```racket
+```clojure
 (if <condition> "Leandro" 29)
 ```
 

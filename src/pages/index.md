@@ -10,30 +10,30 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
-**2020-03-10:** Published [_Shiki LaTeX_](https://www.npmjs.com/package/shiki-latex), JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
+**2020-03-10:** Published [**Shiki LaTeX**](https://www.npmjs.com/package/shiki-latex), JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
-**2020-03-04:** Published [_Collections Deep Equal_](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
+**2020-03-04:** Published [**Collections Deep Equal**](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
 
-**2020-03-02:** Updated [_Curriculum Vitae_](curriculum-vitae) and [_Understanding the Type of `call/cc`_](understanding-the-type-of-call-cc).
+**2020-03-02:** Updated [**Curriculum Vitae**](curriculum-vitae) and [**Understanding the Type of `call/cc`**](understanding-the-type-of-call-cc).
 
-**2020-02-27:** Switched the engine that produces this website from [_Jekyll_](https://jekyllrb.com) to [_Gatsby_](https://www.gatsbyjs.org). Gatsby is (marginally) [more popular](https://www.staticgen.com), its community seems to be more active, its [plugins](https://www.gatsbyjs.org/plugins/) produce better results (at the cost of more configuration and a steeper learning curve), and it’s in JavaScript instead of Ruby.
+**2020-02-27:** Switched the engine that produces this website from [**Jekyll**](https://jekyllrb.com) to [**Gatsby**](https://www.gatsbyjs.org). Gatsby is (marginally) [more popular](https://www.staticgen.com), its community seems to be more active, its [plugins](https://www.gatsbyjs.org/plugins/) produce better results (at the cost of more configuration and a steeper learning curve), and it’s in JavaScript instead of Ruby.
 
-**2020-01-25:** Recorded properly [_Now I’m Taking OOSE_](songs#now-im-taking-oose), a song from a lecture in Object-Oriented Software Engineering.
+**2020-01-25:** Recorded properly [**Now I’m Taking OOSE**](songs#now-im-taking-oose), a song from a lecture in Object-Oriented Software Engineering.
 
-**2019-12-23:** Finished teaching [_Object-Oriented Software Engineering_](https://www.jhu-oose.com) at the Johns Hopkins University. [See course reviews](curriculum-vitae/oose.pdf).
+**2019-12-23:** Finished teaching [**Object-Oriented Software Engineering**](https://www.jhu-oose.com) at the Johns Hopkins University. [See course reviews](curriculum-vitae/oose.pdf).
 
-**2019-10-19:** Ran on the [_Baltimore Running Festival_](https://www.thebaltimoremarathon.com): a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. Succeeded in two personal goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
+**2019-10-19:** Ran on the [**Baltimore Running Festival**](https://www.thebaltimoremarathon.com): a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. Succeeded in two personal goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
 
 <details>
 <summary>See Times</summary>
 <img alt="Baltimore Running Festival" src="news/baltimore-running-festival.png" width="600" />
 </details>
 
-**2019-09:** Started teaching [_Object-Oriented Software Engineering_](https://www.jhu-oose.com) at the Johns Hopkins University.
+**2019-09:** Started teaching [**Object-Oriented Software Engineering**](https://www.jhu-oose.com) at the Johns Hopkins University.
 
-**2019-07:** The paper [_Higher-order Demand-driven Program Analysis_](https://dl.acm.org/citation.cfm?id=3310340) was published on the _ACM Transactions on Programming Languages and Systems_ (TOPLAS).
+**2019-07:** The paper [**Higher-order Demand-driven Program Analysis**](https://dl.acm.org/citation.cfm?id=3310340) was published on the _ACM Transactions on Programming Languages and Systems_ (TOPLAS).
 
-**2019-06:** Made public [_Yocto-CFA_](https://github.com/leafac/yocto-cfa), a work-in-progress dissertation.
+**2019-06:** Made public [**Yocto-CFA**](https://github.com/leafac/yocto-cfa), a work-in-progress dissertation.
 
 # Videos
 
