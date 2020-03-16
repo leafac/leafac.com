@@ -10,7 +10,9 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
-**2020-03-10:** Published [**Shiki LaTeX**](https://www.npmjs.com/package/shiki-latex), JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
+**2020-03-16:** Published **[LaTeX Dissertation Template for the Johns Hopkins University](https://github.com/leafac/latex-dissertation-template-for-the-johns-hopkins-university)**, a [LaTeX](https://www.latex-project.org) template that conforms to the [Formatting Requirements](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/) of the Johns Hopkins University Library.
+
+**2020-03-10:** Published [**Shiki LaTeX**](https://www.npmjs.com/package/shiki-latex), a JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
 **2020-03-04:** Published [**Collections Deep Equal**](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
 

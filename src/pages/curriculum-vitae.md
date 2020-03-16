@@ -207,6 +207,8 @@ title: Curriculum Vitae
 
 **[Shiki LaTeX](https://www.npmjs.com/package/shiki-latex).** JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
+**[LaTeX Dissertation Template for the Johns Hopkins University](https://github.com/leafac/latex-dissertation-template-for-the-johns-hopkins-university).** [LaTeX](https://www.latex-project.org) template that conforms to the [Formatting Requirements](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/) of the Johns Hopkins University Library.
+
 **[Pollen Component](https://docs.racket-lang.org/pollen-component/).** Racket package for component-based development in [Pollen](https://docs.racket-lang.org/pollen/).
 
 **[CSS-expressions](https://docs.racket-lang.org/css-expr/).** Racket package for S-expression-based CSS.
