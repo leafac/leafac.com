@@ -25,7 +25,7 @@ I live in Baltimore, Maryland, United States.
 **2019-10-19:** Ran on the [**Baltimore Running Festival**](https://www.thebaltimoremarathon.com): a 5K followed by a half-marathon, in the so-called Baltimoron-a-thon. Succeeded in two personal goals: to run the entire course without stopping or walking, and to finish the half-marathon in less than 3 hours 🎉
 
 <details>
-<summary>See Times</summary>
+<summary>Times</summary>
 <img alt="Baltimore Running Festival" src="news/baltimore-running-festival.png" width="600" />
 </details>
 

@@ -10,10 +10,8 @@ title: Curriculum Vitae
 
 # Education
 
-**PhD Candidate.** [Johns Hopkins University](https://jhu.edu). Computer Science. 2014-09 – 2020-08 (estimated).
-
 <details>
-<summary>Details</summary>
+<summary><strong>PhD Candidate.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. Computer Science. 2014-09 – 2020-08 (estimated).</summary>
 
 - Part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - Advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
@@ -29,19 +27,15 @@ title: Curriculum Vitae
 
 </details>
 
-**Master’s Degree.** [Johns Hopkins University](https://jhu.edu). Computer Science. 2014-09 – 2016-10.
-
 <details>
-<summary>Details</summary>
+<summary><strong>Master’s Degree.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. Computer Science. 2014-09 – 2016-10.</summary>
 
 - Part of the PhD program.
 
 </details>
 
-**Bachelor’s Degree.** [Universidade de São Paulo](https://www5.usp.br). Computer Science. 2008-02 – 2012-09.
-
 <details>
-<summary>Details</summary>
+<summary><strong>Bachelor’s Degree.</strong> <a href="https://www5.usp.br">Universidade de São Paulo</a>. Computer Science. 2008-02 – 2012-09.</summary>
 
 - Did research in the field of robotics and autonomous vehicles, developing an algorithm for visual navigation. Funded by a scholarship of the Brazilian Government (INCT-SEC) as part of a Scientific Initiation program.
 - Graduated ahead of time, completing a 5-year course in 4 1/2 years.
@@ -51,10 +45,8 @@ title: Curriculum Vitae
 
 # Teaching Experience
 
-**Instructor.** [Johns Hopkins University](https://jhu.edu). [Object-Oriented Software Engineering](https://oose-2019.leafac.com). 2019-08 – 2019-12.
-
 <details>
-<summary>Details</summary>
+<summary><strong>Instructor.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. <a href="https://oose-2019.leafac.com">Object-Oriented Software Engineering</a>. 2019-08 – 2019-12.</summary>
 
 - Updated the curriculum and developed new material.
 - Recorded [a series of video lectures](https://oose-2019.leafac.com/todoose).
@@ -68,10 +60,8 @@ title: Curriculum Vitae
 
 </details>
 
-**Teaching Assistant.** [Johns Hopkins University](https://jhu.edu). [Object-Oriented Software Engineering](https://oose-2019.leafac.com) and [Principles of Programming Languages](https://pl.cs.jhu.edu/pl/index.shtml). 2015-09 – 2020-05 (estimated).
-
 <details>
-<summary>Details</summary>
+<summary><strong>Teaching Assistant.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. <a href="https://oose-2019.leafac.com">Object-Oriented Software Engineering</a> and <a href="https://pl.cs.jhu.edu/pl/index.shtml">Principles of Programming Languages</a>. 2015-09 – 2020-05 (estimated).</summary>
 
 - Received the _Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award_.
 - Prepared course material, lectured, prepared and graded exams and assignments, managed teams of course assistants, advised semester-long group projects, and held office hours.
@@ -139,10 +129,8 @@ title: Curriculum Vitae
 
 # Work Experience
 
-**[Raise Sistemas](https://raisesistemas.com.br).** Software Developer. 2014-02 – 2014-08.
-
 <details>
-<summary>Details</summary>
+<summary><strong><a href="https://raisesistemas.com.br">Raise Sistemas</a>.</strong> Software Developer. 2014-02 – 2014-08.</summary>
 
 - Raise Sistemas is a product start-up.
 - Worked on a medium-sized application in Ruby on Rails used by thousands of customers.
@@ -153,10 +141,8 @@ title: Curriculum Vitae
 
 </details>
 
-**DasDad.** Software Developer. 2013-02 – 2013-12.
-
 <details>
-<summary>Details</summary>
+<summary><strong>DasDad.</strong> Software Developer. 2013-02 – 2013-12.</summary>
 
 - DasDad was a product start-up. Unfortunately the angel investor behind it folded and the product was never released.
 - Contributed to a frontend application in Ruby on Rails and to backend services in Ruby and Java.
@@ -166,10 +152,8 @@ title: Curriculum Vitae
 
 </details>
 
-**[Universo Online (UOL)](https://www.uol.com.br/).** Software Developer. 2012-03 – 2013-02.
-
 <details>
-<summary>Details</summary>
+<summary><strong><a href="https://www.uol.com.br/">Universo Online (UOL)</a>.</strong> Software Developer. 2012-03 – 2013-02.</summary>
 
 - UOL is the biggest internet publishing company in Brazil.
 - Developed and maintained web products in Java EE used by millions of people.
@@ -177,10 +161,8 @@ title: Curriculum Vitae
 
 </details>
 
-**[Daitan Group](http://www.daitangroup.com/).** Software Developer Intern. 2011-07 – 2012-02.
-
 <details>
-<summary>Details</summary>
+<summary><strong><a href="http://www.daitangroup.com/">Daitan Group</a>.</strong> Software Developer Intern. 2011-07 – 2012-02.</summary>
 
 - Daitan Group is an outsourcing company for telecom applications.
 - Worked directly with customers from the Silicon Valley.
@@ -295,10 +277,8 @@ title: Curriculum Vitae
 
 **Coding Dojo at FAI.** Co-hosted a day of activities for undergraduate Computer Science students, including a lecture about Git and a Coding Dojo. 2013-08.
 
-**7Masters.** Talked about modern Java development techniques and tools. 2013-01.
-
 <details>
-<summary>Watch Talk</summary>
+<summary><strong>7Masters.</strong> Talked about modern Java development techniques and tools. 2013-01.</summary>
 <video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="none"></video>
 </details>
 
@@ -326,10 +306,8 @@ title: Curriculum Vitae
 
 # Courses
 
-**Improving Presentation Skills for Scientists and Engineers.** Johns Hopkins University. 2018.
-
 <details>
-<summary>Watch Presentations</summary>
+<summary><strong>Improving Presentation Skills for Scientists and Engineers.</strong> Johns Hopkins University. 2018.</summary>
 
 (Unfortunately the quality of the recordings are bad.)
 
