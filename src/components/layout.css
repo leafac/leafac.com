@@ -35,6 +35,10 @@ header a {
   text-decoration: none;
 }
 
+footer {
+  font-size: 0.875em;
+}
+
 nav,
 figure {
   text-align: center;
