@@ -10,6 +10,8 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
+**2020-03-21:** Published a completely reworked version of [**Kill the Newsletter!**](https://www.kill-the-newsletter.com) It was rewritten from Ruby & Sinatra to TypeScript & Express. Over the years _Kill the Newsletter!_ has been written and rewritten in several technology stacks, and this is the best version yet. Along the way, several bugs were fixed and improvements made.
+
 **2020-03-16:** Published **[LaTeX Dissertation Template for the Johns Hopkins University](https://github.com/leafac/latex-dissertation-template-for-the-johns-hopkins-university)**, a [LaTeX](https://www.latex-project.org) template that conforms to the [Formatting Requirements](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/) of the Johns Hopkins University Library.
 
 **2020-03-10:** Published [**Shiki LaTeX**](https://www.npmjs.com/package/shiki-latex), a JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
