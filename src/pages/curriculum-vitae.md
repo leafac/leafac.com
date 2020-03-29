@@ -221,7 +221,7 @@ title: Curriculum Vitae
 
 **[Programmable Foot Keyboard](https://github.com/leafac/programmable-foot-keyboard).** Programmable foot keyboard using [Adafruit’s Trinket](https://learn.adafruit.com/introducing-trinket).
 
-**Contributions to JavaScript & TypeScript projects.** [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/commits?author=leafac) and [Gatsby](https://github.com/gatsbyjs/gatsby/commits?author=leafac).
+**Contributions to JavaScript & TypeScript projects.** [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/commits?author=leafac), [Visual Studio Code LaTeX Workshop Extension](https://github.com/James-Yu/LaTeX-Workshop/commits?author=leafac) , and [Gatsby](https://github.com/gatsbyjs/gatsby/commits?author=leafac).
 
 **Contributions to Racket.** [Racket](https://github.com/racket/racket/commits?author=leafac), [PLT Redex](https://github.com/racket/redex/commits?author=leafac), [DrRacket](https://github.com/racket/drracket/commits?author=leafac), [Profile](https://github.com/racket/profile/commits?author=leafac), [Pollen](https://github.com/mbutterick/pollen/commits?author=leafac), and [Nanopass](https://github.com/nanopass/nanopass-framework-racket/commits?author=leafac).
 
