@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "gatsby develop",
-    "test": "prettier --check 'src/**' && htmlproofer ./public",
+    "test": "prettier --check src && htmlproofer ./public",
     "build": "gatsby build",
     "clean": "gatsby clean"
   },
@@ -15,7 +15,7 @@
     "gatsby-remark-vscode": "^2.0.3",
     "gatsby-source-filesystem": "^2.1.48",
     "katex": "^0.11.1",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-helmet": "^5.2.1",

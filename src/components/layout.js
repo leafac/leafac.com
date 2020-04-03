@@ -9,8 +9,8 @@ import "katex/dist/katex.min.css";
 export default ({
   children,
   pageContext: {
-    frontmatter: { title }
-  }
+    frontmatter: { title },
+  },
 }) => (
   <>
     <Helmet>
@@ -21,9 +21,7 @@ export default ({
       />
       <title>
         {title !== undefined
-          ? `${remark()
-              .use(remarkStripMarkdown)
-              .processSync(title)} · `
+          ? `${remark().use(remarkStripMarkdown).processSync(title)} · `
           : ""}
         Leandro Facchinetti
       </title>
@@ -35,13 +33,7 @@ export default ({
     </header>
     <main>
       {title !== undefined ? (
-        <h1>
-          {
-            remark()
-              .use(remarkReact)
-              .processSync(title).contents
-          }
-        </h1>
+        <h1>{remark().use(remarkReact).processSync(title).contents}</h1>
       ) : (
         ""
       )}
