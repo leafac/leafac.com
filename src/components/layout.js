@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet";
 import remark from "remark";
 import remarkReact from "remark-react";
 import remarkStripMarkdown from "strip-markdown";
+import "typeface-pt-serif";
+import "typeface-pt-mono";
 import "./layout.css";
 import "katex/dist/katex.min.css";
 
