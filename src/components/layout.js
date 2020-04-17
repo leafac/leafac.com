@@ -36,9 +36,7 @@ export default ({
     <main>
       {title !== undefined ? (
         <h1>{remark().use(remarkReact).processSync(title).contents}</h1>
-      ) : (
-        ""
-      )}
+      ) : null}
       {children}
     </main>
   </>
