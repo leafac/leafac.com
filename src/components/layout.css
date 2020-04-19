@@ -1,17 +1,17 @@
 body {
-  font-family: "PT Serif", Charter, Georgia, serif;
+  font-family: "PT Serif", serif;
   line-height: 1.5;
   max-width: 600px;
   padding: 0 2em;
   margin: 2em auto;
 }
 
-a {
-  color: black;
+code {
+  font-family: "PT Mono", monospace;
 }
 
-code {
-  font-family: "PT Mono", Menlo, Consolas, monospace;
+a {
+  color: black;
 }
 
 h1,
@@ -30,18 +30,14 @@ h2 {
   font-style: italic;
 }
 
-header a {
-  text-decoration: none;
-}
-
-footer {
-  font-size: 0.875em;
-}
-
-nav,
+header,
 figure {
   text-align: center;
   margin: 2em 0;
+}
+
+header a {
+  text-decoration: none;
 }
 
 figcaption {
@@ -65,42 +61,16 @@ summary {
   cursor: pointer;
 }
 
-pre,
-fieldset,
-input,
-textarea {
+fieldset {
   border: 1px solid #dfdfdf;
   border-radius: 3px;
 }
 
 pre {
-  --grvsc-padding-h: 1em;
-  --grvsc-border-radius: 3px;
-  --grvsc-line-highlighted-background-color: #eee;
-}
-
-legend + pre {
-  --grvsc-padding-v: 0;
   --grvsc-padding-h: 0;
-  border: none;
-  margin: 0;
-}
-
-pre code {
+  --grvsc-padding-v: 0;
+  --grvsc-border-radius: 0;
+  --grvsc-line-highlighted-background-color: #eee;
+  white-space: pre-wrap;
   font-size: 0.75em;
-}
-
-legend {
-  font-weight: bold;
-}
-
-input,
-textarea {
-  padding: 0.25em;
-}
-
-textarea {
-  box-sizing: border-box;
-  width: 100%;
-  resize: none;
 }

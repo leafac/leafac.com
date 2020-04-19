@@ -3,7 +3,7 @@ title: Understanding the Type of `call/cc`
 ---
 
 <fieldset>
-<legend>Pre-Requisites</legend>
+<legend><strong>Pre-Requisites</strong></legend>
 
 **[First-class continuations](https://docs.racket-lang.org/guide/conts.html) & [`call/cc`](https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29).** This article is only about the _type_ of `call/cc`, not about what it is or how it works.
 
@@ -20,7 +20,7 @@ $$
 Where $\alpha$ and $\beta$ are type variables that may be instantiated with any type such as `Number` or `String`.
 
 <fieldset>
-<legend>Note</legend>
+<legend><strong>Note</strong></legend>
 
 See the type of `call/cc` in languages with Hindley–Milner-based type systems, for example, [Haskell](https://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-Cont.html) and [ML](https://www.smlnj.org/doc/SMLofNJ/pages/cont.html).
 
@@ -29,7 +29,7 @@ See the type of `call/cc` in languages with Hindley–Milner-based type systems,
 This type is interesting, particularly in [its connection to logic](https://en.wikipedia.org/wiki/Call-with-current-continuation#Relation_to_non-constructive_logic), but like most ideas related to first-class continuations, it’s unintuitive. In this article we derive the type of `call/cc` step-by-step using examples written in Racket. Racket is dynamically typed, but we may use it to reason about static types as well.
 
 <fieldset>
-<legend>Note</legend>
+<legend><strong>Note</strong></legend>
 
 There’s a version of Racket that is statically typed, [Typed Racket](https://docs.racket-lang.org/ts-guide/), but the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system, so the type of `call/cc` in Typed Racket is more sophisticated as well ([see appendix](#appendix-the-type-of-callcc-in-typed-racket)).
 
@@ -58,7 +58,7 @@ We may surround the `0` in this expression with an use of `call/cc` while preser
 The output is preserved because `call/cc` calls `(λ (k) 0)` with the current continuation, but `(λ (k) 0)` ignores its parameter and returns `0`.
 
 <fieldset>
-<legend>Note</legend>
+<legend><strong>Note</strong></legend>
 
 In general, for any expression `e`, the result of computing `e` is the same as the result of computing `(call/cc (λ (k) e))` as long as `e` doesn’t refer to `k`.
 
@@ -176,7 +176,7 @@ This expression reveals the final fact about the type of `call/cc`:
    $$
 
 <fieldset>
-<legend>Note</legend>
+<legend><strong>Note</strong></legend>
 
 The type of `k` is $\alpha \rightarrow \beta$, so `k` has the type of a function that receives an argument of any type and _produces a result of the type you need_. If the call to `k` appears as argument to `string-length`, for example `(string-length (k 29))`, then `k` produces a `String`; if the call to `k` appears as argument to `zero?`, for example `(zero? (k "Leandro"))`, then `k` produces a `Number`; and so forth. It makes sense for a type system to behave like this because execution skips over the `string-length`, `zero?`, and so forth, so no runtime type error could occur.
 
@@ -201,7 +201,7 @@ To understand this type, recall that `call/cc` may produce an output in one of t
 So we conclude that `call/cc` outputs a value of type $\alpha \cup \gamma$, which means _either $\alpha$ or $\gamma$_.
 
 <fieldset>
-<legend>Technical Terms</legend>
+<legend><strong>Technical Terms</strong></legend>
 
 A type such as $\alpha \cup \gamma$ is something called an [_union type_](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29).
 
@@ -219,7 +219,7 @@ This more general form is useful to type programs like the following:
 In this program $\alpha$ is `String` and $\gamma$ is `Number`, so `call/cc` returns a value of type $\texttt{String} \cup \texttt{Number}$. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `String` or a `Number` would be acceptable, which is the case of the argument for [`write`](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
 
 <fieldset>
-<legend>Note</legend>
+<legend><strong>Note</strong></legend>
 
 This kind of limitation in classical Hindley–Milner type systems occurs in many situations beyond `call/cc`. For example, in classical Hindley–Milner type systems the types of the _then_ and _else_ branches of a conditional must agree:
 
