@@ -35,7 +35,7 @@ export default ({
     </header>
     <main>
       {title !== undefined ? (
-        <h1>{remark().use(remarkReact).processSync(title).contents}</h1>
+        <h1>{remark().use(remarkReact).processSync(title).result}</h1>
       ) : null}
       {children}
     </main>
