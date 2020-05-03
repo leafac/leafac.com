@@ -8,37 +8,34 @@ const rangeParser = require("parse-numeric-range");
 const katex = require("katex");
 
 (async () => {
-  const markdownPaths = glob.sync("**/*.md", {
+  for (const markdownPath of glob.sync("**/*.md", {
     ignore: ["**/node_modules/**", "CODE_OF_CONDUCT.md", "README.md"],
-  });
-  for (const markdownPath of markdownPaths) {
+  })) {
     const htmlPath = `${markdownPath.slice(
       0,
       markdownPath.length - ".md".length
     )}.html`;
     const markdown = fs.readFileSync(markdownPath, "utf8");
-    const html = marked(markdown);
-    const document = new JSDOM(html).window.document.body;
-    await processHTML(document, htmlPath);
-    fs.writeFileSync(
-      htmlPath,
-      `<!DOCTYPE html>
-        <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Leandro Facchinetti</title>
-          </head>
-          <body>
-            <header>
-            </header>
-            <main>
-              ${document.innerHTML}
-            </main>
-          </body>
-        </html>
-      `
-    );
+    const renderedMarkdown = marked(markdown);
+    const html = `<!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Leandro Facchinetti</title>
+        </head>
+        <body>
+          <header>
+          </header>
+          <main>
+            ${renderedMarkdown}
+          </main>
+        </body>
+      </html>
+    `;
+    const dom = new JSDOM(html);
+    await processHTML(dom.window.document, htmlPath);
+    fs.writeFileSync(htmlPath, dom.serialize());
   }
 })();
 
