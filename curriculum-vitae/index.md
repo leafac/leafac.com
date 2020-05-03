@@ -307,7 +307,7 @@
 
 **[Shiki LaTeX](https://www.npmjs.com/package/shiki-latex).** JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
-**[Collections Deep Equal](https://www.npmjs.com/package/collections-deep-equal).** JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`` js`deep-equal ``](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
+**[Collections Deep Equal](https://www.npmjs.com/package/collections-deep-equal).** JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`` js`util.isDeepStrictEqual() ``](https://nodejs.org/api/util.html#util_util_isdeepstrictequal_val1_val2)) instead of reference equality.
 
 **[LaTeX Dissertation Template for the Johns Hopkins University](https://github.com/leafac/latex-dissertation-template-for-the-johns-hopkins-university).** [LaTeX](https://www.latex-project.org) template that conforms to the [Formatting Requirements](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/) of the Johns Hopkins University Library.
 
