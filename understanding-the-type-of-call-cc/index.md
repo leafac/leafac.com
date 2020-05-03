@@ -46,19 +46,19 @@ Then we consider the following expression:
 #t
 ```
 
-We may surround the `0` in this expression with an use of `` clojure`call/cc `` while preserving its output:
+We may surround the `` clojure`0 `` in this expression with an use of `` clojure`call/cc `` while preserving its output:
 
 ```clojure
 > (zero? (call/cc (λ (k) 0)))
 #t
 ```
 
-The output is preserved because `` clojure`call/cc `` calls `(λ (k) 0)` with the current continuation, but `(λ (k) 0)` ignores its parameter and returns `0`.
+The output is preserved because `` clojure`call/cc `` calls `` clojure`(λ (k) 0) `` with the current continuation, but `` clojure`(λ (k) 0) `` ignores its parameter and returns `` clojure`0 ``.
 
 <fieldset>
 <legend><strong>Note</strong></legend>
 
-In general, for any expression `e`, the result of computing `e` is the same as the result of computing `(call/cc (λ (k) e))` as long as `e` doesn’t refer to `k`.
+In general, for any expression `` clojure`e ``, the result of computing `` clojure`e `` is the same as the result of computing `` clojure`(call/cc (λ (k) e)) `` as long as `` clojure`e `` doesn’t refer to `` clojure`k ``.
 
 </fieldset>
 
@@ -70,7 +70,7 @@ This example reveals three facts about the type of `` clojure`call/cc ``:
    \texttt{call/cc} : \textcolor{#09885A}{\boxed{?} \rightarrow \boxed{?}}
    ```
 
-2. The argument being passed to `` clojure`call/cc `` is `(λ (k) 0)`:
+2. The argument being passed to `` clojure`call/cc `` is `` clojure`(λ (k) 0) ``:
 
    ```math
    \texttt{(λ (k) 0)} : \textcolor{#09885A}{\boxed{?} \rightarrow \texttt{Number}}
@@ -82,7 +82,7 @@ This example reveals three facts about the type of `` clojure`call/cc ``:
    \texttt{call/cc} : \textcolor{#09885A}{(\boxed{?} \rightarrow \texttt{Number})} \rightarrow \boxed{?}
    ```
 
-3. And `` clojure`call/cc `` is returning `0`:
+3. And `` clojure`call/cc `` is returning `` clojure`0 ``:
 
    ```math
    \texttt{0} : \textcolor{#09885A}{\texttt{Number}}
@@ -94,18 +94,18 @@ This example reveals three facts about the type of `` clojure`call/cc ``:
    \texttt{call/cc} : (\boxed{?} \rightarrow \texttt{Number}) \rightarrow \textcolor{#09885A}{\texttt{Number}}
    ```
 
-To proceed, we want to know more about the type of `k`, so we modify the example expression such that the function passed to `` clojure`call/cc `` uses `k`:
+To proceed, we want to know more about the type of `` clojure`k ``, so we modify the example expression such that the function passed to `` clojure`call/cc `` uses `` clojure`k ``:
 
 ```clojure
 > (zero? (call/cc (λ (k) (k 29) 0)))
 #f
 ```
 
-The output changed from `#t` to `#f` because the `(k 29)` takes execution back to the outer `zero?`, skipping over the remainder of the function, which in this case is just the `0`.
+The output changed from `` clojure`#t `` to `` clojure`#f`` because the `` clojure`(k 29) `` takes execution back to the outer `` clojure`zero? ``, skipping over the remainder of the function, which in this case is just the `` clojure`0 ``.
 
 This expression reveals two facts about the type of `` clojure`call/cc ``:
 
-1. `k` is being called, so it must have a function type:
+1. `` clojure`k `` is being called, so it must have a function type:
 
    ```math
    \texttt{(λ (k) (k 29) 0)} : \textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}
@@ -117,7 +117,7 @@ This expression reveals two facts about the type of `` clojure`call/cc ``:
    \texttt{call/cc} : (\textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
    ```
 
-2. The argument being passed to `k` is `29`:
+2. The argument being passed to `` clojure`k `` is `` clojure`29 ``:
 
    ```math
    \texttt{(λ (k) (k 29) 0)} : (\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}
@@ -129,18 +129,18 @@ This expression reveals two facts about the type of `` clojure`call/cc ``:
    \texttt{call/cc} : ((\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
    ```
 
-The last `` math`\boxed{?} `` is the return type of `k`, so next we consider how the result of the call to `k` may be used, for example:
+The last `` math`\boxed{?} `` is the return type of `` clojure`k ``, so next we consider how the result of the call to `` clojure`k `` may be used, for example:
 
 ```clojure
 > (zero? (call/cc (λ (k) (string-length (k 29)) 0)))
 #f
 ```
 
-The result of this expression is the same as before, `#f`, because `k` causes execution to skip over the rest of the function that is passed to `` clojure`call/cc ``, including the call to [`string-length`](https://docs.racket-lang.org/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string-length%29%29).
+The result of this expression is the same as before, `` clojure`#f ``, because `` clojure`k `` causes execution to skip over the rest of the function that is passed to `` clojure`call/cc ``, including the call to [`` clojure`string-length ``](https://docs.racket-lang.org/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string-length%29%29).
 
 This expression reveals one fact about the type of `` clojure`call/cc ``:
 
-1. The result of calling `k` is being passed to `string-length`, so it must be a `String`:
+1. The result of calling `` clojure`k `` is being passed to `` clojure`string-length ``, so it must be a `` clojure`String ``:
 
    ```math
    \texttt{(λ (k) (string-length (k 29)) 0)} :\\(\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
@@ -152,7 +152,7 @@ This expression reveals one fact about the type of `` clojure`call/cc ``:
    \texttt{call/cc} : ((\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
    ```
 
-Finally, we observe that there’s nothing _special_ about the use of `Number`s and `String`s in the expressions we considered so far. We may, for example, swap them:
+Finally, we observe that there’s nothing _special_ about the use of `` clojure`Number ``s and `` clojure`String ``s in the expressions we considered so far. We may, for example, swap them:
 
 ```clojure
 > (string-length (call/cc (λ (k) (zero? (k "Leandro")) "Facchinetti")))
@@ -161,7 +161,7 @@ Finally, we observe that there’s nothing _special_ about the use of `Number`s 
 
 This expression reveals the final fact about the type of `` clojure`call/cc ``:
 
-1. We may swap `Number`s and `String`s:
+1. We may swap `` clojure`Number ``s and `` clojure`String ``s:
 
    ```math
    \texttt{call/cc} : ((\textcolor{#09885A}{\texttt{String}} \rightarrow \textcolor{#09885A}{\texttt{Number}}) \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \textcolor{#09885A}{\texttt{String}}
@@ -176,9 +176,9 @@ This expression reveals the final fact about the type of `` clojure`call/cc ``:
 <fieldset>
 <legend><strong>Note</strong></legend>
 
-The type of `k` is `` math`\alpha \rightarrow \beta ``, so `k` has the type of a function that receives an argument of any type and _produces a result of the type you need_. If the call to `k` appears as argument to `string-length`, for example `(string-length (k 29))`, then `k` produces a `String`; if the call to `k` appears as argument to `zero?`, for example `(zero? (k "Leandro"))`, then `k` produces a `Number`; and so forth. It makes sense for a type system to behave like this because execution skips over the `string-length`, `zero?`, and so forth, so no runtime type error could occur.
+The type of `` clojure`k `` is `` math`\alpha \rightarrow \beta ``, so `` clojure`k `` has the type of a function that receives an argument of any type and _produces a result of the type you need_. If the call to `` clojure`k `` appears as argument to `` clojure`string-length ``, for example `` clojure`(string-length (k 29)) ``, then `` clojure`k `` produces a `` clojure`String ``; if the call to `` clojure`k `` appears as argument to `` clojure`zero? ``, for example `` clojure`(zero? (k "Leandro")) ``, then `` clojure`k `` produces a `` clojure`Number ``; and so forth. It makes sense for a type system to behave like this because execution skips over the `` clojure`string-length ``, `` clojure`zero? ``, and so forth, so no runtime type error could occur.
 
-This shows that continuations like `k` don’t behave like regular functions.
+This shows that continuations like `` clojure`k `` don’t behave like regular functions.
 
 </fieldset>
 
@@ -192,9 +192,9 @@ The type of `` clojure`call/cc `` in [Typed Racket](https://docs.racket-lang.org
 
 To understand this type, recall that `` clojure`call/cc `` may produce an output in one of two ways:
 
-1. If `k` is not called, then the output of `` clojure`call/cc `` is the output of the function that it received as argument, for example, the output of `(call/cc (λ (k) 0))` is `0`. That is the first `` math`\gamma `` in the type above.
+1. If `` clojure`k `` is not called, then the output of `` clojure`call/cc `` is the output of the function that it received as argument, for example, the output of `` clojure`(call/cc (λ (k) 0)) `` is `` clojure`0 ``. That is the first `` math`\gamma `` in the type above.
 
-2. If `k` is called, then the output of `` clojure`call/cc `` is the argument passed to `k`, for example, the output of `(call/cc (λ (k) (k 29) 0))` is `29`. That is the first `` math`\alpha `` in the type above.
+2. If `` clojure`k `` is called, then the output of `` clojure`call/cc `` is the argument passed to `` clojure`k ``, for example, the output of `` clojure`(call/cc (λ (k) (k 29) 0)) `` is `` clojure`29 ``. That is the first `` math`\alpha `` in the type above.
 
 So we conclude that `` clojure`call/cc `` outputs a value of type `` math`\alpha \cup \gamma ``, which means _either `` math`\alpha `` or `` math`\gamma ``_.
 
@@ -214,7 +214,7 @@ This more general form is useful to type programs like the following:
 "Leandro"
 ```
 
-In this program `` math`\alpha `` is `String` and `` math`\gamma `` is `Number`, so `` clojure`call/cc `` returns a value of type `` math`\texttt{String} \cup \texttt{Number} ``. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `String` or a `Number` would be acceptable, which is the case of the argument for [`write`](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
+In this program `` math`\alpha `` is `` clojure`String `` and `` math`\gamma `` is `` clojure`Number ``, so `` clojure`call/cc `` returns a value of type `` math`\texttt{String} \cup \texttt{Number} ``. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `` clojure`String `` or a `Number` would be acceptable, which is the case of the argument for [`` clojure`write ``](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
 
 <fieldset>
 <legend><strong>Note</strong></legend>
