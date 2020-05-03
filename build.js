@@ -63,7 +63,7 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     if (element.innerHTML !== "") continue;
     const href = element.getAttribute("href");
     const target = document.querySelector(href);
-    if (target === null) console.error(`Undefined cross-reference: ${href}`);
+    if (target === null) console.error(`${htmlPath}: Undefined cross-reference: ${href}`);
     element.textContent = `§ ${target?.textContent ?? "??"}`;
   }
 
@@ -108,7 +108,7 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
         if (option === "number") shouldNumberLines = true;
         else if (option.match(/^[0-9,\-\.]+$/))
           linesToHighlight = rangeParser(option);
-        else console.error(`Unrecognized option for code block: ${option}`);
+        else console.error(`${htmlPath}: Unrecognized option for code block: ${option}`);
     } else {
       const [languageSegment, ...codeSegments] = element.textContent.split("`");
       if (codeSegments.length === 0) continue;
@@ -119,7 +119,7 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     try {
       highlightedCode = highlighter.codeToHtml(code, language);
     } catch (error) {
-      console.error(error);
+      console.error(`${htmlPath}: ${error}`);
       continue;
     }
     const highlightedLines = JSDOM.fragment(highlightedCode)
@@ -138,7 +138,7 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
       const index = lineToHighlight - 1;
       if (highlightedLines[index] === undefined) {
         console.error(
-          `Failed to highlight line out of range: ${lineToHighlight}`
+          `${htmlPath}: Failed to highlight line out of range: ${lineToHighlight}`
         );
         continue;
       }
@@ -156,7 +156,7 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
   for (const element of document.querySelectorAll(`img[src$=".svg"]`)) {
     const svgPath = `${path.dirname(htmlPath)}/${element.getAttribute("src")}`;
     if (!fs.existsSync(svgPath)) {
-      console.error(`Image not found: ${svgPath}`);
+      console.error(`${htmlPath}: Image not found: ${svgPath}`);
       continue;
     }
     const svg = JSDOM.fragment(fs.readFileSync(svgPath, "utf8")).querySelector(
@@ -170,7 +170,7 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
           code.getAttribute("highlight")
         );
       } catch (error) {
-        console.error(error);
+        console.error(`${htmlPath}: ${error}`);
         continue;
       }
       const highlightedCode = JSDOM.fragment(highlightedText).querySelector(
