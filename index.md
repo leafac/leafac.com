@@ -1,6 +1,6 @@
 <figure><img alt="Avatar" src="avatar.png" width="300"></figure>
 
-I’m a PhD candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
+I’m a PhD candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 
 I’m interested in writing & reading, music & video production, running, mindfulness, minimalism, and veganism.
 
