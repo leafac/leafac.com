@@ -15,7 +15,7 @@
 \texttt{call/cc} : ((\alpha \rightarrow \beta) \rightarrow \alpha) \rightarrow \alpha
 ```
 
-Where `` math`\alpha `` and `` math`\beta `` are type variables that may be instantiated with any type such as `Number` or `String`.
+Where `` math`\alpha `` and `` math`\beta `` are type variables that may be instantiated with any type such as `` clojure`Number `` or `` clojure`String ``.
 
 <fieldset>
 <legend><strong>Note</strong></legend>
@@ -214,7 +214,7 @@ This more general form is useful to type programs like the following:
 "Leandro"
 ```
 
-In this program `` math`\alpha `` is `` clojure`String `` and `` math`\gamma `` is `` clojure`Number ``, so `` clojure`call/cc `` returns a value of type `` math`\texttt{String} \cup \texttt{Number} ``. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `` clojure`String `` or a `Number` would be acceptable, which is the case of the argument for [`` clojure`write ``](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
+In this program `` math`\alpha `` is `` clojure`String `` and `` math`\gamma `` is `` clojure`Number ``, so `` clojure`call/cc `` returns a value of type `` math`\texttt{String} \cup \texttt{Number} ``. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `` clojure`String `` or a `` clojure`Number `` would be acceptable, which is the case of the argument for [`` clojure`write ``](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
 
 <fieldset>
 <legend><strong>Note</strong></legend>
