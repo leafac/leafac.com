@@ -11,21 +11,15 @@ const katex = require("katex");
   for (const markdownPath of glob.sync("**/*.md", {
     ignore: ["**/node_modules/**", "CODE_OF_CONDUCT.md", "README.md"],
   })) {
-    const htmlPath = `${markdownPath.slice(
-      0,
-      markdownPath.length - ".md".length
-    )}.html`;
+    const htmlPath = markdownPath.replace(/\.md$/, ".html");
     const markdown = fs.readFileSync(markdownPath, "utf8");
     const renderedMarkdown = marked(markdown);
-    const maybeTitle = JSDOM.fragment(renderedMarkdown).children[0];
     const html = `<!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>${
-            maybeTitle.tagName === "H1" ? `${maybeTitle.textContent} · ` : ""
-          }Leandro Facchinetti</title>
+          <title>Leandro Facchinetti</title>
           <meta name="author" content="Leandro Facchinetti">
           <meta name="description" content="I’m a PhD candidate in Computer Science. I’m interested in writing & reading, music & video production, running, mindfulness, minimalism, and veganism.">
           <link rel="stylesheet" href="/styles.css">
@@ -185,4 +179,11 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     }
     element.outerHTML = svg.outerHTML;
   }
+
+  // Add title
+  const title = document.querySelector("main :first-child");
+  if (title.tagName === "H1")
+    document
+      .querySelector("title")
+      .insertAdjacentText("afterbegin", `${title.textContent} · `);
 }
