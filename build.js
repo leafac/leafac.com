@@ -59,13 +59,29 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     );
 
   // Resolve cross-references
-  for (const element of document.querySelectorAll(`a[href^="#"]`)) {
-    if (element.innerHTML !== "") continue;
-    const href = element.getAttribute("href");
-    const target = document.querySelector(href);
-    if (target === null) console.error(`${htmlPath}: Undefined cross-reference: ${href}`);
-    element.textContent = `§ ${target?.textContent ?? "??"}`;
-  }
+  // for (const element of document.querySelectorAll(`a`)) {
+  //   if (element.innerHTML !== "") continue;
+  //   const href = element.getAttribute("href");
+  //   const [pageHref, anchor] = href.split("#");
+  //   const pagePath = pageHref === "" ? htmlPath : `${path.dirname(htmlPath)}/${pageHref}`;
+  //   if (!fs.existsSync(pagePath)) {
+  //     console.error(`${htmlPath}: Cross-reference page not found: ${pagePath}`);
+  //     continue;
+  //   }
+  //   const page = JSDOM.fragment(marked(fs.readFileSync(pagePath, "utf8")));
+  //   let target;
+  //   if (anchor === undefined) {
+  //     target = page.children[0];
+  //     if (target.tagName !== "H1") {
+  //       console.error(`${htmlPath}: Cross-reference to page without a title: ${href}`)
+  //       continue;
+  //     }
+  //   } else {
+  //     target = page.querySelector(`#${anchor}`);
+  //   }
+  //   if (target === null) console.error(`${htmlPath}: Undefined cross-reference: ${href}`);
+  //   element.innerHTML = `§ ${target?.innerHTML ?? "??"}`;
+  // }
 
   // Render mathematics
   document.head.insertAdjacentHTML(

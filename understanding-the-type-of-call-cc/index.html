@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="en"><head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Understanding the Type of call/cc · Leandro Facchinetti</title>
+          <meta name="author" content="Leandro Facchinetti">
+          <meta name="description" content="I’m a PhD candidate in Computer Science. I’m interested in writing &amp; reading, music &amp; video production, running, mindfulness, minimalism, and veganism.">
+          <link rel="stylesheet" href="/styles.css">
+          <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+          <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+          <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">      
+        <link rel="stylesheet" href="/vendor/node_modules/katex/dist/katex.css"></head>
+        <body>
+          <header><h1><a href="/">Leandro Facchinetti</a></h1></header>
+          <main><h1 id="understanding-the-type-of-callcc">Understanding the Type of <code>call/cc</code></h1>
+<fieldset>
+<legend><strong>Pre-Requisites</strong></legend>
+
+<p><strong><a href="https://docs.racket-lang.org/guide/conts.html">First-class continuations</a> &amp; <a href="https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29"><code>call/cc</code></a>.</strong> This article is only about the <em>type</em> of <code>call/cc</code>, not about what it is or how it works.</p>
+<p><strong>Reading code written in <a href="https://www.racket-lang.org">Racket</a>.</strong> Racket is used only as the language of discourse; the results of the article are about type theory and apply to other languages.</p>
+</fieldset>
+
+<p><code>call/cc</code> has the following type in classical Hindley–Milner type systems:</p>
+<p>$$
+\texttt{call/cc} : ((\alpha \rightarrow \beta) \rightarrow \alpha) \rightarrow \alpha
+$$</p>
+<p>Where $\alpha$ and $\beta$ are type variables that may be instantiated with any type such as <code>Number</code> or <code>String</code>.</p>
+<fieldset>
+<legend><strong>Note</strong></legend>
+
+<p>See the type of <code>call/cc</code> in languages with Hindley–Milner-based type systems, for example, <a href="https://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-Cont.html">Haskell</a> and <a href="https://www.smlnj.org/doc/SMLofNJ/pages/cont.html">ML</a>.</p>
+</fieldset>
+
+<p>This type is interesting, particularly in <a href="https://en.wikipedia.org/wiki/Call-with-current-continuation#Relation_to_non-constructive_logic">its connection to logic</a>, but like most ideas related to first-class continuations, it’s unintuitive. In this article we derive the type of <code>call/cc</code> step-by-step using examples written in Racket. Racket is dynamically typed, but we may use it to reason about static types as well.</p>
+<fieldset>
+<legend><strong>Note</strong></legend>
+
+<p>There’s a version of Racket that is statically typed, <a href="https://docs.racket-lang.org/ts-guide/">Typed Racket</a>, but the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system, so the type of <code>call/cc</code> in Typed Racket is more sophisticated as well (<a href="#appendix-the-type-of-callcc-in-typed-racket">see appendix</a>).</p>
+</fieldset>
+
+<p>We start by knowing nothing about the type of <code>call/cc</code>:</p>
+<p>$$
+\texttt{call/cc} : \boxed{?}
+$$</p>
+<p>Then we consider the following expression:</p>
+<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? </span><span style="color: #098658">0</span><span style="color: #000000">)</span>
+<span style="color: #000000">#t</span></code></pre>
+<p>We may surround the <code>0</code> in this expression with an use of <code>call/cc</code> while preserving its output:</p>
+<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? (call/cc (λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
+<span style="color: #000000">#t</span></code></pre>
+<p>The output is preserved because <code>call/cc</code> calls <code>(λ (k) 0)</code> with the current continuation, but <code>(λ (k) 0)</code> ignores its parameter and returns <code>0</code>.</p>
+<fieldset>
+<legend><strong>Note</strong></legend>
+
+<p>In general, for any expression <code>e</code>, the result of computing <code>e</code> is the same as the result of computing <code>(call/cc (λ (k) e))</code> as long as <code>e</code> doesn’t refer to <code>k</code>.</p>
+</fieldset>
+
+<p>This example reveals three facts about the type of <code>call/cc</code>:</p>
+<ol>
+<li><p><code>call/cc</code> is being called, so it must have a function type:</p>
+<p>$$
+\texttt{call/cc} : \textcolor{#09885A}{\boxed{?} \rightarrow \boxed{?}}
+$$</p>
+</li>
+<li><p>The argument being passed to <code>call/cc</code> is <code>(λ (k) 0)</code>:</p>
+<p>$$
+\texttt{(λ (k) 0)} : \textcolor{#09885A}{\boxed{?} \rightarrow \texttt{Number}}
+$$</p>
+<p>And therefore:</p>
+<p>$$
+\texttt{call/cc} : \textcolor{#09885A}{(\boxed{?} \rightarrow \texttt{Number})} \rightarrow \boxed{?}
+$$</p>
+</li>
+<li><p>And <code>call/cc</code> is returning <code>0</code>:</p>
+<p>$$
+\texttt{0} : \textcolor{#09885A}{\texttt{Number}}
+$$</p>
+<p>And therefore:</p>
+<p>$$
+\texttt{call/cc} : (\boxed{?} \rightarrow \texttt{Number}) \rightarrow \textcolor{#09885A}{\texttt{Number}}
+$$</p>
+</li>
+</ol>
+<p>To proceed, we want to know more about the type of <code>k</code>, so we modify the example expression such that the function passed to <code>call/cc</code> uses <code>k</code>:</p>
+<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (k </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
+<span style="color: #000000">#f</span></code></pre>
+<p>The output changed from <code>#t</code> to <code>#f</code> because the <code>(k 29)</code> takes execution back to the outer <code>zero?</code>, skipping over the remainder of the function, which in this case is just the <code>0</code>.</p>
+<p>This expression reveals two facts about the type of <code>call/cc</code>:</p>
+<ol>
+<li><p><code>k</code> is being called, so it must have a function type:</p>
+<p>$$
+\texttt{(λ (k) (k 29) 0)} : \textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}
+$$</p>
+<p>And therefore:</p>
+<p>$$
+\texttt{call/cc} : (\textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
+$$</p>
+</li>
+<li><p>The argument being passed to <code>k</code> is <code>29</code>:</p>
+<p>$$
+\texttt{(λ (k) (k 29) 0)} : (\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}
+$$</p>
+<p>And therefore:</p>
+<p>$$
+\texttt{call/cc} : ((\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
+$$</p>
+</li>
+</ol>
+<p>The last $\boxed{?}$ is the return type of <code>k</code>, so next we consider how the result of the call to <code>k</code> may be used, for example:</p>
+<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (string-length (k </span><span style="color: #098658">29</span><span style="color: #000000">)) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
+<span style="color: #000000">#f</span></code></pre>
+<p>The result of this expression is the same as before, <code>#f</code>, because <code>k</code> causes execution to skip over the rest of the function that is passed to <code>call/cc</code>, including the call to <a href="https://docs.racket-lang.org/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string-length%29%29"><code>string-length</code></a>.</p>
+<p>This expression reveals one fact about the type of <code>call/cc</code>:</p>
+<ol>
+<li><p>The result of calling <code>k</code> is being passed to <code>string-length</code>, so it must be a <code>String</code>:</p>
+<p>$$
+\texttt{(λ (k) (string-length (k 29)) 0)} :\(\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
+$$</p>
+<p>And therefore:</p>
+<p>$$
+\texttt{call/cc} : ((\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
+$$</p>
+</li>
+</ol>
+<p>Finally, we observe that there’s nothing <em>special</em> about the use of <code>Number</code>s and <code>String</code>s in the expressions we considered so far. We may, for example, swap them:</p>
+<pre><code class="language-clojure"><span style="color: #000000">&gt; (string-length (call/cc (λ (k) (zero? (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">)) </span><span style="color: #A31515">"Facchinetti"</span><span style="color: #000000">)))</span>
+<span style="color: #098658">7</span></code></pre>
+<p>This expression reveals the final fact about the type of <code>call/cc</code>:</p>
+<ol>
+<li><p>We may swap <code>Number</code>s and <code>String</code>s:</p>
+<p>$$
+\texttt{call/cc} : ((\textcolor{#09885A}{\texttt{String}} \rightarrow \textcolor{#09885A}{\texttt{Number}}) \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \textcolor{#09885A}{\texttt{String}}
+$$</p>
+<p>So in general:</p>
+<p>$$
+\texttt{call/cc} : ((\textcolor{#09885A}{\alpha} \rightarrow \textcolor{#09885A}{\beta}) \rightarrow \textcolor{#09885A}{\alpha}) \rightarrow \textcolor{#09885A}{\alpha}
+$$</p>
+</li>
+</ol>
+<fieldset>
+<legend><strong>Note</strong></legend>
+
+<p>The type of <code>k</code> is $\alpha \rightarrow \beta$, so <code>k</code> has the type of a function that receives an argument of any type and <em>produces a result of the type you need</em>. If the call to <code>k</code> appears as argument to <code>string-length</code>, for example <code>(string-length (k 29))</code>, then <code>k</code> produces a <code>String</code>; if the call to <code>k</code> appears as argument to <code>zero?</code>, for example <code>(zero? (k "Leandro"))</code>, then <code>k</code> produces a <code>Number</code>; and so forth. It makes sense for a type system to behave like this because execution skips over the <code>string-length</code>, <code>zero?</code>, and so forth, so no runtime type error could occur.</p>
+<p>This shows that continuations like <code>k</code> don’t behave like regular functions.</p>
+</fieldset>
+
+<h1 id="appendix-the-type-of-callcc-in-typed-racket">Appendix: The Type of <code>call/cc</code> in Typed Racket</h1>
+<p>The type of <code>call/cc</code> in <a href="https://docs.racket-lang.org/ts-guide/">Typed Racket</a> is more sophisticated than the type we derived in this article because the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system. The <a href="https://github.com/racket/typed-racket/blob/b0f36e7d4d7fb8fe738fcea9344fc1d0ced8c58c/typed-racket-lib/typed-racket/base-env/base-env.rkt#L1356-L1361">entire type of <code>call/cc</code> in Typed Racket</a> is too complex and goes beyond the scope of this article, but the main difference is captured by the following type:</p>
+<p>$$
+\texttt{call/cc} : ((\textcolor{#09885A}{\alpha} \rightarrow \beta) \rightarrow \textcolor{#09885A}{\gamma}) \rightarrow \textcolor{#09885A}{\alpha \cup \gamma}
+$$</p>
+<p>To understand this type, recall that <code>call/cc</code> may produce an output in one of two ways:</p>
+<ol>
+<li><p>If <code>k</code> is not called, then the output of <code>call/cc</code> is the output of the function that it received as argument, for example, the output of <code>(call/cc (λ (k) 0))</code> is <code>0</code>. That is the first $\gamma$ in the type above.</p>
+</li>
+<li><p>If <code>k</code> is called, then the output of <code>call/cc</code> is the argument passed to <code>k</code>, for example, the output of <code>(call/cc (λ (k) (k 29) 0))</code> is <code>29</code>. That is the first $\alpha$ in the type above.</p>
+</li>
+</ol>
+<p>So we conclude that <code>call/cc</code> outputs a value of type $\alpha \cup \gamma$, which means <em>either $\alpha$ or $\gamma$</em>.</p>
+<fieldset>
+<legend><strong>Technical Terms</strong></legend>
+
+<p>A type such as $\alpha \cup \gamma$ is something called an <a href="https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29"><em>union type</em></a>.</p>
+</fieldset>
+
+<p>When deriving the type of <code>call/cc</code> in this article, we had to constrain $\alpha$ and $\gamma$ to be the same because a classical Hindley–Milner type system may not express a type such as $\alpha \cup \gamma$, but the type system in Typed Racket may.</p>
+<p>This more general form is useful to type programs like the following:</p>
+<pre><code class="language-clojure"><span style="color: #000000">&gt; (write (call/cc (λ (k) (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
+<span style="color: #A31515">"Leandro"</span></code></pre>
+<p>In this program $\alpha$ is <code>String</code> and $\gamma$ is <code>Number</code>, so <code>call/cc</code> returns a value of type $\texttt{String} \cup \texttt{Number}$. The type system in Typed Racket allows for types like these as long as they are used only in places where either a <code>String</code> or a <code>Number</code> would be acceptable, which is the case of the argument for <a href="https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29"><code>write</code></a>.</p>
+<fieldset>
+<legend><strong>Note</strong></legend>
+
+<p>This kind of limitation in classical Hindley–Milner type systems occurs in many situations beyond <code>call/cc</code>. For example, in classical Hindley–Milner type systems the types of the <em>then</em> and <em>else</em> branches of a conditional must agree:</p>
+<pre><code class="language-clojure"><span style="color: #000000">(</span><span style="color: #0000FF">if</span><span style="color: #000000"> &lt;condition&gt; </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code></pre>
+<p>But in Typed Racket their types may be different, for example:</p>
+<pre><code class="language-clojure"><span style="color: #000000">(</span><span style="color: #0000FF">if</span><span style="color: #000000"> &lt;condition&gt; </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code></pre>
+</fieldset>
+
+<h1 id="acknowledgements">Acknowledgements</h1>
+<p>I thank the following people for their comments: Scott Smith, Sorawee Porncharoenwase, Dario Hamidi, and A. B. McLin.</p>
+</main>
+        
+      
+    </body></html>
