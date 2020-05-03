@@ -1,10 +1,6 @@
 # Using Keynote to Draw Figures for LaTeX Documents
 
-<video
-  src="https://archive.org/download/www.leafac.com/using-keynote-to-draw-figures-for-latex-documents.mp4"
-  controls
-  preload="none"
-></video>
+<video src="https://archive.org/download/www.leafac.com/using-keynote-to-draw-figures-for-latex-documents.mp4" controls preload="none"></video>
 
 In this video I show how to use Keynote to draw figures for LaTeX that blend in with the rest of the document. I show how to set the page size, configure fonts, export the figures, and include them in LaTeX.
 

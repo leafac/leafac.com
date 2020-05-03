@@ -2,11 +2,7 @@
 
 # Now I’m Taking OOSE
 
-<audio
-  src="https://archive.org/download/leafac-music/now-im-taking-oose.mp3"
-  controls
-  preload="none"
-></audio>
+<audio src="https://archive.org/download/leafac-music/now-im-taking-oose.mp3" controls preload="none"></audio>
 
 <details>
 <summary>Background</summary>
@@ -90,27 +86,15 @@ Now I’m taking OOSE
 
 # Bushwhacking
 
-<video
-  src="https://archive.org/download/bushwhacking/bushwhacking.mp4"
-  controls
-  preload="none"
-></video>
+<video src="https://archive.org/download/bushwhacking/bushwhacking.mp4" controls preload="none"></video>
 
 # My First Robot
 
-<audio
-  src="https://archive.org/download/leafac-music/my-first-robot.mp3"
-  controls
-  preload="none"
-></audio>
+<audio src="https://archive.org/download/leafac-music/my-first-robot.mp3" controls preload="none"></audio>
 
 # Agora Há Algo a Temer
 
-<audio
-  src="https://archive.org/download/leafac-music/agora-ha-algo-a-temer.mp3"
-  controls
-  preload="none"
-></audio>
+<audio src="https://archive.org/download/leafac-music/agora-ha-algo-a-temer.mp3" controls preload="none"></audio>
 
 <details>
 <summary>Lyrics</summary>
@@ -190,11 +174,7 @@ Agora há algo a Temer
 
 # O Fim da Tempestade
 
-<audio
-  src="https://archive.org/download/leafac-music/o-fim-da-tempestade.mp3"
-  controls
-  preload="none"
-></audio>
+<audio src="https://archive.org/download/leafac-music/o-fim-da-tempestade.mp3" controls preload="none"></audio>
 
 <details>
 <summary>Samples</summary>
@@ -206,11 +186,7 @@ Agora há algo a Temer
 
 # Criatividade
 
-<audio
-  src="https://archive.org/download/leafac-music/criatividade.mp3"
-  controls
-  preload="none"
-></audio>
+<audio src="https://archive.org/download/leafac-music/criatividade.mp3" controls preload="none"></audio>
 
 <details>
 <summary>Lyrics</summary>
@@ -321,11 +297,7 @@ Aumenta a criativadade
 
 # United
 
-<audio
-  src="https://archive.org/download/leafac-music/united.mp3"
-  controls
-  preload="none"
-></audio>
+<audio src="https://archive.org/download/leafac-music/united.mp3" controls preload="none"></audio>
 
 <details>
 <summary>Lyrics</summary>
