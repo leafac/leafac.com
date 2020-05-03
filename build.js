@@ -63,7 +63,6 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     "beforeend",
     `<link rel="stylesheet" href="/vendor/node_modules/katex/dist/katex.css">`
   );
-  const mathInlinePrefix = "math`";
   for (const element of document.querySelectorAll("code")) {
     const isBlock = element.parentElement.tagName === "PRE";
     if (isBlock) {
@@ -73,9 +72,9 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
       );
       element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
     } else {
-      if (!element.textContent.startsWith(mathInlinePrefix)) continue;
+      if (!element.textContent.startsWith("math`")) continue;
       element.outerHTML = katex.renderToString(
-        element.textContent.slice(mathInlinePrefix.length)
+        element.textContent.slice("math`".length)
       );
     }
   }
