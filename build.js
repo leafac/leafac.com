@@ -34,11 +34,8 @@ const katex = require("katex");
           <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">      
         </head>
         <body>
-          <header>
-          </header>
-          <main>
-            ${renderedMarkdown}
-          </main>
+          <h1><a href="/">Leandro Facchinetti</a></h1>
+          ${renderedMarkdown}
         </body>
       </html>
     `;
