@@ -136,7 +136,7 @@ The last `` math`\boxed{?} `` is the return type of `` clojure`k ``, so next we 
 #f
 ```
 
-The result of this expression is the same as before, `` clojure`#f ``, because `` clojure`k `` causes execution to skip over the rest of the function that is passed to `` clojure`call/cc ``, including the call to [`` clojure`string-length ``](https://docs.racket-lang.org/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string-length%29%29).
+The result of this expression is the same as before (`` clojure`#f ``) because `` clojure`k `` causes execution to skip over the rest of the function that is passed to `` clojure`call/cc ``, including the call to [`` clojure`string-length ``](https://docs.racket-lang.org/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string-length%29%29).
 
 This expression reveals one fact about the type of `` clojure`call/cc ``:
 
