@@ -45,8 +45,6 @@ I live in Baltimore, Maryland, United States.
 
 [Understanding the Type of `call/cc`](understanding-the-type-of-call-cc)
 
-<!-- [Playing the Game with PLT Redex](playing-the-game-with-plt-redex) -->
-
 # [Songs](songs)
 
 # Contact
