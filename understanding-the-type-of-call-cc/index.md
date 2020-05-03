@@ -101,7 +101,7 @@ To proceed, we want to know more about the type of `` clojure`k ``, so we modify
 #f
 ```
 
-The output changed from `` clojure`#t `` to `` clojure`#f`` because the `` clojure`(k 29) `` takes execution back to the outer `` clojure`zero? ``, skipping over the remainder of the function, which in this case is just the `` clojure`0 ``.
+The output changed from `` clojure`#t `` to `` clojure`#f `` because the `` clojure`(k 29) `` takes execution back to the outer `` clojure`zero? ``, skipping over the remainder of the function, which in this case is just the `` clojure`0 ``.
 
 This expression reveals two facts about the type of `` clojure`call/cc ``:
 
