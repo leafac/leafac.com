@@ -29,7 +29,7 @@ This type is interesting, particularly in [its connection to logic](https://en.w
 <fieldset>
 <legend><strong>Note</strong></legend>
 
-There’s a version of Racket that is statically typed, [Typed Racket](https://docs.racket-lang.org/ts-guide/), but the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system, so the type of `` clojure`call/cc `` in Typed Racket is more sophisticated as well ([see appendix](#appendix-the-type-of-callcc-in-typed-racket)).
+There’s a version of Racket that is statically typed, [Typed Racket](https://docs.racket-lang.org/ts-guide/), but the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system, so the type of `` clojure`call/cc `` in Typed Racket is more sophisticated as well ([see appendix](#appendix-the-type-of-clojurecallcc-in-typed-racket)).
 
 </fieldset>
 
