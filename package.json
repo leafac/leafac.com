@@ -12,6 +12,7 @@
     "live-server": "^1.2.1",
     "marked": "^0.8.2",
     "nodemon": "^2.0.3",
+    "parse-numeric-range": "^1.2.0",
     "prettier": "^2.0.5",
     "shiki": "^0.1.7"
   }
