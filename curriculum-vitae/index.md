@@ -68,164 +68,164 @@
 - Examples of lectures: (Unfortunately the audio quality in some of these videos is less than optimal.)
   - **Deployment**
     <video
-      src="https://archive.org/download/deployment-to-heroku/deployment.mp4"
-      controls
-      preload="none"
-    ></video>
+    src="https://archive.org/download/deployment-to-heroku/deployment.mp4"
+    controls
+    preload="none"
+    > </video>
   - **JavaScript**
     - _Classroom Lecture_
       <video
-        src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4"
-        controls
-        preload="none"
-      ></video>
+      src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4"
+      controls
+      preload="none"
+      > </video>
     - _Video Lectures_
       1. Introduction
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4"
-           controls
-           preload="none"
-         ></video>
-      2. `setTimeout`
+         src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4"
+         controls
+         preload="none"
+         > </video>
+      2. `` js`setTimeout()``
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4"
+         controls
+         preload="none"
+         > </video>
       3. Creating Promises
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4"
-           controls
-           preload="none"
-         ></video>
-      4. `var`
+         src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4"
+         controls
+         preload="none"
+         > </video>
+      4. `` js`var ``
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4"
+         controls
+         preload="none"
+         > </video>
       5. DOM · Part 1
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4"
+         controls
+         preload="none"
+         > </video>
       6. DOM · Part 2
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4"
+         controls
+         preload="none"
+         > </video>
       7. Web Sockets · Part 1
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4"
+         controls
+         preload="none"
+         > </video>
       8. Web Sockets · Part 2
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4"
+         controls
+         preload="none"
+         > </video>
       9. Classes · Part 1
          <video
-           src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4"
+         controls
+         preload="none"
+         > </video>
       10. Classes · Part 2
           <video
-            src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4"
-            controls
-            preload="none"
-          ></video>
+          src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4"
+          controls
+          preload="none"
+          > </video>
       11. Classes · Part 3
           <video
-            src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4"
-            controls
-            preload="none"
-          ></video>
+          src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4"
+          controls
+          preload="none"
+          > </video>
       12. Classes · Part 4
           <video
-            src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4"
-            controls
-            preload="none"
-          ></video>
+          src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4"
+          controls
+          preload="none"
+          > </video>
       13. Modules
           <video
-            src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4"
-            controls
-            preload="none"
-          ></video>
+          src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4"
+          controls
+          preload="none"
+          > </video>
   - **Git**
     - _Classroom Lecture_
       <video
-        src="https://archive.org/download/git-video-series/git--lecture.mp4"
-        controls
-        preload="none"
-      ></video>
+      src="https://archive.org/download/git-video-series/git--lecture.mp4"
+      controls
+      preload="none"
+      > </video>
     - _Video Lectures_
       1. Introduction
          <video
-           src="https://archive.org/download/git-video-series/git--1--introduction.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--1--introduction.mp4"
+         controls
+         preload="none"
+         > </video>
       2. Setup
          <video
-           src="https://archive.org/download/git-video-series/git--2--setup.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--2--setup.mp4"
+         controls
+         preload="none"
+         > </video>
       3. Repository
          <video
-           src="https://archive.org/download/git-video-series/git--3--repository.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--3--repository.mp4"
+         controls
+         preload="none"
+         > </video>
       4. Commit
          <video
-           src="https://archive.org/download/git-video-series/git--4--commit.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--4--commit.mp4"
+         controls
+         preload="none"
+         > </video>
       5. Publishing to GitHub
          <video
-           src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4"
+         controls
+         preload="none"
+         > </video>
       6. Cloning from GitHub
          <video
-           src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4"
+         controls
+         preload="none"
+         > </video>
       7. Coordinating Collaboration
          <video
-           src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4"
+         controls
+         preload="none"
+         > </video>
       8. Branches and Pull Requests
          <video
-           src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4"
+         controls
+         preload="none"
+         > </video>
       9. Rebasing
          <video
-           src="https://archive.org/download/git-video-series/git--9--rebasing.mp4"
-           controls
-           preload="none"
-         ></video>
+         src="https://archive.org/download/git-video-series/git--9--rebasing.mp4"
+         controls
+         preload="none"
+         > </video>
       10. Conclusion
           <video
-            src="https://archive.org/download/git-video-series/git--10--conclusion.mp4"
-            controls
-            preload="none"
-          ></video>
+          src="https://archive.org/download/git-video-series/git--10--conclusion.mp4"
+          controls
+          preload="none"
+          > </video>
 
 </details>
 
@@ -307,7 +307,7 @@
 
 **[Shiki LaTeX](https://www.npmjs.com/package/shiki-latex).** JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
-**[Collections Deep Equal](https://www.npmjs.com/package/collections-deep-equal).** JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
+**[Collections Deep Equal](https://www.npmjs.com/package/collections-deep-equal).** JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`` js`deep-equal ``](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
 
 **[LaTeX Dissertation Template for the Johns Hopkins University](https://github.com/leafac/latex-dissertation-template-for-the-johns-hopkins-university).** [LaTeX](https://www.latex-project.org) template that conforms to the [Formatting Requirements](https://www.library.jhu.edu/library-services/electronic-theses-dissertations/formatting-requirements/) of the Johns Hopkins University Library.
 
@@ -429,18 +429,20 @@
 **Presentation for a General Audience**
 
 <video
-  src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4"
-  controls
-  preload="none"
-></video>
+src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4"
+controls
+preload="none"
+
+> </video>
 
 **Final Presentation**
 
 <video
-  src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4"
-  controls
-  preload="none"
-></video>
+src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4"
+controls
+preload="none"
+
+> </video>
 
 </details>
 

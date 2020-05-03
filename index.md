@@ -14,9 +14,9 @@ I live in Baltimore, Maryland, United States.
 
 **2020-03-10:** Published [**Shiki LaTeX**](https://www.npmjs.com/package/shiki-latex), a JavaScript & TypeScript package with a [Shiki](https://shiki.matsu.io) renderer for [LaTeX](https://www.latex-project.org). Compatible with [minted](https://github.com/gpoore/minted), replacing [Pygments](https://pygments.org).
 
-**2020-03-04:** Published [**Collections Deep Equal**](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`deep-equal`](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
+**2020-03-04:** Published [**Collections Deep Equal**](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`` js`deep-equal ``](https://www.npmjs.com/package/deep-equal)) instead of reference equality.
 
-**2020-03-02:** Updated [**Curriculum Vitae**](curriculum-vitae) and [**Understanding the Type of `call/cc`**](understanding-the-type-of-call-cc).
+**2020-03-02:** Updated [**Curriculum Vitae**](curriculum-vitae) and [**Understanding the Type of `` clojure`call/cc ``**](understanding-the-type-of-call-cc).
 
 **2020-02-27:** Switched the engine that produces this website from [**Jekyll**](https://jekyllrb.com) to [**Gatsby**](https://www.gatsbyjs.org). Gatsby is (marginally) [more popular](https://www.staticgen.com), its community seems to be more active, its [plugins](https://www.gatsbyjs.org/plugins/) produce better results (at the cost of more configuration and a steeper learning curve), and it’s in JavaScript instead of Ruby.
 
@@ -43,7 +43,7 @@ I live in Baltimore, Maryland, United States.
 
 # Articles
 
-[Understanding the Type of `call/cc`](understanding-the-type-of-call-cc)
+[Understanding the Type of `` clojure`call/cc ``](understanding-the-type-of-call-cc)
 
 # [Songs](songs)
 
