@@ -40,18 +40,6 @@ const katex = require("katex");
 })();
 
 async function processHTML(/** @type {Document} */ document, htmlPath) {
-  // Add Table of Contents
-  document
-    .querySelector("#table-of-contents")
-    ?.insertAdjacentHTML(
-      "afterend",
-      [...document.querySelectorAll("h1, h2, h3, h4, h5, h6")]
-        .map(
-          (header) => `<p><a href="#${header.id}">${header.innerHTML}</a></p>`
-        )
-        .join("")
-    );
-
   // Render mathematics
   document.head.insertAdjacentHTML(
     "beforeend",
@@ -139,14 +127,6 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     element.innerHTML = highlightedLines.join("\n");
   }
 
-  // Make URLs monospaced
-  for (const element of document.querySelectorAll("a"))
-    if (
-      element.innerHTML === element.getAttribute("href") ||
-      `mailto:${element.innerHTML}` === element.getAttribute("href")
-    )
-      element.innerHTML = `<code>${element.innerHTML}</code>`;
-
   // Inline SVGs
   for (const element of document.querySelectorAll(`img[src$=".svg"]`)) {
     const svgPath = `${path.dirname(htmlPath)}/${element.getAttribute("src")}`;
@@ -180,9 +160,35 @@ async function processHTML(/** @type {Document} */ document, htmlPath) {
     element.outerHTML = svg.outerHTML;
   }
 
+  // Make URLs monospaced
+  for (const element of document.querySelectorAll("a"))
+    if (
+      element.innerHTML === element.getAttribute("href") ||
+      `mailto:${element.innerHTML}` === element.getAttribute("href")
+    )
+      element.innerHTML = `<code>${element.innerHTML}</code>`;
+
+  // Add Table of Contents
+  document.querySelector("#table-of-contents")?.insertAdjacentHTML(
+    "afterend",
+    `<ul>
+        ${[
+          ...document.querySelectorAll(
+            "h1:not(:first-child), h2, h3, h4, h5, h6"
+          ),
+        ]
+          .filter((header) => header.textContent !== "Table of Contents")
+          .map(
+            (header) =>
+              `<li><a href="#${header.id}">${header.innerHTML}</a></li>`
+          )
+          .join("")}
+      </ul>`
+  );
+
   // Add title
-  const title = document.querySelector("main :first-child");
-  if (title.tagName === "H1")
+  const title = document.querySelector("main h1:first-child");
+  if (title !== null)
     document
       .querySelector("title")
       .insertAdjacentText("afterbegin", `${title.textContent} · `);
