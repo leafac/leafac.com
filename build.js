@@ -17,12 +17,17 @@ const katex = require("katex");
     )}.html`;
     const markdown = fs.readFileSync(markdownPath, "utf8");
     const renderedMarkdown = marked(markdown);
+    const maybeTitle = JSDOM.fragment(renderedMarkdown).children[0];
     const html = `<!DOCTYPE html>
       <html lang="en">
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>Leandro Facchinetti</title>
+          <title>${
+            maybeTitle.tagName === "H1" ? `${maybeTitle.textContent} · ` : ""
+          }Leandro Facchinetti</title>
+          <meta name="author" content="Leandro Facchinetti">
+          <meta name="description" content="I’m a PhD candidate in Computer Science. I’m interested in writing & reading, music & video production, running, mindfulness, minimalism, and veganism.">
           <link rel="stylesheet" href="/styles.css">
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
