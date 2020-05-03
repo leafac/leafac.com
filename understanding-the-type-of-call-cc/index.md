@@ -11,11 +11,11 @@
 
 `call/cc` has the following type in classical Hindley–Milner type systems:
 
-$$
+```math
 \texttt{call/cc} : ((\alpha \rightarrow \beta) \rightarrow \alpha) \rightarrow \alpha
-$$
+```
 
-Where $\alpha$ and $\beta$ are type variables that may be instantiated with any type such as `Number` or `String`.
+Where `` math`\alpha `` and `` math`\beta `` are type variables that may be instantiated with any type such as `Number` or `String`.
 
 <fieldset>
 <legend><strong>Note</strong></legend>
@@ -35,9 +35,9 @@ There’s a version of Racket that is statically typed, [Typed Racket](https://d
 
 We start by knowing nothing about the type of `call/cc`:
 
-$$
+```math
 \texttt{call/cc} : \boxed{?}
-$$
+```
 
 Then we consider the following expression:
 
@@ -66,33 +66,33 @@ This example reveals three facts about the type of `call/cc`:
 
 1. `call/cc` is being called, so it must have a function type:
 
-   $$
+   ```math
    \texttt{call/cc} : \textcolor{#09885A}{\boxed{?} \rightarrow \boxed{?}}
-   $$
+   ```
 
 2. The argument being passed to `call/cc` is `(λ (k) 0)`:
 
-   $$
+   ```math
    \texttt{(λ (k) 0)} : \textcolor{#09885A}{\boxed{?} \rightarrow \texttt{Number}}
-   $$
+   ```
 
    And therefore:
 
-   $$
+   ```math
    \texttt{call/cc} : \textcolor{#09885A}{(\boxed{?} \rightarrow \texttt{Number})} \rightarrow \boxed{?}
-   $$
+   ```
 
 3. And `call/cc` is returning `0`:
 
-   $$
+   ```math
    \texttt{0} : \textcolor{#09885A}{\texttt{Number}}
-   $$
+   ```
 
    And therefore:
 
-   $$
+   ```math
    \texttt{call/cc} : (\boxed{?} \rightarrow \texttt{Number}) \rightarrow \textcolor{#09885A}{\texttt{Number}}
-   $$
+   ```
 
 To proceed, we want to know more about the type of `k`, so we modify the example expression such that the function passed to `call/cc` uses `k`:
 
@@ -107,29 +107,29 @@ This expression reveals two facts about the type of `call/cc`:
 
 1. `k` is being called, so it must have a function type:
 
-   $$
+   ```math
    \texttt{(λ (k) (k 29) 0)} : \textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}
-   $$
+   ```
 
    And therefore:
 
-   $$
+   ```math
    \texttt{call/cc} : (\textcolor{#09885A}{(\boxed{?} \rightarrow \boxed{?})} \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
-   $$
+   ```
 
 2. The argument being passed to `k` is `29`:
 
-   $$
+   ```math
    \texttt{(λ (k) (k 29) 0)} : (\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}
-   $$
+   ```
 
    And therefore:
 
-   $$
+   ```math
    \texttt{call/cc} : ((\textcolor{#09885A}{\texttt{Number}} \rightarrow \boxed{?}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
-   $$
+   ```
 
-The last $\boxed{?}$ is the return type of `k`, so next we consider how the result of the call to `k` may be used, for example:
+The last `` math`\boxed{?} `` is the return type of `k`, so next we consider how the result of the call to `k` may be used, for example:
 
 ```clojure
 > (zero? (call/cc (λ (k) (string-length (k 29)) 0)))
@@ -142,15 +142,15 @@ This expression reveals one fact about the type of `call/cc`:
 
 1. The result of calling `k` is being passed to `string-length`, so it must be a `String`:
 
-   $$
+   ```math
    \texttt{(λ (k) (string-length (k 29)) 0)} :\\(\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
-   $$
+   ```
 
    And therefore:
 
-   $$
+   ```math
    \texttt{call/cc} : ((\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}) \rightarrow \texttt{Number}
-   $$
+   ```
 
 Finally, we observe that there’s nothing _special_ about the use of `Number`s and `String`s in the expressions we considered so far. We may, for example, swap them:
 
@@ -163,20 +163,20 @@ This expression reveals the final fact about the type of `call/cc`:
 
 1. We may swap `Number`s and `String`s:
 
-   $$
+   ```math
    \texttt{call/cc} : ((\textcolor{#09885A}{\texttt{String}} \rightarrow \textcolor{#09885A}{\texttt{Number}}) \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \textcolor{#09885A}{\texttt{String}}
-   $$
+   ```
 
    So in general:
 
-   $$
+   ```math
    \texttt{call/cc} : ((\textcolor{#09885A}{\alpha} \rightarrow \textcolor{#09885A}{\beta}) \rightarrow \textcolor{#09885A}{\alpha}) \rightarrow \textcolor{#09885A}{\alpha}
-   $$
+   ```
 
 <fieldset>
 <legend><strong>Note</strong></legend>
 
-The type of `k` is $\alpha \rightarrow \beta$, so `k` has the type of a function that receives an argument of any type and _produces a result of the type you need_. If the call to `k` appears as argument to `string-length`, for example `(string-length (k 29))`, then `k` produces a `String`; if the call to `k` appears as argument to `zero?`, for example `(zero? (k "Leandro"))`, then `k` produces a `Number`; and so forth. It makes sense for a type system to behave like this because execution skips over the `string-length`, `zero?`, and so forth, so no runtime type error could occur.
+The type of `k` is `` math`\alpha \rightarrow \beta ``, so `k` has the type of a function that receives an argument of any type and _produces a result of the type you need_. If the call to `k` appears as argument to `string-length`, for example `(string-length (k 29))`, then `k` produces a `String`; if the call to `k` appears as argument to `zero?`, for example `(zero? (k "Leandro"))`, then `k` produces a `Number`; and so forth. It makes sense for a type system to behave like this because execution skips over the `string-length`, `zero?`, and so forth, so no runtime type error could occur.
 
 This shows that continuations like `k` don’t behave like regular functions.
 
@@ -186,26 +186,26 @@ This shows that continuations like `k` don’t behave like regular functions.
 
 The type of `call/cc` in [Typed Racket](https://docs.racket-lang.org/ts-guide/) is more sophisticated than the type we derived in this article because the type system in Typed Racket is more sophisticated than a classical Hindley–Milner type system. The [entire type of `call/cc` in Typed Racket](https://github.com/racket/typed-racket/blob/b0f36e7d4d7fb8fe738fcea9344fc1d0ced8c58c/typed-racket-lib/typed-racket/base-env/base-env.rkt#L1356-L1361) is too complex and goes beyond the scope of this article, but the main difference is captured by the following type:
 
-$$
+```math
 \texttt{call/cc} : ((\textcolor{#09885A}{\alpha} \rightarrow \beta) \rightarrow \textcolor{#09885A}{\gamma}) \rightarrow \textcolor{#09885A}{\alpha \cup \gamma}
-$$
+```
 
 To understand this type, recall that `call/cc` may produce an output in one of two ways:
 
-1. If `k` is not called, then the output of `call/cc` is the output of the function that it received as argument, for example, the output of `(call/cc (λ (k) 0))` is `0`. That is the first $\gamma$ in the type above.
+1. If `k` is not called, then the output of `call/cc` is the output of the function that it received as argument, for example, the output of `(call/cc (λ (k) 0))` is `0`. That is the first `` math`\gamma `` in the type above.
 
-2. If `k` is called, then the output of `call/cc` is the argument passed to `k`, for example, the output of `(call/cc (λ (k) (k 29) 0))` is `29`. That is the first $\alpha$ in the type above.
+2. If `k` is called, then the output of `call/cc` is the argument passed to `k`, for example, the output of `(call/cc (λ (k) (k 29) 0))` is `29`. That is the first `` math`\alpha `` in the type above.
 
-So we conclude that `call/cc` outputs a value of type $\alpha \cup \gamma$, which means _either $\alpha$ or $\gamma$_.
+So we conclude that `call/cc` outputs a value of type `` math`\alpha \cup \gamma ``, which means _either `` math`\alpha `` or `` math`\gamma ``_.
 
 <fieldset>
 <legend><strong>Technical Terms</strong></legend>
 
-A type such as $\alpha \cup \gamma$ is something called an [_union type_](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29).
+A type such as `` math`\alpha \cup \gamma `` is something called an [_union type_](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29).
 
 </fieldset>
 
-When deriving the type of `call/cc` in this article, we had to constrain $\alpha$ and $\gamma$ to be the same because a classical Hindley–Milner type system may not express a type such as $\alpha \cup \gamma$, but the type system in Typed Racket may.
+When deriving the type of `call/cc` in this article, we had to constrain `` math`\alpha `` and `` math`\gamma `` to be the same because a classical Hindley–Milner type system may not express a type such as `` math`\alpha \cup \gamma ``, but the type system in Typed Racket may.
 
 This more general form is useful to type programs like the following:
 
@@ -214,7 +214,7 @@ This more general form is useful to type programs like the following:
 "Leandro"
 ```
 
-In this program $\alpha$ is `String` and $\gamma$ is `Number`, so `call/cc` returns a value of type $\texttt{String} \cup \texttt{Number}$. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `String` or a `Number` would be acceptable, which is the case of the argument for [`write`](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
+In this program `` math`\alpha `` is `String` and `` math`\gamma `` is `Number`, so `call/cc` returns a value of type `` math`\texttt{String} \cup \texttt{Number} ``. The type system in Typed Racket allows for types like these as long as they are used only in places where either a `String` or a `Number` would be acceptable, which is the case of the argument for [`write`](https://docs.racket-lang.org/reference/Writing.html?q=write#%28def._%28%28quote._~23~25kernel%29._write%29%29).
 
 <fieldset>
 <legend><strong>Note</strong></legend>
