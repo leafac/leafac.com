@@ -1,19 +1,27 @@
 const glob = require("glob");
 const fs = require("fs");
+const path = require("path");
 const marked = require("marked");
 const { JSDOM } = require("jsdom");
+const shiki = require("shiki");
+const rangeParser = require("parse-numeric-range");
+const katex = require("katex");
 
 (async () => {
-  const paths = glob.sync("**/*.md", {
+  const markdownPaths = glob.sync("**/*.md", {
     ignore: ["**/node_modules/**", "CODE_OF_CONDUCT.md", "README.md"],
   });
-  for (const path of paths) {
-    const markdown = fs.readFileSync(path, "utf8");
+  for (const markdownPath of markdownPaths) {
+    const htmlPath = `${markdownPath.slice(
+      0,
+      markdownPath.length - ".md".length
+    )}.html`;
+    const markdown = fs.readFileSync(markdownPath, "utf8");
     const html = marked(markdown);
     const document = new JSDOM(html).window.document.body;
-    await processHTML(document);
+    await processHTML(document, htmlPath);
     fs.writeFileSync(
-      `${path.slice(0, path.length - ".md".length)}.html`,
+      htmlPath,
       `<!DOCTYPE html>
         <html lang="en">
           <head>
@@ -34,11 +42,11 @@ const { JSDOM } = require("jsdom");
   }
 })();
 
-async function processHTML(/** @type {Document} */ document) {
+async function processHTML(/** @type {Document} */ document, htmlPath) {
   // Add Table of Contents
   document
     .querySelector("#table-of-contents")
-    .insertAdjacentHTML(
+    ?.insertAdjacentHTML(
       "afterend",
       [...document.querySelectorAll("h1, h2, h3, h4, h5, h6")]
         .map(
@@ -143,12 +151,12 @@ async function processHTML(/** @type {Document} */ document) {
 
   // Inline SVGs
   for (const element of document.querySelectorAll(`img[src$=".svg"]`)) {
-    const src = element.getAttribute("src");
-    if (!fs.existsSync(src)) {
-      console.error(`Image not found: ${src}`);
+    const svgPath = `${path.dirname(htmlPath)}/${element.getAttribute("src")}`;
+    if (!fs.existsSync(svgPath)) {
+      console.error(`Image not found: ${svgPath}`);
       continue;
     }
-    const svg = JSDOM.fragment(fs.readFileSync(src, "utf8")).querySelector(
+    const svg = JSDOM.fragment(fs.readFileSync(svgPath, "utf8")).querySelector(
       "svg"
     );
     for (const code of svg.querySelectorAll("[highlight]")) {
