@@ -11,6 +11,7 @@ const katex = require("katex");
   for (const markdownPath of glob.sync("**/*.md", {
     ignore: ["**/node_modules/**", "CODE_OF_CONDUCT.md", "README.md"],
   })) {
+    // Render Markdown
     const htmlPath = markdownPath.replace(/\.md$/, ".html");
     const markdown = fs.readFileSync(markdownPath, "utf8");
     const renderedMarkdown = marked(markdown);
@@ -34,162 +35,168 @@ const katex = require("katex");
       </html>
     `;
     const dom = new JSDOM(html);
-    await processHTML(dom.window.document, htmlPath);
-    fs.writeFileSync(htmlPath, dom.serialize());
-  }
-})();
+    const document = dom.window.document;
 
-async function processHTML(/** @type {Document} */ document, htmlPath) {
-  // Render mathematics
-  document.head.insertAdjacentHTML(
-    "beforeend",
-    `<link rel="stylesheet" href="/vendor/node_modules/katex/dist/katex.css">`
-  );
-  for (const element of document.querySelectorAll("code")) {
-    const isBlock = element.parentElement.tagName === "PRE";
-    if (isBlock) {
-      if (element.className !== "language-math") continue;
-      const renderedMath = katex.renderToString(
-        `\\displaystyle ${element.textContent}`
-      );
-      element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
-    } else {
-      if (!element.textContent.startsWith("math`")) continue;
-      element.outerHTML = katex.renderToString(
-        element.textContent.slice("math`".length)
-      );
-    }
-  }
-
-  // Add syntax highlighting
-  const highlighter = await shiki.getHighlighter({ theme: "light_plus" });
-  for (const element of document.querySelectorAll("code")) {
-    let code;
-    let language;
-    let shouldNumberLines = false;
-    let linesToHighlight = [];
-    const isBlock = element.parentElement.tagName === "PRE";
-    if (isBlock) {
-      const match = element.className.match(
-        /^language-(?<language>.*?)(?:\{(?<options>.*)\})?$/
-      );
-      if (match === null) continue;
-      code = element.textContent;
-      language = match.groups.language;
-      for (const option of (match.groups.options ?? "").split("}{"))
-        if (option === "number") shouldNumberLines = true;
-        else if (option.match(/^[0-9,\-\.]+$/))
-          linesToHighlight = rangeParser(option);
-        else
-          console.error(
-            `${htmlPath}: Unrecognized option for code block: ${option}`
-          );
-    } else {
-      const [languageSegment, ...codeSegments] = element.textContent.split("`");
-      if (codeSegments.length === 0) continue;
-      code = codeSegments.join("`");
-      language = languageSegment;
-    }
-    let highlightedCode;
-    try {
-      highlightedCode = highlighter.codeToHtml(code, language);
-    } catch (error) {
-      console.error(`${htmlPath}: ${error}`);
-      continue;
-    }
-    const highlightedLines = JSDOM.fragment(highlightedCode)
-      .querySelector("code")
-      .innerHTML.split("\n");
-    if (shouldNumberLines) {
-      const width = String(highlightedLines.length).length;
-      for (const [index, line] of Object.entries(highlightedLines)) {
-        const lineNumber = String(Number(index) + 1).padStart(width);
-        highlightedLines[
-          index
-        ] = `<span style="color: #aaa;">${lineNumber}</span>  ${line}`;
-      }
-    }
-    for (const lineToHighlight of linesToHighlight) {
-      const index = lineToHighlight - 1;
-      if (highlightedLines[index] === undefined) {
-        console.error(
-          `${htmlPath}: Failed to highlight line out of range: ${lineToHighlight}`
-        );
-        continue;
-      }
-      highlightedLines[
-        index
-      ] = `<div style="background-color: #e0ffff;">${highlightedLines[index]}`;
-      highlightedLines[index + 1] = `</div>${
-        highlightedLines[index + 1] ?? ""
-      }`;
-    }
-    element.innerHTML = highlightedLines.join("\n");
-  }
-
-  // Inline SVGs
-  for (const element of document.querySelectorAll(`img[src$=".svg"]`)) {
-    const svgPath = `${path.dirname(htmlPath)}/${element.getAttribute("src")}`;
-    if (!fs.existsSync(svgPath)) {
-      console.error(`${htmlPath}: Image not found: ${svgPath}`);
-      continue;
-    }
-    const svg = JSDOM.fragment(fs.readFileSync(svgPath, "utf8")).querySelector(
-      "svg"
+    // Render mathematics
+    document.head.insertAdjacentHTML(
+      "beforeend",
+      `<link rel="stylesheet" href="/vendor/node_modules/katex/dist/katex.css">`
     );
-    for (const code of svg.querySelectorAll("[highlight]")) {
-      let highlightedText;
-      try {
-        highlightedText = highlighter.codeToHtml(
-          code.textContent,
-          code.getAttribute("highlight")
+    for (const element of document.querySelectorAll("code")) {
+      const isBlock = element.parentElement.tagName === "PRE";
+      if (isBlock) {
+        if (element.className !== "language-math") continue;
+        const renderedMath = katex.renderToString(
+          `\\displaystyle ${element.textContent}`
         );
+        element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
+      } else {
+        if (!element.textContent.startsWith("math`")) continue;
+        element.outerHTML = katex.renderToString(
+          element.textContent.slice("math`".length)
+        );
+      }
+    }
+
+    // Add syntax highlighting
+    const highlighter = await shiki.getHighlighter({ theme: "light_plus" });
+    for (const element of document.querySelectorAll("code")) {
+      let code;
+      let language;
+      let shouldNumberLines = false;
+      let linesToHighlight = [];
+      const isBlock = element.parentElement.tagName === "PRE";
+      if (isBlock) {
+        const match = element.className.match(
+          /^language-(?<language>.*?)(?:\{(?<options>.*)\})?$/
+        );
+        if (match === null) continue;
+        code = element.textContent;
+        language = match.groups.language;
+        for (const option of (match.groups.options ?? "").split("}{"))
+          if (option === "number") shouldNumberLines = true;
+          else if (option.match(/^[0-9,\-\.]+$/))
+            linesToHighlight = rangeParser(option);
+          else
+            console.error(
+              `${htmlPath}: Unrecognized option for code block: ${option}`
+            );
+      } else {
+        const [languageSegment, ...codeSegments] = element.textContent.split(
+          "`"
+        );
+        if (codeSegments.length === 0) continue;
+        code = codeSegments.join("`");
+        language = languageSegment;
+      }
+      let highlightedCode;
+      try {
+        highlightedCode = highlighter.codeToHtml(code, language);
       } catch (error) {
         console.error(`${htmlPath}: ${error}`);
         continue;
       }
-      const highlightedCode = JSDOM.fragment(highlightedText).querySelector(
-        "code"
-      );
-      for (const span of highlightedCode.querySelectorAll("span")) {
-        const style = span.getAttribute("style").replace(/color:/g, "fill:");
-        span.outerHTML = `<tspan style="${style}">${span.innerHTML}</tspan>`;
+      const highlightedLines = JSDOM.fragment(highlightedCode)
+        .querySelector("code")
+        .innerHTML.split("\n");
+      if (shouldNumberLines) {
+        const width = String(highlightedLines.length).length;
+        for (const [index, line] of Object.entries(highlightedLines)) {
+          const lineNumber = String(Number(index) + 1).padStart(width);
+          highlightedLines[
+            index
+          ] = `<span style="color: #aaa;">${lineNumber}</span>  ${line}`;
+        }
       }
-      code.innerHTML = highlightedCode.innerHTML;
+      for (const lineToHighlight of linesToHighlight) {
+        const index = lineToHighlight - 1;
+        if (highlightedLines[index] === undefined) {
+          console.error(
+            `${htmlPath}: Failed to highlight line out of range: ${lineToHighlight}`
+          );
+          continue;
+        }
+        highlightedLines[
+          index
+        ] = `<div style="background-color: #e0ffff;">${highlightedLines[index]}`;
+        highlightedLines[index + 1] = `</div>${
+          highlightedLines[index + 1] ?? ""
+        }`;
+      }
+      element.innerHTML = highlightedLines.join("\n");
     }
-    element.outerHTML = svg.outerHTML;
+
+    // Inline SVGs
+    for (const element of document.querySelectorAll(`img[src$=".svg"]`)) {
+      const svgPath = `${path.dirname(htmlPath)}/${element.getAttribute(
+        "src"
+      )}`;
+      if (!fs.existsSync(svgPath)) {
+        console.error(`${htmlPath}: Image not found: ${svgPath}`);
+        continue;
+      }
+      const svg = JSDOM.fragment(
+        fs.readFileSync(svgPath, "utf8")
+      ).querySelector("svg");
+      for (const code of svg.querySelectorAll("[highlight]")) {
+        let highlightedText;
+        try {
+          highlightedText = highlighter.codeToHtml(
+            code.textContent,
+            code.getAttribute("highlight")
+          );
+        } catch (error) {
+          console.error(`${htmlPath}: ${error}`);
+          continue;
+        }
+        const highlightedCode = JSDOM.fragment(highlightedText).querySelector(
+          "code"
+        );
+        for (const span of highlightedCode.querySelectorAll("span")) {
+          const style = span.getAttribute("style").replace(/color:/g, "fill:");
+          span.outerHTML = `<tspan style="${style}">${span.innerHTML}</tspan>`;
+        }
+        code.innerHTML = highlightedCode.innerHTML;
+      }
+      element.outerHTML = svg.outerHTML;
+    }
+
+    // Make URLs monospaced
+    for (const element of document.querySelectorAll("a"))
+      if (
+        element.innerHTML === element.getAttribute("href") ||
+        `mailto:${element.innerHTML}` === element.getAttribute("href")
+      )
+        element.innerHTML = `<code>${element.innerHTML}</code>`;
+
+    // Add Table of Contents
+    document.querySelector("#table-of-contents")?.insertAdjacentHTML(
+      "afterend",
+      `
+        <ul>
+          ${[
+            ...document.querySelectorAll(
+              "h1:not(:first-child), h2, h3, h4, h5, h6"
+            ),
+          ]
+            .filter((header) => header.textContent !== "Table of Contents")
+            .map(
+              (header) =>
+                `<li><a href="#${header.id}">${header.innerHTML}</a></li>`
+            )
+            .join("")}
+        </ul>
+      `
+    );
+
+    // Add title
+    const title = document.querySelector("main h1:first-child");
+    if (title !== null)
+      document
+        .querySelector("title")
+        .insertAdjacentText("afterbegin", `${title.textContent} · `);
+
+    // Render HTML
+    fs.writeFileSync(htmlPath, dom.serialize());
   }
-
-  // Make URLs monospaced
-  for (const element of document.querySelectorAll("a"))
-    if (
-      element.innerHTML === element.getAttribute("href") ||
-      `mailto:${element.innerHTML}` === element.getAttribute("href")
-    )
-      element.innerHTML = `<code>${element.innerHTML}</code>`;
-
-  // Add Table of Contents
-  document.querySelector("#table-of-contents")?.insertAdjacentHTML(
-    "afterend",
-    `<ul>
-        ${[
-          ...document.querySelectorAll(
-            "h1:not(:first-child), h2, h3, h4, h5, h6"
-          ),
-        ]
-          .filter((header) => header.textContent !== "Table of Contents")
-          .map(
-            (header) =>
-              `<li><a href="#${header.id}">${header.innerHTML}</a></li>`
-          )
-          .join("")}
-      </ul>`
-  );
-
-  // Add title
-  const title = document.querySelector("main h1:first-child");
-  if (title !== null)
-    document
-      .querySelector("title")
-      .insertAdjacentText("afterbegin", `${title.textContent} · `);
-}
+})();
