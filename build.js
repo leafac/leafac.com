@@ -172,8 +172,8 @@ ${markdown}
     // Make URLs monospaced
     for (const element of document.querySelectorAll("a"))
       if (
-        element.innerHTML === element.getAttribute("href") ||
-        `mailto:${element.innerHTML}` === element.getAttribute("href")
+        element.getAttribute("href") === element.innerHTML ||
+        element.getAttribute("href") === `mailto:${element.innerHTML}`
       )
         element.innerHTML = `<code>${element.innerHTML}</code>`;
 
