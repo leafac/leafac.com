@@ -1,5 +1,10 @@
 # Understanding the Type of `` clojure`call/cc ``
 
+
+```math
+\require{color}
+```
+
 <fieldset>
 <legend><strong>Pre-Requisites</strong></legend>
 
