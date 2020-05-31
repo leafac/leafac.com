@@ -1,11 +1,13 @@
 const glob = require("glob");
 const fs = require("fs");
 const path = require("path");
-const marked = require("marked");
+const remark = require("remark");
+const remarkHTML = require("remark-html");
 const { JSDOM } = require("jsdom");
+const mathJax = require("mathjax-node");
 const shiki = require("shiki");
 const rangeParser = require("parse-numeric-range");
-const katex = require("katex");
+const GitHubSlugger = require("github-slugger");
 
 (async () => {
   for (const markdownPath of glob.sync("**/*.md", {
@@ -41,28 +43,36 @@ ${markdown}
 </body>
 </html>
 `;
-    const html = marked(markdownWithTemplate);
+    const html = remark()
+      .use({
+        settings: { commonmark: true },
+      })
+      .use(remarkHTML)
+      .processSync(markdownWithTemplate).contents;
     const dom = new JSDOM(html);
     const document = dom.window.document;
 
     // Render mathematics
-    document.head.insertAdjacentHTML(
-      "beforeend",
-      `<link rel="stylesheet" href="/vendor/node_modules/katex/dist/katex.css">`
-    );
+    mathJax.config({ MathJax: { SVG: { font: "Asana-Math" } } });
     for (const element of document.querySelectorAll("code")) {
       const isBlock = element.parentElement.tagName === "PRE";
       if (isBlock) {
         if (element.className !== "language-math") continue;
-        const renderedMath = katex.renderToString(
-          `\\displaystyle ${element.textContent}`
-        );
+        const renderedMath = (
+          await mathJax.typeset({
+            math: element.textContent,
+            svg: true,
+          })
+        ).svg;
         element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
       } else {
         if (!element.textContent.startsWith("math`")) continue;
-        element.outerHTML = katex.renderToString(
-          element.textContent.slice("math`".length)
-        );
+        element.outerHTML = (
+          await mathJax.typeset({
+            math: element.textContent.slice("math`".length),
+            svg: true,
+          })
+        ).svg;
       }
     }
 
@@ -143,30 +153,7 @@ ${markdown}
         console.error(`${htmlPath}: Image not found: ${svgPath}`);
         continue;
       }
-      const svg = JSDOM.fragment(
-        fs.readFileSync(svgPath, "utf8")
-      ).querySelector("svg");
-      for (const code of svg.querySelectorAll("[highlight]")) {
-        let highlightedText;
-        try {
-          highlightedText = highlighter.codeToHtml(
-            code.textContent,
-            code.getAttribute("highlight")
-          );
-        } catch (error) {
-          console.error(`${htmlPath}: ${error}`);
-          continue;
-        }
-        const highlightedCode = JSDOM.fragment(highlightedText).querySelector(
-          "code"
-        );
-        for (const span of highlightedCode.querySelectorAll("span")) {
-          const style = span.getAttribute("style").replace(/color:/g, "fill:");
-          span.outerHTML = `<tspan style="${style}">${span.innerHTML}</tspan>`;
-        }
-        code.innerHTML = highlightedCode.innerHTML;
-      }
-      element.outerHTML = svg.outerHTML;
+      element.outerHTML = fs.readFileSync(svgPath, "utf8");
     }
 
     // Make URLs monospaced
@@ -176,6 +163,11 @@ ${markdown}
         element.getAttribute("href") === `mailto:${element.innerHTML}`
       )
         element.innerHTML = `<code>${element.innerHTML}</code>`;
+
+    // Slugify headings
+    const slugger = new GitHubSlugger();
+    for (const element of document.querySelectorAll("h1, h2, h3, h4, h5, h6"))
+      element.id = slugger.slug(element.textContent);
 
     // Add Table of Contents
     document.querySelector("#table-of-contents")?.insertAdjacentHTML(

@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "katex": "^0.11.1",
     "typeface-pt-mono": "0.0.72",
     "typeface-pt-serif": "0.0.72"
   }
