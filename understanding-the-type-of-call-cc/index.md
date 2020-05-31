@@ -1,9 +1,12 @@
 # Understanding the Type of `` clojure`call/cc ``
 
+<div style="display: none;">
 
 ```math
 \require{color}
 ```
+
+</div>
 
 <fieldset>
 <legend><strong>Pre-Requisites</strong></legend>
@@ -148,7 +151,7 @@ This expression reveals one fact about the type of `` clojure`call/cc ``:
 1. The result of calling `` clojure`k `` is being passed to `` clojure`string-length ``, so it must be a `` clojure`String ``:
 
    ```math
-   \texttt{(λ (k) (string-length (k 29)) 0)} :\\(\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
+   \texttt{(λ (k) (string}-\texttt{length (k 29)) 0)} : (\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
    ```
 
    And therefore:
@@ -206,7 +209,7 @@ So we conclude that `` clojure`call/cc `` outputs a value of type `` math`\alpha
 <fieldset>
 <legend><strong>Technical Terms</strong></legend>
 
-A type such as `` math`\alpha \cup \gamma `` is something called an [_union type_](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29).
+**[Union Type](https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29):** A type such as `` math`\alpha \cup \gamma ``.
 
 </fieldset>
 

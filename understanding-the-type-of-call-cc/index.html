@@ -15,12 +15,14 @@
 </header>
 <main>
 <h1 id="understanding-the-type-of-callcc">Understanding the Type of <code><span style="color: #000000">call/cc</span></code></h1>
+<div style="display: none;">
 <figure><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0.343ex" style="vertical-align: -0.171ex;" viewBox="0 -73.8 0 147.5" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\require{color}
 </title>
 <defs aria-hidden="true"></defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true"></g>
 </svg></figure>
+</div>
 <fieldset>
 <legend><strong>Pre-Requisites</strong></legend>
 <p><strong><a href="https://docs.racket-lang.org/guide/conts.html">First-class continuations</a> &amp; <a href="https://docs.racket-lang.org/reference/cont.html#%28def._%28%28lib._racket%2Fprivate%2Fmore-scheme..rkt%29._call%2Fcc%29%29"><code><span style="color: #000000">call/cc</span></code></a>.</strong> This article is only about the <em>type</em> of <code><span style="color: #000000">call/cc</span></code>, not about what it is or how it works.</p>
@@ -882,8 +884,8 @@
 <ol>
 <li>
 <p>The result of calling <code><span style="color: #000000">k</span></code> is being passed to <code><span style="color: #000000">string-length</span></code>, so it must be a <code><span style="color: #000000">String</span></code>:</p>
-<figure><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="100ex" height="7.009ex" style="vertical-align: -4.505ex; max-width: 60000px;" viewBox="0 -1078.4 43055.4 3017.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
-<title id="MathJax-SVG-1-Title">\texttt{(λ (k) (string-length (k 29)) 0)} :\\(\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
+<figure><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="69.284ex" height="3.676ex" style="vertical-align: -1.171ex;" viewBox="0 -1078.4 29830.6 1582.7" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<title id="MathJax-SVG-1-Title">\texttt{(λ (k) (string}-\texttt{length (k 29)) 0)} : (\texttt{Number} \rightarrow \textcolor{#09885A}{\texttt{String}}) \rightarrow \texttt{Number}
 </title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E1-ASANAMATHMAIN-28" d="M146 266c0 -281 109 -403 155 -460l-19 -21c-82 77 -114 116 -149 183c-48 90 -73 191 -73 298c0 276 165 409 222 460l19 -26c-58 -68 -155 -174 -155 -434Z"></path>
@@ -911,7 +913,6 @@
 <path stroke-width="1" id="E1-ASANAMATHMONOSPACE-1D682" d="M296 274c-14 3 -111 26 -115 27c-83 24 -129 90 -129 157c0 85 75 164 186 164c45 0 99 -12 140 -47c8 30 13 47 37 47c30 0 30 -25 30 -41v-132c0 -20 0 -41 -35 -41c-20 0 -31 6 -34 28c-6 31 -21 125 -139 125c-71 0 -120 -48 -120 -99c0 -47 38 -82 80 -94l81 -18 c78 -18 105 -25 146 -65c12 -13 48 -55 48 -119c0 -89 -72 -177 -188 -177c-64 0 -125 16 -165 46c-9 -32 -15 -46 -37 -46c-30 0 -30 25 -30 41v132c0 20 0 41 35 41c32 0 33 -18 34 -35c6 -102 109 -118 164 -118c79 0 122 59 122 111c0 87 -83 107 -111 113Z"></path>
 </defs>
 <g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
-<g transform="translate(13621,0)">
  <use xlink:href="#E1-ASANAMATHMAIN-28" x="0" y="216"></use>
 <g transform="translate(332,0)">
 <text font-family="monospace" stroke="none" transform="scale(71.759) matrix(1 0 0 -1 0 0)">λ</text>
@@ -926,29 +927,26 @@
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D692" x="5085" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D697" x="5610" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D690" x="6134" y="0"></use>
-<g transform="translate(6659,0)">
- <use xlink:href="#E1-ASANAMATHMAIN-2212" x="-52" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-2212" x="-556" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-2212" x="6881" y="0"></use>
+<g transform="translate(7709,0)">
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D695"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D68E" x="524" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D697" x="1049" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D690" x="1573" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D69D" x="2098" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D691" x="2622" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-28" x="3671" y="216"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D694" x="4003" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D7F8" x="5052" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D7FF" x="5551" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-29" x="6051" y="216"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-29" x="6383" y="216"></use>
+ <use xlink:href="#E1-ASANAMATHMONOSPACE-1D7F6" x="7240" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-29" x="7739" y="216"></use>
 </g>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D695" x="7213" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D68E" x="7737" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D697" x="8262" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D690" x="8786" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D69D" x="9311" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D691" x="9835" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-28" x="10884" y="216"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D694" x="11216" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D7F8" x="12265" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D7FF" x="12764" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-29" x="13264" y="216"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-29" x="13596" y="216"></use>
- <use xlink:href="#E1-ASANAMATHMONOSPACE-1D7F6" x="14453" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-29" x="14952" y="216"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-3A" x="15563" y="0"></use>
-</g>
-<g transform="translate(14905,-1589)">
- <use xlink:href="#E1-ASANAMATHMAIN-28" x="0" y="0"></use>
-<g transform="translate(332,0)">
+ <use xlink:href="#E1-ASANAMATHMAIN-3A" x="16059" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-28" x="16586" y="0"></use>
+<g transform="translate(16918,0)">
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D67D"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D69E" x="524" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D696" x="1049" y="0"></use>
@@ -956,8 +954,8 @@
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D68E" x="2098" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D69B" x="2622" y="0"></use>
 </g>
- <use xlink:href="#E1-ASANAMATHMAIN-2192" x="3757" y="0"></use>
-<g fill="#09885A" stroke="#09885A" transform="translate(5048,0)">
+ <use xlink:href="#E1-ASANAMATHMAIN-2192" x="20343" y="0"></use>
+<g fill="#09885A" stroke="#09885A" transform="translate(21635,0)">
 <g fill="#09885A" stroke="#09885A">
 <g fill="#09885A" stroke="#09885A">
 <g fill="#09885A" stroke="#09885A">
@@ -973,16 +971,15 @@
 </g>
 </g>
 </g>
- <use xlink:href="#E1-ASANAMATHMAIN-29" x="8195" y="0"></use>
- <use xlink:href="#E1-ASANAMATHMAIN-2192" x="8805" y="0"></use>
-<g transform="translate(10097,0)">
+ <use xlink:href="#E1-ASANAMATHMAIN-29" x="24782" y="0"></use>
+ <use xlink:href="#E1-ASANAMATHMAIN-2192" x="25392" y="0"></use>
+<g transform="translate(26683,0)">
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D67D"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D69E" x="524" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D696" x="1049" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D68B" x="1573" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D68E" x="2098" y="0"></use>
  <use xlink:href="#E1-ASANAMATHMONOSPACE-1D69B" x="2622" y="0"></use>
-</g>
 </g>
 </g>
 </svg></figure>
@@ -1386,7 +1383,7 @@
 </svg></em>.</p>
 <fieldset>
 <legend><strong>Technical Terms</strong></legend>
-<p>A type such as <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.36ex" height="2.509ex" style="vertical-align: -0.838ex;" viewBox="0 -719.6 2307.9 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<p><strong><a href="https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29">Union Type</a>:</strong> A type such as <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="5.36ex" height="2.509ex" style="vertical-align: -0.838ex;" viewBox="0 -719.6 2307.9 1080.4" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\alpha \cup \gamma</title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E1-ASANAMATHNORMAL-1D6FC" d="M400 -16c-52 1 -43 112 -43 147c-60 -67 -154 -147 -246 -147c-68 0 -88 49 -87 109c3 150 140 380 308 380c113 -1 90 -137 88 -216c36 58 91 134 105 202h11c8 -15 15 -31 22 -46c-38 -70 -84 -135 -134 -197c0 -32 -7 -161 38 -161c27 0 51 24 70 42h13v-13 c-32 -30 -99 -100 -145 -100zM284 437c-109 0 -184 -235 -185 -322c-1 -45 10 -87 63 -87c71 0 152 85 195 136c1 60 14 273 -73 273Z"></path>
@@ -1398,7 +1395,7 @@
  <use xlink:href="#E1-ASANAMATHMAIN-222A" x="816" y="0"></use>
  <use xlink:href="#E1-ASANAMATHNORMAL-1D6FE" x="1726" y="0"></use>
 </g>
-</svg> is something called an <a href="https://docs.racket-lang.org/ts-guide/types.html#%28part._.Union_.Types%29"><em>union type</em></a>.</p>
+</svg>.</p>
 </fieldset>
 <p>When deriving the type of <code><span style="color: #000000">call/cc</span></code> in this article, we had to constrain <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.381ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 594.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\alpha</title>
