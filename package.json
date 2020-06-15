@@ -1,7 +1,7 @@
 {
   "scripts": {
     "start": "concurrently 'nodemon --ext md,js,svg build.js' 'live-server --wait=2000'",
-    "test": "node build && prettier --check '**/*.{md,js,css}'"
+    "test": "prettier --check '**/*.{md,js,css}' && node build"
   },
   "dependencies": {
     "concurrently": "^5.2.0",
