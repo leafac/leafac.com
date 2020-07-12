@@ -17,6 +17,7 @@ const GitHubSlugger = require("github-slugger");
     const htmlPath = markdownPath.replace(/\.md$/, ".html");
     const markdown = fs.readFileSync(markdownPath, "utf8");
     const markdownWithTemplate = `<!DOCTYPE html>
+
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
