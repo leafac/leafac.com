@@ -53,28 +53,26 @@ ${markdown}
     const document = dom.window.document;
 
     // Render mathematics
-    mathJax.config({ MathJax: { SVG: { font: "Asana-Math" } } });
-    for (const element of document.querySelectorAll("code")) {
-      const isBlock = element.parentElement.tagName === "PRE";
-      if (isBlock) {
-        if (element.className !== "language-math") continue;
-        const renderedMath = (
-          await mathJax.typeset({
-            math: element.textContent,
-            svg: true,
-          })
-        ).svg;
-        element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
-      } else {
-        if (!element.textContent.startsWith("math`")) continue;
-        element.outerHTML = (
-          await mathJax.typeset({
-            math: element.textContent.slice("math`".length),
-            svg: true,
-          })
-        ).svg;
-      }
+    for (const element of document.querySelectorAll(
+      "pre > code.language-math"
+    )) {
+      const renderedMath = (
+        await mathJax.typeset({
+          math: element.textContent,
+          svg: true,
+        })
+      ).svg;
+      element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
     }
+    for (const element of [
+      ...document.querySelectorAll(":not(pre) > code"),
+    ].filter((element) => element.textContent.startsWith("math`")))
+      element.outerHTML = (
+        await mathJax.typeset({
+          math: element.textContent.slice("math`".length),
+          svg: true,
+        })
+      ).svg;
 
     // Add syntax highlighting
     const highlighter = await shiki.getHighlighter({ theme: "light_plus" });
