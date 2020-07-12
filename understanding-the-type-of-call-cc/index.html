@@ -120,11 +120,15 @@
 </g>
 </svg></figure>
 <p>Then we consider the following expression:</p>
-<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? </span><span style="color: #098658">0</span><span style="color: #000000">)</span>
-<span style="color: #000000">#t</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">&gt; (zero? </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code></pre></td></tr>
+<tr><td><pre><code><span style="color: #000000">#t</span></code></pre></td></tr>
+          </tbody></table>
 <p>We may surround the <code><span style="color: #098658">0</span></code> in this expression with an use of <code><span style="color: #000000">call/cc</span></code> while preserving its output:</p>
-<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? (call/cc (λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
-<span style="color: #000000">#t</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">&gt; (zero? (call/cc (λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre></td></tr>
+<tr><td><pre><code><span style="color: #000000">#t</span></code></pre></td></tr>
+          </tbody></table>
 <p>The output is preserved because <code><span style="color: #000000">call/cc</span></code> calls <code><span style="color: #000000">(λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code> with the current continuation, but <code><span style="color: #000000">(λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code> ignores its parameter and returns <code><span style="color: #098658">0</span></code>.</p>
 <fieldset>
 <legend><strong>Note</strong></legend>
@@ -481,8 +485,10 @@
 </li>
 </ol>
 <p>To proceed, we want to know more about the type of <code><span style="color: #000000">k</span></code>, so we modify the example expression such that the function passed to <code><span style="color: #000000">call/cc</span></code> uses <code><span style="color: #000000">k</span></code>:</p>
-<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (k </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
-<span style="color: #000000">#f</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (k </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre></td></tr>
+<tr><td><pre><code><span style="color: #000000">#f</span></code></pre></td></tr>
+          </tbody></table>
 <p>The output changed from <code><span style="color: #000000">#t</span></code> to <code><span style="color: #000000">#f</span></code> because the <code><span style="color: #000000">(k </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code> takes execution back to the outer <code><span style="color: #000000">zero?</span></code>, skipping over the remainder of the function, which in this case is just the <code><span style="color: #098658">0</span></code>.</p>
 <p>This expression reveals two facts about the type of <code><span style="color: #000000">call/cc</span></code>:</p>
 <ol>
@@ -878,8 +884,10 @@
 <line stroke-linecap="square" stroke-width="75" y1="37" x2="37" x1="37" y2="1218" transform="translate(0,-275)"></line>
 </g>
 </svg> is the return type of <code><span style="color: #000000">k</span></code>, so next we consider how the result of the call to <code><span style="color: #000000">k</span></code> may be used, for example:</p>
-<pre><code class="language-clojure"><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (string-length (k </span><span style="color: #098658">29</span><span style="color: #000000">)) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
-<span style="color: #000000">#f</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (string-length (k </span><span style="color: #098658">29</span><span style="color: #000000">)) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre></td></tr>
+<tr><td><pre><code><span style="color: #000000">#f</span></code></pre></td></tr>
+          </tbody></table>
 <p>The result of this expression is the same as before (<code><span style="color: #000000">#f</span></code>) because <code><span style="color: #000000">k</span></code> causes execution to skip over the rest of the function that is passed to <code><span style="color: #000000">call/cc</span></code>, including the call to <a href="https://docs.racket-lang.org/reference/strings.html#%28def._%28%28quote._~23~25kernel%29._string-length%29%29"><code><span style="color: #000000">string-length</span></code></a>.</p>
 <p>This expression reveals one fact about the type of <code><span style="color: #000000">call/cc</span></code>:</p>
 <ol>
@@ -1072,8 +1080,10 @@
 </li>
 </ol>
 <p>Finally, we observe that there’s nothing <em>special</em> about the use of <code><span style="color: #000000">Number</span></code>s and <code><span style="color: #000000">String</span></code>s in the expressions we considered so far. We may, for example, swap them:</p>
-<pre><code class="language-clojure"><span style="color: #000000">&gt; (string-length (call/cc (λ (k) (zero? (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">)) </span><span style="color: #A31515">"Facchinetti"</span><span style="color: #000000">)))</span>
-<span style="color: #098658">7</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">&gt; (string-length (call/cc (λ (k) (zero? (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">)) </span><span style="color: #A31515">"Facchinetti"</span><span style="color: #000000">)))</span></code></pre></td></tr>
+<tr><td><pre><code><span style="color: #098658">7</span></code></pre></td></tr>
+          </tbody></table>
 <p>This expression reveals the final fact about the type of <code><span style="color: #000000">call/cc</span></code>:</p>
 <ol>
 <li>
@@ -1430,8 +1440,10 @@
 </g>
 </svg>, but the type system in Typed Racket may.</p>
 <p>This more general form is useful to type programs like the following:</p>
-<pre><code class="language-clojure"><span style="color: #000000">&gt; (write (call/cc (λ (k) (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span>
-<span style="color: #A31515">"Leandro"</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">&gt; (write (call/cc (λ (k) (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre></td></tr>
+<tr><td><pre><code><span style="color: #A31515">"Leandro"</span></code></pre></td></tr>
+          </tbody></table>
 <p>In this program <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.488ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 640.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\alpha</title>
 <defs aria-hidden="true">
@@ -1485,9 +1497,13 @@
 <fieldset>
 <legend><strong>Note</strong></legend>
 <p>This kind of limitation in classical Hindley–Milner type systems occurs in many situations beyond <code><span style="color: #000000">call/cc</span></code>. For example, in classical Hindley–Milner type systems the types of the <em>then</em> and <em>else</em> branches of a conditional must agree:</p>
-<pre><code class="language-clojure"><span style="color: #000000">(</span><span style="color: #0000FF">if</span><span style="color: #000000"> &lt;condition&gt; </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">(</span><span style="color: #0000FF">if</span><span style="color: #000000"> &lt;condition&gt; </span><span style="color: #098658">0</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code></pre></td></tr>
+          </tbody></table>
 <p>But in Typed Racket their types may be different, for example:</p>
-<pre><code class="language-clojure"><span style="color: #000000">(</span><span style="color: #0000FF">if</span><span style="color: #000000"> &lt;condition&gt; </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code></pre>
+<table class="listing">
+            <tbody><tr><td><pre><code><span style="color: #000000">(</span><span style="color: #0000FF">if</span><span style="color: #000000"> &lt;condition&gt; </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code></pre></td></tr>
+          </tbody></table>
 </fieldset>
 <h1 id="acknowledgements">Acknowledgements</h1>
 <p>I thank the following people for their comments: Scott Smith, Sorawee Porncharoenwase, Dario Hamidi, and A. B. McLin.</p>
