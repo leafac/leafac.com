@@ -18,7 +18,6 @@ a {
 
 h1,
 h2 {
-  line-height: 1.3;
   margin-top: 2em;
 }
 
@@ -32,13 +31,58 @@ h2 {
   font-style: italic;
 }
 
+figure,
+.listing {
+  margin: 2em 0;
+}
+
 figure {
   text-align: center;
-  margin: 2em 0;
+}
+
+figure > table {
+  margin: 0 auto;
 }
 
 figcaption {
   font-style: italic;
+}
+
+pre {
+  font-size: 0.75em;
+  white-space: pre-wrap;
+}
+
+.listing {
+  width: 100%;
+}
+
+.listing pre {
+  margin: 0;
+}
+
+.listing .line-number {
+  text-align: right;
+  vertical-align: top;
+  color: #aaa;
+}
+
+.listing .highlighted-line {
+  background-color: #e0ffff;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0 1em 0 0;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
 }
 
 img,
@@ -61,11 +105,6 @@ summary {
 fieldset {
   border: 1px solid #dfdfdf;
   border-radius: 3px;
-}
-
-pre {
-  white-space: pre-wrap;
-  font-size: 0.75em;
 }
 
 header a {
