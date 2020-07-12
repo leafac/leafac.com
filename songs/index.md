@@ -1,0 +1,405 @@
+# Songs
+
+# Now I’m Taking OOSE
+
+<audio src="https://archive.org/download/leafac-music/now-im-taking-oose.mp3" controls preload="none"></audio>
+
+<details>
+<summary>Background</summary>
+
+- In the fall of 2019, I taught a course called [Object-Oriented Software Engineering (OOSE)](https://oose-2019.leafac.com).
+- I sang this song to my students in a lecture.
+- It’s difficult to register for computer science courses at the Johns Hopkins University because there are too many students wanting to take them. Students are served on a first-come, first-served basis, and registration opens around 07:00 in a day in November.
+- One staff member was a robot that I built called [Roboose](https://oose-2019.leafac.com/staff/#robot-roboose), who was responsible for collecting assignments, publishing grades, and so forth.
+- OOSE is a project-based course, and students choose their own projects.
+- A lot of the course material was based on an example application called [TODOOSE](https://oose-2019.leafac.com/todoose).
+- Students had to read [directions](https://oose-2019.leafac.com/group-projects) before going to laboratory sessions.
+
+</details>
+
+<details>
+<summary>Lyrics</summary>
+
+```
+This is a song called “Now I’m Taking OOSE”
+Subtitle: “Procrastinating on Lecture Prep”
+
+Woke up really early
+In that cold November morning
+Registration opened
+And I was trying to get my seat
+In OOSE
+And I had to beat
+What seemed
+Like five thousand other people
+And I did it
+Sucks for them
+And I went back to sleep
+
+Now I’m reconsidering
+Was this a good idea
+’Cause instead of teaching Software Engineering
+The guy is just playing his guitar
+As if I cared
+’Cause I don’t
+I guess I’ll just pretend to laugh
+Ha ha ha
+Ha ha
+
+Now I’m taking OOSE
+My best friend is Roboose
+Working on a project I choose
+That sucks less than TODOOSE
+
+Now I’m taking OOSE
+
+Half of it are labs
+Group mate had garlic for lunch
+I’m sorry buddy
+But I don’t think that we can work under this condition
+Go brush your teeth
+And coming to think of it
+Maybe not even then
+’Cause you know,
+Would it kill you to read the iteration page before to the lab?
+Then we don’t have to explain everything to you…
+Not nice, buddy
+Ohhh, burn
+
+Now I’m taking OOSE
+My best friend is Roboose
+Working on a project I choose
+That sucks less than TODOOSE
+
+Now I’m taking OOSE
+My best friend is Roboose
+Working on a project I choose
+That sucks less than TODOOSE
+
+Now I’m taking OOSE
+Now I’m taking OOSE
+Now I’m taking OOSE
+Now I’m taking OOSE
+```
+
+</details>
+
+# Bushwhacking
+
+<video src="https://archive.org/download/bushwhacking/bushwhacking.mp4" controls preload="none"></video>
+
+# My First Robot
+
+<audio src="https://archive.org/download/leafac-music/my-first-robot.mp3" controls preload="none"></audio>
+
+# Agora Há Algo a Temer
+
+<audio src="https://archive.org/download/leafac-music/agora-ha-algo-a-temer.mp3" controls preload="none"></audio>
+
+<details>
+<summary>Lyrics</summary>
+
+```
+E D B
+A D E
+
+Observo à distância
+A situação no meu país
+E o que eu vejo
+Não me deixa feliz
+
+Salgadinhos verde-e-amarelo
+Tentando calar o povo
+Voltando trinta anos atrás
+Precisam aprender de novo
+
+E-B-C#m-A
+D E
+
+O medo agora é real
+Agora há algo a Temer
+O medo agora é real
+Agora há algo a Temer
+
+E D B
+A D E
+
+Pedem “Ordem e Progresso”
+P’ra homens ricos, burros e preconceituosos
+Isto às custas do resto
+Que passam fome e pagam o pato de borracha
+
+Somos vítimas de um golpe branco
+Em todos os sentidos da palavras
+Mas cacetetes não silenciam
+Nossa música de efeito moral
+
+E-B-C#m-A
+D E
+
+O medo agora é real
+Agora há algo a Temer
+O medo agora é real
+Agora há algo a Temer
+
+C#m C#m7+ C#m7 C#m6 B C°
+
+Pela minha mãe
+Pela minha filha, que hoje ’tá fazendo aniversário
+Pelos torturadores
+Por toda a família
+Também pelos fieis que vão na minha igreja
+E voluntariamente são assaltados
+Contra o desarmamento
+Pela maçonaria
+
+Eu acho os seus valores
+Tão defasados!
+
+E-B-C#m-A
+D E
+
+O medo agora é real
+Agora há algo a Temer
+O medo agora é real
+Agora há algo a Temer
+
+O medo agora é real
+Agora há algo a Temer
+O medo agora é real
+Agora há algo a Temer
+```
+
+</details>
+
+# O Fim da Tempestade
+
+<audio src="https://archive.org/download/leafac-music/o-fim-da-tempestade.mp3" controls preload="none"></audio>
+
+<details>
+<summary>Samples</summary>
+
+- <https://www.freesound.org/people/ermine/sounds/27418/>
+- <https://www.freesound.org/people/AVstudent/sounds/344994/>
+
+</details>
+
+# Criatividade
+
+<audio src="https://archive.org/download/leafac-music/criatividade.mp3" controls preload="none"></audio>
+
+<details>
+<summary>Lyrics</summary>
+
+```
+A minha criatividade
+Cria atividade
+As minhas criações
+Criam ações
+A minha criação se reflete
+No que minhas crias são
+E com a idade
+Aumenta a criativadade
+
+A
+A minha criatividade
+Cria atividade
+As minhas criações
+Criam ações
+A minha criação se reflete
+No que minhas crias são
+E com a idade
+Aumenta a criativadade
+
+F# G A
+Sem imaginação
+Eu fico sem chão
+Sem imaginação
+Eu fico sem chão
+Sem imaginação
+Eu fico sem chão
+A criatividade é minha cria
+
+E D
+
+E
+Eu me alimento
+De conhecimento
+Transformo informação
+Em inspiração
+Via transpiração
+
+O meu argumento
+É que não há atalho
+A canção
+É resultado de trabalho
+Não de piração
+
+O meu argumento
+É que conhecimento
+Cria transformação
+E o meu trabalho
+Transforma a forma
+Reação
+
+A
+A minha criatividade
+G         D
+Cria atividade
+A
+As minhas criações
+F      D
+Criam ações
+A
+A minha criação se reflete
+G                   D
+No que minhas crias são
+A
+E com a idade
+          F         G
+Aumenta a criativadade
+
+E Eb D C# C B Bb A
+A forma, em forma, informa o conteúdo
+Em forma, se forma, de forma informal
+Formula, reforma, transforma a formula
+De forma que, então, se torna real
+
+G A
+
+E Eb D C# C B Bb A
+A forma, em forma, informa o conteúdo
+Em forma, se forma, de forma informal
+Formula, reforma, transforma a formula
+De forma que, então, se torna real
+
+G A G F# F E D
+
+A
+A minha criatividade
+G         D
+Cria atividade
+A
+As minhas criações
+F      D
+Criam ações
+A
+A minha criação se reflete
+G                   D
+No que minhas crias são
+A
+E com a idade
+          F         G
+Aumenta a criativadade
+```
+
+</details>
+
+# United
+
+<audio src="https://archive.org/download/leafac-music/united.mp3" controls preload="none"></audio>
+
+<details>
+<summary>Lyrics</summary>
+
+```
+G     D             G
+A United bate qualquer preço
+G            D         B7
+Bate a concorrência também
+Em    Em7+            Em7    A7
+A United bate em seus clientes. Gente!
+C            D        G
+Cuidado que ela não bate bem!
+
+G7
+
+      C              F7+/C
+O que a United chama de remanejamento
+C            G
+Eu acho de UFC
+      C              F7+/C
+O que a United chama de planejamento
+G
+É esperar acontecer
+
+C             F7+/C
+Se eu fosse voar com a United
+C                    G
+Eu levaria um soco inglês
+C                       F7+/C
+O moço da segurança nem reclamaria, ele diria:
+G
+“Boa sorte p’ra vocês”
+
+C           G/B          Am
+E quando eu entrasse no avião
+  C             G/B            D
+E houvesse um passageiro em meu lugar
+C      G/B      Am
+Eu estaria preparado
+     D7  D7/4  D7
+P’ra duelar
+
+G     D             G
+A United bate qualquer preço
+G            D         B7
+Bate a concorrência também
+Em    Em7+            Em7    A7
+A United bate em seus clientes. Gente!
+C            D        G
+Cuidado que ela não bate bem!
+
+G7
+
+C                  F7+/C
+A United precisa encontrar
+C             G
+Uma solução pacífica
+      C                                 F7+/C
+A dificuldade que é a maior parte dos seus voos
+G
+É sobre o Atlântico
+
+C                                  F7+/C
+Truco, lutinha de dedo, *Mortal Kombat*,
+                    C       G
+Jogo de Tazo, um campeonato de Jenga
+ C                              F7+/C
+São todos jeitos muito mais recomendáveis
+G
+De resolver esta encrenca
+
+    C           G/B        Am
+Porque quando eu entrar no avião
+  C           G/B            D
+E houver um passageiro em meu lugar
+C            G/B      Am
+Eu não vou estar preparado
+     D7  D7/4  D7
+P’ra duelar
+
+G     D             G
+A United bate qualquer preço
+G            D         B7
+Bate a concorrência também
+Em    Em7+            Em7    A7
+A United bate em seus clientes. Gente!
+C            D        G
+Cuidado que ela não bate bem!
+
+> SOLO
+
+G     D             G
+A United bate qualquer preço
+G            D         B7
+Bate a concorrência também
+Em    Em7+            Em7    A7
+A United bate em seus clientes. Gente!
+C            D        G
+Cuidado que ela não bate bem!
+C            D        G
+Cuidado que ela não bate bem!
+```
+
+</details>

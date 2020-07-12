@@ -1,0 +1,112 @@
+@import "/vendor/node_modules/typeface-pt-serif/index.css";
+@import "/vendor/node_modules/typeface-pt-mono/index.css";
+
+body {
+  font: 16px/1.5 "PT Serif", serif;
+  max-width: 600px;
+  padding: 0 2em;
+  margin: 2em auto;
+}
+
+code {
+  font-family: "PT Mono", monospace;
+}
+
+a {
+  color: black;
+}
+
+h1,
+h2 {
+  margin-top: 2em;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h2 {
+  font-size: 1.25em;
+  font-weight: normal;
+  font-style: italic;
+}
+
+figure,
+.listing {
+  margin: 2em 0;
+}
+
+figure {
+  text-align: center;
+}
+
+figure > table {
+  margin: 0 auto;
+}
+
+figcaption {
+  font-style: italic;
+}
+
+pre {
+  font-size: 0.75em;
+  white-space: pre-wrap;
+}
+
+.listing {
+  width: 100%;
+}
+
+.listing pre {
+  margin: 0;
+}
+
+.listing .line-number {
+  text-align: right;
+  vertical-align: top;
+  color: #aaa;
+}
+
+.listing .highlighted-line {
+  background-color: #e0ffff;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0 1em 0 0;
+}
+
+th:last-child,
+td:last-child {
+  padding-right: 0;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 3px;
+}
+
+video,
+audio {
+  width: 100%;
+}
+
+summary {
+  cursor: pointer;
+}
+
+fieldset {
+  border: 1px solid #dfdfdf;
+  border-radius: 3px;
+}
+
+header a {
+  text-decoration: none;
+}
