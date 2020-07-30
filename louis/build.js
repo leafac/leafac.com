@@ -6,7 +6,11 @@ const T = {
     pt: "Baseado no câmbio de €1 = R$6,11 em 2020-07-30 15:46.",
   },
 };
-const sections = [
+const exchangeRate = {
+  en: 1.18,
+  pt: 6.11,
+};
+const inventory = [
   {
     en: "Textile",
     pt: "Têxtil",
@@ -316,10 +320,6 @@ const sections = [
     ],
   },
 ];
-const exchangeRate = {
-  en: 1.18,
-  pt: 6.11,
-};
 
 const fs = require("fs");
 
@@ -337,7 +337,7 @@ for (const language of ["en", "pt"])
 
 <p><a href="https://paypal.me/LeandroFacchinetti">Send Custom Amount</a></p>
 
-${sections
+${inventory
   .map(
     (section) => `
 <h2>${section[language]}</h2>
