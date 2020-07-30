@@ -1,9 +1,14 @@
 const T = {
   title: { en: "Louis’s Registry", pt: "Lista de Nascimento do Louis" },
   currencySymbol: { en: "$", pt: "R$" },
+  currencyIdentifier: { en: "USD", pt: "BRL" },
   exchangeExplanation: {
     en: "Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.",
     pt: "Baseado no câmbio de €1 = R$6,11 em 2020-07-30 15:46.",
+  },
+  sendCustomAmount: {
+    en: "Send Custom Amount",
+    pt: "Mandar Quantia Personalizada",
   },
 };
 const exchangeRate = {
@@ -335,7 +340,9 @@ for (const language of ["en", "pt"])
 <title>${T.title[language]}</title>
 <h1>${T.title[language]}</h1>
 
-<p><a href="https://paypal.me/LeandroFacchinetti">Send Custom Amount</a></p>
+<p><a href="https://paypal.me/LeandroFacchinetti">${
+      T.sendCustomAmount[language]
+    }</a></p>
 
 ${inventory
   .map(
@@ -348,11 +355,11 @@ ${section.items
       item.price * exchangeRate[language]
     );
     return `
-<p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}USD"><img src="images/${
-      item.image
-    }" alt="${item.title[language]}"><br>${item.title[language]}${
-      item.brand === undefined ? "" : ` · ${item.brand}`
-    }${
+<p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}${
+      T.currencyIdentifier[language]
+    }"><img src="images/${item.image}" alt="${item.title[language]}"><br>${
+      item.title[language]
+    }${item.brand === undefined ? "" : ` · ${item.brand}`}${
       item.type === undefined
         ? ""
         : `<br><span class="type">${item.type[language]}</span>`
