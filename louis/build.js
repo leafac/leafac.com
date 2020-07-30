@@ -1,4 +1,11 @@
-const title = { en: "Louis’s Registry", pt: "Lista de Nascimento do Louis" };
+const T = {
+  title: { en: "Louis’s Registry", pt: "Lista de Nascimento do Louis" },
+  currencySymbol: { en: "$", pt: "R$" },
+  exchangeExplanation: {
+    en: "Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.",
+    pt: "Baseado no câmbio de €1 = R$6,11 em 2020-07-30 15:46.",
+  },
+};
 const sections = [
   {
     en: "Textile",
@@ -313,14 +320,6 @@ const exchangeRate = {
   en: 1.18,
   pt: 6.11,
 };
-const currencySymbol = {
-  en: "$",
-  pt: "R$",
-};
-const exchangeExplanation = {
-  en: "Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.",
-  pt: "Baseado no câmbio de €1 = R$6,11 em 2020-07-30 15:46.",
-};
 
 const fs = require("fs");
 
@@ -333,8 +332,8 @@ for (const language of ["en", "pt"])
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
 
-<title>${title[language]}</title>
-<h1>${title[language]}</h1>
+<title>${T.title[language]}</title>
+<h1>${T.title[language]}</h1>
 
 <p><a href="https://paypal.me/LeandroFacchinetti">Send Custom Amount</a></p>
 
@@ -358,7 +357,7 @@ ${section.items
         ? ""
         : `<br><span class="type">${item.type[language]}</span>`
     }<br><span class="price">${
-      currencySymbol[language]
+      T.currencySymbol[language]
     }${priceInForeignCurrency}</span></a></p>
 `;
   })
@@ -368,6 +367,6 @@ ${section.items
   )
   .join("")}
 
-<footer><p>${exchangeExplanation[language]}</p></footer>
+<footer><p>${T.exchangeExplanation[language]}</p></footer>
     `
   );
