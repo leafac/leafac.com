@@ -26,6 +26,11 @@ h2 {
   padding-top: 1em;
 }
 
+img {
+  border-radius: 3px;
+  max-width: 100%;
+}
+
 .items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
@@ -47,4 +52,26 @@ h2 {
 
 footer {
   font-size: 0.875em;
+}
+
+#modal {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  display: none;
+  transition: opacity ease-in-out;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal .content {
+  background-color: white;
+  border-radius: 3px;
+  padding: 1em 2em;
 }

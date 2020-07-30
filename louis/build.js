@@ -10,6 +10,12 @@ const T = {
     en: "Send Custom Amount",
     pt: "Mandar Quantia Personalizada",
   },
+  payPal: {
+    en: (amount) =>
+      `https://www.paypal.me/LeandroFacchinetti/${amount ?? ""}?locale.x=en_US`,
+    pt: (amount) =>
+      `https://www.paypal.me/LeandroFacchinetti/${amount ?? ""}?locale.x=pt_PT`,
+  },
 };
 const exchangeRate = {
   en: 1.18,
@@ -340,9 +346,7 @@ for (const language of ["en", "pt"])
 <title>${T.title[language]}</title>
 <h1>${T.title[language]}</h1>
 
-<p><a href="https://paypal.me/LeandroFacchinetti">${
-      T.sendCustomAmount[language]
-    }</a></p>
+<p><a href="${T.payPal[language]()}">${T.sendCustomAmount[language]}</a></p>
 
 ${inventory
   .map(
@@ -355,9 +359,9 @@ ${section.items
       item.price * exchangeRate[language]
     );
     return `
-<p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}${
-      T.currencyIdentifier[language]
-    }"><img src="images/${item.image}" alt="${item.title[language]}"><br>${
+<p class="item"><a href="${T.payPal[language](
+      `${priceInForeignCurrency}${T.currencyIdentifier[language]}`
+    )}"><img src="images/${item.image}" alt="${item.title[language]}"><br>${
       item.title[language]
     }${item.brand === undefined ? "" : ` · ${item.brand}`}${
       item.type === undefined
@@ -374,6 +378,10 @@ ${section.items
   )
   .join("")}
 
-<footer><p>${T.exchangeExplanation[language]}</p></footer>
+<footer><p>${T.exchangeExplanation[language]}<br>❤ Li & Lê & Lou</p></footer>
+<script>
+const language = "${language}";
+</script>
+<script src="scripts.js"></script>
     `
   );
