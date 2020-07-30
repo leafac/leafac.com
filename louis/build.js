@@ -336,27 +336,32 @@ for (const language of ["en", "pt"])
 <title>${title[language]}</title>
 <h1>${title[language]}</h1>
 
+<p><a href="https://paypal.me/LeandroFacchinetti">Send Custom Amount</a></p>
+
 ${sections
   .map(
     (section) => `
 <h2>${section[language]}</h2>
 <div class="items">
 ${section.items
-  .map(
-    (item) => `
-<p class="item"><a href="#"><img src="images/${item.image}" alt="${
-      item.title[language]
-    }"><br>${item.title[language]}${
+  .map((item) => {
+    const priceInForeignCurrency = Math.ceil(
+      item.price * exchangeRate[language]
+    );
+    return `
+<p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}USD"><img src="images/${
+      item.image
+    }" alt="${item.title[language]}"><br>${item.title[language]}${
       item.brand === undefined ? "" : ` · ${item.brand}`
     }${
       item.type === undefined
         ? ""
         : `<br><span class="type">${item.type[language]}</span>`
-    }<br><span class="price">${currencySymbol[language]}${Math.ceil(
-      item.price * exchangeRate[language]
-    )}</span></a></p>
-`
-  )
+    }<br><span class="price">${
+      currencySymbol[language]
+    }${priceInForeignCurrency}</span></a></p>
+`;
+  })
   .join("")}
 </div>
     `
