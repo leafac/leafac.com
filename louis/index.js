@@ -1,4 +1,3 @@
-const exchangeRate = 1.18;
 const inventory = [
   {
     title: "Textile",
@@ -220,6 +219,7 @@ const inventory = [
     ],
   },
 ];
+const exchangeRate = 1.18;
 
 const fs = require("fs");
 
@@ -243,7 +243,7 @@ ${section.items
   .map((item) => {
     const priceInForeignCurrency = Math.ceil(item.price * exchangeRate);
     return `
-<p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}USD?locale.x=en_US"><img src="images/${
+<p class="item"><a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US"><img src="images/${
       item.image
     }" alt="${item.title}"><br>${item.title}${
       item.brand === undefined ? "" : ` · ${item.brand}`
@@ -260,7 +260,18 @@ ${section.items
   )
   .join("")}
 
-<footer><p>Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.<br>❤ Li & Lê & Lou</p></footer>
-<script src="scripts.js"></script>
+<footer><p>Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.<br>Made with ❤ by Li & Lê & Lou</p></footer>
+<script>
+for (const element of document.querySelectorAll("a"))
+  element.addEventListener("click", () => {
+    alert(\`🎉 Thanks for the gift! 🎉
+
+You’ll be redirected to PayPal now.
+
+1. Please leave a note mentioning which item is your gift.
+
+2. Please don’t tick the box that says “Paying for goods or a service?” or we’d have to pay a fee.\`);
+  });
+</script>
     `
 );
