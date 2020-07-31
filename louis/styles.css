@@ -42,10 +42,6 @@ img {
   height: 300px;
 }
 
-.item .type {
-  font-size: 0.875em;
-}
-
 .item .price {
   font-weight: 600;
 }

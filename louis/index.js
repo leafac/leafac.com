@@ -242,15 +242,14 @@ ${inventory
 ${section.items
   .map((item) => {
     const priceInForeignCurrency = Math.ceil(item.price * exchangeRate);
+    const details = [item.brand, item.type].filter(
+      (detail) => detail !== undefined
+    );
     return `
 <p class="item"><a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US"><img src="images/${
       item.image
     }" alt="${item.title}"><br>${item.title}${
-      item.brand === undefined ? "" : ` · ${item.brand}`
-    }${
-      item.type === undefined
-        ? ""
-        : `<br><span class="type">${item.type}</span>`
+      details === [] ? "" : `<br><small>${details.join(" · ")}</small>`
     }<br><span class="price">\$${priceInForeignCurrency}</span></a></p>
 `;
   })
