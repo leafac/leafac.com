@@ -168,7 +168,7 @@ const inventory = [
         },
         brand: "Chicco",
         type: { en: "Pack of 2", pt: "Pacote de 2" },
-        price: 10,
+        price: 6,
         image: "chupetaverde0-6.jpg",
       },
       {
@@ -229,7 +229,7 @@ const inventory = [
         },
         brand: "Chicco",
         type: { en: "Fuchsia", pt: "Fúcsia" },
-        price: 60,
+        price: 70,
         image: "berco.jpg",
       },
       {
@@ -248,7 +248,7 @@ const inventory = [
           pt: "Colchão Next2Me",
         },
         brand: "Chicco",
-        price: 35,
+        price: 36,
         image: "5401a030f563371357b70316c795a82bc359c0ac.jpg",
       },
     ],

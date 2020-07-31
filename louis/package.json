@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "start": "nodemon --ext js build.js"
+  },
   "dependencies": {
     "typeface-dancing-script": "^1.1.4",
     "typeface-quicksand": "^1.1.4"
