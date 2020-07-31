@@ -1,230 +1,163 @@
 const exchangeRate = 1.18;
 const inventory = [
   {
-    en: "Textile",
-    pt: "Têxtil",
+    title: "Textile",
     items: [
       {
-        title: {
-          en: "Velcro Swaddle",
-          pt: "Swaddle de Velcro",
-        },
+        title: "Velcro Swaddle",
         brand: "Ergobaby",
-        type: { en: "Pineapple", pt: "Abacaxi" },
+        type: "Pineapple",
         price: 30,
         image: "ergobaby-swaddler-pineapples.jpg",
       },
       {
-        title: {
-          en: "Velcro Swaddle",
-          pt: "Swaddle de Velcro",
-        },
+        title: "Velcro Swaddle",
         brand: "Ergobaby",
-        type: { en: "Bamboo", pt: "Bambú" },
+        type: "Bamboo",
         price: 30,
         image: "71ABP+O5SLL._AC_SL1500_.jpg",
       },
       {
-        title: {
-          en: "Cotton Muslin (Large)",
-          pt: "Musselina de Algodão (Grande)",
-        },
+        title: "Cotton Muslin (Large)",
         brand: "Little Unicorn",
-        type: { en: "Fox", pt: "Raposa" },
+        type: "Fox",
         price: 19,
         image: "513420a-muselina-algodon-fox-120x120.jpg",
       },
       {
-        title: {
-          en: "Bamboo Muslin (Large)",
-          pt: "Musselina de Bambú (Grande)",
-        },
+        title: "Bamboo Muslin (Large)",
         brand: "Little Unicorn",
-        type: { en: "Insect", pt: "Insetos" },
+        type: "Insect",
         price: 20,
         image: "muselina-bambu-insectos-little-unicorn-120x120-1000x1000.jpg",
       },
       {
-        title: {
-          en: "Bamboo Muslin (Medium)",
-          pt: "Musselina de Bambú (Médio)",
-        },
+        title: "Bamboo Muslin (Medium)",
         brand: "bambinoMio",
-        type: { en: "Pack of 3", pt: "Pacote de 3" },
+        type: "Pack of 3",
         price: 15,
         image: "016a9173-102b-4973-b388-80a2faa241e6.jpg",
       },
       {
-        title: {
-          en: "Cotton Muslin (Small)",
-          pt: "Musselina de Algodão (Pequeno)",
-        },
+        title: "Cotton Muslin (Small)",
         brand: "Zara Home",
-        type: { en: "Pack of 3", pt: "Pacote de 3" },
+        type: "Pack of 3",
         price: 10,
         image: "3675767625_2_1_1.jpg",
       },
       {
-        title: {
-          en: "Cover for Changing Pad",
-          pt: "Capa para Muda Fraldas",
-        },
+        title: "Cover for Changing Pad",
         brand: "IKEA",
-        type: { en: "Bunny", pt: "Coelho" },
+        type: "Bunny",
         price: 6,
         image:
           "vaedra-cover-for-babycare-mat-rabbit-pattern-white__0717411_PE731232_S5.jpg",
       },
       {
-        title: {
-          en: "Cover for Changing Pad",
-          pt: "Capa para Muda Fraldas",
-        },
+        title: "Cover for Changing Pad",
         brand: "IKEA",
-        type: { en: "Strawberry", pt: "Morango" },
+        type: "Strawberry",
         price: 6,
         image: "vaedra-cover-for-babycare-mat__0774098_PE756614_S5.jpg",
       },
       {
-        title: {
-          en: "Cotton Blanket",
-          pt: "Manta de Algodão",
-        },
+        title: "Cotton Blanket",
         brand: "IKEA",
-        type: { en: "Yellow", pt: "Amarela" },
+        type: "Yellow",
         price: 10,
         image: "solgul-blanket-dark-yellow__0603279_PE680716_S5.jpg",
       },
       {
-        title: {
-          en: "Fitted Sheet Next2Me",
-          pt: "Lençol de Elástico Next2Me",
-        },
+        title: "Fitted Sheet Next2Me",
         brand: "Chicco",
-        type: { en: "Pack of 2", pt: "Pacote de 2" },
+        type: "Pack of 2",
         price: 25,
         image: "8051761935485-1-chicco-spannbettlaken-next2me.jpg",
       },
     ],
   },
   {
-    en: "Toys",
-    pt: "Brinquedos",
+    title: "Toys",
     items: [
       {
-        title: {
-          en: "Lapidou Octopus",
-          pt: "Polvo Lapidou",
-        },
+        title: "Lapidou Octopus",
         brand: "Nattou",
-        type: { en: "Grey", pt: "Cinzento" },
+        type: "Grey",
         price: 17,
         image: "lapidoupolvocinza.jpg",
       },
       {
-        title: {
-          en: "Playmat",
-          pt: "Tapete de Exercício",
-        },
+        title: "Playmat",
         brand: "IKEA",
         price: 25,
         image: "klappa-play-mat__0606299_PE682202_S5.jpg",
       },
       {
-        title: {
-          en: "Teether",
-          pt: "Mordedor",
-        },
+        title: "Teether",
         brand: "Sophie la Girafe",
         price: 18,
         image: "Girafa-Sofia.jpg",
       },
       {
-        title: {
-          en: "Silicone Pacifier",
-          pt: "Chupeta de Silicone",
-        },
+        title: "Silicone Pacifier",
         brand: "Chicco",
-        type: { en: "Pack of 2", pt: "Pacote de 2" },
+        type: "Pack of 2",
         price: 6,
         image: "chupetaverde0-6.jpg",
       },
       {
-        title: {
-          en: "Pacifier Clip",
-          pt: "Clip de Chupeta",
-        },
-        type: { en: "Wood", pt: "Madeira" },
+        title: "Pacifier Clip",
+        type: "Wood",
         price: 12,
         image: "clip_chupeta_estrela_cinza.jpg",
       },
     ],
   },
   {
-    en: "Travel",
-    pt: "Passeio",
+    title: "Travel",
     items: [
       {
-        title: {
-          en: "Street Duo Adventure",
-          pt: "Conjunto de Rua Duo Adventure",
-        },
+        title: "Street Duo Adventure",
         brand: "ZY SAFE",
-        type: { en: "Grey/Beige", pt: "Cinzento/Bege" },
+        type: "Grey/Beige",
         price: 200,
         image: "carrinho.jpg",
       },
       {
-        title: {
-          en: "Traveling Changing Pad",
-          pt: "Tapete Muda Fraldas",
-        },
+        title: "Traveling Changing Pad",
         brand: "bambinoMio",
-        type: { en: "Snail", pt: "Caracol" },
+        type: "Snail",
         price: 18,
         image: "change-mat-snail-suprise-web_1080x.jpg",
       },
       {
-        title: {
-          en: "Baby Carrier Boppy Comfyfit",
-          pt: "Marsúpio Boppy Comfyfit",
-        },
+        title: "Baby Carrier Boppy Comfyfit",
         brand: "Chicco",
-        type: { en: "Grey", pt: "cinzento" },
+        type: "Grey",
         price: 40,
         image: "portabebe.jpg",
       },
     ],
   },
   {
-    en: "Furniture",
-    pt: "Mobília",
+    title: "Furniture",
     items: [
       {
-        title: {
-          en: "Bassinet Next2Me",
-          pt: "Berço Next2Me",
-        },
+        title: "Bassinet Next2Me",
         brand: "Chicco",
-        type: { en: "Fuchsia", pt: "Fúcsia" },
+        type: "Fuchsia",
         price: 70,
         image: "berco.jpg",
       },
       {
-        title: {
-          en: "Changing Table + Changing Pad",
-          pt: "Trocador + Muda Fraldas",
-        },
+        title: "Changing Table + Changing Pad",
         brand: "IKEA",
-        type: { en: "White", pt: "Branco" },
+        type: "White",
         price: 40,
         image: "gulliver-changing-table__0627301_PE693285_S5.jpg",
       },
       {
-        title: {
-          en: "Mattress Next2Me",
-          pt: "Colchão Next2Me",
-        },
+        title: "Mattress Next2Me",
         brand: "Chicco",
         price: 36,
         image: "5401a030f563371357b70316c795a82bc359c0ac.jpg",
@@ -232,77 +165,55 @@ const inventory = [
     ],
   },
   {
-    en: "Hygiene",
-    pt: "Higiene",
+    title: "Hygiene",
     items: [
       {
-        title: {
-          en: "Wet Bag (Medium)",
-          pt: "Saco para Fraldas (Médio)",
-        },
+        title: "Wet Bag (Medium)",
         brand: "Baba+Boo",
-        type: { en: "Seagulls", pt: "Gaivotas" },
+        type: "Seagulls",
         price: 20,
         image:
           "baba-boo-small-cloth-nappy-storage-bag-seagulls-6949-p[ekm]1000x1000[ekm].jpg",
       },
       {
-        title: {
-          en: "Pail Liner",
-          pt: "Saco de Roupa Suja ",
-        },
+        title: "Pail Liner",
         brand: "Piriuki",
-        type: { en: "Farm", pt: "Fazenda" },
+        type: "Farm",
         price: 25,
         image: "saco_de_balde_piriuki_farm_1.jpg",
       },
       {
-        title: {
-          en: "Bamboo Reusable Wipes",
-          pt: "Toalhitas Reutilizáveis de Bambú",
-        },
+        title: "Bamboo Reusable Wipes",
         brand: "Piriuki",
-        type: { en: "Pack of 10", pt: "Pacote de 10" },
+        type: "Pack of 10",
         price: 17,
         image: "toalhitas_reutilizaveis_em_bambu.jpg",
       },
       {
-        title: {
-          en: "Nursing Pillow",
-          pt: "Almofada de Amamentação",
-        },
+        title: "Nursing Pillow",
         brand: "DonAlgodon",
-        type: { en: "Grey", pt: "Cinzento" },
+        type: "Grey",
         price: 25,
         image:
           "218555_3_cambrass-almofada-amamentacao-estrelas-cinza-35403.jpg",
       },
       {
-        title: {
-          en: "Diapers (Size 2)",
-          pt: "Fraldas (Tamanho 2)",
-        },
+        title: "Diapers (Size 2)",
         brand: "BamboNature",
-        type: { en: "Pack of 30", pt: "Pacote de 30" },
+        type: "Pack of 30",
         price: 9,
         image: "bambo_nature_fraldas_2_s_30unidades001.jpg",
       },
       {
-        title: {
-          en: "Wipes",
-          pt: "Toalhitas",
-        },
+        title: "Wipes",
         brand: "WaterWipes",
-        type: { en: "Pack of 240", pt: "Pacote de 240" },
+        type: "Pack of 240",
         price: 15,
         image: "dbb732dfbcd7188ec4107b064c4c2395.jpg",
       },
       {
-        title: {
-          en: "Reusable Diapers",
-          pt: "Fraldas Reutilizáveis",
-        },
-        type: { en: "Pack of 12", pt: "Pacote de 12" },
+        title: "Reusable Diapers",
+        type: "Pack of 12",
         price: 300,
         image: "BBjune20-385_1024x1024@2x.jpg",
       },
@@ -313,8 +224,9 @@ const inventory = [
 const fs = require("fs");
 
 const language = "en"; // FIXME:
+
 fs.writeFileSync(
-  `${language}.html`,
+  "index.html",
   `<!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
