@@ -1,26 +1,4 @@
-const T = {
-  title: { en: "Louis’s Registry", pt: "Lista de Nascimento do Louis" },
-  currencySymbol: { en: "$", pt: "R$" },
-  currencyIdentifier: { en: "USD", pt: "BRL" },
-  exchangeExplanation: {
-    en: "Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.",
-    pt: "Baseado no câmbio de €1 = R$6,11 em 2020-07-30 15:46.",
-  },
-  sendCustomAmount: {
-    en: "Send Custom Amount",
-    pt: "Mandar Quantia Personalizada",
-  },
-  payPal: {
-    en: (amount) =>
-      `https://www.paypal.me/LeandroFacchinetti/${amount ?? ""}?locale.x=en_US`,
-    pt: (amount) =>
-      `https://www.paypal.me/LeandroFacchinetti/${amount ?? ""}?locale.x=pt_PT`,
-  },
-};
-const exchangeRate = {
-  en: 1.18,
-  pt: 6.11,
-};
+const exchangeRate = 1.18;
 const inventory = [
   {
     en: "Textile",
@@ -334,19 +312,17 @@ const inventory = [
 
 const fs = require("fs");
 
-for (const language of ["en", "pt"])
-  fs.writeFileSync(
-    `${language}.html`,
-    `<!DOCTYPE html>
+const language = "en"; // FIXME:
+fs.writeFileSync(
+  `${language}.html`,
+  `<!DOCTYPE html>
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
 
-<title>${T.title[language]}</title>
-<h1>${T.title[language]}</h1>
-
-<p><a href="${T.payPal[language]()}">${T.sendCustomAmount[language]}</a></p>
+<title>Louis’s Registry</title>
+<h1>Louis’s Registry</h1>
 
 ${inventory
   .map(
@@ -355,21 +331,17 @@ ${inventory
 <div class="items">
 ${section.items
   .map((item) => {
-    const priceInForeignCurrency = Math.ceil(
-      item.price * exchangeRate[language]
-    );
+    const priceInForeignCurrency = Math.ceil(item.price * exchangeRate);
     return `
-<p class="item"><a href="${T.payPal[language](
-      `${priceInForeignCurrency}${T.currencyIdentifier[language]}`
-    )}"><img src="images/${item.image}" alt="${item.title[language]}"><br>${
-      item.title[language]
-    }${item.brand === undefined ? "" : ` · ${item.brand}`}${
+<p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}USD?locale.x=en_US"><img src="images/${
+      item.image
+    }" alt="${item.title[language]}"><br>${item.title[language]}${
+      item.brand === undefined ? "" : ` · ${item.brand}`
+    }${
       item.type === undefined
         ? ""
         : `<br><span class="type">${item.type[language]}</span>`
-    }<br><span class="price">${
-      T.currencySymbol[language]
-    }${priceInForeignCurrency}</span></a></p>
+    }<br><span class="price">\$${priceInForeignCurrency}</span></a></p>
 `;
   })
   .join("")}
@@ -378,10 +350,10 @@ ${section.items
   )
   .join("")}
 
-<footer><p>${T.exchangeExplanation[language]}<br>❤ Li & Lê & Lou</p></footer>
+<footer><p>Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.<br>❤ Li & Lê & Lou</p></footer>
 <script>
 const language = "${language}";
 </script>
 <script src="scripts.js"></script>
     `
-  );
+);
