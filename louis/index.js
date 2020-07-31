@@ -223,8 +223,6 @@ const inventory = [
 
 const fs = require("fs");
 
-const language = "en"; // FIXME:
-
 fs.writeFileSync(
   "index.html",
   `<!DOCTYPE html>
@@ -239,7 +237,7 @@ fs.writeFileSync(
 ${inventory
   .map(
     (section) => `
-<h2>${section[language]}</h2>
+<h2>${section.title}</h2>
 <div class="items">
 ${section.items
   .map((item) => {
@@ -247,12 +245,12 @@ ${section.items
     return `
 <p class="item"><a href="https://paypal.me/LeandroFacchinetti/${priceInForeignCurrency}USD?locale.x=en_US"><img src="images/${
       item.image
-    }" alt="${item.title[language]}"><br>${item.title[language]}${
+    }" alt="${item.title}"><br>${item.title}${
       item.brand === undefined ? "" : ` · ${item.brand}`
     }${
       item.type === undefined
         ? ""
-        : `<br><span class="type">${item.type[language]}</span>`
+        : `<br><span class="type">${item.type}</span>`
     }<br><span class="price">\$${priceInForeignCurrency}</span></a></p>
 `;
   })
@@ -263,9 +261,6 @@ ${section.items
   .join("")}
 
 <footer><p>Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.<br>❤ Li & Lê & Lou</p></footer>
-<script>
-const language = "${language}";
-</script>
 <script src="scripts.js"></script>
     `
 );
