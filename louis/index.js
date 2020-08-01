@@ -246,12 +246,17 @@ ${section.items
       (detail) => detail !== undefined
     );
     return `
-<p class="item"><a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US"><img src="images/${
-      item.image
-    }" alt="${item.title}"><br>${item.title}${
-      details === [] ? "" : `<br><small>${details.join(" · ")}</small>`
-    }<br><span class="price">\$${priceInForeignCurrency}</span></a></p>
-`;
+<p class="item">
+<a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US">
+<img src="images/${item.image}" alt="${item.title}">
+<br>
+${item.title}
+${details === [] ? "" : `<br><small>${details.join(" · ")}</small>`}
+<br>
+<strong>\$${priceInForeignCurrency}</strong>
+</a>
+</p>
+    `;
   })
   .join("")}
 </div>
@@ -259,7 +264,13 @@ ${section.items
   )
   .join("")}
 
-<footer><p>Based on the exchange rate of €1 = $1.18 on 2020-07-30 15:46.<br>Made with ❤ by Li & Lê & Lou</p></footer>
+<footer>
+<p>
+Based on the exchange rate of €1 = \$${exchangeRate} on 2020-07-30 15:46.<br>
+Made with ❤ by Li & Lê & Lou
+</p>
+</footer>
+
 <script>
 for (const element of document.querySelectorAll("a"))
   element.addEventListener("click", () => {
