@@ -246,10 +246,10 @@ ${section.items
       (detail) => detail !== undefined
     );
     return `
-<p class="item${item.given === true ? " given" : ""}">
+<p class="item${item.gifted === true ? " gifted" : ""}">
 <span class="content">
 ${
-  item.given === true
+  item.gifted === true
     ? ""
     : `<a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US">`
 }
@@ -259,7 +259,7 @@ ${item.title}
 ${details === [] ? "" : `<br><small>${details.join(" · ")}</small>`}
 <br>
 <strong>\$${priceInForeignCurrency}</strong>
-${item.given === true ? "" : `</a>`}
+${item.gifted === true ? "" : `</a>`}
 </span>
 </p>
     `;
