@@ -262,7 +262,7 @@ Linda Renner invites you to Louis’s baby shower!
 <input type="email" name="email" placeholder="Your email…" required>
 <button href="mailto:linda.vale.renner@gmail.com"><strong>RSVP</strong></button>
 <br>
-We’ll send you an email with a link on the day of the party
+I’ll send you an email with a link on the day of the party
 </p>
 </form>
 
