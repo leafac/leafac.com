@@ -256,7 +256,7 @@ Linda Renner invites you to Louis’s baby shower!
 <img src="6348bbf1de1a1e3ec83eb616625c2e2c.jpg" alt="" width="300">
 </p>
 
-<form method="POST" action="https://louis-baby-shower.herokuapp.com/">
+<form id="rsvp" method="POST" action="https://louis-baby-shower.herokuapp.com/">
 <p>
 <input type="text" name="name" placeholder="Your name…" required>
 <input type="email" name="email" placeholder="Your email…" required>
@@ -312,17 +312,6 @@ Made with ❤ by Li & Lê & Lou
 </p>
 </footer>
 
-<script>
-for (const element of document.querySelectorAll(\`a[href^="https://paypal.me/"]\`))
-  element.addEventListener("click", () => {
-    alert(\`🎁 Thanks for the gift! 🎁
-
-You’ll be redirected to PayPal now.
-
-1. Please leave a note mentioning which item is your gift.
-
-2. Please don’t tick the box that says “Paying for goods or a service?” or we’d have to pay a fee.\`);
-  });
-</script>
-    `
+<script src="index.js"></script>
+  `
 );
