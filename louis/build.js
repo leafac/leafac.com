@@ -243,8 +243,30 @@ fs.writeFileSync(
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="styles.css">
 
-<title>Louis’s Registry</title>
-<h1>Louis’s Registry</h1>
+<title>Louis’s Baby Shower</title>
+<h1>Louis’s Baby Shower</h1>
+
+<p>
+Linda Renner invites you to Louis’s baby shower!
+<br>
+<strong>Thursday, 08/20 6PM</strong>
+</p>
+
+<p>
+<img src="6348bbf1de1a1e3ec83eb616625c2e2c.jpg" alt="" width="300">
+</p>
+
+<form method="POST" action="#">
+<p>
+We’ll email you the link to join the party.
+<br>
+<input type="text" name="name" placeholder="Your name…" required>
+<input type="email" name="email" placeholder="Your email…" required>
+<button href="mailto:linda.vale.renner@gmail.com"><strong>RSVP</strong></button>
+</p>
+</form>
+
+<h1>Registry</h1>
 
 ${inventory
   .map(
@@ -291,7 +313,7 @@ Made with ❤ by Li & Lê & Lou
 </footer>
 
 <script>
-for (const element of document.querySelectorAll("a"))
+for (const element of document.querySelectorAll(\`a[href^="https://paypal.me/"]\`))
   element.addEventListener("click", () => {
     alert(\`🎁 Thanks for the gift! 🎁
 

@@ -35,6 +35,17 @@ img {
   max-width: 100%;
 }
 
+input,
+button {
+  font-size: 1em;
+  font-family: "Quicksand", sans-serif;
+  background-color: transparent;
+  color: black;
+  padding: 0.25em;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
 .items {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, max-content));
