@@ -161,6 +161,20 @@ const inventory = [
         price: 36,
         image: "5401a030f563371357b70316c795a82bc359c0ac.jpg",
       },
+      {
+        title: "Bathtub",
+        brand: "Chicco",
+        price: 27,
+        image: "big_catalogo_1428941851_60521.jpg",
+      },
+      {
+        title: "Nursing Pillow",
+        brand: "DonAlgodon",
+        type: "Grey",
+        price: 25,
+        image:
+          "218555_3_cambrass-almofada-amamentacao-estrelas-cinza-35403.jpg",
+      },
     ],
   },
   {
@@ -182,19 +196,17 @@ const inventory = [
         image: "saco_de_balde_piriuki_farm_1.jpg",
       },
       {
+        title: "Nasal Aspirator",
+        brand: "Chicco",
+        price: 8,
+        image: "367b2369e98fe79c3bbf228b75c1532e1bc01531.jpg",
+      },
+      {
         title: "Bamboo Reusable Wipes",
         brand: "Piriuki",
         type: "Pack of 10",
         price: 17,
         image: "toalhitas_reutilizaveis_em_bambu.jpg",
-      },
-      {
-        title: "Nursing Pillow",
-        brand: "DonAlgodon",
-        type: "Grey",
-        price: 25,
-        image:
-          "218555_3_cambrass-almofada-amamentacao-estrelas-cinza-35403.jpg",
       },
       {
         title: "Diapers (Size 2)",
@@ -251,7 +263,7 @@ ${section.items
 ${
   item.gifted === true
     ? ""
-    : `<a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US">`
+    : `<a href="https://paypal.me/LVRenner/${priceInForeignCurrency}USD?locale.x=en_US">`
 }
 <img src="images/${item.image}" alt="${item.title}">
 <br>
