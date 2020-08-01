@@ -263,7 +263,7 @@ ${section.items
 <script>
 for (const element of document.querySelectorAll("a"))
   element.addEventListener("click", () => {
-    alert(\`🎉 Thanks for the gift! 🎉
+    alert(\`🎁 Thanks for the gift! 🎁
 
 You’ll be redirected to PayPal now.
 
