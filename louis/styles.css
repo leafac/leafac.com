@@ -11,6 +11,10 @@ a {
   text-decoration: none;
 }
 
+strong {
+  font-weight: 600;
+}
+
 h1,
 h2 {
   font-family: "Dancing Script", cursive;
@@ -37,13 +41,29 @@ img {
   justify-content: center;
 }
 
+.item {
+  position: relative;
+}
+
 .item img {
   width: auto;
   height: 300px;
 }
 
-strong {
-  font-weight: 600;
+.item.given .content {
+  filter: grayscale(1);
+  opacity: 0.5;
+}
+
+.item.given::before {
+  content: "Given";
+  position: absolute;
+  z-index: 1;
+  top: 150px;
+  left: 160px;
+  background-color: white;
+  padding: 0.5em 1em;
+  border-radius: 3px;
 }
 
 footer {

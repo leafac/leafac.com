@@ -246,15 +246,21 @@ ${section.items
       (detail) => detail !== undefined
     );
     return `
-<p class="item">
-<a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US">
+<p class="item${item.given === true ? " given" : ""}">
+<span class="content">
+${
+  item.given === true
+    ? ""
+    : `<a href="https://paypal.me/LindaRenner/${priceInForeignCurrency}USD?locale.x=en_US">`
+}
 <img src="images/${item.image}" alt="${item.title}">
 <br>
 ${item.title}
 ${details === [] ? "" : `<br><small>${details.join(" · ")}</small>`}
 <br>
 <strong>\$${priceInForeignCurrency}</strong>
-</a>
+${item.given === true ? "" : `</a>`}
+</span>
 </p>
     `;
   })
