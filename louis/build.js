@@ -272,7 +272,8 @@ ${item.given === true ? "" : `</a>`}
 
 <footer>
 <p>
-Based on the exchange rate of €1 = \$${exchangeRate} on 2020-07-30 15:46.<br>
+Based on the exchange rate of €1 = \$${exchangeRate} on 2020-07-30 15:46
+<br>
 Made with ❤ by Li & Lê & Lou
 </p>
 </footer>
