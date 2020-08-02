@@ -14,14 +14,18 @@ You’ll be redirected to PayPal now.
 document.querySelector("#rsvp").addEventListener("submit", async (event) => {
   event.preventDefault();
   const { target } = event;
-  for (const element of target.querySelectorAll("input, button"))
-    element.disabled = true;
-  const { status } = await fetch(target.action, {
-    method: target.method,
-    body: new FormData(target),
-  });
-  target.outerHTML =
+  const { method, action } = target;
+  const body = new URLSearchParams(new FormData(target));
+  target.innerHTML = `<p><strong>Please wait…</strong></p>`;
+  const { status } = await fetch(action, { method, body });
+  target.innerHTML =
     status === 200
       ? `<p><strong>Thanks for RSVPing</strong></p>`
-      : `<p><strong>Oops, something went wrong. Please contact me at <a href="mailto:linda.vale.renner@gmail.com">linda.vale.renner@gmail.com</a>.</strong></p>`;
+      : `
+          <p><strong>
+          Oops, something went wrong.
+          <br>
+          Please contact me at <a href="mailto:linda.vale.renner@gmail.com">linda.vale.renner@gmail.com</a>.
+          </strong></p>
+        `;
 });
