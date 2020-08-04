@@ -3,7 +3,7 @@
   "tasks": [
     {
       "type": "npm",
-      "script": "start",
+      "script": "develop",
       "problemMatcher": [],
       "group": {
         "kind": "build",
