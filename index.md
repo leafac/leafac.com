@@ -18,11 +18,11 @@ I live in Baltimore, Maryland, United States.
 
 **2020-03-04:** Published [**Collections Deep Equal**](https://www.npmjs.com/package/collections-deep-equal), a JavaScript & TypeScript package with collections like JavaScript’s native Maps and Sets, but using value equality ([`` js`util.isDeepStrictEqual() ``](https://nodejs.org/api/util.html#util_util_isdeepstrictequal_val1_val2)) instead of reference equality.
 
-**2020-03-02:** Updated [**Curriculum Vitae**](curriculum-vitae) and [**Understanding the Type of `` clojure`call/cc ``**](understanding-the-type-of-call-cc).
+**2020-03-02:** Updated [**Curriculum Vitae**](curriculum-vitae/) and [**Understanding the Type of `` clojure`call/cc ``**](understanding-the-type-of-call-cc/).
 
 **2020-02-27:** Switched the engine that produces this website from [**Jekyll**](https://jekyllrb.com) to [**Gatsby**](https://www.gatsbyjs.org). Gatsby is (marginally) [more popular](https://www.staticgen.com), its community seems to be more active, its [plugins](https://www.gatsbyjs.org/plugins/) produce better results (at the cost of more configuration and a steeper learning curve), and it’s in JavaScript instead of Ruby.
 
-**2020-01-25:** Recorded properly [**Now I’m Taking OOSE**](songs#now-im-taking-oose), a song from a lecture in Object-Oriented Software Engineering.
+**2020-01-25:** Recorded properly [**Now I’m Taking OOSE**](songs/#now-im-taking-oose), a song from a lecture in Object-Oriented Software Engineering.
 
 **2019-12-23:** Finished teaching [**Object-Oriented Software Engineering**](https://www.jhu-oose.com) at the Johns Hopkins University. [See course reviews](curriculum-vitae/oose.pdf).
 
@@ -41,16 +41,16 @@ I live in Baltimore, Maryland, United States.
 
 # Videos
 
-[Using Keynote to Draw Figures for LaTeX Documents](using-keynote-to-draw-figures-for-latex-documents)
+[Using Keynote to Draw Figures for LaTeX Documents](using-keynote-to-draw-figures-for-latex-documents/)
 
 # Articles
 
-[Understanding the Type of `` clojure`call/cc ``](understanding-the-type-of-call-cc)
+[Understanding the Type of `` clojure`call/cc ``](understanding-the-type-of-call-cc/)
 
-# [Songs](songs)
+# [Songs](songs/)
 
 # Contact
 
 <me@leafac.com> · <leandro@jhu.edu>
 
-# [Curriculum Vitae](curriculum-vitae)
+# [Curriculum Vitae](curriculum-vitae/)
