@@ -8,7 +8,7 @@ I live in Baltimore, Maryland, United States.
 
 # News
 
-**2020-05-03:** Yet again, switched the engine that produces this website. This time, from [**Gatsby**](https://www.gatsbyjs.org) to a [**custom script**](https://github.com/leafac/www.leafac.com/blob/c4ac98b750b0484ad850a67dffc967e70891be21/build.js). The custom script is simpler, easier to maintain, and includes only the features that are needed. No more GraphQL & friends, which may be great in some cases but are overkill for such a simple website. Instead, added new features, for example, syntax highlighting of code that appears inline and in SVGs.
+**2020-05-03:** Yet again, switched the engine that produces this website. This time, from [**Gatsby**](https://www.gatsbyjs.org) to a [**custom script**](https://github.com/leafac/leafac.com/blob/c4ac98b750b0484ad850a67dffc967e70891be21/build.js). The custom script is simpler, easier to maintain, and includes only the features that are needed. No more GraphQL & friends, which may be great in some cases but are overkill for such a simple website. Instead, added new features, for example, syntax highlighting of code that appears inline and in SVGs.
 
 **2020-03-21:** Published a completely reworked version of [**Kill the Newsletter!**](https://www.kill-the-newsletter.com) It was rewritten from Ruby & Sinatra to TypeScript & Express. Over the years _Kill the Newsletter!_ has been written and rewritten in several technology stacks, and this is the best version yet. Along the way, several bugs were fixed and improvements made.
 
