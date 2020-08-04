@@ -1,5 +1,5 @@
-@import "node_modules/typeface-dancing-script/index.css";
-@import "node_modules/typeface-quicksand/index.css";
+@import "typeface-dancing-script/index.css";
+@import "typeface-quicksand/index.css";
 
 body {
   font: 16px/1.5 "Quicksand", sans-serif;
