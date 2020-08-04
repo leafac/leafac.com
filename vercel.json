@@ -1,4 +1,5 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": true
+  "redirects": [
+    { "source": "/louis", "destination": "https://louis.leafac.com" }
+  ]
 }
