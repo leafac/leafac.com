@@ -2,7 +2,6 @@ const glob = require("glob");
 const fs = require("fs");
 const path = require("path");
 const remark = require("remark");
-const remarkHTML = require("remark-html");
 const { JSDOM } = require("jsdom");
 const mathJax = require("mathjax-node");
 const shiki = require("shiki");
@@ -47,7 +46,7 @@ ${markdown}
       .use({
         settings: { commonmark: true },
       })
-      .use(remarkHTML)
+      .use(require("remark-html"))
       .processSync(markdownWithTemplate).contents;
     const dom = new JSDOM(html);
     const document = dom.window.document;
