@@ -10,7 +10,13 @@ const GitHubSlugger = require("github-slugger");
 
 (async () => {
   for (const markdownPath of glob.sync("**/*.md", {
-    ignore: ["**/node_modules/**", "CODE_OF_CONDUCT.md", "README.md"],
+    ignore: [
+      "node_modules/**",
+      "typeface-pt-serif/**",
+      "typeface-pt-mono/**",
+      "CODE_OF_CONDUCT.md",
+      "README.md",
+    ],
   })) {
     // Render Markdown
     const htmlPath = markdownPath.replace(/\.md$/, ".html");
