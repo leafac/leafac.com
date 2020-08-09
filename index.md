@@ -1,4 +1,4 @@
-<figure><img alt="Avatar" src="avatar.png" width="300"></figure>
+<figure><img src="avatar.png" alt="Avatar" width="300"></figure>
 
 I’m a PhD candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 
@@ -30,7 +30,7 @@ I live in Baltimore, Maryland, United States.
 
 <details>
 <summary>Times</summary>
-<img alt="Baltimore Running Festival" src="news/baltimore-running-festival.png" width="600">
+<img src="news/baltimore-running-festival.png" alt="Baltimore Running Festival" width="600">
 </details>
 
 **2019-09:** Started teaching [**Object-Oriented Software Engineering**](https://www.jhu-oose.com) at the Johns Hopkins University.
