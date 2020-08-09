@@ -7,6 +7,7 @@ const mathJax = require("mathjax-node");
 const shiki = require("shiki");
 const rangeParser = require("parse-numeric-range");
 const GitHubSlugger = require("github-slugger");
+const html = require("tagged-template-noop");
 
 (async () => {
   for (const markdownPath of glob.sync("**/*.md", {
@@ -21,40 +22,51 @@ const GitHubSlugger = require("github-slugger");
     // Render Markdown
     const htmlPath = markdownPath.replace(/\.md$/, ".html");
     const markdown = fs.readFileSync(markdownPath, "utf8");
-    const markdownWithTemplate = `<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Leandro Facchinetti</title>
-<meta name="author" content="Leandro Facchinetti">
-<meta name="description" content="I’m a PhD candidate in Computer Science. I’m interested in writing & reading, music & video production, running, mindfulness, minimalism, and veganism.">
-<link rel="stylesheet" href="/styles.css">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-</head>
-<body>
-<header>
-
-# [Leandro Facchinetti](/)
-
-</header>
-<main>
-
-${markdown}
-
-</main>
-</body>
-</html>
-`;
-    const html = remark()
-      .use({
-        settings: { commonmark: true },
-      })
+    const renderedMarkdown = remark()
+      .use({ settings: { commonmark: true } })
       .use(require("remark-html"))
-      .processSync(markdownWithTemplate).contents;
-    const dom = new JSDOM(html);
+      .processSync(markdown).contents;
+    const documentSource = html`
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <meta charset="UTF-8" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <title>Leandro Facchinetti</title>
+          <meta name="author" content="Leandro Facchinetti" />
+          <meta
+            name="description"
+            content="I’m a PhD candidate in Computer Science. I’m interested in writing & reading, music & video production, running, mindfulness, minimalism, and veganism."
+          />
+          <link rel="stylesheet" href="/styles.css" />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+          />
+          <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        </head>
+        <body>
+          <header>
+            <h1><a href="/">Leandro Facchinetti</a></h1>
+          </header>
+          <main>
+            ${renderedMarkdown}
+          </main>
+        </body>
+      </html>
+    `;
+    const dom = new JSDOM(documentSource);
     const document = dom.window.document;
 
     // Render mathematics
