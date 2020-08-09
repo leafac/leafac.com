@@ -79,7 +79,7 @@ const html = require("tagged-template-noop");
           svg: true,
         })
       ).svg;
-      element.parentElement.outerHTML = `<figure>${renderedMath}</figure>`;
+      element.parentElement.outerHTML = html`<figure>${renderedMath}</figure>`;
     }
     for (const element of [
       ...document.querySelectorAll(":not(pre) > code"),
@@ -118,15 +118,19 @@ const html = require("tagged-template-noop");
         "code"
       );
       const listing = JSDOM.fragment(
-        `
+        html`
           <table class="listing">
             ${highlightedCode.innerHTML
               .split("\n")
               .map(
                 (line) =>
-                  `<tr><td><pre><code>${
-                    line === "" ? " " : line
-                  }</code></pre></td></tr>`
+                  html`
+                    <tr>
+                      <td>
+                        <pre><code>${line === "" ? " " : line}</code></pre>
+                      </td>
+                    </tr>
+                  `
               )
               .join("\n")}
           </table>
@@ -138,7 +142,11 @@ const html = require("tagged-template-noop");
           const lineNumber = Number(index) + 1;
           line.insertAdjacentHTML(
             "afterbegin",
-            `<td class="line-number"><pre><code>${lineNumber}</code></pre></td>`
+            html`
+              <td class="line-number">
+                <pre><code>${lineNumber}</code></pre>
+              </td>
+            `
           );
         }
       for (const lineToHighlight of linesToHighlight) {
@@ -190,7 +198,7 @@ const html = require("tagged-template-noop");
         element.getAttribute("href") === element.innerHTML ||
         element.getAttribute("href") === `mailto:${element.innerHTML}`
       )
-        element.innerHTML = `<code>${element.innerHTML}</code>`;
+        element.innerHTML = html`<code>${element.innerHTML}</code>`;
 
     // Slugify headings
     const slugger = new GitHubSlugger();
@@ -200,7 +208,7 @@ const html = require("tagged-template-noop");
     // Add Table of Contents
     document.querySelector("#table-of-contents")?.insertAdjacentHTML(
       "afterend",
-      `
+      html`
         <ul>
           ${[
             ...document.querySelectorAll(
@@ -210,7 +218,7 @@ const html = require("tagged-template-noop");
             .filter((header) => header.textContent !== "Table of Contents")
             .map(
               (header) =>
-                `<li><a href="#${header.id}">${header.innerHTML}</a></li>`
+                html`<li><a href="#${header.id}">${header.innerHTML}</a></li>`
             )
             .join("")}
         </ul>
