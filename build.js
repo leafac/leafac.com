@@ -65,7 +65,7 @@ const html = require("tagged-template-noop");
           </main>
         </body>
       </html>
-    `;
+    `.trim();
     const dom = new JSDOM(documentSource);
     const document = dom.window.document;
 
