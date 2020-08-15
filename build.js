@@ -59,6 +59,24 @@ const html = require("tagged-template-noop");
         <body>
           <header>
             <h1><a href="/">Leandro Facchinetti</a></h1>
+            <p>
+              ${Object.entries({
+                About: "/",
+                "Tutorial Videos":
+                  "https://www.youtube.com/playlist?list=PLQKZfz89aDZzx2STVeABdqG4zdR2UNGSs",
+                Articles: "/#articles",
+                Songs:
+                  "https://www.youtube.com/playlist?list=PLQKZfz89aDZw6naqDCSrS1KGq4fAls3Os",
+                GitHub: "https://github.com/leafac",
+                YouTube:
+                  "https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA",
+                News: "/#news",
+                "Curriculum Vitae": "/curriculum-vitae/",
+                Email: "mailto:me@leafac.com",
+              })
+                .map(([content, href]) => `<a href="${href}">${content}</a>`)
+                .join(" · ")}
+            </p>
           </header>
           <main>
             ${renderedMarkdown}
@@ -197,7 +215,7 @@ const html = require("tagged-template-noop");
       element.outerHTML = `<iframe width="600" height="338" src="https://www.youtube-nocookie.com/embed/${element.getAttribute(
         "src"
       )}?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-      // https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
+    // https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
 
     // Make URLs monospaced
     for (const element of document.querySelectorAll("a"))

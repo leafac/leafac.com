@@ -86,16 +86,10 @@ td:last-child {
 }
 
 img,
-svg,
-video {
+svg {
   max-width: 100%;
   height: auto;
   border-radius: 3px;
-}
-
-video,
-audio {
-  width: 100%;
 }
 
 summary {
@@ -105,6 +99,10 @@ summary {
 fieldset {
   border: 1px solid #dfdfdf;
   border-radius: 3px;
+}
+
+header {
+  text-align: center;
 }
 
 header a {
