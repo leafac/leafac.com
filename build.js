@@ -87,6 +87,32 @@ const html = require("tagged-template-noop");
     const dom = new JSDOM(documentSource);
     const document = dom.window.document;
 
+    // Slugify headings
+    const slugger = new GitHubSlugger();
+    for (const element of document.querySelectorAll("h1, h2, h3, h4, h5, h6"))
+      element.id = slugger.slug(element.textContent);
+
+    // Add Table of Contents
+    const tableOfContents = html`
+      <ul>
+        ${[
+          ...document.querySelectorAll(
+            "h1:not(:first-child), h2, h3, h4, h5, h6"
+          ),
+        ]
+          .filter((header) => header.textContent !== "Table of Contents")
+          .map(
+            (header) =>
+              html`<li><a href="#${header.id}">${header.innerHTML}</a></li>`
+          )
+          .join("")}
+      </ul>
+    `;
+    for (const element of document.querySelectorAll(
+      "code.language-table-of-contents"
+    ))
+      element.parentElement.outerHTML = tableOfContents;
+
     // Render mathematics
     for (const element of document.querySelectorAll(
       "pre > code.language-math"
@@ -200,22 +226,16 @@ const html = require("tagged-template-noop");
 
     // Inline SVGs
     for (const element of document.querySelectorAll(`img[src$=".svg"]`)) {
-      const svgPath = `${path.dirname(htmlPath)}/${element.getAttribute(
-        "src"
-      )}`;
+      const svgPath = path.join(
+        path.dirname(htmlPath),
+        element.getAttribute("src")
+      );
       if (!fs.existsSync(svgPath)) {
         console.error(`${htmlPath}: Image not found: ${svgPath}`);
         continue;
       }
       element.outerHTML = fs.readFileSync(svgPath, "utf8");
     }
-
-    // Render YouTube Videos
-    for (const element of document.querySelectorAll("youtube"))
-      element.outerHTML = `<iframe width="600" height="338" src="https://www.youtube-nocookie.com/embed/${element.getAttribute(
-        "src"
-      )}?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-    // https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
 
     // Make URLs monospaced
     for (const element of document.querySelectorAll("a"))
@@ -224,31 +244,6 @@ const html = require("tagged-template-noop");
         element.getAttribute("href") === `mailto:${element.innerHTML}`
       )
         element.innerHTML = html`<code>${element.innerHTML}</code>`;
-
-    // Slugify headings
-    const slugger = new GitHubSlugger();
-    for (const element of document.querySelectorAll("h1, h2, h3, h4, h5, h6"))
-      element.id = slugger.slug(element.textContent);
-
-    // Add Table of Contents
-    document.querySelector("#table-of-contents")?.insertAdjacentHTML(
-      "afterend",
-      html`
-        <ul>
-          ${[
-            ...document.querySelectorAll(
-              "h1:not(:first-child), h2, h3, h4, h5, h6"
-            ),
-          ]
-            .filter((header) => header.textContent !== "Table of Contents")
-            .map(
-              (header) =>
-                html`<li><a href="#${header.id}">${header.innerHTML}</a></li>`
-            )
-            .join("")}
-        </ul>
-      `
-    );
 
     // Add title
     const title = document.querySelector("main h1:first-child");

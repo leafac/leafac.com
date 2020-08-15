@@ -1,6 +1,7 @@
 # Curriculum Vitae
 
-# Table of Contents
+```table-of-contents
+```
 
 # Contact
 
