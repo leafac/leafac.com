@@ -1,5 +1,10 @@
 <figure><img src="avatar.png" alt="Avatar" width="300"></figure>
 
+[**GitHub**](https://github.com/leafac) ·
+[**YouTube**](https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA) ·
+[**Curriculum Vitae**](curriculum-vitae/) ·
+[**Email**](me@leafac.com)
+
 I’m a PhD candidate in Computer Science, at [The Programming Languages Laboratory](https://pl.cs.jhu.edu), at the [Johns Hopkins University](https://jhu.edu), advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
 
 I’m interested in writing & reading, music & video production, running, mindfulness, minimalism, and veganism.
@@ -39,18 +44,6 @@ I live in Baltimore, Maryland, United States.
 
 **2019-06:** Made public [**Yocto-CFA**](https://github.com/leafac/yocto-cfa), a work-in-progress dissertation.
 
-# Videos
-
-[Using Keynote to Draw Figures for LaTeX Documents](using-keynote-to-draw-figures-for-latex-documents/)
-
 # Articles
 
 [Understanding the Type of `` clojure`call/cc ``](understanding-the-type-of-call-cc/)
-
-# [Songs](songs/)
-
-# Contact
-
-<me@leafac.com> · <leandro@jhu.edu>
-
-# [Curriculum Vitae](curriculum-vitae/)

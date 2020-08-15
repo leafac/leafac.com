@@ -192,6 +192,13 @@ const html = require("tagged-template-noop");
       element.outerHTML = fs.readFileSync(svgPath, "utf8");
     }
 
+    // Render YouTube Videos
+    for (const element of document.querySelectorAll("youtube"))
+      element.outerHTML = `<iframe width="600" height="338" src="https://www.youtube-nocookie.com/embed/${element.getAttribute(
+        "src"
+      )}?modestbranding=1&rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      // https://www.youtube.com/embed?listType=playlist&list=PLC77007E23FF423C6
+
     // Make URLs monospaced
     for (const element of document.querySelectorAll("a"))
       if (
