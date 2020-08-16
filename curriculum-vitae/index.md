@@ -7,15 +7,15 @@
 # Education
 
 <details>
-<summary><strong>PhD Candidate.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. Computer Science. 2014-09 – 2020-08 (estimated).</summary>
+<summary><strong>Incomplete PhD.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. Computer Science. 2014-09 – 2020-07.</summary>
 
+- Ended without a degree due to a combination of life circumstances: end of funding, the pandemic, parental leave, moving abroad, and so forth.
 - Part of the [Programming Languages Laboratory](https://pl.cs.jhu.edu/).
 - Advised by [Dr. Scott Smith](https://www.cs.jhu.edu/~scott/).
-- Doing research in the field of program analysis, developing new techniques for control-flow analysis of higher-order functions.
+- Did research in the field of program analysis, developing new techniques for control-flow analysis of higher-order functions.
 - Goal as a researcher: to communicate technical ideas clearly to software developers in industry, avoiding jargon, obscure notation, and unnecessary complexity.
 - [See publications](#publications).
-- [See work-in-progress dissertation](https://github.com/leafac/yocto-cfa).
-- Completing the 5-year PhD program in 6 years because of time spent [teaching](#teaching-experience) (the average completion time in the department is 6 years).
+- [See partially completed dissertation](https://github.com/leafac/yocto-cfa).
 - Did a qualifying project in the field of cryptography advised by [Dr. Matthew D. Green](https://isi.jhu.edu/~mgreen/) and [Dr. J. Ayo Akinyele](http://hms.isi.jhu.edu/index.php/people/6.html).
 - Was the system administrator for the laboratory for 5 years.
 - Took courses on programming-language theory, logic, software engineering, cryptography, natural language processing, databases, and presentation skills. As extra-curricular activity, also took courses on music theory and meditation.
