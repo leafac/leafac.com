@@ -1,11 +1,8 @@
 # Curriculum Vitae
 
 ```table-of-contents
+
 ```
-
-# Contact
-
-<me@leafac.com> · <leandro@jhu.edu>
 
 # Education
 
@@ -48,7 +45,7 @@
 <summary><strong>Instructor.</strong> <a href="https://jhu.edu">Johns Hopkins University</a>. <a href="https://oose-2019.leafac.com">Object-Oriented Software Engineering</a>. 2019-08 – 2019-12.</summary>
 
 - Updated the curriculum and developed new material.
-- Recorded [a series of video lectures](https://oose-2019.leafac.com/todoose).
+- Recorded [a series of video lectures](https://www.youtube.com/playlist?list=PLQKZfz89aDZwCKTCHgPBplQuJ3ViFIq3M).
 - Goal as an educator: to build students’ confidence.
 - One of the biggest courses in the department, with 85 students.
 - Project-based course, involving lectures, assignments, a quiz, laboratory sessions, and project presentations.
@@ -64,65 +61,9 @@
 
 - Received the _Whiting School of Engineering’s Professor Joel Dean Excellence in Teaching Award_.
 - Prepared course material, lectured, prepared and graded exams and assignments, managed teams of course assistants, advised semester-long group projects, and held office hours.
-- Example of course material: A to-do application that was used in several lectures: [source code](https://github.com/leafac/todo) and [live version](https://leafac-oose-todo.herokuapp.com).
+- Examples of lectures and tutorial videos: [Git](https://www.youtube.com/playlist?list=PLQKZfz89aDZzxKlgYEtvUxdywIEG0lZ9L), [JavaScript](https://www.youtube.com/playlist?list=PLQKZfz89aDZz08np6JsJkZrPnip-zUzSg), and [Deployment](https://www.youtube.com/watch?v=4iGkcq9g0tc).
 - Example of assignment: [Handout](https://github.com/leafac/lights-out) and [live version](https://leafac-oose-lights-out.herokuapp.com).
-- Examples of lectures: (Unfortunately the audio quality in some of these videos is less than optimal.)
-  - **Deployment**
-    <video src="https://archive.org/download/deployment-to-heroku/deployment.mp4" controls preload="none"></video>
-  - **JavaScript**
-    - _Classroom Lecture_
-      <video src="https://archive.org/download/javascript-video-series/javascript--lecture.mp4" controls preload="none"></video>
-    - _Video Lectures_
-      1. Introduction
-         <video src="https://archive.org/download/javascript-video-series/javascript--1--introduction.mp4" controls preload="none"></video>
-      2. `` js`setTimeout() ``
-         <video src="https://archive.org/download/javascript-video-series/javascript--2--set-timeout.mp4" controls preload="none"></video>
-      3. Creating Promises
-         <video src="https://archive.org/download/javascript-video-series/javascript--3--creating-promises.mp4" controls preload="none"></video>
-      4. `` js`var ``
-         <video src="https://archive.org/download/javascript-video-series/javascript--4--var.mp4" controls preload="none"></video>
-      5. DOM · Part 1
-         <video src="https://archive.org/download/javascript-video-series/javascript--5--dom--part-1.mp4" controls preload="none"></video>
-      6. DOM · Part 2
-         <video src="https://archive.org/download/javascript-video-series/javascript--6--dom--part-2.mp4" controls preload="none"></video>
-      7. Web Sockets · Part 1
-         <video src="https://archive.org/download/javascript-video-series/javascript--7--web-sockets--part-1.mp4" controls preload="none"></video>
-      8. Web Sockets · Part 2
-         <video src="https://archive.org/download/javascript-video-series/javascript--8--web-sockets--part-2.mp4" controls preload="none"></video>
-      9. Classes · Part 1
-         <video src="https://archive.org/download/javascript-video-series/javascript--9--classes--part-1.mp4" controls preload="none"></video>
-      10. Classes · Part 2
-          <video src="https://archive.org/download/javascript-video-series/javascript--10--classes--part-2.mp4" controls preload="none"></video>
-      11. Classes · Part 3
-          <video src="https://archive.org/download/javascript-video-series/javascript--11--classes--part-3.mp4" controls preload="none"></video>
-      12. Classes · Part 4
-          <video src="https://archive.org/download/javascript-video-series/javascript--12--classes--part-4.mp4" controls preload="none"></video>
-      13. Modules
-          <video src="https://archive.org/download/javascript-video-series/javascript--13--modules.mp4" controls preload="none"></video>
-  - **Git**
-    - _Classroom Lecture_
-      <video src="https://archive.org/download/git-video-series/git--lecture.mp4" controls preload="none"></video>
-    - _Video Lectures_
-      1. Introduction
-         <video src="https://archive.org/download/git-video-series/git--1--introduction.mp4" controls preload="none"></video>
-      2. Setup
-         <video src="https://archive.org/download/git-video-series/git--2--setup.mp4" controls preload="none"></video>
-      3. Repository
-         <video src="https://archive.org/download/git-video-series/git--3--repository.mp4" controls preload="none"></video>
-      4. Commit
-         <video src="https://archive.org/download/git-video-series/git--4--commit.mp4" controls preload="none"></video>
-      5. Publishing to GitHub
-         <video src="https://archive.org/download/git-video-series/git--5--publish-to-github.mp4" controls preload="none"></video>
-      6. Cloning from GitHub
-         <video src="https://archive.org/download/git-video-series/git--6--cloning-from-github.mp4" controls preload="none"></video>
-      7. Coordinating Collaboration
-         <video src="https://archive.org/download/git-video-series/git--7--coordinating-collaboration.mp4" controls preload="none"></video>
-      8. Branches and Pull Requests
-         <video src="https://archive.org/download/git-video-series/git--8--branches-and-pull-requests.mp4" controls preload="none"></video>
-      9. Rebasing
-         <video src="https://archive.org/download/git-video-series/git--9--rebasing.mp4" controls preload="none"></video>
-      10. Conclusion
-          <video src="https://archive.org/download/git-video-series/git--10--conclusion.mp4" controls preload="none"></video>
+- Example of course material: A to-do application that was used in several lectures: [source code](https://github.com/leafac/todo) and [live version](https://leafac-oose-todo.herokuapp.com).
 
 </details>
 
@@ -282,12 +223,7 @@
 
 **Coding Dojo at FAI.** Co-hosted a day of activities for undergraduate Computer Science students, including a lecture about Git and a Coding Dojo. 2013-08.
 
-<details>
-<summary>
-<strong>7Masters.</strong> Talked about modern Java development techniques and tools. 2013-01.
-</summary>
-<video src="https://archive.org/download/7masters--java--leandro-facchinetti/7masters.mp4" controls preload="none"></video>
-</details>
+**[7Masters](https://www.youtube.com/watch?v=jyQvWvXcfGY).** Talked about modern Java development techniques and tools. 2013-01.
 
 **Dev in Sampa 2012.** 2012-05.
 
@@ -313,20 +249,7 @@
 
 # Courses
 
-<details>
-<summary><strong>Improving Presentation Skills for Scientists and Engineers.</strong> Johns Hopkins University. 2018.</summary>
-
-(Unfortunately the quality of the recordings are bad.)
-
-**Presentation for a General Audience**
-
-<video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/general-audience.mp4" controls preload="none"></video>
-
-**Final Presentation**
-
-<video src="https://archive.org/download/leandro-improving-presentation-skills-for-scientists-and-engineers/final-presentation.mp4" controls preload="none"></video>
-
-</details>
+**[Improving Presentation Skills for Scientists and Engineers](https://www.youtube.com/playlist?list=PLQKZfz89aDZwcPEw6ukW1aCHfuc6fntbg).** Johns Hopkins University. 2018.
 
 **Writing in the Sciences.** Stanford University via Coursera. 2018.
 
