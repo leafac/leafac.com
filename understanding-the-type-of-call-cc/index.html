@@ -130,7 +130,7 @@
             
                     <tbody><tr>
                       <td>
-                        <pre><code><span style="color: #000000">&gt; (zero? </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code></pre>
+                        <pre><code><span style="color: #000000">&gt; (</span><span style="color: #795E26">zero?</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code></pre>
                       </td>
                     </tr>
                   
@@ -147,7 +147,7 @@
             
                     <tbody><tr>
                       <td>
-                        <pre><code><span style="color: #000000">&gt; (zero? (call/cc (λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
+                        <pre><code><span style="color: #000000">&gt; (</span><span style="color: #795E26">zero?</span><span style="color: #000000"> (</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
                       </td>
                     </tr>
                   
@@ -159,10 +159,10 @@
                     </tr>
                   
           </tbody></table>
-<p>The output is preserved because <code><span style="color: #000000">call/cc</span></code> calls <code><span style="color: #000000">(λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code> with the current continuation, but <code><span style="color: #000000">(λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code> ignores its parameter and returns <code><span style="color: #098658">0</span></code>.</p>
+<p>The output is preserved because <code><span style="color: #000000">call/cc</span></code> calls <code><span style="color: #000000">(</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code> with the current continuation, but <code><span style="color: #000000">(</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code> ignores its parameter and returns <code><span style="color: #098658">0</span></code>.</p>
 <fieldset>
 <legend><strong>Note</strong></legend>
-<p>In general, for any expression <code><span style="color: #000000">e</span></code>, the result of computing <code><span style="color: #000000">e</span></code> is the same as the result of computing <code><span style="color: #000000">(call/cc (λ (k) e))</span></code> as long as <code><span style="color: #000000">e</span></code> doesn’t refer to <code><span style="color: #000000">k</span></code>.</p>
+<p>In general, for any expression <code><span style="color: #000000">e</span></code>, the result of computing <code><span style="color: #000000">e</span></code> is the same as the result of computing <code><span style="color: #000000">(</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) e))</span></code> as long as <code><span style="color: #000000">e</span></code> doesn’t refer to <code><span style="color: #000000">k</span></code>.</p>
 </fieldset>
 <p>This example reveals three facts about the type of <code><span style="color: #000000">call/cc</span></code>:</p>
 <ol>
@@ -246,7 +246,7 @@
 </svg></figure>
 </li>
 <li>
-<p>The argument being passed to <code><span style="color: #000000">call/cc</span></code> is <code><span style="color: #000000">(λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code>:</p>
+<p>The argument being passed to <code><span style="color: #000000">call/cc</span></code> is <code><span style="color: #000000">(</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)</span></code>:</p>
 <figure><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="26.428ex" height="3.676ex" style="vertical-align: -1.171ex;" viewBox="0 -1078.4 11378.6 1582.7" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\texttt{(λ (k) 0)} : \textcolor{#09885A}{\boxed{?} \rightarrow \texttt{Number}}
 </title>
@@ -519,7 +519,7 @@
             
                     <tbody><tr>
                       <td>
-                        <pre><code><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (k </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
+                        <pre><code><span style="color: #000000">&gt; (</span><span style="color: #795E26">zero?</span><span style="color: #000000"> (</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
                       </td>
                     </tr>
                   
@@ -531,7 +531,7 @@
                     </tr>
                   
           </tbody></table>
-<p>The output changed from <code><span style="color: #000000">#t</span></code> to <code><span style="color: #000000">#f</span></code> because the <code><span style="color: #000000">(k </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code> takes execution back to the outer <code><span style="color: #000000">zero?</span></code>, skipping over the remainder of the function, which in this case is just the <code><span style="color: #098658">0</span></code>.</p>
+<p>The output changed from <code><span style="color: #000000">#t</span></code> to <code><span style="color: #000000">#f</span></code> because the <code><span style="color: #000000">(</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)</span></code> takes execution back to the outer <code><span style="color: #000000">zero?</span></code>, skipping over the remainder of the function, which in this case is just the <code><span style="color: #098658">0</span></code>.</p>
 <p>This expression reveals two facts about the type of <code><span style="color: #000000">call/cc</span></code>:</p>
 <ol>
 <li>
@@ -930,7 +930,7 @@
             
                     <tbody><tr>
                       <td>
-                        <pre><code><span style="color: #000000">&gt; (zero? (call/cc (λ (k) (string-length (k </span><span style="color: #098658">29</span><span style="color: #000000">)) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
+                        <pre><code><span style="color: #000000">&gt; (</span><span style="color: #795E26">zero?</span><span style="color: #000000"> (</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) (</span><span style="color: #795E26">string-length</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">)) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
                       </td>
                     </tr>
                   
@@ -1138,7 +1138,7 @@
             
                     <tbody><tr>
                       <td>
-                        <pre><code><span style="color: #000000">&gt; (string-length (call/cc (λ (k) (zero? (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">)) </span><span style="color: #A31515">"Facchinetti"</span><span style="color: #000000">)))</span></code></pre>
+                        <pre><code><span style="color: #000000">&gt; (</span><span style="color: #795E26">string-length</span><span style="color: #000000"> (</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) (</span><span style="color: #795E26">zero?</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">)) </span><span style="color: #A31515">"Facchinetti"</span><span style="color: #000000">)))</span></code></pre>
                       </td>
                     </tr>
                   
@@ -1338,7 +1338,7 @@
  <use xlink:href="#E1-MJMAIN-2192" x="918" y="0"></use>
  <use xlink:href="#E1-MJMATHI-3B2" x="2196" y="0"></use>
 </g>
-</svg>, so <code><span style="color: #000000">k</span></code> has the type of a function that receives an argument of any type and <em>produces a result of the type you need</em>. If the call to <code><span style="color: #000000">k</span></code> appears as argument to <code><span style="color: #000000">string-length</span></code>, for example <code><span style="color: #000000">(string-length (k </span><span style="color: #098658">29</span><span style="color: #000000">))</span></code>, then <code><span style="color: #000000">k</span></code> produces a <code><span style="color: #000000">String</span></code>; if the call to <code><span style="color: #000000">k</span></code> appears as argument to <code><span style="color: #000000">zero?</span></code>, for example <code><span style="color: #000000">(zero? (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">))</span></code>, then <code><span style="color: #000000">k</span></code> produces a <code><span style="color: #000000">Number</span></code>; and so forth. It makes sense for a type system to behave like this because execution skips over the <code><span style="color: #000000">string-length</span></code>, <code><span style="color: #000000">zero?</span></code>, and so forth, so no runtime type error could occur.</p>
+</svg>, so <code><span style="color: #000000">k</span></code> has the type of a function that receives an argument of any type and <em>produces a result of the type you need</em>. If the call to <code><span style="color: #000000">k</span></code> appears as argument to <code><span style="color: #000000">string-length</span></code>, for example <code><span style="color: #000000">(</span><span style="color: #795E26">string-length</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">))</span></code>, then <code><span style="color: #000000">k</span></code> produces a <code><span style="color: #000000">String</span></code>; if the call to <code><span style="color: #000000">k</span></code> appears as argument to <code><span style="color: #000000">zero?</span></code>, for example <code><span style="color: #000000">(</span><span style="color: #795E26">zero?</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">))</span></code>, then <code><span style="color: #000000">k</span></code> produces a <code><span style="color: #000000">Number</span></code>; and so forth. It makes sense for a type system to behave like this because execution skips over the <code><span style="color: #000000">string-length</span></code>, <code><span style="color: #000000">zero?</span></code>, and so forth, so no runtime type error could occur.</p>
 <p>This shows that continuations like <code><span style="color: #000000">k</span></code> don’t behave like regular functions.</p>
 </fieldset>
 <h1 id="appendix-the-type-of-clojurecallcc-in-typed-racket">Appendix: The Type of <code><span style="color: #000000">call/cc</span></code> in Typed Racket</h1>
@@ -1409,7 +1409,7 @@
 <p>To understand this type, recall that <code><span style="color: #000000">call/cc</span></code> may produce an output in one of two ways:</p>
 <ol>
 <li>
-<p>If <code><span style="color: #000000">k</span></code> is not called, then the output of <code><span style="color: #000000">call/cc</span></code> is the output of the function that it received as argument, for example, the output of <code><span style="color: #000000">(call/cc (λ (k) </span><span style="color: #098658">0</span><span style="color: #000000">))</span></code> is <code><span style="color: #098658">0</span></code>. That is the first <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.262ex" height="2.176ex" style="vertical-align: -0.838ex;" viewBox="0 -576.1 543.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<p>If <code><span style="color: #000000">k</span></code> is not called, then the output of <code><span style="color: #000000">call/cc</span></code> is the output of the function that it received as argument, for example, the output of <code><span style="color: #000000">(</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">))</span></code> is <code><span style="color: #098658">0</span></code>. That is the first <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.262ex" height="2.176ex" style="vertical-align: -0.838ex;" viewBox="0 -576.1 543.5 936.9" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\gamma</title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E1-MJMATHI-3B3" d="M31 249Q11 249 11 258Q11 275 26 304T66 365T129 418T206 441Q233 441 239 440Q287 429 318 386T371 255Q385 195 385 170Q385 166 386 166L398 193Q418 244 443 300T486 391T508 430Q510 431 524 431H537Q543 425 543 422Q543 418 522 378T463 251T391 71Q385 55 378 6T357 -100Q341 -165 330 -190T303 -216Q286 -216 286 -188Q286 -138 340 32L346 51L347 69Q348 79 348 100Q348 257 291 317Q251 355 196 355Q148 355 108 329T51 260Q49 251 47 251Q45 249 31 249Z"></path>
@@ -1420,7 +1420,7 @@
 </svg> in the type above.</p>
 </li>
 <li>
-<p>If <code><span style="color: #000000">k</span></code> is called, then the output of <code><span style="color: #000000">call/cc</span></code> is the argument passed to <code><span style="color: #000000">k</span></code>, for example, the output of <code><span style="color: #000000">(call/cc (λ (k) (k </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">))</span></code> is <code><span style="color: #098658">29</span></code>. That is the first <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.488ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 640.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<p>If <code><span style="color: #000000">k</span></code> is called, then the output of <code><span style="color: #000000">call/cc</span></code> is the argument passed to <code><span style="color: #000000">k</span></code>, for example, the output of <code><span style="color: #000000">(</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #098658">29</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">))</span></code> is <code><span style="color: #098658">29</span></code>. That is the first <svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.488ex" height="1.676ex" style="vertical-align: -0.338ex;" viewBox="0 -576.1 640.5 721.6" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
 <title id="MathJax-SVG-1-Title">\alpha</title>
 <defs aria-hidden="true">
 <path stroke-width="1" id="E1-MJMATHI-3B1" d="M34 156Q34 270 120 356T309 442Q379 442 421 402T478 304Q484 275 485 237V208Q534 282 560 374Q564 388 566 390T582 393Q603 393 603 385Q603 376 594 346T558 261T497 161L486 147L487 123Q489 67 495 47T514 26Q528 28 540 37T557 60Q559 67 562 68T577 70Q597 70 597 62Q597 56 591 43Q579 19 556 5T512 -10H505Q438 -10 414 62L411 69L400 61Q390 53 370 41T325 18T267 -2T203 -11Q124 -11 79 39T34 156ZM208 26Q257 26 306 47T379 90L403 112Q401 255 396 290Q382 405 304 405Q235 405 183 332Q156 292 139 224T121 120Q121 71 146 49T208 26Z"></path>
@@ -1510,7 +1510,7 @@
             
                     <tbody><tr>
                       <td>
-                        <pre><code><span style="color: #000000">&gt; (write (call/cc (λ (k) (k </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
+                        <pre><code><span style="color: #000000">&gt; (</span><span style="color: #795E26">write</span><span style="color: #000000"> (</span><span style="color: #795E26">call/cc</span><span style="color: #000000"> (</span><span style="color: #795E26">λ</span><span style="color: #000000"> (</span><span style="color: #795E26">k</span><span style="color: #000000">) (</span><span style="color: #795E26">k</span><span style="color: #000000"> </span><span style="color: #A31515">"Leandro"</span><span style="color: #000000">) </span><span style="color: #098658">0</span><span style="color: #000000">)))</span></code></pre>
                       </td>
                     </tr>
                   

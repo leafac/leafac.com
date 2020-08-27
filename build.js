@@ -136,7 +136,7 @@ const html = require("tagged-template-noop");
       ).svg;
 
     // Add syntax highlighting
-    const highlighter = await shiki.getHighlighter({ theme: "light_plus" });
+    const highlighter = await shiki.getHighlighter({ theme: "light-plus" });
     for (const element of document.querySelectorAll(
       `pre > code[class^="language-"]`
     )) {
