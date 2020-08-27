@@ -1,6 +1,0 @@
-{
-  "redirects": [
-    { "source": "/louis", "destination": "https://louis.leafac.com" },
-    { "source": "/louis/", "destination": "https://louis.leafac.com" }
-  ]
-}
