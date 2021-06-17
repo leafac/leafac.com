@@ -1,0 +1,198 @@
+{
+  "redirects": [
+    { "source": "/2", "destination": "https://github.com/leafac/yocto-cfa" },
+    { "source": "/7", "destination": "https://oose-2019.leafac.com" },
+    {
+      "source": "/8",
+      "destination": "https://www.youtube.com/playlist?list=PLQKZfz89aDZwCKTCHgPBplQuJ3ViFIq3M"
+    },
+    {
+      "source": "/9",
+      "destination": "https://github.com/leafac/oose-2019-roboose"
+    },
+    {
+      "source": "/10",
+      "destination": "https://leafac.com/publications/oose.pdf"
+    },
+    {
+      "source": "/11",
+      "destination": "https://oose-2019.leafac.com/fun-stuff-students-did/"
+    },
+    {
+      "source": "/12",
+      "destination": "https://www.youtube.com/playlist?list=PLQKZfz89aDZzxKlgYEtvUxdywIEG0lZ9L"
+    },
+    {
+      "source": "/13",
+      "destination": "https://www.youtube.com/playlist?list=PLQKZfz89aDZz08np6JsJkZrPnip-zUzSg"
+    },
+    {
+      "source": "/14",
+      "destination": "https://www.youtube.com/watch?v=4iGkcq9g0tc"
+    },
+    {
+      "source": "/15",
+      "destination": "https://github.com/leafac/lights-out"
+    },
+    {
+      "source": "/16",
+      "destination": "https://leafac-oose-lights-out.herokuapp.com"
+    },
+    {
+      "source": "/17",
+      "destination": "https://github.com/leafac/todo"
+    },
+    {
+      "source": "/18",
+      "destination": "https://leafac-oose-todo.herokuapp.com"
+    },
+    {
+      "source": "/19",
+      "destination": "https://leafac.com/publications/higher-order-demand-driven-program-analysis.pdf"
+    },
+    {
+      "source": "/20",
+      "destination": "https://dl.acm.org/doi/10.1145/3310340"
+    },
+    {
+      "source": "/21",
+      "destination": "https://leafac.com/publications/sdl--a-dsl-for-cryptographic-schemes.pdf"
+    },
+    {
+      "source": "/22",
+      "destination": "https://leafac.com/publications/relative-store-fragments-for-singleton-abstraction.pdf"
+    },
+    {
+      "source": "/23",
+      "destination": "https://link.springer.com/chapter/10.1007%2F978-3-319-66706-5_6"
+    },
+    {
+      "source": "/24",
+      "destination": "https://leafac.com/publications/towards-practical-higher-order-demand-driven-program-analysis.pdf"
+    },
+    {
+      "source": "/25",
+      "destination": "https://leafac.com/publications/towards-practical-higher-order-demand-driven-program-analysis.key"
+    },
+    {
+      "source": "/26",
+      "destination": "https://leafac.com/publications/practical-demand-driven-program-analysis-with-recursion.pdf"
+    },
+    {
+      "source": "/27",
+      "destination": "https://leafac.com/publications/higher-order-demand-driven-program-analysis--artifact.pdf"
+    },
+    {
+      "source": "/28",
+      "destination": "https://leafac.com/publications/higher-order-demand-driven-program-analysis--artifact.tgz"
+    },
+    {
+      "source": "/29",
+      "destination": "http://2016.ecoop.org/event/ecoop-2016-artifacts-higher-order-demand-driven-program-analysis"
+    },
+    {
+      "source": "/30",
+      "destination": "https://leafac.com/publications/what-is-your-function--static-pattern-matching-on-function-behavior.pdf"
+    },
+    {
+      "source": "/31",
+      "destination": "https://leafac.com/publications/pesquisa-e-desenvolvimento-de-robos-taticos-para-ambientes-internos.pdf"
+    },
+    {
+      "source": "/32",
+      "destination": "https://leafac.com/publications/sistema-de-navegacao-visual-baseado-em-correlacao-de-imagens-visando-a-aplicacao-em-veiculos-autonomos-inteligentes.pdf"
+    },
+    {
+      "source": "/33",
+      "destination": "https://leafac.com/publications/navegacao-visual-de-robos-moveis-autonomos-baseada-em-metodos-de-correlacao-de-imagens.pdf"
+    },
+    {
+      "source": "/34",
+      "destination": "https://www.kill-the-newsletter.com"
+    },
+    {
+      "source": "/35",
+      "destination": "https://github.com/leafac/shiki-latex"
+    },
+    {
+      "source": "/36",
+      "destination": "https://github.com/leafac/collections-deep-equal"
+    },
+    {
+      "source": "/37",
+      "destination": "https://github.com/leafac/latex-dissertation-template-for-the-johns-hopkins-university"
+    },
+    {
+      "source": "/38",
+      "destination": "https://github.com/leafac/oose-2019-roboose"
+    },
+    {
+      "source": "/39",
+      "destination": "https://github.com/leafac/pollen-component/"
+    },
+    {
+      "source": "/40",
+      "destination": "https://github.com/leafac/css-expr/"
+    },
+    {
+      "source": "/41",
+      "destination": "https://github.com/leafac/extensible-functions/"
+    },
+    {
+      "source": "/42",
+      "destination": "https://github.com/leafac/org-password-manager"
+    },
+    {
+      "source": "/43",
+      "destination": "https://github.com/leafac/programmable-foot-keyboard"
+    },
+    {
+      "source": "/44",
+      "destination": "https://leafac.com/publications/a-set-based-context-model-for-program-analysis.pdf"
+    },
+    {
+      "source": "/45",
+      "destination": "https://conf.researchr.org/details/aplas-2020/aplas-2020-papers/2/A-Set-Based-Context-Model-for-Program-Analysis"
+    },
+    {
+      "source": "/46",
+      "destination": "https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
+    },
+    {
+      "source": "/47",
+      "destination": "https://github.com/leafac/obs-cli"
+    },
+    {
+      "source": "/48",
+      "destination": "https://github.com/leafac/reaper"
+    },
+    {
+      "source": "/49",
+      "destination": "https://github.com/leafac/caxa"
+    },
+    {
+      "source": "/50",
+      "destination": "https://github.com/leafac/sqlite"
+    },
+    {
+      "source": "/51",
+      "destination": "https://github.com/leafac/sqlite-migration"
+    },
+    {
+      "source": "/52",
+      "destination": "https://github.com/leafac/html"
+    },
+    {
+      "source": "/53",
+      "destination": "https://github.com/leafac/css"
+    },
+    {
+      "source": "/54",
+      "destination": "https://github.com/leafac/rehype-shiki"
+    },
+    {
+      "source": "/55",
+      "destination": "https://github.com/leafac/express-async-handler"
+    }
+  ]
+}
