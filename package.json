@@ -1,8 +1,12 @@
 {
   "scripts": {
-    "start": "http-server -c-1"
+    "start": "concurrently --kill-others \"caddy run\" \"node-dev .\""
   },
   "dependencies": {
-    "http-server": "^0.12.3"
+    "@leafac/caddy": "^1.0.0",
+    "@leafac/css": "^0.2.6",
+    "@leafac/html": "^3.0.0",
+    "concurrently": "^6.2.0",
+    "node-dev": "^7.0.0"
   }
 }
