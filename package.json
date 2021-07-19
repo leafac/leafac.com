@@ -3,7 +3,7 @@
     "start": "concurrently --kill-others \"caddy run\" \"node-dev .\""
   },
   "dependencies": {
-    "@leafac/caddy": "^1.0.0",
+    "@leafac/caddy": "^1.0.1",
     "@leafac/css": "^0.2.6",
     "@leafac/html": "^3.0.0",
     "concurrently": "^6.2.0",
