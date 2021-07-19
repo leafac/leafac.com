@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrently --kill-others \"caddy run\" \"node-dev .\""
+    "start": "concurrently --kill-others-on-fail \"caddy run\" \"node-dev --respawn .\""
   },
   "dependencies": {
     "@leafac/caddy": "^1.0.1",
