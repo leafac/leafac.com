@@ -37,47 +37,16 @@ const { css, extractInlineStyles } = require("@leafac/css");
             rel="stylesheet"
             href="/vendor/node_modules/@ibm/plex/css/ibm-plex.min.css"
           />
-          <style>
-            body {
-              font-family: "IBM Plex Mono";
-              line-height: 1.5;
-              -webkit-text-size-adjust: 100%;
-              max-width: 600px;
-              padding: 0 1rem;
-              margin: 0 auto;
-            }
-
-            @media (prefers-color-scheme: dark) {
-              body {
-                color: #d4d4d4;
-                background-color: #1e1e1e;
-              }
-            }
-
-            a {
-              color: inherit;
-            }
-
-            header a {
-              text-decoration: none;
-            }
-
-            h1 {
-              font-size: 1.5rem;
-            }
-
-            img {
-              max-width: 100%;
-              height: auto;
-            }
-
-            header {
-              text-align: center;
-            }
-          </style>
         </head>
-        <body>
+        <body style="${css`
+          font-family: "IBM Plex Mono", var(--font-family--monospace);
+          font-size: var(--font-size--sm);
+          line-height: var(--line-height--sm);
+          width: var(--width--prose);
+          margin: 0 auto;
+        `}">
           <header>
+          <p>Hi </p>
             <h1><a href="https://leafac.com">Leandro Facchinetti</a></h1>
             <p>
               <strong
