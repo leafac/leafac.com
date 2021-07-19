@@ -37,72 +37,140 @@ const { css, extractInlineStyles } = require("@leafac/css");
             rel="stylesheet"
             href="/vendor/node_modules/@ibm/plex/css/ibm-plex.min.css"
           />
+          <link
+            rel="stylesheet"
+            href="/vendor/node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+          />
         </head>
-        <body style="${css`
-          font-family: "IBM Plex Mono", var(--font-family--monospace);
-          font-size: var(--font-size--sm);
-          line-height: var(--line-height--sm);
-          width: var(--width--prose);
-          margin: 0 auto;
-        `}">
-          <header>
-          <p>Hi </p>
-            <h1><a href="https://leafac.com">Leandro Facchinetti</a></h1>
-            <p>
-              <strong
-                ><a
+        <body
+          style="${css`
+            font-family: "IBM Plex Mono", var(--font-family--monospace);
+            font-size: var(--font-size--sm);
+            line-height: var(--line-height--sm);
+            color: var(--color--gray--warm--700);
+            background-color: var(--color--gray--warm--100);
+            @media (prefers-color-scheme: dark) {
+              color: var(--color--gray--warm--300);
+              background-color: var(--color--gray--warm--900);
+            }
+            display: flex;
+            justify-content: center;
+          `}"
+        >
+          <div
+            style="${css`
+              width: var(--width--prose);
+            `}"
+          >
+            <header
+              style="${css`
+                a {
+                  @media (prefers-color-scheme: dark) {
+                    &:hover,
+                    &:focus-within {
+                      color: var(--color--fuchsia--300);
+                    }
+                  }
+                  transition-property: var(--transition-property--colors);
+                  transition-duration: var(--transition-duration--150);
+                  transition-timing-function: var(
+                    --transition-timing-function--in-out
+                  );
+                }
+              `}"
+            >
+              <h1
+                style="${css`
+                  font-size: var(--font-size--4xl);
+                  line-height: var(--line-height--4xl);
+                  font-weight: var(--font-weight--bold);
+                  font-style: italic;
+                  color: var(--color--gray--warm--900);
+                  @media (prefers-color-scheme: dark) {
+                    color: var(--color--gray--warm--50);
+                  }
+                `}"
+              >
+                <a href="https://leafac.com">Leandro Facchinetti</a>
+              </h1>
+              <nav>
+                <ul>
+                  <li>
+                    <a
+                      href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
+                      ><i class="fab fa-youtube"></i> Watch My Streams & Videos
+                      on YouTube</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://github.com/leafac"
+                      ><i class="fab fa-github"></i> Get My Open-Source Code on
+                      GitHub</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://patreon.com/leafac"
+                      ><i class="fab fa-patreon"></i> Support My Work with
+                      Recurrent Contributions on Patreon</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://paypal.me/LeandroFacchinetti"
+                      ><i class="fab fa-paypal"></i> Support My Work with a
+                      One-Time Contribution on PayPal</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/leandro-facchinetti--resume.pdf"
+                      ><i class="far fa-file"></i> Learn a Bit about Me on My
+                      Résumé</a
+                    >
+                  </li>
+                  <li>
+                    <a href="/leandro-facchinetti--curriculum-vitae.pdf"
+                      ><i class="far fa-copy"></i> Learn a Lot about Me on My
+                      Curriculum Vitæ</a
+                    >
+                  </li>
+                  <li>
+                    <a href="mailto:me@leafac.com"
+                      ><i class="far fa-envelope"></i> Contact Me via Email</a
+                    >
+                  </li>
+                </ul>
+              </nav>
+              <p><img src="avatar.png" alt="Avatar" width="300" /></p>
+            </header>
+            <main>
+              <p>I’m a computer scientist.</p>
+              <p>
+                I’m interested in audio/video application development, web
+                development, and programming languages.
+              </p>
+              <p>
+                I’m working on <a href="https://courselore.org">CourseLore</a>,
+                the open-source student forum.
+              </p>
+              <p>
+                I was a PhD Candidate in computer science (programming
+                languages) at the Johns Hopkins University. I had to end without
+                a degree due to a combination of life circumstances: end of
+                funding, the pandemic, the birth of my first son, having to move
+                abroad, and so forth.
+              </p>
+              <p>I live in Portugal.</p>
+              <p>
+                In my spare time I make
+                <a
                   href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-                  >YouTube</a
-                ></strong
-              > · <strong><a href="https://github.com/leafac">GitHub</a></strong
-              > ·
-              <strong><a href="https://patreon.com/leafac">Patreon</a></strong
-              > ·
-              <strong
-                ><a href="https://paypal.me/LeandroFacchinetti"
-                  >PayPal</a
-                ></strong
-              > ·
-              <strong
-                ><a href="/leandro-facchinetti--resume.pdf">Résumé</a></strong
-              > ·
-              <strong
-                ><a href="/leandro-facchinetti--curriculum-vitae.pdf"
-                  >Curriculum Vitæ</a
-                ></strong
-              > ·
-              <strong><a href="mailto:me@leafac.com">Contact</a></strong>
-            </p>
-            <p><img src="avatar.png" alt="Avatar" width="300" /></p>
-          </header>
-          <main>
-            <p>I’m a computer scientist.</p>
-            <p>
-              I’m interested in audio/video application development, web
-              development, and programming languages.
-            </p>
-            <p>
-              I’m working on <a href="https://courselore.org">CourseLore</a>,
-              the open-source student forum.
-            </p>
-            <p>
-              I was a PhD Candidate in computer science (programming languages)
-              at the Johns Hopkins University. I had to end without a degree due
-              to a combination of life circumstances: end of funding, the
-              pandemic, the birth of my first son, having to move abroad, and so
-              forth.
-            </p>
-            <p>I live in Portugal.</p>
-            <p>
-              In my spare time I make
-              <a href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-                >videos about programming and audio/video production</a
-              >, develop
-              <a href="https://github.com/leafac">open-source software</a>, run,
-              bike, play the guitar, cook vegan foods, and spend time with my
-              wife and son.
-            </p>
-          </main>
+                  >videos about programming and audio/video production</a
+                >, develop
+                <a href="https://github.com/leafac">open-source software</a>,
+                run, bike, play the guitar, cook vegan foods, and spend time
+                with my wife and son.
+              </p>
+            </main>
+          </div>
         </body>
       </html>
     `)
