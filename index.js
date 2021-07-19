@@ -86,6 +86,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
                   font-weight: var(--font-weight--bold);
                   font-style: italic;
                   color: var(--color--gray--warm--900);
+                  margin-top: var(--space--4);
                   @media (prefers-color-scheme: dark) {
                     color: var(--color--gray--warm--50);
                   }
@@ -93,53 +94,70 @@ const { css, extractInlineStyles } = require("@leafac/css");
               >
                 <a href="https://leafac.com">Leandro Facchinetti</a>
               </h1>
+              <p>
+                <img
+                  src="avatar.png"
+                  alt="Avatar"
+                  width="300"
+                  style="${css`
+                    @media (prefers-color-scheme: dark) {
+                      filter: brightness(var(--brightness--90));
+                    }
+                  `}"
+                />
+              </p>
               <nav>
-                <ul>
+                <ul
+                  style="${css`
+                    margin-top: var(--space--4);
+                    display: flex;
+                    flex-direction: column;
+                    gap: var(--space--2);
+                  `}"
+                >
                   <li>
                     <a
                       href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-                      ><i class="fab fa-youtube"></i> Watch My Streams & Videos
-                      on YouTube</a
+                      ><i class="fab fa-youtube"></i> YouTube: Watch My Streams
+                      & Videos</a
                     >
                   </li>
                   <li>
                     <a href="https://github.com/leafac"
-                      ><i class="fab fa-github"></i> Get My Open-Source Code on
-                      GitHub</a
+                      ><i class="fab fa-github"></i> GitHub: Open-Source Code</a
                     >
                   </li>
                   <li>
                     <a href="https://patreon.com/leafac"
-                      ><i class="fab fa-patreon"></i> Support My Work with
-                      Recurrent Contributions on Patreon</a
+                      ><i class="fab fa-patreon"></i> Patreon: Support My Work
+                      with Recurrent Contributions</a
                     >
                   </li>
                   <li>
                     <a href="https://paypal.me/LeandroFacchinetti"
-                      ><i class="fab fa-paypal"></i> Support My Work with a
-                      One-Time Contribution on PayPal</a
+                      ><i class="fab fa-paypal"></i> PayPal: Support My Work
+                      with a One-Time Contribution</a
                     >
                   </li>
                   <li>
                     <a href="/leandro-facchinetti--resume.pdf"
-                      ><i class="far fa-file"></i> Learn a Bit about Me on My
-                      Résumé</a
+                      ><i class="far fa-file"></i> Résumé: Learn a Bit about
+                      Me</a
                     >
                   </li>
                   <li>
                     <a href="/leandro-facchinetti--curriculum-vitae.pdf"
-                      ><i class="far fa-copy"></i> Learn a Lot about Me on My
-                      Curriculum Vitæ</a
+                      ><i class="far fa-copy"></i> Curriculum Vitæ: Learn a Lot
+                      about Me</a
                     >
                   </li>
                   <li>
                     <a href="mailto:me@leafac.com"
-                      ><i class="far fa-envelope"></i> Contact Me via Email</a
+                      ><i class="far fa-envelope"></i> Email: Contact Me</a
                     >
                   </li>
                 </ul>
               </nav>
-              <p><img src="avatar.png" alt="Avatar" width="300" /></p>
             </header>
             <main>
               <p>I’m a computer scientist.</p>
