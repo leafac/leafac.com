@@ -162,13 +162,13 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 <li>
                   <a href="https://patreon.com/leafac"
                     ><strong><i class="fab fa-patreon"></i> Patreon:</strong>
-                    Recurrent contributions</a
+                    Ongoing support</a
                   >
                 </li>
                 <li>
-                  <a href="https://paypal.me/LeandroFacchinetti"
+                  <a href="https://paypal.me/LeandroFacchinettiEU"
                     ><strong><i class="fab fa-paypal"></i> PayPal:</strong>
-                    One-time contribution</a
+                    One-time support</a
                   >
                 </li>
                 <li>
