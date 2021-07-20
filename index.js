@@ -59,17 +59,26 @@ const { css, extractInlineStyles } = require("@leafac/css");
               @media (prefers-color-scheme: dark) {
                 &:hover,
                 &:focus-within {
-                  color: var(--color--fuchsia--300);
+                  &,
+                  & * {
+                    color: var(--color--fuchsia--300);
+                  }
                 }
                 &:active {
-                  color: var(--color--fuchsia--500);
+                  &,
+                  & * {
+                    color: var(--color--fuchsia--500);
+                  }
                 }
               }
-              transition-property: var(--transition-property--colors);
-              transition-duration: var(--transition-duration--150);
-              transition-timing-function: var(
-                --transition-timing-function--in-out
-              );
+              &,
+              & * {
+                transition-property: var(--transition-property--colors);
+                transition-duration: var(--transition-duration--150);
+                transition-timing-function: var(
+                  --transition-timing-function--in-out
+                );
+              }
             }
             strong {
               font-weight: var(--font-weight--semibold);
