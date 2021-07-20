@@ -94,7 +94,11 @@ const { css, extractInlineStyles } = require("@leafac/css");
               >
                 <a href="https://leafac.com">Leandro Facchinetti</a>
               </h1>
-              <p>
+              <p
+                style="${css`
+                  margin-top: var(--space--4);
+                `}"
+              >
                 <img
                   src="avatar.png"
                   alt="Avatar"
@@ -118,8 +122,8 @@ const { css, extractInlineStyles } = require("@leafac/css");
                   <li>
                     <a
                       href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-                      ><i class="fab fa-youtube"></i> YouTube: Watch My Streams
-                      & Videos</a
+                      ><i class="fab fa-youtube"></i> YouTube: Streams about
+                      code & audio production every weekday at 17:30 UTC</a
                     >
                   </li>
                   <li>
