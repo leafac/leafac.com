@@ -155,7 +155,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 </li>
                 <li>
                   <a href="/leandro-facchinetti--curriculum-vitae.pdf"
-                    ><i class="far fa-copy"></i> Curriculum Vitæ: A lot about
+                    ><i class="far fa-copy"></i> Curriculum Vitæ: A lot about
                     me</a
                   >
                 </li>
