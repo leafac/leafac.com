@@ -15,11 +15,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
             content="width=device-width, initial-scale=1.0"
           />
           <title>Leandro Facchinetti</title>
-          <meta name="author" content="Leandro Facchinetti" />
-          <meta
-            name="description"
-            content="I’m a computer scientist interested in audio/video application development, web development, and programming languages. In my spare time I make videos about programming and audio/video production, and develop open-source software."
-          />
           <link
             rel="icon"
             type="image/png"
@@ -47,7 +42,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
             font-family: "IBM Plex Mono", var(--font-family--monospace);
             font-size: var(--font-size--sm);
             line-height: var(--line-height--sm);
-            color: var(--color--gray--warm--700);
+            color: var(--color--gray--warm--600);
             background-color: var(--color--gray--warm--100);
             @media (prefers-color-scheme: dark) {
               color: var(--color--gray--warm--300);
@@ -55,43 +50,51 @@ const { css, extractInlineStyles } = require("@leafac/css");
             }
             display: flex;
             justify-content: center;
-            a {
-              @media (prefers-color-scheme: dark) {
+
+            @at-root {
+              a {
                 &:hover,
                 &:focus-within {
-                  &,
-                  & * {
-                    color: var(--color--fuchsia--300);
-                  }
+                  color: var(--color--fuchsia--700);
                 }
                 &:active {
-                  &,
-                  & * {
+                  color: var(--color--fuchsia--800);
+                }
+                @media (prefers-color-scheme: dark) {
+                  &:hover,
+                  &:focus-within {
+                    color: var(--color--fuchsia--300);
+                  }
+                  &:active {
                     color: var(--color--fuchsia--500);
                   }
                 }
-              }
-              &,
-              & * {
                 transition-property: var(--transition-property--colors);
                 transition-duration: var(--transition-duration--150);
                 transition-timing-function: var(
                   --transition-timing-function--in-out
                 );
               }
-            }
-            strong {
-              font-weight: var(--font-weight--semibold);
-              color: var(--color--gray--warm--300);
-              @media (prefers-color-scheme: dark) {
-                color: var(--color--gray--warm--50);
+
+              strong {
+                font-weight: var(--font-weight--semibold);
+                color: var(--color--gray--warm--900);
+                @media (prefers-color-scheme: dark) {
+                  color: var(--color--gray--warm--50);
+                }
+                a:hover &,
+                a:focus-within &,
+                a:active & {
+                  color: inherit;
+                }
               }
             }
           `}"
         >
           <div
             style="${css`
-              width: var(--width--prose);
+              max-width: var(--width--prose);
+              padding: var(--space--4);
               display: flex;
               flex-direction: column;
               gap: var(--space--4);
@@ -105,7 +108,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 font-style: italic;
                 text-align: center;
                 color: var(--color--gray--warm--900);
-                margin-top: var(--space--4);
                 @media (prefers-color-scheme: dark) {
                   color: var(--color--gray--warm--50);
                 }
@@ -115,7 +117,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
             </h1>
             <p
               style="${css`
-                margin-top: var(--space--4);
                 text-align: center;
               `}"
             >
@@ -124,6 +125,8 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 alt="Avatar"
                 width="300"
                 style="${css`
+                  max-width: 100%;
+                  height: auto;
                   @media (prefers-color-scheme: dark) {
                     filter: brightness(var(--brightness--90));
                   }
@@ -133,7 +136,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
             <nav>
               <ul
                 style="${css`
-                  margin-top: var(--space--4);
                   display: flex;
                   flex-direction: column;
                   gap: var(--space--2);
