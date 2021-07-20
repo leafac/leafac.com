@@ -60,110 +60,110 @@ const { css, extractInlineStyles } = require("@leafac/css");
           <div
             style="${css`
               width: var(--width--prose);
+              display: flex;
+              flex-direction: column;
+              gap: var(--space--4);
+              a {
+                @media (prefers-color-scheme: dark) {
+                  &:hover,
+                  &:focus-within {
+                    color: var(--color--fuchsia--300);
+                  }
+                }
+                transition-property: var(--transition-property--colors);
+                transition-duration: var(--transition-duration--150);
+                transition-timing-function: var(
+                  --transition-timing-function--in-out
+                );
+              }
             `}"
           >
-            <header
+            <h1
               style="${css`
-                a {
-                  @media (prefers-color-scheme: dark) {
-                    &:hover,
-                    &:focus-within {
-                      color: var(--color--fuchsia--300);
-                    }
-                  }
-                  transition-property: var(--transition-property--colors);
-                  transition-duration: var(--transition-duration--150);
-                  transition-timing-function: var(
-                    --transition-timing-function--in-out
-                  );
+                font-size: var(--font-size--4xl);
+                line-height: var(--line-height--4xl);
+                font-weight: var(--font-weight--semibold);
+                font-style: italic;
+                text-align: center;
+                color: var(--color--gray--warm--900);
+                margin-top: var(--space--4);
+                @media (prefers-color-scheme: dark) {
+                  color: var(--color--gray--warm--50);
                 }
               `}"
             >
-              <h1
+              <a href="https://leafac.com">Leandro Facchinetti</a>
+            </h1>
+            <p
+              style="${css`
+                margin-top: var(--space--4);
+                text-align: center;
+              `}"
+            >
+              <img
+                src="avatar.png"
+                alt="Avatar"
+                width="300"
                 style="${css`
-                  font-size: var(--font-size--4xl);
-                  line-height: var(--line-height--4xl);
-                  font-weight: var(--font-weight--bold);
-                  font-style: italic;
-                  color: var(--color--gray--warm--900);
-                  margin-top: var(--space--4);
                   @media (prefers-color-scheme: dark) {
-                    color: var(--color--gray--warm--50);
+                    filter: brightness(var(--brightness--90));
                   }
                 `}"
-              >
-                <a href="https://leafac.com">Leandro Facchinetti</a>
-              </h1>
-              <p
+              />
+            </p>
+            <nav>
+              <ul
                 style="${css`
                   margin-top: var(--space--4);
+                  display: flex;
+                  flex-direction: column;
+                  gap: var(--space--2);
                 `}"
               >
-                <img
-                  src="avatar.png"
-                  alt="Avatar"
-                  width="300"
-                  style="${css`
-                    @media (prefers-color-scheme: dark) {
-                      filter: brightness(var(--brightness--90));
-                    }
-                  `}"
-                />
-              </p>
-              <nav>
-                <ul
-                  style="${css`
-                    margin-top: var(--space--4);
-                    display: flex;
-                    flex-direction: column;
-                    gap: var(--space--2);
-                  `}"
-                >
-                  <li>
-                    <a
-                      href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-                      ><i class="fab fa-youtube"></i> YouTube: Streams about
-                      code & audio production every weekday at 17:30 UTC</a
-                    >
-                  </li>
-                  <li>
-                    <a href="https://github.com/leafac"
-                      ><i class="fab fa-github"></i> GitHub: Open-Source Code</a
-                    >
-                  </li>
-                  <li>
-                    <a href="https://patreon.com/leafac"
-                      ><i class="fab fa-patreon"></i> Patreon: Support My Work
-                      with Recurrent Contributions</a
-                    >
-                  </li>
-                  <li>
-                    <a href="https://paypal.me/LeandroFacchinetti"
-                      ><i class="fab fa-paypal"></i> PayPal: Support My Work
-                      with a One-Time Contribution</a
-                    >
-                  </li>
-                  <li>
-                    <a href="/leandro-facchinetti--resume.pdf"
-                      ><i class="far fa-file"></i> Résumé: Learn a Bit about
-                      Me</a
-                    >
-                  </li>
-                  <li>
-                    <a href="/leandro-facchinetti--curriculum-vitae.pdf"
-                      ><i class="far fa-copy"></i> Curriculum Vitæ: Learn a Lot
-                      about Me</a
-                    >
-                  </li>
-                  <li>
-                    <a href="mailto:me@leafac.com"
-                      ><i class="far fa-envelope"></i> Email: Contact Me</a
-                    >
-                  </li>
-                </ul>
-              </nav>
-            </header>
-            <main>
+                <li>
+                  <a
+                    href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
+                    ><i class="fab fa-youtube"></i> YouTube: Streams about code
+                    & audio production every weekday at 17:30 UTC</a
+                  >
+                </li>
+                <li>
+                  <a href="https://github.com/leafac"
+                    ><i class="fab fa-github"></i> GitHub: Open-source projects
+                    on web development & audio production</a
+                  >
+                </li>
+                <li>
+                  <a href="https://patreon.com/leafac"
+                    ><i class="fab fa-patreon"></i> Patreon: Recurrent
+                    contributions</a
+                  >
+                </li>
+                <li>
+                  <a href="https://paypal.me/LeandroFacchinetti"
+                    ><i class="fab fa-paypal"></i> PayPal: One-time
+                    contribution</a
+                  >
+                </li>
+                <li>
+                  <a href="/leandro-facchinetti--resume.pdf"
+                    ><i class="far fa-file"></i> Résumé: A bit about me</a
+                  >
+                </li>
+                <li>
+                  <a href="/leandro-facchinetti--curriculum-vitae.pdf"
+                    ><i class="far fa-copy"></i> Curriculum Vitæ: A lot about
+                    me</a
+                  >
+                </li>
+                <li>
+                  <a href="mailto:me@leafac.com"
+                    ><i class="far fa-envelope"></i> Email</a
+                  >
+                </li>
+              </ul>
+            </nav>
+            <!--<main>
               <p>I’m a computer scientist.</p>
               <p>
                 I’m interested in audio/video application development, web
@@ -191,7 +191,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 run, bike, play the guitar, cook vegan foods, and spend time
                 with my wife and son.
               </p>
-            </main>
+            </main>-->
           </div>
         </body>
       </html>
