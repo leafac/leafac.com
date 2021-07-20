@@ -55,6 +55,29 @@ const { css, extractInlineStyles } = require("@leafac/css");
             }
             display: flex;
             justify-content: center;
+            a {
+              @media (prefers-color-scheme: dark) {
+                &:hover,
+                &:focus-within {
+                  color: var(--color--fuchsia--300);
+                }
+                &:active {
+                  color: var(--color--fuchsia--500);
+                }
+              }
+              transition-property: var(--transition-property--colors);
+              transition-duration: var(--transition-duration--150);
+              transition-timing-function: var(
+                --transition-timing-function--in-out
+              );
+            }
+            strong {
+              font-weight: var(--font-weight--semibold);
+              color: var(--color--gray--warm--300);
+              @media (prefers-color-scheme: dark) {
+                color: var(--color--gray--warm--50);
+              }
+            }
           `}"
         >
           <div
@@ -63,19 +86,6 @@ const { css, extractInlineStyles } = require("@leafac/css");
               display: flex;
               flex-direction: column;
               gap: var(--space--4);
-              a {
-                @media (prefers-color-scheme: dark) {
-                  &:hover,
-                  &:focus-within {
-                    color: var(--color--fuchsia--300);
-                  }
-                }
-                transition-property: var(--transition-property--colors);
-                transition-duration: var(--transition-duration--150);
-                transition-timing-function: var(
-                  --transition-timing-function--in-out
-                );
-              }
             `}"
           >
             <h1
@@ -126,42 +136,47 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 <li>
                   <a
                     href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-                    ><i class="fab fa-youtube"></i> YouTube: Streams about code
-                    & audio production every weekday at 17:30 UTC</a
+                    ><strong><i class="fab fa-youtube"></i> YouTube:</strong>
+                    Streams about code & audio production every weekday at
+                    17:30 UTC</a
                   >
                 </li>
                 <li>
                   <a href="https://github.com/leafac"
-                    ><i class="fab fa-github"></i> GitHub: Open-source projects
-                    on web development & audio production</a
+                    ><strong><i class="fab fa-github"></i> GitHub:</strong>
+                    Open-source projects on web development & audio
+                    production</a
                   >
                 </li>
                 <li>
                   <a href="https://patreon.com/leafac"
-                    ><i class="fab fa-patreon"></i> Patreon: Recurrent
-                    contributions</a
+                    ><strong><i class="fab fa-patreon"></i> Patreon:</strong>
+                    Recurrent contributions</a
                   >
                 </li>
                 <li>
                   <a href="https://paypal.me/LeandroFacchinetti"
-                    ><i class="fab fa-paypal"></i> PayPal: One-time
-                    contribution</a
+                    ><strong><i class="fab fa-paypal"></i> PayPal:</strong>
+                    One-time contribution</a
                   >
                 </li>
                 <li>
                   <a href="/leandro-facchinetti--resume.pdf"
-                    ><i class="far fa-file"></i> Résumé: A bit about me</a
+                    ><strong><i class="far fa-file"></i> Résumé:</strong> A bit
+                    about me</a
                   >
                 </li>
                 <li>
                   <a href="/leandro-facchinetti--curriculum-vitae.pdf"
-                    ><i class="far fa-copy"></i> Curriculum Vitæ: A lot about
-                    me</a
+                    ><strong
+                      ><i class="far fa-copy"></i> Curriculum Vitæ:</strong
+                    >
+                    A lot about me</a
                   >
                 </li>
                 <li>
                   <a href="mailto:me@leafac.com"
-                    ><i class="far fa-envelope"></i> Email</a
+                    ><strong><i class="far fa-envelope"></i> Email</strong></a
                   >
                 </li>
               </ul>
