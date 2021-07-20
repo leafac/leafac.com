@@ -118,6 +118,9 @@ const { css, extractInlineStyles } = require("@leafac/css");
                   display: flex;
                   flex-direction: column;
                   gap: var(--space--2);
+                  i {
+                    width: var(--space--4);
+                  }
                 `}"
               >
                 <li>
