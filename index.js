@@ -94,7 +94,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
           <div
             style="${css`
               max-width: var(--width--prose);
-              padding: var(--space--4);
+              margin: var(--space--4);
               display: flex;
               flex-direction: column;
               gap: var(--space--4);
