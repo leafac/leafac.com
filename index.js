@@ -172,6 +172,15 @@ const { css, extractInlineStyles } = require("@leafac/css");
                   >
                 </li>
                 <li>
+                  <a href="https://github.com/sponsors/leafac"
+                    ><strong
+                      ><i class="fab fa-github-alt"></i> GitHub
+                      Sponsors:</strong
+                    >
+                    Yet another way to support</a
+                  >
+                </li>
+                <li>
                   <a href="/leandro-facchinetti--resume.pdf"
                     ><strong><i class="far fa-file"></i> Résumé:</strong> A bit
                     about me</a
