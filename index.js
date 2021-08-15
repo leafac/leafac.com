@@ -145,8 +145,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
                 `}"
               >
                 <li>
-                  <a
-                    href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
+                  <a href="https://www.youtube.com/c/leafac"
                     ><strong><i class="fab fa-youtube"></i> YouTube:</strong>
                     Streams about code & audio production every weekday at
                     17:30 UTC</a
