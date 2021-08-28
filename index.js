@@ -69,6 +69,7 @@ const { css, extractInlineStyles } = require("@leafac/css");
                     color: var(--color--fuchsia--500);
                   }
                 }
+                cursor: pointer;
                 transition-property: var(--transition-property--colors);
                 transition-duration: var(--transition-duration--150);
                 transition-timing-function: var(
