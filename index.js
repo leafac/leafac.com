@@ -55,6 +55,23 @@ const indexBody = html`
             color: inherit;
           }
         }
+
+        hr {
+          border-top: var(--border-width--1) solid
+            var(--color--gray--medium--200);
+          @media (prefers-color-scheme: dark) {
+            border-color: var(--color--gray--medium--700);
+          }
+        }
+
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: var(--space--2);
+          i {
+            width: var(--space--4);
+          }
+        }
       }
     `)}"
   >
@@ -101,17 +118,42 @@ const indexBody = html`
           `)}"
         />
       </p>
+      <hr />
+      <ul>
+        <li>
+          <strong><i class="fa-solid fa-code"></i> Software Developer:</strong>
+          Web programming, audio programming, and programming language theory
+        </li>
+        <li>
+          <a href="https://courselore.org">
+            <strong>
+              $${html`<svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                class="${indexLocalCSS(css`
+                  vertical-align: var(--space---1);
+                `)}"
+              >
+                <path
+                  d="M 3 3 L 9 9 L 3 9 L 9 3 L 3 15 L 9 21 L 9 15 L 3 21 L 15 15 L 21 21 L 21 15 L 15 21 L 21 9 L 15 3 L 21 3 L 15 9 Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>`} Courselore:</strong
+            >
+            My day job
+          </a>
+        </li>
+        <li>
+          <strong><i class="fa-solid fa-location-dot"></i> Portugal</strong>
+        </li>
+      </ul>
+      <hr />
       <nav>
-        <ul
-          class="${indexLocalCSS(css`
-            display: flex;
-            flex-direction: column;
-            gap: var(--space--2);
-            i {
-              width: var(--space--4);
-            }
-          `)}"
-        >
+        <ul>
           <li>
             <a href="https://www.youtube.com/c/leafac"
               ><strong><i class="fab fa-youtube"></i> YouTube:</strong> Streams
@@ -167,44 +209,6 @@ const indexBody = html`
           </li>
         </ul>
       </nav>
-      <hr
-        class="${indexLocalCSS(css`
-          border-top: var(--border-width--1) solid
-            var(--color--gray--medium--200);
-          @media (prefers-color-scheme: dark) {
-            border-color: var(--color--gray--medium--700);
-          }
-        `)}"
-      />
-      <!--<main>
-    <p>I’m a computer scientist.</p>
-    <p>
-      I’m interested in audio/video application development, web
-      development, and programming languages.
-    </p>
-    <p>
-      I’m working on <a href="https://courselore.org">CourseLore</a>,
-      the open-source student forum.
-    </p>
-    <p>
-      I was a PhD Candidate in computer science (programming
-      languages) at the Johns Hopkins University. I had to end without
-      a degree due to a combination of life circumstances: end of
-      funding, the pandemic, the birth of my first son, having to move
-      abroad, and so forth.
-    </p>
-    <p>I live in Portugal.</p>
-    <p>
-      In my spare time I make
-      <a
-        href="https://www.youtube.com/channel/UC_R-6HcHW5V9_FlZe30tnGA"
-        >videos about programming and audio/video production</a
-      >, develop
-      <a href="https://github.com/leafac">open-source software</a>,
-      run, bike, play the guitar, cook vegan foods, and spend time
-      with my wife and son.
-    </p>
-  </main>-->
     </div>
   </body>
 `;
