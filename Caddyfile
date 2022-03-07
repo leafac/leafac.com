@@ -1,9 +1,0 @@
-{
-  admin off
-  local_certs
-}
-
-{$URL:https://localhost} {
-  file_server
-  encode zstd gzip
-}
