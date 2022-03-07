@@ -1,11 +1,13 @@
 {
+  "type": "module",
   "scripts": {
-    "start": "concurrently --kill-others-on-fail \"caddy run\" \"node-dev --respawn .\""
+    "start": "nodemon ./index.js"
   },
   "dependencies": {
     "@leafac/caddy": "^1.0.4",
     "@leafac/css": "^0.3.11",
     "@leafac/html": "^3.0.1",
-    "concurrently": "^7.0.0"
+    "execa": "^6.1.0",
+    "nodemon": "^2.0.15"
   }
 }
