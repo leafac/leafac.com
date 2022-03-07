@@ -114,7 +114,7 @@ const indexBody = html`
           <li>
             <a href="https://www.youtube.com/c/leafac"
               ><strong><i class="fab fa-youtube"></i> YouTube:</strong> Streams
-              about code & audio production every weekday at 17:30 UTC</a
+              about code & audio production every weekday at 18:30 UTC</a
             >
           </li>
           <li>
@@ -142,6 +142,10 @@ const indexBody = html`
               >
               Yet another way to support</a
             >
+          </li>
+          <li>
+            <strong><i class="fa-brands fa-bitcoin"></i> Bitcoin:</strong>
+            34KJBgtaFYMtDqpSgMayw9qiKWg2GQXA9M Yet another way to support²
           </li>
           <li>
             <a href="/leandro-facchinetti--resume.pdf"
