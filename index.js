@@ -212,6 +212,10 @@ await fs.writeFile(
           rel="stylesheet"
           href="/vendor/node_modules/@fortawesome/fontawesome-free/css/all.min.css"
         />
+        <link
+          rel="stylesheet"
+          href="/vendor/node_modules/@leafac/css/distribution/browser.css"
+        />
         $${indexLocalCSS.toString()}
       </head>
       $${indexBody}
