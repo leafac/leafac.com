@@ -1,6 +1,7 @@
 import fs from "fs/promises";
 import { html } from "@leafac/html";
 import { css, localCSS } from "@leafac/css";
+import { execa } from "execa";
 
 const indexLocalCSS = localCSS();
 const indexBody = html`
@@ -196,7 +197,7 @@ const indexBody = html`
 
 await fs.writeFile(
   "index.html",
-  extractInlineStyles(html`
+  html`
     <!DOCTYPE html>
     <html lang="en">
       <head>
@@ -215,7 +216,7 @@ await fs.writeFile(
       </head>
       $${indexBody}
     </html>
-  `)
+  `
 );
 
 for (const [from, to] of Object.entries({
