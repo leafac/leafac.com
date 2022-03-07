@@ -3,10 +3,10 @@
     "start": "concurrently --kill-others-on-fail \"caddy run\" \"node-dev --respawn .\""
   },
   "dependencies": {
-    "@leafac/caddy": "^1.0.1",
-    "@leafac/css": "^0.2.6",
-    "@leafac/html": "^3.0.0",
-    "concurrently": "^6.2.0",
-    "node-dev": "^7.0.0"
+    "@leafac/caddy": "^1.0.4",
+    "@leafac/css": "^0.3.11",
+    "@leafac/html": "^3.0.1",
+    "concurrently": "^7.0.0",
+    "node-dev": "^7.2.0"
   }
 }
