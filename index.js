@@ -6,7 +6,7 @@ import { execa } from "execa";
 const indexLocalCSS = localCSS();
 const indexBody = html`
   <body
-    style="${indexLocalCSS(css`
+    class="${indexLocalCSS(css`
       font-family: "IBM Plex Mono", var(--font-family--monospace);
       font-size: var(--font-size--sm);
       line-height: var(--line-height--sm);
@@ -59,7 +59,7 @@ const indexBody = html`
     `)}"
   >
     <div
-      style="${indexLocalCSS(css`
+      class="${indexLocalCSS(css`
         max-width: var(--width--prose);
         margin: var(--space--4);
         display: flex;
@@ -68,7 +68,7 @@ const indexBody = html`
       `)}"
     >
       <h1
-        style="${indexLocalCSS(css`
+        class="${indexLocalCSS(css`
           font-size: var(--font-size--4xl);
           line-height: var(--line-height--4xl);
           font-weight: var(--font-weight--semibold);
@@ -83,7 +83,7 @@ const indexBody = html`
         <a href="https://leafac.com">Leandro Facchinetti</a>
       </h1>
       <p
-        style="${indexLocalCSS(css`
+        class="${indexLocalCSS(css`
           text-align: center;
         `)}"
       >
@@ -91,7 +91,7 @@ const indexBody = html`
           src="avatar.png"
           alt="Avatar"
           width="300"
-          style="${indexLocalCSS(css`
+          class="${indexLocalCSS(css`
             max-width: 100%;
             height: auto;
             @media (prefers-color-scheme: dark) {
@@ -102,7 +102,7 @@ const indexBody = html`
       </p>
       <nav>
         <ul
-          style="${indexLocalCSS(css`
+          class="${indexLocalCSS(css`
             display: flex;
             flex-direction: column;
             gap: var(--space--2);
