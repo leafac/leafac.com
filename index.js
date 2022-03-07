@@ -60,6 +60,7 @@ const indexBody = html`
   >
     <div
       class="${indexLocalCSS(css`
+        min-width: var(--space--0);
         max-width: var(--width--prose);
         margin: var(--space--4);
         display: flex;
@@ -166,6 +167,15 @@ const indexBody = html`
           </li>
         </ul>
       </nav>
+      <hr
+        class="${indexLocalCSS(css`
+          border-top: var(--border-width--1) solid
+            var(--color--gray--medium--200);
+          @media (prefers-color-scheme: dark) {
+            border-color: var(--color--gray--medium--700);
+          }
+        `)}"
+      />
       <!--<main>
     <p>I’m a computer scientist.</p>
     <p>
