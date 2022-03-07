@@ -6,7 +6,6 @@
     "@leafac/caddy": "^1.0.4",
     "@leafac/css": "^0.3.11",
     "@leafac/html": "^3.0.1",
-    "concurrently": "^7.0.0",
-    "node-dev": "^7.2.0"
+    "concurrently": "^7.0.0"
   }
 }
