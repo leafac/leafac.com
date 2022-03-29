@@ -157,7 +157,7 @@ const indexBody = html`
           <li>
             <a href="https://www.youtube.com/c/leafac"
               ><strong><i class="fab fa-youtube"></i> YouTube:</strong> Streams
-              about code & audio production every weekday at 18:30 UTC</a
+              about code & audio production every weekday at 19:30 UTC</a
             >
           </li>
           <li>
