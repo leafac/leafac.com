@@ -152,63 +152,83 @@ const indexBody = html`
         </li>
       </ul>
       <hr />
-      <nav>
-        <ul>
-          <li>
-            <a href="https://www.youtube.com/c/leafac"
-              ><strong><i class="fab fa-youtube"></i> YouTube:</strong> Streams
-              about code & audio production every weekday at 19:30 UTC</a
+      <ul>
+        <li>
+          <a href="https://www.youtube.com/c/leafac"
+            ><strong><i class="fab fa-youtube"></i> YouTube:</strong> Streams
+            about code & audio production every weekday at 17:30 UTC</a
+          >
+        </li>
+        <li>
+          <a href="https://github.com/leafac"
+            ><strong><i class="fab fa-github"></i> GitHub:</strong> Open-source
+            projects on web development & audio production</a
+          >
+        </li>
+      </ul>
+      <hr />
+      <ul>
+        <li>
+          <a href="https://patreon.com/leafac"
+            ><strong><i class="fab fa-patreon"></i> Patreon:</strong> Ongoing
+            support</a
+          >
+        </li>
+        <li>
+          <a href="https://paypal.me/LeandroFacchinettiEU"
+            ><strong><i class="fab fa-paypal"></i> PayPal:</strong> One-time
+            support</a
+          >
+        </li>
+        <li>
+          <a href="https://github.com/sponsors/leafac"
+            ><strong><i class="fab fa-github-alt"></i> GitHub Sponsors:</strong>
+            Yet another way to support</a
+          >
+        </li>
+        <li>
+          <strong><i class="fa-brands fa-bitcoin"></i> Bitcoin:</strong>
+          34KJBgtaFYMtDqpSgMayw9qiKWg2GQXA9M Yet another way to support²
+        </li>
+      </ul>
+      <hr />
+      <ul>
+        <li>
+          <a href="/leandro-facchinetti--resume.pdf"
+            ><strong><i class="far fa-file"></i> Résumé:</strong> A bit about
+            me</a
+          >
+        </li>
+        <li>
+          <a href="/leandro-facchinetti--curriculum-vitae.pdf"
+            ><strong><i class="far fa-copy"></i> Curriculum Vitæ:</strong> A lot
+            about me</a
+          >
+        </li>
+      </ul>
+      <hr />
+      <ul>
+        <li>
+          <a href="mailto:me@leafac.com"
+            ><strong><i class="far fa-envelope"></i> Email:</strong>
+            me@leafac.com</a
+          >
+        </li>
+        <li>
+          <a href="https://discord.gg/bjbssqHJmK"
+            ><strong><i class="fab fa-discord"></i> Discord:</strong> Chat with
+            me and a community of other audio programmers at
+            <strong>The Unofficial REAPER Users Group</strong> in the
+            <strong
+              class="${indexLocalCSS(css`
+                display: inline-block;
+              `)}"
+              >#leandro-facchinetti</strong
             >
-          </li>
-          <li>
-            <a href="https://github.com/leafac"
-              ><strong><i class="fab fa-github"></i> GitHub:</strong>
-              Open-source projects on web development & audio production</a
-            >
-          </li>
-          <li>
-            <a href="https://patreon.com/leafac"
-              ><strong><i class="fab fa-patreon"></i> Patreon:</strong> Ongoing
-              support</a
-            >
-          </li>
-          <li>
-            <a href="https://paypal.me/LeandroFacchinettiEU"
-              ><strong><i class="fab fa-paypal"></i> PayPal:</strong> One-time
-              support</a
-            >
-          </li>
-          <li>
-            <a href="https://github.com/sponsors/leafac"
-              ><strong
-                ><i class="fab fa-github-alt"></i> GitHub Sponsors:</strong
-              >
-              Yet another way to support</a
-            >
-          </li>
-          <li>
-            <strong><i class="fa-brands fa-bitcoin"></i> Bitcoin:</strong>
-            34KJBgtaFYMtDqpSgMayw9qiKWg2GQXA9M Yet another way to support²
-          </li>
-          <li>
-            <a href="/leandro-facchinetti--resume.pdf"
-              ><strong><i class="far fa-file"></i> Résumé:</strong> A bit about
-              me</a
-            >
-          </li>
-          <li>
-            <a href="/leandro-facchinetti--curriculum-vitae.pdf"
-              ><strong><i class="far fa-copy"></i> Curriculum Vitæ:</strong> A
-              lot about me</a
-            >
-          </li>
-          <li>
-            <a href="mailto:me@leafac.com"
-              ><strong><i class="far fa-envelope"></i> Email</strong></a
-            >
-          </li>
-        </ul>
-      </nav>
+            channel</a
+          >
+        </li>
+      </ul>
     </div>
   </body>
 `;
