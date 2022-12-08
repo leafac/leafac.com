@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon ./index.js"
+    "start": "nodemon ./index.mjs"
   },
   "dependencies": {
     "@leafac/caddy": "^1.0.4",

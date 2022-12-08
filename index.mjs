@@ -106,7 +106,7 @@ const indexBody = html`
         `)}"
       >
         <img
-          src="avatar.png"
+          src="avatar.webp"
           alt="Avatar"
           width="300"
           class="${indexLocalCSS(css`
