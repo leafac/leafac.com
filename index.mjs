@@ -262,7 +262,6 @@ await fs.writeFile(
 );
 
 for (const [from, to] of Object.entries({
-  "business-card": "https://wa.me/qr/AOC77CPES57QO1",
   2: "https://github.com/leafac/yocto-cfa",
   7: "https://oose-2019.leafac.com",
   8: "https://www.youtube.com/playlist?list=PLQKZfz89aDZwCKTCHgPBplQuJ3ViFIq3M",
