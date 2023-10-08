@@ -111,6 +111,7 @@ const indexBody = html`
           width="300"
           class="${indexLocalCSS(css`
             max-width: 100%;
+            border-radius: var(--border-radius--circle);
             height: auto;
             @media (prefers-color-scheme: dark) {
               filter: brightness(var(--brightness--90));
